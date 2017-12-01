@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="../../../../css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="../../../../images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="NSMutableArray," />
+
+
+
+
+
+  <link rel="alternate" href="../../../../atom.xml" title="志鹏的技术博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="平时工作中我们接触最多的容器，可能就数字典与数组了。有时我们在使用这些容器时有这样一个困惑，容器中的数据改变了，我们却无法立即知道。近日小编因为这个感到有些小苦恼，思来想去发现还是有途径可以做到监听容器的变化。接下来我将会用文字将我的想法叙述出来，供大家参考。要想监听一个容器的变化，首先我们需要对这个容器的属性及方法有">
+<meta name="keywords" content="NSMutableArray">
+<meta property="og:type" content="article">
+<meta property="og:title" content="监听NSMutableArray的变化">
+<meta property="og:url" content="http://yuanph.org/2017/07/10/NSMutableArray/index.html">
+<meta property="og:site_name" content="志鹏的技术博客">
+<meta property="og:description" content="平时工作中我们接触最多的容器，可能就数字典与数组了。有时我们在使用这些容器时有这样一个困惑，容器中的数据改变了，我们却无法立即知道。近日小编因为这个感到有些小苦恼，思来想去发现还是有途径可以做到监听容器的变化。接下来我将会用文字将我的想法叙述出来，供大家参考。要想监听一个容器的变化，首先我们需要对这个容器的属性及方法有着深入的了解。要监听容器的元素改变，那肯定是针对于可变容器。我们先着手于可变数组">
+<meta property="og:updated_time" content="2017-07-11T09:03:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="监听NSMutableArray的变化">
+<meta name="twitter:description" content="平时工作中我们接触最多的容器，可能就数字典与数组了。有时我们在使用这些容器时有这样一个困惑，容器中的数据改变了，我们却无法立即知道。近日小编因为这个感到有些小苦恼，思来想去发现还是有途径可以做到监听容器的变化。接下来我将会用文字将我的想法叙述出来，供大家参考。要想监听一个容器的变化，首先我们需要对这个容器的属性及方法有着深入的了解。要监听容器的元素改变，那肯定是针对于可变容器。我们先着手于可变数组">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yuanph.org/2017/07/10/NSMutableArray/"/>
+
+
+
+
+
+  <title>监听NSMutableArray的变化 | 志鹏的技术博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?hexo5154a045f583f13e4b93ee8041fa5efc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">志鹏的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录成长的点滴</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">监听NSMutableArray的变化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-10T10:19:00+08:00">
+                2017-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>平时工作中我们接触最多的容器，可能就数字典与数组了。有时我们在使用这些容器时有这样一个困惑，容器中的数据改变了，我们却无法立即知道。近日小编因为这个感到有些小苦恼，思来想去发现还是有途径可以做到监听容器的变化。<br>接下来我将会用文字将我的想法叙述出来，供大家参考。<br>要想监听一个容器的变化，首先我们需要对这个容器的属性及方法有着深入的了解。要监听容器的元素改变，那肯定是针对于可变容器。我们先着手于可变数组的监听工作。<br>接下来的工作将分成三部分：</p>
+<ol>
+<li>可变数组容器的分析</li>
+<li>设计一套监听回调机制</li>
+<li>使用runtime机制替换或者交换对应的函数指针IMP</li>
+</ol>
+<p>现在我们开始着手分析可变数组的方法。</p>
+<h1 id="可变数组的分析"><a href="#可变数组的分析" class="headerlink" title="可变数组的分析"></a>可变数组的分析</h1><h2 id="可变数组的定义"><a href="#可变数组的定义" class="headerlink" title="可变数组的定义"></a>可变数组的定义</h2><p><strong>NSMutableArray</strong>定义了一套接口用于管理可变数组对象，该类的添加／插入／删除基础操作继承于不可变数组<strong>NSArray</strong></p>
+<h2 id="可变数组的方法分类"><a href="#可变数组的方法分类" class="headerlink" title="可变数组的方法分类"></a>可变数组的方法分类</h2><p>通过查阅苹果的官方文档，我们大致可以将可变数组的方法分为以下几部分：</p>
+<ol>
+<li>创建和初始化一个可变数组</li>
+<li>数组元素的添加操作</li>
+<li>数组元素的删除操作</li>
+<li>数组元素的替换操作</li>
+<li>数组内容的筛选操作</li>
+<li>数组内容的排序操作</li>
+</ol>
+<p>下面我将各部分的相关函数贴出，以便大家更好的直观了解。</p>
+<h3 id="创建和初始化一个可变数组"><a href="#创建和初始化一个可变数组" class="headerlink" title="创建和初始化一个可变数组"></a>创建和初始化一个可变数组</h3><figure class="highlight objc"><figcaption><span>类方法</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ arrayWithCapacity:</span><br><span class="line">+ arrayWithContentsOfFile:</span><br><span class="line">+ arrayWithContentsOfURL:</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><figcaption><span>实例方法</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- init</span><br><span class="line">- initWithCapacity:</span><br><span class="line">- initWithContentsOfFile:</span><br><span class="line">- initWithContentsOfURL:</span><br></pre></td></tr></table></figure>
+<h3 id="数组元素的添加操作"><a href="#数组元素的添加操作" class="headerlink" title="数组元素的添加操作"></a>数组元素的添加操作</h3><figure class="highlight objc"><figcaption><span>元素的添加</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- addObject:</span><br><span class="line">- addObjectsFromArray:</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><figcaption><span>元素的插入</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- insertObject:atIndex:</span><br><span class="line">- insertObjects:atIndexes:</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ps:批量元素的插入会调用多次单个元素的插入方法，<strong><em>在以后的监听过程中需要做些特殊的处理</em></strong><br><figure class="highlight objc"><figcaption><span>批量元素的插入</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- <span class="keyword">void</span> insertObjects:(<span class="built_in">NSArray</span> *)additions atIndexes:(<span class="built_in">NSIndexSet</span> *)indexes</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSUInteger</span> currentIndex = [indexes firstIndex];</span><br><span class="line">    <span class="built_in">NSUInteger</span> i, count = [indexes count];</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        [<span class="keyword">self</span> insertObject:[additions objectAtIndex:i] atIndex:currentIndex];</span><br><span class="line">        currentIndex = [indexes indexGreaterThanIndex:currentIndex];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="数组元素的删除操作"><a href="#数组元素的删除操作" class="headerlink" title="数组元素的删除操作"></a>数组元素的删除操作</h3><figure class="highlight objc"><figcaption><span>删除单个元素</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//删除元素的删除</span></span><br><span class="line">- removeLastObject</span><br><span class="line">- removeObjectAtIndex:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><figcaption><span>批量删除</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 批量元素的删除</span></span><br><span class="line">- removeAllObjects</span><br><span class="line">- removeObject:</span><br><span class="line">- removeObject:inRange:</span><br><span class="line">- removeObjectsAtIndexes:</span><br><span class="line">- removeObjectIdenticalTo:</span><br><span class="line">- removeObjectIdenticalTo:inRange:</span><br><span class="line">- removeObjectsInArray:</span><br><span class="line">- removeObjectsInRange:</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ps： 以下方法会多次调用<code>- removeObjectAtIndex:</code>方法：,在监听过程中需要处理多次调用问题。<br><figure class="highlight objc"><figcaption><span>多次调用- removeObjectAtIndex:</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- removeObject:</span><br><span class="line">- removeObject:inRange:</span><br><span class="line">- removeObjectIdenticalTo:</span><br><span class="line">- removeObjectIdenticalTo:inRange:</span><br><span class="line">- removeObjectsInArray:</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="数组元素的替换操作"><a href="#数组元素的替换操作" class="headerlink" title="数组元素的替换操作"></a>数组元素的替换操作</h3><figure class="highlight objc"><figcaption><span>单个元素的替换</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- replaceObjectAtIndex:withObject:</span><br><span class="line">- setObject:atIndexedSubscript:</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ps：<code>- setObject:atIndexedSubscript:</code>这个方法我们最好不要直接使用而是使用语法糖的形式调用。<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mutableArray[<span class="number">3</span>] = <span class="string">@"someValue"</span>; </span><br><span class="line"><span class="comment">// equivalent to </span></span><br><span class="line">[mutableArray replaceObjectAtIndex:<span class="number">3</span> withObject:<span class="string">@"someValue"</span>];</span><br></pre></td></tr></table></figure></p>
+<p>若替换对象为空会抛出<code>NSInvalidArgumentException</code>异常，若索引下标越界会抛出<code>NSRangeException</code>异常</p>
+</blockquote>
+<figure class="highlight objc"><figcaption><span>批量元素的替换</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- replaceObjectsAtIndexes:withObjects:</span><br><span class="line">- replaceObjectsInRange:withObjectsFromArray:range:</span><br><span class="line">- replaceObjectsInRange:withObjectsFromArray:</span><br><span class="line">- setArray:</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ps: 以下方法会调用多次<code>- replaceObjectAtIndex:withObject:</code>方法<br><figure class="highlight objc"><figcaption><span>多次调用- replaceObjectAtIndex:withObject:</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- replaceObjectsAtIndexes:withObjects:</span><br><span class="line"><span class="comment">//PS: objects的个数必须与indexes的个数相同，否则会抛出异常</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="数组元素的筛选"><a href="#数组元素的筛选" class="headerlink" title="数组元素的筛选"></a>数组元素的筛选</h3><figure class="highlight objc"><figcaption><span>筛选</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- filterUsingPredicate:</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ps： 会在数组中直接筛选出符合条件的数组元素，不符合的会直接删除</p>
+</blockquote>
+<h3 id="数组元素的排序"><a href="#数组元素的排序" class="headerlink" title="数组元素的排序"></a>数组元素的排序</h3><figure class="highlight objc"><figcaption><span>下标元素的交换</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- exchangeObjectAtIndex:withObjectAtIndex:</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><figcaption><span>排序操作</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- sortUsingDescriptors:</span><br><span class="line">- sortUsingComparator:</span><br><span class="line">- sortWithOptions:usingComparator:</span><br><span class="line">- sortUsingFunction:context:</span><br><span class="line">- sortUsingSelector:</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ps:数组的排序方法会递归调用 <code>- replaceObjectAtIndex:withObject:</code><strong>在监听数组排序时需要处理多次回调的问题</strong></p>
+</blockquote>
+<p>通过对数组方法的分类及分析，我们对数组的方法有了大概的了解。接下来我们来制定一套协议，用来做回调操作。</p>
+<h1 id="监听机制的协议商定"><a href="#监听机制的协议商定" class="headerlink" title="监听机制的协议商定"></a>监听机制的协议商定</h1><h2 id="协议行为的划分"><a href="#协议行为的划分" class="headerlink" title="协议行为的划分"></a>协议行为的划分</h2><p>从数组元素的变化行为来看，协议主要可以划分为以下几部分：</p>
+<ol>
+<li>元素增加<ul>
+<li>单个元素的增加</li>
+<li>多个元素的增加</li>
+</ul>
+</li>
+<li>元素删除<ul>
+<li>单个元素的删除</li>
+<li>多个元素的删除</li>
+</ul>
+</li>
+<li>元素的替换<ul>
+<li>单个元素的替换</li>
+</ul>
+</li>
+<li>数组改变了<ul>
+<li>删除所有元素</li>
+<li>批量元素的替换</li>
+<li>数组的排序操作</li>
+<li>数组元素的筛选</li>
+</ul>
+</li>
+<li>数组元素的交换<ul>
+<li>元素的交换</li>
+</ul>
+</li>
+</ol>
+<h2 id="参数商定"><a href="#参数商定" class="headerlink" title="参数商定"></a>参数商定</h2><p>监听数组变化，哪些数据需要被回调回来呢？<br>通过参考表格协议和同事进行商讨决定</p>
+<p>对于数组元素的添加／删除操作需要将以下数据回调回来：</p>
+<ul>
+<li>监听的数组本身</li>
+<li>添加删除的元素对象</li>
+<li>及对应的索引返回。</li>
+</ul>
+<p>对于数组的替换操作将以下数据回调回来：</p>
+<ul>
+<li>监听数组对象本身</li>
+<li>替换的对象</li>
+<li>替换的新对象</li>
+<li>对象的索引</li>
+</ul>
+<p>对于数组改变了的相关操作，考虑到期复杂度相对较高，先采用较简单的方式处理，简洁明了的告诉协议的遵守者，说数组变了，回调回监听的数组对象本身。<br>对于数组元素的交换，将以下数据回调：</p>
+<ul>
+<li>监听的数组本身</li>
+<li>交换的下标1</li>
+<li>将交的下标2</li>
+</ul>
+<h2 id="协议确认"><a href="#协议确认" class="headerlink" title="协议确认"></a>协议确认</h2><figure class="highlight objc"><figcaption><span>数组监听协议</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">NSmutableArrayOberver</span> &lt;<span class="title">NSObject</span>&gt;</span></span><br><span class="line"><span class="keyword">@optional</span></span><br><span class="line"><span class="meta">#pragma mark - 增加</span></span><br><span class="line">-(<span class="keyword">void</span>)mutableArray:(<span class="built_in">NSMutableArray</span>*)array didAddObject:(<span class="keyword">id</span>)anObject atIndex:(<span class="built_in">NSInteger</span>)index;</span><br><span class="line">-(<span class="keyword">void</span>)mutableArray:(<span class="built_in">NSMutableArray</span>*)array didAddObjects:(<span class="built_in">NSArray</span> *)objects atIndexes:(<span class="built_in">NSIndexSet</span>*)indexSet;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark - 删除</span></span><br><span class="line">-(<span class="keyword">void</span>)mutableArray:(<span class="built_in">NSMutableArray</span> *)array didDeleteObject:(<span class="keyword">id</span>)anObject atIndex:(<span class="built_in">NSInteger</span>)index;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)mutableArray:(<span class="built_in">NSMutableArray</span> *)array didDeleteObjects:(<span class="built_in">NSArray</span>*)objects atIndexes:(<span class="built_in">NSIndexSet</span>*)indexes;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark  - 替换</span></span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)mutableArray:(<span class="built_in">NSMutableArray</span>*)array replaceObject:(<span class="keyword">id</span> )object withObject:(<span class="keyword">id</span>)anObject atIndex:(<span class="built_in">NSUInteger</span>)index;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark  - 改变（排序）</span></span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)mutableArrayhasChanged:(<span class="built_in">NSMutableArray</span>*)array;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark - 位置交换</span></span><br><span class="line">-(<span class="keyword">void</span>)mutableArray:(<span class="built_in">NSMutableArray</span>*)array exchangeObjectAtIndex:(<span class="built_in">NSUInteger</span>)index1 withObjectAtIndex:(<span class="built_in">NSUInteger</span>)index2;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="使用runtime机制替换或者交换对应的函数指针IMP"><a href="#使用runtime机制替换或者交换对应的函数指针IMP" class="headerlink" title="使用runtime机制替换或者交换对应的函数指针IMP"></a>使用runtime机制替换或者交换对应的函数指针IMP</h1><ol>
+<li>创建一个数组的扩展，并添加代理属性（使用<strong>关联属性</strong>添加）</li>
+<li>创建相应的函数指针，并替换数组对应的方法IMP<br>这里以- insertObject:atIndex:为例：<br>创建C函数指针：<figure class="highlight c"><figcaption><span>插入一个元素的函数指针</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*insertObject_atIndex_IMP)</span><span class="params">(id self, SEL _cmd ,id anObject ,NSUInteger index)</span></span>;</span><br><span class="line"><span class="keyword">static</span> insertObject_atIndex_IMP origin_insertObject_atIndex = nil;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">replace_insertObject_atIndex</span><span class="params">(id self, SEL _cmd ,id anObject ,NSUInteger index)</span></span>&#123;</span><br><span class="line">    NSMutableArray * <span class="built_in">array</span> = self;</span><br><span class="line">    <span class="keyword">if</span> ([<span class="built_in">array</span>.delegate conformsToProtocol:@protocol(NSmutableArrayOberver) ]&amp;&amp; [<span class="built_in">array</span>.delegate respondsToSelector:@selector(mutableArray:didAddObject:atIndex:)]) &#123;</span><br><span class="line">        </span><br><span class="line">        NSInteger number = addCount();</span><br><span class="line">        origin_insertObject_atIndex(self,_cmd,anObject,index);</span><br><span class="line">        <span class="keyword">if</span> (number==<span class="number">1</span>) &#123;</span><br><span class="line">            [<span class="built_in">array</span>.delegate mutableArray:self didAddObject:anObject atIndex:index];</span><br><span class="line">        &#125;</span><br><span class="line">        decreaseCount();</span><br><span class="line">        </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        origin_insertObject_atIndex(self,_cmd,anObject,index);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><figcaption><span>替换IMP</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+(<span class="keyword">void</span>)load&#123;</span><br><span class="line">     Method method;</span><br><span class="line">    Class  <span class="keyword">class</span> = <span class="built_in">NSClassFromString</span>(<span class="string">@"__NSArrayM"</span>);</span><br><span class="line"><span class="meta">#pragma mark - 添加</span></span><br><span class="line">    method = class_getInstanceMethod(<span class="keyword">class</span>, <span class="keyword">@selector</span>(insertObject:atIndex:));</span><br><span class="line">    origin_insertObject_atIndex = (insertObject_atIndex_IMP)method_setImplementation(method, (IMP)replace_insertObject_atIndex);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>PS:这里使用对一个线程变量用于统计函数的调用次数，进入函数时进行加1操作，退出时进行减1操作。如果当前调用次数为1,则在当前方法中进行回调，如果不在则不回调，由上一级调用函数进行回调。该原理类似于引用计数。</p>
+</blockquote>
+<p>至一个基础版本的数组监听工作已经完成，后续将兼容block的工作模式，以便提高代码的高聚合。</p>
+<p>参考博客：</p>
+<ol>
+<li><a href="http://www.cocoachina.com/ios/20150717/12623.html" target="_blank" rel="noopener">轻松学习之 IMP指针的作用</a></li>
+<li><a href="http://southpeak.github.io/2014/11/03/objective-c-runtime-3/" target="_blank" rel="noopener">Objective-C Runtime 运行时之三：方法与消息</a></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="../../../../tags/NSMutableArray/" rel="tag"># NSMutableArray</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../../06/NSIndexSet/" rel="next" title="NSIndexSet">
+                <i class="fa fa-chevron-left"></i> NSIndexSet
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../../11/断言/" rel="prev" title="断言">
+                断言 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">志鹏</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="../../../../archives/">
+              
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="../../../../atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#可变数组的分析"><span class="nav-number">1.</span> <span class="nav-text">可变数组的分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#可变数组的定义"><span class="nav-number">1.1.</span> <span class="nav-text">可变数组的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可变数组的方法分类"><span class="nav-number">1.2.</span> <span class="nav-text">可变数组的方法分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建和初始化一个可变数组"><span class="nav-number">1.2.1.</span> <span class="nav-text">创建和初始化一个可变数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组元素的添加操作"><span class="nav-number">1.2.2.</span> <span class="nav-text">数组元素的添加操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组元素的删除操作"><span class="nav-number">1.2.3.</span> <span class="nav-text">数组元素的删除操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组元素的替换操作"><span class="nav-number">1.2.4.</span> <span class="nav-text">数组元素的替换操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组元素的筛选"><span class="nav-number">1.2.5.</span> <span class="nav-text">数组元素的筛选</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组元素的排序"><span class="nav-number">1.2.6.</span> <span class="nav-text">数组元素的排序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#监听机制的协议商定"><span class="nav-number">2.</span> <span class="nav-text">监听机制的协议商定</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#协议行为的划分"><span class="nav-number">2.1.</span> <span class="nav-text">协议行为的划分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数商定"><span class="nav-number">2.2.</span> <span class="nav-text">参数商定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#协议确认"><span class="nav-number">2.3.</span> <span class="nav-text">协议确认</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用runtime机制替换或者交换对应的函数指针IMP"><span class="nav-number">3.</span> <span class="nav-text">使用runtime机制替换或者交换对应的函数指针IMP</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">志鹏</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="../../../../js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="../../../../js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="../../../../js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="../../../../js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

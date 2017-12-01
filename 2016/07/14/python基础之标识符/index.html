@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="../../../../css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="../../../../images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="../../../../atom.xml" title="志鹏的技术博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="标识符  标识符是计算机语言中允许用为名字的有效字符串集合。有一部分是关键字，构成语言的标识符。这样的标识符是保留字，不能用于其他用途，否则会引起语法错误。python中的“内建”标识符也不推荐使用。 合法的标识符 第一个字符必须是字母或下划线 剩下的字符可以是字母和数字或下划线 大小写敏感 除了下划线，其他的符号都不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python基础之标识符">
+<meta property="og:url" content="http://yuanph.org/2016/07/14/python基础之标识符/index.html">
+<meta property="og:site_name" content="志鹏的技术博客">
+<meta property="og:description" content="标识符  标识符是计算机语言中允许用为名字的有效字符串集合。有一部分是关键字，构成语言的标识符。这样的标识符是保留字，不能用于其他用途，否则会引起语法错误。python中的“内建”标识符也不推荐使用。 合法的标识符 第一个字符必须是字母或下划线 剩下的字符可以是字母和数字或下划线 大小写敏感 除了下划线，其他的符号都不允许使用。关键字内建除关键字外，python还有可以在任一级代码使用的”内建（b">
+<meta property="og:image" content="http://7xw3wp.com1.z0.glb.clouddn.com/pythonkeyword.jpg">
+<meta property="og:updated_time" content="2016-07-19T13:47:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python基础之标识符">
+<meta name="twitter:description" content="标识符  标识符是计算机语言中允许用为名字的有效字符串集合。有一部分是关键字，构成语言的标识符。这样的标识符是保留字，不能用于其他用途，否则会引起语法错误。python中的“内建”标识符也不推荐使用。 合法的标识符 第一个字符必须是字母或下划线 剩下的字符可以是字母和数字或下划线 大小写敏感 除了下划线，其他的符号都不允许使用。关键字内建除关键字外，python还有可以在任一级代码使用的”内建（b">
+<meta name="twitter:image" content="http://7xw3wp.com1.z0.glb.clouddn.com/pythonkeyword.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yuanph.org/2016/07/14/python基础之标识符/"/>
+
+
+
+
+
+  <title>python基础之标识符 | 志鹏的技术博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?hexo5154a045f583f13e4b93ee8041fa5efc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">志鹏的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录成长的点滴</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python基础之标识符</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-14T22:03:08+08:00">
+                2016-07-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h2><p>  标识符是计算机语言中允许用为名字的有效字符串集合。有一部分是关键字，构成语言的标识符。这样的标识符是保留字，不能用于其他用途，否则会引起语法错误。python中的“内建”标识符也不推荐使用。</p>
+<h3 id="合法的标识符"><a href="#合法的标识符" class="headerlink" title="合法的标识符"></a>合法的标识符</h3><ul>
+<li>第一个字符必须是字母或下划线</li>
+<li>剩下的字符可以是字母和数字或下划线</li>
+<li>大小写敏感</li>
+<li>除了下划线，其他的符号都不允许使用。<h3 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h3><img src="http://7xw3wp.com1.z0.glb.clouddn.com/pythonkeyword.jpg" alt="pythonkeyword.jpg"><h3 id="内建"><a href="#内建" class="headerlink" title="内建"></a>内建</h3>除关键字外，python还有可以在任一级代码使用的”内建（built-in）”的名字集合。这些名字由解释器设置或使用。python不支持重载标识符，所以任何时刻都只有一个名字绑定.<br>built-in是<strong>builtins</strong>模块的成员，在你的程序开始或义互解释器中给出&gt;&gt;&gt;提示前，由解释器自动导入。<h3 id="专用下划线标识符"><a href="#专用下划线标识符" class="headerlink" title="专用下划线标识符"></a>专用下划线标识符</h3>python中下划线作为变量前缀或后缀指定特殊变量<ul>
+<li><code>_XXX</code> 不用<code>from moudle import*</code>导入</li>
+<li><code>_XXX_</code> 系统定义的名字</li>
+<li><code>_XXX</code>  类中的私有变量名</li>
+</ul>
+</li>
+</ul>
+<h2 id="模块结构与布局"><a href="#模块结构与布局" class="headerlink" title="模块结构与布局"></a>模块结构与布局</h2><p>  布局模式：</p>
+<ul>
+<li>起始行<ul>
+<li>通常只有在类Unix环境下使用起始行，有起始行就能够仅输入脚本名字来执行脚本，无需调用解释器</li>
+</ul>
+</li>
+<li>模块文档<ul>
+<li>简要介绍模块的功能及重要全局变量的定义，模块外可以通过<code>moudle.__doc__</code>访问这些内容</li>
+</ul>
+</li>
+<li>模块导入<ul>
+<li>导入当前模块的代码需要的模块；每个模块仅导入一次（当模块被加载时）；函数内部的模块导入代码不会执行，附非该函数正在执行</li>
+</ul>
+</li>
+<li>变量定义<ul>
+<li>这里主要定义全局变量，本模块中的所有函数都可以直接使用。如果不是必须，建议使用局部变量替代、</li>
+</ul>
+</li>
+<li>类定义<ul>
+<li>所有的类都在这里定义，当模块导入时class语句被执行，类也就被定义了。类的文档变量是<code>class.__doc__</code></li>
+</ul>
+</li>
+<li>函数定义<ul>
+<li>此处定义的函数可通过模块<code>module.function()</code>在外部访问，当模块被导入时def语句会被执行，函数也就都会定义好，函数的文档变量是<code>function.__doc__</code></li>
+</ul>
+</li>
+<li>主程序<ul>
+<li>无论这个模块是被别的模块导入还是作为脚本直接执行，都会执行这部分代码，通常在这里不会有太多功能性代码，是根据执行的模式调用不同的函数</li>
+</ul>
+</li>
+</ul>
+<p><code>__name__</code>系统变量：</p>
+<ul>
+<li>如果模块是导被导入，<code>__name__</code>的值为模块名</li>
+<li>如果模块被直接执行,<code>__name__</code> 的值为<code>__main__</code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding=utf-8              # 起始行</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">"this is a module document"</span>  <span class="comment"># 模块文档</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os  <span class="comment"># 模块导入</span></span><br><span class="line"></span><br><span class="line">debug = <span class="keyword">True</span>  <span class="comment"># 全局变量定义</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span><span class="params">(object)</span>:</span>  <span class="comment"># 类定义</span></span><br><span class="line">    <span class="string">"this is a test calss "</span>  <span class="comment"># 类文档</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># pass</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"fdasfd"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">testFunction</span><span class="params">(self)</span>:</span>  <span class="comment"># 函数定义</span></span><br><span class="line">        <span class="string">"this is a test function"</span>  <span class="comment"># 函数文档</span></span><br><span class="line">        test = Test()</span><br><span class="line">        print(<span class="string">'this test function'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span>  <span class="comment"># 函数定义</span></span><br><span class="line">    <span class="string">"test"</span></span><br><span class="line">    print(<span class="string">"test"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:  <span class="comment"># 主程序</span></span><br><span class="line">    test()</span><br><span class="line">    print(__name__)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><ul>
+<li>变量无须事先声明</li>
+<li>变量无须指定类型</li>
+<li>开发人员不用关心内存管理</li>
+<li>变量名会被“回收”</li>
+<li>del 语句能够直接释放资源</li>
+</ul>
+<h3 id="为什么变量无需事先声明，也无需类型声明"><a href="#为什么变量无需事先声明，也无需类型声明" class="headerlink" title="为什么变量无需事先声明，也无需类型声明"></a>为什么变量无需事先声明，也无需类型声明</h3><p>  在Python语言中，对象的类型和内存占用都是运行时确定的。尽管代码被编译成字节码，python依然是一种解释型语言。在创建时，解释器会根据语法和右侧的操作数来决定新对象的类型。在对象创建后，该对象的引用会被赋值给左侧的变量。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../../13/python基础之变量赋值/" rel="next" title="python基础之变量赋值">
+                <i class="fa fa-chevron-left"></i> python基础之变量赋值
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../../21/MD5/" rel="prev" title="MD5">
+                MD5 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">志鹏</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="../../../../archives/">
+              
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="../../../../atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#标识符"><span class="nav-number">1.</span> <span class="nav-text">标识符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#合法的标识符"><span class="nav-number">1.1.</span> <span class="nav-text">合法的标识符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键字"><span class="nav-number">1.2.</span> <span class="nav-text">关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内建"><span class="nav-number">1.3.</span> <span class="nav-text">内建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#专用下划线标识符"><span class="nav-number">1.4.</span> <span class="nav-text">专用下划线标识符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块结构与布局"><span class="nav-number">2.</span> <span class="nav-text">模块结构与布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理"><span class="nav-number">3.</span> <span class="nav-text">内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么变量无需事先声明，也无需类型声明"><span class="nav-number">3.1.</span> <span class="nav-text">为什么变量无需事先声明，也无需类型声明</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">志鹏</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="../../../../js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="../../../../js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="../../../../js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="../../../../js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

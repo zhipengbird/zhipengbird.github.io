@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="../../../../css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="../../../../images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="-http," />
+
+
+
+
+
+  <link rel="alternate" href="../../../../atom.xml" title="志鹏的技术博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="URL什么是URL* Uniform Resource Location（统一资源定位符） *  网络中每一个资源都对应一个地址--&amp;gt; URL  URL的基本格式* 协议://主机地址:端口号/路径     * 协议 ： 不同协议代表不同的资源获取方式     * 主机地址：主机的唯一标识（IP地址，域名">
+<meta name="keywords" content="-http">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP 入门">
+<meta property="og:url" content="http://yuanph.org/2017/03/18/http/index.html">
+<meta property="og:site_name" content="志鹏的技术博客">
+<meta property="og:description" content="URL什么是URL* Uniform Resource Location（统一资源定位符） *  网络中每一个资源都对应一个地址--&amp;gt; URL  URL的基本格式* 协议://主机地址:端口号/路径     * 协议 ： 不同协议代表不同的资源获取方式     * 主机地址：主机的唯一标识（IP地址，域名）     * 路径： 资源在主机中的具体位置 URL的常见协议* http ,FTP，">
+<meta property="og:updated_time" content="2017-03-27T03:01:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP 入门">
+<meta name="twitter:description" content="URL什么是URL* Uniform Resource Location（统一资源定位符） *  网络中每一个资源都对应一个地址--&amp;gt; URL  URL的基本格式* 协议://主机地址:端口号/路径     * 协议 ： 不同协议代表不同的资源获取方式     * 主机地址：主机的唯一标识（IP地址，域名）     * 路径： 资源在主机中的具体位置 URL的常见协议* http ,FTP，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yuanph.org/2017/03/18/http/"/>
+
+
+
+
+
+  <title>HTTP 入门 | 志鹏的技术博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?hexo5154a045f583f13e4b93ee8041fa5efc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">志鹏的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录成长的点滴</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HTTP 入门</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-18T22:38:12+08:00">
+                2017-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h1><h2 id="什么是URL"><a href="#什么是URL" class="headerlink" title="什么是URL"></a>什么是URL</h2><pre><code>* Uniform Resource Location（统一资源定位符）
+*  网络中每一个资源都对应一个地址--&gt; URL 
+</code></pre><h2 id="URL的基本格式"><a href="#URL的基本格式" class="headerlink" title="URL的基本格式"></a>URL的基本格式</h2><pre><code>* 协议://主机地址:端口号/路径
+    * 协议 ： 不同协议代表不同的资源获取方式
+    * 主机地址：主机的唯一标识（IP地址，域名）
+    * 路径： 资源在主机中的具体位置
+</code></pre><h2 id="URL的常见协议"><a href="#URL的常见协议" class="headerlink" title="URL的常见协议"></a>URL的常见协议</h2><pre><code>* http ,FTP，Mailto,File,tel://,sms://
+</code></pre><h1 id="HTTP-协议简介"><a href="#HTTP-协议简介" class="headerlink" title="HTTP 协议简介"></a>HTTP 协议简介</h1><h2 id="什么是-http协议"><a href="#什么是-http协议" class="headerlink" title="什么是 http协议"></a>什么是 http协议</h2><pre><code>* HyperText TransportProtocol(超文本传输协议)
+* 浏览器和web服务器通讯时遵守的约定
+* 互联网使用最多的协议
+* 提供超文本传输协议
+* 通过浏览器打开网使用的http提供的服务。
+</code></pre><h1 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h1><h2 id="IP-1"><a href="#IP-1" class="headerlink" title="IP"></a>IP</h2><ul>
+<li>两个计算机通讯必须要知道的：<ul>
+<li>IP地址和端口号</li>
+</ul>
+</li>
+<li>IP地址<ul>
+<li>IP地址是一个32位的二进制数，通常被分割为8位二进制数，通常用点分隔，10进制表示。<ul>
+<li>192.168.1.1</li>
+<li>127.0.0.1 回路地址 </li>
+<li>255.255.255.255 广播</li>
+<li>0.0.0.0 any </li>
+</ul>
+</li>
+<li>唯一标识互联网上的一台计算机（IP地址不好记忆，所以有了域名）</li>
+<li>一个计算机可能有多个可用IP地址，如两块网卡</li>
+<li>内网的计算机，都通过路由器上网，它们对外的地址都是路由器的IP地址。</li>
+</ul>
+</li>
+</ul>
+<h1 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h1><h2 id="端口号-1"><a href="#端口号-1" class="headerlink" title="端口号"></a>端口号</h2><ul>
+<li>标识进程（程序）的逻辑地址，不同进程（程序）的标识</li>
+<li>端口取值范围 ： 0〜65535</li>
+<li>端口的分类：<ul>
+<li>公认端口（Well Know Ports）<ul>
+<li>这类端口也常称之为“常用端口”。端口号从0到1024,它们紧密绑定一些特定的服务。通常这些端口的通信明确表明了某种服务的协议，这种端口是不可再重新定义它的作用对象。比如： http: 80 ,ftp:21,pop3:110,smtp:25</li>
+</ul>
+</li>
+<li>注册端口（Registered Ports）<ul>
+<li>端口号从1025到49151。分配给用户进程或应用程序。这些进程主要是用户选择安装的一些应用程序，而不是已经分配好的公认端口的常用程序。</li>
+</ul>
+</li>
+<li>动态和／或私有端口（Dynamic and/or Private Ports）<ul>
+<li>端口号从49152到65535。之所以称为动态端口，是因为它一般不固定分配某种服务，而是动态分配。   </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h1><h2 id="OSI七层网络模型"><a href="#OSI七层网络模型" class="headerlink" title="OSI七层网络模型"></a>OSI七层网络模型</h2><ul>
+<li>应用层</li>
+<li>表示层</li>
+<li>会话层</li>
+<li>传输层</li>
+<li>网络层</li>
+<li>数据链路层</li>
+<li>物理层<h1 id="TCP／IP-网络模型"><a href="#TCP／IP-网络模型" class="headerlink" title="TCP／IP 网络模型"></a>TCP／IP 网络模型</h1></li>
+<li><p>应用层</p>
+<ul>
+<li>对应OSI模型的前三层 ，为用户提供所需要的各种服务，例如 ： FTP，Telnet,DNS,SMTP,HTTP等</li>
+</ul>
+</li>
+<li><p>传输层</p>
+<ul>
+<li>为应用层提供端到端的通信功能，保证了数据包的传输顺序及数据完整性。两个主要协议：TCP／UDP</li>
+</ul>
+</li>
+<li>网络层<ul>
+<li>解决主机到主机的通信问题。它所保护的协议设计数据包在整个网络上的逻辑传输。注重重新赋予主机一个IP地址来完成对主机的寻址，它还负责数据包在多种网络中和路由。该层有三个重要协议 ：网际协议（IP），互联网组管理协议（IGMP）和互联网控制报文协议（ICMP）</li>
+</ul>
+</li>
+<li>网络接入层<ul>
+<li>负监视数据在主机和网络之间的交换。</li>
+</ul>
+</li>
+</ul>
+<h1 id="传输协议"><a href="#传输协议" class="headerlink" title="传输协议"></a>传输协议</h1><ul>
+<li>TCP （传输控制协议）<ul>
+<li>TCP 协议提供的是一种可靠的，通过“三次握手”来连接的数据传输服务</li>
+</ul>
+</li>
+<li>UDP（用户数据报协议）<ul>
+<li>UDP 协议提供的则是不保证可靠性，无连接的数据传输服务。</li>
+</ul>
+</li>
+</ul>
+<h1 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h1><ul>
+<li>两个计算机通讯的过程，就像两个人打电话一样</li>
+<li>Socket<ul>
+<li>Socket 又称“套接字”，应用程序通过“套接字”向网络发送请求或向网络做出应答</li>
+<li>网络通信其实就是Socket之间的通信</li>
+<li>数据在两个Socket之间通过I传输数据</li>
+<li>Socket是纯C语言的，是跨平台的</li>
+<li>HTTP协议是基于Socket的，HTTP协议的底层使用的就是Socket</li>
+</ul>
+</li>
+</ul>
+<h2 id="通讯过程"><a href="#通讯过程" class="headerlink" title="通讯过程"></a>通讯过程</h2><ul>
+<li>创建Socket</li>
+<li>连接到服务器</li>
+<li>发送数据到服务器</li>
+<li>从服务器接收数据</li>
+<li>关闭连接</li>
+</ul>
+<p><strong>socket对应于TCP／IP网络模型中的应用层和传输层之间</strong></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="../../../../tags/http/" rel="tag"># -http</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../../16/keyboard-iOS/" rel="next" title="keyboard_iOS">
+                <i class="fa fa-chevron-left"></i> keyboard_iOS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../../22/CoreLocation/" rel="prev" title="CoreLocation">
+                CoreLocation <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">志鹏</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="../../../../archives/">
+              
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="../../../../atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#URL"><span class="nav-number">1.</span> <span class="nav-text">URL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是URL"><span class="nav-number">1.1.</span> <span class="nav-text">什么是URL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#URL的基本格式"><span class="nav-number">1.2.</span> <span class="nav-text">URL的基本格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#URL的常见协议"><span class="nav-number">1.3.</span> <span class="nav-text">URL的常见协议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-协议简介"><span class="nav-number">2.</span> <span class="nav-text">HTTP 协议简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是-http协议"><span class="nav-number">2.1.</span> <span class="nav-text">什么是 http协议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IP"><span class="nav-number">3.</span> <span class="nav-text">IP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-1"><span class="nav-number">3.1.</span> <span class="nav-text">IP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#端口号"><span class="nav-number">4.</span> <span class="nav-text">端口号</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#端口号-1"><span class="nav-number">4.1.</span> <span class="nav-text">端口号</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络模型"><span class="nav-number">5.</span> <span class="nav-text">网络模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI七层网络模型"><span class="nav-number">5.1.</span> <span class="nav-text">OSI七层网络模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP／IP-网络模型"><span class="nav-number">6.</span> <span class="nav-text">TCP／IP 网络模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#传输协议"><span class="nav-number">7.</span> <span class="nav-text">传输协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Socket"><span class="nav-number">8.</span> <span class="nav-text">Socket</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#通讯过程"><span class="nav-number">8.1.</span> <span class="nav-text">通讯过程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">志鹏</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="../../../../js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="../../../../js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="../../../../js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="../../../../js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

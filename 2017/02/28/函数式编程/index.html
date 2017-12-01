@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="../../../../css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="../../../../images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="../../../../atom.xml" title="志鹏的技术博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="函数式编程思想： 把操作尽量写成一系例嵌套的函数或者方法调用。 函数式编程本质： 就是往方法中传入Block,方法中嵌套Block调用，把代码聚合起来管理 函数式编程特点： 每个方法必须有返回值（本身对象）,把函数或者Block当做参数,block参数（需要操作的值）block返回值（操作结果） 代表：Reactive">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数式编程">
+<meta property="og:url" content="http://yuanph.org/2017/02/28/函数式编程/index.html">
+<meta property="og:site_name" content="志鹏的技术博客">
+<meta property="og:description" content="函数式编程思想： 把操作尽量写成一系例嵌套的函数或者方法调用。 函数式编程本质： 就是往方法中传入Block,方法中嵌套Block调用，把代码聚合起来管理 函数式编程特点： 每个方法必须有返回值（本身对象）,把函数或者Block当做参数,block参数（需要操作的值）block返回值（操作结果） 代表：ReactiveCocoa。链式编程思想：是将多个操作（多行代码）通过点号(.)链接在一起成为">
+<meta property="og:updated_time" content="2017-03-01T09:55:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="函数式编程">
+<meta name="twitter:description" content="函数式编程思想： 把操作尽量写成一系例嵌套的函数或者方法调用。 函数式编程本质： 就是往方法中传入Block,方法中嵌套Block调用，把代码聚合起来管理 函数式编程特点： 每个方法必须有返回值（本身对象）,把函数或者Block当做参数,block参数（需要操作的值）block返回值（操作结果） 代表：ReactiveCocoa。链式编程思想：是将多个操作（多行代码）通过点号(.)链接在一起成为">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yuanph.org/2017/02/28/函数式编程/"/>
+
+
+
+
+
+  <title>函数式编程 | 志鹏的技术博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?hexo5154a045f583f13e4b93ee8041fa5efc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">志鹏的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录成长的点滴</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">函数式编程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-28T15:58:38+08:00">
+                2017-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p><strong>函数式编程思想</strong>： 把操作尽量写成一系例嵌套的函数或者方法调用。</p>
+<p><strong>函数式编程本质</strong>： 就是往方法中传入Block,方法中嵌套Block调用，把代码聚合起来管理</p>
+<p><strong>函数式编程特点</strong>： 每个方法必须有返回值（本身对象）,把函数或者Block当做参数,block参数（需要操作的值）block返回值（操作结果）</p>
+<h2 id="代表：ReactiveCocoa。"><a href="#代表：ReactiveCocoa。" class="headerlink" title="代表：ReactiveCocoa。"></a><strong>代表</strong>：ReactiveCocoa。</h2><p><strong>链式编程思想</strong>：是将多个操作（多行代码）通过点号(.)链接在一起成为一句代码,使代码可读性好。a(1).b(2).c(3)</p>
+<p><strong>链式编程特点</strong>：方法的返回值是block,block必须有返回值（本身对象），block参数（需要操作的值）</p>
+<h2 id="代表：Masonry框架。"><a href="#代表：Masonry框架。" class="headerlink" title="代表：Masonry框架。"></a><strong>代表</strong>：Masonry框架。</h2><p>##ReactiveCocoa常见类</p>
+<blockquote>
+<p>学习框架首要之处:个人认为先要搞清楚框架中常用的类，在RAC中最核心的类<code>RACSiganl</code>,搞定这个类就能用ReactiveCocoa开发了。</p>
+</blockquote>
+<ol>
+<li><code>RACSiganl</code>:信号类,一般表示将来有数据传递，只要有数据改变，信号内部接收到数据，就会马上发出数据。</li>
+</ol>
+<blockquote>
+<p>注意：</p>
+<ol>
+<li><p>信号类(<code>RACSiganl</code>)，只是表示当数据改变时，信号内部会发出数据，它本身不具备发送信号的能力，而是交给内部一个订阅者去发出。</p>
+</li>
+<li><p>默认一个信号都是冷信号，也就是值改变了，也不会触发，只有订阅了这个信号，这个信号才会变为热信号，值改变了才会触发。</p>
+</li>
+<li><p>如何订阅信号：调用信号<code>RACSignal</code>的<code>subscribeNext</code>就能订阅</p>
+</li>
+</ol>
+</blockquote>
+<ol>
+<li><p><code>RACSubscriber</code>:表示订阅者的意思，用于发送信号，这是一个协议，不是一个类，只要遵守这个协议，并且实现方法才能成为订阅者。通过create创建的信号，都有一个订阅者，帮助他发送数据。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)createSimpleSignal&#123;</span><br><span class="line">  <span class="comment">// RACSignal使用步骤：</span></span><br><span class="line">  <span class="comment">// 1.创建信号 + (RACSignal * )createSignal:(RACDisposable * (^)(id&lt;RACSubscriber&gt; subscriber))didSubscribe</span></span><br><span class="line">  <span class="comment">// 2.订阅信号,才会激活信号. - (RACDisposable * )subscribeNext:(void (^)(id x))nextBlock</span></span><br><span class="line">  <span class="comment">// 3.发送信号 - (void)sendNext:(id)value</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// RACSignal底层实现：</span></span><br><span class="line">  <span class="comment">// 1.创建信号，首先把didSubscribe保存到信号中，还不会触发。</span></span><br><span class="line">  <span class="comment">// 2.当信号被订阅，也就是调用signal的subscribeNext:nextBlock</span></span><br><span class="line">  <span class="comment">// 2.2 subscribeNext内部会创建订阅者subscriber，并且把nextBlock保存到subscriber中。</span></span><br><span class="line">  <span class="comment">// 2.1 subscribeNext内部会调用siganl的didSubscribe</span></span><br><span class="line">  <span class="comment">// 3.siganl的didSubscribe中调用[subscriber sendNext:@1];</span></span><br><span class="line">  <span class="comment">// 3.1 sendNext底层其实就是执行subscriber的nextBlock</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">//    1.创建信息</span></span><br><span class="line">  RACSignal * signal =  [RACSignal createSignal:^RACDisposable * _Nullable(<span class="keyword">id</span>&lt;RACSubscriber&gt;   subscriber) &#123;</span><br><span class="line">    <span class="comment">// block调用时刻：每当有订阅者订阅信号，就会调用block。</span></span><br><span class="line">    <span class="comment">//        2.发送信号</span></span><br><span class="line">    [subscriber sendNext:@<span class="number">1</span>];</span><br><span class="line">    <span class="comment">// 如果不在发送数据，最好发送信号完成，内部会自动调用[RACDisposable disposable]取消订阅信号。</span></span><br><span class="line"></span><br><span class="line">    [subscriber sendCompleted];</span><br><span class="line">    <span class="keyword">return</span> [RACDisposable disposableWithBlock:^&#123;</span><br><span class="line">      <span class="comment">// block调用时刻：当信号发送完成或者发送错误，就会自动执行这个block,取消订阅信号。</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// 执行完Block后，当前信号就不在被订阅了。</span></span><br><span class="line">      <span class="built_in">NSLog</span>(<span class="string">@"信号销毁了"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;];</span><br><span class="line">  &#125;];</span><br><span class="line">  <span class="comment">//    3. 订阅信号，才会激活信号</span></span><br><span class="line">  [signal subscribeNext:^(<span class="keyword">id</span>   x) &#123;</span><br><span class="line">     <span class="comment">// block调用时刻：每当有信号发出数据，就会调用block.</span></span><br><span class="line">   <span class="built_in">NSLog</span>(<span class="string">@"接收到数据：%@"</span>,x);</span><br><span class="line">  &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>RACDisposable</code>:用于取消订阅或者清理资源，当信号发送完成或者发送错误的时候，就会自动触发它。<br><strong>使用场景</strong>: 不想监听某个信号时，可以通过它主动取消订阅信号。</p>
+</li>
+<li><p><code>RACSubject</code>: 信号提供者，自己可以充当信号，又能发送信号。<br><strong>使用场景</strong>： 通常用来代替代理，有了它，就不必要使用代理了</p>
+</li>
+<li><code>RACReplaySubject</code>:重复提供信号类，<code>RACSubject</code>的子类。<blockquote>
+<p><code>RACReplaySubject</code>可以先发送信号，在订阅信号，<code>RACSubject</code>就不可以<br><strong>使用场景一</strong>:如果一个信号每被订阅一次，就需要把之前的值重复发送一遍，使用重复提供信号类。<br><strong>使用场景二</strong>:可以设置capacity数量来限制缓存的value的数量,即只缓充最新的几个值。</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)createRACSubject&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// RACSubject使用步骤</span></span><br><span class="line">  <span class="comment">// 1.创建信号 [RACSubject subject]，跟RACSiganl不一样，创建信号时没有block。</span></span><br><span class="line">  <span class="comment">// 2.订阅信号 - (RACDisposable * ) subscribeNext:(void (^)(id x))nextBlock</span></span><br><span class="line">  <span class="comment">// 3.发送信号 sendNext:(id)value</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// RACSubject:底层实现和RACSignal不一样。</span></span><br><span class="line">  <span class="comment">// 1.调用subscribeNext订阅信号，只是把订阅者保存起来，并且订阅者的nextBlock已经赋值了。</span></span><br><span class="line">  <span class="comment">// 2.调用sendNext发送信号，遍历刚刚保存的所有订阅者，一个一个调用订阅者的nextBlock</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">//1. 创建信号</span></span><br><span class="line">  RACSubject * subject = [RACSubject subject];</span><br><span class="line"></span><br><span class="line">  <span class="comment">//2.订阅信号</span></span><br><span class="line">  [subject subscribeNext:^(<span class="keyword">id</span>   x) &#123;</span><br><span class="line">    <span class="comment">// block调用时刻：当信号发出新值，就会调用.</span></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"第一个订阅都:%@"</span>,x);</span><br><span class="line">  &#125;];</span><br><span class="line">  [subject subscribeNext:^(<span class="keyword">id</span>   x) &#123;</span><br><span class="line">    <span class="comment">// block调用时刻：当信号发出新值，就会调用.</span></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"第二个订阅都:%@"</span>,x);</span><br><span class="line">  &#125;];</span><br><span class="line">  <span class="comment">//3. 发送信息</span></span><br><span class="line">  [subject sendNext:<span class="string">@"1"</span>];</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)createReplaySubject&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// RACReplaySubject使用步骤:</span></span><br><span class="line">  <span class="comment">// 1.创建信号 [RACSubject subject]，跟RACSiganl不一样，创建信号时没有block。</span></span><br><span class="line">  <span class="comment">// 2.可以先订阅信号，也可以先发送信号。</span></span><br><span class="line">  <span class="comment">// 2.1 订阅信号 - (RACDisposable * )subscribeNext:(void (^)(id x))nextBlock</span></span><br><span class="line">  <span class="comment">// 2.2 发送信号 sendNext:(id)value</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// RACReplaySubject:底层实现和RACSubject不一样。</span></span><br><span class="line">  <span class="comment">// 1.调用sendNext发送信号，把值保存起来，然后遍历刚刚保存的所有订阅者，一个一个调用订阅者的nextBlock。</span></span><br><span class="line">  <span class="comment">// 2.调用subscribeNext订阅信号，遍历保存的所有值，一个一个调用订阅者的nextBlock</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 如果想当一个信号被订阅，就重复播放之前所有值，需要先发送信号，在订阅信号。</span></span><br><span class="line">  <span class="comment">// 也就是先保存值，在订阅值。</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">//    1.创建信号</span></span><br><span class="line">  RACReplaySubject * replaySuject = [RACReplaySubject subject];</span><br><span class="line"></span><br><span class="line">  <span class="comment">//    2. 发送信号</span></span><br><span class="line">  [replaySuject sendNext:@<span class="number">1</span>];</span><br><span class="line">  [replaySuject sendNext:@<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">//    3.订阅信号</span></span><br><span class="line">  [replaySuject subscribeNext:^(<span class="keyword">id</span>   x) &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"第一个订阅者接收到的数据%@"</span>,x);</span><br><span class="line"></span><br><span class="line">  &#125;];</span><br><span class="line">  [replaySuject subscribeNext:^(<span class="keyword">id</span>   x) &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@" 第二个订阅者接收到的数据%@"</span>,x);</span><br><span class="line"></span><br><span class="line">  &#125;];</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p><code>RACTuple</code>:元组类,类似<code>NSArray</code>,用来包装值.</p>
+</li>
+<li><p><code>RACSequence</code>:RAC中的集合类，用于代替<code>NSArray</code>,<code>NSDictionary</code>,可以使用它来快速遍历数组和字典。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">-( <span class="keyword">void</span> )RACIterator&#123;</span><br><span class="line">    <span class="comment">// 1.遍历数组</span></span><br><span class="line">    <span class="built_in">NSArray</span> * numbers = @[@<span class="number">1</span>,@<span class="number">3</span>,@<span class="number">4</span>];</span><br><span class="line">    <span class="comment">// 这里其实是三步</span></span><br><span class="line">    <span class="comment">// 第一步: 把数组转换成集合RACSequence numbers.rac_sequence</span></span><br><span class="line">    <span class="comment">// 第二步: 把集合RACSequence转换RACSignal信号类,numbers.rac_sequence.signal</span></span><br><span class="line">    <span class="comment">// 第三步: 订阅信号，激活信号，会自动把集合中的所有值，遍历出来。</span></span><br><span class="line">    [numbers.rac_sequence.signal subscribeNext:^(<span class="keyword">id</span>   x) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,x);</span><br><span class="line">    &#125;];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2.遍历字典,遍历出来的键值对会包装成RACTuple(元组对象)</span></span><br><span class="line">    <span class="built_in">NSDictionary</span> * dict = @&#123;<span class="string">@"name"</span>:<span class="string">@"yuanph"</span>,<span class="string">@"age"</span>:@<span class="number">18</span>,<span class="string">@"country"</span>:<span class="string">@"china"</span>&#125;;</span><br><span class="line">    [dict.rac_sequence.signal subscribeNext:^(RACTuple *  x) &#123;</span><br><span class="line">        <span class="comment">// 解包元组，会把元组的值，按顺序给参数里面的变量赋值</span></span><br><span class="line">        RACTupleUnpack(<span class="built_in">NSString</span> * key,<span class="built_in">NSString</span> * value)= x;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@:%@"</span>,key,value);</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>RACCommand</code>:<code>RAC</code>中用于处理事件的类，可以把事件如何处理,事件中的数据如何传递，包装到这个类中，他可以很方便的监控事件的执行过程<br> <strong>使用场景</strong>:监听按钮点击，网络请求</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../../27/UITest/" rel="next" title="UITest 学习笔记">
+                <i class="fa fa-chevron-left"></i> UITest 学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../../../03/07/pod-command/" rel="prev" title="pod command">
+                pod command <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">志鹏</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="../../../../archives/">
+              
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="../../../../atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#代表：ReactiveCocoa。"><span class="nav-number">1.</span> <span class="nav-text">代表：ReactiveCocoa。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代表：Masonry框架。"><span class="nav-number">2.</span> <span class="nav-text">代表：Masonry框架。</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">志鹏</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="../../../../js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="../../../../js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="../../../../js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="../../../../js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
