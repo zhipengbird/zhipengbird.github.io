@@ -260,6 +260,1042 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2017/06/13/日期处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="../../2017/06/13/日期处理/" itemprop="url">iOS 日期处理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-13T13:39:46+08:00">
+                2017-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在开发过程中，我们经常会遇到一些跟时间处理相关的工作，比如说，时间的比较，加减，格式化，NSString &lt;—-&gt; NSDate, NSDate &lt;—&gt; NSCanlendar等等。今天我们来做个整理，理个头绪。方便我们自己记忆。</p>
+<h1 id="NSDate-介绍"><a href="#NSDate-介绍" class="headerlink" title="NSDate 介绍"></a>NSDate 介绍</h1><ol>
+<li>NSDate对象用来表示一个具体的时间点；</li>
+<li>NSDate是一个类簇。我们所使用的NSDate对象，都是NSDate的私有之类的实体；</li>
+<li>NSDate储存的是GMT时间，使用的时候会根据当前应用指定的时区进行时间上的增减，以供计算或显示。</li>
+</ol>
+<h2 id="方法的使用："><a href="#方法的使用：" class="headerlink" title="方法的使用："></a>方法的使用：</h2><ul>
+<li>类方法初始化</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回当前时间(获取的是GMT时间,需要获取某个时区的时间，看常用方法)</span></span><br><span class="line">+(<span class="keyword">instancetype</span>)date;</span><br><span class="line"></span><br><span class="line"><span class="comment">//返回以当前时间为基准，然后过了secs秒的时间</span></span><br><span class="line">+(<span class="keyword">instancetype</span>)dateWithTimeIntervalSinceNow:(<span class="built_in">NSTimeInterval</span>)secs;</span><br><span class="line"></span><br><span class="line"><span class="comment">//返回以2001-01-01 GMT为基准，然后过了secs秒的时间</span></span><br><span class="line">+(<span class="keyword">instancetype</span>)dateWithTimeIntervalSinceReferenceDate:(<span class="built_in">NSTimeInterval</span>)ti;</span><br><span class="line"></span><br><span class="line"><span class="comment">//返回以1970-01-01 GMT为基准，然后过了secs秒的时间</span></span><br><span class="line">+(<span class="keyword">instancetype</span>)dateWithTimeIntervalSince1970:(<span class="built_in">NSTimeInterval</span>)secs;</span><br><span class="line"></span><br><span class="line"><span class="comment">//返回以date时间为基准，过了secsToBeAdded秒的时间</span></span><br><span class="line">+(<span class="keyword">instancetype</span>)dateWithTimeInterval:(<span class="built_in">NSTimeInterval</span>)secsToBeAdded sinceDate:(<span class="built_in">NSDate</span> *)date;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>实例方法初始化</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化当前时间(获取的是GMT时间,需要获取某个时区的时间，看常用方法)</span></span><br><span class="line">- (<span class="keyword">instancetype</span>)init;</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化以当前时间为基准，然后过了secs秒的时间</span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithTimeIntervalSinceNow:(<span class="built_in">NSTimeInterval</span>)secs;</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化以1970-01-01 GMT为基准，然后过了secs秒的时间</span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithTimeIntervalSince1970:(<span class="built_in">NSTimeInterval</span>)secs;</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化以date时间为基准，过了secsToBeAdded秒的时间</span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithTimeInterval:(<span class="built_in">NSTimeInterval</span>)secsToBeAdded sinceDate:(<span class="built_in">NSDate</span> *)date;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>时间之间的比较</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//与anotherDate比较，返回较早的那个日期</span></span><br><span class="line">- (<span class="built_in">NSDate</span> *)earlierDate:(<span class="built_in">NSDate</span> *)anotherDate;</span><br><span class="line"></span><br><span class="line"><span class="comment">//与anotherDate比较，返回较晚的那个日期</span></span><br><span class="line">- (<span class="built_in">NSDate</span> *)laterDate:(<span class="built_in">NSDate</span> *)anotherDate;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*该方法用于排序时调用:</span></span><br><span class="line"><span class="comment">  当实例保存的日期值与anotherDate相同时返回NSOrderedSame</span></span><br><span class="line"><span class="comment">  当实例保存的日期值晚于anotherDate时返回NSOrderedDescending</span></span><br><span class="line"><span class="comment">  当实例保存的日期值早于anotherDate时返回NSOrderedAscending */</span></span><br><span class="line">- (<span class="built_in">NSComparisonResult</span>)compare:(<span class="built_in">NSDate</span> *)other;</span><br><span class="line"></span><br><span class="line"><span class="comment">//与otherDate比较，相同返回YES</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)isEqualToDate:(<span class="built_in">NSDate</span> *)otherDate;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>取回时间间隔</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以refDate为基准时间，返回实例保存的时间与refDate的时间间隔</span></span><br><span class="line">- (<span class="built_in">NSTimeInterval</span>)timeIntervalSinceDate:(<span class="built_in">NSDate</span> *)anotherDate;</span><br><span class="line"></span><br><span class="line"><span class="comment">//以当前时间(Now)为基准时间，返回实例保存的时间与当前时间(Now)的时间间隔</span></span><br><span class="line">- (<span class="built_in">NSTimeInterval</span>)timeIntervalSinceNow;</span><br><span class="line"></span><br><span class="line"><span class="comment">//以1970/01/01 GMT为基准时间，返回实例保存的时间与1970/01/01 GMT的时间间隔</span></span><br><span class="line">- (<span class="built_in">NSTimeInterval</span>)timeIntervalSince1970;</span><br><span class="line"></span><br><span class="line"><span class="comment">//以2001/01/01 GMT为基准时间，返回实例保存的时间与2001/01/01 GMT的时间间隔</span></span><br><span class="line">- (<span class="built_in">NSTimeInterval</span>)timeIntervalSinceReferenceDate;</span><br><span class="line">+ (<span class="built_in">NSTimeInterval</span>)timeIntervalSinceReferenceDate;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="时间的创建"><a href="#时间的创建" class="headerlink" title="时间的创建"></a>时间的创建</h1><ul>
+<li><p>创建当前时间</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSDate</span> * now =  [<span class="built_in">NSDate</span> date];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>根据指定的时间差创建时间</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSTimeInterval</span> day = <span class="number">24</span>*<span class="number">60</span>*<span class="number">60</span>;</span><br><span class="line"><span class="built_in">NSDate</span> * yesterday = [<span class="built_in">NSDate</span> dateWithTimeIntervalSinceNow:-day];</span><br><span class="line"><span class="built_in">NSDate</span>  *tomarror  =[<span class="built_in">NSDate</span> dateWithTimeIntervalSinceNow:day];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>根据已有时间创建日期</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSTimeInterval</span> day = <span class="number">24</span>*<span class="number">60</span>*<span class="number">60</span>;</span><br><span class="line"><span class="built_in">NSDate</span> * now =  [<span class="built_in">NSDate</span> date];</span><br><span class="line"><span class="built_in">NSDate</span> * nextDay = [now dateByAddingTimeInterval:day];</span><br><span class="line"><span class="built_in">NSDate</span> * lastDay = [now dateByAddingTimeInterval:-day];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="日期的比较"><a href="#日期的比较" class="headerlink" title="日期的比较"></a>日期的比较</h1><ul>
+<li><p>两日期是否相同</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">BOOL</span> isEqual = [nextDay isEqualToDate:lastDay];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>比较哪个日期更早</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSDate</span> * earlier_date = [nextDay earlierDate:lastDay];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>比较哪个日期更晚</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSDate</span> * later_date = [nextDay laterDate:lastDay];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>求两个时间相同秒数</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSTimeInterval</span> time = [nextDay timeIntervalSinceDate:lastDay];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="设置日期格式"><a href="#设置日期格式" class="headerlink" title="设置日期格式"></a>设置日期格式</h1><ul>
+<li><p>根据系统预设创建日期格式</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- ( <span class="built_in">NSDateFormatter</span> * )formate&#123;</span><br><span class="line">    <span class="keyword">if</span> (!_formate) &#123;</span><br><span class="line">        _formate = [[<span class="built_in">NSDateFormatter</span> alloc]init];</span><br><span class="line">        [_formate setTimeStyle:<span class="built_in">NSDateFormatterLongStyle</span>];</span><br><span class="line">        [_formate setDateStyle:<span class="built_in">NSDateFormatterLongStyle</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _formate;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>根据格式化字符创建日期格式</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="built_in">NSDateFormatter</span>*)formate&#123;</span><br><span class="line">    <span class="keyword">if</span> (!_formate) &#123;</span><br><span class="line">        _formate = [[<span class="built_in">NSDateFormatter</span> alloc]init];</span><br><span class="line">        </span><br><span class="line">        [_formate setDateFormat:<span class="string">@"yyyy/MM/dd HH/mm/ss Z"</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _formate;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>ps:这里的formate尽量使用一个懒加载的方式，并持有一个实例，有利用节约创建时间。</p>
+</blockquote>
+<h1 id="字符串-lt-—-gt-时间"><a href="#字符串-lt-—-gt-时间" class="headerlink" title="字符串&lt;—&gt;时间"></a>字符串&lt;—&gt;时间</h1><ul>
+<li><p>字符串转时间</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.时间字符串</span></span><br><span class="line"><span class="built_in">NSString</span> * datestring = <span class="string">@"2017-06-13 14:44:11 +0800"</span>;</span><br><span class="line"><span class="comment">// 2.格式化对象的样式/z大小写都行/格式必须严格和字符串时间一样</span></span><br><span class="line">[<span class="keyword">self</span>.formate setDateFormat:<span class="string">@"yyyy-MM-dd HH:mm:ss Z"</span>];</span><br><span class="line"><span class="comment">// 3.利用时间格式化对象让字符串转换成时间 (自动转换0时区/东加西减)</span></span><br><span class="line"><span class="built_in">NSDate</span> * date = [<span class="keyword">self</span>.formate dateFromString:datestring];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>时间转字符串</p>
+</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.创建一个时间对象</span></span><br><span class="line"><span class="built_in">NSDate</span> * date = [<span class="built_in">NSDate</span> date];</span><br><span class="line"><span class="comment">// 2.设置时间格式化对象的样式</span></span><br><span class="line">[<span class="keyword">self</span>.formate setDateFormat:<span class="string">@"yyyy/MM/dd HH:mm:s"</span>];</span><br><span class="line"><span class="comment">// 3.利用时间格式化对象对时间进行格式化</span></span><br><span class="line"><span class="built_in">NSString</span> * datestring = [<span class="keyword">self</span>.formate stringFromDate:date];</span><br></pre></td></tr></table></figure>
+<h1 id="时区"><a href="#时区" class="headerlink" title="时区"></a>时区</h1><ul>
+<li><p>获取当前时区</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSTimeZone</span> * zone =  [<span class="built_in">NSTimeZone</span> systemTimeZone];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取时差</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时区</span></span><br><span class="line"><span class="built_in">NSTimeZone</span> * zone =  [<span class="built_in">NSTimeZone</span> systemTimeZone];</span><br><span class="line"><span class="comment">//时间格式</span></span><br><span class="line"><span class="built_in">NSDate</span> * date = [<span class="built_in">NSDate</span> date];</span><br><span class="line"><span class="comment">//时差</span></span><br><span class="line"><span class="built_in">NSInteger</span> seconds = [zone secondsFromGMTForDate:date];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="NSCalendar"><a href="#NSCalendar" class="headerlink" title="NSCalendar"></a>NSCalendar</h1><p>NSCalendar：日历。对世界上现存的常用历法进行了封装，即提供了不同的历法的时间信息，又支持日历的计算。</p>
+<h1 id="NSDateComponents"><a href="#NSDateComponents" class="headerlink" title="NSDateComponents"></a>NSDateComponents</h1><p>NSDateComponents：时间容器，一个包含了详细的年月日时分秒的容器。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2017/06/11/English-Level3-Unit3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="../../2017/06/11/English-Level3-Unit3/" itemprop="url">English-Level3-Unit3</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-11T16:46:30+08:00">
+                2017-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="解释你和某个人的相识过程"><a href="#解释你和某个人的相识过程" class="headerlink" title="解释你和某个人的相识过程"></a>解释你和某个人的相识过程</h1><h2 id="过去进行时"><a href="#过去进行时" class="headerlink" title="过去进行时"></a>过去进行时</h2><ul>
+<li>使用过去进行时表示过去发生并持续了一段时间的一个动作或事件。用动词 be 的过去时和动词的 + ing 形式构成过去进行时。<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">A: I met Elsa <span class="keyword">in</span> Spain. I was visiting <span class="keyword">my</span> brother <span class="keyword">in</span> Madrid. We were eating tapas, <span class="keyword">and</span> she walked <span class="keyword">into</span> <span class="keyword">the</span> restaurant.	我在西班牙碰见了 Elsa。我当时正在马德里看望我的兄弟。我们正在餐馆吃西班牙塔帕，这时她走了进来。</span><br><span class="line">B: Were you hoping <span class="keyword">to</span> find a girlfriend?	你当时想着找女朋友吗？</span><br><span class="line">A: No, I was just lucky. I really wasn't trying <span class="keyword">to</span> find a girlfriend.	没，我只是走运罢了。我当时真没想着找女朋友。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>注意，过去进行时态常用于介绍或提供故事的背景信息。</strong><br><figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">So, <span class="literal">I</span> was driving <span class="keyword">in</span> my car. Then <span class="literal">I</span> saw the accident.	因此，我当时在开车。然后看到了事故的发生。</span><br></pre></td></tr></table></figure></p>
+<h2 id="讲故事的惯用方法"><a href="#讲故事的惯用方法" class="headerlink" title="讲故事的惯用方法"></a>讲故事的惯用方法</h2><p>描述过去发生的事情时，使用这些常见的讲故事的惯用方法。</p>
+<h3 id="故事背景中的过去进行时"><a href="#故事背景中的过去进行时" class="headerlink" title="故事背景中的过去进行时"></a>故事背景中的过去进行时</h3><p>设定故事背景时，使用过去进行时态<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Let <span class="keyword">me</span> <span class="keyword">tell</span> you <span class="keyword">the</span> story <span class="keyword">about</span> how I met Shane. I was sitting <span class="keyword">in</span> <span class="keyword">the</span> movie theater.</span><br><span class="line">我告诉你我是怎么遇见 Shane 的故事。我坐在电影院里</span><br></pre></td></tr></table></figure></p>
+<h3 id="开头和结尾"><a href="#开头和结尾" class="headerlink" title="开头和结尾"></a>开头和结尾</h3><p>你讲的故事应该有头有尾。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">I was sitting in the movie theater. He dropped <span class="keyword">his</span> pizza <span class="keyword">on</span> <span class="keyword">his</span> shoes. I helped him clean <span class="keyword">up</span>, <span class="built_in">and</span> we <span class="keyword">left</span> together.    </span><br><span class="line">我坐在电影院里。他把披萨掉自己鞋上了，我帮他弄干净，然后一起离开了。</span><br></pre></td></tr></table></figure>
+<h3 id="眼神交流和手势"><a href="#眼神交流和手势" class="headerlink" title="眼神交流和手势"></a>眼神交流和手势</h3><p>在讲故事时，有效运用肢体语言，可以让故事更加吸引人。开始讲时，注视听众的眼睛，尽量保持眼神交流。你还可以使用手势来帮助说明事情。<br><figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">I</span> caught a really big fish.</span><br><span class="line">（伸出双手放在两旁，展示鱼的长度。）</span><br><span class="line"></span><br><span class="line"><span class="literal">I</span> couldn't believe it!</span><br><span class="line">（伸出双手，掌心朝上，表示难以相信。）</span><br><span class="line"></span><br><span class="line">My stomach really hurt.	（把手放在肚子上表示疼痛。）</span><br></pre></td></tr></table></figure></p>
+<h2 id="故事事件的排序"><a href="#故事事件的排序" class="headerlink" title="故事事件的排序"></a>故事事件的排序</h2><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">使用类似表达开始故事。</span><br><span class="line"></span><br><span class="line">At first, I didn<span class="comment">'t like him.	起初，我不喜欢他。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">In</span> the beginning, he seemed unfriendly.	刚开始，他看起来不是很友好。</span><br><span class="line"></span><br><span class="line">使用类似表达继续讲述故事。</span><br><span class="line"></span><br><span class="line">Later, we started talking <span class="keyword">in</span> the break room.	后来，我们在休息室开始交谈。</span><br><span class="line"></span><br><span class="line">After that, we had lunch a couple <span class="keyword">of</span> times.	之后，我们一起吃过几次午饭。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Next</span>, we went <span class="keyword">on</span> a <span class="built_in">date</span>.	接下来，我们约会了。</span><br><span class="line"></span><br><span class="line">使用类似表达结束故事。</span><br><span class="line"><span class="keyword">Finally</span>, he asked <span class="keyword">me</span> <span class="keyword">to</span> marry him.	最后，他要我嫁给他。</span><br><span class="line"></span><br><span class="line"><span class="keyword">In</span> the <span class="keyword">end</span>, we got married <span class="keyword">and</span> had three children.	最后，我们结婚，生了三个孩子。</span><br></pre></td></tr></table></figure>
+<h1 id="谈论关系"><a href="#谈论关系" class="headerlink" title="谈论关系"></a>谈论关系</h1><h2 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h2><h3 id="个人关系"><a href="#个人关系" class="headerlink" title="个人关系"></a>个人关系</h3><p>有许多描述个人关系的方法。</p>
+<ul>
+<li>Close friends 是指和你关系非常好的人。</li>
+</ul>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Mary </span><span class="keyword">and </span>I are very close friends.	 	<span class="keyword">Mary </span>和我是一对密友。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Old friends 是指你认识很长时间的人。</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">John </span><span class="keyword">and </span>I are old friends. I met him <span class="number">20</span> years ago.	 	<span class="keyword">John </span>和我是老朋友。<span class="number">20</span> 年前我们就认识了。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Buddy 是表示朋友的非正式用语。注意，该词多为男性使用，指代他们的男性朋友。</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">My buddy Harry <span class="keyword">and</span> I went <span class="keyword">to</span> college together.	 	我和我的哥们 Harry 一起上大学。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Relatives 是指你家族中的人，比如 cousins 和 aunts。</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">For New Yea<span class="string">r's Eve, all of my wife'</span>s relatives are coming over <span class="keyword">for</span> a party.	 </span><br><span class="line">新年前夕，我妻子的全部亲戚都来参加聚会。</span><br></pre></td></tr></table></figure>
+<h3 id="职业关系"><a href="#职业关系" class="headerlink" title="职业关系"></a>职业关系</h3><p>有许多描述职业关系的方法。</p>
+<ul>
+<li>Co-workers 和 colleagues 是指和你共事的人。两个词是同义词，意思相同。</li>
+</ul>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">Sarah</span> <span class="keyword">and </span>I are colleagues.	Sarah 和我是同事。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Martin </span>is a co-worker.	<span class="keyword">Martin </span>是一位同事。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>boss 和 manager 也表示同一事情，但 boss 正式程度更低。</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Martina <span class="keyword">is</span> <span class="keyword">my</span> boss.	Martina 是我的老板。</span><br><span class="line"></span><br><span class="line">My manager <span class="keyword">is</span> <span class="keyword">on</span> vacation.	我的经理在度假。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 acquaintance 表示你了解一点的人。这可能是个人关系，也可能是职业关系。</li>
+</ul>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Antonio <span class="keyword">is</span> an acquaintance <span class="keyword">of</span> mine. I don<span class="symbol">'t</span> really know him very well.	</span><br><span class="line">Antonio 是我的相识。我不是很了解他。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>含过去进行时的’While’ 从句</li>
+</ul>
+<p><strong><em>使用 while + 过去进行时，描述被另一动作中断的一个持续动作(While it was raining)。中断的动作使用一般过去时(the electricity went out)</em></strong></p>
+<p>While it was raining, the electricity went out.    下雨的时候停电了。</p>
+<p>While we were sleeping, the electricity came back on.    我们睡觉的时候，又有电了。</p>
+<p><strong><em>当两个过去持续的动作同时发生，你可以把 while 用在任意一个动作上。</em></strong></p>
+<p>While Ken was calling the police, the neighbor’s dog was barking.    当肯在给警方打电话时，邻居的狗在犬叫。</p>
+<p>While I was driving, I was putting on my lip gloss.    开车时，我涂上了润唇膏</p>
+<p><strong><em>如果 while 从句位于句后，不使用逗号。</em></strong></p>
+<p>The electricity came back on while we were sleeping.    我们睡觉时又有电了。</p>
+<p>The neighbor’s dog was barking while Ken was calling the police.    肯在给警察打电话时，邻居的狗在犬叫</p>
+<p>句子重音</p>
+<p>要达到有效的交流，大声说出每个句子里最重要的词以表示强调。注意：terrible 和 accident在句子里是重读的。<br>What a <strong>terrible accident</strong>!</p>
+<p>注意句中的ambulance 和fast要重读：<br>The <strong>ambulance</strong> was going too <strong>fast</strong>.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2017/06/02/cocoapods系列教程1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="../../2017/06/02/cocoapods系列教程1/" itemprop="url">cocoapods系列教程1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-02T10:21:47+08:00">
+                2017-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../categories/cocoapods/" itemprop="url" rel="index">
+                    <span itemprop="name">cocoapods</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="cocoapods-打包类库"><a href="#cocoapods-打包类库" class="headerlink" title="cocoapods 打包类库"></a>cocoapods 打包类库</h1><p>需要使用一个cocoapods的插件cocoapods-packager来完成类库的打包。当然也可以手动编译打包，但是过程会相当繁琐。</p>
+<ul>
+<li><p>安装打包插件<br>终端执行以下命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem install cocoapods-packager</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打包<br>命令很简单，执行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod package XXXX.podspec --library --force</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>命令参数<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//强制覆盖之前已经生成过的二进制库 </span><br><span class="line">--force</span><br><span class="line"></span><br><span class="line">//生成静态.framework </span><br><span class="line">--embedded</span><br><span class="line"></span><br><span class="line">//生成静态.a </span><br><span class="line">--library</span><br><span class="line"></span><br><span class="line">//生成动态.framework </span><br><span class="line">--dynamic</span><br><span class="line"></span><br><span class="line">//动态.framework是需要签名的，所以只有生成动态库的时候需要这个BundleId </span><br><span class="line">--bundle-identifier</span><br><span class="line"></span><br><span class="line">//不包含依赖的符号表，生成动态库的时候不能包含这个命令，动态库一定需要包含依赖的符号表。 </span><br><span class="line">--exclude-deps</span><br><span class="line"></span><br><span class="line">//表示生成的库是debug还是release，默认是release。--configuration=Debug </span><br><span class="line">--configuration</span><br></pre></td></tr></table></figure></p>
+<p>参考链接<br><a href="https://www.zybuluo.com/qidiandasheng/note/595740" target="_blank" rel="noopener">pod 二进制化</a></p>
+<p><a href="https://segmentfault.com/a/1190000007076865" target="_blank" rel="noopener">use_frameworks!</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2017/06/02/TODOLIST/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="../../2017/06/02/TODOLIST/" itemprop="url">TODOLIST</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-02T10:17:18+08:00">
+                2017-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>GPUImage示例：<br></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2017/05/22/Python-tips/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="../../2017/05/22/Python-tips/" itemprop="url">Python-tips</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-22T21:08:54+08:00">
+                2017-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Python-一些实用技巧知识点集合"><a href="#Python-一些实用技巧知识点集合" class="headerlink" title="Python 一些实用技巧知识点集合"></a>Python 一些实用技巧知识点集合</h1><ol>
+<li>python中的os.system()和os.popen()区别<br>python调用Shell脚本或者是调用系统命令，有两种方法：os.system(cmd)或os.popen(cmd),前者返回值是脚本的退出状态码，后者的返回值返回一个文件描述符号为fd的打开的文件对象。实际使用时视需求情况而选择。</li>
+</ol>
+<ol>
+<li><p>Python 模块或者包名应该遵守以下的规则:</p>
+<ul>
+<li>全小写</li>
+<li>不要和pypi上已有的包名重复，即使你不想公开发布你的包，因为你的包可能作为其他包的依赖包</li>
+<li>使用下划线分隔单词或者什么都不用(不要使用连字符)</li>
+</ul>
+</li>
+<li><p>python 包的上传 <a href="http://setuptools.readthedocs.io/en/latest/setuptools.html" target="_blank" rel="noopener">setuptools</a><br> <code>python setup.py sdist register upload</code></p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2017/05/16/TCP-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="../../2017/05/16/TCP-1/" itemprop="url">TCP 基础入门</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-16T17:05:23+08:00">
+                2017-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../categories/TCP/" itemprop="url" rel="index">
+                    <span itemprop="name">TCP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>TCP连接的端点是由一个IP地址和一个端口号来唯一标识的 </li>
+<li><p>TCP 是一个可靠的协议，也就是说，除非整个网络出现问题，数据将被完好地按原样正确的传送到另一外一端。这个可靠性是通过以下几个规则来实现的：</p>
+<ul>
+<li><p>为了防止数据在传输过程中被损坏，每个信息包都包含一个<strong>校验码</strong>。这个校验码就是一个用来保证信息包在传输过程中没有被更改的代码。当信息包到达目的地的时候，接收方会对比校验码和收到的信息中的数据，如果校验码不对，该信息包被省略。</p>
+</li>
+<li><p>为了防止信息包丢失，TCP会要求接收方每收到一个信息包都反馈一下，如果接收方没有提供反馈，发送方会自动重发一次。由于系统自动处理这个问题，所以程序的开发者根本不用知道问题的出现。TCP会一直试着发送信息包，一直到接收者收到为止，或者它会判断网络连接断了，并在程序中返回一个错误提示。</p>
+</li>
+<li><p>为了防止信息包重复或顺序列错误，TCP每传送一个信息包都会发送一个序号。接收方会检查这个序号，确保收到该信息包，并把全部信息包按顺序重新合并。同时，如果接收方看到了一个已看过的序号，则该信息包就会被丢弃。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="TCP-与-UDP-选择："><a href="#TCP-与-UDP-选择：" class="headerlink" title="TCP 与 UDP 选择："></a>TCP 与 UDP 选择：</h2><ul>
+<li><p>用TCP</p>
+<ul>
+<li>您需要一个可靠的数据传输，以确保您的数据完整无缺地到达目的地</li>
+<li>您的协议需要不止一个请求和服务器的回答</li>
+<li>您要发送较多的数据</li>
+<li>初始连接出现短暂的延迟是可以容忍的</li>
+</ul>
+</li>
+<li><p>用UDP</p>
+<ul>
+<li>您不太关心数据包是否到达或者不太在意信息包到达的顺序是否正确，再或者您可以自己察觉这些问题并自己解决</li>
+<li>您的协议只包括基本请求和回答</li>
+<li>您需要尽快建立网络会话</li>
+<li>只传送很少部分数据。UDP 的限制是一个信息包不超过64KB的数所据，通常只用UDP传送1KB以下的数据</li>
+</ul>
+</li>
+</ul>
+<h1 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h1><ul>
+<li>socket 是操作系统中I／O系统的延伸部分，它可以使用进程和机器之间的通信成为可能。</li>
+</ul>
+<h2 id="建立Socket"><a href="#建立Socket" class="headerlink" title="建立Socket"></a>建立Socket</h2><ul>
+<li><p>客户端建立一个socket需要两个步骤：</p>
+<ul>
+<li>建立一个实际的socket对象</li>
+<li>把它连接到远程服务器上。</li>
+</ul>
+</li>
+<li><p>建立Socket对象时，需要告诉系统两件事：</p>
+<ul>
+<li>通信类型<ul>
+<li>指明用什么协议传输数据 （IPV4,IPV6,IPX／SPX，AFP）</li>
+</ul>
+</li>
+<li>协议家族<ul>
+<li>定义数据如何被传输</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>通信类型基本上都是AF_INET(IPv4)<br>  协议家族一般表示：</p>
+<ol>
+<li>TCP通信的SOCK_STREAM</li>
+<li>UDP通信的SOCK_DGRAM</li>
+</ol>
+</blockquote>
+<p>建立一个实际的socket对象:<br><code>s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)</code><br>连接socket，提供一个tupe（远程主机名／IP地址 , 远程端口）<br><code>s.connect((&#39;www.baidu.com&#39;,80))</code></p>
+<blockquote>
+<p>Ps: C语言的connect()函数需要远程机器的IP地址，在Python中socket对象的connect()函数会根据需要利用DNS把域名自动转换为IP地址，但对端口号则不是这样.</p>
+</blockquote>
+<h2 id="利用socket通信"><a href="#利用socket通信" class="headerlink" title="利用socket通信"></a>利用socket通信</h2><p>利用socket发送和接收数据，python提供了两种方法：socket对象和文件类对象</p>
+<ol>
+<li>socket对象<ul>
+<li>socket对象提供了操作系统的send(),sendto(),recv(),和recvfrom()调用的接口</li>
+<li>使用场景：<ul>
+<li>读写数据、需要协议可以详细的控制时、使用二进制传送固定大小数据时、数据超时需要特殊处理时，</li>
+<li>任何不止需要简单读写时，编写UDP程序时</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>文件类对象</p>
+<ul>
+<li>文件类对象提供了read(),write(),readline()接口</li>
+<li><p>文件类对象一般用于面向线性的协议，因为它能够通过提供的readline()函数自动为您处理大多数的解析。</p>
+<blockquote>
+<p>文件类对象一般只对TCP连接工作表现很好，对UDP连接反而不好。原因如下：  </p>
+</blockquote>
+</li>
+</ul>
+<ol>
+<li>TCP连接的行为更像是标准的文件，它们保证数据接收的精确性，并且和文件一样是以字节流形式运转  </li>
+<li>UDP是一种基于信息包的通信。文件类对象没法操作每个基本的信息包，因而建立、接收、发送UDP信息包的基本机制是不能工作的，并且检查也非常困难</li>
+</ol>
+</li>
+</ol>
+<h2 id="socket异常"><a href="#socket异常" class="headerlink" title="socket异常"></a>socket异常</h2><p>socket模块实际上定义了4种可能出现的异常：</p>
+<ol>
+<li>与一般I/O和通信问题有关的socket.error</li>
+<li>与查询地址信息有关的socket.gaierror</li>
+<li>与其他地址错误有关的socket.herror</li>
+<li>与在一个socket上调用settimeout()后，处理超时有关的socket.timeout(需要python2.3或更高版本)</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2017/05/10/xcodebuild/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -657,7 +1693,7 @@
 <li>邮件的正文和附件是在一起编码的，只是他们的Content-Type有区别罢了。比如正文的type一般是text/plain或text/html等，而附件的type一般是：application/octet-stream。但type不同，对应的内容头也会略有不同。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> email.header <span class="keyword">import</span>  Header</span><br><span class="line">frm = Header(<span class="string">'平华'</span>,<span class="string">'utf-8'</span>)</span><br><span class="line">frm.append(<span class="string">'&lt;yuanph@ushareit.com&gt;'</span>,<span class="string">'ascii'</span>)</span><br><span class="line"><span class="keyword">print</span> frm.encode()</span><br><span class="line"><span class="comment"># =?utf-8?b?5bmz5Y2O?= &lt;yuanph@ushareit.com&gt;</span></span><br><span class="line"><span class="keyword">import</span>  base64</span><br><span class="line">base64.b64decode(<span class="string">'5bmz5Y2O'</span>,<span class="string">'utf-8'</span>)</span><br><span class="line"><span class="comment"># '\xe5\xb9\xb3\xe5\x8d\x8e'</span></span><br></pre></td></tr></table></figure>
-<p>解析：<br>=?utf-8?b?5bmz5Y2O?= <a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#121;&#x75;&#x61;&#x6e;&#x70;&#104;&#64;&#x75;&#115;&#104;&#x61;&#x72;&#101;&#x69;&#x74;&#x2e;&#99;&#x6f;&#109;">&#121;&#x75;&#x61;&#x6e;&#x70;&#104;&#64;&#x75;&#115;&#104;&#x61;&#x72;&#101;&#x69;&#x74;&#x2e;&#99;&#x6f;&#109;</a> 这个内容里本身就有编码信息，因此反过来解析也很简单。因为=?、?、?=属于分隔符，用这三个分隔符简单的split后 。re.split(r’’’=\?|\?=|\?’’’,’’’=?utf-8?b?5bmz5Y2O?=’’’)。  可以得到[‘’, ‘utf-8’, ‘b’, ‘5bmz5Y2O’, ‘’] ，根据python的源码显示，utf-8表示数据编码，b表示base64。那么对内容’5bmz5Y2O’进行base64.b64decode后，就可得到utf-8编码的“平华”二个字。</p>
+<p>解析：<br>=?utf-8?b?5bmz5Y2O?= <a href="&#109;&#97;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#121;&#117;&#x61;&#110;&#112;&#x68;&#64;&#x75;&#x73;&#104;&#x61;&#x72;&#x65;&#x69;&#116;&#x2e;&#x63;&#111;&#109;">&#121;&#117;&#x61;&#110;&#112;&#x68;&#64;&#x75;&#x73;&#104;&#x61;&#x72;&#x65;&#x69;&#116;&#x2e;&#x63;&#111;&#109;</a> 这个内容里本身就有编码信息，因此反过来解析也很简单。因为=?、?、?=属于分隔符，用这三个分隔符简单的split后 。re.split(r’’’=\?|\?=|\?’’’,’’’=?utf-8?b?5bmz5Y2O?=’’’)。  可以得到[‘’, ‘utf-8’, ‘b’, ‘5bmz5Y2O’, ‘’] ，根据python的源码显示，utf-8表示数据编码，b表示base64。那么对内容’5bmz5Y2O’进行base64.b64decode后，就可得到utf-8编码的“平华”二个字。</p>
 <h1 id="Content-Type"><a href="#Content-Type" class="headerlink" title="Content-Type"></a>Content-Type</h1><p><strong>表明传递的信息类型</strong><br>Content-Type表明信息类型，缺省值为” text/plain”。它包含了主要类型（primary type）和次要类型（subtype）两个部分，两者之间用”/“分割。主要类型有9种，分别是application、audio、example、image、message、model、multipart、text、video。<br>每一种主要类型下面又有许多种次要类型，常见的有：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">text/plain：纯文本，文件扩展名.txt</span><br><span class="line">text/html：HTML文本，文件扩展名.htm和.html</span><br><span class="line">image/jpeg：jpeg格式的图片，文件扩展名.jpg</span><br><span class="line">image/gif：GIF格式的图片，文件扩展名.gif</span><br><span class="line">audio/x-wave：WAVE格式的音频，文件扩展名.wav</span><br><span class="line">audio/mpeg：MP3格式的音频，文件扩展名.mp3</span><br><span class="line">video/mpeg：MPEG格式的视频，文件扩展名.mpg</span><br><span class="line">application/zip：PK-ZIP格式的压缩文件，文件扩展名.zip</span><br></pre></td></tr></table></figure></p>
 <p>“Content-Type: multipart/alternative;”表明这封信的内容，是纯文本和HTML文本的混合。另两个可能的值是<code>multipart/mixed</code>和<code>multipart/related</code>，分别表示<code>信件内容中有二进制内容</code>和<code>信件带有附件</code></p>
 <p>参考链接：<br><a href="http://www.ruanyifeng.com/blog/2008/06/mime.html" target="_blank" rel="noopener">MIME笔记</a></p>
@@ -1085,1029 +2121,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2017/04/09/计数初步/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="../../images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="../../2017/04/09/计数初步/" itemprop="url">计数初步</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-09T08:45:18+08:00">
-                2017-04-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>求和符号（∑）(求和符号）</p>
-<ul>
-<li>英语名称：Sigma</li>
-<li>汉语名称：西格玛（大写Σ，小写σ）</li>
-<li>第十八个希腊字母。在希腊语中，如果一个单字的最末一个字母是小写sigma，要把该字母写成 ς ，此字母又称final sigma（Unicode: U+03C2）。在现代的希腊数字代表6。</li>
-</ul>
-<p>详解</p>
-<ol>
-<li>∑符号表示求和，∑读音为sigma，英文意思为Sum，Summation,就是和。<ul>
-<li>用∑表示求和的方法叫做Sigma Notation，或∑ Notation。它的小写是σ，在物<br>理上经常用来表示面密度。(相应地，ρ表示体密度，η表示线密度)</li>
-</ul>
-</li>
-<li>∑的用法：<ul>
-<li>其中i表示下界，n表示上界， k从i开始取数，一直取到n,全部加起来。</li>
-<li>∑i 这样表达也可以，表示对i求和，i是变数</li>
-</ul>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2017/03/23/DateFormate/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="../../images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="../../2017/03/23/DateFormate/" itemprop="url">日期格式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-23T21:54:34+08:00">
-                2017-03-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="../../categories/其他/" itemprop="url" rel="index">
-                    <span itemprop="name">其他</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="日期格式："><a href="#日期格式：" class="headerlink" title="日期格式："></a>日期格式：</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">G:         公元时代，例如AD公元  </span><br><span class="line">yy:        年的后2位  </span><br><span class="line">yyyy:      完整年  </span><br><span class="line">MM:        月，显示为1-12,带前置0  </span><br><span class="line">MMM:       月，显示为英文月份简写,如 Jan  </span><br><span class="line">MMMM:      月，显示为英文月份全称，如 Janualy  </span><br><span class="line">dd:        日，2位数表示，如02  </span><br><span class="line">d:         日，1-2位显示，如2，无前置0  </span><br><span class="line">EEE:       简写星期几，如Sun   </span><br><span class="line">EEEE:      全写星期几，如Sunday  </span><br><span class="line">aa:        上下午，AM/PM   </span><br><span class="line">H:         时，24小时制，0-23  </span><br><span class="line">HH:        时，24小时制，带前置0  </span><br><span class="line">h:         时，12小时制，无前置0  </span><br><span class="line">hh:        时，12小时制，带前置0  </span><br><span class="line">m:         分，1-2位  </span><br><span class="line">mm:        分，2位，带前置0  </span><br><span class="line">s:         秒，1-2位  </span><br><span class="line">ss:        秒，2位，带前置0  </span><br><span class="line">S:         毫秒  </span><br><span class="line">Z：        GMT（时区）</span><br></pre></td></tr></table></figure>
-<h1 id="星期："><a href="#星期：" class="headerlink" title="星期："></a>星期：</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">星期一：Mon. = Monday</span><br><span class="line"></span><br><span class="line">星期二： Tues.=Tuesday </span><br><span class="line"></span><br><span class="line">星期三： Wed.=Wednesday </span><br><span class="line"></span><br><span class="line">星期四： Thur.=Thursday </span><br><span class="line"></span><br><span class="line">星期五： Fri.=Friday </span><br><span class="line"></span><br><span class="line">星期六： Sat.=Saturday </span><br><span class="line"></span><br><span class="line">星期天： Sun.=Sunday</span><br></pre></td></tr></table></figure>
-<p>#月份</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"> 一月份＝ JAN.  Jan.=January </span><br><span class="line"></span><br><span class="line"> 二月份＝ FEB.  Feb.=February </span><br><span class="line"></span><br><span class="line"> 三月份＝ MAR.  Mar.=March </span><br><span class="line"></span><br><span class="line"> 四月份＝ APR.  Apr.=April </span><br><span class="line"></span><br><span class="line"> 五月份＝ MAY  May=May </span><br><span class="line"></span><br><span class="line"> 六月份＝ JUN.  Jun.=June </span><br><span class="line"></span><br><span class="line"> 七月份＝ JUL.  Jul.=July </span><br><span class="line"></span><br><span class="line">八月份＝ AUG.  Aug.=August </span><br><span class="line"></span><br><span class="line"> 九月份＝ SEP.  Sept.=September </span><br><span class="line"></span><br><span class="line">十月份＝ OCT.  Oct.=October </span><br><span class="line"></span><br><span class="line">十一月份＝ NOV.  Nov.=November </span><br><span class="line">十二月份＝ DEC.  Dec.=December</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2017/03/22/CoreLocation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="../../images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="../../2017/03/22/CoreLocation/" itemprop="url">CoreLocation</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-22T14:06:22+08:00">
-                2017-03-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="../../categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="获取定位信息"><a href="#获取定位信息" class="headerlink" title="获取定位信息"></a>获取定位信息</h1><p>iOS开发者使用<code>CoreLocation.framework</code>框架进行定位非常简单<code>CoreLocation</code>框架的常用API主要有如下几个。</p>
-<ul>
-<li><code>CLLocationManager</code>定位管理器类。</li>
-<li><code>CLLocationManagerdelegate</code>该协议代表定位管理器的<code>delegate</code>协议。实现该协议的对象可负责处理<code>CLLocationManager</code>的定位事件。</li>
-<li><code>CLLocation</code>该对象代表位置。该对象包含了当前设备的 <em>经度</em>、<em>纬度</em>、<em>高度</em>、<em>速度</em>、<em>路线</em>等信息还包含了该定位信息的水平精确度、垂直精确度以及时间戳信息。</li>
-<li><code>CLHeading</code>该对象代表设备的移动方向。</li>
-<li><code>CLRegion</code>该对象代表一个区域。一般程序不会直接使用该类而是使用它的两个子类即<code>CLCircularRegion</code>圆形区域和<code>CLBeaconRegion</code>蓝牙信号区。<br>除此之外<code>CoreLocation</code>框架还涉及一个<code>CLLocationCoordinate2D</code>结构体变量该结构体变量包含 <em>经度</em>、<em>纬度</em> 两个值。其中<code>CLLocation</code>对象的<code>coordinate</code>属性就是一个<code>CLLocationCoordinate2D</code>结构体变量。</li>
-</ul>
-<h1 id="获取位置信息"><a href="#获取位置信息" class="headerlink" title="获取位置信息"></a>获取位置信息</h1><p>使用<code>CoreLocation.framework</code>进行定位只要如下3步即可。</p>
-<ul>
-<li>创建<code>CLLocationManager</code>对象该对象负责获取定位相关信息。并为该对象设置一些必要的属性。</li>
-<li>为<code>CLLocationManager</code>指定<code>delegate</code>属性该属性值必须是一个实现<code>CLLocationManagerDelegate</code>协议的对象。实现              <code>CLLocationManagerDelegate</code>协议时可根据需要实现协议中特定的方法。</li>
-<li>调用<code>CLLocationManager</code>的<code>startUpdatingLocation</code>方法获取定位信息。定位结束时可调用<code>stopUpdatingLocation</code>方法结束获取定位信息</li>
-</ul>
-<p>#解析：</p>
-<ul>
-<li><code>LLocationManager</code><em>负责获取定位信息</em> 而<code>delegate</code>则 <em>负责处理定位事件</em> ——通过这些事件即可获取设备所在位置。</li>
-</ul>
-<h2 id="CLLocationManager还提供了如下类方法来判断当前设备的定位相关服务状态。"><a href="#CLLocationManager还提供了如下类方法来判断当前设备的定位相关服务状态。" class="headerlink" title="CLLocationManager还提供了如下类方法来判断当前设备的定位相关服务状态。"></a>CLLocationManager还提供了如下类方法来判断当前设备的定位相关服务状态。</h2><ul>
-<li><p><code>+ locationServicesEnabled</code>返回当前定位服务是否可用。</p>
-</li>
-<li><p><code>+ deferredLocationUpdatesAvailable</code>返回延迟定位更新是否可用。</p>
-</li>
-<li><p><code>+ significantLocationChangeMonitoringAvailable</code>返回重大位置改变监听是否可用。</p>
-</li>
-<li><p><code>+ headingAvailable</code>返回该设备是否支持磁力计计算方向。</p>
-</li>
-<li><p><code>+ isRangingAvailable</code>返回蓝牙信号范围服务是否可用。这是iOS 7新增的方法。</p>
-</li>
-</ul>
-<p>除此之外在使用CLLocationManager开始定位之前还可为该对象设置如下属性。</p>
-<ul>
-<li><code>pausesLocationUpdatesAutomatically</code>设置iOS设备是否可暂停定位来节省电池的电量。如果该属性设为“YES”则当iOS设备不再需要定位数据时iOS设备可以自动暂停定位。</li>
-</ul>
-<ul>
-<li><p><code>distanceFilter</code>设置<code>CLLocationManager</code>的自动过滤距离。也就是说只有当设备在水平方向的位置改变超过该数值以米为单位指定的距离时才会生成一次位置改变的信号。</p>
-</li>
-<li><p><code>desiredAccuracy</code>设置定位服务的精度。该属性值支持</p>
-<ul>
-<li><code>kCLLocationAccuracyBestForNavigation</code>导航级的最佳精确度、</li>
-<li><code>kCLLocationAccuracyBest</code>最佳精确度、</li>
-<li><code>kCLLocationAccuracy NearestTenMeters</code>10米误差、</li>
-<li><code>kCLLocationAccuracyHundredMeters</code>百米误差、</li>
-<li><code>kCLLocationAccuracyKilometer</code>千米误差、</li>
-<li><code>kCLLocationAccuracyThreeKilometers</code>三千米误差等常量值。当然也可直接指定一个浮点数作为定位服务允许的误差。</li>
-</ul>
-</li>
-<li><p><code>activityType</code>设置定位数据的用途。该属性支持</p>
-<ul>
-<li><code>CLActivityTypeOther</code>定位数据作为普通用途、</li>
-<li><code>CLActivityTypeAutomotiveNavigation</code>定位数据作为车辆导航使用、</li>
-<li><code>CLActivityTypeFitness</code>定位数据作为步行导航使用</li>
-<li><code>CLActivityTypeOtherNavigation</code>定位数据作为其他导航使用这几个枚举值之一。</li>
-</ul>
-</li>
-</ul>
-<h2 id="CLLocation对象中包含如下属性这些属性包含了定位相关信息。"><a href="#CLLocation对象中包含如下属性这些属性包含了定位相关信息。" class="headerlink" title="CLLocation对象中包含如下属性这些属性包含了定位相关信息。"></a>CLLocation对象中包含如下属性这些属性包含了定位相关信息。</h2><ul>
-<li><code>altitude</code>该属性表示当前设备的海拔高度单位是米。</li>
-<li><code>coordinate</code>该属性返回一个<code>CLLocationCoordinate2D</code>结构体变量该结构体变量中包含<em>经度</em>、<em>纬度</em>信息。</li>
-<li><code>course</code>该属性表示当前设备前进的方向。该值为0°表示向北90°表示向东180°表示向南270°表示向西。</li>
-<li><p><code>horizontalAccuracy</code>该属性表明定位信息的水平精确度。将返回的坐标作为圆心并将水平精确度视为半径。真正的设备位置落在此圆内的某处。此圆越小位置就越精确此圆越大则位置越不精确。如果精确度为负值则表明测量精确度失败。</p>
-</li>
-<li><p><code>verticalAccuracy</code>该属性表明定位信息的垂直精确度。也就是说iOS设备的实际高度在该定位信息的高度加或减该属性值的范围内。<br>timestamp该属性返回定位信息的返回时间。</p>
-</li>
-<li><code>speed</code>该属性表示返回设备的移动速度单位是米/秒。实际上该属性适用于行车速度而不太适用于步行速度。</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2017/03/18/http/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="../../images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="../../2017/03/18/http/" itemprop="url">HTTP 入门</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-18T22:38:12+08:00">
-                2017-03-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h1><h2 id="什么是URL"><a href="#什么是URL" class="headerlink" title="什么是URL"></a>什么是URL</h2><pre><code>* Uniform Resource Location（统一资源定位符）
-*  网络中每一个资源都对应一个地址--&gt; URL 
-</code></pre><h2 id="URL的基本格式"><a href="#URL的基本格式" class="headerlink" title="URL的基本格式"></a>URL的基本格式</h2><pre><code>* 协议://主机地址:端口号/路径
-    * 协议 ： 不同协议代表不同的资源获取方式
-    * 主机地址：主机的唯一标识（IP地址，域名）
-    * 路径： 资源在主机中的具体位置
-</code></pre><h2 id="URL的常见协议"><a href="#URL的常见协议" class="headerlink" title="URL的常见协议"></a>URL的常见协议</h2><pre><code>* http ,FTP，Mailto,File,tel://,sms://
-</code></pre><h1 id="HTTP-协议简介"><a href="#HTTP-协议简介" class="headerlink" title="HTTP 协议简介"></a>HTTP 协议简介</h1><h2 id="什么是-http协议"><a href="#什么是-http协议" class="headerlink" title="什么是 http协议"></a>什么是 http协议</h2><pre><code>* HyperText TransportProtocol(超文本传输协议)
-* 浏览器和web服务器通讯时遵守的约定
-* 互联网使用最多的协议
-* 提供超文本传输协议
-* 通过浏览器打开网使用的http提供的服务。
-</code></pre><h1 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h1><h2 id="IP-1"><a href="#IP-1" class="headerlink" title="IP"></a>IP</h2><ul>
-<li>两个计算机通讯必须要知道的：<ul>
-<li>IP地址和端口号</li>
-</ul>
-</li>
-<li>IP地址<ul>
-<li>IP地址是一个32位的二进制数，通常被分割为8位二进制数，通常用点分隔，10进制表示。<ul>
-<li>192.168.1.1</li>
-<li>127.0.0.1 回路地址 </li>
-<li>255.255.255.255 广播</li>
-<li>0.0.0.0 any </li>
-</ul>
-</li>
-<li>唯一标识互联网上的一台计算机（IP地址不好记忆，所以有了域名）</li>
-<li>一个计算机可能有多个可用IP地址，如两块网卡</li>
-<li>内网的计算机，都通过路由器上网，它们对外的地址都是路由器的IP地址。</li>
-</ul>
-</li>
-</ul>
-<h1 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h1><h2 id="端口号-1"><a href="#端口号-1" class="headerlink" title="端口号"></a>端口号</h2><ul>
-<li>标识进程（程序）的逻辑地址，不同进程（程序）的标识</li>
-<li>端口取值范围 ： 0〜65535</li>
-<li>端口的分类：<ul>
-<li>公认端口（Well Know Ports）<ul>
-<li>这类端口也常称之为“常用端口”。端口号从0到1024,它们紧密绑定一些特定的服务。通常这些端口的通信明确表明了某种服务的协议，这种端口是不可再重新定义它的作用对象。比如： http: 80 ,ftp:21,pop3:110,smtp:25</li>
-</ul>
-</li>
-<li>注册端口（Registered Ports）<ul>
-<li>端口号从1025到49151。分配给用户进程或应用程序。这些进程主要是用户选择安装的一些应用程序，而不是已经分配好的公认端口的常用程序。</li>
-</ul>
-</li>
-<li>动态和／或私有端口（Dynamic and/or Private Ports）<ul>
-<li>端口号从49152到65535。之所以称为动态端口，是因为它一般不固定分配某种服务，而是动态分配。   </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h1><h2 id="OSI七层网络模型"><a href="#OSI七层网络模型" class="headerlink" title="OSI七层网络模型"></a>OSI七层网络模型</h2><ul>
-<li>应用层</li>
-<li>表示层</li>
-<li>会话层</li>
-<li>传输层</li>
-<li>网络层</li>
-<li>数据链路层</li>
-<li>物理层<h1 id="TCP／IP-网络模型"><a href="#TCP／IP-网络模型" class="headerlink" title="TCP／IP 网络模型"></a>TCP／IP 网络模型</h1></li>
-<li><p>应用层</p>
-<ul>
-<li>对应OSI模型的前三层 ，为用户提供所需要的各种服务，例如 ： FTP，Telnet,DNS,SMTP,HTTP等</li>
-</ul>
-</li>
-<li><p>传输层</p>
-<ul>
-<li>为应用层提供端到端的通信功能，保证了数据包的传输顺序及数据完整性。两个主要协议：TCP／UDP</li>
-</ul>
-</li>
-<li>网络层<ul>
-<li>解决主机到主机的通信问题。它所保护的协议设计数据包在整个网络上的逻辑传输。注重重新赋予主机一个IP地址来完成对主机的寻址，它还负责数据包在多种网络中和路由。该层有三个重要协议 ：网际协议（IP），互联网组管理协议（IGMP）和互联网控制报文协议（ICMP）</li>
-</ul>
-</li>
-<li>网络接入层<ul>
-<li>负监视数据在主机和网络之间的交换。</li>
-</ul>
-</li>
-</ul>
-<h1 id="传输协议"><a href="#传输协议" class="headerlink" title="传输协议"></a>传输协议</h1><ul>
-<li>TCP （传输控制协议）<ul>
-<li>TCP 协议提供的是一种可靠的，通过“三次握手”来连接的数据传输服务</li>
-</ul>
-</li>
-<li>UDP（用户数据报协议）<ul>
-<li>UDP 协议提供的则是不保证可靠性，无连接的数据传输服务。</li>
-</ul>
-</li>
-</ul>
-<h1 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h1><ul>
-<li>两个计算机通讯的过程，就像两个人打电话一样</li>
-<li>Socket<ul>
-<li>Socket 又称“套接字”，应用程序通过“套接字”向网络发送请求或向网络做出应答</li>
-<li>网络通信其实就是Socket之间的通信</li>
-<li>数据在两个Socket之间通过I传输数据</li>
-<li>Socket是纯C语言的，是跨平台的</li>
-<li>HTTP协议是基于Socket的，HTTP协议的底层使用的就是Socket</li>
-</ul>
-</li>
-</ul>
-<h2 id="通讯过程"><a href="#通讯过程" class="headerlink" title="通讯过程"></a>通讯过程</h2><ul>
-<li>创建Socket</li>
-<li>连接到服务器</li>
-<li>发送数据到服务器</li>
-<li>从服务器接收数据</li>
-<li>关闭连接</li>
-</ul>
-<p><strong>socket对应于TCP／IP网络模型中的应用层和传输层之间</strong></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2017/03/16/keyboard-iOS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="../../images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="../../2017/03/16/keyboard-iOS/" itemprop="url">keyboard_iOS</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-16T16:55:27+08:00">
-                2017-03-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="../../categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="一-键盘通知"><a href="#一-键盘通知" class="headerlink" title="一. 键盘通知"></a>一. 键盘通知</h1><p>  当文本<code>View</code>(如<code>UITextField</code>,<code>UITextView</code>, <code>UIWebView</code>内的输入框)进入编辑模式成为first responder时，系统会自动显示键盘。成为firstresponder可能由用户点击触发，也可向文本View发送<code>becomeFirstResponder</code>消息触发。当文本视图退出first responder时，键盘会消失。文本View退出first responder可能由用户点击键盘上的Done或Return键结束输入触发，也可向文本View发送<code>resignFirstResponder</code>消息触发。<br>  当键盘显示或消失时，系统会发送相关的通知:</p>
-<pre><code>1. UIKeyboardWillShowNotification
-2. UIKeyboardDidShowNotification
-3. UIKeyboardWillHideNotification
-4. UIKeyboardDidHideNotification
-</code></pre><p>  通知消息 <code>NSNotification</code>中的 userInfo字典中包含键盘的位置和大小信息，对应的key为</p>
-<pre><code>1. UIKeyboardFrameBeginUserInfoKey
-2. UIKeyboardFrameEndUserInfoKey
-3. UIKeyboardAnimationDurationUserInfoKey
-4. UIKeyboardAnimationCurveUserInfoKey
-</code></pre><p>  <code>UIKeyboardFrameBeginUserInfoKey</code>,<code>UIKeyboardFrameEndUserInfoKey</code>对应的<code>Value</code>是个<code>NSValue</code>对象，内部包含<code>CGRect</code>结构，分别为 <strong>键盘起始时和终止时的位置信息</strong>。<br>  <code>UIKeyboardAnimationCurveUserInfoKey</code>对应的<code>Value</code>是<code>NSNumber</code>对象，内部为<code>UIViewAnimationCurve</code>类型的数据，表示键盘显示或消失的 <strong>动画类型</strong>。<br>  <code>UIKeyboardAnimationDurationUserInfoKey</code>对应的<code>Value</code>也是<code>NSNumber</code>对象，内部为<code>double</code>类型的数据，表示键盘显示或消失时动画的持续时间。</p>
-<h1 id="文本对象与WebView键盘设置"><a href="#文本对象与WebView键盘设置" class="headerlink" title="文本对象与WebView键盘设置"></a>文本对象与WebView键盘设置</h1><p> <code>UITextFiled</code>和 <code>UITextView</code>都遵循 <code>[UITextInputTraits](https://developer.apple.com/reference/uikit/uitextinputtraits#//apple_ref/occ/intfp/UITextInputTraits/returnKeyType)</code>协议，在<code>UITextInputTraits</code>协议中定义了设置键盘的属性，有</p>
-<ol>
-<li>keyboardType:键盘类型，如UIKeyboardTypeDefault,UIKeyboardTypeURL,UIKeyboardTypeEmailAddress,UIKeyboardTypePhonePad等</li>
-<li>returnKeyType:键盘Return键显示的文本，默认为”Return”,其他可选择的包括Go,Next,Done,Send,Google等。</li>
-<li>keyboardAppearance：键盘外观，默认为 UIKeyboardAppearanceDefault，即上图中的浅兰色不透明背景，另外还有一种为 UIKeyboardAppearanceAlert</li>
-<li>autocapitalizationType:文本大小写样式，见 UITextAutocapitalizationType。</li>
-<li>autocorrectionType:是否自动更正，见 UITextAutocorrectionType。</li>
-<li>spellCheckingType:拼写检查设置，见UITextSpellCheckingType。</li>
-<li>enablesReturnKeyAutomatically：是否在无文本时禁用Return键，默认为NO。若为YES,则用户至少输入一个字符后Return键才被激活。</li>
-<li><p>secureTextEntry：若输入的是密码，可设置此类型为YES,输入字符时可显示最后一个字符，其他字符显示为点。</p>
-<p>UIWebView本身不直接遵循 UITextInputTraits协议，但同样可设置其内部输入部件的键盘属性。如Configuring the Keyboard for Web Views中所述。<br>设置autocorrect, auto-capitalization属性。</p>
-</li>
-</ol>
-<h1 id="使用inputAccessoryView与inputView定制输入视图"><a href="#使用inputAccessoryView与inputView定制输入视图" class="headerlink" title="使用inputAccessoryView与inputView定制输入视图"></a>使用inputAccessoryView与inputView定制输入视图</h1><p>  <code>inputAccessoryView</code>和 <code>inputView</code>属性在 <code>UIResponder</code>中定义，为<code>readonly</code>的属性，但在<code>UITextFiled</code>和 <code>UITextView</code>中重新定义为了·的属性，可以由用户赋值。若 inputView的不为nil,则当文本视图成为first responder时，不会显示系统键盘，而是显示自定义的<code>inputView</code>;若<code>inputAccessoryView</code>不为nil,则<code>inputAccessoryView</code>会显示在系统键盘或定制<code>inputView</code>的上方。当使用<code>inputView</code>时，仍然会有<code>WillShow</code>,<code>DidShow</code>,<code>WillHide</code>,<code>DidHide</code>的键盘通知，通知中的<code>BeginFrame</code>与<code>EndFrame</code>为系统键盘(或<code>inputView</code>)与<code>inputAccessoryView</code>一起的frame。</p>
-<p>  在标准视图中只有<code>UITextField</code>和<code>UITextView</code>将<code>inputView</code>和<code>inputAccessoryView</code>重新定义为了<code>readwrite</code>类型，若想在自定义视图中使用，需要在自定义视图中重新定义<code>inputView</code>和<code>inputAccessoryView</code>属性。见 <a href="https://developer.apple.com/library/content/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/InputViews/InputViews.html#//apple_ref/doc/uid/TP40009542-CH12-SW2" target="_blank" rel="noopener">Input Views and Input Accessory Views</a>。</p>
-<h1 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h1><p>我们可以将键盘看成有两部分组成（当然，键盘还会有其他的部分组成），一部分是inputView，一部分是InputAccessoryView，并且，inputView在系统键盘的下面的部分，我们调用的系统默认键盘的时候，我们看到的部分就是这个InputView（输入视图），而这个InputAccessoryView就是键盘顶部的一个部分，当我Nil的时候则不显示，当我们给这个属性赋值的时候，就会显示这个我们添加的视图。</p>
-<h1 id="键盘中的枚举"><a href="#键盘中的枚举" class="headerlink" title="键盘中的枚举"></a>键盘中的枚举</h1><h2 id="键盘风格"><a href="#键盘风格" class="headerlink" title="键盘风格"></a>键盘风格</h2><p>UIKit框架支持8种风格键盘。<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;  </span><br><span class="line">    <span class="built_in">UIKeyboardTypeDefault</span>,                <span class="comment">// 默认键盘：支持所有字符  </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeASCIICapable</span>,           <span class="comment">// 支持ASCII的默认键盘  </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeNumbersAndPunctuation</span>,  <span class="comment">// 标准电话键盘，支持+ * # 等符号  </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeURL</span>,                    <span class="comment">// URL键盘，有.com按钮；只支持URL字符  </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeNumberPad</span>,              <span class="comment">//数字键盘  </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypePhonePad</span>,               <span class="comment">// 电话键盘  </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeNamePhonePad</span>,           <span class="comment">// 电话键盘，也支持输入人名字  </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeEmailAddress</span>,           <span class="comment">// 用于输入电子邮件地址的键盘  </span></span><br><span class="line">&#125; <span class="built_in">UIKeyboardType</span>;</span><br></pre></td></tr></table></figure></p>
-<p>eg:<br><code>textView.keyboardtype = UIKeyboardTypeNumberPad;</code></p>
-<h2 id="键盘外观"><a href="#键盘外观" class="headerlink" title="键盘外观"></a>键盘外观</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;  </span><br><span class="line">    <span class="built_in">UIKeyboardAppearanceDefault</span>,    <span class="comment">// 默认外观：浅灰色  </span></span><br><span class="line">    <span class="built_in">UIKeyboardAppearanceAlert</span>,      <span class="comment">//深灰/石墨色  </span></span><br><span class="line">&#125; <span class="built_in">UIKeyboardAppearance</span>;</span><br></pre></td></tr></table></figure>
-<p>eg :<br><code>textView.keyboardAppearance=UIKeyboardAppearanceDefault;</code></p>
-<h2 id="回车键"><a href="#回车键" class="headerlink" title="回车键"></a>回车键</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;  </span><br><span class="line">    <span class="built_in">UIReturnKeyDefault</span>,  <span class="comment">//默认：灰色按钮，标有Return</span></span><br><span class="line">    <span class="built_in">UIReturnKeyGo</span>,  <span class="comment">//标有Go的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyGoogle</span>,  <span class="comment">//标有Google的蓝色按钮，用于搜索</span></span><br><span class="line">    <span class="built_in">UIReturnKeyJoin</span>,  <span class="comment">//标有Join的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyNext</span>,  <span class="comment">//标有Next的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyRoute</span>,  <span class="comment">//标有Route的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeySearch</span>,  <span class="comment">//标有Search的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeySend</span>,  <span class="comment">//标有Send的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyYahoo</span>,  <span class="comment">//标有Yahoo!的蓝色按钮，用于搜索</span></span><br><span class="line">    <span class="built_in">UIReturnKeyDone</span>,  <span class="comment">//标有Done的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyEmergencyCall</span>,  <span class="comment">//紧急呼叫按钮</span></span><br><span class="line">&#125; <span class="built_in">UIReturnKeyType</span>;</span><br></pre></td></tr></table></figure>
-<p>eg:<br><code>textView.returnKeyType=UIReturnKeyGo;</code></p>
-<h2 id="自动大写"><a href="#自动大写" class="headerlink" title="自动大写"></a>自动大写</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;  </span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeNone</span>, <span class="comment">//不自动大写  </span></span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeWords</span>, <span class="comment">//单词首字母大写  </span></span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeSentences</span>, <span class="comment">//句子首字母大写  </span></span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeAllCharacters</span>, <span class="comment">//所有字母大写  </span></span><br><span class="line">&#125; <span class="built_in">UITextAutocapitalizationType</span>;</span><br></pre></td></tr></table></figure>
-<p>eg:<br><code>textField.autocapitalizationType = UITextAutocapitalizationTypeWords;</code></p>
-<h2 id="自动更正"><a href="#自动更正" class="headerlink" title="自动更正"></a>自动更正</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;  </span><br><span class="line">    <span class="built_in">UITextAutocorrectionTypeDefault</span>,<span class="comment">//默认  </span></span><br><span class="line">    <span class="built_in">UITextAutocorrectionTypeNo</span>,<span class="comment">//不自动更正  </span></span><br><span class="line">    <span class="built_in">UITextAutocorrectionTypeYes</span>,<span class="comment">//自动更正  </span></span><br><span class="line">&#125; <span class="built_in">UITextAutocorrectionType</span>;</span><br></pre></td></tr></table></figure>
-<p>eg:<br><code>textField.autocorrectionType = UITextAutocorrectionTypeYes;</code></p>
-<h2 id="安全文本输入"><a href="#安全文本输入" class="headerlink" title="安全文本输入"></a>安全文本输入</h2><p><code>textView.secureTextEntry=YES;</code><br>开启安全输入主要是用于密码或一些私人数据的输入，此时会禁用自动更正和自此缓存。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2017/03/16/emoj/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="../../images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="../../2017/03/16/emoj/" itemprop="url">emoj</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-16T14:39:08+08:00">
-                2017-03-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>iOS4.0以前emoji采用的是SoftBank的那套编码，叫做SB_Unicode, 而且iOS5时，emoji被放进了Unicode6.0, 此后iOS采用的是Unicode编码</p>
-<p>ps: 字符显示程序的快捷键应该是 Control + Cmd + 空格键</p>
-<p>emoji 的样式就是一个标准化变体序列的例子。许多 emoji 和一些「正常」的字符都有两种风格：一种是彩色的「emoji 风格」，另一种是黑白的，更像是符号的「文本风格」。例如，「有雨滴的伞」这个字符（U+2614）可能是这样：☔️ (U+2614 U+FE0F) ，也可能是这样的： ☔︎ (U+2614 U+FE0E)。</p>
-<p>iOS中可用的表情unicode范围是：0xE001~0xE05A,0xE101~0xE15A, 0xE201~0xE253, 0xE401~0xE44C, 0xE501~0xE537</p>
-<p>参考 <a href="https://www.objccn.io/issue-9-1/" target="_blank" rel="noopener">Unicode</a></p>
-<p><a href="https://my.oschina.net/u/2340880/blog/529078" target="_blank" rel="noopener">参考</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="../2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="../../index.html">1</a><a class="page-number" href="../2/">2</a><span class="page-number current">3</span><a class="page-number" href="../4/">4</a><span class="space">&hellip;</span><a class="page-number" href="../11/">11</a><a class="extend next" rel="next" href="../4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="../2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="../../index.html">1</a><a class="page-number" href="../2/">2</a><span class="page-number current">3</span><a class="page-number" href="../4/">4</a><span class="space">&hellip;</span><a class="page-number" href="../12/">12</a><a class="extend next" rel="next" href="../4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2153,7 +2171,7 @@
               
                 <a href="../../archives/">
               
-                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-count">113</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2221,7 +2239,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

@@ -260,6 +260,908 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/09/27/安装组件时遇到的一些问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="../../2016/09/27/安装组件时遇到的一些问题/" itemprop="url">安装组件时遇到的一些问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-27T21:12:03+08:00">
+                2016-09-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>安装 mpv 终端播放器时遇到的问题<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mpv</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在终端执行上述命令时遇到如下的提示：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Error: You must `brew link lua` before mpv can be installed</span><br><span class="line">localhost:~ yuanpinghua$ brew link lua</span><br><span class="line">Linking /usr/<span class="built_in">local</span>/Cellar/lua/5.2.4_4...</span><br><span class="line">Error: Could not symlink bin/lua</span><br><span class="line">Target /usr/<span class="built_in">local</span>/bin/lua</span><br><span class="line">already exists. You may want to remove it:</span><br><span class="line">  rm <span class="string">'/usr/local/bin/lua'</span></span><br><span class="line"></span><br><span class="line">To force the link and overwrite all conflicting files:</span><br><span class="line">  brew link --overwrite lua</span><br><span class="line"></span><br><span class="line">To list all files that would be deleted:</span><br><span class="line">  brew link --overwrite --dry-run lua</span><br></pre></td></tr></table></figure></p>
+<p>解决方案：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R $(whoami) /usr/<span class="built_in">local</span>/</span><br><span class="line">brew link lua</span><br></pre></td></tr></table></figure></p>
+<p>执行上述命令会得到如下的提示：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Linking /usr/<span class="built_in">local</span>/Cellar/lua/5.2.4_4... 55 symlinks created</span><br></pre></td></tr></table></figure></p>
+<p>再次执行:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mpv</span><br></pre></td></tr></table></figure></p>
+<p>这时就可以安装成功了</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/09/26/Python-os-模块学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="../../2016/09/26/Python-os-模块学习/" itemprop="url">Python os 模块学习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-26T15:25:09+08:00">
+                2016-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="线程相关操作"><a href="#线程相关操作" class="headerlink" title="线程相关操作"></a>线程相关操作</h1><ul>
+<li><p>获取当前线程的ID</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.getpid()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取父线程的ID</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.getppid()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当前线程的用户ID</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.getuid()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="用户相关操作"><a href="#用户相关操作" class="headerlink" title="用户相关操作"></a>用户相关操作</h1><ul>
+<li>获取当前登录的用户名<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.getlogin()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="系统环境相关"><a href="#系统环境相关" class="headerlink" title="系统环境相关"></a>系统环境相关</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/09/26/常用的系统资源文件路径/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="../../2016/09/26/常用的系统资源文件路径/" itemprop="url">常用的系统资源文件路径</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-26T11:54:58+08:00">
+                2016-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p>系统字体文件路径：</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/<span class="keyword">Library</span>/<span class="built_in">Fonts</span>/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>xcode 证书路径：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~<span class="regexp">/Library/</span>MobileDevice<span class="regexp">/Provisioning Profiles</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/09/23/English-Level2-UNIT3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="../../2016/09/23/English-Level2-UNIT3/" itemprop="url">English UNIT3</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-23T21:40:19+08:00">
+                2016-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="动词过去时"><a href="#动词过去时" class="headerlink" title="动词过去时"></a>动词过去时</h2><p>许多动词过去时只用在动词词尾添加 -ed 即可。<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">walk - walked</span></span><br><span class="line"><span class="attribute">clean - cleaned</span></span><br></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="../../2016/09/23/English-Level2-UNIT3/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/09/23/brew-useMethod/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="../../2016/09/23/brew-useMethod/" itemprop="url">homebrew 的使用写安装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-23T11:46:18+08:00">
+                2016-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>简介：<br>  <a href="http://brew.sh/index_zh-cn.html" target="_blank" rel="noopener">Homebrew</a></p>
+<blockquote>
+<p>Homebrew是Mac OSX上的软件包管理工具，能在Mac中方便的安装软件或者卸载软件，相当于linux下的apt-get、yum神器；Homebre可以在Mac上安装一些OS X没有的UNIX工具，Homebrew将这些工具统统安装到了 /usr/local/Cellar 目录中，并在 /usr/local/bin 中创建符号链接。</p>
+</blockquote>
+<p><strong>Homebrew的安装</strong><br>打开终端窗口, 粘贴以下脚本：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>Homebrew的使用</strong></p>
+<ul>
+<li><p>安装软件：</p>
+  <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>softname(软件名)</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>python3</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>搜索软件：</p>
+  <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew <span class="built_in">search</span> softname(软件名)</span><br><span class="line">brew <span class="built_in">search</span> <span class="keyword">python3</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>卸载软件：</p>
+  <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span>uninstall softname(软件名)</span><br><span class="line"><span class="keyword">brew </span>uninstall python3</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新软件：</p>
+<ul>
+<li><p>更新所有软件：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span>update</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新具体软件：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew<span class="built_in"> upgrade </span>softname(软件名)</span><br><span class="line">brew<span class="built_in"> upgrade </span>git</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>显示已安装软件：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew <span class="built_in">list</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看软件信息：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="meta">info</span>/home softname(软件名)</span><br><span class="line"><span class="keyword">brew </span><span class="meta">info</span> git /<span class="keyword">brew </span>home git</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>brew home指令是用浏览器打开官方网页查看软件信息</p>
+</blockquote>
+</li>
+<li><p>查看那些已安装的程序并且需要更新的：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span>outdated</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示包依赖：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span>reps</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/09/20/iOS-remotepush/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="../../2016/09/20/iOS-remotepush/" itemprop="url">iOS 远程推送</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-20T15:31:30+08:00">
+                2016-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="iOS-通知分类："><a href="#iOS-通知分类：" class="headerlink" title="iOS 通知分类："></a>iOS 通知分类：</h1><ol>
+<li><p>remote-notification</p>
+<ul>
+<li>silent remote notifications</li>
+</ul>
+<p>iOS 7在推送方面最大的变化就是允许，应用收到通知后在后台（background）状态下运行一段代码，可用于从服务器获取内容更新。功能使用场景：（多媒体）聊天，Email更新，基于通知的订阅内容同步等功能，提升了终端用户的体验。<br>Remote Notifications 与之前版本的对比可以参考下面两张 Apple 官方的图片便可一目了然。<br><img src="http://docs.jpush.cn/download/attachments/7865069/iOS6+push.jpg?version=1&amp;modificationDate=1384927835000" alt="iOS6"><br><img src="http://docs.jpush.cn/download/attachments/7865069/iOS7.png?version=1&amp;modificationDate=1384927835000" alt="iOS7"><br>如果只携带content-available: 1 不携带任何badge，sound 和消息内容等参数，则可以不打扰用户的情况下进行内容更新等操作即为“Silent Remote Notifications”。<br><img src="http://docs.jpush.cn/download/attachments/7865069/silent.png?version=1&amp;modificationDate=1384932801000" alt="Slient Remote Notifications"></p>
+<blockquote>
+<p>若有<code>content-available: 1</code> 字段并带有任何badge，sound 和消息内容等参数一个或多个，都会在手机端有一个的表现行式（如声单，提示框，badge 并会调用：<code>[UIApplicationDelegate application:didReceiveRemoteNotification:fetchCompletionHandler:]</code>方法<br>若只带<code>content-available: 1</code>字段只会调用<code>[UIApplicationDelegate application:didReceiveRemoteNotification:fetchCompletionHandler:]</code>,在手机端没有其他的表现。</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p>不同版本的通知注册及回调用情况</p>
+<ol>
+<li><p>iOS8 以前</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] registerForRemoteNotificationTypes:(<span class="built_in">UIRemoteNotificationTypeBadge</span> | <span class="built_in">UIRemoteNotificationTypeSound</span> | <span class="built_in">UIRemoteNotificationTypeAlert</span>)];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>iOS8~iOS9</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="built_in">UIUserNotificationSettings</span> * settings = [<span class="built_in">UIUserNotificationSettings</span> settingsForTypes:( <span class="built_in">UIUserNotificationTypeBadge</span> | <span class="built_in">UIUserNotificationTypeSound</span> | <span class="built_in">UIUserNotificationTypeAlert</span>)      categories:<span class="literal">nil</span>];</span><br><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] registerUserNotificationSettings:settings];</span><br><span class="line"></span><br><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] registerForRemoteNotifications];</span><br></pre></td></tr></table></figure>
+<ol>
+<li>iOS10<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">// iOS10.0 register remote notification</span></span><br><span class="line">   [[<span class="built_in">UIApplication</span> sharedApplication]registerForRemoteNotifications];</span><br><span class="line">[[UNUserNotificationCenter currentNotificationCenter]requestAuthorizationWithOptions:UNAuthorizationOptionAlert|UNAuthorizationOptionBadge|UNAuthorizationOptionSound completionHandler:^(<span class="built_in">BOOL</span> granted, <span class="built_in">NSError</span> * _ Nullable error) &#123;</span><br><span class="line">    <span class="keyword">if</span> (granted) &#123;</span><br><span class="line">        [UNUserNotificationCenter currentNotificationCenter].delegate= <span class="keyword">self</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   &#125;];</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>在iOS10，苹果将用户通知相关操作集合在了<code>UserNotifications.framework</code>中，通知的回调用采用代理方式。</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ol>
+<pre><code>注册通知成功后，Token的获取回调用：
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didRegisterForRemoteNotificationsWithDeviceToken:(<span class="built_in">NSData</span> *)deviceToken <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">3</span>_0)&#123;</span><br><span class="line">  <span class="built_in">NSString</span> * strDeviceToken =[[deviceToken description] stringByTrimmingCharactersInSet:[<span class="built_in">NSCharacterSet</span> characterSetWithCharactersInString:<span class="string">@"&lt; &gt;"</span>]];</span><br><span class="line">  <span class="built_in">NSLog</span>(<span class="string">@"APNS token:%@"</span>, strDeviceToken);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+注册通知失败的回调用：
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didFailToRegisterForRemoteNotificationsWithError:(<span class="built_in">NSError</span> *)error <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">3</span>_0);</span><br></pre></td></tr></table></figure>
+
+接收到通知的回调用处理方法：
+iOS10以前：
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 接收到远程通知</span></span><br><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didReceiveRemoteNotification:(<span class="built_in">NSDictionary</span> *)userInfo;</span><br><span class="line"><span class="comment">// 接收到本地通知</span></span><br><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didReceiveLocalNotification:(<span class="built_in">UILocalNotification</span> *)notification ；</span><br></pre></td></tr></table></figure>
+
+iOS10的回调：
+实现UNUserNotificationCenterDelegate的代理方法：这些代理方法是可选的。
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// The method will be called on the delegate only if the application is in the foreground. If the method is not implemented or the handler is not called in a timely manner then the notification will not be presented. The application can choose to have the notification presented as a sound, badge, alert and/or in the notification list. This decision should be based on whether the information in the notification is otherwise visible to the user.</span></span><br><span class="line"> - (<span class="keyword">void</span>)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(<span class="keyword">void</span> (^)(UNNotificationPresentationOptions options))completionHandler __IOS_AVAILABLE(<span class="number">10.0</span>) __TVOS_AVAILABLE(<span class="number">10.0</span>) __WATCHOS_AVAILABLE(<span class="number">3.0</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="comment">// The method will be called on the delegate when the user responded to the notification by opening the application, dismissing the notification or choosing a UNNotificationAction. The delegate must be set before the application returns from applicationDidFinishLaunching:.</span></span><br><span class="line"> - (<span class="keyword">void</span>)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(<span class="keyword">void</span>(^)())completionHandler __IOS_AVAILABLE(<span class="number">10.0</span>) __WATCHOS_AVAILABLE(<span class="number">3.0</span>) __TVOS_PROHIBITED&#123;</span><br><span class="line"></span><br><span class="line">   <span class="built_in">NSDictionary</span> * userinfo= response.notification.request.content.userInfo;</span><br><span class="line">     [<span class="keyword">self</span> analysisNotification:userinfo];</span><br><span class="line">     <span class="comment">// <span class="doctag">TODO:</span>: 如果有用户操作，可获取到对应的动作类型，并进行相关处理、</span></span><br><span class="line">     <span class="comment">// 例如</span></span><br><span class="line">         <span class="keyword">if</span> ([response.notification.request.content.categoryIdentifier isEqualToString:<span class="string">@"replaymessage"</span>]) &#123;</span><br><span class="line">    UNTextInputNotificationResponse * tresponse =(UNTextInputNotificationResponse*)response;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,tresponse.userText);</span><br><span class="line">     <span class="comment">//        get the user input text to dosomething</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/09/18/English-Level2-UNIT2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -807,808 +1709,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/09/11/English-Level2-UINIT1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="../../images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="../../2016/09/11/English-Level2-UINIT1/" itemprop="url">English－UINIT1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-11T22:20:09+08:00">
-                2016-09-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="动名词和不定式"><a href="#动名词和不定式" class="headerlink" title="动名词和不定式"></a>动名词和不定式</h2><p>动名词和不定式用于谈论复杂的观点。动名词由 -ing 构成，不定式由 to 加动词构成。有些动词后面既可用动名词，也能用不定式。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="../../2016/09/11/English-Level2-UINIT1/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/09/08/给MacOS-X下的Python3安装requests模块/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="../../images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="../../2016/09/08/给MacOS-X下的Python3安装requests模块/" itemprop="url">给MacOS X下的Python3安装requests模块</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-08T17:17:08+08:00">
-                2016-09-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>默认情况下直接用<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install requests</span><br></pre></td></tr></table></figure></p>
-<p>会安装到MacOS 自带的Python 2下面，Python 3还是不能使用requests模块。<br>解决方案</p>
-<p>下载request源代码：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -OL https://github.com/kennethreitz/requests/zipball/master</span><br></pre></td></tr></table></figure>
-<p>加扩展名.zip后解压，从命令行进入这个目录下然后执行：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 setup.py install</span><br></pre></td></tr></table></figure></p>
-<p>这样requests模块就被安装在Python 3下面了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/09/03/手把手教你使用charles抓取https消息/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="../../images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="../../2016/09/03/手把手教你使用charles抓取https消息/" itemprop="url">手把手教你使用charles抓取https消息</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-03T15:33:43+08:00">
-                2016-09-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <ol>
-<li>安装charles</li>
-<li><p>安装sslproxy证书</p>
-<ul>
-<li>电脑端（Mac）：  charles–&gt;help–&gt;SSL Proxying –&gt; install charles Root certificate<br>在密钥管理中将该证书设置信任。</li>
-<li>手机端（iOS）：<br> 将网络代理设置成电脑网络，然后在safari中输入“<a href="http://charlesproxy.com/getssl”下载证书并安装" target="_blank" rel="noopener">http://charlesproxy.com/getssl”下载证书并安装</a></li>
-</ul>
-</li>
-<li><p>制作对应用网站的crt证书 这里以”<a href="https://cf.ushareit.com&quot;为例" target="_blank" rel="noopener">https://cf.ushareit.com&quot;为例</a></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="../../2016/09/03/手把手教你使用charles抓取https消息/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/09/03/Mac-OS-X中Apache开启ssl/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="../../images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="../../2016/09/03/Mac-OS-X中Apache开启ssl/" itemprop="url">Mac OS X中Apache开启ssl</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-03T13:38:04+08:00">
-                2016-09-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <ol>
-<li><p>生成主机密钥<br> 这里会要求输入密码，不输入，直接回车</p>
- <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir <span class="regexp">/private/</span>etc<span class="regexp">/apache2/</span>ssl</span><br><span class="line">cd <span class="regexp">/private/</span>etc<span class="regexp">/apache2/</span>ssl</span><br><span class="line">sudo ssh-keygen -f server.key</span><br></pre></td></tr></table></figure>
-<p> 执行过程：</p>
- <figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">localhost:~ yuanpinghua$ sudo mkdir  /private/etc/apache2/ssl</span><br><span class="line">Password:</span><br><span class="line">localhost:~ yuanpinghua$ cd /private/etc/apache2/ssl</span><br><span class="line">localhost:ssl yuanpinghua$ sudo ssh-keygen -f server.key</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in server.key.</span><br><span class="line">Your public key has been saved in server.key.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:MX4CY5k2ehZtPjp+SQ3F5Au+RKdYrlpN+ycdI43MlQw root<span class="meta">@localhost</span></span><br><span class="line">The key's randomart image is:</span><br><span class="line">+---[RSA 2048]----+</span><br><span class="line">|<span class="string">         o.      </span>|</span><br><span class="line">|<span class="string">       + .E      </span>|</span><br><span class="line">|<span class="string">      X O.oo .   </span>|</span><br><span class="line">|<span class="string">     + #.* .+    </span>|</span><br><span class="line">|<span class="string">    . + S=o+     </span>|</span><br><span class="line">|<span class="string">     o *.** +    </span>|</span><br><span class="line">|<span class="string">      =.+. o o   </span>|</span><br><span class="line">|<span class="string">     + .o.. o    </span>|</span><br><span class="line">|<span class="string">    . ..  .o     </span>|</span><br><span class="line">+----[SHA256]-----+</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="../../2016/09/03/Mac-OS-X中Apache开启ssl/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/09/02/Mac上-Appache-的操作/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="../../images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="../../2016/09/02/Mac上-Appache-的操作/" itemprop="url">Mac上 Appache 的操作</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-02T23:59:01+08:00">
-                2016-09-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="常用操作："><a href="#常用操作：" class="headerlink" title="常用操作："></a>常用操作：</h1><ol>
-<li><p>打开终端，运行启动Apache命令：</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apachectl <span class="literal">start</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>关闭命令：</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apachectl <span class="built_in">stop</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重启命令</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">sudo apachectl restart</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看Apache版本命令</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">httpd</span> –v</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>语法检测</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">apachectl configtest</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看Apache版本号：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">httpd -v</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="../../2016/09/02/Mac上-Appache-的操作/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/09/01/ARC环境下内存问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="../../images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="../../2016/09/01/ARC环境下内存问题/" itemprop="url">ARC环境下内存问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-01T17:12:26+08:00">
-                2016-09-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="../../categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSMutableArray</span> * array  = [<span class="built_in">NSMutableArray</span> arrayWithArray:@[<span class="string">@"2"</span>,<span class="string">@"2"</span>,<span class="string">@"1"</span>,<span class="string">@"fad"</span>,<span class="string">@"23"</span>]];</span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">NSString</span>* str  <span class="keyword">in</span> array)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span> (str isEqualToString:<span class="string">@"fad"</span>]) &#123;</span><br><span class="line">    [array removeObject:str];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>编译运行时出现崩溃：<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Terminating app due to uncaught exception 'NSGenericException', reason: '*** Collection &lt;__NSArrayM: 0x<span class="number">10010356</span>0&gt; was mutated while being enumerated.'</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSMutableArray</span> * array  = [<span class="built_in">NSMutableArray</span> arrayWithArray:@[<span class="string">@"2"</span>,<span class="string">@"2"</span>,<span class="string">@"1"</span>,<span class="string">@"fad"</span>,<span class="string">@"23"</span>]];</span><br><span class="line">[array enumerateObjectsUsingBlock:^(<span class="built_in">NSString</span>*  obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *  stop) &#123;</span><br><span class="line">           <span class="keyword">if</span> ([obj isEqualToString:<span class="string">@"fad"</span>]) &#123;</span><br><span class="line">               [array removeObject:obj];</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;];</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSMutableArray</span> * arrayNum  = [<span class="built_in">NSMutableArray</span> arrayWithArray:@[@(<span class="number">2</span>),@(<span class="number">21</span>),@(<span class="number">1</span>),@(<span class="number">100</span>),@(<span class="number">23</span>)]];</span><br><span class="line">[arrayNum enumerateObjectsUsingBlock:^(<span class="built_in">NSNumber</span> *  obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *  stop) &#123;</span><br><span class="line">           <span class="keyword">if</span> ([obj isEqualToString:@(<span class="number">2</span>)]) &#123;</span><br><span class="line">               [arrayNum removeObject:obj];</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;];</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="../6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="../../index.html">1</a><span class="space">&hellip;</span><a class="page-number" href="../6/">6</a><span class="page-number current">7</span><a class="page-number" href="../8/">8</a><span class="space">&hellip;</span><a class="page-number" href="../11/">11</a><a class="extend next" rel="next" href="../8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="../6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="../../index.html">1</a><span class="space">&hellip;</span><a class="page-number" href="../6/">6</a><span class="page-number current">7</span><a class="page-number" href="../8/">8</a><span class="space">&hellip;</span><a class="page-number" href="../12/">12</a><a class="extend next" rel="next" href="../8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1654,7 +1759,7 @@
               
                 <a href="../../archives/">
               
-                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-count">113</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1722,7 +1827,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

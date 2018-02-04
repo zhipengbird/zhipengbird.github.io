@@ -260,6 +260,818 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/07/12/Python-对象/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="../../2016/07/12/Python-对象/" itemprop="url">Python 对象</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-12T21:56:00+08:00">
+                2016-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="python-对象"><a href="#python-对象" class="headerlink" title="python 对象"></a>python 对象</h1><p>  python 使用对象模型来存储对象。构造任何类型的值都是一个对象。<br>  所有的Python对象都拥有三个特性：身份，类型和值</p>
+<ul>
+<li>身份： 每一个对象都有一个唯一的身份标识自己。任何对象的身份可以使用内建函数id()来得到。这个值可以被认为是该对象的内存地址</li>
+<li>类型： 对象的类型决定了对象可以保存什么类型的值，可以进行什么样的操作，以及遵循什么样的规则。你可以内建type()查看对象的类型。</li>
+<li><p>值：对象表示的数据项</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="../../2016/07/12/Python-对象/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/07/12/沙盒外读取防火墙状态/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="../../2016/07/12/沙盒外读取防火墙状态/" itemprop="url">沙盒外读取防火墙状态</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-12T17:05:23+08:00">
+                2016-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>读取沙盒外的防火墙状态信息 默认是读取该路径下的文件<code>Library/Preferences/com.apple.alf.plist</code>中的<code>globalstate</code>字段的值 ，<code>0</code>–&gt;<code>off</code>, <code>1</code>–&gt;<code>ON</code><br><strong><em>在沙盒内读取不了</em></strong><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSDictionary</span>* dictionary = [<span class="built_in">NSDictionary</span> dictionaryWithContentsOfFile:<span class="string">@"/Library/Preferences/com.apple.alf.plist"</span>];</span><br><span class="line">       <span class="keyword">int</span> status = [[dictionary valueForKey:<span class="string">@"globalstate"</span>] intValue];</span><br><span class="line">      <span class="keyword">if</span> (status==<span class="number">0</span>) &#123;</span><br><span class="line">          <span class="built_in">NSLog</span>(<span class="string">@"close"</span>);</span><br><span class="line">      &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">           <span class="built_in">NSLog</span>(<span class="string">@"open"</span>);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/07/11/对多个target使用不同的-Bundle-Display-Name/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="../../2016/07/11/对多个target使用不同的-Bundle-Display-Name/" itemprop="url">对多个target使用不同的 Bundle Display Name</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-11T15:41:43+08:00">
+                2016-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在项目多语言包xx.lproj里引入一个叫InfoPlist.strings的文件，可以对同一个App在不同系统语方中显示不同的Display Name 如：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">InfoPlist.strings (English) - <span class="string">"CFBundleDisplayName"</span> = <span class="string">"English Name"</span>;</span><br><span class="line">InfoPlist.strings (Chinese) - <span class="string">"CFBundleDisplayName"</span> = <span class="string">"中文"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>在单个target中很容易做，多个target的时候需要做一点额外的处理，在项目目录下新建与target同名的文件夹（为了方便区分），然后将xx.lproj文件夹复制到各target 下面，目录结构会是这样的<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">./Target1/</span><br><span class="line">          en.lproj/InfoPlist.strings</span><br><span class="line">          zh-Hans.lproj/InfoPlist.strings</span><br><span class="line">./Target2/</span><br><span class="line">          en.lproj/InfoPlist.strings</span><br><span class="line">          zh-Hans.lproj/InfoPlist.strings</span><br></pre></td></tr></table></figure></p>
+<p>复制后保持项目目录下还有 xx.lproj 文件夹，里面保留 Localizable.strings，因为多语言化一般是通用的，没必要针对每一个 Target 做多语言。复制后的 Target1/xx.lproj 下只有 InfoPlist.strings。然后添加到 Xcode 项目里，打开 Xcode - Views - Utilities （Command+Option+0），在 Target Membership 下针对不同的 Target 把对应文件夹下的 InfoPlist.strings 对应连接起来。<br>另外有一点需要注意的是：不同target对应着不同的info.plist文件，在不同的target中的<code>Build Settings</code>—&gt;<code>Packaging</code>—&gt;<code>Info.plist File</code>中设置对应的文件路路径，（最好使用相对路径如<code>$(SRCROOT)/文件夹名/Info.plist</code>）。<br><img src="http://7xw3wp.com1.z0.glb.clouddn.com/infoplistRoote.png" alt="infoplistRoote"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/07/11/清理mac的一些方去/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="../../2016/07/11/清理mac的一些方去/" itemprop="url">清理mac的一些方去</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-11T11:42:02+08:00">
+                2016-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="一．-禁用SafeSleep休眠模式（可逆转操作）"><a href="#一．-禁用SafeSleep休眠模式（可逆转操作）" class="headerlink" title="一． 禁用SafeSleep休眠模式（可逆转操作）"></a>一． 禁用SafeSleep休眠模式（可逆转操作）</h3><p>SafeSleep的大小基本等同于设备的实际内存大小，例如Macbook Air是4GB的内存，那么SafeSleep的大小也是4GB左右。<br>禁用SafeSleep的弊端：如果电脑断电了，（没电）将无法恢复到断电前的状态。<br>禁用SafeSleep后需要：确保在电池将没电前保存好需求存储的内容。<br>具体操作：<br>1.开启Terminal<br>2.禁用SafeSleep，输入：<br>sudo pmset -a hibernatemode 0<br>3.然后定位到/private/var/vm/删除已经存在的sleepimage文件，输入：<br>cd /private/var/vm/<br>4.删除该文件，输入：<br>sudo rm sleepimage<br>5.制作一个替身，阻止系统新建SafeSleep文件，输入：<br>touch sleepimage<br>chmod 000 /private/var/vm/sleepimage<br>6.如果想恢复SafeSleep服务，请输入：<br>sudo pmset -a hibernatemode 3<br>sudo rm /private/var/vm/sleepimage</p>
+<h3 id="二．清理系统噪音文件（不可逆转操作）"><a href="#二．清理系统噪音文件（不可逆转操作）" class="headerlink" title="二．清理系统噪音文件（不可逆转操作）"></a>二．清理系统噪音文件（不可逆转操作）</h3><p>Mac OS X内置了很多噪音文件，如果日常并不使用文字转换语音这个功能，这些文件可以删除以获取更多的磁盘空间。<br>具体操作：<br>1.开启 Terminal<br>2.定位到文件位置，输入：<br>cd /System/Library/Speech/<br>3.执行删除命令，输入：<br>sudo rm -rf Voices/*</p>
+<h3 id="三．删除所有系统日志"><a href="#三．删除所有系统日志" class="headerlink" title="三．删除所有系统日志"></a>三．删除所有系统日志</h3><p>系统日志是用来调试和校验系统故障的，其文件会随着使用时间增长而增加，通常，此部分文件对于一般用户而言没有太多意义，可以删除。<br>具体操作：<br>1.开启Terminal<br>2.输入删除命令：<br>sudo rm -rf /private/var/log/*<br>请注意：系统日志文件是会不断的产生的，所以如果想删除，请定期操作。</p>
+<h3 id="四．删除QuickLook缓存文件"><a href="#四．删除QuickLook缓存文件" class="headerlink" title="四．删除QuickLook缓存文件"></a>四．删除QuickLook缓存文件</h3><p>Quicklook 这个内置预览功能非常的好用，但是随着使用的增多，对应的缓存文件也会不断的增多，所以定期清理，也可以让磁盘空间得到很好的释放。<br>具体操作：<br>1.开启Terminal<br>2.输入删除命令：<br>sudo rm -rf /private/var/folders/</p>
+<h3 id="五．删除临时文件"><a href="#五．删除临时文件" class="headerlink" title="五．删除临时文件"></a>五．删除临时文件</h3><p>可以尝试在Finder下，按Command＋Option＋G，然后前往：/private/var/tmp/ 这个文件夹，这里面是用来存储临时文件的。<br>对于这个路径下的内容，其实，系统在重启的时候一般都会做清理，但是鉴于现在很多用户都不怎么关机，导致这个里面的内容越来越多，所以有时候，我们还是有必要手动清理一下的。<br>具体操作<br>1.开启Terminal<br>2.定位到对应路径，请输入：<br>cd /private/var/tmp/<br>3.清理，请输入：<br>rm -rf TM*</p>
+<h3 id="六．清除缓存文件"><a href="#六．清除缓存文件" class="headerlink" title="六．清除缓存文件"></a>六．清除缓存文件</h3><p>具体操作：<br>1.开启Terminal<br>2.定位到对应路径（当前用户的路径），请输入：<br>cd ~/Library/Caches/<br>3.清理，请输入：<br>rm -rf ~/Library/Caches/*<br>其上只是部分可以清理的mac垃圾，这些操作需要花费一定的时间和精力，而且有一定的难度，最重要的是并不可能完全清理mac。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/07/07/iOS9新关键字/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="../../2016/07/07/iOS9新关键字/" itemprop="url">iOS9新关键字</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-07T22:00:41+08:00">
+                2016-07-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在iOS9 中苹果推出了很多新的关键字，目的其实很明确，主要是提高开发人员的效率，有益于程序员之间的沟通与交流，在开发中代码更加规范。</p>
+<h2 id="关键字：-nullable-与-nonull"><a href="#关键字：-nullable-与-nonull" class="headerlink" title="关键字： nullable 与 nonull"></a>关键字： nullable 与 nonull</h2><p>   nullable:表示可以为nil<br>   nonull: 表示不可以为nil<br>   这两关键字只能修改对象，不能修饰基本数据类型，可以用在属性、方法的参数、方法的返回值中使用，在默认情况下，不加nonull，setter和getter都是可以为空nil的<br>   在定义属性中可以像如下一样使用：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- more --&gt;</span><br><span class="line"><span class="comment">//这样定义属性会得到以下的警告</span></span><br><span class="line"><span class="comment">// Pointer is missing a nullability type specifier (_Nonnull, _Nullable, or _Null_unspecified)</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>)<span class="built_in">NSArray</span> * array;</span><br><span class="line"><span class="comment">//以下属性值不能为空</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>,<span class="keyword">nonnull</span>) <span class="built_in">NSArray</span> * array1;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>)<span class="built_in">NSArray</span> * _Nonnull array2;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>)<span class="built_in">NSArray</span> * __<span class="keyword">nonnull</span> array3;</span><br><span class="line"><span class="comment">//以下属性值可以为空</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">nullable</span>)<span class="built_in">NSArray</span> * array4;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>)<span class="built_in">NSArray</span> * __<span class="keyword">nullable</span> array5;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>)<span class="built_in">NSArray</span> * _Nullable array6;</span><br></pre></td></tr></table></figure></p>
+<p>在方法中可以与如下示例一样使用：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以下方法中参数不能为空，如若为空，系统会有警告提示</span></span><br><span class="line"><span class="comment">//nonnull ,_Nonnull,__nonnull 这三个关键字可以起到同样的效果，具体区别是什么呢？？？</span></span><br><span class="line">-(<span class="keyword">nonnull</span> <span class="built_in">NSString</span> * )testString:(<span class="keyword">nonnull</span> <span class="built_in">NSString</span>  * )string;</span><br><span class="line">-(<span class="built_in">NSString</span> * _Nonnull)testString1:(<span class="built_in">NSString</span>* _Nonnull)string;</span><br><span class="line">-(<span class="built_in">NSString</span> * __<span class="keyword">nonnull</span>)testString2:(<span class="built_in">NSString</span>*__<span class="keyword">nonnull</span>)string;</span><br><span class="line"><span class="comment">//以下方法中参数，返回值可以为空</span></span><br><span class="line"><span class="comment">//__nullable,nullable ,_Nullable 这三个关键字可以起到同样的效果，具体区别是什么？？？</span></span><br><span class="line">-(<span class="keyword">nullable</span> <span class="built_in">NSString</span> * )testString3:(<span class="keyword">nullable</span> <span class="built_in">NSString</span>  * )string;</span><br><span class="line">-(<span class="built_in">NSString</span> * _Nullable)testString4:(<span class="built_in">NSString</span>* _Nullable)string;</span><br><span class="line">-(<span class="built_in">NSString</span> * __<span class="keyword">nullable</span>)testString5:(<span class="built_in">NSString</span>*__<span class="keyword">nullable</span>)string;</span><br></pre></td></tr></table></figure></p>
+<p>在以下两个宏之间定义的所有对象属性都默认为nonull<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NS_ASSUME_NONNULL_BEGIN</span></span><br><span class="line"><span class="built_in">NS_ASSUME_NONNULL_END</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">LocationDataController</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="built_in">NS_ASSUME_NONNULL_BEGIN</span></span><br><span class="line"><span class="comment">//在这之间的所有属性的是非空的</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>) <span class="built_in">NSArray</span> *locations;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>) <span class="built_in">NSObject</span> *latestLocation;</span><br><span class="line"><span class="comment">//方法里的参数默认也是非空的</span></span><br><span class="line">- (<span class="keyword">void</span>)addPhoto:(<span class="built_in">NSObject</span> *)photo forLocation:(<span class="built_in">NSObject</span> *)location;</span><br><span class="line">- (<span class="keyword">nullable</span> <span class="built_in">NSObject</span> *)photoForLocation:(<span class="built_in">NSObject</span> *)location;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NS_ASSUME_NONNULL_END</span></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<h2 id="关键字-null-resettable"><a href="#关键字-null-resettable" class="headerlink" title="关键字: null_resettable"></a>关键字: null_resettable</h2><p>getter :不可以为nil<br>setter :可以为nil<br>如果使用 null_resettable 就必须重写 getter或者setter方法. 目的是为了处理值为空的情况<br>使用方法如下<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//如果使用下null_resettable，没有实现setter方法或getter 方法会得到如下的警告</span></span><br><span class="line"><span class="comment">// Synthesized setter 'setObjc:' for null_resettable property 'objc' does not handle nil</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>,<span class="keyword">null_resettable</span>)<span class="built_in">NSObject</span> * objc;</span><br></pre></td></tr></table></figure></p>
+<h2 id="关键字-Null-unspecified"><a href="#关键字-Null-unspecified" class="headerlink" title="关键字: _Null_unspecified"></a>关键字: _Null_unspecified</h2><p>这个关键字作用感觉不是那么大，因为默认情况下，都是不确定<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在不确定对象中是否为空的情况下可以使用null_unspecified关键字</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">null_unspecified</span>)<span class="built_in">NSObject</span> * objc1;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>)<span class="built_in">NSObject</span>* _Null_unspecified objec2;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>)<span class="built_in">NSObject</span> * __<span class="keyword">null_unspecified</span> objec3;</span><br></pre></td></tr></table></figure></p>
+<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>通过使用泛型, 我们可以非常容易地获取其中的元素，并访问其特有的属性和方法, 一般使用在集合中使用(例如:数组,字典), 当方法调用的时候才有效果, 我们来看看如何使用:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//如下定义属性与方法会得到下面的警告</span></span><br><span class="line"><span class="comment">// Pointer is missing a nullability type specifier (_Nonnull, _Nullable, or _Null_unspecified)</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>)<span class="built_in">NSMutableArray</span>&lt;<span class="built_in">NSString</span>*&gt; * mutableArray;</span><br><span class="line">-(<span class="built_in">NSArray</span> * )testArray:(<span class="built_in">NSArray</span> * )array;</span><br><span class="line">-(<span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span>*&gt;*)testArray2:(<span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span>*&gt;*)array;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//加上_Nonnull、_Nullable、_Null_unspecified这几个关键字中的一个，都不会出现以上警告</span></span><br><span class="line">-(<span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span>*&gt;* __<span class="keyword">nonnull</span>)testArray3:(<span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span>*&gt;*__<span class="keyword">nonnull</span>)array;</span><br><span class="line">-(__kindof <span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span>*&gt;* __<span class="keyword">nonnull</span>)testArray4:(<span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span>*&gt;*__<span class="keyword">nonnull</span>)array;</span><br></pre></td></tr></table></figure>
+<h3 id="带泛型的容器"><a href="#带泛型的容器" class="headerlink" title="带泛型的容器"></a>带泛型的容器</h3><p>  有了泛型后可以指定容器类中对象的类型了<br>  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">  <span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; * strings= @[<span class="string">@"sun"</span>,<span class="string">@"moon"</span>];</span><br><span class="line">  <span class="comment">//这什么这样定义的数组不会报提示呢，它们的类型不是不一样的吗？？</span></span><br><span class="line">  <span class="built_in">NSArray</span> &lt;<span class="built_in">NSString</span> * &gt;* string = @[<span class="string">@"su"</span>,<span class="string">@"fasd"</span>,@<span class="number">10</span>,@&#123;@<span class="number">10</span>:@<span class="number">10</span>&#125;];</span><br><span class="line"></span><br><span class="line">  <span class="built_in">NSMutableArray</span> &lt;<span class="built_in">NSString</span>*&gt;* array = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line"></span><br><span class="line"><span class="comment">//如下加入一个NSNumber会得到以下提示</span></span><br><span class="line"><span class="comment">// Incompatible pointer types sending 'NSNumber *' to parameter of type 'NSString * _Nonnull'</span></span><br><span class="line">  [array addObject:@(<span class="number">10</span>)];</span><br><span class="line">  <span class="comment">//为什么我在泛型中指定值的类型为NSString，在实际给值中没有给string而是NSNumber，却没有给出提示信息，这是为什么呢？？</span></span><br><span class="line">  <span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSNumber</span> *,<span class="built_in">NSString</span>*&gt; * dic =@&#123;@<span class="number">100</span>:@<span class="number">100</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    指定字典键值类型</span></span><br><span class="line">  <span class="built_in">NSMutableDictionary</span>&lt;<span class="built_in">NSString</span> *,<span class="built_in">NSString</span>*&gt; * mDic =[<span class="built_in">NSMutableDictionary</span> dictionary];</span><br><span class="line"><span class="comment">//    为什么在可变字典里，设置不同类型的键值，会有如下提示？</span></span><br><span class="line"><span class="comment">//    Incompatible pointer types sending 'NSNumber *' to parameter of type 'NSString * _Nullable'</span></span><br><span class="line">  [mDic setValue:@<span class="number">10</span> forKey:<span class="string">@"age"</span>];</span><br><span class="line">  [mDic setObject:@<span class="number">10</span> forKey:@<span class="number">10</span>];</span><br><span class="line">  [mDic setValue:<span class="string">@"yuan"</span> forKey:@<span class="number">10</span>];</span><br></pre></td></tr></table></figure></p>
+<p>系统中常用的一系列容器类型都增加了泛型支持，甚至连 NSEnumerator 都支持了，这是非常 Nice 的改进。和 Nullability 一样，我认为最大的意义还是丰富了接口描述信息，对比下面两种写法：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>) <span class="built_in">NSArray</span> *imageURLs;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>) <span class="built_in">NSArray</span>&lt;<span class="built_in">NSURL</span> *&gt; *imageURLs;</span><br></pre></td></tr></table></figure>
+<p>不用多想就清楚下面的数组中存的是什么，避免了 NSString 和 NSURL 的混乱。</p>
+<h3 id="自定义泛型类"><a href="#自定义泛型类" class="headerlink" title="自定义泛型类"></a>自定义泛型类</h3><p>比起系统的泛型容器，更好 玩的是自定义一个泛型类<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Stack</span>&lt;<span class="title">ObjectType</span>&gt; : <span class="title">NSObject</span></span></span><br><span class="line">- (<span class="keyword">void</span>)pushObject:(ObjectType)object;</span><br><span class="line">- (ObjectType)popObject;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>) <span class="built_in">NSArray</span>&lt;ObjectType&gt; *allObjects;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
+<p>  这个 ObjectType 是传入类型的 placeholder，它只能在 @interface 上定义（类声明、类扩展、Category），如果你喜欢用 T 表示也 ok，这个类型在 @interface 和 @end 区间的作用域有效，可以把它作为入参、出参、甚至内部 NSArray 属性的泛型类型，应该说一切都是符合预期的。我们还可以给 ObjectType 增加类型限制，比如：<br>  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只接受 NSNumber * 的泛型</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Stack</span>&lt;<span class="title">ObjectType</span>: <span class="title">NSNumber</span> *&gt; : <span class="title">NSObject</span></span></span><br><span class="line"><span class="comment">// 只接受满足 NSCopying 协议的泛型</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Stack</span>&lt;<span class="title">ObjectType</span>: <span class="title">id</span>&lt;<span class="title">NSCopying</span>&gt;&gt; : <span class="title">NSObject</span></span></span><br></pre></td></tr></table></figure></p>
+<p>若什么都不加，表示接受任意类型 ( id )；当类型不满足时编译器将产生 error。<br><img src="imagesource/logo.jpg" alt="logo.jpg"></p>
+<h2 id="关键字：-kindof"><a href="#关键字：-kindof" class="headerlink" title="关键字： __kindof"></a>关键字： __kindof</h2><p>表示当前类, 或者它的子类(<strong>kindof使用: 放在类型前面, 表示修饰此类型)
+</strong>kindof 这修饰符还是很实用的，解决了一个长期以来的小痛点，拿原来的 UITableView 的这个方法来说：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">id</span>)dequeueReusableCellWithIdentifier:(<span class="built_in">NSString</span> *)identifier;</span><br></pre></td></tr></table></figure>
+<p>使用时前面基本会使用 UITableViewCell 子类型的指针来接收返回值，所以这个 API 为了让开发者不必每次都蛋疼的写显式强转，把返回值定义成了 id 类型，而这个 API 实际上的意思是返回一个 UITableViewCell 或 UITableViewCell 子类的实例，于是新的 __kindof 关键字解决了这个问题：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (__kindof <span class="built_in">UITableViewCell</span> *)dequeueReusableCellWithIdentifier:(<span class="built_in">NSString</span> *)identifier;</span><br></pre></td></tr></table></figure>
+<p>既明确表明了返回值，又让使用者不必写强转。再举个带泛型的例子，UIView 的 subviews 属性被修改成了：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>, <span class="keyword">copy</span>) <span class="built_in">NSArray</span>&lt;__kindof <span class="built_in">UIView</span> *&gt; *subviews;</span><br></pre></td></tr></table></figure>
+<p>这样，写下面的代码时就没有任何警告了：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIButton</span> *button = view.subviews.lastObject;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/06/29/常用正则表达式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="../../2016/06/29/常用正则表达式/" itemprop="url">常用正则表达式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-29T17:00:57+08:00">
+                2016-06-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../categories/正则表达式/" itemprop="url" rel="index">
+                    <span itemprop="name">正则表达式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="电话号码匹配"><a href="#电话号码匹配" class="headerlink" title="电话号码匹配"></a>电话号码匹配</h1><blockquote>
+<p>如，中国国际代号是0086,我们要让外国人直接和我们联系表述如下：008610-85912411，或者，(008610)85912411、(0086) 10-85912411、+8610-8591241、+86-10-85912411<br>阿联酋固定电话：+971 4 2241288，+971 是他的国际区号，4是他的国内当地区号<br>英国伦敦固定电话+44-7778-188 810，7778应该是伦敦区号<br>英国固定电话：+44 (0)208 908 5848，208应该是国内当地区号</p>
+<p>法国；+353 87 9114696 ，+353是法国区号</p>
+<p>名片上是这样写的 。<br>英国：+44 (0)793 0179-230、<br> +44 (0)793 017-9230 、<br>+44 (00)7 0179 230</p>
+<p>埃及：(+20) 010 188 8486、<br>0592-6054790、<br>0592 6054790</p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="../../2016/06/29/常用正则表达式/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/06/21/Python基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -744,831 +1556,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/06/02/Framework制作/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="../../images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="../../2016/06/02/Framework制作/" itemprop="url">Framework制作</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-02T17:18:17+08:00">
-                2016-06-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>知识科谱：<br> <em>什么是库?</em><br> 库是程序代码的集合，是共享程序代码的一种方式。<br> 依源代码的公开情况不同，库可以分为2种：<br> <strong>开源库</strong><br>  公开源代码，能看到具体实现（如我们常用的第三方库）<br> <strong>闭源库</strong><br>  不公开源代码，是经过编译后的二进制文件，看不到具体的实现 ，主要分为:<br>  <em>静态库</em> 、<em>动态库</em></p>
-<p>  <strong>动/静态库存在的形式</strong><br>  静态库： .a 和 .framework<br>  动态库： .dylib 和 .framework</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="../../2016/06/02/Framework制作/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/05/19/设置行间距/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="../../images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="../../2016/05/19/设置行间距/" itemprop="url">设置行间距</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-19T20:35:33+08:00">
-                2016-05-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>在iOS开发过程中对文本的处理，可以需要去调整字间距，行间距之类，在这里给大伙介绍一个工具类（NSMutableParagraphStyle），它可以帮我们实现这个需求：<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="../../2016/05/19/设置行间距/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/05/19/OC中的拷贝/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="../../images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="../../2016/05/19/OC中的拷贝/" itemprop="url">OC中的拷贝</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-19T16:14:13+08:00">
-                2016-05-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="../../categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>内存的栈区 : 由编译器自动分配释放, 存放函数的参数值, 局部变量的值等. 其 操作方式类似于数据结构中的栈.</p>
-<p>内存的堆区 : 一般由程序员分配释放, 若程序员不释放, 程序结束时可能由OS回 收. 注意它与数据结构中的堆是两回事, 分配方式倒是类似于链表.</p>
-</blockquote>
-<h1 id="用copy和multableCopy对外象"><a href="#用copy和multableCopy对外象" class="headerlink" title="用copy和multableCopy对外象"></a>用copy和multableCopy对外象</h1><p>  当我们要创建一个与源对象内容相同的对象时，可以考虑使用copy和multableCopy。<br>  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * string = <span class="string">@"yuanph"</span>;</span><br><span class="line"><span class="built_in">NSString</span> * copyString = [string <span class="keyword">copy</span>];<span class="comment">//拷贝出内容为yuanph的NSString类型的字符串</span></span><br><span class="line"><span class="built_in">NSString</span> * multiString = [string mutableCopy];<span class="comment">//拷贝出内容为yuanph的NSMutableString类型的字符串</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">NSArray</span> * array = @[<span class="string">@"yuanph"</span>];</span><br><span class="line"><span class="built_in">NSArray</span> * copyArray = [array <span class="keyword">copy</span>];<span class="comment">//拷贝出内容与array相同的NSArray类型的数组</span></span><br><span class="line"><span class="built_in">NSArray</span> * multiArray  =[array mutableCopy];<span class="comment">//拷贝出内容与array相同的NSMutableArray类型的数组</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">NSDictionary</span> * dict = @&#123;<span class="string">@"name"</span>:<span class="string">@"yuanph"</span>&#125;;</span><br><span class="line"><span class="built_in">NSDictionary</span> * copyDict = [dict <span class="keyword">copy</span>];<span class="comment">//拷贝出内容与dict相同的NSDictionary类型的字典</span></span><br><span class="line"><span class="built_in">NSDictionary</span> * multiDict = [dict mutableCopy];<span class="comment">//拷贝出内容与dict相同的NSMutableDictionary类型的字典</span></span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>1.copy拷贝出来的对象类型总是不可变类型(例如, NSString, NSDictionary, NSArray等等)<br> 2.mutableCopy拷贝出来的对象类型总是可变类型(例如, NSMutableString, NSMutableDictionary, NSMutableArray等等)</p>
-</blockquote>
-<h1 id="深拷贝与浅拷贝"><a href="#深拷贝与浅拷贝" class="headerlink" title="深拷贝与浅拷贝"></a>深拷贝与浅拷贝</h1><p>深拷贝 : 拷贝出来的对象与源对象地址不一致! ＝＝＝&gt;修改拷贝对象的值对源对象的值没有任何影响.</p>
-<p>浅拷贝 : 拷贝出来的对象与源对象地址一致!   =====&gt;修改拷贝对象的值会直接影响到源对象.</p>
-<font color="ff0000">copy都是浅拷贝, mutableCopy都是深拷贝???????</font>
-
-<p>用copy从一个可变对象拷贝出一个不可变对象 =====&gt;深拷贝</p>
-<p> 不完全拷贝与完全拷贝</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/05/18/const与define/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="../../images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="../../2016/05/18/const与define/" itemprop="url">const与define</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-18T16:46:08+08:00">
-                2016-05-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="../../categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="const和-define使用"><a href="#const和-define使用" class="headerlink" title="const和#define使用"></a>const和#define使用</h2><blockquote>
-<p>1.什么是const?<br>2.什么是#define?<br>3.有什么用？<br>4.区别是什么？<br>5.应该怎么用？</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="../../2016/05/18/const与define/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/05/17/创建block姿势/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="../../images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="../../2016/05/17/创建block姿势/" itemprop="url">创建block姿势</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-17T19:01:43+08:00">
-                2016-05-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="../../categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="如何在OC中声明一个block"><a href="#如何在OC中声明一个block" class="headerlink" title="如何在OC中声明一个block?"></a>如何在OC中声明一个block?</h2><font color="#2E73D6"> 作为一个本地变量：</font><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">returnType (^blockName)(parameterTypes) = ^returnType(parameters) &#123;...&#125;;</span><br></pre></td></tr></table></figure><br><br><font color="#2E73D6"> 作为一个属性：</font>
-
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>, nullability) returnType (^blockName)(parameterTypes);</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="../../2016/05/17/创建block姿势/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org../../2016/05/17/Hex2Int/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="../../images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="../../2016/05/17/Hex2Int/" itemprop="url">Hex2Int</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-17T15:38:29+08:00">
-                2016-05-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong><em>十六进制字符串转成整数</em></strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">HEX2int</span><span class="params">(NSString  * hexString)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> nReval = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> nPower = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">size_t</span> nStrlen = hexString.length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(nStrlen--)</span><br><span class="line">    &#123;</span><br><span class="line">        unichar ch=[hexString characterAtIndex:nStrlen];</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">isdigit</span>(ch) == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ch = ch&amp;<span class="number">0x4f</span>;</span><br><span class="line">            nReval += (ch - <span class="number">55</span>)* nPower;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            nReval += (ch - <span class="string">'0'</span>)* nPower;</span><br><span class="line">        &#125;</span><br><span class="line">        nPower *= <span class="number">16</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nReval;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="../9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="../../index.html">1</a><span class="space">&hellip;</span><a class="page-number" href="../9/">9</a><span class="page-number current">10</span><a class="page-number" href="../11/">11</a><a class="extend next" rel="next" href="../11/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="../9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="../../index.html">1</a><span class="space">&hellip;</span><a class="page-number" href="../9/">9</a><span class="page-number current">10</span><a class="page-number" href="../11/">11</a><a class="page-number" href="../12/">12</a><a class="extend next" rel="next" href="../11/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1614,7 +1606,7 @@
               
                 <a href="../../archives/">
               
-                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-count">113</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1682,7 +1674,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

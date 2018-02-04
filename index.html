@@ -260,6 +260,917 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org2018/02/04/Foundation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="2018/02/04/Foundation/" itemprop="url">ARC 和 Core Foundation</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-04T17:50:59+08:00">
+                2018-02-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Core-Foundation"><a href="#Core-Foundation" class="headerlink" title="Core Foundation"></a>Core Foundation</h1><p>Core Foundation 杠框架使用一个朴素的C语言编写的纯手工创建的对象系统。CF对象具有它们自己的音独的引用计数系统。从其名称中具有的单词”Create”、”Copy”的函数获得的对象在返回时将具有“+1的保留计数”。CFRetain(aCFObject)函数将把aCFObject的保留计数加1，而CFRelease(aCFObject)函数则会把aCFObject的保留计数减1。 当一个对象的保留计数归零时，它将被取消分配。如果你从一个“Create”、“Copy”函数接收到对象，最终必须通过调用CFRelease来抵消创建或复制。如果不这样做，就会产生内存泄漏。</p>
+<p>ARC不会使用这个单独的引用计数系统自动化。 <strong>如果你在使用CF对象，就要负责理解手动引用计数，并且正确地保留和释放你的CF对象</strong></p>
+<h1 id="ARC-与-Core-Foundation-之间的免费桥接"><a href="#ARC-与-Core-Foundation-之间的免费桥接" class="headerlink" title="ARC 与 Core Foundation 之间的免费桥接"></a>ARC 与 Core Foundation 之间的免费桥接</h1><p>从免费桥接的一方到别一方的强制转换对于ARC而言都是一个问题。当把一个对象从CF强制转成OC(或者采用相反方向)时，结果将得到单个对象，它的保留计数可以被两个不同的不会彼此交流的系统操纵。ARC对CF的内存管理约定一无所知，使事情更坏的是，你可以直接控制其中一个系统（CF），但不能控制另一个系统ARC。<strong><em>就像由两位厨师一起做一碗汤一样，会引起烹饪麻烦。</em></strong><br>编译器避免这种麻烦的方式是禁止在OC对与CF对象之间进行强制转换。解决这个问题的方式是：<strong>通过一种称为 *</strong>桥接强制转换（brige casts）<strong>* 的特殊的强制转换类型给ARC提供一些额外的信息</strong> 有以下三种情况</p>
+<ul>
+<li>强制转换不转移所有权</li>
+<li>强制转换把所有权转出CF并转入ARC中</li>
+<li>强制转换把所有权转出ARC 并转入CF中</li>
+</ul>
+<h2 id="强制转换不会转移所有权"><a href="#强制转换不会转移所有权" class="headerlink" title="强制转换不会转移所有权"></a>强制转换不会转移所有权</h2><p>在这种情况下，一方只会从另一方临时“借用”对象，而不会转移所有权<br><code>__bridge</code>告诉ARC在强制转换下不会转移所有权。<br><figure class="highlight objc"><figcaption><span>CF-->OC</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CF----&gt;OC</span></span><br><span class="line"><span class="built_in">CFStringRef</span> cfstr =  <span class="built_in">CFStringCreateWithCString</span>(<span class="literal">NULL</span>, <span class="string">"hello cfstring!"</span>, kCFStringEncodingUTF8);</span><br><span class="line"><span class="built_in">NSString</span> * ocstr = (__bridge <span class="built_in">NSString</span>*)cfstr;</span><br><span class="line"><span class="comment">//只是类型的转换，没有进行所有权的交接</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,ocstr);</span><br><span class="line"><span class="built_in">CFRelease</span>(cfstr);</span><br><span class="line"><span class="comment">// 内存管理仍需要所手动释放</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight objc"><figcaption><span>OC --> CF</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//OC --&gt; CF</span></span><br><span class="line"><span class="built_in">NSString</span> * ocString = <span class="string">@"hello objective C string!"</span>;</span><br><span class="line"><span class="built_in">CFStringRef</span> cfstring = (__bridge <span class="built_in">CFStringRef</span>)ocString;</span><br><span class="line"><span class="comment">// 只是类型转换，对象释放仍由ARC来进行管理，不需要进行手动释放该cfstring</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><figcaption><span>OC-->CF 在参数中的使用</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生成gif文件路径</span></span><br><span class="line">   <span class="built_in">NSString</span> * gifpath = [imgDir stringByAppendingPathComponent:<span class="string">@"newgif.gif"</span>];</span><br><span class="line">   <span class="built_in">CFURLRef</span>  urlref = <span class="built_in">CFURLCreateWithFileSystemPath</span>(kCFAllocatorDefault, (__bridge <span class="built_in">CFStringRef</span>)gifpath, kCFURLPOSIXPathStyle, <span class="literal">NO</span>);</span><br><span class="line">   <span class="built_in">CFRelease</span>(urlref);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><figcaption><span>OC-->CF 在参数中使CFBridgingRetain会造成内存泄漏 url link text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSString * gifpath = [imgDir stringByAppendingPathComponent:@&quot;newgif.gif&quot;];</span><br><span class="line">CFURLRef  urlref = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, CFBridgingRetain(gifpath)/**只做类型的转换，不需要移交所有权*/, kCFURLPOSIXPathStyle, NO);//这里会造内存泄漏</span><br></pre></td></tr></table></figure>
+<h2 id="强制转换把所有权转出CF并转入ARC中"><a href="#强制转换把所有权转出CF并转入ARC中" class="headerlink" title="强制转换把所有权转出CF并转入ARC中"></a>强制转换把所有权转出CF并转入ARC中</h2><p><code>__bridge_transfer</code>强制转换将把所有权从CF转移给ARC。它告诉ARC在CF一方有一个没有抵消的保留计数，最终必须通过一个release抵消它。ARC负责发送该release消息<br><figure class="highlight objc"><figcaption><span>对象所有权转出CF，并转入ARC中</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CFStringRef</span> cfstring = <span class="built_in">CFStringCreateWithCString</span>(<span class="literal">NULL</span>, <span class="string">"hello CFStringRef object"</span>, kCFStringEncodingUTF8);</span><br><span class="line"><span class="built_in">NSString</span> * ocString = (__bridge_transfer <span class="built_in">NSString</span>*)cfstring;</span><br><span class="line"><span class="comment">// ARC 将接替CF的所有权，负责ocString的释放，其将会在不再使用ocString对象时，向该对象发送一条release消息</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,ocString);</span><br></pre></td></tr></table></figure></p>
+<h2 id="强制转换把所有权转出ARC并转入CF中"><a href="#强制转换把所有权转出ARC并转入CF中" class="headerlink" title="强制转换把所有权转出ARC并转入CF中"></a>强制转换把所有权转出ARC并转入CF中</h2><p><code>__bridge_retain</code>强制转换采用的是相反的方向，它把所有权从ARC中转移给CF。它告诉ARC抵消对象创建的责任传递给了CF。当CF代码用完对象后，它必须利用对象作为参数来调用<code>CFRelease()</code><br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * ocObject = <span class="string">@"我将放器ARC的内存管理，转入CF的内存管理系统"</span>;</span><br><span class="line"><span class="built_in">CFStringRef</span> cfObject = (__bridge_retained <span class="built_in">CFStringRef</span>)ocObject;</span><br><span class="line"><span class="comment">// CF接管现OC对象的所有权，它的释放由CF来负责,必须手动进行释放</span></span><br><span class="line"><span class="built_in">CFRelease</span>(cfObject);</span><br></pre></td></tr></table></figure></p>
+<h2 id="利用宏隐藏强制转换"><a href="#利用宏隐藏强制转换" class="headerlink" title="利用宏隐藏强制转换"></a>利用宏隐藏强制转换</h2><p>可以利用宏<code>CFBrigingRelease()</code>和<code>CFBrigingRetain()</code>分别隐藏<code>__bridge_transfer</code>和<code>__bridge_retain</code>强制转换，来改进代码的美感。<br><figure class="highlight objectivec"><figcaption><span>以下代码是等价的</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以下两行代码将做相同的事情</span></span><br><span class="line"><span class="built_in">NSString</span> * ocString = (__bridge_transfer <span class="built_in">NSString</span>*)cfstring;</span><br><span class="line"><span class="built_in">NSString</span> * ocString = <span class="built_in">CFBridgingRelease</span>(cfstring);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下两行代码将做相同的事情</span></span><br><span class="line"><span class="built_in">CFStringRef</span> cfObject = (__bridge_retained <span class="built_in">CFStringRef</span>)ocObject;</span><br><span class="line"><span class="built_in">CFStringRef</span> cfObject = <span class="built_in">CFBridgingRetain</span>(ocObject);</span><br></pre></td></tr></table></figure></p>
+<h2 id="与void-之间来回进行强制转换"><a href="#与void-之间来回进行强制转换" class="headerlink" title="与void*之间来回进行强制转换"></a>与void*之间来回进行强制转换</h2><p>ARC禁止在对象指针与类型化<code>void*</code>的变量之间直接进行强制转换。<br>其原因与ARC禁目对象指针与CF类型之间直接进行大多数强制转换原因相同。如果把一个对象指针强制转换成<code>void*</code>，将把该对象提供给一个未知量。ARC不会管理非OC指针，因为它无法跟踪一个<code>void*</code>变量中存储的对象所发生的事情，别外，如果把一个<code>void*</code>指针强转为OC对象，ARC将无法确定对象的所有权状态。<br>如果确信知道自己正在做什么，可以使用桥接来转换支配ARC：<br><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NSMutableArray</span> * <span class="built_in">array</span> = [<span class="type">NSMutableArray</span> arrayWithObject:@<span class="string">"hello OC object"</span>];</span><br><span class="line">//    <span class="built_in">void</span> * cPointer = (<span class="built_in">void</span>*)<span class="built_in">array</span>;//<span class="type">Cast</span> <span class="keyword">of</span> <span class="type">Objective</span>-C <span class="built_in">pointer</span> <span class="keyword">type</span> '<span class="type">NSMutableArray</span> *' to C <span class="built_in">pointer</span> <span class="keyword">type</span> '<span class="built_in">void</span> *' requires a bridged <span class="keyword">cast</span>  这样编译器会不报错</span><br><span class="line"><span class="built_in">void</span> * cPointer = (__bridge <span class="built_in">void</span>*)<span class="built_in">array</span>;//这样是<span class="type">OK</span> 的</span><br></pre></td></tr></table></figure><br><strong><em>小心：  __bridge 强制转没有内存管理的隐含意思，并且`void</em><code>不是强引用，如果指向对象的所有的强引用都消失了，就会取消分配对象，并且</code>void<em>`变理可能保存一个指向死对象的指针。 </em></strong></p>
+<h1 id="ARC-和额外的自动释放池"><a href="#ARC-和额外的自动释放池" class="headerlink" title="ARC 和额外的自动释放池"></a>ARC 和额外的自动释放池</h1><p>使用ARC，你将不知道特定的对象是否将被释放或者自动释放，或者它将被取消分配的确切时间，不过当你的代码将创建许多只在短时间内需要的对象时，仍然可以使用额外的自动释放时来限制内存占用：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">for</span> (int i = <span class="number">0</span>; i&lt;<span class="number">10000</span>; i++) &#123;</span><br><span class="line">     <span class="variable">@autoreleasepool</span>&#123;</span><br><span class="line">         <span class="comment">// 创建监时的对象</span></span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>@autoreleasepool的作用域确保：在循环的单独一次迭代中创建的任何临时对象都会在不晚于循环的底部位置收到一个release消息，在那个位置@autoreleasepool的作用域将终结，并会清空对应的自动释放池，ARC可能决定在更早的时间给这样的对象发送一条release消息，而不是自动释放它们，但是额外的@autoreleasepool作用域将会阴止随着循环的每次迭代而使用当前自动释放池中的对象数量增加的情况发生。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org2018/01/27/GCD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="2018/01/27/GCD/" itemprop="url">GCD</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-27T13:55:43+08:00">
+                2018-01-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h1><p>GCD(Grand Central Dispatch)是一个能让开发者轻松写出并发代码的强大特性。它把管理多个线程及线程同步的重担转移给了操作系统。使用GCD时，只需要创建能够彼此独立执行的单元，而让操作系统为你处理队列和同步。iOS上的GCD实现了一系列包含了一系列的C语言扩展、API、和一个运行时引擎。如果有多个处理器，GCD会自动确保独立单元运行在多个处理器上。<br>GCD提供了三种派发队列：<strong>串形队列</strong>、<strong>并发队列</strong>和<strong>主队列</strong>。可以把任务加入这些队列。串形队列按先进先出（FIFO）的顺序，在同一时间只执行一个任务。并发队列也是按照FIFO顺序，但并行地执行任务。主队列在主线程上执行操作，通常用于不同的串行或并发队列上执行线程间的同步。<br>GCD是iOS多任务的核心，广泛应用在系统在系统层的几乎各个方面。NSOPerationQueue是GCD的基础上实现的，而基本的队列原理都类似。只要把一个块添加到分派队列，而不是把NSOperation添加到NSOperationQueue。<br>分派队列要比操作队列更底层。块添加到分配队列后就无法取消了。分派队列是严格FIFO结构。所以无法在队列中使用优先级或者调整块的次序。</p>
+<h2 id="源和定时器"><a href="#源和定时器" class="headerlink" title="源和定时器"></a>源和定时器</h2><p>分派源是一种方便的事件处理方法。先注册处理事件，当事件发生后，你就能得到通知。如果在系统还没有来得及通知你之前事件就已经发了多次，那么这些事件会被合并为一个事件。这对于底层的高性能I/O代码很有用。分派源可以应答UNIX信号、文件系统变化、其他进程的变化以及mach port事件。它们在MAC上很有用。<br><strong><em>定时器源</em></strong>在iOS上很有用。GCD定时器源基于分派队列。而不是像NSTimer那条基于运行循环，这意味着把它们用于多线程应用中要容易得多。GCD定时器不用块而不是用选择器。所以不需要一个独立的方法处理定时器，这样也更容易避免重复GCD定时器的循环保留。<br><strong><em>分派屏障（dispathc barrier）</em></strong>可以在并发队列内部创建一个同步点，当它运行时，即使用有并发条件和空闲的处理器核心，队列中也不能运行。听起来像互斥（写入）锁，确实如此。没有屏障的块可以看作共享（读取）锁。只要所有对资源的访问都要通过这个队列的进行，那么屏障就能以极低的代价提供同步。<br>作为比较，可以使用@syschronize管理多线和访问，它会在参数上加一个互斥锁。</p>
+<h2 id="队列目标和优先级"><a href="#队列目标和优先级" class="headerlink" title="队列目标和优先级"></a>队列目标和优先级</h2><p>GCD中的队列是有层次结构的，只有全局队列才是调度运行的，可以用<code>dispatch_get_global_queue</code>和下列某个优先级参数来访问这些队列</p>
+<ul>
+<li>DISPATCH_QUEUE_PRIORITY_HIGH</li>
+<li>DISPATCH_QUEUE_PRIORITY_DEFAULT</li>
+<li>DISPATCH_QUEUE_PRIORITY_LOW</li>
+<li>DISPATCH_QUEUE_PRIORITY_BACKGROUND<br>所有这些队列都是并发的，GCD调度与HIGH队列中线程数量相同的块。当high队列空了以后就转移到default队列。以些类推。系统根据当前的空余处理器核心数量和系统负载按需创建或销毁线程。<br>创建队列时，它被连接到某个全局对队列（全局队列就是它的目标）。默认情况下连接到default队列。当一个块到了队列的最前面，块其实就到了目标队列的最尾。块到了全局队列的最前面才会执行，可以使用<code>dispatch_set_target_queue</code>改变目标队列</li>
+</ul>
+<h2 id="分派组"><a href="#分派组" class="headerlink" title="分派组"></a>分派组</h2><p>分派组类似于NSOpertion中的依赖关系。首先创建一个组<br><figure class="highlight objc"><figcaption><span>创建组</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dispatch_group_t group = dispatch_group_create();</span><br></pre></td></tr></table></figure></p>
+<p>*PS. 组本身没有任何配置项，它们没有绑到任何队列上，只是一个组块。一般通过<code>dispatch_group_async</code>把块添加到组，类似<code>dispatch_async</code>:<br><figure class="highlight objc"><figcaption><span>加入块</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">      </span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure><br>然后调用<code>dispatch_gourp_notify</code>注册一个块，即当组执行完毕后调用它<br><figure class="highlight objc"><figcaption><span>执行完后执行该块</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_group_notify(group, queue, ^&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure><br>组里所有的块执行完毕时，block就会被调用到queue上，可以注册同一个组的多个通知。可以把这些通知块放到不同的队列上。如果调用<code>dispatch_group_notify</code>时队列上没有任何块，那么马上触发通知。可以在配置组上时用<code>dispatch_supend</code>暂停队列来防止这种情况，配置完后用<code>dispatch_resume</code>启动队列。<br>实际上组并不像追踪任务一样追踪块，可以直接使用<code>dispatch_group_enter</code>和<code>dispatch_group_leave</code>增加和减少任务数量。<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dispatch_async(<span class="name">queue</span>, ^&#123;</span><br><span class="line">    dispatch_group_enter(<span class="name">group</span>)<span class="comment">;</span></span><br><span class="line">    dispatch_sync(<span class="name">queue</span>, ^&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line">    dispatch_group_leave(<span class="name">group</span>)<span class="comment">;</span></span><br><span class="line">&#125;)<span class="comment">;</span></span><br></pre></td></tr></table></figure><br>调用<code>dispatch_group_wait</code>会阻塞当前线程，直到整个组执行完毕。 </p>
+<h1 id="NSOperationQueue"><a href="#NSOperationQueue" class="headerlink" title="NSOperationQueue"></a>NSOperationQueue</h1><h2 id="什么时候应该使用GCD，什么时候应该使用NSOperationQueue"><a href="#什么时候应该使用GCD，什么时候应该使用NSOperationQueue" class="headerlink" title="什么时候应该使用GCD，什么时候应该使用NSOperationQueue?"></a>什么时候应该使用GCD，什么时候应该使用NSOperationQueue?</h2><p>两者的相同点与异点：</p>
+<ol>
+<li>NSOperationQueue 用GCD创建，是GCD的高级抽象</li>
+<li>GCD只支持FIFO队列,而加入NSOperationQueue队列的操作可以被重新排序（重新设置优先级）</li>
+<li>NSOperationQueue支持在操作之间设置依赖关系，而GCD不支持。如果一个操作需要别一个操作生成的数据，可以让这个操作依赖别一个操作。NSOpertionQueue会自动按照正确的顺序执行。而GCD没有内建依赖关系支持</li>
+<li>NSOperationQueue 兼容KVO. 这意味着你可以观察任务的状态。那么我们应该只用NSoperationQueue而不用GCD吗？答案是否定的。NSOperationQueue的执行速度比GCD慢.如果用Instruments查看代码性能并且觉得需要性能提升的话，那就用GCD。通常情况下底层代码中，任务之间可能不会相互依赖或者没有必要用KVO观察状态。</li>
+</ol>
+<h1 id="多任务"><a href="#多任务" class="headerlink" title="多任务"></a>多任务</h1><p>多任务最基本的形式就是运行循环，多任务最早在NeXTSTEP上出现时使用的就是这种形式<br>每个iOS程序都是由一个处于阻塞状态的do/while循环驱动，当有事件发生时，就把事件分派给合适的监听器。如此反复直至循环结束。处理分派的对象就叫作运行循环（NSRunloop）</p>
+<blockquote>
+<p>运行循环其实就是一个大的do/while循环，它运行在某个线程中，从各种事件队列中取得事件（每次取一个），然后把它分派给合适的监听器。这就是iOS的核心</p>
+</blockquote>
+<p>NSTimer基于运行循环进行消息派发。调度NSTimer时，其实是要求当前的运行循环在某个特定的时间分派某个选择器。运行循环的每次迭代都会对时间进行检查并且触发所有过期的选择器，延迟执行的方法也是通过调度定时器实现的。</p>
+<h2 id="NSOperation"><a href="#NSOperation" class="headerlink" title="NSOperation"></a>NSOperation</h2><p>NSOperation是封装任务的基本单位，在OC中用块来表示，NSOperation支持优先级、依赖关系和取消<br>NSOperationQueue尝试管理生成的线程数，但是大多数情况下，它做得并不好。NSOperationQueue会同时调度太多的操作，如果明确告诉NSOperationQueue不要超过CPU数量的计算型密集操作，那么简单代码就跑得更快了。<br><figure class="highlight cpp"><figcaption><span>获取CPU核数</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/sysctl.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">countOfCores</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> ncpu;</span><br><span class="line">    <span class="keyword">size_t</span> len = <span class="keyword">sizeof</span>(ncpu);</span><br><span class="line">    sysctlbyname(<span class="string">"hw.ncpu"</span>, &amp;ncpu, &amp;len, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> ncpu;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org2018/01/10/URL的组成部分/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="2018/01/10/URL的组成部分/" itemprop="url">URL的组成部分</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-10T17:20:12+08:00">
+                2018-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="URL的组成部分"><a href="#URL的组成部分" class="headerlink" title="URL的组成部分"></a>URL的组成部分</h1><p>URL(统一资源定位符)是URI(通用资源标识)的特定类型，URL通常在因特网上查找现有资源。当Web客户机向服务器发出对资源的请求时，使用URL。<br>URI 和 URL 的概念由因特网协会和 IETF（因特网工程任务组织）请求评论文档 RFC 2396 统一资源标识（URI）：一般语法定义（<a href="http://www.ietf.org/rfc/rfc2396.txt）。简要地说，***URI" target="_blank" rel="noopener">http://www.ietf.org/rfc/rfc2396.txt）。简要地说，***URI</a> 是定义为识别资源的任何一个字符串<strong>*。</strong>URL 定义为按资源的位置或用户访问它的方式，而不是按资源的名称或其他属性来识别资源的那些 URI。**</p>
+<p>HTTP（HTTPS）的 URL 通常由三或四个组成部分组成：</p>
+<ul>
+<li><strong>规则</strong><ul>
+<li>规则识别用于访问因特网上的资源协议</li>
+</ul>
+</li>
+<li><strong>主机</strong><ul>
+<li>主机名识别拥有资源的主机</li>
+</ul>
+</li>
+<li><strong>路径</strong> <ul>
+<li>路径识别主机中Web客户机要访问的特定资源</li>
+</ul>
+</li>
+<li><strong>查询字符</strong> <ul>
+<li>如果使用查询字符串，那么它跟随路径部分，并且提供一串字符串，资源使用这些字符串可以完成某些操作（例如，作为用于搜索的参数或用于处理的数据）。 查询字符串通常是一串名称和值对，例如，q=bluebird。</li>
+</ul>
+</li>
+</ul>
+<p>URL 的规则和主机部分不定义为区分大小写，但是路径和查询字符串是区分大小写的。通常，整个 URL 指定为小写字母。<br>URL 的组成部分如下所示进行组合和定界：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">scheme:</span><span class="comment">//host:port/path?query</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>规则后跟冒号和两个正斜杠。</li>
+<li>如果指定端口号，那么主机名后面是号码，并用冒号分隔。</li>
+<li>路径名以单正斜杠开始。</li>
+<li>如果指定查询字符串，那么在它的前面加个问号。</li>
+</ul>
+<p>图 1. HTTP URL 语法<br>阅读语法图跳过直观语法图<br>                            .-:80—–.                      </p>
+<blockquote>
+<blockquote>
+<p>-<a href="http://--+-host" target="_blank" rel="noopener">http://--+-host</a> name–+–+———+–/–path component——&gt;<br>            ‘-IP address-‘  ‘-:–port-‘                      </p>
+</blockquote>
+<p>–+—————–+—————————————–&gt;&lt;<br>   ‘-?–query string-‘</p>
+</blockquote>
+<p>URL 的后面可以跟片段标识。URL 与片段标识之间使用的分隔符是字符 #。<strong>片段标识用于使 Web 浏览器指向它刚检索的项中的引用或函数</strong>。 例如，如果 URL 标识 HTML 页面，那么可使用片段标识，以子节的标识来指示页面中的子节。对于这种情况，Web 浏览器通常向用户显示页面， 以使用户可以看到子节。根据项的介质类型以及为该介质类型的片段标识所定义含义的不同，Web 浏览器为片段标识所采取的操作也会不同<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">https</span>://<span class="keyword">item</span>.jd.com/<span class="number">11818781778.</span>html<span class="comment">#crumb-wrap</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="OC中如何获取URL的中各个组成部分"><a href="#OC中如何获取URL的中各个组成部分" class="headerlink" title="OC中如何获取URL的中各个组成部分"></a>OC中如何获取URL的中各个组成部分</h1><p>为获取URL中的各个组成部分，Foundation框架为我们提供了一个<code>NSURLComponents</code>类，通过该类，可以获取到URL中和各个组成部分</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// NSURLComponents 相关字段</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *scheme; <span class="comment">// 规则， Attempting to set the scheme with an invalid scheme string will cause an exception.</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *user;<span class="comment">//用户</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *password;<span class="comment">//密码</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *host;<span class="comment">//主机</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSNumber</span> *port; <span class="comment">// 端口 Attempting to set a negative port number will cause an exception.</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *path;<span class="comment">//路径</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *query;<span class="comment">//查询字符</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *fragment;<span class="comment">//片段标识</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSArray</span>&lt;<span class="built_in">NSURLQueryItem</span> *&gt; *queryItems; <span class="comment">//查询字段数组</span></span><br></pre></td></tr></table></figure>
+<p>示例<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * urlString = <span class="string">@"http://54.223.156.84:9120/relayserver/spring/commands/command?commandType=cmd_type_ad&amp;commandName=&amp;commandStatus=&amp;code=10001&amp;id=test_snapshow_ios_first_test&amp;page=&amp;restrict=false"</span>;</span><br><span class="line">urlString = <span class="string">@"https://item.jd.com/11818781778.html#crumb-wrap"</span>;</span><br><span class="line"><span class="comment">// 创建组件对象</span></span><br><span class="line"><span class="built_in">NSURLComponents</span> *components = [<span class="built_in">NSURLComponents</span> componentsWithString:urlString];</span><br><span class="line"></span><br><span class="line"><span class="comment">//规则</span></span><br><span class="line"><span class="built_in">NSString</span> * scheme = components.scheme;</span><br><span class="line"><span class="comment">// 路径</span></span><br><span class="line"><span class="built_in">NSString</span> * path = components.path;</span><br><span class="line"><span class="comment">//端口</span></span><br><span class="line"><span class="built_in">NSString</span> * port = components.port;</span><br><span class="line"><span class="comment">//查询字符串</span></span><br><span class="line"><span class="built_in">NSString</span> * query  = components.query;</span><br><span class="line"><span class="comment">//片段标识</span></span><br><span class="line"><span class="built_in">NSString</span> * fragment = components.fragment;</span><br><span class="line"><span class="comment">//获取查询参数</span></span><br><span class="line"><span class="built_in">NSMutableDictionary</span> *paramsDic = [<span class="built_in">NSMutableDictionary</span> dictionary];</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">NSURLQueryItem</span> *item <span class="keyword">in</span> components.queryItems) &#123;</span><br><span class="line">    [paramsDic setValue:item.value forKey:item.name];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org2018/01/06/runtimecopy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="2018/01/06/runtimecopy/" itemprop="url">runtime - 实现对象的自动拷贝</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-06T23:21:28+08:00">
+                2018-01-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在我们开发过程中，有时会遇到对象进行拷贝的情况，在对象属性少的情况下，我们可以直接在 <code>copyWithZone:/mutableCopyWithZone:</code> 方法里手动对复制后的对象的相应属性赋值，但在属性成员很多的情况及通过runtime在运行时关联属性时，我们这种手动赋值的方式就有点应赋不过来了。runtime是OC的一把利器，用得好可以帮我们节省很多事情。废话不多说，用代码说话。</p>
+<ol>
+<li><p>为对象增加一个扩展并遵守 <code>&lt;NSCopying,NSMutableCopying&gt;</code>协议 </p>
+ <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;objc/runtime.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Person</span>()&lt;<span class="title">NSCopying</span>,<span class="title">NSMutableCopying</span>&gt;</span></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现协议  </p>
+ <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> * )zone&#123;</span><br><span class="line">    <span class="keyword">id</span> objCopy = [[[<span class="keyword">self</span> <span class="keyword">class</span>] allocWithZone:zone] init];</span><br><span class="line">    <span class="comment">// 1.获取属性列表</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> propertyCount = <span class="number">0</span>;</span><br><span class="line">    objc_property_t * propertyArray = class_copyPropertyList([<span class="keyword">self</span> <span class="keyword">class</span>], &amp;propertyCount);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;propertyCount; i++) &#123;</span><br><span class="line">        </span><br><span class="line">        objc_property_t  property = propertyArray[i];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 2.属性名字</span></span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">char</span> * propertyName = property_getName(property);</span><br><span class="line">        <span class="built_in">NSString</span> * key = [<span class="built_in">NSString</span> stringWithUTF8String:propertyName];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 3.通过属性名拿到属性值</span></span><br><span class="line">        <span class="keyword">id</span> value=[<span class="keyword">self</span> valueForKey:key];</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"name:%s,value:%@"</span>,propertyName,value);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 4.判断 值对象是否响应copyWithZone</span></span><br><span class="line">        <span class="keyword">if</span> ([value respondsToSelector:<span class="keyword">@selector</span>(copyWithZone:)]) &#123;</span><br><span class="line">            <span class="comment">//5. 设置属性值</span></span><br><span class="line">            [objCopy setValue:[value <span class="keyword">copy</span>] forKey:key];</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            [objCopy setValue:value forKey:key];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//*****切记需要手动释放</span></span><br><span class="line">    free(propertyArray);</span><br><span class="line">    <span class="keyword">return</span> objCopy;</span><br><span class="line">&#125;</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
+<p> -(id)mutableCopyWithZone:(NSZone *)zone{</p>
+<pre><code>id objcopy = [[[self class]allocWithZone:zone] init];
+//    1.获取属性列表
+unsigned int count = 0;
+objc_property_t* propertylist = class_copyPropertyList([self class], &amp;count);
+
+for (int i = 0; i &lt; count ; i++) {
+    objc_property_t property = propertylist[i];
+    //    2.获取属性名
+    const char * propertyName = property_getName(property);
+    NSString * key = [NSString stringWithUTF8String:propertyName];
+    //    3.获取属性值
+    id value = [self valueForKey:key];
+    //    4.判断属性值对象是否遵守NSMutableCopying协议
+    if ([value respondsToSelector:@selector(mutableCopyWithZone:)]) {
+        //    5.设置对象属性值
+        [objcopy setValue:[value mutableCopy] forKey:key];
+    }else{
+        [objcopy setValue:value forKey:key];
+    }
+}
+//*****切记需要手动释放
+free(propertylist);
+return objcopy;
+</code></pre><p> }<br> ```</p>
+</li>
+</ol>
+<p>通过以上两个方法的实现，可以应付对象的拷贝场景。</p>
+<blockquote>
+<p>小结下:<br>    使用runtime机制实现对象的拷贝有以下几个步骤:</p>
+<pre><code>* 导入&lt;objc/runtime.h&gt;头文件
+* 遵守`&lt;NSCopying,NSMutableCopying&gt;`协议
+* 实现`mutableCopyWithZone:/copyWithZone:`方法
+    * 获取类的属性列表
+    * 对属性列表进行遍历
+        * 拿到属性
+        * 拿到属性名
+        * 通过属性名拿到属性值, 使用`valueForKey:`方法
+        * 判断值对象是否响应协议方法，将值赋值给新对象的相应属性
+    * 释放属性指针
+</code></pre></blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org2018/01/06/copy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="2018/01/06/copy/" itemprop="url">copy</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-06T23:18:20+08:00">
+                2018-01-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org2017/12/10/English-Level4-Unit3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="2017/12/10/English-Level4-Unit3/" itemprop="url">English-Level4-Unit3</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-10T17:24:00+08:00">
+                2017-12-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="问题与解决办法"><a href="#问题与解决办法" class="headerlink" title="问题与解决办法"></a>问题与解决办法</h1><h2 id="个人问题"><a href="#个人问题" class="headerlink" title="个人问题"></a>个人问题</h2><p>如果你无法放弃止做某事，你就是对它addicted，或你对它有了一种addiction，下面就是一些常见的沉溺。  </p>
+<p>He’s addicted to cigarettes.<br>他有烟瘾。                  </p>
+<p>She’s addicted to coffee.<br>她喝咖啡上瘾。  </p>
+<p>They’re addicted to gambling.<br>他们嗜赌成瘾。  </p>
+<p>He’s addicted to alcohol. He’s an alcoholic.<br>他嗜酒成瘾。他是个酒鬼。  </p>
+<p>以下是一些其他常见的个人问题。  </p>
+<p>She has financial problems.    她碰到了一些经济上的问题。  </p>
+<p>He has a weight problem. He’s overweight.    他有体重问题。他非常胖。  </p>
+<p>I have a problem sleeping. I have insomnia.    我睡不着觉。我患有失眠症。  </p>
+<p>They have marital problems.    他们遇到了婚姻问题。  </p>
+<h2 id="阅读找出大意"><a href="#阅读找出大意" class="headerlink" title="阅读找出大意"></a>阅读找出大意</h2><p>找出段落或文本的大意是一种重要的阅读技巧。大意是指梗概，不是具体细节。了解大意后，更容易理解文本。</p>
+<p>你通常可以通过确定主题句来找出大意。主题句一般位于段首，但也可以出现在其他位置。</p>
+<p>如果你不确定主题句，你可以通过用自己的话概括来得出文本大意。寻找重复的单词或观点来帮助概括。</p>
+<p>确定大意时不可太狭隘，也不能太宽泛。一个陈述即便真实，但可能过于具体或笼统，不可能是大意。</p>
+<h2 id="谈论问题"><a href="#谈论问题" class="headerlink" title="谈论问题"></a>谈论问题</h2><p>在确定一个问题后，你可能想详细加以解释。以下是一些帮助你进行解释的表达。  </p>
+<p>I have insomnia. The problem is that I can’t stop thinking about work.         我患有失眠症。问题在于我老想着工作。    </p>
+<p>She can’t quit smoking. One big problem is that her husband smokes, too.         她戒不了烟。一个大问题是她的丈夫也抽烟。  </p>
+<p>that可省略而不会造成意义的改变。  </p>
+<p>He is very overweight. The trouble is he eats too much chocolate.         他非常胖。问题是他吃太多巧克力了。  </p>
+<p>She can’t quit smoking. One big problem is her husband smokes, too.         她戒不了烟。一个大问题是她的丈夫也抽烟。  </p>
+<h2 id="情态动词-‘ought-to’和’had-better’"><a href="#情态动词-‘ought-to’和’had-better’" class="headerlink" title="情态动词 ‘ought to’和’had better’"></a>情态动词 ‘ought to’和’had better’</h2><p>你可以使用情态动词 ought to 和 had better 来给予个人建议。Had better 语气强于ought to，在提出强烈的建议时使用。</p>
+<p>He’s very overweight. He ought to lose some weight.    他很胖，应该减减肥。</p>
+<p>Your health is very poor. You had better quit smoking.    你身体很不好，最好把烟戒了。</p>
+<p>had better 的否定是 had better not。ought to 的否定是 ought not to，但很少使用。</p>
+<p>You had better not start smoking. It’s a terrible habit.    你最好不要开始吸烟。这个习惯很不好。</p>
+<p>She has terrible insomnia. She ought not to drink coffee in the evening.    她严重失眠。她晚上不应该喝咖啡。</p>
+<h2 id="提出强烈建议"><a href="#提出强烈建议" class="headerlink" title="提出强烈建议"></a>提出强烈建议</h2><p>提出强烈建议有许多方法。学习这些不同的表达。</p>
+<p>Make sure to get enough sleep.    务必保持充足的睡眠。</p>
+<p>Make sure not to drink coffee at night.    晚上千万别喝咖啡。</p>
+<p>Be sure to exercise every week.<br>务必每周锻炼身体。</p>
+<p>Be sure not to eat too much fast food.    务必不要吃太多快餐。</p>
+<p>Don’t start smoking.    不要开始吸烟。</p>
+<p>You ought to give up gambling.<br>你应该戒赌。</p>
+<p>You had better stop smoking.    你最好戒烟。</p>
+<p>You had better not talk to him. You’re angry!    你最好别和他说话。你很生气！</p>
+<h3 id="工作问题"><a href="#工作问题" class="headerlink" title="工作问题"></a>工作问题</h3><p>与生活中其他方面一样，有时工作中也会碰到一些问题。一位员工可能需要与老板就以下方面谈话：</p>
+<p>being late = tardiness    迟到</p>
+<p>being disorganized    缺乏条理的</p>
+<p>being lazy    懒惰</p>
+<p>being sloppy    粗心</p>
+<p>being argumentative    好辩</p>
+<p>being offensive    无礼</p>
+<p>not being flexible    处事不灵活</p>
+<p>not following instructions    不遵守指示</p>
+<p>not working well with the team    和团队合作不愉快</p>
+<p>not meeting deadlines    没有如期完成</p>
+<h3 id="‘who’-引导的关系从句"><a href="#‘who’-引导的关系从句" class="headerlink" title="‘who’ 引导的关系从句"></a>‘who’ 引导的关系从句</h3><p>用关系从句连接两个句子。关系从句使您的写作和讲话更流利，并帮助您避免重复。关系代词 who 用来指人。</p>
+<p>We have a lot of engineers. The engineers work late.                  </p>
+<p>We have a lot of engineers who work late.</p>
+<p>在例子中，主句We have a lot of engineers 是一个完整的句子。关系从句who work late不是一个完整的句子，故不能独立成句。</p>
+<h2 id="。。。"><a href="#。。。" class="headerlink" title="。。。"></a>。。。</h2><p>So what’s going on?<br>那么，发生什么事了？</p>
+<p>What’s the story?<br>怎么回事？</p>
+<p>We have to figure out a solution.<br>我们必须想出解决的办法。</p>
+<p>Another possibility would be …<br>另一种可能是……</p>
+<p>Would that work for you?<br>你觉得这可行吗？</p>
+<p>Yeah, that would work.<br>对，这可行。</p>
+<p>Let’s see how it goes.<br>我们看看会怎么样。</p>
+<h2 id="‘that’-引导的关系从句"><a href="#‘that’-引导的关系从句" class="headerlink" title="‘that’ 引导的关系从句"></a>‘that’ 引导的关系从句</h2><p>用关系代词连接两个句子。用关系代词that 代替事物。</p>
+<p>I work for a company. The company has lots of problems.</p>
+<p>I work for a company that has lots of problems.</p>
+<p>在该例子中，主句I work for a company 是一个完整句，关系从句that has lots of problems 不是完整句，故不能单独成句。</p>
+<p>记住，使用关系从句可以让你的作文和讲话更流畅，避免重复。</p>
+<h2 id="提出解决办法"><a href="#提出解决办法" class="headerlink" title="提出解决办法"></a>提出解决办法</h2><p>使用类似表达来提出解决办法:</p>
+<p>One solution could be that we hire a new manager.    一种解决办法是我们雇一位新经理。</p>
+<p>Another possibility would be to have a team meeting.    另一种可能是开一场团队会议。</p>
+<p>为了竭力提出解决方法，使用类似下列表达。</p>
+<p>I really think that the only solution is to replace the entire management team.    我真的认为唯一的解决办法是替换整个管理团队。</p>
+<p>The only way to solve this problem is to buy the company.    解决问题的唯一办法是买下这家公司。</p>
+<p>I strongly suggest that we deal with this problem immediately.    我强烈建议我们即刻处理这一问题。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yuanph.org2017/11/27/English-Level4-Unit2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -345,8 +1256,7 @@
 <p>She’s nauseous. She feels nauseous.    她感觉恶心。她觉得恶心。</p>
 <p>如果是呕吐，使用动词 to vomit。</p>
 <p>I’ve been vomiting for about an hour.    我吐了一个小时左右。</p>
-<p>###现在完成时进行时</p>
-<p>用现在完成进行时谈论一种在过去开始一直延续到现在的病症或病。用 I have been + 动词 + -ing结构。</p>
+<h3 id="现在完成时进行时"><a href="#现在完成时进行时" class="headerlink" title="现在完成时进行时"></a>现在完成时进行时</h3><p>用现在完成进行时谈论一种在过去开始一直延续到现在的病症或病。用 I have been + 动词 + -ing结构。</p>
 <p>I have been vomiting a lot.    我一直在吐，吐了好多。</p>
 <p>I have been having problems sleeping.    我一直都难以睡眠。</p>
 <p>用for 增加有关时间的信息。</p>
@@ -354,6 +1264,61 @@
 <p>医生也可能使用现在完成进行时提问。</p>
 <p>How long has this been going on?    这事持续多久了？</p>
 <p>How long have you been feeling like this?    你这样的感觉多久了?</p>
+<h3 id="‘For’-和-‘since’"><a href="#‘For’-和-‘since’" class="headerlink" title="‘For’ 和 ‘since’"></a>‘For’ 和 ‘since’</h3><p>注意，在使用 since 时，分句顺序可以变换。如果 since 引导的分句位于句首，请在该分句之后加上逗号。</p>
+<p>Since I got home, I’ve been feeling terrible.    自从我回到家，我一直感到恐惧。</p>
+<p>I’ve been feeling terrible since I got home.    自从回到家，我一直都感到恐惧。</p>
+<p>注意： for 引导的分句通常不这样改变。</p>
+<h3 id="医药词汇"><a href="#医药词汇" class="headerlink" title="医药词汇"></a>医药词汇</h3><p>医药和药物有许多专业词汇。了解这些词汇非常重要，这样你可以和药剂师交流，拿到自己需要的药物。形容获得 prescription 的动作，使用动词 fill。当你要去药房取药时使用动词 pick up。</p>
+<p>I’m going to the pharmacy.    我要去药房。</p>
+<p>He talked to the pharmacist.    他跟那位药剂师说话。</p>
+<p>She filled a prescription for her medication.    她按处方配了药。</p>
+<p>药剂师可能询问你是否不能服用一些药物。注意形容词结构 + to：</p>
+<p>Are you allergic to any medications?    你药物过敏吗？</p>
+<p>使用下列词汇谈论你的药物。谈论在家用药时，使用 medicine 搭配动词 take。当你去药房时，使用更正式的词汇 medication。</p>
+<p>You forgot to take your medicine.    你忘记吃药了。</p>
+<p>I’m here to pick up my medication.    我来取药的。</p>
+<p>药物有各种不同形式。pill 一词常用于指固体药物。Capsules 和 tablets 是两种最常见的药物形状。服药的动作使用动词 take。</p>
+<p>I have to take three pills a day.    我每天要吃三片药。</p>
+<p>My medicine comes in tablets.    我的药是片状的。</p>
+<p>She takes four capsules a day.    她每天吃四粒。</p>
+<p>由于处方药有时由保险支付或有折扣，你可能会问药剂师你的医疗计划是否支付某种药品。使用动词 cover，询问你要承担的费用。</p>
+<p>Does my insurance cover this medication?    我的保险覆盖这种药吗？</p>
+<h3 id="阅读处方标签"><a href="#阅读处方标签" class="headerlink" title="阅读处方标签"></a>阅读处方标签</h3><p>药有不同形式-有如 tablets或capsules的固体药物，或如你用teaspoons服用的如syrups的液体药物。你将在处方标签上找到你的施药信息。</p>
+<p>Take four tablets, twice a day.    每次四片，每天两次。<br>The medicine comes in capsules. Take two every day.    胶囊包装，每天两颗。<br>Take one teaspoon, after meals.      餐后服用一匙。</p>
+<p>标签也会提醒你有关的side effects, 你服药时遇到的难题。这会包括drowsiness 或loss of appetite。</p>
+<p>The side effect of this medicine is that it may cause drowsiness.    本药有副作用，可能引起昏睡。<br>Side effects may include loss of appetite.    副作用可能包括食欲不振。</p>
+<p>标签上也许会告诉你药的用量-maximum dosage -和谁suitable for该药-成年人或是小孩。</p>
+<p>Maximum dosage: four capsules per day    最大用量：每日四颗<br>Suitable for: adults and children over 12 years old    适用：成人和 12 岁以上的孩童</p>
+<h3 id="事故和受伤"><a href="#事故和受伤" class="headerlink" title="事故和受伤"></a>事故和受伤</h3><p>你可以通过解释发生的事情或结果来描述事故和受伤。</p>
+<p>发生的事情</p>
+<p>I slipped and cut my arm.<br>我脚下一滑，把胳膊划伤了。</p>
+<p>I fell down and bruised my shoulder.<br>我摔倒了，把肩膀碰伤了。</p>
+<p>结果</p>
+<p>I have a bruise on my arm.<br>我碰伤了肩膀。</p>
+<p>I have a sprained wrist.<br>我扭伤了手腕。</p>
+<p>I have a broken leg.<br>我摔断了腿。</p>
+<h4 id="While-和-when-描述中断的动作"><a href="#While-和-when-描述中断的动作" class="headerlink" title="While 和 when 描述中断的动作"></a><em>While</em> 和 <em>when</em> 描述中断的动作</h4><p>在讲述事故时，我们常常提到两个动作，一个动作 (was + verb + ing) 被另一个动作打断。</p>
+<p>I sprained my ankle while I was playing soccer.    我踢足球的时候扭伤了脚踝。</p>
+<p>I was walking on an icy road when I slipped and broke my leg.    当时我正在结冰的路面上走路，不小心滑倒摔断了腿。</p>
+<p>您可能注意到了，我们可以使用 while 和 when 引出同时进行的动作。</p>
+<p>While I was crossing the road, a woman fell down.<br>我过马路时，一个女人摔倒了。</p>
+<p>When I was driving to work, I saw the accident.<br>我开车去上班时目睹了事故的发生。</p>
+<p>我们也可以使用 when 引出第二个动作。</p>
+<p>A: What happened?<br>发生了什么事？</p>
+<p>B: I was climbing the ladder when I slipped.<br>我爬楼梯时滑了一跤。</p>
+<h3 id="询问事故"><a href="#询问事故" class="headerlink" title="询问事故"></a>询问事故</h3><p>在向人询问他刚经历的一场事故时，以下是一些常见的问题。</p>
+<p>What happened?<br>发生了什么事？</p>
+<p>Oh, no! Were you OK?<br>哟，不会吧！你没事吧？</p>
+<p>And how are you feeling now?<br>你现在觉得怎么样？</p>
+<p>以下是一些常见的回答，通常降低了事故的严重性。</p>
+<p>A: Hey. How was your weekend?<br>嗨，你周末过得怎么样？</p>
+<p>B: Mmmm, it was OK. Not so great.<br>嗯，还行。不算太好。</p>
+<p>A: What happened?<br>发生了什么事？</p>
+<p>B: Well, while I was cooking,I slipped and fell down.<br>嗯，我做饭的时候，脚下一滑摔倒了。</p>
+<p>A: Oh, no! Were you OK?<br>哦，不会吧！你没事吧？</p>
+<p>B: Yes. I went to the hospital, but it wasn’t serious.<br>有事，我去了医院，不过问题不大。</p>
+<p>A: And how are you feeling now?<br>你现在觉得怎么样？</p>
+<p>B: I’m OK. I have a bruise on my head, but I’ll be fine.<br>我没事。我碰伤了头，但没有大碍。</p>
 
           
         
@@ -946,1028 +1911,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org2017/09/03/swordOffer/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="2017/09/03/swordOffer/" itemprop="url">swordOffer</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-03T17:26:49+08:00">
-                2017-09-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="代码的完整性"><a href="#代码的完整性" class="headerlink" title="代码的完整性"></a>代码的完整性</h1><h2 id="从3方面确保代码的完整性"><a href="#从3方面确保代码的完整性" class="headerlink" title="从3方面确保代码的完整性"></a>从3方面确保代码的完整性</h2><ol>
-<li>功能测试</li>
-<li>边界测试</li>
-<li>负面测试<br>从这3 方面设计测试用例，以保证代码的完整性。<h2 id="3种错误处理的方法"><a href="#3种错误处理的方法" class="headerlink" title="3种错误处理的方法"></a>3种错误处理的方法</h2></li>
-<li>用函数返回值来告诉调用都是否出错。</li>
-<li>当错误发生时设置一个全局变量</li>
-<li>抛出异常<img src="/2017/09/03/swordOffer/threemethodForException.jpg" title="三种异常的对比"> 
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org2017/07/21/HookArrayBinder/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="2017/07/21/HookArrayBinder/" itemprop="url">将容器列表视图从控制器分离，做到数据驱动UI</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-21T11:49:12+08:00">
-                2017-07-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org2017/07/20/git使用小技巧/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="2017/07/20/git使用小技巧/" itemprop="url">git 命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-20T13:23:52+08:00">
-                2017-07-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li>移除本地仓库的远程git<br>使用 <code>git remote rm</code>命令解除本地创建与远程git的绑定关系<br><code>git remote rm</code>命令需要传入一个参数 <code>远程仓库名</code><br>示例：<figure class="highlight ruby"><figcaption><span>查看当前的远程仓库</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$git remote -v </span><br><span class="line">origin	git@192.<span class="number">168.250</span>.<span class="number">71</span><span class="symbol">:yuanph/HookArray</span>.git (fetch)</span><br><span class="line">origin	git@192.<span class="number">168.250</span>.<span class="number">71</span><span class="symbol">:yuanph/HookArray</span>.git (push)</span><br></pre></td></tr></table></figure>
-<figure class="highlight ruby"><figcaption><span>移除远程git</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote rm origin</span><br></pre></td></tr></table></figure>
-<figure class="highlight ruby"><figcaption><span>添加新远程仓库</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$git remote add origin git@192.<span class="number">168.250</span>.<span class="number">71</span><span class="symbol">:shareCode/HookArray</span>.git</span><br></pre></td></tr></table></figure>
-<figure class="highlight ruby"><figcaption><span>查看当前的远程仓库</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$git remote -v </span><br><span class="line">origin	git@192.<span class="number">168.250</span>.<span class="number">71</span><span class="symbol">:shareCode/HookArray</span>.git (fetch)</span><br><span class="line">origin	git@192.<span class="number">168.250</span>.<span class="number">71</span><span class="symbol">:shareCode/HookArray</span>.git (push)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org2017/07/12/NSPredicate/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="2017/07/12/NSPredicate/" itemprop="url">NSPredicate</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-12T11:35:48+08:00">
-                2017-07-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="NSPredicate是什么？"><a href="#NSPredicate是什么？" class="headerlink" title="NSPredicate是什么？"></a>NSPredicate是什么？</h1><p>NSPredicate是一个Foundation类，它指定数据被获取或者过滤的方式。它的查询语言就像SQL的WHERE和正则表达式的交叉一样，提供了具有表现力的，自然语言界面来定义一个集合被搜寻的逻辑条件</p>
-<h1 id="集合中使用NSPredicate"><a href="#集合中使用NSPredicate" class="headerlink" title="集合中使用NSPredicate"></a>集合中使用NSPredicate</h1><p>Foundation提供使用谓词（predicate）来过滤NSArray／NSMutableArray&amp;NSSet／NSMutableSet的方法。</p>
-<p>不可变的集合，NSArray&amp;NSSet，有可以通过评估接收到的predicate来返回一个不可变集合的方法filteredArrayUsingPredicate:和filteredSetUsingPredicate:。</p>
-<p>可变集合，NSMutableArray&amp;NSMutableSet，可以使用方法filterUsingPredicate:，它可以通过运行接收到的谓词来移除评估结果为FALSE的对象。</p>
-<p>NSDictionary可以用谓词来过滤它的键和值（两者都为NSArray对象）。NSOrderedSet可以由过滤的NSArray或NSSet生成一个新的有序的集，或者NSMutableSet可以简单的removeObjectsInArray:，来传递通过_否定_predicate过滤的对象。</p>
-<h1 id="Core-Data中使用NSPredicate"><a href="#Core-Data中使用NSPredicate" class="headerlink" title="Core Data中使用NSPredicate"></a>Core Data中使用NSPredicate</h1><p>NSFetchRequest有一个predicate属性，它可以指定管理对象应该被获取的逻辑条件。谓词的使用规则在这里同样适用，唯一的区别在于，在管理对象环境中，谓词由持久化存储助理（persistent store coordinator）评估，而不像集合那样在内存中被过滤</p>
-<figure class="highlight objc"><figcaption><span>data</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Person</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="keyword">@property</span> <span class="built_in">NSString</span> *firstName;</span><br><span class="line"><span class="keyword">@property</span> <span class="built_in">NSString</span> *lastName;</span><br><span class="line"><span class="keyword">@property</span> <span class="built_in">NSNumber</span> *age;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Person</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="built_in">NSString</span> *)description &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@ %@"</span>, <span class="keyword">self</span>.firstName, <span class="keyword">self</span>.lastName];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark -</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">NSArray</span> *firstNames = @[ <span class="string">@"Alice"</span>, <span class="string">@"Bob"</span>, <span class="string">@"Charlie"</span>, <span class="string">@"Quentin"</span> ];</span><br><span class="line"><span class="built_in">NSArray</span> *lastNames = @[ <span class="string">@"Smith"</span>, <span class="string">@"Jones"</span>, <span class="string">@"Smith"</span>, <span class="string">@"Alberts"</span> ];</span><br><span class="line"><span class="built_in">NSArray</span> *ages = @[ @<span class="number">24</span>, @<span class="number">27</span>, @<span class="number">33</span>, @<span class="number">31</span> ];</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSMutableArray</span> *people = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">[firstNames enumerateObjectsUsingBlock:^(<span class="keyword">id</span> obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">    Person *person = [[Person alloc] init];</span><br><span class="line">    person.firstName = firstNames[idx];</span><br><span class="line">    person.lastName = lastNames[idx];</span><br><span class="line">    person.age = ages[idx];</span><br><span class="line">    [people addObject:person];</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSPredicate</span> *bobPredicate = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"firstName = 'Bob'"</span>];</span><br><span class="line"><span class="built_in">NSPredicate</span> *smithPredicate = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"lastName = %@"</span>, <span class="string">@"Smith"</span>];</span><br><span class="line"><span class="built_in">NSPredicate</span> *thirtiesPredicate = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"age &gt;= 30"</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["Bob Jones"]</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"Bobs: %@"</span>, [people filteredArrayUsingPredicate:bobPredicate]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["Alice Smith", "Charlie Smith"]</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"Smiths: %@"</span>, [people filteredArrayUsingPredicate:smithPredicate]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["Charlie Smith", "Quentin Alberts"]</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"30's: %@"</span>, [people filteredArrayUsingPredicate:thirtiesPredicate]);</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h1 id="谓词语法"><a href="#谓词语法" class="headerlink" title="谓词语法"></a>谓词语法</h1><h2 id="替换（占位符）"><a href="#替换（占位符）" class="headerlink" title="替换（占位符）"></a>替换（占位符）</h2><ul>
-<li>%@是对值为字符串，数字或者日期的对象的替换值。(变量值)</li>
-<li><p>%K是key path的替换值。（变量名）</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSPredicate</span> *ageIs33Predicate = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"%K = %@"</span>, <span class="string">@"age"</span>, @<span class="number">33</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["Charlie Smith"]</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"Age 33: %@"</span>, [people filteredArrayUsingPredicate:ageIs33Predicate]);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>$VARIABLE_NAME是可以被NSPredicate -predicateWithSubstitutionVariables:替换的值。</p>
-<figure class="highlight objc"><figcaption><span>变量</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSPredicate</span> *namesBeginningWithLetterPredicate = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"(firstName BEGINSWITH[cd] $letter) OR (lastName BEGINSWITH[cd] $letter)"</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["Alice Smith", "Quentin Alberts"]</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"'A' Names: %@"</span>, [people filteredArrayUsingPredicate:[namesBeginningWithLetterPredicate predicateWithSubstitutionVariables:@&#123;<span class="string">@"letter"</span>: <span class="string">@"A"</span>&#125;]]);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="基本比较"><a href="#基本比较" class="headerlink" title="基本比较"></a>基本比较</h2><ul>
-<li>=, ==：左边的表达式和右边的表达式相等。</li>
-<li>‘&gt;=’, =&gt;：左边的表达式大于或者等于右边的表达式。</li>
-<li>&lt;=, =&lt;：左边的表达式小于等于右边的表达式。</li>
-<li>‘&gt;’：左边的表达式大于右边的表达式。</li>
-<li>&lt;：左边的表达式小于右边的表达式。</li>
-<li>!=, &lt;&gt;：左边的表达式不等于右边的表达式。</li>
-<li>BETWEEN：左边的表达式等于右边的表达式的值或者介于它们之间。右边是一个有两个指定上限和下限的数值的数列（指定顺序的数列）。比如，1 BETWEEN { 0 , 33 }，或者$INPUT BETWEEN { $LOWER, $UPPER }。</li>
-</ul>
-<h2 id="基本复合谓词"><a href="#基本复合谓词" class="headerlink" title="基本复合谓词"></a>基本复合谓词</h2><ul>
-<li>AND, &amp;&amp;：逻辑与.</li>
-<li>OR, ||：逻辑或.</li>
-<li>NOT, !：逻辑非.</li>
-</ul>
-<h2 id="字符串比较"><a href="#字符串比较" class="headerlink" title="字符串比较"></a>字符串比较</h2><p>字符串比较在默认的情况下是<strong>区分大小写和音调</strong>的。你可以在方括号中用关键字符c和d来修改操作符以相应的指定不区分大小写和变音符号，比如firstname BEGINSWITH[cd] $FIRST_NAME。</p>
-<ul>
-<li>BEGINSWITH：左边的表达式以右边的表达式作为开始。</li>
-<li>CONTAINS：左边的表达式包含右边的表达式。</li>
-<li>ENDSWITH：左边的表达式以右边的表达式作为结束。</li>
-<li>LIKE：左边的表达式等于右边的表达式：?和<em>可作为通配符，其中?匹配1个字符，</em>匹配0个或者多个字符。</li>
-<li>MATCHES：左边的表达式根据ICU v3（更多内容请查看ICU User Guide for Regular Expressions）的regex风格比较，等于右边的表达式</li>
-</ul>
-<h2 id="关系操作"><a href="#关系操作" class="headerlink" title="关系操作"></a>关系操作</h2><ul>
-<li>ANY，SOME：指定下列表达式中的任意元素。比如，ANY children.age &lt; 18。</li>
-<li>ALL：指定下列表达式中的所有元素。比如，ALL children.age &lt; 18。</li>
-<li>NONE：指定下列表达式中没有的元素。比如，NONE children.age &lt; 18。它在逻辑上等于NOT (ANY …)。</li>
-<li>IN：等于SQL的IN操作，左边的表达必须出现在右边指定的集合中。比如，name IN { ‘Ben’, ‘Melissa’, ‘Nick’ }。</li>
-</ul>
-<h2 id="数组操作"><a href="#数组操作" class="headerlink" title="数组操作"></a>数组操作</h2><ul>
-<li>array[index]：指定数组中特定索引处的元素。</li>
-<li>array[FIRST]：指定数组中的第一个元素。</li>
-<li>array[LAST]：指定数组中的最后一个元素。</li>
-<li>array[SIZE]：指定数组的大小。</li>
-</ul>
-<h2 id="布尔值谓词"><a href="#布尔值谓词" class="headerlink" title="布尔值谓词"></a>布尔值谓词</h2><ul>
-<li>TRUEPREDICATE：结果始终为真的谓词。</li>
-<li>FALSEPREDICATE：结果始终为假的谓词。</li>
-</ul>
-<h2 id="直接量"><a href="#直接量" class="headerlink" title="直接量"></a>直接量</h2><p>在谓词表达式中可以使用如下直接量</p>
-<ul>
-<li>FALSE、NO：代表逻辑假</li>
-<li>TRUE、YES：代表逻辑真</li>
-<li>NULL、NIL：代表空值</li>
-<li>SELF：代表正在被判断的对象自身</li>
-<li>“string”或’string’：代表字符串</li>
-<li>数组：和c中的写法相同，如：{‘one’, ‘two’, ‘three’}。</li>
-<li>数值：包括证书、小数和科学计数法表示的形式</li>
-<li>十六进制数：0x开头的数字</li>
-<li>八进制：0o开头的数字</li>
-<li>二进制：0b开头的数字</li>
-</ul>
-<h2 id="保留字"><a href="#保留字" class="headerlink" title="保留字"></a>保留字</h2><blockquote>
-<p>下列单词都是保留字（不论大小写）</p>
-<p>AND、OR、IN、NOT、ALL、ANY、SOME、NONE、LIKE、CASEINSENSITIVE、CI、MATCHES、CONTAINS、BEGINSWITH、ENDSWITH、BETWEEN、NULL、NIL、SELF、TRUE、YES、FALSE、NO、FIRST、LAST、SIZE、ANYKEY、SUBQUERY、CAST、TRUEPREDICATE、FALSEPREDICATE</p>
-<p>注：虽然大小写都可以，但是更推荐使用大写来表示这些保留字</p>
-</blockquote>
-<h1 id="NSCompoundPredicate"><a href="#NSCompoundPredicate" class="headerlink" title="NSCompoundPredicate"></a>NSCompoundPredicate</h1><p>我们见过与&amp;或被用在谓词格式字符串中以创建复合谓词。然而，我们也可以用NSCompoundPredicate来完成同样的工作</p>
-<figure class="highlight objc"><figcaption><span>下列谓词是相等的</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="built_in">NSCompoundPredicate</span> andPredicateWithSubpredicates:@[[<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"age &gt; 25"</span>], [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"firstName = %@"</span>, <span class="string">@"Quentin"</span>]]];</span><br><span class="line"></span><br><span class="line">[<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"(age &gt; 25) AND (firstName = %@)"</span>, <span class="string">@"Quentin"</span>];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org2017/07/11/断言/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="2017/07/11/断言/" itemprop="url">断言</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-11T16:20:56+08:00">
-                2017-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>断言的定义：</p>
-<blockquote>
-<p>断言（assertion）是指在开发期间使用的、让程序在运行时进行自检的代码（通常是一个子程序或宏）。断言为真，则表明程序运行正常，而断言为假，则意味着它已经在代码中发现了意料之外的错误。断言对于大型的复杂程序或可靠性要求极高的程序来说尤其有用</p>
-</blockquote>
-<p>断言使用的准则与建议：<br><blockquote><ol>
-<li>用错误处理代码来处理预期会发生的状况，用断言来处理绝不应该发生的状况。</li>
-<li>避免把需要执行的代码放到断言中</li>
-<li>用断言来注解并验证前条件和后条件</li>
-<li>对于高健壮性的代码，应该先使用断言再处理错误</li>
-</ol>
-<footer><strong>《代码大全2》</strong><cite>-防御式编程</cite></footer></blockquote></p>
-<h1 id="NSAssert"><a href="#NSAssert" class="headerlink" title="NSAssert()"></a>NSAssert()</h1><p>NSAssert()是一个宏，用于开发阶段调试程序中的Bug，通过为NSAssert()传递条件表达式来断定是否属于Bug，满足条件返回真值，程序继续运行，如果返回假值，则抛出异常，并且可以自定义异常描述。<br><figure class="highlight objc"><figcaption><span>断言的定义</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#define NSAssert(condition, desc)</span></span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<ul>
-<li>condition是条件表达式，值为YES或NO；</li>
-<li>desc为异常描述，通常为NSString。</li>
-<li>当conditon为YES时程序继续运行，为NO时，则抛出带有desc描述的异常信息。NSAssert()可以出现在程序的任何一个位置。</li>
-</ul>
-</blockquote>
-<h1 id="NSAssert和assert-区别"><a href="#NSAssert和assert-区别" class="headerlink" title="NSAssert和assert 区别"></a>NSAssert和assert 区别</h1><p>NSAssert和assert都是断言,主要的差别是assert在断言失败的时候只是简单的终止程序,而NSAssert会报告出错误信息并且打印出来.所以只使用NSAssert就好,可以不去使用assert。</p>
-<h1 id="断言何时运行？"><a href="#断言何时运行？" class="headerlink" title="断言何时运行？"></a>断言何时运行？</h1><p>通常在debug情况下（真机中会自动忽略），所有NSAssert都会被执行。在release下系统会自动将断言设置为禁用。如果release下断言仍可执行的话，则需要我们手动设置为，设置方式如下：Preprocessor Macros 的Release值为 NS_BLOCK_ASSERTIONS。</p>
-<p>小延伸：如何切换Debug和Release呢？</p>
-<p>自答吧：<br>1、点击工程名，点这里。选择Edit Scheme<br>2、选择Run，在Info 中将Build Configuration 修改为release</p>
-<h1 id="NOTE"><a href="#NOTE" class="headerlink" title="NOTE"></a>NOTE</h1><ol>
-<li>使用NSAssert的时候，每个NSAssert只检验一个条件，因为同事检验多个条件时，如果断言失败，无法直观地判断是那个条件失败</li>
-<li><p>Block中使用NSAssert要特别注意循环引用。<br> 有没有搞错，用断言也会出现循环引用,不信，那我们看看宏定义展开后是啥样的？：</p>
- <figure class="highlight objc"><figcaption><span>断言的宏定义</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">   <span class="meta">#define NSAssert(condition, desc, ...)	\</span></span><br><span class="line">   <span class="keyword">do</span> &#123;				\</span><br><span class="line">__PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \</span><br><span class="line"><span class="keyword">if</span> (!(condition)) &#123;		\</span><br><span class="line">           <span class="built_in">NSString</span> *__assert_file__ = [<span class="built_in">NSString</span> stringWithUTF8String:__FILE__]; \</span><br><span class="line">           __assert_file__ = __assert_file__ ? __assert_file__ : <span class="string">@"&lt;Unknown File&gt;"</span>; \</span><br><span class="line">    [[<span class="built_in">NSAssertionHandler</span> currentHandler] handleFailureInMethod:_cmd \</span><br><span class="line">	object:<span class="keyword">self</span> file:__assert_file__ \</span><br><span class="line">    	lineNumber:__LINE__ description:(desc), <span class="meta">##__VA_ARGS__]; \</span></span><br><span class="line">&#125;				\</span><br><span class="line">       __PRAGMA_POP_NO_EXTRA_ARG_WARNINGS \</span><br><span class="line">   &#125; <span class="keyword">while</span>(<span class="number">0</span>)</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
-<p> 看到没，宏定义展开后会出现对self的持有，容易导致循环引用！！！。有没有解决方法，必须呀，使用  <code>NSCAssert</code>！，你确信吗？不信，展开看看：</p>
- <figure class="highlight objc"><figcaption><span>NSCAssert</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">   <span class="meta">#define NSCAssert(condition, desc, ...) \</span></span><br><span class="line">   <span class="keyword">do</span> &#123;				\</span><br><span class="line">__PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \</span><br><span class="line"><span class="keyword">if</span> (!(condition)) &#123;		\</span><br><span class="line">           <span class="built_in">NSString</span> *__assert_fn__ = [<span class="built_in">NSString</span> stringWithUTF8String:__PRETTY_FUNCTION__]; \</span><br><span class="line">           __assert_fn__ = __assert_fn__ ? __assert_fn__ : <span class="string">@"&lt;Unknown Function&gt;"</span>; \</span><br><span class="line">           <span class="built_in">NSString</span> *__assert_file__ = [<span class="built_in">NSString</span> stringWithUTF8String:__FILE__]; \</span><br><span class="line">           __assert_file__ = __assert_file__ ? __assert_file__ : <span class="string">@"&lt;Unknown File&gt;"</span>; \</span><br><span class="line">    [[<span class="built_in">NSAssertionHandler</span> currentHandler] handleFailureInFunction:__assert_fn__ \</span><br><span class="line">	file:__assert_file__ \</span><br><span class="line">    	lineNumber:__LINE__ description:(desc), <span class="meta">##__VA_ARGS__]; \</span></span><br><span class="line">&#125;				\</span><br><span class="line">       __PRAGMA_POP_NO_EXTRA_ARG_WARNINGS \</span><br><span class="line">   &#125; <span class="keyword">while</span>(<span class="number">0</span>)</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
-<p> 宏定义中并没有出现self，所以在block中使用NSCAssert可以避免循环引用的发生。</p>
-</li>
-<li><p>频繁地调用会极大的影响程序的性能，增加额外开销。</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuanph.org2017/07/10/NSMutableArray/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="志鹏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="志鹏的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="2017/07/10/NSMutableArray/" itemprop="url">监听NSMutableArray的变化</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-10T10:19:00+08:00">
-                2017-07-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>平时工作中我们接触最多的容器，可能就数字典与数组了。有时我们在使用这些容器时有这样一个困惑，容器中的数据改变了，我们却无法立即知道。近日小编因为这个感到有些小苦恼，思来想去发现还是有途径可以做到监听容器的变化。<br>接下来我将会用文字将我的想法叙述出来，供大家参考。<br>要想监听一个容器的变化，首先我们需要对这个容器的属性及方法有着深入的了解。要监听容器的元素改变，那肯定是针对于可变容器。我们先着手于可变数组的监听工作。<br>接下来的工作将分成三部分：</p>
-<ol>
-<li>可变数组容器的分析</li>
-<li>设计一套监听回调机制</li>
-<li>使用runtime机制替换或者交换对应的函数指针IMP</li>
-</ol>
-<p>现在我们开始着手分析可变数组的方法。</p>
-<h1 id="可变数组的分析"><a href="#可变数组的分析" class="headerlink" title="可变数组的分析"></a>可变数组的分析</h1><h2 id="可变数组的定义"><a href="#可变数组的定义" class="headerlink" title="可变数组的定义"></a>可变数组的定义</h2><p><strong>NSMutableArray</strong>定义了一套接口用于管理可变数组对象，该类的添加／插入／删除基础操作继承于不可变数组<strong>NSArray</strong></p>
-<h2 id="可变数组的方法分类"><a href="#可变数组的方法分类" class="headerlink" title="可变数组的方法分类"></a>可变数组的方法分类</h2><p>通过查阅苹果的官方文档，我们大致可以将可变数组的方法分为以下几部分：</p>
-<ol>
-<li>创建和初始化一个可变数组</li>
-<li>数组元素的添加操作</li>
-<li>数组元素的删除操作</li>
-<li>数组元素的替换操作</li>
-<li>数组内容的筛选操作</li>
-<li>数组内容的排序操作</li>
-</ol>
-<p>下面我将各部分的相关函数贴出，以便大家更好的直观了解。</p>
-<h3 id="创建和初始化一个可变数组"><a href="#创建和初始化一个可变数组" class="headerlink" title="创建和初始化一个可变数组"></a>创建和初始化一个可变数组</h3><figure class="highlight objc"><figcaption><span>类方法</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ arrayWithCapacity:</span><br><span class="line">+ arrayWithContentsOfFile:</span><br><span class="line">+ arrayWithContentsOfURL:</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><figcaption><span>实例方法</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- init</span><br><span class="line">- initWithCapacity:</span><br><span class="line">- initWithContentsOfFile:</span><br><span class="line">- initWithContentsOfURL:</span><br></pre></td></tr></table></figure>
-<h3 id="数组元素的添加操作"><a href="#数组元素的添加操作" class="headerlink" title="数组元素的添加操作"></a>数组元素的添加操作</h3><figure class="highlight objc"><figcaption><span>元素的添加</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- addObject:</span><br><span class="line">- addObjectsFromArray:</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><figcaption><span>元素的插入</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- insertObject:atIndex:</span><br><span class="line">- insertObjects:atIndexes:</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>ps:批量元素的插入会调用多次单个元素的插入方法，<strong><em>在以后的监听过程中需要做些特殊的处理</em></strong><br><figure class="highlight objc"><figcaption><span>批量元素的插入</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- <span class="keyword">void</span> insertObjects:(<span class="built_in">NSArray</span> *)additions atIndexes:(<span class="built_in">NSIndexSet</span> *)indexes</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSUInteger</span> currentIndex = [indexes firstIndex];</span><br><span class="line">    <span class="built_in">NSUInteger</span> i, count = [indexes count];</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        [<span class="keyword">self</span> insertObject:[additions objectAtIndex:i] atIndex:currentIndex];</span><br><span class="line">        currentIndex = [indexes indexGreaterThanIndex:currentIndex];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h3 id="数组元素的删除操作"><a href="#数组元素的删除操作" class="headerlink" title="数组元素的删除操作"></a>数组元素的删除操作</h3><figure class="highlight objc"><figcaption><span>删除单个元素</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//删除元素的删除</span></span><br><span class="line">- removeLastObject</span><br><span class="line">- removeObjectAtIndex:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><figcaption><span>批量删除</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 批量元素的删除</span></span><br><span class="line">- removeAllObjects</span><br><span class="line">- removeObject:</span><br><span class="line">- removeObject:inRange:</span><br><span class="line">- removeObjectsAtIndexes:</span><br><span class="line">- removeObjectIdenticalTo:</span><br><span class="line">- removeObjectIdenticalTo:inRange:</span><br><span class="line">- removeObjectsInArray:</span><br><span class="line">- removeObjectsInRange:</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>ps： 以下方法会多次调用<code>- removeObjectAtIndex:</code>方法：,在监听过程中需要处理多次调用问题。<br><figure class="highlight objc"><figcaption><span>多次调用- removeObjectAtIndex:</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- removeObject:</span><br><span class="line">- removeObject:inRange:</span><br><span class="line">- removeObjectIdenticalTo:</span><br><span class="line">- removeObjectIdenticalTo:inRange:</span><br><span class="line">- removeObjectsInArray:</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h3 id="数组元素的替换操作"><a href="#数组元素的替换操作" class="headerlink" title="数组元素的替换操作"></a>数组元素的替换操作</h3><figure class="highlight objc"><figcaption><span>单个元素的替换</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- replaceObjectAtIndex:withObject:</span><br><span class="line">- setObject:atIndexedSubscript:</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>ps：<code>- setObject:atIndexedSubscript:</code>这个方法我们最好不要直接使用而是使用语法糖的形式调用。<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mutableArray[<span class="number">3</span>] = <span class="string">@"someValue"</span>; </span><br><span class="line"><span class="comment">// equivalent to </span></span><br><span class="line">[mutableArray replaceObjectAtIndex:<span class="number">3</span> withObject:<span class="string">@"someValue"</span>];</span><br></pre></td></tr></table></figure></p>
-<p>若替换对象为空会抛出<code>NSInvalidArgumentException</code>异常，若索引下标越界会抛出<code>NSRangeException</code>异常</p>
-</blockquote>
-<figure class="highlight objc"><figcaption><span>批量元素的替换</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- replaceObjectsAtIndexes:withObjects:</span><br><span class="line">- replaceObjectsInRange:withObjectsFromArray:range:</span><br><span class="line">- replaceObjectsInRange:withObjectsFromArray:</span><br><span class="line">- setArray:</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>ps: 以下方法会调用多次<code>- replaceObjectAtIndex:withObject:</code>方法<br><figure class="highlight objc"><figcaption><span>多次调用- replaceObjectAtIndex:withObject:</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- replaceObjectsAtIndexes:withObjects:</span><br><span class="line"><span class="comment">//PS: objects的个数必须与indexes的个数相同，否则会抛出异常</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h3 id="数组元素的筛选"><a href="#数组元素的筛选" class="headerlink" title="数组元素的筛选"></a>数组元素的筛选</h3><figure class="highlight objc"><figcaption><span>筛选</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- filterUsingPredicate:</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>ps： 会在数组中直接筛选出符合条件的数组元素，不符合的会直接删除</p>
-</blockquote>
-<h3 id="数组元素的排序"><a href="#数组元素的排序" class="headerlink" title="数组元素的排序"></a>数组元素的排序</h3><figure class="highlight objc"><figcaption><span>下标元素的交换</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- exchangeObjectAtIndex:withObjectAtIndex:</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><figcaption><span>排序操作</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- sortUsingDescriptors:</span><br><span class="line">- sortUsingComparator:</span><br><span class="line">- sortWithOptions:usingComparator:</span><br><span class="line">- sortUsingFunction:context:</span><br><span class="line">- sortUsingSelector:</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>ps:数组的排序方法会递归调用 <code>- replaceObjectAtIndex:withObject:</code><strong>在监听数组排序时需要处理多次回调的问题</strong></p>
-</blockquote>
-<p>通过对数组方法的分类及分析，我们对数组的方法有了大概的了解。接下来我们来制定一套协议，用来做回调操作。</p>
-<h1 id="监听机制的协议商定"><a href="#监听机制的协议商定" class="headerlink" title="监听机制的协议商定"></a>监听机制的协议商定</h1><h2 id="协议行为的划分"><a href="#协议行为的划分" class="headerlink" title="协议行为的划分"></a>协议行为的划分</h2><p>从数组元素的变化行为来看，协议主要可以划分为以下几部分：</p>
-<ol>
-<li>元素增加<ul>
-<li>单个元素的增加</li>
-<li>多个元素的增加</li>
-</ul>
-</li>
-<li>元素删除<ul>
-<li>单个元素的删除</li>
-<li>多个元素的删除</li>
-</ul>
-</li>
-<li>元素的替换<ul>
-<li>单个元素的替换</li>
-</ul>
-</li>
-<li>数组改变了<ul>
-<li>删除所有元素</li>
-<li>批量元素的替换</li>
-<li>数组的排序操作</li>
-<li>数组元素的筛选</li>
-</ul>
-</li>
-<li>数组元素的交换<ul>
-<li>元素的交换</li>
-</ul>
-</li>
-</ol>
-<h2 id="参数商定"><a href="#参数商定" class="headerlink" title="参数商定"></a>参数商定</h2><p>监听数组变化，哪些数据需要被回调回来呢？<br>通过参考表格协议和同事进行商讨决定</p>
-<p>对于数组元素的添加／删除操作需要将以下数据回调回来：</p>
-<ul>
-<li>监听的数组本身</li>
-<li>添加删除的元素对象</li>
-<li>及对应的索引返回。</li>
-</ul>
-<p>对于数组的替换操作将以下数据回调回来：</p>
-<ul>
-<li>监听数组对象本身</li>
-<li>替换的对象</li>
-<li>替换的新对象</li>
-<li>对象的索引</li>
-</ul>
-<p>对于数组改变了的相关操作，考虑到期复杂度相对较高，先采用较简单的方式处理，简洁明了的告诉协议的遵守者，说数组变了，回调回监听的数组对象本身。<br>对于数组元素的交换，将以下数据回调：</p>
-<ul>
-<li>监听的数组本身</li>
-<li>交换的下标1</li>
-<li>将交的下标2</li>
-</ul>
-<h2 id="协议确认"><a href="#协议确认" class="headerlink" title="协议确认"></a>协议确认</h2><figure class="highlight objc"><figcaption><span>数组监听协议</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">NSmutableArrayOberver</span> &lt;<span class="title">NSObject</span>&gt;</span></span><br><span class="line"><span class="keyword">@optional</span></span><br><span class="line"><span class="meta">#pragma mark - 增加</span></span><br><span class="line">-(<span class="keyword">void</span>)mutableArray:(<span class="built_in">NSMutableArray</span>*)array didAddObject:(<span class="keyword">id</span>)anObject atIndex:(<span class="built_in">NSInteger</span>)index;</span><br><span class="line">-(<span class="keyword">void</span>)mutableArray:(<span class="built_in">NSMutableArray</span>*)array didAddObjects:(<span class="built_in">NSArray</span> *)objects atIndexes:(<span class="built_in">NSIndexSet</span>*)indexSet;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark - 删除</span></span><br><span class="line">-(<span class="keyword">void</span>)mutableArray:(<span class="built_in">NSMutableArray</span> *)array didDeleteObject:(<span class="keyword">id</span>)anObject atIndex:(<span class="built_in">NSInteger</span>)index;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)mutableArray:(<span class="built_in">NSMutableArray</span> *)array didDeleteObjects:(<span class="built_in">NSArray</span>*)objects atIndexes:(<span class="built_in">NSIndexSet</span>*)indexes;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark  - 替换</span></span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)mutableArray:(<span class="built_in">NSMutableArray</span>*)array replaceObject:(<span class="keyword">id</span> )object withObject:(<span class="keyword">id</span>)anObject atIndex:(<span class="built_in">NSUInteger</span>)index;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark  - 改变（排序）</span></span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)mutableArrayhasChanged:(<span class="built_in">NSMutableArray</span>*)array;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark - 位置交换</span></span><br><span class="line">-(<span class="keyword">void</span>)mutableArray:(<span class="built_in">NSMutableArray</span>*)array exchangeObjectAtIndex:(<span class="built_in">NSUInteger</span>)index1 withObjectAtIndex:(<span class="built_in">NSUInteger</span>)index2;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h1 id="使用runtime机制替换或者交换对应的函数指针IMP"><a href="#使用runtime机制替换或者交换对应的函数指针IMP" class="headerlink" title="使用runtime机制替换或者交换对应的函数指针IMP"></a>使用runtime机制替换或者交换对应的函数指针IMP</h1><ol>
-<li>创建一个数组的扩展，并添加代理属性（使用<strong>关联属性</strong>添加）</li>
-<li>创建相应的函数指针，并替换数组对应的方法IMP<br>这里以- insertObject:atIndex:为例：<br>创建C函数指针：<figure class="highlight c"><figcaption><span>插入一个元素的函数指针</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*insertObject_atIndex_IMP)</span><span class="params">(id self, SEL _cmd ,id anObject ,NSUInteger index)</span></span>;</span><br><span class="line"><span class="keyword">static</span> insertObject_atIndex_IMP origin_insertObject_atIndex = nil;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">replace_insertObject_atIndex</span><span class="params">(id self, SEL _cmd ,id anObject ,NSUInteger index)</span></span>&#123;</span><br><span class="line">    NSMutableArray * <span class="built_in">array</span> = self;</span><br><span class="line">    <span class="keyword">if</span> ([<span class="built_in">array</span>.delegate conformsToProtocol:@protocol(NSmutableArrayOberver) ]&amp;&amp; [<span class="built_in">array</span>.delegate respondsToSelector:@selector(mutableArray:didAddObject:atIndex:)]) &#123;</span><br><span class="line">        </span><br><span class="line">        NSInteger number = addCount();</span><br><span class="line">        origin_insertObject_atIndex(self,_cmd,anObject,index);</span><br><span class="line">        <span class="keyword">if</span> (number==<span class="number">1</span>) &#123;</span><br><span class="line">            [<span class="built_in">array</span>.delegate mutableArray:self didAddObject:anObject atIndex:index];</span><br><span class="line">        &#125;</span><br><span class="line">        decreaseCount();</span><br><span class="line">        </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        origin_insertObject_atIndex(self,_cmd,anObject,index);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><figcaption><span>替换IMP</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+(<span class="keyword">void</span>)load&#123;</span><br><span class="line">     Method method;</span><br><span class="line">    Class  <span class="keyword">class</span> = <span class="built_in">NSClassFromString</span>(<span class="string">@"__NSArrayM"</span>);</span><br><span class="line"><span class="meta">#pragma mark - 添加</span></span><br><span class="line">    method = class_getInstanceMethod(<span class="keyword">class</span>, <span class="keyword">@selector</span>(insertObject:atIndex:));</span><br><span class="line">    origin_insertObject_atIndex = (insertObject_atIndex_IMP)method_setImplementation(method, (IMP)replace_insertObject_atIndex);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<blockquote>
-<p>PS:这里使用对一个线程变量用于统计函数的调用次数，进入函数时进行加1操作，退出时进行减1操作。如果当前调用次数为1,则在当前方法中进行回调，如果不在则不回调，由上一级调用函数进行回调。该原理类似于引用计数。</p>
-</blockquote>
-<p>至一个基础版本的数组监听工作已经完成，后续将兼容block的工作模式，以便提高代码的高聚合。</p>
-<p>参考博客：</p>
-<ol>
-<li><a href="http://www.cocoachina.com/ios/20150717/12623.html" target="_blank" rel="noopener">轻松学习之 IMP指针的作用</a></li>
-<li><a href="http://southpeak.github.io/2014/11/03/objective-c-runtime-3/" target="_blank" rel="noopener">Objective-C Runtime 运行时之三：方法与消息</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="page/11/">11</a><a class="extend next" rel="next" href="page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="page/12/">12</a><a class="extend next" rel="next" href="page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2013,7 +1961,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-count">113</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2081,7 +2029,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

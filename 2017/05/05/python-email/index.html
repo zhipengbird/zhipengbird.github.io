@@ -370,7 +370,7 @@
 <li>邮件的正文和附件是在一起编码的，只是他们的Content-Type有区别罢了。比如正文的type一般是text/plain或text/html等，而附件的type一般是：application/octet-stream。但type不同，对应的内容头也会略有不同。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> email.header <span class="keyword">import</span>  Header</span><br><span class="line">frm = Header(<span class="string">'平华'</span>,<span class="string">'utf-8'</span>)</span><br><span class="line">frm.append(<span class="string">'&lt;yuanph@ushareit.com&gt;'</span>,<span class="string">'ascii'</span>)</span><br><span class="line"><span class="keyword">print</span> frm.encode()</span><br><span class="line"><span class="comment"># =?utf-8?b?5bmz5Y2O?= &lt;yuanph@ushareit.com&gt;</span></span><br><span class="line"><span class="keyword">import</span>  base64</span><br><span class="line">base64.b64decode(<span class="string">'5bmz5Y2O'</span>,<span class="string">'utf-8'</span>)</span><br><span class="line"><span class="comment"># '\xe5\xb9\xb3\xe5\x8d\x8e'</span></span><br></pre></td></tr></table></figure>
-<p>解析：<br>=?utf-8?b?5bmz5Y2O?= <a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#121;&#x75;&#x61;&#x6e;&#x70;&#104;&#64;&#x75;&#115;&#104;&#x61;&#x72;&#101;&#x69;&#x74;&#x2e;&#99;&#x6f;&#109;">&#121;&#x75;&#x61;&#x6e;&#x70;&#104;&#64;&#x75;&#115;&#104;&#x61;&#x72;&#101;&#x69;&#x74;&#x2e;&#99;&#x6f;&#109;</a> 这个内容里本身就有编码信息，因此反过来解析也很简单。因为=?、?、?=属于分隔符，用这三个分隔符简单的split后 。re.split(r’’’=\?|\?=|\?’’’,’’’=?utf-8?b?5bmz5Y2O?=’’’)。  可以得到[‘’, ‘utf-8’, ‘b’, ‘5bmz5Y2O’, ‘’] ，根据python的源码显示，utf-8表示数据编码，b表示base64。那么对内容’5bmz5Y2O’进行base64.b64decode后，就可得到utf-8编码的“平华”二个字。</p>
+<p>解析：<br>=?utf-8?b?5bmz5Y2O?= <a href="&#109;&#97;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#121;&#117;&#x61;&#110;&#112;&#x68;&#64;&#x75;&#x73;&#104;&#x61;&#x72;&#x65;&#x69;&#116;&#x2e;&#x63;&#111;&#109;">&#121;&#117;&#x61;&#110;&#112;&#x68;&#64;&#x75;&#x73;&#104;&#x61;&#x72;&#x65;&#x69;&#116;&#x2e;&#x63;&#111;&#109;</a> 这个内容里本身就有编码信息，因此反过来解析也很简单。因为=?、?、?=属于分隔符，用这三个分隔符简单的split后 。re.split(r’’’=\?|\?=|\?’’’,’’’=?utf-8?b?5bmz5Y2O?=’’’)。  可以得到[‘’, ‘utf-8’, ‘b’, ‘5bmz5Y2O’, ‘’] ，根据python的源码显示，utf-8表示数据编码，b表示base64。那么对内容’5bmz5Y2O’进行base64.b64decode后，就可得到utf-8编码的“平华”二个字。</p>
 <h1 id="Content-Type"><a href="#Content-Type" class="headerlink" title="Content-Type"></a>Content-Type</h1><p><strong>表明传递的信息类型</strong><br>Content-Type表明信息类型，缺省值为” text/plain”。它包含了主要类型（primary type）和次要类型（subtype）两个部分，两者之间用”/“分割。主要类型有9种，分别是application、audio、example、image、message、model、multipart、text、video。<br>每一种主要类型下面又有许多种次要类型，常见的有：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">text/plain：纯文本，文件扩展名.txt</span><br><span class="line">text/html：HTML文本，文件扩展名.htm和.html</span><br><span class="line">image/jpeg：jpeg格式的图片，文件扩展名.jpg</span><br><span class="line">image/gif：GIF格式的图片，文件扩展名.gif</span><br><span class="line">audio/x-wave：WAVE格式的音频，文件扩展名.wav</span><br><span class="line">audio/mpeg：MP3格式的音频，文件扩展名.mp3</span><br><span class="line">video/mpeg：MPEG格式的视频，文件扩展名.mpg</span><br><span class="line">application/zip：PK-ZIP格式的压缩文件，文件扩展名.zip</span><br></pre></td></tr></table></figure></p>
 <p>“Content-Type: multipart/alternative;”表明这封信的内容，是纯文本和HTML文本的混合。另两个可能的值是<code>multipart/mixed</code>和<code>multipart/related</code>，分别表示<code>信件内容中有二进制内容</code>和<code>信件带有附件</code></p>
 <p>参考链接：<br><a href="http://www.ruanyifeng.com/blog/2008/06/mime.html" target="_blank" rel="noopener">MIME笔记</a></p>
@@ -493,7 +493,7 @@
               
                 <a href="../../../../archives/">
               
-                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-count">113</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -577,7 +577,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

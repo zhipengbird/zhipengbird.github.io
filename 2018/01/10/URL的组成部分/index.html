@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="../../../../css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="../../../../images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="../../../../atom.xml" title="志鹏的技术博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="URL的组成部分URL(统一资源定位符)是URI(通用资源标识)的特定类型，URL通常在因特网上查找现有资源。当Web客户机向服务器发出对资源的请求时，使用URL。URI 和 URL 的概念由因特网协会和 IETF（因特网工程任务组织）请求评论文档 RFC 2396 统一资源标识（URI）：一般语法定义（http://">
+<meta property="og:type" content="article">
+<meta property="og:title" content="URL的组成部分">
+<meta property="og:url" content="http://yuanph.org/2018/01/10/URL的组成部分/index.html">
+<meta property="og:site_name" content="志鹏的技术博客">
+<meta property="og:description" content="URL的组成部分URL(统一资源定位符)是URI(通用资源标识)的特定类型，URL通常在因特网上查找现有资源。当Web客户机向服务器发出对资源的请求时，使用URL。URI 和 URL 的概念由因特网协会和 IETF（因特网工程任务组织）请求评论文档 RFC 2396 统一资源标识（URI）：一般语法定义（http://www.ietf.org/rfc/rfc2396.txt）。简要地说，***UR">
+<meta property="og:updated_time" content="2018-01-10T09:57:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="URL的组成部分">
+<meta name="twitter:description" content="URL的组成部分URL(统一资源定位符)是URI(通用资源标识)的特定类型，URL通常在因特网上查找现有资源。当Web客户机向服务器发出对资源的请求时，使用URL。URI 和 URL 的概念由因特网协会和 IETF（因特网工程任务组织）请求评论文档 RFC 2396 统一资源标识（URI）：一般语法定义（http://www.ietf.org/rfc/rfc2396.txt）。简要地说，***UR">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yuanph.org/2018/01/10/URL的组成部分/"/>
+
+
+
+
+
+  <title>URL的组成部分 | 志鹏的技术博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?hexo5154a045f583f13e4b93ee8041fa5efc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">志鹏的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录成长的点滴</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuanph.org">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="志鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志鹏的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">URL的组成部分</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-10T17:20:12+08:00">
+                2018-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="URL的组成部分"><a href="#URL的组成部分" class="headerlink" title="URL的组成部分"></a>URL的组成部分</h1><p>URL(统一资源定位符)是URI(通用资源标识)的特定类型，URL通常在因特网上查找现有资源。当Web客户机向服务器发出对资源的请求时，使用URL。<br>URI 和 URL 的概念由因特网协会和 IETF（因特网工程任务组织）请求评论文档 RFC 2396 统一资源标识（URI）：一般语法定义（<a href="http://www.ietf.org/rfc/rfc2396.txt）。简要地说，***URI" target="_blank" rel="noopener">http://www.ietf.org/rfc/rfc2396.txt）。简要地说，***URI</a> 是定义为识别资源的任何一个字符串<strong>*。</strong>URL 定义为按资源的位置或用户访问它的方式，而不是按资源的名称或其他属性来识别资源的那些 URI。**</p>
+<p>HTTP（HTTPS）的 URL 通常由三或四个组成部分组成：</p>
+<ul>
+<li><strong>规则</strong><ul>
+<li>规则识别用于访问因特网上的资源协议</li>
+</ul>
+</li>
+<li><strong>主机</strong><ul>
+<li>主机名识别拥有资源的主机</li>
+</ul>
+</li>
+<li><strong>路径</strong> <ul>
+<li>路径识别主机中Web客户机要访问的特定资源</li>
+</ul>
+</li>
+<li><strong>查询字符</strong> <ul>
+<li>如果使用查询字符串，那么它跟随路径部分，并且提供一串字符串，资源使用这些字符串可以完成某些操作（例如，作为用于搜索的参数或用于处理的数据）。 查询字符串通常是一串名称和值对，例如，q=bluebird。</li>
+</ul>
+</li>
+</ul>
+<p>URL 的规则和主机部分不定义为区分大小写，但是路径和查询字符串是区分大小写的。通常，整个 URL 指定为小写字母。<br>URL 的组成部分如下所示进行组合和定界：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">scheme:</span><span class="comment">//host:port/path?query</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>规则后跟冒号和两个正斜杠。</li>
+<li>如果指定端口号，那么主机名后面是号码，并用冒号分隔。</li>
+<li>路径名以单正斜杠开始。</li>
+<li>如果指定查询字符串，那么在它的前面加个问号。</li>
+</ul>
+<p>图 1. HTTP URL 语法<br>阅读语法图跳过直观语法图<br>                            .-:80—–.                      </p>
+<blockquote>
+<blockquote>
+<p>-<a href="http://--+-host" target="_blank" rel="noopener">http://--+-host</a> name–+–+———+–/–path component——&gt;<br>            ‘-IP address-‘  ‘-:–port-‘                      </p>
+</blockquote>
+<p>–+—————–+—————————————–&gt;&lt;<br>   ‘-?–query string-‘</p>
+</blockquote>
+<p>URL 的后面可以跟片段标识。URL 与片段标识之间使用的分隔符是字符 #。<strong>片段标识用于使 Web 浏览器指向它刚检索的项中的引用或函数</strong>。 例如，如果 URL 标识 HTML 页面，那么可使用片段标识，以子节的标识来指示页面中的子节。对于这种情况，Web 浏览器通常向用户显示页面， 以使用户可以看到子节。根据项的介质类型以及为该介质类型的片段标识所定义含义的不同，Web 浏览器为片段标识所采取的操作也会不同<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">https</span>://<span class="keyword">item</span>.jd.com/<span class="number">11818781778.</span>html<span class="comment">#crumb-wrap</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="OC中如何获取URL的中各个组成部分"><a href="#OC中如何获取URL的中各个组成部分" class="headerlink" title="OC中如何获取URL的中各个组成部分"></a>OC中如何获取URL的中各个组成部分</h1><p>为获取URL中的各个组成部分，Foundation框架为我们提供了一个<code>NSURLComponents</code>类，通过该类，可以获取到URL中和各个组成部分</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// NSURLComponents 相关字段</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *scheme; <span class="comment">// 规则， Attempting to set the scheme with an invalid scheme string will cause an exception.</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *user;<span class="comment">//用户</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *password;<span class="comment">//密码</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *host;<span class="comment">//主机</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSNumber</span> *port; <span class="comment">// 端口 Attempting to set a negative port number will cause an exception.</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *path;<span class="comment">//路径</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *query;<span class="comment">//查询字符</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *fragment;<span class="comment">//片段标识</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSArray</span>&lt;<span class="built_in">NSURLQueryItem</span> *&gt; *queryItems; <span class="comment">//查询字段数组</span></span><br></pre></td></tr></table></figure>
+<p>示例<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * urlString = <span class="string">@"http://54.223.156.84:9120/relayserver/spring/commands/command?commandType=cmd_type_ad&amp;commandName=&amp;commandStatus=&amp;code=10001&amp;id=test_snapshow_ios_first_test&amp;page=&amp;restrict=false"</span>;</span><br><span class="line">urlString = <span class="string">@"https://item.jd.com/11818781778.html#crumb-wrap"</span>;</span><br><span class="line"><span class="comment">// 创建组件对象</span></span><br><span class="line"><span class="built_in">NSURLComponents</span> *components = [<span class="built_in">NSURLComponents</span> componentsWithString:urlString];</span><br><span class="line"></span><br><span class="line"><span class="comment">//规则</span></span><br><span class="line"><span class="built_in">NSString</span> * scheme = components.scheme;</span><br><span class="line"><span class="comment">// 路径</span></span><br><span class="line"><span class="built_in">NSString</span> * path = components.path;</span><br><span class="line"><span class="comment">//端口</span></span><br><span class="line"><span class="built_in">NSString</span> * port = components.port;</span><br><span class="line"><span class="comment">//查询字符串</span></span><br><span class="line"><span class="built_in">NSString</span> * query  = components.query;</span><br><span class="line"><span class="comment">//片段标识</span></span><br><span class="line"><span class="built_in">NSString</span> * fragment = components.fragment;</span><br><span class="line"><span class="comment">//获取查询参数</span></span><br><span class="line"><span class="built_in">NSMutableDictionary</span> *paramsDic = [<span class="built_in">NSMutableDictionary</span> dictionary];</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">NSURLQueryItem</span> *item <span class="keyword">in</span> components.queryItems) &#123;</span><br><span class="line">    [paramsDic setValue:item.value forKey:item.name];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../../06/runtimecopy/" rel="next" title="runtime - 实现对象的自动拷贝">
+                <i class="fa fa-chevron-left"></i> runtime - 实现对象的自动拷贝
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../../27/GCD/" rel="prev" title="GCD">
+                GCD <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">志鹏</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="../../../../archives/">
+              
+                  <span class="site-state-item-count">113</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="../../../../atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#URL的组成部分"><span class="nav-number">1.</span> <span class="nav-text">URL的组成部分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OC中如何获取URL的中各个组成部分"><span class="nav-number">2.</span> <span class="nav-text">OC中如何获取URL的中各个组成部分</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">志鹏</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="../../../../js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="../../../../js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="../../../../js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="../../../../js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
