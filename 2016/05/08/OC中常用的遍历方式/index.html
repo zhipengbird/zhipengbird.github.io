@@ -1,0 +1,706 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>OC中常用的遍历方式 | 志鹏的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="志鹏">
+    
+
+    
+    <meta name="description" content="&amp;emsp;&amp;emsp;在开发过程中经常需要列举collection中的元素，在ＯＣ语言中可以有多种方法实现该功能，标准的Ｃ语言循环，OC 1.0的枚举器（ＮSNumerator）,OC 2.0中的快速遍历。在引入块这一特性后，又新增了几种新的遍历方式，采用这几种新方式遍历collection时，可以传入块，而collection中的每个元素都可能会放在块里运行一遍，这样可以大幅度简化编码过程。">
+<meta name="keywords" content="循环,遍历">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OC中常用的遍历方式">
+<meta property="og:url" content="http://yuanph.org/2016/05/08/OC中常用的遍历方式/index.html">
+<meta property="og:site_name" content="志鹏的技术博客">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;在开发过程中经常需要列举collection中的元素，在ＯＣ语言中可以有多种方法实现该功能，标准的Ｃ语言循环，OC 1.0的枚举器（ＮSNumerator）,OC 2.0中的快速遍历。在引入块这一特性后，又新增了几种新的遍历方式，采用这几种新方式遍历collection时，可以传入块，而collection中的每个元素都可能会放在块里运行一遍，这样可以大幅度简化编码过程。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-31T15:08:14.146Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OC中常用的遍历方式">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;在开发过程中经常需要列举collection中的元素，在ＯＣ语言中可以有多种方法实现该功能，标准的Ｃ语言循环，OC 1.0的枚举器（ＮSNumerator）,OC 2.0中的快速遍历。在引入块这一特性后，又新增了几种新的遍历方式，采用这几种新方式遍历collection时，可以传入块，而collection中的每个元素都可能会放在块里运行一遍，这样可以大幅度简化编码过程。">
+
+    
+    <link rel="alternative" href="atom.xml" title="志鹏的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="../../../../css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="志鹏的技术博客">志鹏的技术博客</a></h1>
+				<h2 class="blog-motto">记录成长的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">简介</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" class="st-default-search-input" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/05/08/OC中常用的遍历方式/" title="OC中常用的遍历方式" itemprop="url">OC中常用的遍历方式</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="志鹏" target="_blank" itemprop="author">志鹏</a>
+		
+  <p class="article-time">
+    <time datetime="2016-05-08T13:49:26.000Z" itemprop="datePublished"> Published 2016-05-08</time>
+    <span id="busuanzi_container_page_pv">
+    总阅读<span id="busuanzi_value_page_pv"></span>次
+</span>
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#for循环"><span class="toc-number">1.</span> <span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#枚举器（NSEnumerator）"><span class="toc-number">2.</span> <span class="toc-text">枚举器（NSEnumerator）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速遍历-forin"><span class="toc-number">3.</span> <span class="toc-text">快速遍历 (forin)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#块方法（block）"><span class="toc-number">4.</span> <span class="toc-text">块方法（block）</span></a></li></ol>
+		
+		</div>
+		
+		<p>&emsp;&emsp;在开发过程中经常需要列举collection中的元素，在ＯＣ语言中可以有多种方法实现该功能，标准的Ｃ语言循环，OC 1.0的枚举器（ＮSNumerator）,OC 2.0中的快速遍历。在引入块这一特性后，又新增了几种新的遍历方式，采用这几种新方式遍历collection时，可以传入块，而collection中的每个元素都可能会放在块里运行一遍，这样可以大幅度简化编码过程。<br><a id="more"></a></p>
+<h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><p>&emsp;&emsp;遍边数组的第一种方式就是采用老式的for循环。在作为OC的根基的Ｃ语言中就有了些特征。通常的代码样式：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> traditionalForArray(<span class="built_in">NSArray</span> * array)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.count; i++) &#123;</span><br><span class="line">        <span class="keyword">id</span> object = array[i];</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with object</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;那么遍历字典跟set集合可以会更复杂些：<br>&emsp;&emsp;<em>直接遍历字典的所有值</em><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> traditionalForDictonary(<span class="built_in">NSDictionary</span> * dict)&#123;</span><br><span class="line">    <span class="built_in">NSArray</span> * allValues = [dict allValues];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; allValues.count; i++) &#123;</span><br><span class="line">        <span class="keyword">id</span> value = allValues[i];</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with value</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;<em>直接遍历字典的所有键</em><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> traditionalForDictonary(<span class="built_in">NSDictionary</span> * dict)&#123;</span><br><span class="line">    <span class="built_in">NSArray</span> * allKeys = [dict allKeys];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; allKeys.count; i++) &#123;</span><br><span class="line">        <span class="keyword">id</span> key = allKeys[i];</span><br><span class="line">        <span class="keyword">id</span> value = dict[key];</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with  key and value</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;<em>遍历set中所有对象</em><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> traditionalForSet(<span class="built_in">NSSet</span> * set)&#123;</span><br><span class="line">    <span class="built_in">NSArray</span> * allObject = [set allObjects];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; allObject.count; i++) &#123;</span><br><span class="line">        <span class="keyword">id</span> object = allObject[i];</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with object</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;根据定义，字典和set都是“无序的（unordered）”所以无法根据特定的下标来获取其中的值，为此，需要先获取字典里所有的键/值或set中所有的对象，在获取到的有序数组里就可以使用for循环获取对应下标的键/值或对象了.但创建这个附加的数组会有额外的开销，而且还会多创建一个数组对象，它会保留collection中的所有以元素对象，在释放数组时这些附加对象也会释放，这些操作看起来有点多余，因为其他方式都可以不用这么做。<br>&emsp;&emsp;for循环可以实现反向遍历，计数器的值从“元素的个数减一”开始，每次迭代时递减直至为0结束。执行反向遍历时，会比其他方式简单。</p>
+<blockquote>
+<p>总结优缺点：<br>优点：被广泛使用，容易接受，操作简单；<br>缺点：遍历字典和set是比较繁琐，会占用比较多的系统资源。</p>
+</blockquote>
+<h3 id="枚举器（NSEnumerator）"><a href="#枚举器（NSEnumerator）" class="headerlink" title="枚举器（NSEnumerator）"></a>枚举器（<code>NSEnumerator</code>）</h3><p>&emsp;&emsp;<code>NSEnumerator</code> 是个抽象基类，其只定义了两个方法，供其具体子类实现:   </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">nullable</span> ObjectType)nextObject;</span><br><span class="line">- ( <span class="built_in">NSArray</span>&lt;ObjectType&gt; *)allObjects;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;<code>nextObject</code>方法是关键，它返回枚举里的下一个对象，每次调用都会更新内部结构，使得下次调用时能返回下一个对象。枚举里的全部对象返回后，再调用将会返回nil.这表示已经枚举完了。下面是各容器使用Enumerator的样式：<br><em>正向枚举数组</em><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> enumeratorForArray(<span class="built_in">NSArray</span> * array )&#123;</span><br><span class="line">    <span class="built_in">NSEnumerator</span> * enumerator =[array objectEnumerator];</span><br><span class="line">    <span class="keyword">id</span> object ;</span><br><span class="line">    <span class="keyword">while</span> (( object =  [enumerator nextObject])!= <span class="literal">nil</span>) &#123;</span><br><span class="line">         <span class="comment">//<span class="doctag">TODO:</span>:to do something with object</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><em>逆向枚举数组</em><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> enumeratorForReverseArray(<span class="built_in">NSArray</span> * array )&#123;</span><br><span class="line">    <span class="built_in">NSEnumerator</span> * enumerator =[array reverseObjectEnumerator];</span><br><span class="line">    <span class="keyword">id</span> object ;</span><br><span class="line">    <span class="keyword">while</span> (( object =  [enumerator nextObject])!= <span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with object</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><em>使用key枚举字典</em><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> enumeratorForDictionaryAllKeys(<span class="built_in">NSDictionary</span> * dict)&#123;</span><br><span class="line">    <span class="built_in">NSEnumerator</span> * keyEnumerator = [dict keyEnumerator];</span><br><span class="line">    <span class="keyword">id</span> key ;</span><br><span class="line">    <span class="keyword">while</span> ((key = [keyEnumerator nextObject])!=<span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="keyword">id</span> value = dict[key];</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with value</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><em>使用value 枚举字典</em><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> enumeratorForDictionaryAllValues(<span class="built_in">NSDictionary</span> * dict)&#123;</span><br><span class="line">    <span class="built_in">NSEnumerator</span> * valueEnumerator = [dict objectEnumerator];</span><br><span class="line">    <span class="keyword">id</span> value ;</span><br><span class="line">    <span class="keyword">while</span> ((value = [valueEnumerator nextObject])!=<span class="literal">nil</span>) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with value</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><em>枚举set集合</em><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> enumeratorForSet(<span class="built_in">NSSet</span> * set)&#123;</span><br><span class="line">    <span class="built_in">NSEnumerator</span> * objectEnumerator = [set objectEnumerator];</span><br><span class="line">    <span class="keyword">id</span> object;</span><br><span class="line">    <span class="keyword">while</span> ((object = [objectEnumerator nextObject])!= <span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with object</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>枚举的写法跟标准的for循环相似，但代码多了一点，其优势在于：不论遍历哪种collection，都可以采用这种相似的语法。</p>
+<blockquote>
+<p>总结优缺点：<br>优点：代码更易读，不需要定义额外的数组；<br>缺点：</p>
+<pre><code>1. 无法直接获取遍历操作的下标，需要另外声明变量记录；
+2. 需要自行创建NSEnumerator对象，稍显麻烦。
+</code></pre></blockquote>
+<h3 id="快速遍历-forin"><a href="#快速遍历-forin" class="headerlink" title="快速遍历 (forin)"></a>快速遍历 (forin)</h3><p>字典<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> forinDic(<span class="built_in">NSDictionary</span> * dict)&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">id</span> key <span class="keyword">in</span> dict) &#123;</span><br><span class="line">        <span class="keyword">id</span> value = dict[key];</span><br><span class="line">         <span class="comment">//<span class="doctag">TODO:</span>:to do something with key &amp;&amp; value</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>数组<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> forinArray(<span class="built_in">NSArray</span> * array)&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">id</span> object <span class="keyword">in</span> array) &#123;</span><br><span class="line">       <span class="comment">//<span class="doctag">TODO:</span>:to do something with object</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>SET集合<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> forinSet(<span class="built_in">NSSet</span> * set)&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">id</span> object <span class="keyword">in</span> set) &#123;</span><br><span class="line">         <span class="comment">//<span class="doctag">TODO:</span>:to do something with object</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>forin小结：<br>优点：<br>  语法简洁，使用方便，效率高；<br>缺点：</p>
+<pre><code>1. 无法方便获取当前遍历的下标；
+2. 无法在遍历过程中修改被遍历的collection，否则会导致崩溃。
+</code></pre></blockquote>
+<h3 id="块方法（block）"><a href="#块方法（block）" class="headerlink" title="块方法（block）"></a>块方法（block）</h3><p>数组<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> blockEnumeratorArray(<span class="built_in">NSArray</span> * array)&#123;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark － 对数组整个区间进行遍历</span></span><br><span class="line">    [array enumerateObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with object  &amp; index  &amp; stop</span></span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:可以增删除改？？</span></span><br><span class="line">    &#125;];</span><br><span class="line"></span><br><span class="line"><span class="comment">//    typedef NS_OPTIONS(NSUInteger, NSEnumerationOptions) &#123;</span></span><br><span class="line"><span class="comment">//        NSEnumerationConcurrent = (1UL &lt;&lt; 0),并发</span></span><br><span class="line"><span class="comment">//        NSEnumerationReverse = (1UL &lt;&lt; 1),逆序</span></span><br><span class="line"><span class="comment">//    &#125;;</span></span><br><span class="line"><span class="meta">#pragma mark - 对数组进行遍历，可设置遍历顺序，并发或反序</span></span><br><span class="line">    [array enumerateObjectsWithOptions:<span class="built_in">NSEnumerationConcurrent</span> usingBlock:^(<span class="keyword">id</span>  _Nonnull obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with object  &amp; index  &amp; stop</span></span><br><span class="line">    &#125;];</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark － 对数组的某个区间进行遍历操作</span></span><br><span class="line">    <span class="built_in">NSIndexSet</span> * indexset  =[<span class="built_in">NSIndexSet</span> indexSetWithIndexesInRange:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, array.count)];</span><br><span class="line">    [array enumerateObjectsAtIndexes:indexset options:<span class="built_in">NSEnumerationReverse</span> usingBlock:^(<span class="keyword">id</span>  _Nonnull obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with object  &amp; index  &amp; stop</span></span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>字典<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> blockEnumeratorDict(<span class="built_in">NSDictionary</span> *dict)&#123;</span><br><span class="line"></span><br><span class="line">    [dict enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull key, <span class="keyword">id</span>  _Nonnull obj, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with object  &amp; key  &amp; stop</span></span><br><span class="line"></span><br><span class="line">    &#125;];</span><br><span class="line"><span class="meta">#pragma mark  设置遍历顺序方式（正序或逆序)</span></span><br><span class="line">    [dict enumerateKeysAndObjectsWithOptions:<span class="built_in">NSEnumerationReverse</span> usingBlock:^(<span class="keyword">id</span>  _Nonnull key, <span class="keyword">id</span>  _Nonnull obj, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with object  &amp; key  &amp; stop</span></span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>SET集合<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> blockEnumeratorSet(<span class="built_in">NSSet</span> * set)&#123;</span><br><span class="line">    [set enumerateObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull obj, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">         <span class="comment">//<span class="doctag">TODO:</span>:to do something with object    &amp; stop</span></span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="meta">#pragma mark  设置遍历顺序方式（正序或逆序)</span></span><br><span class="line">    [set enumerateObjectsWithOptions:<span class="built_in">NSEnumerationReverse</span> usingBlock:^(<span class="keyword">id</span>  _Nonnull obj, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">         <span class="comment">//<span class="doctag">TODO:</span>:to do something with object    &amp; stop</span></span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>若提前知道遍历的集合含有何种对象，则应修改块签名，指出对象的具体类型。</strong></p>
+<blockquote>
+<p>小结：<br>优点：</p>
+<ol>
+<li>可以完美实现for循环的所有功能；</li>
+<li>可以方便获取集合中的每一项元素；</li>
+<li>提供了循环遍历的参数，NSEnumerationReverse用来实现倒序循环。NSEnumerationConcurrent用来实现并发遍历，两个参数可以同时使用；</li>
+<li>这种循环方式效率高，能够提升程序性能，开发者可以专注于业务逻辑，而不必担心内存和线程的问题；</li>
+<li>当开启NSEnumerationConcurrent选项时，可以实现for循环和快速遍历无法轻易实现的并发循环功能，系统底层会通过GCD处理并发事宜，这样可以充分利用系统和硬件资源，达到最优的遍历效果；</li>
+<li>可以修改块签名，当我们已经明确集合中的元素类型时，可以把默认的签名id类型修改成已知类型，比如常见的NSString，这样既可以节省系统资源开销，也可以防止误向对象发送不存在的方法是引起的崩溃。</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>缺点：</p>
+<ol>
+<li>很多开发者不知道这种遍历方式；</li>
+<li>这里使用了block，需要注意在block里容易引起的保留环问题，比如使用self调用方法时，把self转化成若引用即可打破保留环。如：<strong>weak </strong>typeof(self)weakSelf = self 或者 __weak MyController *weakSelf = self; 在block里使用weakSelf即可。</li>
+</ol>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="../../../../categories/iOS/">iOS</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/循环/">循环</a><a href="/tags/遍历/">遍历</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yuanph.org/2016/05/08/OC中常用的遍历方式/" data-title="OC中常用的遍历方式 | 志鹏的技术博客" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/05/08/markdown语法使用小技巧/" title="markdown语法使用小技巧">
+  <strong>上一篇：</strong><br/>
+  <span>
+  markdown语法使用小技巧</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/05/06/存储对象指针/"  title="工作随笔">
+ <strong>下一篇：</strong><br/> 
+ <span>工作随笔
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#for循环"><span class="toc-number">1.</span> <span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#枚举器（NSEnumerator）"><span class="toc-number">2.</span> <span class="toc-text">枚举器（NSEnumerator）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速遍历-forin"><span class="toc-number">3.</span> <span class="toc-text">快速遍历 (forin)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#块方法（block）"><span class="toc-number">4.</span> <span class="toc-text">块方法（block）</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/English/" title="English">English<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/GPUImage/" title="GPUImage">GPUImage<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/TCP/" title="TCP">TCP<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/XML/" title="XML">XML<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Xcode8/" title="Xcode8">Xcode8<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/cocoapods/" title="cocoapods">cocoapods<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/git/" title="git">git<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>23</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/python/" title="python">python<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/xcode-archive/" title="xcode_archive">xcode_archive<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/其他/" title="其他">其他<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/工具/" title="工具">工具<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/数学/" title="数学">数学<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/正则表达式/" title="正则表达式">正则表达式<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/测试/" title="测试">测试<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/English/" title="English">English<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/XML/" title="XML">XML<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Appache/" title="Appache">Appache<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/动画/" title="动画">动画<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/tips/" title="tips">tips<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UI/" title="UI">UI<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ARC/" title="ARC">ARC<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/内存问题/" title="内存问题">内存问题<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/AutoLayout/" title="AutoLayout">AutoLayout<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CGRect/" title="CGRect">CGRect<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/日期格式/" title="日期格式">日期格式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Location/" title="Location">Location<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ushow/" title="ushow">ushow<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/GCD/" title="GCD">GCD<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS-GPUImage/" title="iOS-GPUImage">iOS-GPUImage<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MD5/" title="MD5">MD5<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://blog.scorplot.com/" target="_blank" title="蛟哥的博客">蛟哥的博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.bomobox.org/" target="_blank" title="贤凯的博客">贤凯的博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://ushareit.github.io/" target="_blank" title="Ushareit">Ushareit</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://janexzz.github.io" target="_blank" title="许珍珍">许珍珍</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m zhipengbird. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018
+		
+		<a href="/about" target="_blank" title="志鹏">志鹏</a>
+		
+		</br>
+		<span id="busuanzi_container_site_pv">
+					&nbsp;&nbsp;Total visits:&nbsp;<span id="busuanzi_value_site_pv"></span>
+		</span>
+		<span id="busuanzi_container_site_uv">
+				&nbsp;&nbsp;You are Visiter No.<span id="busuanzi_value_site_uv"></span>
+		</span>
+	
+		
+				
+		
+		</p>
+		
+		<script type="text/javascript">
+(function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+(w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+})(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+_st('install','VPgYp3Umx_FneUdxKodz','2.0.0');
+</script>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+</div>
+
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'yuanpinghua';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

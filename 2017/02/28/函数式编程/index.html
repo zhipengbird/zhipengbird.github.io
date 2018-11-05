@@ -1,0 +1,698 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>函数式编程 | 志鹏的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="志鹏">
+    
+
+    
+    <meta name="description" content="函数式编程思想： 把操作尽量写成一系例嵌套的函数或者方法调用。 函数式编程本质： 就是往方法中传入Block,方法中嵌套Block调用，把代码聚合起来管理 函数式编程特点： 每个方法必须有返回值（本身对象）,把函数或者Block当做参数,block参数（需要操作的值）block返回值（操作结果） 代表：ReactiveCocoa。链式编程思想：是将多个操作（多行代码）通过点号(.)链接在一起成为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数式编程">
+<meta property="og:url" content="http://yuanph.org/2017/02/28/函数式编程/index.html">
+<meta property="og:site_name" content="志鹏的技术博客">
+<meta property="og:description" content="函数式编程思想： 把操作尽量写成一系例嵌套的函数或者方法调用。 函数式编程本质： 就是往方法中传入Block,方法中嵌套Block调用，把代码聚合起来管理 函数式编程特点： 每个方法必须有返回值（本身对象）,把函数或者Block当做参数,block参数（需要操作的值）block返回值（操作结果） 代表：ReactiveCocoa。链式编程思想：是将多个操作（多行代码）通过点号(.)链接在一起成为">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-31T15:08:14.161Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="函数式编程">
+<meta name="twitter:description" content="函数式编程思想： 把操作尽量写成一系例嵌套的函数或者方法调用。 函数式编程本质： 就是往方法中传入Block,方法中嵌套Block调用，把代码聚合起来管理 函数式编程特点： 每个方法必须有返回值（本身对象）,把函数或者Block当做参数,block参数（需要操作的值）block返回值（操作结果） 代表：ReactiveCocoa。链式编程思想：是将多个操作（多行代码）通过点号(.)链接在一起成为">
+
+    
+    <link rel="alternative" href="atom.xml" title="志鹏的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="../../../../css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="志鹏的技术博客">志鹏的技术博客</a></h1>
+				<h2 class="blog-motto">记录成长的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">简介</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" class="st-default-search-input" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/02/28/函数式编程/" title="函数式编程" itemprop="url">函数式编程</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="志鹏" target="_blank" itemprop="author">志鹏</a>
+		
+  <p class="article-time">
+    <time datetime="2017-02-28T07:58:38.000Z" itemprop="datePublished"> Published 2017-02-28</time>
+    <span id="busuanzi_container_page_pv">
+    总阅读<span id="busuanzi_value_page_pv"></span>次
+</span>
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#代表：ReactiveCocoa。"><span class="toc-number">1.</span> <span class="toc-text">代表：ReactiveCocoa。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代表：Masonry框架。"><span class="toc-number">2.</span> <span class="toc-text">代表：Masonry框架。</span></a></li></ol>
+		
+		</div>
+		
+		<hr>
+<p><strong>函数式编程思想</strong>： 把操作尽量写成一系例嵌套的函数或者方法调用。</p>
+<p><strong>函数式编程本质</strong>： 就是往方法中传入Block,方法中嵌套Block调用，把代码聚合起来管理</p>
+<p><strong>函数式编程特点</strong>： 每个方法必须有返回值（本身对象）,把函数或者Block当做参数,block参数（需要操作的值）block返回值（操作结果）</p>
+<h2 id="代表：ReactiveCocoa。"><a href="#代表：ReactiveCocoa。" class="headerlink" title="代表：ReactiveCocoa。"></a><strong>代表</strong>：ReactiveCocoa。</h2><p><strong>链式编程思想</strong>：是将多个操作（多行代码）通过点号(.)链接在一起成为一句代码,使代码可读性好。a(1).b(2).c(3)</p>
+<p><strong>链式编程特点</strong>：方法的返回值是block,block必须有返回值（本身对象），block参数（需要操作的值）</p>
+<h2 id="代表：Masonry框架。"><a href="#代表：Masonry框架。" class="headerlink" title="代表：Masonry框架。"></a><strong>代表</strong>：Masonry框架。</h2><p>##ReactiveCocoa常见类</p>
+<blockquote>
+<p>学习框架首要之处:个人认为先要搞清楚框架中常用的类，在RAC中最核心的类<code>RACSiganl</code>,搞定这个类就能用ReactiveCocoa开发了。</p>
+</blockquote>
+<ol>
+<li><code>RACSiganl</code>:信号类,一般表示将来有数据传递，只要有数据改变，信号内部接收到数据，就会马上发出数据。</li>
+</ol>
+<blockquote>
+<p>注意：</p>
+</blockquote>
+<blockquote>
+<ol>
+<li>信号类(<code>RACSiganl</code>)，只是表示当数据改变时，信号内部会发出数据，它本身不具备发送信号的能力，而是交给内部一个订阅者去发出。</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>默认一个信号都是冷信号，也就是值改变了，也不会触发，只有订阅了这个信号，这个信号才会变为热信号，值改变了才会触发。</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li>如何订阅信号：调用信号<code>RACSignal</code>的<code>subscribeNext</code>就能订阅</li>
+</ol>
+</blockquote>
+<ol start="2">
+<li><p><code>RACSubscriber</code>:表示订阅者的意思，用于发送信号，这是一个协议，不是一个类，只要遵守这个协议，并且实现方法才能成为订阅者。通过create创建的信号，都有一个订阅者，帮助他发送数据。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)createSimpleSignal&#123;</span><br><span class="line">  <span class="comment">// RACSignal使用步骤：</span></span><br><span class="line">  <span class="comment">// 1.创建信号 + (RACSignal * )createSignal:(RACDisposable * (^)(id&lt;RACSubscriber&gt; subscriber))didSubscribe</span></span><br><span class="line">  <span class="comment">// 2.订阅信号,才会激活信号. - (RACDisposable * )subscribeNext:(void (^)(id x))nextBlock</span></span><br><span class="line">  <span class="comment">// 3.发送信号 - (void)sendNext:(id)value</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// RACSignal底层实现：</span></span><br><span class="line">  <span class="comment">// 1.创建信号，首先把didSubscribe保存到信号中，还不会触发。</span></span><br><span class="line">  <span class="comment">// 2.当信号被订阅，也就是调用signal的subscribeNext:nextBlock</span></span><br><span class="line">  <span class="comment">// 2.2 subscribeNext内部会创建订阅者subscriber，并且把nextBlock保存到subscriber中。</span></span><br><span class="line">  <span class="comment">// 2.1 subscribeNext内部会调用siganl的didSubscribe</span></span><br><span class="line">  <span class="comment">// 3.siganl的didSubscribe中调用[subscriber sendNext:@1];</span></span><br><span class="line">  <span class="comment">// 3.1 sendNext底层其实就是执行subscriber的nextBlock</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">//    1.创建信息</span></span><br><span class="line">  RACSignal * signal =  [RACSignal createSignal:^RACDisposable * _Nullable(<span class="keyword">id</span>&lt;RACSubscriber&gt;   subscriber) &#123;</span><br><span class="line">    <span class="comment">// block调用时刻：每当有订阅者订阅信号，就会调用block。</span></span><br><span class="line">    <span class="comment">//        2.发送信号</span></span><br><span class="line">    [subscriber sendNext:@<span class="number">1</span>];</span><br><span class="line">    <span class="comment">// 如果不在发送数据，最好发送信号完成，内部会自动调用[RACDisposable disposable]取消订阅信号。</span></span><br><span class="line"></span><br><span class="line">    [subscriber sendCompleted];</span><br><span class="line">    <span class="keyword">return</span> [RACDisposable disposableWithBlock:^&#123;</span><br><span class="line">      <span class="comment">// block调用时刻：当信号发送完成或者发送错误，就会自动执行这个block,取消订阅信号。</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// 执行完Block后，当前信号就不在被订阅了。</span></span><br><span class="line">      <span class="built_in">NSLog</span>(<span class="string">@"信号销毁了"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;];</span><br><span class="line">  &#125;];</span><br><span class="line">  <span class="comment">//    3. 订阅信号，才会激活信号</span></span><br><span class="line">  [signal subscribeNext:^(<span class="keyword">id</span>   x) &#123;</span><br><span class="line">     <span class="comment">// block调用时刻：每当有信号发出数据，就会调用block.</span></span><br><span class="line">   <span class="built_in">NSLog</span>(<span class="string">@"接收到数据：%@"</span>,x);</span><br><span class="line">  &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>RACDisposable</code>:用于取消订阅或者清理资源，当信号发送完成或者发送错误的时候，就会自动触发它。<br><strong>使用场景</strong>: 不想监听某个信号时，可以通过它主动取消订阅信号。</p>
+</li>
+<li><p><code>RACSubject</code>: 信号提供者，自己可以充当信号，又能发送信号。<br><strong>使用场景</strong>： 通常用来代替代理，有了它，就不必要使用代理了</p>
+</li>
+<li><code>RACReplaySubject</code>:重复提供信号类，<code>RACSubject</code>的子类。<blockquote>
+<p><code>RACReplaySubject</code>可以先发送信号，在订阅信号，<code>RACSubject</code>就不可以<br><strong>使用场景一</strong>:如果一个信号每被订阅一次，就需要把之前的值重复发送一遍，使用重复提供信号类。<br><strong>使用场景二</strong>:可以设置capacity数量来限制缓存的value的数量,即只缓充最新的几个值。</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)createRACSubject&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// RACSubject使用步骤</span></span><br><span class="line">  <span class="comment">// 1.创建信号 [RACSubject subject]，跟RACSiganl不一样，创建信号时没有block。</span></span><br><span class="line">  <span class="comment">// 2.订阅信号 - (RACDisposable * ) subscribeNext:(void (^)(id x))nextBlock</span></span><br><span class="line">  <span class="comment">// 3.发送信号 sendNext:(id)value</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// RACSubject:底层实现和RACSignal不一样。</span></span><br><span class="line">  <span class="comment">// 1.调用subscribeNext订阅信号，只是把订阅者保存起来，并且订阅者的nextBlock已经赋值了。</span></span><br><span class="line">  <span class="comment">// 2.调用sendNext发送信号，遍历刚刚保存的所有订阅者，一个一个调用订阅者的nextBlock</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">//1. 创建信号</span></span><br><span class="line">  RACSubject * subject = [RACSubject subject];</span><br><span class="line"></span><br><span class="line">  <span class="comment">//2.订阅信号</span></span><br><span class="line">  [subject subscribeNext:^(<span class="keyword">id</span>   x) &#123;</span><br><span class="line">    <span class="comment">// block调用时刻：当信号发出新值，就会调用.</span></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"第一个订阅都:%@"</span>,x);</span><br><span class="line">  &#125;];</span><br><span class="line">  [subject subscribeNext:^(<span class="keyword">id</span>   x) &#123;</span><br><span class="line">    <span class="comment">// block调用时刻：当信号发出新值，就会调用.</span></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"第二个订阅都:%@"</span>,x);</span><br><span class="line">  &#125;];</span><br><span class="line">  <span class="comment">//3. 发送信息</span></span><br><span class="line">  [subject sendNext:<span class="string">@"1"</span>];</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)createReplaySubject&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// RACReplaySubject使用步骤:</span></span><br><span class="line">  <span class="comment">// 1.创建信号 [RACSubject subject]，跟RACSiganl不一样，创建信号时没有block。</span></span><br><span class="line">  <span class="comment">// 2.可以先订阅信号，也可以先发送信号。</span></span><br><span class="line">  <span class="comment">// 2.1 订阅信号 - (RACDisposable * )subscribeNext:(void (^)(id x))nextBlock</span></span><br><span class="line">  <span class="comment">// 2.2 发送信号 sendNext:(id)value</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// RACReplaySubject:底层实现和RACSubject不一样。</span></span><br><span class="line">  <span class="comment">// 1.调用sendNext发送信号，把值保存起来，然后遍历刚刚保存的所有订阅者，一个一个调用订阅者的nextBlock。</span></span><br><span class="line">  <span class="comment">// 2.调用subscribeNext订阅信号，遍历保存的所有值，一个一个调用订阅者的nextBlock</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 如果想当一个信号被订阅，就重复播放之前所有值，需要先发送信号，在订阅信号。</span></span><br><span class="line">  <span class="comment">// 也就是先保存值，在订阅值。</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">//    1.创建信号</span></span><br><span class="line">  RACReplaySubject * replaySuject = [RACReplaySubject subject];</span><br><span class="line"></span><br><span class="line">  <span class="comment">//    2. 发送信号</span></span><br><span class="line">  [replaySuject sendNext:@<span class="number">1</span>];</span><br><span class="line">  [replaySuject sendNext:@<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">//    3.订阅信号</span></span><br><span class="line">  [replaySuject subscribeNext:^(<span class="keyword">id</span>   x) &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"第一个订阅者接收到的数据%@"</span>,x);</span><br><span class="line"></span><br><span class="line">  &#125;];</span><br><span class="line">  [replaySuject subscribeNext:^(<span class="keyword">id</span>   x) &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@" 第二个订阅者接收到的数据%@"</span>,x);</span><br><span class="line"></span><br><span class="line">  &#125;];</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li><p><code>RACTuple</code>:元组类,类似<code>NSArray</code>,用来包装值.</p>
+</li>
+<li><p><code>RACSequence</code>:RAC中的集合类，用于代替<code>NSArray</code>,<code>NSDictionary</code>,可以使用它来快速遍历数组和字典。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">-( <span class="keyword">void</span> )RACIterator&#123;</span><br><span class="line">    <span class="comment">// 1.遍历数组</span></span><br><span class="line">    <span class="built_in">NSArray</span> * numbers = @[@<span class="number">1</span>,@<span class="number">3</span>,@<span class="number">4</span>];</span><br><span class="line">    <span class="comment">// 这里其实是三步</span></span><br><span class="line">    <span class="comment">// 第一步: 把数组转换成集合RACSequence numbers.rac_sequence</span></span><br><span class="line">    <span class="comment">// 第二步: 把集合RACSequence转换RACSignal信号类,numbers.rac_sequence.signal</span></span><br><span class="line">    <span class="comment">// 第三步: 订阅信号，激活信号，会自动把集合中的所有值，遍历出来。</span></span><br><span class="line">    [numbers.rac_sequence.signal subscribeNext:^(<span class="keyword">id</span>   x) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,x);</span><br><span class="line">    &#125;];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2.遍历字典,遍历出来的键值对会包装成RACTuple(元组对象)</span></span><br><span class="line">    <span class="built_in">NSDictionary</span> * dict = @&#123;<span class="string">@"name"</span>:<span class="string">@"yuanph"</span>,<span class="string">@"age"</span>:@<span class="number">18</span>,<span class="string">@"country"</span>:<span class="string">@"china"</span>&#125;;</span><br><span class="line">    [dict.rac_sequence.signal subscribeNext:^(RACTuple *  x) &#123;</span><br><span class="line">        <span class="comment">// 解包元组，会把元组的值，按顺序给参数里面的变量赋值</span></span><br><span class="line">        RACTupleUnpack(<span class="built_in">NSString</span> * key,<span class="built_in">NSString</span> * value)= x;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@:%@"</span>,key,value);</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>RACCommand</code>:<code>RAC</code>中用于处理事件的类，可以把事件如何处理,事件中的数据如何传递，包装到这个类中，他可以很方便的监控事件的执行过程<br> <strong>使用场景</strong>:监听按钮点击，网络请求</p>
+</li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yuanph.org/2017/02/28/函数式编程/" data-title="函数式编程 | 志鹏的技术博客" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/03/07/pod-command/" title="pod command">
+  <strong>上一篇：</strong><br/>
+  <span>
+  pod command</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/02/27/UITest/"  title="UITest 学习笔记">
+ <strong>下一篇：</strong><br/> 
+ <span>UITest 学习笔记
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#代表：ReactiveCocoa。"><span class="toc-number">1.</span> <span class="toc-text">代表：ReactiveCocoa。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代表：Masonry框架。"><span class="toc-number">2.</span> <span class="toc-text">代表：Masonry框架。</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/English/" title="English">English<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/GPUImage/" title="GPUImage">GPUImage<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/TCP/" title="TCP">TCP<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/XML/" title="XML">XML<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Xcode8/" title="Xcode8">Xcode8<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/cocoapods/" title="cocoapods">cocoapods<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/git/" title="git">git<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>23</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/python/" title="python">python<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/xcode-archive/" title="xcode_archive">xcode_archive<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/其他/" title="其他">其他<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/工具/" title="工具">工具<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/数学/" title="数学">数学<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/正则表达式/" title="正则表达式">正则表达式<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/测试/" title="测试">测试<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/English/" title="English">English<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/XML/" title="XML">XML<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Appache/" title="Appache">Appache<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/动画/" title="动画">动画<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/tips/" title="tips">tips<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UI/" title="UI">UI<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ARC/" title="ARC">ARC<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/内存问题/" title="内存问题">内存问题<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/AutoLayout/" title="AutoLayout">AutoLayout<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CGRect/" title="CGRect">CGRect<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/日期格式/" title="日期格式">日期格式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Location/" title="Location">Location<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ushow/" title="ushow">ushow<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/GCD/" title="GCD">GCD<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS-GPUImage/" title="iOS-GPUImage">iOS-GPUImage<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MD5/" title="MD5">MD5<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://blog.scorplot.com/" target="_blank" title="蛟哥的博客">蛟哥的博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.bomobox.org/" target="_blank" title="贤凯的博客">贤凯的博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://ushareit.github.io/" target="_blank" title="Ushareit">Ushareit</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://janexzz.github.io" target="_blank" title="许珍珍">许珍珍</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m zhipengbird. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018
+		
+		<a href="/about" target="_blank" title="志鹏">志鹏</a>
+		
+		</br>
+		<span id="busuanzi_container_site_pv">
+					&nbsp;&nbsp;Total visits:&nbsp;<span id="busuanzi_value_site_pv"></span>
+		</span>
+		<span id="busuanzi_container_site_uv">
+				&nbsp;&nbsp;You are Visiter No.<span id="busuanzi_value_site_uv"></span>
+		</span>
+	
+		
+				
+		
+		</p>
+		
+		<script type="text/javascript">
+(function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+(w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+})(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+_st('install','VPgYp3Umx_FneUdxKodz','2.0.0');
+</script>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+</div>
+
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'yuanpinghua';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

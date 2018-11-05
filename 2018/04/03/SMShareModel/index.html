@@ -1,0 +1,743 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>SMShareModel | 志鹏的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="志鹏">
+    
+
+    
+    <meta name="description" content="SMShareModel 简介该分享模块是一个相对独立的功能模块，主要负责内容分享. 目前可分享的平台如下：  whatsapp、facebook、Instagram、Messenager、Twitter Message(短信)、Email、CopyLink、More、 StartMarker、Friends     分享类型：  普通分享 强分享 h5分享  代码目录结构12345678">
+<meta name="keywords" content="ushow,share">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SMShareModel">
+<meta property="og:url" content="http://yuanph.org/2018/04/03/SMShareModel/index.html">
+<meta property="og:site_name" content="志鹏的技术博客">
+<meta property="og:description" content="SMShareModel 简介该分享模块是一个相对独立的功能模块，主要负责内容分享. 目前可分享的平台如下：  whatsapp、facebook、Instagram、Messenager、Twitter Message(短信)、Email、CopyLink、More、 StartMarker、Friends     分享类型：  普通分享 强分享 h5分享  代码目录结构12345678">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-04T13:37:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SMShareModel">
+<meta name="twitter:description" content="SMShareModel 简介该分享模块是一个相对独立的功能模块，主要负责内容分享. 目前可分享的平台如下：  whatsapp、facebook、Instagram、Messenager、Twitter Message(短信)、Email、CopyLink、More、 StartMarker、Friends     分享类型：  普通分享 强分享 h5分享  代码目录结构12345678">
+
+    
+    <link rel="alternative" href="atom.xml" title="志鹏的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="../../../../css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="志鹏的技术博客">志鹏的技术博客</a></h1>
+				<h2 class="blog-motto">记录成长的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">简介</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" class="st-default-search-input" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/04/03/SMShareModel/" title="SMShareModel" itemprop="url">SMShareModel</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="志鹏" target="_blank" itemprop="author">志鹏</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-03T01:49:20.000Z" itemprop="datePublished"> Published 2018-04-03</time>
+    <span id="busuanzi_container_page_pv">
+    总阅读<span id="busuanzi_value_page_pv"></span>次
+</span>
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SMShareModel-简介"><span class="toc-number">1.</span> <span class="toc-text">SMShareModel 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码目录结构"><span class="toc-number">1.1.</span> <span class="toc-text">代码目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用方式"><span class="toc-number">1.2.</span> <span class="toc-text">使用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分享控件接口"><span class="toc-number">1.2.1.</span> <span class="toc-text">分享控件接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#普通分享"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">普通分享</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#强分享"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">强分享</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SMShareAPIManager"><span class="toc-number">1.2.2.</span> <span class="toc-text">SMShareAPIManager</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SMShareAPIContent-（分享内容模型）"><span class="toc-number">1.2.3.</span> <span class="toc-text">SMShareAPIContent （分享内容模型）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SMShareHelper"><span class="toc-number">1.2.4.</span> <span class="toc-text">SMShareHelper</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存在的问题"><span class="toc-number">1.3.</span> <span class="toc-text">存在的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#改进的地方"><span class="toc-number">1.4.</span> <span class="toc-text">改进的地方</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="SMShareModel-简介"><a href="#SMShareModel-简介" class="headerlink" title="SMShareModel 简介"></a>SMShareModel 简介</h1><p>该分享模块是一个相对独立的功能模块，主要负责内容分享. 目前可分享的平台如下：</p>
+<ul>
+<li><code>whatsapp</code>、<code>facebook</code>、<code>Instagram</code>、<code>Messenager</code>、<code>Twitter</code></li>
+<li><code>Message(短信)</code>、<code>Email</code>、<code>CopyLink</code>、<code>More</code>、</li>
+<li><code>StartMarker</code>、<code>Friends</code>   </li>
+</ul>
+<p>分享类型：</p>
+<ol>
+<li>普通分享</li>
+<li>强分享</li>
+<li>h5分享</li>
+</ol>
+<h2 id="代码目录结构"><a href="#代码目录结构" class="headerlink" title="代码目录结构"></a>代码目录结构</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── SMH5UploadShare(web分享)</span><br><span class="line">│   ├── SMH5GuideShareScollerView </span><br><span class="line">│   ├── SMH5GuideShareViewController </span><br><span class="line">│   ├── SMH5UploadShareScollerView </span><br><span class="line">│   ├── SMH5UploadViewController </span><br><span class="line">│   ├── SMWebGuideTopShareView </span><br><span class="line">│   ├── SMWebShareDataSource </span><br><span class="line">│   └── SMWebShareItemModel </span><br><span class="line">├── SMShare</span><br><span class="line">│   ├── SMCustomShareView </span><br><span class="line">│   ├── SMShareCompetitionActivitiesInfoModel </span><br><span class="line">│   ├── SMShareDynamicConfigurationModel </span><br><span class="line">│   ├── SMShareFriendsModel </span><br><span class="line">│   ├── SMShareFriendsViewController </span><br><span class="line">│   ├── SMShareFriensDataSource </span><br><span class="line">│   ├── SMShareFriensTableViewCell </span><br><span class="line">│   ├── SMShareItemModel </span><br><span class="line">│   ├── SMShareItemSucessState </span><br><span class="line">│   ├── SMShareList.plist</span><br><span class="line">│   ├── SMShareManager </span><br><span class="line">│   ├── SMShareScrollView </span><br><span class="line">│   ├── SMShareVideoDownloadProgressView </span><br><span class="line">│   ├── SMShareVideoDownloadTransitionAnimator </span><br><span class="line">│   ├── SMShareVideoDownloadViewController </span><br><span class="line">│   └── SMShareWebService </span><br><span class="line">├── SMShareAPIUI</span><br><span class="line">│   ├── SMShareActivityGuideView </span><br><span class="line">│   ├── SMShareActivityGuideViewController </span><br><span class="line">│   ├── SMShareInstrumentLikesView </span><br><span class="line">│   ├── SMShareItemButton </span><br><span class="line">│   ├── SMShareOrdinaryContentView </span><br><span class="line">│   ├── SMShareOrdinaryView </span><br><span class="line">│   ├── SMShareOrdinaryViewController </span><br><span class="line">│   ├── SMShareToChannelModel </span><br><span class="line">│   ├── SMShareViewController </span><br><span class="line">│   ├── SMStrongShareCell+Rate </span><br><span class="line">│   ├── SMStrongShareCell+ad </span><br><span class="line">│   ├── SMStrongShareCell+winIpad </span><br><span class="line">│   ├── SMStrongShareCell </span><br><span class="line">│   ├── SMStrongShareHeaderView </span><br><span class="line">│   ├── SMStrongShareViewController </span><br><span class="line">│   └── SMStrongShareWinIpadView </span><br><span class="line">├── SMShareBounced</span><br><span class="line">│   ├── SMShareBouncedView </span><br><span class="line">│   └── SMShareBouncedViewController</span><br><span class="line">├── SMShareManager(核心)</span><br><span class="line">│   ├── SMMFMessageViewController </span><br><span class="line">│   ├── SMShareAPIContent </span><br><span class="line">│   ├── SMShareAPIManager </span><br><span class="line">│   ├── SMShareHelper</span><br><span class="line">│   │   ├── SMShareAppContentManager </span><br><span class="line">│   │   ├── SMShareContentHelper </span><br><span class="line">│   │   └── SMShareHelper </span><br><span class="line">│   └── SMShareTypeDefine </span><br><span class="line">├── SMShareModel</span><br><span class="line">│   ├── SMShareFromContent </span><br><span class="line">│   ├── SMShareTrackModel </span><br><span class="line">│   ├── SMStrongShareDataSource </span><br><span class="line">│   └── SMStrongShareModel </span><br><span class="line">├── SMSharePublishSuccess（发布成功后的分享视图）</span><br><span class="line">│   ├── SMActivityPublishView </span><br><span class="line">│   ├── SMSharePublishErrorView </span><br><span class="line">│   ├── SMSharePublishFailureView </span><br><span class="line">│   ├── SMSharePublishSuccessView </span><br><span class="line">│   └── SMSharePublishView </span><br><span class="line">└── SMStrongShare(强分享)</span><br><span class="line">    ├── Controller</span><br><span class="line">    │   ├── SMStrongChorusViewController </span><br><span class="line">    │   └── SMStrongSoloViewController </span><br><span class="line">    ├── Model</span><br><span class="line">    │   ├── SMShareStrongSoloItemModel </span><br><span class="line">    │   └── SMStrongChorusDataSource</span><br><span class="line">    └── View</span><br><span class="line">        ├── SMStrongChorusHeadView </span><br><span class="line">        ├── SMStrongChorusNaverView </span><br><span class="line">        ├── SMStrongScollerView </span><br><span class="line">        ├── SMStrongSoloExcellentShareView </span><br><span class="line">        └── SMStrongSoloOrdinaryShareView</span><br></pre></td></tr></table></figure>
+<p>主要使用对象类：</p>
+<ol>
+<li>公共分享控件<ul>
+<li>SMShareOrdinaryViewController （目前使用该接口）</li>
+<li>SMShareViewController（未来将使用这个入口）</li>
+<li>SMShareFriendsViewController（好友私信分享）</li>
+<li>SMStrongSoloViewController/SMStrongChorusViewController(独唱/合唱分享入口)</li>
+</ul>
+</li>
+<li>分享管理<ul>
+<li>SMShareAPIManager</li>
+</ul>
+</li>
+<li>SMShareTypeDefine 类型定义<br> 该类中主要定义了一些公共的枚举数据类型：<ol>
+<li>分享平台（SMSharePlatformType）</li>
+<li>分享内容类型（SMShareContentType）</li>
+<li>分享状态（SMShareResponseState）</li>
+</ol>
+</li>
+<li>数据模型<ul>
+<li>SMShareAPIContent</li>
+<li>SMShareItemModel（要分享的数据内容对象）</li>
+</ul>
+</li>
+</ol>
+<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><h3 id="分享控件接口"><a href="#分享控件接口" class="headerlink" title="分享控件接口"></a>分享控件接口</h3><h4 id="普通分享"><a href="#普通分享" class="headerlink" title="普通分享"></a>普通分享</h4><ol>
+<li><p>SMShareOrdinaryViewController</p>
+ <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    - (<span class="keyword">instancetype</span>)initWithShareItme:(SMShareItemModel *)aItemModel</span><br><span class="line">                            returnBack:(ReturnBack)returnBack;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> SMShareModuleTypeVipInvite 这种类型才需要外部赋值</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithShareItem:(SMShareItemModel *)aItemModel</span><br><span class="line">                    inviteAPIContent:(SMShareAPIContent *)apiContent</span><br><span class="line">                        returnBack:(ReturnBack)returnBack;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>SMShareViewController</p>
+ <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   自定义分享</span></span><br><span class="line"><span class="comment">   目前只支持已知的分享平台类型,之后会增加自定义分享平台的逻辑</span></span><br><span class="line"><span class="comment">   @param shareItems</span></span><br><span class="line"><span class="comment">   分享按钮的item</span></span><br><span class="line"><span class="comment">   例如:</span></span><br><span class="line"><span class="comment">   &#123;</span></span><br><span class="line"><span class="comment">   shareTitle:@"Copy Link",</span></span><br><span class="line"><span class="comment">   shareImage:@"CopylinkImage",</span></span><br><span class="line"><span class="comment">   shareHighlightedImage:@"CopylinkImage",</span></span><br><span class="line"><span class="comment">   &#125;</span></span><br><span class="line"><span class="comment">   @param shareContent 分享的内容</span></span><br><span class="line"><span class="comment">   @param returnBack</span></span><br><span class="line"><span class="comment">   @return</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">   - (<span class="keyword">instancetype</span>)initWithShareItems:(<span class="built_in">NSMutableArray</span> &lt;<span class="built_in">NSDictionary</span> *&gt;*)shareItems</span><br><span class="line">                       shareContent:(SMShareAPIContent *)shareContent</span><br><span class="line">                           returnBack:(ReturnBack)returnBack;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="强分享"><a href="#强分享" class="headerlink" title="强分享"></a>强分享</h4><ol>
+<li><p>SMStrongSoloViewController（独唱分享）</p>
+ <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">SMStrongSoloViewController</span> : <span class="title">SMSNSBaseViewController</span></span></span><br><span class="line"><span class="comment">//视频是否可以分享的状态</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) <span class="built_in">BOOL</span> isShareVideoState;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithShareStrongSoloItemModel:(SMShareStrongSoloItemModel *)itemModel</span><br><span class="line">                                    returnBlock:(ReturnBlock)returnBlock;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>SMStrongChorusViewController（合唱分享） </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">SMStrongChorusViewController</span> : <span class="title">SMSNSBaseViewController</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//视频是否可以分享的状态</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) <span class="built_in">BOOL</span> isShareVideoState;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithShareStrongSoloItemModel:(SMShareStrongSoloItemModel *)itemModel</span><br><span class="line">                        returnBlock:(ReturnBlock)returnBlock;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="SMShareAPIManager"><a href="#SMShareAPIManager" class="headerlink" title="SMShareAPIManager"></a>SMShareAPIManager</h3><pre><code>该分享管理器提供了各平台单独的分享内容接口，在使用过程中调用相应的方法并传入正确的参数即可。
+</code></pre><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">分享 (目前这个是支持的旧的分享 随时可能废弃 如果要调用分享建议使用下面的方法)</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">@required aContent 分享的内容</span></span><br><span class="line"><span class="comment">@param aContentType 分享内容的类型 (目前只有Instagram 需要区分分享图片或者视频 其他分享平台暂时未用到可以使用SMShareContentTypeAuto)</span></span><br><span class="line"><span class="comment">@param aPlatformType 分享平台类型</span></span><br><span class="line"><span class="comment">@required fromViewController 当前控制器</span></span><br><span class="line"><span class="comment">@param aStateChangedHandler 返回结果</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)initWithShareContent:(SMShareAPIContent *)aContent</span><br><span class="line">            shareItemModel:(SMShareItemModel *)aShareItemModel</span><br><span class="line">        fromViewController:(<span class="built_in">UIViewController</span> *)aFromViewController</span><br><span class="line">    popPresenterSourceView:(<span class="built_in">UIView</span> *)aSourceView</span><br><span class="line">                platformType:(SMSharePlatformType)aPlatformType</span><br><span class="line">            onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">分享</span></span><br><span class="line"><span class="comment">@required aContent 分享的内容</span></span><br><span class="line"><span class="comment">@required aFromViewController 当前的viewController</span></span><br><span class="line"><span class="comment">@required aSourceView 当前的来源视图</span></span><br><span class="line"><span class="comment">@param aPlatformType 分享平台类型</span></span><br><span class="line"><span class="comment">@param aStateChangedHandler 返回结果</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)initWithShareContent:(SMShareAPIContent *)aContent</span><br><span class="line">        fromViewController:(<span class="built_in">UIViewController</span> *)aFromViewController</span><br><span class="line">    popPresenterSourceView:(<span class="built_in">UIView</span> *)aSourceView</span><br><span class="line">                platformType:(SMSharePlatformType)aPlatformType</span><br><span class="line">            onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">whatsApp分享</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">@required message 分享内容 需要用到shareTitle + shareLink</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)shareWhatsAppWithShareContent:(SMShareAPIContent *)aContent</span><br><span class="line">                    onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">Facebook分享</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">@required aContent  shareLink + shareHashtag (link 为必需的 hastag 可选)</span></span><br><span class="line"><span class="comment">@required fromViewController 当前控制器</span></span><br><span class="line"><span class="comment">@param aStateChangedHandler</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)shareFacebookWithOpenGraphContent:(SMShareAPIContent *)aContent</span><br><span class="line">                    fromViewController:(<span class="built_in">UIViewController</span> *)fromViewController</span><br><span class="line">                        onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">Messenger分享</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">@required aContent shareLink</span></span><br><span class="line"><span class="comment">@param aStateChangedHandler</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)shareMessengerWithOpenGraphContent:(SMShareAPIContent *)aContent</span><br><span class="line">                            onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">Instagram分享</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">@required aContent 图片地址 shareVieoURL 或者 视频</span></span><br><span class="line"><span class="comment">@param aStateChangedHandler</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)shareInstagramWithContent:(SMShareAPIContent *)aContent</span><br><span class="line">                onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">分享到 Twitter</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">@required aContent shareTitle +  shareLink +  shareImageURL (必须保证至少一个不是空的)</span></span><br><span class="line"><span class="comment">@param aStateChangedHandler </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)shareTwitterContent:(SMShareAPIContent *)aContent</span><br><span class="line">            onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">分享到短信</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">@required aContent shareTitle + shareLink</span></span><br><span class="line"><span class="comment">@required fromViewController</span></span><br><span class="line"><span class="comment">@param aStateChangedHandler</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)shareTextWithContent:(SMShareAPIContent *)aContent</span><br><span class="line">        fromViewController:(<span class="built_in">UIViewController</span> *)fromViewController</span><br><span class="line">            onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">分享到邮件</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">@required aContent shareTitle + shareLink + shareDescription</span></span><br><span class="line"><span class="comment">@required fromViewController</span></span><br><span class="line"><span class="comment">@param state</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)shareEMailWithContent:(SMShareAPIContent *)aContent</span><br><span class="line">        fromViewController:(<span class="built_in">UIViewController</span> *)fromViewController</span><br><span class="line">            onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自动发布facebook</span></span><br><span class="line">- (<span class="keyword">void</span>)automaticShareFacebookWithOpenGraphContent:(SMShareAPIContent *)aContent</span><br><span class="line">                                    onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"><span class="comment">// 当前的FB自动发布权限是否可用</span></span><br><span class="line">+ (<span class="built_in">BOOL</span>)isFacebookShareHasGranted;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取当前的FB自动发布权限</span></span><br><span class="line">+ (<span class="keyword">void</span>)facebookShareHasGrantedWithViewController:(<span class="built_in">UIViewController</span> *)aFromViewController</span><br><span class="line">                                onStateChanged:(SMFacebookSyncToState)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除facebook上传权限 (PM 要求内部控制删除权限 不走facebook的删除权限接口 但是已经实现 如果需要可以把注释掉的内容打开)</span></span><br><span class="line">+ (<span class="keyword">void</span>)facebookDeletePublishactionOnStateChanged:(SMFacebookSyncToState)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断Twitter是否登陆</span></span><br><span class="line">+ (<span class="keyword">void</span>)isTwitterLogin:(SMShareTwitterState)state;</span><br></pre></td></tr></table></figure>
+<h3 id="SMShareAPIContent-（分享内容模型）"><a href="#SMShareAPIContent-（分享内容模型）" class="headerlink" title="SMShareAPIContent （分享内容模型）"></a>SMShareAPIContent （分享内容模型）</h3><ol>
+<li>属性 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>, <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareRecordingId; <span class="comment">//分享的唯一标识  不要重复</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) SMShareContentType shareContentSourceType; <span class="comment">//之后会废弃这个字段</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>,  <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareTitle; <span class="comment">//分享标题</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>,  <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareDescription; <span class="comment">// 分享内容</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>,  <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareType; <span class="comment">//分享类型 invite ，打点使用</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) SMShareContentType shareContentType; <span class="comment">//分享内容类型</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>,  <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareLink; <span class="comment">//分享链接</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>,  <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareImageURL;<span class="comment">//分享图片</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>,  <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareVieoURL;<span class="comment">//分享视频下载地址</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>,  <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareVideoPath;<span class="comment">//分享视频本地地址</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>,  <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareHashtag; <span class="comment">//分享Hashtag</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) <span class="built_in">BOOL</span> isShareVideoType; <span class="comment">// 是否是分享视频</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) <span class="built_in">NSInteger</span> shareIspublic;<span class="comment">//是否是私密状态</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>, <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *isContested;<span class="comment">//是否是参赛作品 1，参赛 0，未参赛</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/****************************************</span></span><br><span class="line"><span class="comment">* 以下为IM分享携带信息</span></span><br><span class="line"><span class="comment">* 如果可以取到信息请尽量传入避免之后请求</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">****************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">strong</span>,  <span class="keyword">nonatomic</span>) SMShareFromContent *fromContent; <span class="comment">//分享发送方信息</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>, <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareSingID;<span class="comment">//分享作品歌手id</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>, <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareSingName;<span class="comment">//分享作品歌手名字</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>, <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareSingCover;<span class="comment">//分享作品歌手头像url</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) <span class="built_in">BOOL</span> isVerified;<span class="comment">//分享作品歌手是否是认证歌手</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="built_in">NSInteger</span>  isRecordingPublic;<span class="comment">//是否是我创建的作品</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>便捷方法：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">instancetype</span>)initWithShareContentTitle:(<span class="built_in">NSString</span> *) aTitle</span><br><span class="line">                              description:(<span class="built_in">NSString</span> *) aDescription</span><br><span class="line">                              recordingId:(<span class="built_in">NSString</span> *) aRecordingId</span><br><span class="line">                                     link:(<span class="built_in">NSString</span> *) aLink</span><br><span class="line">                                 imageURl:(<span class="built_in">NSString</span> *) aImageUrl</span><br><span class="line">                                 videoURL:(<span class="built_in">NSString</span> *) aVideoUrl</span><br><span class="line">                                  hashtag:(<span class="built_in">NSString</span> *) ahashtag</span><br><span class="line">                              contentType:(SMShareContentType) aContentType;</span><br></pre></td></tr></table></figure></p>
+<h3 id="SMShareHelper"><a href="#SMShareHelper" class="headerlink" title="SMShareHelper"></a>SMShareHelper</h3><p>   根据title获取分享平台类型 、获取全部分享平台类型 、分享私信好友状态是否可用等功能接口<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">根据返回传入item的title，获取分享平台类型</span><br><span class="line"></span><br><span class="line">@param title 分享的title</span><br><span class="line">@return 分享平台类型</span><br><span class="line">*/</span><br><span class="line">+ (SMSharePlatformType)getShareTypeForTitle:(NSString *)title;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">根据分享平台类型返回分享平台名字</span><br><span class="line"></span><br><span class="line">@param aPlatformType 分享平台类型</span><br><span class="line">@return 平台名字</span><br><span class="line">*/</span><br><span class="line">+ (NSString *)channelWithPlatformType:(SMSharePlatformType)aPlatformType;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">根据分享平台类型配置link 规则：link + shareType + appName</span><br><span class="line"></span><br><span class="line">@param link 分享的链接</span><br><span class="line">@param shareType 分享类型</span><br><span class="line">@return 返回配置后的分享URL</span><br><span class="line">*/</span><br><span class="line">+ (NSString *)shareTitleInfoCombinationLink:(NSString *)link shareType:(SMSharePlatformType)shareType;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">获取可分享平台的Items</span><br><span class="line"></span><br><span class="line">@param songId 判断当前分享歌曲是否在在白名单内，如果不在会默认不显示Instagram分享平台 （如果不要做这个判断直接传空）</span><br><span class="line">@param imageName 是否需要替换不同的More图片 （因为项目中多个地方使用了不同的moreIcon图片，所以特别加这个接口.如果不需要替换可以不传会显示默认icon）</span><br><span class="line">@return 返回生产的分享平台的Items信息</span><br><span class="line">*/</span><br><span class="line">+ (NSMutableArray *)shareItemArrayIsCanShareSongID:(NSString *)songId</span><br><span class="line">                                andMoreImageName:(NSString *)imageName</span><br><span class="line">                                    hideInstagram:(BOOL)hideInstagram;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">+ (NSMutableArray *)shareItemKtvAndLiveArrayMoreImageName:(NSString *)imageName;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">增加点击分享平台数量</span><br><span class="line"></span><br><span class="line">@param aPlatformType 平台</span><br><span class="line">*/</span><br><span class="line">+ (void)writeToFile:(SMSharePlatformType)aPlatformType;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">根据分享返回结果返回分享结果</span><br><span class="line"></span><br><span class="line">@param responseState 分享返回的结果</span><br><span class="line">@return 结果的描述</span><br><span class="line">*/</span><br><span class="line">+ (NSString *)resultWithResponseState:(SMShareResponseState)responseState;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">分享私信是否可用</span><br><span class="line"></span><br><span class="line">@return</span><br><span class="line">*/</span><br><span class="line">- (BOOL)isShareThroughChat;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">获取分享应用下载link</span><br><span class="line">starmaker 和 the voice 使用旧的链接不进行修改</span><br><span class="line"></span><br><span class="line">印度和印尼以及以后的app链接 遵守（ https://m.singit.vip/download + apptype） 规则 具体参考：T23035</span><br><span class="line"></span><br><span class="line">@return</span><br><span class="line">*/</span><br><span class="line">+ (NSString *)getShareAppDownloadLink;/**</span><br><span class="line">根据返回传入item的title，获取分享平台类型</span><br><span class="line"></span><br><span class="line">@param title 分享的title</span><br><span class="line">@return 分享平台类型</span><br><span class="line">*/</span><br><span class="line">+ (SMSharePlatformType)getShareTypeForTitle:(NSString *)title;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">根据分享平台类型返回分享平台名字</span><br><span class="line"></span><br><span class="line">@param aPlatformType 分享平台类型</span><br><span class="line">@return 平台名字</span><br><span class="line">*/</span><br><span class="line">+ (NSString *)channelWithPlatformType:(SMSharePlatformType)aPlatformType;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">根据分享平台类型配置link 规则：link + shareType + appName</span><br><span class="line"></span><br><span class="line">@param link 分享的链接</span><br><span class="line">@param shareType 分享类型</span><br><span class="line">@return 返回配置后的分享URL</span><br><span class="line">*/</span><br><span class="line">+ (NSString *)shareTitleInfoCombinationLink:(NSString *)link shareType:(SMSharePlatformType)shareType;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">获取可分享平台的Items</span><br><span class="line"></span><br><span class="line">@param songId 判断当前分享歌曲是否在在白名单内，如果不在会默认不显示Instagram分享平台 （如果不要做这个判断直接传空）</span><br><span class="line">@param imageName 是否需要替换不同的More图片 （因为项目中多个地方使用了不同的moreIcon图片，所以特别加这个接口.如果不需要替换可以不传会显示默认icon）</span><br><span class="line">@return 返回生产的分享平台的Items信息</span><br><span class="line">*/</span><br><span class="line">+ (NSMutableArray *)shareItemArrayIsCanShareSongID:(NSString *)songId</span><br><span class="line">                                andMoreImageName:(NSString *)imageName</span><br><span class="line">                                    hideInstagram:(BOOL)hideInstagram;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">+ (NSMutableArray *)shareItemKtvAndLiveArrayMoreImageName:(NSString *)imageName;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">增加点击分享平台数量</span><br><span class="line"></span><br><span class="line">@param aPlatformType 平台</span><br><span class="line">*/</span><br><span class="line">+ (void)writeToFile:(SMSharePlatformType)aPlatformType;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">根据分享返回结果返回分享结果</span><br><span class="line"></span><br><span class="line">@param responseState 分享返回的结果</span><br><span class="line">@return 结果的描述</span><br><span class="line">*/</span><br><span class="line">+ (NSString *)resultWithResponseState:(SMShareResponseState)responseState;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">分享私信是否可用</span><br><span class="line"></span><br><span class="line">@return</span><br><span class="line">*/</span><br><span class="line">- (BOOL)isShareThroughChat;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">获取分享应用下载link</span><br><span class="line">starmaker 和 the voice 使用旧的链接不进行修改</span><br><span class="line"></span><br><span class="line">印度和印尼以及以后的app链接 遵守（ https://m.singit.vip/download + apptype） 规则 具体参考：T23035</span><br><span class="line"></span><br><span class="line">@return</span><br><span class="line">*/</span><br><span class="line">+ (NSString *)getShareAppDownloadLink;</span><br></pre></td></tr></table></figure></p>
+<p>目录结构存在的问题(<strong>已修复</strong>)：</p>
+<ol>
+<li>SMSharePublisthSuccess 代码存放目录不对</li>
+<li>SMStrongShare 存放目录不对  </li>
+<li>SMShare 代码存放目录不对</li>
+</ol>
+<h2 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h2><ol>
+<li><a href="https://phabricator.ushow.media/T22065" target="_blank" rel="noopener">https://phabricator.ushow.media/T22065</a></li>
+<li>单个文件目录下的文件太多，按不同类型的功能类分成不同的子文件夹</li>
+<li>SMSNSManager 与SMShareAPIManager在功能上有相似的地方 ,该模块可以去除SMSNSManager相关方法的使用，改用SMShareAPIManager</li>
+<li>独/合唱 使用的是旧接口，可以考虑使用新的分享接口替换</li>
+<li>存在循环引用问题，dealloc方法一直没有走</li>
+</ol>
+<p>疑问：<br>该模块引入的SNS模块和SSMLoginManager，主要意图是啥？ </p>
+<p>Q： 我们项目中很多视图控制器都重写了init方法，如果我们的视图控制器由xib/sb加载，则这个方法是不会走的。 </p>
+<p>补充：</p>
+<ol>
+<li><p>在项目中隐藏系统的导航栏</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (void)viewWillAppear:(BOOL)animated</span><br><span class="line">&#123;</span><br><span class="line">    [super viewWillAppear:animated];</span><br><span class="line">    [self.navigationController setNavigationBarHidden:YES animated:NO];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 这样在push页面过程中导航栏会出黑色<br> 建议把这个动画打开</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (void)viewWillAppear:(BOOL)animated</span><br><span class="line">&#123;</span><br><span class="line">    [super viewWillAppear:animated];</span><br><span class="line">    [self.navigationController setNavigationBarHidden:YES animated:YES];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="改进的地方"><a href="#改进的地方" class="headerlink" title="改进的地方"></a>改进的地方</h2><ol>
+<li>项目中代码的逻辑目录需要有对应的物理文件夹</li>
+<li>将代码按不同的功能模块归纳到相应的目录下</li>
+<li>重复使用的代码可以考虑提取成一个方法，供使用</li>
+<li>一个代码文件里的代码可以按不同的方法类型 使用 <code>#pragma mark  -</code>进行归纳区分，方便阅读</li>
+<li>项目中的注释有点少，.h文件里的接口加上相应的注释，有利于自己和他们阅读与理解</li>
+</ol>
+<p>参考文档：<br><a href="https://phabricator.ushow.media/w/starmaker/ios/ios_sharesdk%E6%96%87%E6%A1%A3%E8%AF%B4%E6%98%8E/" target="_blank" rel="noopener">ShareSDK</a><br><!-- # h5
+活动(web) --><br><!-- <img src="/2018/04/03/SMShareModel/publishsuccess1.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/publishsuccess2.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMStrongShare1.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMStrongShare2.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMStrongShare3.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMShare1.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMShare2.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMShare3.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMShare4.png" title="代码实际位置">  –&gt;</p>
+--></p>  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ushow/">ushow</a><a href="/tags/share/">share</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yuanph.org/2018/04/03/SMShareModel/" data-title="SMShareModel | 志鹏的技术博客" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2018/07/12/Runloop/" title="Runloop">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Runloop</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2018/03/31/hello-world/"  title="Hello World">
+ <strong>下一篇：</strong><br/> 
+ <span>Hello World
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SMShareModel-简介"><span class="toc-number">1.</span> <span class="toc-text">SMShareModel 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码目录结构"><span class="toc-number">1.1.</span> <span class="toc-text">代码目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用方式"><span class="toc-number">1.2.</span> <span class="toc-text">使用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分享控件接口"><span class="toc-number">1.2.1.</span> <span class="toc-text">分享控件接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#普通分享"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">普通分享</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#强分享"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">强分享</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SMShareAPIManager"><span class="toc-number">1.2.2.</span> <span class="toc-text">SMShareAPIManager</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SMShareAPIContent-（分享内容模型）"><span class="toc-number">1.2.3.</span> <span class="toc-text">SMShareAPIContent （分享内容模型）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SMShareHelper"><span class="toc-number">1.2.4.</span> <span class="toc-text">SMShareHelper</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存在的问题"><span class="toc-number">1.3.</span> <span class="toc-text">存在的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#改进的地方"><span class="toc-number">1.4.</span> <span class="toc-text">改进的地方</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/English/" title="English">English<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/GPUImage/" title="GPUImage">GPUImage<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/TCP/" title="TCP">TCP<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/XML/" title="XML">XML<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Xcode8/" title="Xcode8">Xcode8<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/cocoapods/" title="cocoapods">cocoapods<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/git/" title="git">git<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>23</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/python/" title="python">python<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/xcode-archive/" title="xcode_archive">xcode_archive<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/其他/" title="其他">其他<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/工具/" title="工具">工具<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/数学/" title="数学">数学<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/正则表达式/" title="正则表达式">正则表达式<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/测试/" title="测试">测试<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/English/" title="English">English<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/XML/" title="XML">XML<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Appache/" title="Appache">Appache<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/动画/" title="动画">动画<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/tips/" title="tips">tips<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UI/" title="UI">UI<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ARC/" title="ARC">ARC<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/内存问题/" title="内存问题">内存问题<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/AutoLayout/" title="AutoLayout">AutoLayout<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CGRect/" title="CGRect">CGRect<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/日期格式/" title="日期格式">日期格式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Location/" title="Location">Location<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ushow/" title="ushow">ushow<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/GCD/" title="GCD">GCD<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS-GPUImage/" title="iOS-GPUImage">iOS-GPUImage<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MD5/" title="MD5">MD5<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://blog.scorplot.com/" target="_blank" title="蛟哥的博客">蛟哥的博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.bomobox.org/" target="_blank" title="贤凯的博客">贤凯的博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://ushareit.github.io/" target="_blank" title="Ushareit">Ushareit</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://janexzz.github.io" target="_blank" title="许珍珍">许珍珍</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m zhipengbird. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018
+		
+		<a href="/about" target="_blank" title="志鹏">志鹏</a>
+		
+		</br>
+		<span id="busuanzi_container_site_pv">
+					&nbsp;&nbsp;Total visits:&nbsp;<span id="busuanzi_value_site_pv"></span>
+		</span>
+		<span id="busuanzi_container_site_uv">
+				&nbsp;&nbsp;You are Visiter No.<span id="busuanzi_value_site_uv"></span>
+		</span>
+	
+		
+				
+		
+		</p>
+		
+		<script type="text/javascript">
+(function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+(w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+})(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+_st('install','VPgYp3Umx_FneUdxKodz','2.0.0');
+</script>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+</div>
+
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'yuanpinghua';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

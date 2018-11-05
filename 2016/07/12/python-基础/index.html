@@ -1,0 +1,668 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>python 基础之语法与句法 | 志鹏的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="志鹏">
+    
+
+    
+    <meta name="description" content="在本文中主要了解python的基本语法，介绍基本的编程风格，了解变量、关键字以及变量占用的内存分配和回收。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python 基础之语法与句法">
+<meta property="og:url" content="http://yuanph.org/2016/07/12/python-基础/index.html">
+<meta property="og:site_name" content="志鹏的技术博客">
+<meta property="og:description" content="在本文中主要了解python的基本语法，介绍基本的编程风格，了解变量、关键字以及变量占用的内存分配和回收。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-31T15:08:14.157Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python 基础之语法与句法">
+<meta name="twitter:description" content="在本文中主要了解python的基本语法，介绍基本的编程风格，了解变量、关键字以及变量占用的内存分配和回收。">
+
+    
+    <link rel="alternative" href="atom.xml" title="志鹏的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="../../../../css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="志鹏的技术博客">志鹏的技术博客</a></h1>
+				<h2 class="blog-motto">记录成长的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">简介</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" class="st-default-search-input" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/07/12/python-基础/" title="python 基础之语法与句法" itemprop="url">python 基础之语法与句法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="志鹏" target="_blank" itemprop="author">志鹏</a>
+		
+  <p class="article-time">
+    <time datetime="2016-07-12T14:00:37.000Z" itemprop="datePublished"> Published 2016-07-12</time>
+    <span id="busuanzi_container_page_pv">
+    总阅读<span id="busuanzi_value_page_pv"></span>次
+</span>
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#语法与句法"><span class="toc-number">1.</span> <span class="toc-text">语法与句法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#python语句中的一些基本规则和特殊字符："><span class="toc-number">1.1.</span> <span class="toc-text">python语句中的一些基本规则和特殊字符：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注释-："><span class="toc-number">1.2.</span> <span class="toc-text">注释(#)：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继续-‘-’"><span class="toc-number">1.3.</span> <span class="toc-text">继续(‘\’) :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多个语句构成代码组（-）"><span class="toc-number">1.4.</span> <span class="toc-text">多个语句构成代码组（:）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码组由不同的缩进进行分隔"><span class="toc-number">1.5.</span> <span class="toc-text">代码组由不同的缩进进行分隔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#同一行书写多个语句（-）"><span class="toc-number">1.6.</span> <span class="toc-text">同一行书写多个语句（;）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模块"><span class="toc-number">1.7.</span> <span class="toc-text">模块</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p>在本文中主要了解python的基本语法，介绍基本的编程风格，了解变量、关键字以及变量占用的内存分配和回收。<br><a id="more"></a></p>
+<h2 id="语法与句法"><a href="#语法与句法" class="headerlink" title="语法与句法"></a>语法与句法</h2><h3 id="python语句中的一些基本规则和特殊字符："><a href="#python语句中的一些基本规则和特殊字符：" class="headerlink" title="python语句中的一些基本规则和特殊字符："></a>python语句中的一些基本规则和特殊字符：</h3><ul>
+<li>井号（#）表示之后的字符为python注释</li>
+<li>换行（’\n’)是标准的行分隔符</li>
+<li>反斜线（’\’）继续上一行</li>
+<li>分号（;）将两个语句连接接在一行中</li>
+<li>冒号（:）将代码块的头和体分开</li>
+<li>语句块（代码块）用缩进块的方式体现</li>
+<li>不同的缩进深度分隔不同的代码块</li>
+<li>python文件以模块的形式组织</li>
+</ul>
+<h3 id="注释-："><a href="#注释-：" class="headerlink" title="注释(#)："></a>注释(#)：</h3><p>  python的注释语句从(#)号开始，注释可以在一行的任何地方开始，解析器会忽略该行(#)号之后的所有内容。我们需要正确使用注释，来提高代码的可读性</p>
+<h3 id="继续-‘-’"><a href="#继续-‘-’" class="headerlink" title="继续(‘\’) :"></a>继续(‘\’) :</h3><p>  一行过长的语句可以用(‘\’)分解成几行<br>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#check condition</span></span><br><span class="line"><span class="keyword">if</span> (weather_is_hot == <span class="number">1</span> ) <span class="keyword">and</span> \</span><br><span class="line">        (shark_waring==<span class="number">0</span>):</span><br><span class="line">    send_goto_beach_mesg_to_pager()</span><br></pre></td></tr></table></figure></p>
+<p>以下两种情况例外不使用\ 也可以换行</p>
+<ul>
+<li>使用闭合操作符，单一语句也可以跨多行：在含有小括号、中括号、花括号时可以多行书写</li>
+<li>三个单引号包括下的字符串可以跨行<br><strong style="color:red;">使用括号换行的可读性强，推荐使用</strong></li>
+</ul>
+<h3 id="多个语句构成代码组（-）"><a href="#多个语句构成代码组（-）" class="headerlink" title="多个语句构成代码组（:）"></a>多个语句构成代码组（:）</h3><p>缩进相同的一组语句构成一个代码块。像<code>if</code>、<code>while</code>、<code>def</code>和<code>class</code>这样的复合语句，首行以关键字开始，以冒号（:）结束，该行之后的一行或多行代码构成代码组。</p>
+<h3 id="代码组由不同的缩进进行分隔"><a href="#代码组由不同的缩进进行分隔" class="headerlink" title="代码组由不同的缩进进行分隔"></a>代码组由不同的缩进进行分隔</h3><p>python使用缩进来分隔代码组。代码层次关系通过同样深度的空格或制表符缩进体现。同一代码组的代码行必须严格<bold style="color:red">左对齐</bold>，如不遵守，同一代码组的代码可能被当成另一个代码组，甚至导致语法错误。</p>
+<blockquote>
+<p>因python使用空格缩进表达代码块逻辑，因此“神对的大括号战争”永不会发生在python身上。C、C++、java、OC开始使用大括号可以在第一行的尾部，也可以在第二行的头部，也可以在第二行空几格后开始，这就造成不同的人选择不同的风格。</p>
+</blockquote>
+<h3 id="同一行书写多个语句（-）"><a href="#同一行书写多个语句（-）" class="headerlink" title="同一行书写多个语句（;）"></a>同一行书写多个语句（;）</h3><p>  分号（;）允许将多个语句写在同一行上，语句之间用分号隔开，而这些语句也不能在这行开始新的代码块。<br>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys;x= <span class="string">'food'</span>; sys.stdout.write(x+<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><p>  每一个python脚本文件都可以当成一个模块。模块以磁盘文件形式存在，当一个模块变得过大，并且驱动了太多功能，应该考虑折分成多个模块。模块里的代码可能是一段直接执行的脚本，也可以是一堆类似库函数的代码，从而可以被别的模块导入（import）调用</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yuanph.org/2016/07/12/python-基础/" data-title="python 基础之语法与句法 | 志鹏的技术博客" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/07/13/python基础之变量赋值/" title="python基础之变量赋值">
+  <strong>上一篇：</strong><br/>
+  <span>
+  python基础之变量赋值</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/07/12/Python-对象/"  title="Python 对象">
+ <strong>下一篇：</strong><br/> 
+ <span>Python 对象
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#语法与句法"><span class="toc-number">1.</span> <span class="toc-text">语法与句法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#python语句中的一些基本规则和特殊字符："><span class="toc-number">1.1.</span> <span class="toc-text">python语句中的一些基本规则和特殊字符：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注释-："><span class="toc-number">1.2.</span> <span class="toc-text">注释(#)：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继续-‘-’"><span class="toc-number">1.3.</span> <span class="toc-text">继续(‘\’) :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多个语句构成代码组（-）"><span class="toc-number">1.4.</span> <span class="toc-text">多个语句构成代码组（:）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码组由不同的缩进进行分隔"><span class="toc-number">1.5.</span> <span class="toc-text">代码组由不同的缩进进行分隔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#同一行书写多个语句（-）"><span class="toc-number">1.6.</span> <span class="toc-text">同一行书写多个语句（;）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模块"><span class="toc-number">1.7.</span> <span class="toc-text">模块</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/English/" title="English">English<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/GPUImage/" title="GPUImage">GPUImage<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/TCP/" title="TCP">TCP<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/XML/" title="XML">XML<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Xcode8/" title="Xcode8">Xcode8<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/cocoapods/" title="cocoapods">cocoapods<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/git/" title="git">git<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>23</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/python/" title="python">python<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/xcode-archive/" title="xcode_archive">xcode_archive<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/其他/" title="其他">其他<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/工具/" title="工具">工具<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/数学/" title="数学">数学<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/正则表达式/" title="正则表达式">正则表达式<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/测试/" title="测试">测试<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/English/" title="English">English<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/XML/" title="XML">XML<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Appache/" title="Appache">Appache<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/动画/" title="动画">动画<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/tips/" title="tips">tips<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UI/" title="UI">UI<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ARC/" title="ARC">ARC<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/内存问题/" title="内存问题">内存问题<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/AutoLayout/" title="AutoLayout">AutoLayout<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CGRect/" title="CGRect">CGRect<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/日期格式/" title="日期格式">日期格式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Location/" title="Location">Location<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ushow/" title="ushow">ushow<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/GCD/" title="GCD">GCD<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS-GPUImage/" title="iOS-GPUImage">iOS-GPUImage<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MD5/" title="MD5">MD5<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://blog.scorplot.com/" target="_blank" title="蛟哥的博客">蛟哥的博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.bomobox.org/" target="_blank" title="贤凯的博客">贤凯的博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://ushareit.github.io/" target="_blank" title="Ushareit">Ushareit</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://janexzz.github.io" target="_blank" title="许珍珍">许珍珍</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m zhipengbird. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018
+		
+		<a href="/about" target="_blank" title="志鹏">志鹏</a>
+		
+		</br>
+		<span id="busuanzi_container_site_pv">
+					&nbsp;&nbsp;Total visits:&nbsp;<span id="busuanzi_value_site_pv"></span>
+		</span>
+		<span id="busuanzi_container_site_uv">
+				&nbsp;&nbsp;You are Visiter No.<span id="busuanzi_value_site_uv"></span>
+		</span>
+	
+		
+				
+		
+		</p>
+		
+		<script type="text/javascript">
+(function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+(w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+})(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+_st('install','VPgYp3Umx_FneUdxKodz','2.0.0');
+</script>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+</div>
+
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'yuanpinghua';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

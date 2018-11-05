@@ -1,0 +1,649 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>清理mac的一些方去 | 志鹏的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="志鹏">
+    
+
+    
+    <meta name="description" content="一． 禁用SafeSleep休眠模式（可逆转操作）SafeSleep的大小基本等同于设备的实际内存大小，例如Macbook Air是4GB的内存，那么SafeSleep的大小也是4GB左右。禁用SafeSleep的弊端：如果电脑断电了，（没电）将无法恢复到断电前的状态。禁用SafeSleep后需要：确保在电池将没电前保存好需求存储的内容。具体操作：1.开启Terminal2.禁用SafeSleep">
+<meta property="og:type" content="article">
+<meta property="og:title" content="清理mac的一些方去">
+<meta property="og:url" content="http://yuanph.org/2016/07/11/清理mac的一些方去/index.html">
+<meta property="og:site_name" content="志鹏的技术博客">
+<meta property="og:description" content="一． 禁用SafeSleep休眠模式（可逆转操作）SafeSleep的大小基本等同于设备的实际内存大小，例如Macbook Air是4GB的内存，那么SafeSleep的大小也是4GB左右。禁用SafeSleep的弊端：如果电脑断电了，（没电）将无法恢复到断电前的状态。禁用SafeSleep后需要：确保在电池将没电前保存好需求存储的内容。具体操作：1.开启Terminal2.禁用SafeSleep">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-31T15:08:14.166Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="清理mac的一些方去">
+<meta name="twitter:description" content="一． 禁用SafeSleep休眠模式（可逆转操作）SafeSleep的大小基本等同于设备的实际内存大小，例如Macbook Air是4GB的内存，那么SafeSleep的大小也是4GB左右。禁用SafeSleep的弊端：如果电脑断电了，（没电）将无法恢复到断电前的状态。禁用SafeSleep后需要：确保在电池将没电前保存好需求存储的内容。具体操作：1.开启Terminal2.禁用SafeSleep">
+
+    
+    <link rel="alternative" href="atom.xml" title="志鹏的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="../../../../css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="志鹏的技术博客">志鹏的技术博客</a></h1>
+				<h2 class="blog-motto">记录成长的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">简介</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" class="st-default-search-input" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/07/11/清理mac的一些方去/" title="清理mac的一些方去" itemprop="url">清理mac的一些方去</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="志鹏" target="_blank" itemprop="author">志鹏</a>
+		
+  <p class="article-time">
+    <time datetime="2016-07-11T03:42:02.000Z" itemprop="datePublished"> Published 2016-07-11</time>
+    <span id="busuanzi_container_page_pv">
+    总阅读<span id="busuanzi_value_page_pv"></span>次
+</span>
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一．-禁用SafeSleep休眠模式（可逆转操作）"><span class="toc-number">1.</span> <span class="toc-text">一． 禁用SafeSleep休眠模式（可逆转操作）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二．清理系统噪音文件（不可逆转操作）"><span class="toc-number">2.</span> <span class="toc-text">二．清理系统噪音文件（不可逆转操作）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三．删除所有系统日志"><span class="toc-number">3.</span> <span class="toc-text">三．删除所有系统日志</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四．删除QuickLook缓存文件"><span class="toc-number">4.</span> <span class="toc-text">四．删除QuickLook缓存文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五．删除临时文件"><span class="toc-number">5.</span> <span class="toc-text">五．删除临时文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六．清除缓存文件"><span class="toc-number">6.</span> <span class="toc-text">六．清除缓存文件</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="一．-禁用SafeSleep休眠模式（可逆转操作）"><a href="#一．-禁用SafeSleep休眠模式（可逆转操作）" class="headerlink" title="一． 禁用SafeSleep休眠模式（可逆转操作）"></a>一． 禁用SafeSleep休眠模式（可逆转操作）</h3><p>SafeSleep的大小基本等同于设备的实际内存大小，例如Macbook Air是4GB的内存，那么SafeSleep的大小也是4GB左右。<br>禁用SafeSleep的弊端：如果电脑断电了，（没电）将无法恢复到断电前的状态。<br>禁用SafeSleep后需要：确保在电池将没电前保存好需求存储的内容。<br>具体操作：<br>1.开启Terminal<br>2.禁用SafeSleep，输入：<br>sudo pmset -a hibernatemode 0<br>3.然后定位到/private/var/vm/删除已经存在的sleepimage文件，输入：<br>cd /private/var/vm/<br>4.删除该文件，输入：<br>sudo rm sleepimage<br>5.制作一个替身，阻止系统新建SafeSleep文件，输入：<br>touch sleepimage<br>chmod 000 /private/var/vm/sleepimage<br>6.如果想恢复SafeSleep服务，请输入：<br>sudo pmset -a hibernatemode 3<br>sudo rm /private/var/vm/sleepimage</p>
+<h3 id="二．清理系统噪音文件（不可逆转操作）"><a href="#二．清理系统噪音文件（不可逆转操作）" class="headerlink" title="二．清理系统噪音文件（不可逆转操作）"></a>二．清理系统噪音文件（不可逆转操作）</h3><p>Mac OS X内置了很多噪音文件，如果日常并不使用文字转换语音这个功能，这些文件可以删除以获取更多的磁盘空间。<br>具体操作：<br>1.开启 Terminal<br>2.定位到文件位置，输入：<br>cd /System/Library/Speech/<br>3.执行删除命令，输入：<br>sudo rm -rf Voices/*</p>
+<h3 id="三．删除所有系统日志"><a href="#三．删除所有系统日志" class="headerlink" title="三．删除所有系统日志"></a>三．删除所有系统日志</h3><p>系统日志是用来调试和校验系统故障的，其文件会随着使用时间增长而增加，通常，此部分文件对于一般用户而言没有太多意义，可以删除。<br>具体操作：<br>1.开启Terminal<br>2.输入删除命令：<br>sudo rm -rf /private/var/log/*<br>请注意：系统日志文件是会不断的产生的，所以如果想删除，请定期操作。</p>
+<h3 id="四．删除QuickLook缓存文件"><a href="#四．删除QuickLook缓存文件" class="headerlink" title="四．删除QuickLook缓存文件"></a>四．删除QuickLook缓存文件</h3><p>Quicklook 这个内置预览功能非常的好用，但是随着使用的增多，对应的缓存文件也会不断的增多，所以定期清理，也可以让磁盘空间得到很好的释放。<br>具体操作：<br>1.开启Terminal<br>2.输入删除命令：<br>sudo rm -rf /private/var/folders/</p>
+<h3 id="五．删除临时文件"><a href="#五．删除临时文件" class="headerlink" title="五．删除临时文件"></a>五．删除临时文件</h3><p>可以尝试在Finder下，按Command＋Option＋G，然后前往：/private/var/tmp/ 这个文件夹，这里面是用来存储临时文件的。<br>对于这个路径下的内容，其实，系统在重启的时候一般都会做清理，但是鉴于现在很多用户都不怎么关机，导致这个里面的内容越来越多，所以有时候，我们还是有必要手动清理一下的。<br>具体操作<br>1.开启Terminal<br>2.定位到对应路径，请输入：<br>cd /private/var/tmp/<br>3.清理，请输入：<br>rm -rf TM*</p>
+<h3 id="六．清除缓存文件"><a href="#六．清除缓存文件" class="headerlink" title="六．清除缓存文件"></a>六．清除缓存文件</h3><p>具体操作：<br>1.开启Terminal<br>2.定位到对应路径（当前用户的路径），请输入：<br>cd ~/Library/Caches/<br>3.清理，请输入：<br>rm -rf ~/Library/Caches/*<br>其上只是部分可以清理的mac垃圾，这些操作需要花费一定的时间和精力，而且有一定的难度，最重要的是并不可能完全清理mac。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yuanph.org/2016/07/11/清理mac的一些方去/" data-title="清理mac的一些方去 | 志鹏的技术博客" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/07/11/对多个target使用不同的-Bundle-Display-Name/" title="对多个target使用不同的 Bundle Display Name">
+  <strong>上一篇：</strong><br/>
+  <span>
+  对多个target使用不同的 Bundle Display Name</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/07/07/iOS9新关键字/"  title="iOS9新关键字">
+ <strong>下一篇：</strong><br/> 
+ <span>iOS9新关键字
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一．-禁用SafeSleep休眠模式（可逆转操作）"><span class="toc-number">1.</span> <span class="toc-text">一． 禁用SafeSleep休眠模式（可逆转操作）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二．清理系统噪音文件（不可逆转操作）"><span class="toc-number">2.</span> <span class="toc-text">二．清理系统噪音文件（不可逆转操作）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三．删除所有系统日志"><span class="toc-number">3.</span> <span class="toc-text">三．删除所有系统日志</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四．删除QuickLook缓存文件"><span class="toc-number">4.</span> <span class="toc-text">四．删除QuickLook缓存文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五．删除临时文件"><span class="toc-number">5.</span> <span class="toc-text">五．删除临时文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六．清除缓存文件"><span class="toc-number">6.</span> <span class="toc-text">六．清除缓存文件</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/English/" title="English">English<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/GPUImage/" title="GPUImage">GPUImage<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/TCP/" title="TCP">TCP<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/XML/" title="XML">XML<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Xcode8/" title="Xcode8">Xcode8<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/cocoapods/" title="cocoapods">cocoapods<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/git/" title="git">git<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>23</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/python/" title="python">python<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/xcode-archive/" title="xcode_archive">xcode_archive<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/其他/" title="其他">其他<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/工具/" title="工具">工具<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/数学/" title="数学">数学<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/正则表达式/" title="正则表达式">正则表达式<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/测试/" title="测试">测试<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/English/" title="English">English<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/XML/" title="XML">XML<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Appache/" title="Appache">Appache<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/动画/" title="动画">动画<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/tips/" title="tips">tips<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UI/" title="UI">UI<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ARC/" title="ARC">ARC<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/内存问题/" title="内存问题">内存问题<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/AutoLayout/" title="AutoLayout">AutoLayout<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CGRect/" title="CGRect">CGRect<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/日期格式/" title="日期格式">日期格式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Location/" title="Location">Location<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ushow/" title="ushow">ushow<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/GCD/" title="GCD">GCD<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS-GPUImage/" title="iOS-GPUImage">iOS-GPUImage<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MD5/" title="MD5">MD5<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://blog.scorplot.com/" target="_blank" title="蛟哥的博客">蛟哥的博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.bomobox.org/" target="_blank" title="贤凯的博客">贤凯的博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://ushareit.github.io/" target="_blank" title="Ushareit">Ushareit</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://janexzz.github.io" target="_blank" title="许珍珍">许珍珍</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m zhipengbird. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018
+		
+		<a href="/about" target="_blank" title="志鹏">志鹏</a>
+		
+		</br>
+		<span id="busuanzi_container_site_pv">
+					&nbsp;&nbsp;Total visits:&nbsp;<span id="busuanzi_value_site_pv"></span>
+		</span>
+		<span id="busuanzi_container_site_uv">
+				&nbsp;&nbsp;You are Visiter No.<span id="busuanzi_value_site_uv"></span>
+		</span>
+	
+		
+				
+		
+		</p>
+		
+		<script type="text/javascript">
+(function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+(w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+})(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+_st('install','VPgYp3Umx_FneUdxKodz','2.0.0');
+</script>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+</div>
+
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'yuanpinghua';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

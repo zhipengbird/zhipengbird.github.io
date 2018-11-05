@@ -1,0 +1,755 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>HTTP 入门 | 志鹏的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="志鹏">
+    
+
+    
+    <meta name="description" content="URL什么是URL* Uniform Resource Location（统一资源定位符） *  网络中每一个资源都对应一个地址--&amp;gt; URL  URL的基本格式* 协议://主机地址:端口号/路径     * 协议 ： 不同协议代表不同的资源获取方式     * 主机地址：主机的唯一标识（IP地址，域名）     * 路径： 资源在主机中的具体位置 URL的常见协议* http ,FTP，">
+<meta name="keywords" content="-http">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP 入门">
+<meta property="og:url" content="http://yuanph.org/2017/03/18/http/index.html">
+<meta property="og:site_name" content="志鹏的技术博客">
+<meta property="og:description" content="URL什么是URL* Uniform Resource Location（统一资源定位符） *  网络中每一个资源都对应一个地址--&amp;gt; URL  URL的基本格式* 协议://主机地址:端口号/路径     * 协议 ： 不同协议代表不同的资源获取方式     * 主机地址：主机的唯一标识（IP地址，域名）     * 路径： 资源在主机中的具体位置 URL的常见协议* http ,FTP，">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-31T15:08:14.155Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP 入门">
+<meta name="twitter:description" content="URL什么是URL* Uniform Resource Location（统一资源定位符） *  网络中每一个资源都对应一个地址--&amp;gt; URL  URL的基本格式* 协议://主机地址:端口号/路径     * 协议 ： 不同协议代表不同的资源获取方式     * 主机地址：主机的唯一标识（IP地址，域名）     * 路径： 资源在主机中的具体位置 URL的常见协议* http ,FTP，">
+
+    
+    <link rel="alternative" href="atom.xml" title="志鹏的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="../../../../css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="志鹏的技术博客">志鹏的技术博客</a></h1>
+				<h2 class="blog-motto">记录成长的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">简介</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" class="st-default-search-input" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/03/18/http/" title="HTTP 入门" itemprop="url">HTTP 入门</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="志鹏" target="_blank" itemprop="author">志鹏</a>
+		
+  <p class="article-time">
+    <time datetime="2017-03-18T14:38:12.000Z" itemprop="datePublished"> Published 2017-03-18</time>
+    <span id="busuanzi_container_page_pv">
+    总阅读<span id="busuanzi_value_page_pv"></span>次
+</span>
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#URL"><span class="toc-number">1.</span> <span class="toc-text">URL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是URL"><span class="toc-number">1.1.</span> <span class="toc-text">什么是URL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL的基本格式"><span class="toc-number">1.2.</span> <span class="toc-text">URL的基本格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL的常见协议"><span class="toc-number">1.3.</span> <span class="toc-text">URL的常见协议</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP-协议简介"><span class="toc-number">2.</span> <span class="toc-text">HTTP 协议简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是-http协议"><span class="toc-number">2.1.</span> <span class="toc-text">什么是 http协议</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IP"><span class="toc-number">3.</span> <span class="toc-text">IP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IP-1"><span class="toc-number">3.1.</span> <span class="toc-text">IP</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#端口号"><span class="toc-number">4.</span> <span class="toc-text">端口号</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#端口号-1"><span class="toc-number">4.1.</span> <span class="toc-text">端口号</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网络模型"><span class="toc-number">5.</span> <span class="toc-text">网络模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#OSI七层网络模型"><span class="toc-number">5.1.</span> <span class="toc-text">OSI七层网络模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP／IP-网络模型"><span class="toc-number">6.</span> <span class="toc-text">TCP／IP 网络模型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#传输协议"><span class="toc-number">7.</span> <span class="toc-text">传输协议</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Socket"><span class="toc-number">8.</span> <span class="toc-text">Socket</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#通讯过程"><span class="toc-number">8.1.</span> <span class="toc-text">通讯过程</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h1><h2 id="什么是URL"><a href="#什么是URL" class="headerlink" title="什么是URL"></a>什么是URL</h2><pre><code>* Uniform Resource Location（统一资源定位符）
+*  网络中每一个资源都对应一个地址--&gt; URL 
+</code></pre><h2 id="URL的基本格式"><a href="#URL的基本格式" class="headerlink" title="URL的基本格式"></a>URL的基本格式</h2><pre><code>* 协议://主机地址:端口号/路径
+    * 协议 ： 不同协议代表不同的资源获取方式
+    * 主机地址：主机的唯一标识（IP地址，域名）
+    * 路径： 资源在主机中的具体位置
+</code></pre><h2 id="URL的常见协议"><a href="#URL的常见协议" class="headerlink" title="URL的常见协议"></a>URL的常见协议</h2><pre><code>* http ,FTP，Mailto,File,tel://,sms://
+</code></pre><h1 id="HTTP-协议简介"><a href="#HTTP-协议简介" class="headerlink" title="HTTP 协议简介"></a>HTTP 协议简介</h1><h2 id="什么是-http协议"><a href="#什么是-http协议" class="headerlink" title="什么是 http协议"></a>什么是 http协议</h2><pre><code>* HyperText TransportProtocol(超文本传输协议)
+* 浏览器和web服务器通讯时遵守的约定
+* 互联网使用最多的协议
+* 提供超文本传输协议
+* 通过浏览器打开网使用的http提供的服务。
+</code></pre><h1 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h1><h2 id="IP-1"><a href="#IP-1" class="headerlink" title="IP"></a>IP</h2><ul>
+<li>两个计算机通讯必须要知道的：<ul>
+<li>IP地址和端口号</li>
+</ul>
+</li>
+<li>IP地址<ul>
+<li>IP地址是一个32位的二进制数，通常被分割为8位二进制数，通常用点分隔，10进制表示。<ul>
+<li>192.168.1.1</li>
+<li>127.0.0.1 回路地址 </li>
+<li>255.255.255.255 广播</li>
+<li>0.0.0.0 any </li>
+</ul>
+</li>
+<li>唯一标识互联网上的一台计算机（IP地址不好记忆，所以有了域名）</li>
+<li>一个计算机可能有多个可用IP地址，如两块网卡</li>
+<li>内网的计算机，都通过路由器上网，它们对外的地址都是路由器的IP地址。</li>
+</ul>
+</li>
+</ul>
+<h1 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h1><h2 id="端口号-1"><a href="#端口号-1" class="headerlink" title="端口号"></a>端口号</h2><ul>
+<li>标识进程（程序）的逻辑地址，不同进程（程序）的标识</li>
+<li>端口取值范围 ： 0〜65535</li>
+<li>端口的分类：<ul>
+<li>公认端口（Well Know Ports）<ul>
+<li>这类端口也常称之为“常用端口”。端口号从0到1024,它们紧密绑定一些特定的服务。通常这些端口的通信明确表明了某种服务的协议，这种端口是不可再重新定义它的作用对象。比如： http: 80 ,ftp:21,pop3:110,smtp:25</li>
+</ul>
+</li>
+<li>注册端口（Registered Ports）<ul>
+<li>端口号从1025到49151。分配给用户进程或应用程序。这些进程主要是用户选择安装的一些应用程序，而不是已经分配好的公认端口的常用程序。</li>
+</ul>
+</li>
+<li>动态和／或私有端口（Dynamic and/or Private Ports）<ul>
+<li>端口号从49152到65535。之所以称为动态端口，是因为它一般不固定分配某种服务，而是动态分配。   </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h1><h2 id="OSI七层网络模型"><a href="#OSI七层网络模型" class="headerlink" title="OSI七层网络模型"></a>OSI七层网络模型</h2><ul>
+<li>应用层</li>
+<li>表示层</li>
+<li>会话层</li>
+<li>传输层</li>
+<li>网络层</li>
+<li>数据链路层</li>
+<li>物理层<h1 id="TCP／IP-网络模型"><a href="#TCP／IP-网络模型" class="headerlink" title="TCP／IP 网络模型"></a>TCP／IP 网络模型</h1></li>
+<li><p>应用层</p>
+<ul>
+<li>对应OSI模型的前三层 ，为用户提供所需要的各种服务，例如 ： FTP，Telnet,DNS,SMTP,HTTP等</li>
+</ul>
+</li>
+<li><p>传输层</p>
+<ul>
+<li>为应用层提供端到端的通信功能，保证了数据包的传输顺序及数据完整性。两个主要协议：TCP／UDP</li>
+</ul>
+</li>
+<li>网络层<ul>
+<li>解决主机到主机的通信问题。它所保护的协议设计数据包在整个网络上的逻辑传输。注重重新赋予主机一个IP地址来完成对主机的寻址，它还负责数据包在多种网络中和路由。该层有三个重要协议 ：网际协议（IP），互联网组管理协议（IGMP）和互联网控制报文协议（ICMP）</li>
+</ul>
+</li>
+<li>网络接入层<ul>
+<li>负监视数据在主机和网络之间的交换。</li>
+</ul>
+</li>
+</ul>
+<h1 id="传输协议"><a href="#传输协议" class="headerlink" title="传输协议"></a>传输协议</h1><ul>
+<li>TCP （传输控制协议）<ul>
+<li>TCP 协议提供的是一种可靠的，通过“三次握手”来连接的数据传输服务</li>
+</ul>
+</li>
+<li>UDP（用户数据报协议）<ul>
+<li>UDP 协议提供的则是不保证可靠性，无连接的数据传输服务。</li>
+</ul>
+</li>
+</ul>
+<h1 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h1><ul>
+<li>两个计算机通讯的过程，就像两个人打电话一样</li>
+<li>Socket<ul>
+<li>Socket 又称“套接字”，应用程序通过“套接字”向网络发送请求或向网络做出应答</li>
+<li>网络通信其实就是Socket之间的通信</li>
+<li>数据在两个Socket之间通过I传输数据</li>
+<li>Socket是纯C语言的，是跨平台的</li>
+<li>HTTP协议是基于Socket的，HTTP协议的底层使用的就是Socket</li>
+</ul>
+</li>
+</ul>
+<h2 id="通讯过程"><a href="#通讯过程" class="headerlink" title="通讯过程"></a>通讯过程</h2><ul>
+<li>创建Socket</li>
+<li>连接到服务器</li>
+<li>发送数据到服务器</li>
+<li>从服务器接收数据</li>
+<li>关闭连接</li>
+</ul>
+<p><strong>socket对应于TCP／IP网络模型中的应用层和传输层之间</strong></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/http/">-http</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yuanph.org/2017/03/18/http/" data-title="HTTP 入门 | 志鹏的技术博客" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/03/22/CoreLocation/" title="CoreLocation">
+  <strong>上一篇：</strong><br/>
+  <span>
+  CoreLocation</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/03/16/keyboard-iOS/"  title="keyboard_iOS">
+ <strong>下一篇：</strong><br/> 
+ <span>keyboard_iOS
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#URL"><span class="toc-number">1.</span> <span class="toc-text">URL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是URL"><span class="toc-number">1.1.</span> <span class="toc-text">什么是URL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL的基本格式"><span class="toc-number">1.2.</span> <span class="toc-text">URL的基本格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL的常见协议"><span class="toc-number">1.3.</span> <span class="toc-text">URL的常见协议</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP-协议简介"><span class="toc-number">2.</span> <span class="toc-text">HTTP 协议简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是-http协议"><span class="toc-number">2.1.</span> <span class="toc-text">什么是 http协议</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IP"><span class="toc-number">3.</span> <span class="toc-text">IP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IP-1"><span class="toc-number">3.1.</span> <span class="toc-text">IP</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#端口号"><span class="toc-number">4.</span> <span class="toc-text">端口号</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#端口号-1"><span class="toc-number">4.1.</span> <span class="toc-text">端口号</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网络模型"><span class="toc-number">5.</span> <span class="toc-text">网络模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#OSI七层网络模型"><span class="toc-number">5.1.</span> <span class="toc-text">OSI七层网络模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP／IP-网络模型"><span class="toc-number">6.</span> <span class="toc-text">TCP／IP 网络模型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#传输协议"><span class="toc-number">7.</span> <span class="toc-text">传输协议</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Socket"><span class="toc-number">8.</span> <span class="toc-text">Socket</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#通讯过程"><span class="toc-number">8.1.</span> <span class="toc-text">通讯过程</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/English/" title="English">English<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/GPUImage/" title="GPUImage">GPUImage<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/TCP/" title="TCP">TCP<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/XML/" title="XML">XML<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Xcode8/" title="Xcode8">Xcode8<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/cocoapods/" title="cocoapods">cocoapods<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/git/" title="git">git<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>23</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/python/" title="python">python<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/xcode-archive/" title="xcode_archive">xcode_archive<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/其他/" title="其他">其他<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/工具/" title="工具">工具<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/数学/" title="数学">数学<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/正则表达式/" title="正则表达式">正则表达式<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/测试/" title="测试">测试<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/English/" title="English">English<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/XML/" title="XML">XML<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Appache/" title="Appache">Appache<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/动画/" title="动画">动画<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/tips/" title="tips">tips<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UI/" title="UI">UI<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ARC/" title="ARC">ARC<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/内存问题/" title="内存问题">内存问题<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/AutoLayout/" title="AutoLayout">AutoLayout<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CGRect/" title="CGRect">CGRect<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/日期格式/" title="日期格式">日期格式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Location/" title="Location">Location<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ushow/" title="ushow">ushow<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/GCD/" title="GCD">GCD<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS-GPUImage/" title="iOS-GPUImage">iOS-GPUImage<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MD5/" title="MD5">MD5<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://blog.scorplot.com/" target="_blank" title="蛟哥的博客">蛟哥的博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.bomobox.org/" target="_blank" title="贤凯的博客">贤凯的博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://ushareit.github.io/" target="_blank" title="Ushareit">Ushareit</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://janexzz.github.io" target="_blank" title="许珍珍">许珍珍</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m zhipengbird. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018
+		
+		<a href="/about" target="_blank" title="志鹏">志鹏</a>
+		
+		</br>
+		<span id="busuanzi_container_site_pv">
+					&nbsp;&nbsp;Total visits:&nbsp;<span id="busuanzi_value_site_pv"></span>
+		</span>
+		<span id="busuanzi_container_site_uv">
+				&nbsp;&nbsp;You are Visiter No.<span id="busuanzi_value_site_uv"></span>
+		</span>
+	
+		
+				
+		
+		</p>
+		
+		<script type="text/javascript">
+(function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+(w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+})(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+_st('install','VPgYp3Umx_FneUdxKodz','2.0.0');
+</script>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+</div>
+
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'yuanpinghua';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
