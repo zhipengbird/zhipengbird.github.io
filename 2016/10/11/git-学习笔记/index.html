@@ -1,106 +1,432 @@
+<!DOCTYPE HTML>
+<html lang="">
 
- <!DOCTYPE HTML>
-<html >
+
 <head>
-  <meta charset="UTF-8">
-  
+    <meta charset="utf-8">
+    <meta name="keywords" content="git 学习笔记1, 志鹏的技术博客">
+    <meta name="description" content="
+本节讲解几个基本命令：
+
+git config：配置相关信息
+git clone：复制仓库
+git init：初始化仓库
+git add：添加更新内容到索引中
+git diff：比较内容
+git status：获取当前项目状况
+git c">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>git 学习笔记1 | 志鹏的技术博客</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    
-    <meta name="author" content="志鹏">
-    
+    <link rel="icon" type="image/png" href="/favicon.png">
 
-    
-    <meta name="description" content="本节讲解几个基本命令：  git config：配置相关信息 git clone：复制仓库 git init：初始化仓库 git add：添加更新内容到索引中 git diff：比较内容 git status：获取当前项目状况 git commit：提交 git branch：分支相关 git checkout：切换分支 git merge：合并分支 git reset：恢复版本 git log">
-<meta name="keywords" content="git">
-<meta property="og:type" content="article">
-<meta property="og:title" content="git 学习笔记1">
-<meta property="og:url" content="http://yuanph.win/2016/10/11/git-学习笔记/index.html">
-<meta property="og:site_name" content="志鹏的技术博客">
-<meta property="og:description" content="本节讲解几个基本命令：  git config：配置相关信息 git clone：复制仓库 git init：初始化仓库 git add：添加更新内容到索引中 git diff：比较内容 git status：获取当前项目状况 git commit：提交 git branch：分支相关 git checkout：切换分支 git merge：合并分支 git reset：恢复版本 git log">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-03-31T15:08:14.154Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git 学习笔记1">
-<meta name="twitter:description" content="本节讲解几个基本命令：  git config：配置相关信息 git clone：复制仓库 git init：初始化仓库 git add：添加更新内容到索引中 git diff：比较内容 git status：获取当前项目状况 git commit：提交 git branch：分支相关 git checkout：切换分支 git merge：合并分支 git reset：恢复版本 git log">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
 
-    
-    <link rel="alternative" href="atom.xml" title="志鹏的技术博客" type="application/atom+xml">
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/jacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
-    
-    <link rel="stylesheet" href="../../../../css/style.css">
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
 </head>
 
-  <body>
-    <header>
-      
-<div>
-		
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="志鹏的技术博客">志鹏的技术博客</a></h1>
-				<h2 class="blog-motto">记录成长的点滴</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/">主页</a></li>
-					
-						<li><a href="/archives">归档</a></li>
-					
-						<li><a href="/about">简介</a></li>
-					
-					<li>
- 					
-						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="text" id="search" class="st-default-search-input" maxlength="20" placeholder="Search" />
-						</form>
-					
-					</li>
-				</ul>
-			</nav>
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="../../../../index.html" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">志鹏的技术博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>Index</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>Tags</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>Categories</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>Archives</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>About</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>Friends</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="Search"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">志鹏的技术博客</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                Index
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                Tags
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                Categories
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                Archives
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                About
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                Friends
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
 </div>
 
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-  
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/10/11/git-学习笔记/" title="git 学习笔记1" itemprop="url">git 学习笔记1</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="志鹏" target="_blank" itemprop="author">志鹏</a>
-		
-  <p class="article-time">
-    <time datetime="2016-10-11T03:23:04.000Z" itemprop="datePublished"> Published 2016-10-11</time>
-    <span id="busuanzi_container_page_pv">
-    总阅读<span id="busuanzi_value_page_pv"></span>次
-</span>
-  </p>
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
 </header>
-	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#git-的初始化"><span class="toc-number">1.</span> <span class="toc-text">git 的初始化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#获得一个Git仓库"><span class="toc-number">2.</span> <span class="toc-text">获得一个Git仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Clone一个仓库"><span class="toc-number">2.1.</span> <span class="toc-text">Clone一个仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化一个新的仓库"><span class="toc-number">2.2.</span> <span class="toc-text">初始化一个新的仓库</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#正常的工作流程"><span class="toc-number">3.</span> <span class="toc-text">正常的工作流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#正常的工作流程-1"><span class="toc-number">3.1.</span> <span class="toc-text">正常的工作流程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分支与合并"><span class="toc-number">4.</span> <span class="toc-text">分支与合并</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分支"><span class="toc-number">4.1.</span> <span class="toc-text">分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#撒销一个合并"><span class="toc-number">4.2.</span> <span class="toc-text">撒销一个合并</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快速向前合并"><span class="toc-number">4.3.</span> <span class="toc-text">快速向前合并</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Git日志"><span class="toc-number">5.</span> <span class="toc-text">Git日志</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#查看日志"><span class="toc-number">5.1.</span> <span class="toc-text">查看日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日志统计"><span class="toc-number">5.2.</span> <span class="toc-text">日志统计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#格式化日志"><span class="toc-number">5.3.</span> <span class="toc-text">格式化日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日志排序"><span class="toc-number">5.4.</span> <span class="toc-text">日志排序</span></a></li></ol></li></ol>
-		
-		</div>
-		
-		<blockquote>
+
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        git 学习笔记1
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="../../../../tags/git/" target="_blank">
+                                <span class="chip bg-color">git</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="../../../../categories/git/" class="post-category" target="_blank">
+                                git
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2016-10-11
+                </div>
+
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
 <p>本节讲解几个基本命令：</p>
 <ul>
 <li>git config：配置相关信息</li>
@@ -119,11 +445,24 @@
 </ul>
 </blockquote>
 <h1 id="git-的初始化"><a href="#git-的初始化" class="headerlink" title="git 的初始化"></a>git 的初始化</h1><ol>
-<li>git 配置<br>使用Git的第一件事就是设置你的名字和<code>email</code>,这些就是你在提交<code>commit</code>时的签名，每次提交记录里都会包含这些信息。使用<code>git config</code>命令进行配置：<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bogon:~ yuanpinghua$ git config --global user.name <span class="string">"yuanph"</span></span><br><span class="line">bogon:~ yuanpinghua$ git config --global user.email <span class="string">"yuanph@ushareit.com"</span></span><br></pre></td></tr></table></figure>
-</li>
+<li>git 配置<br>使用Git的第一件事就是设置你的名字和<code>email</code>,这些就是你在提交<code>commit</code>时的签名，每次提交记录里都会包含这些信息。使用<code>git config</code>命令进行配置：<pre><code class="sh">bogon:~ yuanpinghua$ git config --global user.name &quot;yuanph&quot;
+bogon:~ yuanpinghua$ git config --global user.email &quot;yuanph@ushareit.com&quot;
+</code></pre>
+执行了上面的命令后,会在家目录(<code>/yuanpinghua</code>)下建立一个叫<code>.gitconfig</code> 的文件（该文件问隐藏文件，需要使用<code>ls -al</code>查看到. 内容一般像下面这样，可以使用vim或cat查看文件内容:</li>
 </ol>
-<p>执行了上面的命令后,会在家目录(<code>/yuanpinghua</code>)下建立一个叫<code>.gitconfig</code> 的文件（该文件问隐藏文件，需要使用<code>ls -al</code>查看到. 内容一般像下面这样，可以使用vim或cat查看文件内容:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">bogon:~ yuanpinghua$ cat ~/.gitconfig</span><br><span class="line">[core]</span><br><span class="line">	excludesfile = /Users/yuanpinghua/.gitignore_global</span><br><span class="line">[difftool <span class="string">"sourcetree"</span>]</span><br><span class="line">	cmd = opendiff \<span class="string">"<span class="variable">$LOCAL</span>\" \"<span class="variable">$REMOTE</span>\"</span></span><br><span class="line"><span class="string">	path =</span></span><br><span class="line"><span class="string">[mergetool "</span>sourcetree<span class="string">"]</span></span><br><span class="line"><span class="string">	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"<span class="variable">$LOCAL</span>\" \"<span class="variable">$REMOTE</span>\" -ancestor \"<span class="variable">$BASE</span>\" -merge \"<span class="variable">$MERGED</span>\"</span></span><br><span class="line"><span class="string">	trustExitCode = true</span></span><br><span class="line"><span class="string">[user]</span></span><br><span class="line"><span class="string">	name = yuanph</span></span><br><span class="line"><span class="string">	email = yuanph@ushareit.com</span></span><br></pre></td></tr></table></figure>
+<pre><code class="sh">bogon:~ yuanpinghua$ cat ~/.gitconfig
+[core]
+    excludesfile = /Users/yuanpinghua/.gitignore_global
+[difftool &quot;sourcetree&quot;]
+    cmd = opendiff \&quot;$LOCAL\&quot; \&quot;$REMOTE\&quot;
+    path =
+[mergetool &quot;sourcetree&quot;]
+    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \&quot;$LOCAL\&quot; \&quot;$REMOTE\&quot; -ancestor \&quot;$BASE\&quot; -merge \&quot;$MERGED\&quot;
+    trustExitCode = true
+[user]
+    name = yuanph
+    email = yuanph@ushareit.com
+</code></pre>
 <p>这是个我电脑上的git配置信息.</p>
 <blockquote>
 <p>上面的配置文件就是Git全局配置的文件，一般配置方法是<code>git config --global &lt;配置名称&gt; &lt;配置的值&gt;</code>。<br>如果你想使项目里的某个值与前面的全局设置有区别(例如把私人邮箱地址改为工作邮箱)，你可以在项目中使用<code>git config</code>命令不带<code>--global</code>选项来设置. 这会在你当前的项目目录下创建 <code>.git/config</code>，从而使用针对当前项目的配置。</p>
@@ -133,9 +472,16 @@
 <li>从已有的Git仓库中clone (克隆，复制).</li>
 <li>新建一个仓库，把未进行版本控制的文件进行版本控制.</li>
 </ul>
-<h2 id="Clone一个仓库"><a href="#Clone一个仓库" class="headerlink" title="Clone一个仓库"></a>Clone一个仓库</h2><p>为了得一个项目的拷贝(copy),我们需要知道这个项目仓库的地址(Git URL). Git能在许多协议下使用，所以Git URL可能以<code>ssh://</code>, <code>http(s)://</code>, <code>git://</code>. 有些仓库可以通过不只一种协议来访问<br>我在github上创建一个名为“gittutorial”的仓库。这个仓库用来进行 clone<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zhipengbird/gittutorial.git</span><br></pre></td></tr></table></figure></p>
+<h2 id="Clone一个仓库"><a href="#Clone一个仓库" class="headerlink" title="Clone一个仓库"></a>Clone一个仓库</h2><p>为了得一个项目的拷贝(copy),我们需要知道这个项目仓库的地址(Git URL). Git能在许多协议下使用，所以Git URL可能以<code>ssh://</code>, <code>http(s)://</code>, <code>git://</code>. 有些仓库可以通过不只一种协议来访问<br>我在github上创建一个名为“gittutorial”的仓库。这个仓库用来进行 clone</p>
+<pre><code class="sh">git clone https://github.com/zhipengbird/gittutorial.git
+</code></pre>
 <p>clone完成后，会在当前目录下多一个gittutorial的文件夹。这个文件夹里的内容就是我们刚才clone下来的代码。</p>
-<h2 id="初始化一个新的仓库"><a href="#初始化一个新的仓库" class="headerlink" title="初始化一个新的仓库"></a>初始化一个新的仓库</h2><p>可以对一个已存在的文件夹用下面的命令让它置于Git的版本控制管理之下。<br>创建工程目录，初始化git仓库：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bogon:~ yuanpinghua$ mkdir project</span><br><span class="line">bogon:~ yuanpinghua$ <span class="built_in">cd</span> project</span><br><span class="line">bogon:project yuanpinghua$ git init</span><br><span class="line">Initialized empty Git repository <span class="keyword">in</span> /Users/yuanpinghua/project/.git/</span><br></pre></td></tr></table></figure></p>
+<h2 id="初始化一个新的仓库"><a href="#初始化一个新的仓库" class="headerlink" title="初始化一个新的仓库"></a>初始化一个新的仓库</h2><p>可以对一个已存在的文件夹用下面的命令让它置于Git的版本控制管理之下。<br>创建工程目录，初始化git仓库：</p>
+<pre><code class="sh">bogon:~ yuanpinghua$ mkdir project
+bogon:~ yuanpinghua$ cd project
+bogon:project yuanpinghua$ git init
+Initialized empty Git repository in /Users/yuanpinghua/project/.git/
+</code></pre>
 <p>通过<code>ls -la</code>命令会发现<code>project</code>目录下会有一个名叫<code>.git</code> 的目录被创建，这意味着一个仓库被初始化了。可以进入到<code>.git</code>目录查看下有哪些内容</p>
 <h1 id="正常的工作流程"><a href="#正常的工作流程" class="headerlink" title="正常的工作流程"></a>正常的工作流程</h1><h2 id="正常的工作流程-1"><a href="#正常的工作流程-1" class="headerlink" title="正常的工作流程"></a>正常的工作流程</h2><p>&emsp; git的基本流程如下：</p>
 <ul>
@@ -144,627 +490,907 @@
 <li>使用git commit命令提交到本地代码库</li>
 <li>（可选，有的时候并没有可以同步的远端代码库）使用git push命令将本地代码库同步到远端代码库</li>
 </ul>
-<p>进入我们刚才建立的project目录，分别创建文件file1，file2，file3：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bogon:project yuanpinghua$ touch file1 file2 file3</span><br></pre></td></tr></table></figure></p>
-<p>修改文件，可以使用vim编辑内容，也可以直接echo添加测试内容。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"testcontent1"</span> &gt;&gt; file1</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"testcontent2"</span> &gt;&gt; file2</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"testcontent3"</span> &gt;&gt; file3</span><br></pre></td></tr></table></figure></p>
-<p>此时可以使用<code>git status</code>命令查看当前git仓库的状态：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line"></span><br><span class="line">Initial commit</span><br><span class="line"></span><br><span class="line">Untracked files:</span><br><span class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to include <span class="keyword">in</span> what will be committed)</span><br><span class="line"></span><br><span class="line">	file1</span><br><span class="line">	file2</span><br><span class="line">	file3</span><br><span class="line"></span><br><span class="line">nothing added to commit but untracked files present (use <span class="string">"git add"</span> to track)</span><br></pre></td></tr></table></figure></p>
-<p>可以发现，有三个文件处于<code>untracked</code>状态，下一步我们就需要用<code>git add</code>命令将他们加入到缓存区（Index）。<br>使用git add命令将新建的文件添加到缓存区：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git add file1 file2 file3</span><br></pre></td></tr></table></figure></p>
-<p>然后再次执行<code>git status</code>就会发现新的变化：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line"></span><br><span class="line">Initial commit</span><br><span class="line"></span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use <span class="string">"git rm --cached &lt;file&gt;..."</span> to unstage)</span><br><span class="line"></span><br><span class="line">	new file:   file1</span><br><span class="line">	new file:   file2</span><br><span class="line">	new file:   file3</span><br></pre></td></tr></table></figure></p>
-<p>你现在为commit做好了准备，你可以使用 git diff 命令再加上 –cached 参数，看看缓存区中哪些文件被修改了。<br>如果没有–cached参数，git diff 会显示当前你所有已做的但没有加入到索引里的修改。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ git diff --cached</span><br><span class="line">diff --git a/file1 b/file1</span><br><span class="line">new file mode 100644</span><br><span class="line">index 0000000..ac65bb3</span><br><span class="line">--- /dev/null</span><br><span class="line">+++ b/file1</span><br><span class="line">@@ -0,0 +1 @@</span><br><span class="line">+testcontent1</span><br><span class="line">diff --git a/file2 b/file2</span><br><span class="line">new file mode 100644</span><br><span class="line">index 0000000..a7db157</span><br><span class="line">--- /dev/null</span><br><span class="line">+++ b/file2</span><br><span class="line">@@ -0,0 +1 @@</span><br><span class="line">+testcontent2</span><br><span class="line">diff --git a/file3 b/file3</span><br><span class="line">new file mode 100644</span><br><span class="line">index 0000000..be7a7f5</span><br><span class="line">--- /dev/null</span><br><span class="line">+++ b/file3</span><br><span class="line">@@ -0,0 +1 @@</span><br><span class="line">+testcontent3</span><br></pre></td></tr></table></figure></p>
-<p>当所有新建，修改的文件都被添加到了缓存区，我们就要使用<code>git commit</code>提交到本地仓库：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -m <span class="string">'add three files'</span></span><br><span class="line">[master (root-commit) 2a5cf79] add three files</span><br><span class="line"> 3 files changed, 3 insertions(+)</span><br><span class="line"> create mode 100644 file1</span><br><span class="line"> create mode 100644 file2</span><br><span class="line"> create mode 100644 file3</span><br></pre></td></tr></table></figure></p>
-<p>需要使用<code>-m</code>添加本次修改的注释，完成后就会记录一个新的项目版本。除了用<code>git add</code>命令，我们还可以用下面的命令将所有没有加到缓存区的修改也一起提交，但<code>-a</code>命令不会添加新建的文件。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"file yet add to cached"</span> &gt;&gt; file1</span><br><span class="line">$ git commit -a -m <span class="string">'add yet cached content'</span></span><br><span class="line">[master cabcbbf] add yet cached content</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ touch file4</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"edit file2"</span> &gt;&gt; file2</span><br><span class="line">git status</span><br><span class="line">On branch master</span><br><span class="line">Changes not staged <span class="keyword">for</span> commit:</span><br><span class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to update what will be committed)</span><br><span class="line">  (use <span class="string">"git checkout -- &lt;file&gt;..."</span> to discard changes <span class="keyword">in</span> working directory)</span><br><span class="line"></span><br><span class="line">	modified:   file2</span><br><span class="line"></span><br><span class="line">Untracked files:</span><br><span class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to include <span class="keyword">in</span> what will be committed)</span><br><span class="line"></span><br><span class="line">	file4</span><br><span class="line"></span><br><span class="line">no changes added to commit (use <span class="string">"git add"</span> and/or <span class="string">"git commit -a"</span>)</span><br></pre></td></tr></table></figure>
-<p>此时有工程下有一个新的修改和一个未跟踪的文件，我们使用g<code>it commit -a -m</code>来提交看下最后的效果：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -a -m <span class="string">'add modify'</span></span><br><span class="line">[master 5888696] add modify</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br></pre></td></tr></table></figure></p>
-<p>使用 <code>git status</code>查询当前状态：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Untracked files:</span><br><span class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to include <span class="keyword">in</span> what will be committed)</span><br><span class="line"></span><br><span class="line">	file4</span><br><span class="line"></span><br><span class="line">nothing added to commit but untracked files present (use <span class="string">"git add"</span> to track)</span><br></pre></td></tr></table></figure></p>
+<p>进入我们刚才建立的project目录，分别创建文件file1，file2，file3：</p>
+<pre><code class="sh">bogon:project yuanpinghua$ touch file1 file2 file3
+</code></pre>
+<p>修改文件，可以使用vim编辑内容，也可以直接echo添加测试内容。</p>
+<pre><code class="sh">$ echo &quot;testcontent1&quot; &gt;&gt; file1
+$ echo &quot;testcontent2&quot; &gt;&gt; file2
+$ echo &quot;testcontent3&quot; &gt;&gt; file3
+</code></pre>
+<p>此时可以使用<code>git status</code>命令查看当前git仓库的状态：</p>
+<pre><code class="sh">$ git status
+On branch master
+
+Initial commit
+
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+
+    file1
+    file2
+    file3
+
+nothing added to commit but untracked files present (use &quot;git add&quot; to track)
+
+</code></pre>
+<p>可以发现，有三个文件处于<code>untracked</code>状态，下一步我们就需要用<code>git add</code>命令将他们加入到缓存区（Index）。<br>使用git add命令将新建的文件添加到缓存区：</p>
+<pre><code class="sh">$ git add file1 file2 file3
+</code></pre>
+<p>然后再次执行<code>git status</code>就会发现新的变化：</p>
+<pre><code class="sh">$ git status
+On branch master
+
+Initial commit
+
+Changes to be committed:
+  (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)
+
+    new file:   file1
+    new file:   file2
+    new file:   file3
+</code></pre>
+<p>你现在为commit做好了准备，你可以使用 git diff 命令再加上 –cached 参数，看看缓存区中哪些文件被修改了。<br>如果没有–cached参数，git diff 会显示当前你所有已做的但没有加入到索引里的修改。</p>
+<pre><code class="sh">$ git diff --cached
+diff --git a/file1 b/file1
+new file mode 100644
+index 0000000..ac65bb3
+--- /dev/null
++++ b/file1
+@@ -0,0 +1 @@
++testcontent1
+diff --git a/file2 b/file2
+new file mode 100644
+index 0000000..a7db157
+--- /dev/null
++++ b/file2
+@@ -0,0 +1 @@
++testcontent2
+diff --git a/file3 b/file3
+new file mode 100644
+index 0000000..be7a7f5
+--- /dev/null
++++ b/file3
+@@ -0,0 +1 @@
++testcontent3
+</code></pre>
+<p>当所有新建，修改的文件都被添加到了缓存区，我们就要使用<code>git commit</code>提交到本地仓库：</p>
+<pre><code class="sh">$ git commit -m &#39;add three files&#39;
+[master (root-commit) 2a5cf79] add three files
+ 3 files changed, 3 insertions(+)
+ create mode 100644 file1
+ create mode 100644 file2
+ create mode 100644 file3
+</code></pre>
+<p>需要使用<code>-m</code>添加本次修改的注释，完成后就会记录一个新的项目版本。除了用<code>git add</code>命令，我们还可以用下面的命令将所有没有加到缓存区的修改也一起提交，但<code>-a</code>命令不会添加新建的文件。</p>
+<pre><code class="sh">$ echo &quot;file yet add to cached&quot; &gt;&gt; file1
+$ git commit -a -m &#39;add yet cached content&#39;
+[master cabcbbf] add yet cached content
+ 1 file changed, 1 insertion(+)
+</code></pre>
+<pre><code class="sh">$ touch file4
+$ echo &quot;edit file2&quot; &gt;&gt; file2
+git status
+On branch master
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+    modified:   file2
+
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+
+    file4
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre>
+<p>此时有工程下有一个新的修改和一个未跟踪的文件，我们使用g<code>it commit -a -m</code>来提交看下最后的效果：</p>
+<pre><code class="sh">$ git commit -a -m &#39;add modify&#39;
+[master 5888696] add modify
+ 1 file changed, 1 insertion(+)
+</code></pre>
+<p>使用 <code>git status</code>查询当前状态：</p>
+<pre><code class="sh">$ git status
+On branch master
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+
+    file4
+
+nothing added to commit but untracked files present (use &quot;git add&quot; to track)
+</code></pre>
 <p>我们发现刚才新增的文件没有提交到本地的仓库里。<br>我们使用 <code>git add</code>,<code>git commit -m</code>将其提交到本地仓库中。<br>再次输入git status查看状态，会发现当前的代码库已经没有待提交的文件了，缓存区已经被清空。</p>
 <blockquote>
 <p>至此，我们完成了第一次代码提交，这次提交的代码中我们创建了四个新文件。需要注意的是如果是修改文件，也需要使用<code>git add</code>命令添加到缓存区才可以提交。如果是删除文件，则直接使用<code>git rm</code>命令删除后会自动将已删除文件的信息添加到缓存区，<code>git commit</code>提交后就会将本地仓库中的对应文件删除</p>
 </blockquote>
-<p>这个时候如果本地的仓库连接到了远程Git服务器，可以使用下面的命令将本地仓库同步到远端服务器：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure></p>
+<p>这个时候如果本地的仓库连接到了远程Git服务器，可以使用下面的命令将本地仓库同步到远端服务器：</p>
+<pre><code class="sh">$ git push origin master
+</code></pre>
 <h1 id="分支与合并"><a href="#分支与合并" class="headerlink" title="分支与合并"></a>分支与合并</h1><p>&emsp;Git的分支可以让你在主线（master分支）之外进行代码提交，同时又不会影响代码库主线。分支的作用体现在多人协作开发中，比如一个团队开发软件，你负责独立的一个功能需要一个月的时间来完成，你就可以创建一个分支，只把该功能的代码提交到这个分支，而其他同事仍然可以继续使用主线开发，你每天的提交不会对他们造成任何影响。当你完成功能后，测试通过再把你的功能分支合并到主线</p>
-<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>一个Git仓库可以维护很多开发分支。现在我们来创建一个新的叫 <code>experimental</code>的分支<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git branch experimental</span><br></pre></td></tr></table></figure></p>
-<p>运行git branch命令可以查看当前的分支列表，已经目前的开发环境处在哪个分支上：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git branch</span><br><span class="line">  experimental</span><br><span class="line">* master</span><br></pre></td></tr></table></figure></p>
-<p><code>experimental</code>分支是你刚才创建的，<code>master</code>分支是<code>Git</code>系统默认创建的主分支。星号标识了你当工作在哪个分支下，输入<code>git checkout</code>分支名可以切换到其他分支：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout experimental</span><br><span class="line">Switched to branch <span class="string">'experimental'</span></span><br></pre></td></tr></table></figure></p>
-<p>切换到<code>experimental</code>分支，切换完成后，先编辑里面的一个文件，再提交(<code>commit</code>)改动，最后切换回 “<code>master</code>”分支：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">'update file1 in experimental branch'</span> &gt;&gt; file1 <span class="comment"># 修改文件</span></span><br><span class="line">$ git status <span class="comment"># 查看当前状态</span></span><br><span class="line">On branch experimental</span><br><span class="line">Changes not staged <span class="keyword">for</span> commit:</span><br><span class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to update what will be committed)</span><br><span class="line">  (use <span class="string">"git checkout -- &lt;file&gt;..."</span> to discard changes <span class="keyword">in</span> working directory)</span><br><span class="line"></span><br><span class="line">	modified:   file1</span><br><span class="line"></span><br><span class="line">no changes added to commit (use <span class="string">"git add"</span> and/or <span class="string">"git commit -a"</span>)</span><br><span class="line">$ git add file1 <span class="comment"># 添加修改</span></span><br><span class="line">$ git commit -m <span class="string">'update file1'</span> <span class="comment"># 提交更改</span></span><br><span class="line">[experimental f8d7347] update file1</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line">$ cat file1 <span class="comment"># 查看内容</span></span><br><span class="line">testcontent1</span><br><span class="line">file yet add to cached</span><br><span class="line">update file1 <span class="keyword">in</span> experimental branch</span><br><span class="line">$ git checkout master <span class="comment"># 切换回主分支</span></span><br><span class="line">Switched to branch <span class="string">'master'</span></span><br></pre></td></tr></table></figure></p>
-<p>查看下file1中的内容会发现刚才做的修改已经看不到了。因为刚才的修改时在<code>experimental</code>分支下，现在切换回了<code>master</code>分支，目录下的文件都是<code>master</code>分支上的文件了。<br>现在可以在<code>master</code>分支下再作一些不同的修改:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">'update file2 in master branch'</span> &gt;&gt; file2</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use "git add &lt;file&gt;..." to update what will be committed)</span><br><span class="line">  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">	modified:   file2</span><br><span class="line"></span><br><span class="line">no changes added to commit (use "git add" and/or "git commit -a")</span><br><span class="line"><span class="meta">$</span><span class="bash"> git add file2</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git  commit -m <span class="string">' update file2 on master'</span></span></span><br><span class="line">[master b1f2507]  update file2 on master</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"><span class="meta">$</span><span class="bash"> cat file2</span></span><br><span class="line">testcontent2</span><br><span class="line">edit file2</span><br><span class="line">update file2 in master branch</span><br></pre></td></tr></table></figure></p>
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>一个Git仓库可以维护很多开发分支。现在我们来创建一个新的叫 <code>experimental</code>的分支</p>
+<pre><code class="sh">$ git branch experimental
+</code></pre>
+<p>运行git branch命令可以查看当前的分支列表，已经目前的开发环境处在哪个分支上：</p>
+<pre><code class="sh">$ git branch
+  experimental
+* master
+</code></pre>
+<p><code>experimental</code>分支是你刚才创建的，<code>master</code>分支是<code>Git</code>系统默认创建的主分支。星号标识了你当工作在哪个分支下，输入<code>git checkout</code>分支名可以切换到其他分支：</p>
+<pre><code class="sh">$ git checkout experimental
+Switched to branch &#39;experimental&#39;
+</code></pre>
+<p>切换到<code>experimental</code>分支，切换完成后，先编辑里面的一个文件，再提交(<code>commit</code>)改动，最后切换回 “<code>master</code>”分支：</p>
+<pre><code class="sh">$ echo &#39;update file1 in experimental branch&#39; &gt;&gt; file1 # 修改文件
+$ git status # 查看当前状态
+On branch experimental
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+    modified:   file1
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+$ git add file1 # 添加修改
+$ git commit -m &#39;update file1&#39; # 提交更改
+[experimental f8d7347] update file1
+ 1 file changed, 1 insertion(+)
+$ cat file1 # 查看内容
+testcontent1
+file yet add to cached
+update file1 in experimental branch
+$ git checkout master # 切换回主分支
+Switched to branch &#39;master&#39;
+</code></pre>
+<p>查看下file1中的内容会发现刚才做的修改已经看不到了。因为刚才的修改时在<code>experimental</code>分支下，现在切换回了<code>master</code>分支，目录下的文件都是<code>master</code>分支上的文件了。<br>现在可以在<code>master</code>分支下再作一些不同的修改:</p>
+<pre><code class="shell">$ echo &#39;update file2 in master branch&#39; &gt;&gt; file2
+$ git status
+On branch master
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+    modified:   file2
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+$ git add file2
+$ git  commit -m &#39; update file2 on master&#39;
+[master b1f2507]  update file2 on master
+ 1 file changed, 1 insertion(+)
+$ cat file2
+testcontent2
+edit file2
+update file2 in master branch
+
+</code></pre>
 <p>这时，两个分支就有了各自不同的修改，分支的内容都已经不同，如何将多个分支进行合并呢？</p>
-<p>可以通过下面的<code>git merge</code>命令来合并<code>experimental</code>到主线分支<code>master</code>:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git merge -m <span class="string">'merge experimental branch'</span> experimental</span></span><br><span class="line">Merge made by the 'recursive' strategy.</span><br><span class="line"> file1 | 1 +</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br></pre></td></tr></table></figure></p>
+<p>可以通过下面的<code>git merge</code>命令来合并<code>experimental</code>到主线分支<code>master</code>:</p>
+<pre><code class="shell">$ git merge -m &#39;merge experimental branch&#39; experimental
+Merge made by the &#39;recursive&#39; strategy.
+ file1 | 1 +
+ 1 file changed, 1 insertion(+)
+
+</code></pre>
 <p><code>-m</code>参数仍然是需要填写合并的注释信息。<br>由于两个branch修改了两个不同的文件，所以合并时不会有冲突，执行上面的命令后合并就完成了。</p>
-<p>如果有冲突，比如两个分支都改了一个文件file3，则合并时会失败。首先我们在master分支上修改file3文件并提交：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改文件3</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">'update file3 in master branch'</span> &gt;&gt; file3</span><br><span class="line">$ git commit -a -m <span class="string">'update file3 on master'</span> <span class="comment"># 提交更改</span></span><br><span class="line">[master 042406f] update file3 on master</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br></pre></td></tr></table></figure></p>
-<p>然后切换到<code>experimental</code>，修改<code>file3</code>并提交：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout experimental</span><br><span class="line">Switched to branch <span class="string">'experimental'</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">' update file3 on experimental'</span> &gt;&gt; file3</span><br><span class="line">$ git commit -a -m <span class="string">'update file3 on experimental'</span></span><br><span class="line">[experimental b5bdaf6] update file3 on experimental</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br></pre></td></tr></table></figure></p>
-<p>切换到<code>master</code>进行合并：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git merge experimental</span><br><span class="line">Auto-merging file3</span><br><span class="line">CONFLICT (content): Merge conflict <span class="keyword">in</span> file3</span><br><span class="line">Automatic merge failed; fix conflicts and <span class="keyword">then</span> commit the result.</span><br></pre></td></tr></table></figure></p>
-<p>合并失败后先用<code>git status</code>查看状态，会发现file3显示为<code>both modified</code>，查看file3内容会发现：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">You have unmerged paths.</span><br><span class="line">  (fix conflicts and run <span class="string">"git commit"</span>)</span><br><span class="line"></span><br><span class="line">Unmerged paths:</span><br><span class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to mark resolution)</span><br><span class="line"></span><br><span class="line">	both modified:   file3</span><br><span class="line"></span><br><span class="line">no changes added to commit (use <span class="string">"git add"</span> and/or <span class="string">"git commit -a"</span>)</span><br><span class="line">$ cat file3</span><br><span class="line">testcontent3</span><br><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span><br><span class="line">update file3 <span class="keyword">in</span> master branch</span><br><span class="line">=======</span><br><span class="line"> update file3 on experimental</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; experimental</span><br></pre></td></tr></table></figure></p>
-<p>上面的内容也可以使用<code>git diff</code>查看，先前已经提到<code>git diff</code>不加参数可以显示未提交到缓存区中的修改内容。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ git diff</span><br><span class="line">diff --cc file3</span><br><span class="line">index c3d69fe,2d0b022..0000000</span><br><span class="line">--- a/file3</span><br><span class="line">+++ b/file3</span><br><span class="line">@@@ -1,2 -1,2 +1,6 @@@</span><br><span class="line">  testcontent3</span><br><span class="line">++&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span><br><span class="line"> +update file3 <span class="keyword">in</span> master branch</span><br><span class="line">++=======</span><br><span class="line">+  update file3 on experimental</span><br><span class="line">++&gt;&gt;&gt;&gt;&gt;&gt;&gt; experimental</span><br></pre></td></tr></table></figure></p>
-<p>可以看到冲突的内容都被添加到了file3中，我们使用vim编辑这个文件，去掉git自动产生标志冲突的<code>&lt;&lt;&lt;&lt;&lt;&lt;</code>等符号后，根据需要只保留我们需要的内容后保存，然后使用<code>git add file3</code>和<code>git commit</code>命令来提交合并后的file3内容，这个过程是手动解决冲突的流程。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ vi file3</span><br><span class="line">$ git add file3</span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">All conflicts fixed but you are still merging.</span><br><span class="line">  (use <span class="string">"git commit"</span> to conclude merge)</span><br><span class="line"></span><br><span class="line">Changes to be committed:</span><br><span class="line"></span><br><span class="line">	modified:   file3</span><br><span class="line"></span><br><span class="line">$ git commit -m <span class="string">'merge file3'</span></span><br><span class="line">[master 9cbeac6] merge file3</span><br></pre></td></tr></table></figure></p>
-<p>当我们完成合并后，不再需要<code>experimental</code>时，可以使用下面的命令删除：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -d experimental</span><br><span class="line">Deleted branch experimental (was b5bdaf6).</span><br></pre></td></tr></table></figure></p>
+<p>如果有冲突，比如两个分支都改了一个文件file3，则合并时会失败。首先我们在master分支上修改file3文件并提交：</p>
+<pre><code class="sh"># 修改文件3
+$ echo &#39;update file3 in master branch&#39; &gt;&gt; file3
+$ git commit -a -m &#39;update file3 on master&#39; # 提交更改
+[master 042406f] update file3 on master
+ 1 file changed, 1 insertion(+)
+</code></pre>
+<p>然后切换到<code>experimental</code>，修改<code>file3</code>并提交：</p>
+<pre><code class="sh">$ git checkout experimental
+Switched to branch &#39;experimental&#39;
+$ echo &#39; update file3 on experimental&#39; &gt;&gt; file3
+$ git commit -a -m &#39;update file3 on experimental&#39;
+[experimental b5bdaf6] update file3 on experimental
+ 1 file changed, 1 insertion(+)
+
+</code></pre>
+<p>切换到<code>master</code>进行合并：</p>
+<pre><code class="sh">$ git merge experimental
+Auto-merging file3
+CONFLICT (content): Merge conflict in file3
+Automatic merge failed; fix conflicts and then commit the result.
+
+</code></pre>
+<p>合并失败后先用<code>git status</code>查看状态，会发现file3显示为<code>both modified</code>，查看file3内容会发现：</p>
+<pre><code class="sh">$ git status
+On branch master
+You have unmerged paths.
+  (fix conflicts and run &quot;git commit&quot;)
+
+Unmerged paths:
+  (use &quot;git add &lt;file&gt;...&quot; to mark resolution)
+
+    both modified:   file3
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+$ cat file3
+testcontent3
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+update file3 in master branch
+=======
+ update file3 on experimental
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; experimental
+
+</code></pre>
+<p>上面的内容也可以使用<code>git diff</code>查看，先前已经提到<code>git diff</code>不加参数可以显示未提交到缓存区中的修改内容。</p>
+<pre><code class="sh">$ git diff
+diff --cc file3
+index c3d69fe,2d0b022..0000000
+--- a/file3
++++ b/file3
+@@@ -1,2 -1,2 +1,6 @@@
+  testcontent3
+++&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+ +update file3 in master branch
+++=======
++  update file3 on experimental
+++&gt;&gt;&gt;&gt;&gt;&gt;&gt; experimental
+
+</code></pre>
+<p>可以看到冲突的内容都被添加到了file3中，我们使用vim编辑这个文件，去掉git自动产生标志冲突的<code>&lt;&lt;&lt;&lt;&lt;&lt;</code>等符号后，根据需要只保留我们需要的内容后保存，然后使用<code>git add file3</code>和<code>git commit</code>命令来提交合并后的file3内容，这个过程是手动解决冲突的流程。</p>
+<pre><code class="sh">$ vi file3
+$ git add file3
+$ git status
+On branch master
+All conflicts fixed but you are still merging.
+  (use &quot;git commit&quot; to conclude merge)
+
+Changes to be committed:
+
+    modified:   file3
+
+$ git commit -m &#39;merge file3&#39;
+[master 9cbeac6] merge file3
+
+</code></pre>
+<p>当我们完成合并后，不再需要<code>experimental</code>时，可以使用下面的命令删除：</p>
+<pre><code class="sh">$ git branch -d experimental
+Deleted branch experimental (was b5bdaf6).
+
+</code></pre>
 <blockquote>
 <p><code>git branch -d</code>只能删除那些已经被当前分支的合并的分支. 如果你要强制删除某个分支的话就用<code>git branch –D</code></p>
 </blockquote>
-<h2 id="撒销一个合并"><a href="#撒销一个合并" class="headerlink" title="撒销一个合并"></a>撒销一个合并</h2><p>如果你觉得你合并后的状态是一团乱麻，想把当前的修改都放弃，你可以用下面的命令回到合并之前的状态：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a$ git reset --hard HEAD^</span><br><span class="line">HEAD is now at 042406f update file3 on master</span><br><span class="line">$ cat file3  <span class="comment"># 查看file3的内容，已经恢复到合并前的master上的文件内容</span></span><br><span class="line">testcontent3</span><br><span class="line">update file3 <span class="keyword">in</span> master branch</span><br></pre></td></tr></table></figure></p>
+<h2 id="撒销一个合并"><a href="#撒销一个合并" class="headerlink" title="撒销一个合并"></a>撒销一个合并</h2><p>如果你觉得你合并后的状态是一团乱麻，想把当前的修改都放弃，你可以用下面的命令回到合并之前的状态：</p>
+<pre><code class="sh">a$ git reset --hard HEAD^
+HEAD is now at 042406f update file3 on master
+$ cat file3  # 查看file3的内容，已经恢复到合并前的master上的文件内容
+testcontent3
+update file3 in master branch
+</code></pre>
 <h2 id="快速向前合并"><a href="#快速向前合并" class="headerlink" title="快速向前合并"></a>快速向前合并</h2><p>还有一种需要特殊对待的情况，在前面没有提到。通常，一个合并会产生一个合并提交(commit), 把两个父分支里的每一行内容都合并进来。</p>
 <p>但是，如果当前的分支和另一个分支没有内容上的差异，就是说当前分支的每一个提交(commit)都已经存在另一个分支里了，git 就会执行一个“快速向前”(fast forward)操作；git 不创建任何新的提交(commit),只是将当前分支指向合并进来的分支。</p>
-<h1 id="Git日志"><a href="#Git日志" class="headerlink" title="Git日志"></a>Git日志</h1><h2 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h2><p><code>git log</code>命令可以显示所有的提交(commit)：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span></span><br></pre></td></tr></table></figure></p>
-<p>如果提交的历史纪录很长，回车会逐步显示，输入<code>q</code>可以退出。<br><code>git log</code>有很多选项，可以使用<code>git help log</code>查看，例如下面的命令就是找出所有从”v2.5“开始在fs目录下的所有Makefile的修改：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> v2.5.. Makefile fs/</span><br></pre></td></tr></table></figure></p>
+<h1 id="Git日志"><a href="#Git日志" class="headerlink" title="Git日志"></a>Git日志</h1><h2 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h2><p><code>git log</code>命令可以显示所有的提交(commit)：</p>
+<pre><code class="sh">$ git log
+
+</code></pre>
+<p>如果提交的历史纪录很长，回车会逐步显示，输入<code>q</code>可以退出。<br><code>git log</code>有很多选项，可以使用<code>git help log</code>查看，例如下面的命令就是找出所有从”v2.5“开始在fs目录下的所有Makefile的修改：</p>
+<pre><code class="sh">$ git log v2.5.. Makefile fs/
+</code></pre>
 <p>Git会根据<code>git log</code>命令的参数，按时间顺序显示相关的提交(commit)。</p>
-<h2 id="日志统计"><a href="#日志统计" class="headerlink" title="日志统计"></a>日志统计</h2><p>如果用–stat选项使用<code>git log</code>,它会显示在每个提交(commit)中哪些文件被修改了, 这些文件分别添加或删除了多少行内容，这个命令相当于打印详细的提交记录：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --<span class="built_in">stat</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="格式化日志"><a href="#格式化日志" class="headerlink" title="格式化日志"></a>格式化日志</h2><p>你可以按你的要求来格式化日志输出。<code>--pretty</code> 参数可以使用若干表现格式，如<code>oneline</code>:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --pretty=oneline</span><br></pre></td></tr></table></figure></p>
-<p>显示样式如下<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">042406fc594369852da2a708d3c1711d0e06f96e update file3 on master</span><br><span class="line">26ecc96e38154b12f13e524a59258ceaf12a1ec8 merge experimental branch</span><br><span class="line">b1f2507784fb22ea6e6fcbe94fe3c0f5deafc8e4  update file2 on master</span><br><span class="line">f8d734757042dc5b92f6f1ea5a8cff828c339ef5 update file1</span><br><span class="line">ebf80c4a15490f3356f4fd20d602de195bb9841f add file4</span><br><span class="line">58886962819614df227fc19cfb9148cb286c1865 add modify</span><br><span class="line">cabcbbf371f41559e6fefdd4dbc8bc057d1f19e0 add yet cached content</span><br><span class="line">2a5cf798589e67b6cc7e6ba26a042e9523b5cd05 add three files</span><br></pre></td></tr></table></figure></p>
-<p>或者你也可以使用 short 格式:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --pretty=short</span><br></pre></td></tr></table></figure></p>
-<p>显示结果样式如下：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">commit 042406fc594369852da2a708d3c1711d0e06f96e</span><br><span class="line">Author: yuanph &lt;yuanph@ushareit.com&gt;</span><br><span class="line"></span><br><span class="line">    update file3 on master</span><br><span class="line"></span><br><span class="line">commit 26ecc96e38154b12f13e524a59258ceaf12a1ec8</span><br><span class="line">Merge: b1f2507 f8d7347</span><br><span class="line">Author: yuanph &lt;yuanph@ushareit.com&gt;</span><br><span class="line"></span><br><span class="line">    merge experimental branch</span><br><span class="line">.....</span><br></pre></td></tr></table></figure></p>
+<h2 id="日志统计"><a href="#日志统计" class="headerlink" title="日志统计"></a>日志统计</h2><p>如果用–stat选项使用<code>git log</code>,它会显示在每个提交(commit)中哪些文件被修改了, 这些文件分别添加或删除了多少行内容，这个命令相当于打印详细的提交记录：</p>
+<pre><code class="sh">$ git log --stat
+</code></pre>
+<h2 id="格式化日志"><a href="#格式化日志" class="headerlink" title="格式化日志"></a>格式化日志</h2><p>你可以按你的要求来格式化日志输出。<code>--pretty</code> 参数可以使用若干表现格式，如<code>oneline</code>:</p>
+<pre><code class="sh">$ git log --pretty=oneline
+</code></pre>
+<p>显示样式如下</p>
+<pre><code class="sh">042406fc594369852da2a708d3c1711d0e06f96e update file3 on master
+26ecc96e38154b12f13e524a59258ceaf12a1ec8 merge experimental branch
+b1f2507784fb22ea6e6fcbe94fe3c0f5deafc8e4  update file2 on master
+f8d734757042dc5b92f6f1ea5a8cff828c339ef5 update file1
+ebf80c4a15490f3356f4fd20d602de195bb9841f add file4
+58886962819614df227fc19cfb9148cb286c1865 add modify
+cabcbbf371f41559e6fefdd4dbc8bc057d1f19e0 add yet cached content
+2a5cf798589e67b6cc7e6ba26a042e9523b5cd05 add three files
+</code></pre>
+<p>或者你也可以使用 short 格式:</p>
+<pre><code class="sh">$ git log --pretty=short
+</code></pre>
+<p>显示结果样式如下：</p>
+<pre><code class="sh">commit 042406fc594369852da2a708d3c1711d0e06f96e
+Author: yuanph &lt;yuanph@ushareit.com&gt;
+
+    update file3 on master
+
+commit 26ecc96e38154b12f13e524a59258ceaf12a1ec8
+Merge: b1f2507 f8d7347
+Author: yuanph &lt;yuanph@ushareit.com&gt;
+
+    merge experimental branch
+.....
+</code></pre>
 <p>你也可用<code>medium</code>,<code>full</code>,<code>fuller</code>,<code>email</code> 或<code>raw</code>。 如果这些格式不完全符合你的相求， 你也可以用<code>--pretty=format</code>参数定义格式。<br>以下是几种格式的显示方式，有兴趣可以看下，没有兴趣的略过</p>
 <ul>
-<li><p><code>git log --pretty=medium</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># medium</span></span><br><span class="line">$ git <span class="built_in">log</span> --pretty=medium</span><br><span class="line">commit 042406fc594369852da2a708d3c1711d0e06f96e</span><br><span class="line">Author: yuanph &lt;yuanph@ushareit.com&gt;</span><br><span class="line">Date:   Tue Oct 11 16:14:03 2016 +0800</span><br><span class="line"></span><br><span class="line">    update file3 on master</span><br><span class="line"></span><br><span class="line">commit 26ecc96e38154b12f13e524a59258ceaf12a1ec8</span><br><span class="line">Merge: b1f2507 f8d7347</span><br><span class="line">Author: yuanph &lt;yuanph@ushareit.com&gt;</span><br><span class="line">Date:   Tue Oct 11 16:11:45 2016 +0800</span><br><span class="line"></span><br><span class="line">    merge experimental branch</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>git log --pretty=full</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --pretty=full</span><br><span class="line">commit 042406fc594369852da2a708d3c1711d0e06f96e</span><br><span class="line">Author: yuanph &lt;yuanph@ushareit.com&gt;</span><br><span class="line">Commit: yuanph &lt;yuanph@ushareit.com&gt;</span><br><span class="line"></span><br><span class="line">    update file3 on master</span><br><span class="line"></span><br><span class="line">commit 26ecc96e38154b12f13e524a59258ceaf12a1ec8</span><br><span class="line">Merge: b1f2507 f8d7347</span><br><span class="line">Author: yuanph &lt;yuanph@ushareit.com&gt;</span><br><span class="line">Commit: yuanph &lt;yuanph@ushareit.com&gt;</span><br><span class="line"></span><br><span class="line">    merge experimental branch</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>git log --pretty=fuller</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ git <span class="built_in">log</span> --pretty=fuller</span><br><span class="line">commit 042406fc594369852da2a708d3c1711d0e06f96e</span><br><span class="line">Author:     yuanph &lt;yuanph@ushareit.com&gt;</span><br><span class="line">AuthorDate: Tue Oct 11 16:14:03 2016 +0800</span><br><span class="line">Commit:     yuanph &lt;yuanph@ushareit.com&gt;</span><br><span class="line">CommitDate: Tue Oct 11 16:14:03 2016 +0800</span><br><span class="line"></span><br><span class="line">    update file3 on master</span><br><span class="line"></span><br><span class="line">commit 26ecc96e38154b12f13e524a59258ceaf12a1ec8</span><br><span class="line">Merge: b1f2507 f8d7347</span><br><span class="line">Author:     yuanph &lt;yuanph@ushareit.com&gt;</span><br><span class="line">AuthorDate: Tue Oct 11 16:11:45 2016 +0800</span><br><span class="line">Commit:     yuanph &lt;yuanph@ushareit.com&gt;</span><br><span class="line">CommitDate: Tue Oct 11 16:11:45 2016 +0800</span><br><span class="line"></span><br><span class="line">    merge experimental branch</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>git log --pretty=email</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --pretty=email</span><br><span class="line">From 042406fc594369852da2a708d3c1711d0e06f96e Mon Sep 17 00:00:00 2001</span><br><span class="line">From: yuanph &lt;yuanph@ushareit.com&gt;</span><br><span class="line">Date: Tue, 11 Oct 2016 16:14:03 +0800</span><br><span class="line">Subject: [PATCH] update file3 on master</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">From 26ecc96e38154b12f13e524a59258ceaf12a1ec8 Mon Sep 17 00:00:00 2001</span><br><span class="line">From: yuanph &lt;yuanph@ushareit.com&gt;</span><br><span class="line">Date: Tue, 11 Oct 2016 16:11:45 +0800</span><br><span class="line">Subject: [PATCH] merge experimental branch</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>git log --pretty=raw</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --pretty=raw</span><br><span class="line">commit 042406fc594369852da2a708d3c1711d0e06f96e</span><br><span class="line">tree f69c2548cf938330507318e36b3e4f72b26a7e69</span><br><span class="line">parent 26ecc96e38154b12f13e524a59258ceaf12a1ec8</span><br><span class="line">author yuanph &lt;yuanph@ushareit.com&gt; 1476173643 +0800</span><br><span class="line">committer yuanph &lt;yuanph@ushareit.com&gt; 1476173643 +0800</span><br><span class="line"></span><br><span class="line">    update file3 on master</span><br><span class="line"></span><br><span class="line">commit 26ecc96e38154b12f13e524a59258ceaf12a1ec8</span><br><span class="line">tree 6fe01742a9fc7b236e446a18a6e0171ebe106e19</span><br><span class="line">parent b1f2507784fb22ea6e6fcbe94fe3c0f5deafc8e4</span><br><span class="line">parent f8d734757042dc5b92f6f1ea5a8cff828c339ef5</span><br><span class="line">author yuanph &lt;yuanph@ushareit.com&gt; 1476173505 +0800</span><br><span class="line">committer yuanph &lt;yuanph@ushareit.com&gt; 1476173505 +0800</span><br><span class="line"></span><br><span class="line">    merge experimental branch</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>--graph</code> 选项可以可视化你的提交图(commit graph)，会用ASCII字符来画出一个很漂亮的提交历史(commit history)线：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --graph --pretty=oneline</span><br><span class="line">* 042406fc594369852da2a708d3c1711d0e06f96e update file3 on master</span><br><span class="line">*   26ecc96e38154b12f13e524a59258ceaf12a1ec8 merge experimental branch</span><br><span class="line">|\  </span><br><span class="line">| * f8d734757042dc5b92f6f1ea5a8cff828c339ef5 update file1</span><br><span class="line">* | b1f2507784fb22ea6e6fcbe94fe3c0f5deafc8e4  update file2 on master</span><br><span class="line">|/  </span><br><span class="line">* ebf80c4a15490f3356f4fd20d602de195bb9841f add file4</span><br><span class="line">* 58886962819614df227fc19cfb9148cb286c1865 add modify</span><br><span class="line">* cabcbbf371f41559e6fefdd4dbc8bc057d1f19e0 add yet cached content</span><br><span class="line">* 2a5cf798589e67b6cc7e6ba26a042e9523b5cd05 add three files</span><br></pre></td></tr></table></figure>
+<li><p><code>git log --pretty=medium</code><br><code>`</code>sh</p>
+<h1 id="medium"><a href="#medium" class="headerlink" title="medium"></a>medium</h1><p>$ git log –pretty=medium<br>commit 042406fc594369852da2a708d3c1711d0e06f96e<br>Author: yuanph <a href="mailto:&#x79;&#117;&#97;&#110;&#x70;&#x68;&#64;&#117;&#115;&#x68;&#97;&#114;&#x65;&#x69;&#116;&#46;&#x63;&#x6f;&#109;" target="_blank" rel="noopener">&#x79;&#117;&#97;&#110;&#x70;&#x68;&#64;&#117;&#115;&#x68;&#97;&#114;&#x65;&#x69;&#116;&#46;&#x63;&#x6f;&#109;</a><br>Date:   Tue Oct 11 16:14:03 2016 +0800</p>
+<p>  update file3 on master</p>
 </li>
 </ul>
-<h2 id="日志排序"><a href="#日志排序" class="headerlink" title="日志排序"></a>日志排序</h2><p>日志记录可以按不同的顺序来显示。如果你要指定一个特定的顺序，可以为git log命令添加顺序参数。<br>按默认情况，提交会按逆时间顺序显示，可以指定<code>--topo-order</code>参数，让提交按拓扑顺序来显示(就是子提交在它们的父提交前显示):<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --pretty=format:<span class="string">'%h:%s'</span> --topo-order --graph</span><br></pre></td></tr></table></figure></p>
-<p>展示效果：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">* 042406f:update file3 on master</span><br><span class="line">*   26ecc96:merge experimental branch</span><br><span class="line">|\  </span><br><span class="line">| * f8d7347:update file1</span><br><span class="line">* | b1f2507: update file2 on master</span><br><span class="line">|/  </span><br><span class="line">* ebf80c4:add file4</span><br><span class="line">* 5888696:add modify</span><br><span class="line">* cabcbbf:add yet cached content</span><br><span class="line">* 2a5cf79:add three files</span><br></pre></td></tr></table></figure></p>
+<p>commit 26ecc96e38154b12f13e524a59258ceaf12a1ec8<br>Merge: b1f2507 f8d7347<br>Author: yuanph <a href="mailto:&#121;&#117;&#97;&#110;&#112;&#x68;&#64;&#x75;&#x73;&#x68;&#x61;&#114;&#101;&#x69;&#x74;&#46;&#x63;&#x6f;&#x6d;" target="_blank" rel="noopener">&#121;&#117;&#97;&#110;&#112;&#x68;&#64;&#x75;&#x73;&#x68;&#x61;&#114;&#101;&#x69;&#x74;&#46;&#x63;&#x6f;&#x6d;</a><br>Date:   Tue Oct 11 16:11:45 2016 +0800</p>
+<pre><code>merge experimental branch
+</code></pre><pre><code>* `git log --pretty=full`
+```sh
+$ git log --pretty=full
+commit 042406fc594369852da2a708d3c1711d0e06f96e
+Author: yuanph &lt;yuanph@ushareit.com&gt;
+Commit: yuanph &lt;yuanph@ushareit.com&gt;
+
+    update file3 on master
+
+commit 26ecc96e38154b12f13e524a59258ceaf12a1ec8
+Merge: b1f2507 f8d7347
+Author: yuanph &lt;yuanph@ushareit.com&gt;
+Commit: yuanph &lt;yuanph@ushareit.com&gt;
+
+    merge experimental branch
+</code></pre><ul>
+<li><code>git log --pretty=fuller</code><br><code>`</code>sh</li>
+</ul>
+<p>$ git log –pretty=fuller<br>commit 042406fc594369852da2a708d3c1711d0e06f96e<br>Author:     yuanph <a href="mailto:&#x79;&#x75;&#x61;&#x6e;&#x70;&#104;&#x40;&#x75;&#115;&#104;&#97;&#114;&#101;&#105;&#x74;&#x2e;&#99;&#x6f;&#109;" target="_blank" rel="noopener">&#x79;&#x75;&#x61;&#x6e;&#x70;&#104;&#x40;&#x75;&#115;&#104;&#97;&#114;&#101;&#105;&#x74;&#x2e;&#99;&#x6f;&#109;</a><br>AuthorDate: Tue Oct 11 16:14:03 2016 +0800<br>Commit:     yuanph <a href="mailto:&#x79;&#117;&#x61;&#x6e;&#x70;&#104;&#64;&#x75;&#115;&#104;&#97;&#114;&#101;&#105;&#x74;&#x2e;&#99;&#111;&#109;" target="_blank" rel="noopener">&#x79;&#117;&#x61;&#x6e;&#x70;&#104;&#64;&#x75;&#115;&#104;&#97;&#114;&#101;&#105;&#x74;&#x2e;&#99;&#111;&#109;</a><br>CommitDate: Tue Oct 11 16:14:03 2016 +0800</p>
+<pre><code>update file3 on master
+</code></pre><p>commit 26ecc96e38154b12f13e524a59258ceaf12a1ec8<br>Merge: b1f2507 f8d7347<br>Author:     yuanph <a href="mailto:&#x79;&#117;&#97;&#x6e;&#112;&#104;&#x40;&#117;&#x73;&#104;&#x61;&#114;&#x65;&#105;&#x74;&#x2e;&#99;&#x6f;&#109;" target="_blank" rel="noopener">&#x79;&#117;&#97;&#x6e;&#112;&#104;&#x40;&#117;&#x73;&#104;&#x61;&#114;&#x65;&#105;&#x74;&#x2e;&#99;&#x6f;&#109;</a><br>AuthorDate: Tue Oct 11 16:11:45 2016 +0800<br>Commit:     yuanph <a href="mailto:&#121;&#117;&#97;&#x6e;&#112;&#104;&#64;&#x75;&#115;&#104;&#97;&#x72;&#101;&#105;&#116;&#x2e;&#x63;&#x6f;&#109;" target="_blank" rel="noopener">&#121;&#117;&#97;&#x6e;&#112;&#104;&#64;&#x75;&#115;&#104;&#97;&#x72;&#101;&#105;&#116;&#x2e;&#x63;&#x6f;&#109;</a><br>CommitDate: Tue Oct 11 16:11:45 2016 +0800</p>
+<pre><code>merge experimental branch
+</code></pre><pre><code>* `git log --pretty=email`
+```sh
+$ git log --pretty=email
+From 042406fc594369852da2a708d3c1711d0e06f96e Mon Sep 17 00:00:00 2001
+From: yuanph &lt;yuanph@ushareit.com&gt;
+Date: Tue, 11 Oct 2016 16:14:03 +0800
+Subject: [PATCH] update file3 on master
+
+
+From 26ecc96e38154b12f13e524a59258ceaf12a1ec8 Mon Sep 17 00:00:00 2001
+From: yuanph &lt;yuanph@ushareit.com&gt;
+Date: Tue, 11 Oct 2016 16:11:45 +0800
+Subject: [PATCH] merge experimental branch
+
+</code></pre><ul>
+<li><p><code>git log --pretty=raw</code><br><code>`</code>sh<br>$ git log –pretty=raw<br>commit 042406fc594369852da2a708d3c1711d0e06f96e<br>tree f69c2548cf938330507318e36b3e4f72b26a7e69<br>parent 26ecc96e38154b12f13e524a59258ceaf12a1ec8<br>author yuanph <a href="mailto:&#121;&#117;&#x61;&#110;&#x70;&#104;&#64;&#x75;&#115;&#104;&#97;&#x72;&#x65;&#105;&#x74;&#x2e;&#99;&#111;&#109;" target="_blank" rel="noopener">&#121;&#117;&#x61;&#110;&#x70;&#104;&#64;&#x75;&#115;&#104;&#97;&#x72;&#x65;&#105;&#x74;&#x2e;&#99;&#111;&#109;</a> 1476173643 +0800<br>committer yuanph <a href="mailto:&#121;&#x75;&#97;&#x6e;&#112;&#104;&#64;&#x75;&#x73;&#104;&#x61;&#114;&#101;&#x69;&#x74;&#x2e;&#99;&#111;&#x6d;" target="_blank" rel="noopener">&#121;&#x75;&#97;&#x6e;&#112;&#104;&#64;&#x75;&#x73;&#104;&#x61;&#114;&#101;&#x69;&#x74;&#x2e;&#99;&#111;&#x6d;</a> 1476173643 +0800</p>
+<p>  update file3 on master</p>
+</li>
+</ul>
+<p>commit 26ecc96e38154b12f13e524a59258ceaf12a1ec8<br>tree 6fe01742a9fc7b236e446a18a6e0171ebe106e19<br>parent b1f2507784fb22ea6e6fcbe94fe3c0f5deafc8e4<br>parent f8d734757042dc5b92f6f1ea5a8cff828c339ef5<br>author yuanph <a href="mailto:&#121;&#x75;&#97;&#x6e;&#112;&#104;&#x40;&#117;&#115;&#x68;&#x61;&#114;&#101;&#105;&#116;&#x2e;&#x63;&#x6f;&#x6d;" target="_blank" rel="noopener">&#121;&#x75;&#97;&#x6e;&#112;&#104;&#x40;&#117;&#115;&#x68;&#x61;&#114;&#101;&#105;&#116;&#x2e;&#x63;&#x6f;&#x6d;</a> 1476173505 +0800<br>committer yuanph <a href="mailto:&#121;&#117;&#x61;&#x6e;&#112;&#104;&#x40;&#117;&#x73;&#x68;&#x61;&#x72;&#x65;&#x69;&#116;&#46;&#x63;&#111;&#109;" target="_blank" rel="noopener">&#121;&#117;&#x61;&#x6e;&#112;&#104;&#x40;&#117;&#x73;&#x68;&#x61;&#x72;&#x65;&#x69;&#116;&#46;&#x63;&#111;&#109;</a> 1476173505 +0800</p>
+<pre><code>merge experimental branch
+</code></pre><pre><code>* `--graph` 选项可以可视化你的提交图(commit graph)，会用ASCII字符来画出一个很漂亮的提交历史(commit history)线：
+```sh
+$ git log --graph --pretty=oneline
+* 042406fc594369852da2a708d3c1711d0e06f96e update file3 on master
+*   26ecc96e38154b12f13e524a59258ceaf12a1ec8 merge experimental branch
+|\  
+| * f8d734757042dc5b92f6f1ea5a8cff828c339ef5 update file1
+* | b1f2507784fb22ea6e6fcbe94fe3c0f5deafc8e4  update file2 on master
+|/  
+* ebf80c4a15490f3356f4fd20d602de195bb9841f add file4
+* 58886962819614df227fc19cfb9148cb286c1865 add modify
+* cabcbbf371f41559e6fefdd4dbc8bc057d1f19e0 add yet cached content
+* 2a5cf798589e67b6cc7e6ba26a042e9523b5cd05 add three files
+</code></pre><h2 id="日志排序"><a href="#日志排序" class="headerlink" title="日志排序"></a>日志排序</h2><p>日志记录可以按不同的顺序来显示。如果你要指定一个特定的顺序，可以为git log命令添加顺序参数。<br>按默认情况，提交会按逆时间顺序显示，可以指定<code>--topo-order</code>参数，让提交按拓扑顺序来显示(就是子提交在它们的父提交前显示):</p>
+<pre><code class="sh">$ git log --pretty=format:&#39;%h:%s&#39; --topo-order --graph
+</code></pre>
+<p>展示效果：</p>
+<pre><code class="sh">* 042406f:update file3 on master
+*   26ecc96:merge experimental branch
+|\  
+| * f8d7347:update file1
+* | b1f2507: update file2 on master
+|/  
+* ebf80c4:add file4
+* 5888696:add modify
+* cabcbbf:add yet cached content
+* 2a5cf79:add three files
+</code></pre>
 <blockquote>
 <p>你也可以用 –reverse参数来逆向显示所有提交日志。</p>
 </blockquote>
-  
-	</div>
-		<footer class="article-footer clearfix">
-<div class="article-catetags">
 
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="../../../../categories/git/">git</a>
-</div>
+            </div>
+            <hr/>
 
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/git/">git</a>
-  </div>
-
-</div>
-
-
-
-	<div class="article-share" id="share">
-	
-	  <div data-url="http://yuanph.win/2016/10/11/git-学习笔记/" data-title="git 学习笔记1 | 志鹏的技术博客" data-tsina="" class="share clearfix">
-	  </div>
-	
-	</div>
-
-
-</footer>
-
-   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2016/10/23/English-Level2-UNIT5/" title="English-UNIT5">
-  <strong>上一篇：</strong><br/>
-  <span>
-  English-UNIT5</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2016/10/08/English-Level2-UNIT4/"  title="English-UNIT4">
- <strong>下一篇：</strong><br/> 
- <span>English-UNIT4
-</span>
-</a>
-</div>
-
-</nav>
-
-	
-
-<section id="comments" class="comment">
-  <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  </div>
-</section>
-
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#git-的初始化"><span class="toc-number">1.</span> <span class="toc-text">git 的初始化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#获得一个Git仓库"><span class="toc-number">2.</span> <span class="toc-text">获得一个Git仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Clone一个仓库"><span class="toc-number">2.1.</span> <span class="toc-text">Clone一个仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化一个新的仓库"><span class="toc-number">2.2.</span> <span class="toc-text">初始化一个新的仓库</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#正常的工作流程"><span class="toc-number">3.</span> <span class="toc-text">正常的工作流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#正常的工作流程-1"><span class="toc-number">3.1.</span> <span class="toc-text">正常的工作流程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分支与合并"><span class="toc-number">4.</span> <span class="toc-text">分支与合并</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分支"><span class="toc-number">4.1.</span> <span class="toc-text">分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#撒销一个合并"><span class="toc-number">4.2.</span> <span class="toc-text">撒销一个合并</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快速向前合并"><span class="toc-number">4.3.</span> <span class="toc-text">快速向前合并</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Git日志"><span class="toc-number">5.</span> <span class="toc-text">Git日志</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#查看日志"><span class="toc-number">5.1.</span> <span class="toc-text">查看日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日志统计"><span class="toc-number">5.2.</span> <span class="toc-text">日志统计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#格式化日志"><span class="toc-number">5.3.</span> <span class="toc-text">格式化日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日志排序"><span class="toc-number">5.4.</span> <span class="toc-text">日志排序</span></a></li></ol></li></ol>
- 
-  </div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
-<aside class="clearfix">
-
-  
-
-
-  
-<div class="categorieslist">
-	<p class="asidetitle">Categories</p>
-		<ul>
-		
-		  
-			<li><a href="/categories/English/" title="English">English<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/GPUImage/" title="GPUImage">GPUImage<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/TCP/" title="TCP">TCP<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/XML/" title="XML">XML<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Xcode8/" title="Xcode8">Xcode8<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/cocoapods/" title="cocoapods">cocoapods<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/git/" title="git">git<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/iOS/" title="iOS">iOS<sup>23</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/python/" title="python">python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/xcode-archive/" title="xcode_archive">xcode_archive<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/其他/" title="其他">其他<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/工具/" title="工具">工具<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/数学/" title="数学">数学<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/正则表达式/" title="正则表达式">正则表达式<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/测试/" title="测试">测试<sup>1</sup></a></li>
-		  
-		
-		</ul>
-</div>
-
-
-  
-<div class="tagslist">
-	<p class="asidetitle">Tags</p>
-		<ul class="clearfix">
-		
-			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>9</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/English/" title="English">English<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/XML/" title="XML">XML<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Appache/" title="Appache">Appache<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/动画/" title="动画">动画<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/tips/" title="tips">tips<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/坐标转换/" title="-坐标转换">-坐标转换<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/CoreWlan/" title="CoreWlan">CoreWlan<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/内存问题/" title="内存问题">内存问题<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/AutoLayout/" title="AutoLayout">AutoLayout<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ARC/" title="ARC">ARC<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/CGRect/" title="CGRect">CGRect<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Location/" title="Location">Location<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/日期格式/" title="日期格式">日期格式<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ushow/" title="ushow">ushow<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/GCD/" title="GCD">GCD<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/iOS-GPUImage/" title="iOS-GPUImage">iOS-GPUImage<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/MD5/" title="MD5">MD5<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
-			
-		
-		</ul>
-</div>
-
-
-  <div class="linkslist">
-  <p class="asidetitle">Links</p>
-    <ul>
-        
-          <li>
             
-            	<a href="http://blog.scorplot.com/" target="_blank" title="蛟哥的博客">蛟哥的博客</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.bomobox.org/" target="_blank" title="贤凯的博客">贤凯的博客</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://ushareit.github.io/" target="_blank" title="Ushareit">Ushareit</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://janexzz.github.io" target="_blank" title="许珍珍">许珍珍</a>
-            
-          </li>
-        
-    </ul>
-</div>
-
-</aside>
-</div>
-    </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<section class="info">
-		<p> Hello ,I&#39;m zhipengbird. <br/>
-			This is my blog,believe it or not.</p>
-	</section>
-	 
-	<div class="social-font" class="clearfix">
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	</div>
-			
-		
-
-		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019
-		
-		<a href="/about" target="_blank" title="志鹏">志鹏</a>
-		
-		</br>
-		<span id="busuanzi_container_site_pv">
-					&nbsp;&nbsp;Total visits:&nbsp;<span id="busuanzi_value_site_pv"></span>
-		</span>
-		<span id="busuanzi_container_site_uv">
-				&nbsp;&nbsp;You are Visiter No.<span id="busuanzi_value_site_uv"></span>
-		</span>
-	
-		
-				
-		
-		</p>
-		
-		<script type="text/javascript">
-(function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-(w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-})(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-_st('install','VPgYp3Umx_FneUdxKodz','2.0.0');
-</script>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-</div>
-
-</footer>
-    <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-  
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else{
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
-        
+            <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
     }
-  });
-});
-</script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
-  });
-});
-</script>
+    #reward .reward-link {
+        font-size: 1.88rem;
+    }
 
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<div class="hoverqrcode clearfix"></div>',
-  '<a class="overlay" id="qrcode"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
 
-  $('.hoverqrcode').hide();
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
 
-  var myWidth = 0;
-  function updatehoverqrcode(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-    var qrsize = myWidth > 1024 ? 200:100;
-    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
-    var p = $('.article-share-qrcode').position();
-    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
-                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
-                          .qrcode(options);
-  };
-  $(window).resize(function(){
-    $('.hoverqrcode').hide();
-  });
-  $('.article-share-qrcode').click(function(){
-    updatehoverqrcode();
-    $('.hoverqrcode').toggle();
-  });
-  $('.article-share-qrcode').hover(function(){}, function(){
-      $('.hoverqrcode').hide();
-  });
-});   
-</script>
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
 
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
 
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
 
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
 
-<script type="text/javascript">
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
 
-var disqus_shortname = 'yuanpinghua';
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
 
-(function(){
-  var dsq = document.createElement('script');
-  dsq.type = 'text/javascript';
-  dsq.async = true;
-  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-}());
-(function(){
-  var dsq = document.createElement('script');
-  dsq.type = 'text/javascript';
-  dsq.async = true;
-  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
-  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-}());
-</script>
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
 
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
 
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
 
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
 
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
 
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.article-content').each(function(i){
-    $(this).find('img').each(function(){
-      if ($(this).parent().hasClass('fancybox')) return;
-      var alt = this.alt;
-      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
-      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
-    });
-    $(this).find('.fancybox').each(function(){
-      $(this).attr('rel', 'article' + i);
-    });
-  });
-  if($.fancybox){
-    $('.fancybox').fancybox();
-  }
-}); 
-</script>
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-large waves-effect waves-light red">赏</a>
 
-
-
-<!-- Analytics Begin -->
-
-
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fa fa-close"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
+    $(function () {
+        $('.tabs').tabs();
+    });
 </script>
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone, qq, weibo, douban"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>Reprint policy</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《git 学习笔记1》
+                </span> by
+            <a xmlns:cc="http://creativecommons.org/ns#" href="" property="cc:attributionName"
+               rel="cc:attributionURL">
+                志鹏
+            </a> is licensed under a
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+                Creative Commons Attribution 4.0 International License
+            </a> 
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="../../23/English-Level2-UNIT5/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="English-UNIT5">
+                        
+                        <span class="card-title">English-UNIT5</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            欢迎使用 just 表示最近的过去使用 just + 动词谈论刚刚或最近完成的行动。Zach and I just bought a house.     （我和 Zach 刚买了房子。）Carla just got promoted.  
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2016-10-23
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-user fa-fw"></i>
+                            志鹏
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="../../../../tags/English/" target="_blank">
+                        <span class="chip bg-color">English</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="../../08/English-Level2-UNIT4/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="English-UNIT4">
+                        
+                        <span class="card-title">English-UNIT4</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            人生事件一生中的大事请用这些词来谈谈一生中的大事
 
 
 
-<!-- Analytics End -->
-
-<!-- Totop Begin -->
-
-	<div id="totop">
-	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
-	</div>
-	<script src="/js/totop.js"></script>
-
-<!-- Totop End -->
-
-<!-- MathJax Begin -->
-<!-- mathjax config similar to math.stackexchange -->
+动词
+名词
 
 
-<!-- MathJax End -->
 
-<!-- Tiny_search Begin -->
 
-<!-- Tiny_search End -->
+be born    出生
+birth    出生
 
-  </body>
+
+graduate    毕业
+graduation    毕业
+
+
+marry    结婚
+marriage
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-10-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-user fa-fw"></i>
+                            志鹏
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="../../../../tags/English/" target="_blank">
+                        <span class="chip bg-color">English</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+
+    <a href="../../../../atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
 </html>

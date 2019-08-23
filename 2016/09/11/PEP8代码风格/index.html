@@ -1,106 +1,424 @@
+<!DOCTYPE HTML>
+<html lang="">
 
- <!DOCTYPE HTML>
-<html >
+
 <head>
-  <meta charset="UTF-8">
-  
+    <meta charset="utf-8">
+    <meta name="keywords" content="PEP8代码风格, 志鹏的技术博客">
+    <meta name="description" content="介绍这份文档给出的代码约定适用于主要的 Python 发行版所有标准库中的 Python 代码。请参阅相似的 PEP 信息，其用于描述实现 Python 的 C 代码规范[1]。
+这份文档和 PEP 257(文档字符串约定) 改编自 Gui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>PEP8代码风格 | 志鹏的技术博客</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    
-    <meta name="author" content="志鹏">
-    
+    <link rel="icon" type="image/png" href="/favicon.png">
 
-    
-    <meta name="description" content="介绍这份文档给出的代码约定适用于主要的 Python 发行版所有标准库中的 Python 代码。请参阅相似的 PEP 信息，其用于描述实现 Python 的 C 代码规范[1]。 这份文档和 PEP 257(文档字符串约定) 改编自 Guido 的 Python 风格指南原文，从 Barry 的风格指南里添加了一些东西[2]。 随着时间的推移，这份额外约定的风格指南已经被认可了，过去的约定由于语言">
-<meta name="keywords" content="PEP8">
-<meta property="og:type" content="article">
-<meta property="og:title" content="PEP8代码风格">
-<meta property="og:url" content="http://yuanph.win/2016/09/11/PEP8代码风格/index.html">
-<meta property="og:site_name" content="志鹏的技术博客">
-<meta property="og:description" content="介绍这份文档给出的代码约定适用于主要的 Python 发行版所有标准库中的 Python 代码。请参阅相似的 PEP 信息，其用于描述实现 Python 的 C 代码规范[1]。 这份文档和 PEP 257(文档字符串约定) 改编自 Guido 的 Python 风格指南原文，从 Barry 的风格指南里添加了一些东西[2]。 随着时间的推移，这份额外约定的风格指南已经被认可了，过去的约定由于语言">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-03-31T15:08:14.146Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PEP8代码风格">
-<meta name="twitter:description" content="介绍这份文档给出的代码约定适用于主要的 Python 发行版所有标准库中的 Python 代码。请参阅相似的 PEP 信息，其用于描述实现 Python 的 C 代码规范[1]。 这份文档和 PEP 257(文档字符串约定) 改编自 Guido 的 Python 风格指南原文，从 Barry 的风格指南里添加了一些东西[2]。 随着时间的推移，这份额外约定的风格指南已经被认可了，过去的约定由于语言">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
 
-    
-    <link rel="alternative" href="atom.xml" title="志鹏的技术博客" type="application/atom+xml">
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/jacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
-    
-    <link rel="stylesheet" href="../../../../css/style.css">
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
 </head>
 
-  <body>
-    <header>
-      
-<div>
-		
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="志鹏的技术博客">志鹏的技术博客</a></h1>
-				<h2 class="blog-motto">记录成长的点滴</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/">主页</a></li>
-					
-						<li><a href="/archives">归档</a></li>
-					
-						<li><a href="/about">简介</a></li>
-					
-					<li>
- 					
-						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="text" id="search" class="st-default-search-input" maxlength="20" placeholder="Search" />
-						</form>
-					
-					</li>
-				</ul>
-			</nav>
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="../../../../index.html" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">志鹏的技术博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>Index</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>Tags</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>Categories</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>Archives</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>About</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>Friends</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="Search"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">志鹏的技术博客</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                Index
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                Tags
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                Categories
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                Archives
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                About
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                Friends
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
 </div>
 
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-  
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/09/11/PEP8代码风格/" title="PEP8代码风格" itemprop="url">PEP8代码风格</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="志鹏" target="_blank" itemprop="author">志鹏</a>
-		
-  <p class="article-time">
-    <time datetime="2016-09-11T15:08:48.000Z" itemprop="datePublished"> Published 2016-09-11</time>
-    <span id="busuanzi_container_page_pv">
-    总阅读<span id="busuanzi_value_page_pv"></span>次
-</span>
-  </p>
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
 </header>
-	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#愚蠢的一致性就像没脑子的妖怪"><span class="toc-number">2.</span> <span class="toc-text">愚蠢的一致性就像没脑子的妖怪</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码排版"><span class="toc-number">3.</span> <span class="toc-text">代码排版</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#缩进"><span class="toc-number">3.1.</span> <span class="toc-text">缩进</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#制表符还是空格？"><span class="toc-number">3.2.</span> <span class="toc-text">制表符还是空格？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#空行"><span class="toc-number">3.3.</span> <span class="toc-text">空行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#源文件编码"><span class="toc-number">3.4.</span> <span class="toc-text">源文件编码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#导入包"><span class="toc-number">3.5.</span> <span class="toc-text">导入包</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串引号"><span class="toc-number">4.</span> <span class="toc-text">字符串引号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表达式和语句中的空格"><span class="toc-number">5.</span> <span class="toc-text">表达式和语句中的空格</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#不能忍受的情况"><span class="toc-number">5.1.</span> <span class="toc-text">不能忍受的情况</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注释"><span class="toc-number">6.</span> <span class="toc-text">注释</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#块注释"><span class="toc-number">6.1.</span> <span class="toc-text">块注释</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#行内注释"><span class="toc-number">6.2.</span> <span class="toc-text">行内注释</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文档字符串"><span class="toc-number">7.</span> <span class="toc-text">文档字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#版本注记"><span class="toc-number">8.</span> <span class="toc-text">版本注记</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Source"><span class="toc-number"></span> <span class="toc-text">$Source$</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命名约定"><span class="toc-number">1.</span> <span class="toc-text">命名约定</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#覆盖原则"><span class="toc-number">1.1.</span> <span class="toc-text">覆盖原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#规定：命名约定"><span class="toc-number">1.2.</span> <span class="toc-text">规定：命名约定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#规定：命名约定-1"><span class="toc-number">1.3.</span> <span class="toc-text">规定：命名约定</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#应该避免的名字"><span class="toc-number">1.3.1.</span> <span class="toc-text">应该避免的名字</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#包和模块名"><span class="toc-number">1.3.2.</span> <span class="toc-text">包和模块名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#类名"><span class="toc-number">1.3.3.</span> <span class="toc-text">类名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#异常名"><span class="toc-number">1.3.4.</span> <span class="toc-text">异常名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#全局变量名"><span class="toc-number">1.3.5.</span> <span class="toc-text">全局变量名</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数名"><span class="toc-number">1.4.</span> <span class="toc-text">函数名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数和方法参数"><span class="toc-number">1.5.</span> <span class="toc-text">函数和方法参数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#方法名和实例变量"><span class="toc-number">1.5.1.</span> <span class="toc-text">方法名和实例变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#常量"><span class="toc-number">1.5.2.</span> <span class="toc-text">常量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#继承的设计"><span class="toc-number">1.5.3.</span> <span class="toc-text">继承的设计</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#公共和内部接口"><span class="toc-number">2.</span> <span class="toc-text">公共和内部接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#程序编写建议"><span class="toc-number">3.</span> <span class="toc-text">程序编写建议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考文献"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#版权"><span class="toc-number">5.</span> <span class="toc-text">版权</span></a></li></ol>
-		
-		</div>
-		
-		<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>这份文档给出的代码约定适用于主要的 Python 发行版所有标准库中的 Python 代码。请参阅相似的 PEP 信息，其用于描述实现 Python 的 C 代码规范[1]。</p>
+
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        PEP8代码风格
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="../../../../tags/PEP8/" target="_blank">
+                                <span class="chip bg-color">PEP8</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="../../../../categories/python/" class="post-category" target="_blank">
+                                python
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2016-09-11
+                </div>
+
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>这份文档给出的代码约定适用于主要的 Python 发行版所有标准库中的 Python 代码。请参阅相似的 PEP 信息，其用于描述实现 Python 的 C 代码规范[1]。</p>
 <p>这份文档和 PEP 257(文档字符串约定) 改编自 Guido 的 Python 风格指南原文，从 Barry 的风格指南里添加了一些东西[2]。</p>
 <p>随着时间的推移，这份额外约定的风格指南已经被认可了，过去的约定由于语言自身的发展被淘汰了。</p>
 <p>许多项目有它们自己的编码风格指南。如果有冲突，优先考虑项目规定的编码指南。</p>
@@ -114,15 +432,81 @@
 <h3 id="代码排版"><a href="#代码排版" class="headerlink" title="代码排版"></a>代码排版</h3><h4 id="缩进"><a href="#缩进" class="headerlink" title="缩进"></a>缩进</h4><p>每层缩进使用4个空格。</p>
 <p>续行要么与圆括号、中括号、花括号这样的被包裹元素保持垂直对齐，要么放在 Python 的隐线（注：应该是相对于def的内部块）内部，或者使用悬挂缩进。使用悬挂缩进的注意事项：第一行不能有参数，用进一步的缩进来把其他行区分开。</p>
 <p>好的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Aligned with opening delimiter.</span></span><br><span class="line">foo = long_function_name(var_one, var_two,</span><br><span class="line">                         var_three, var_four)</span><br><span class="line"></span><br><span class="line"><span class="comment"># More indentation included to distinguish this from the rest.</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">long_function_name</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        var_one, var_two, var_three,</span></span></span><br><span class="line"><span class="function"><span class="params">        var_four)</span>:</span></span><br><span class="line">    print(var_one)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Hanging indents should add a level.</span></span><br><span class="line">foo = long_function_name(</span><br><span class="line">    var_one, var_two,</span><br><span class="line">    var_three, var_four)</span><br></pre></td></tr></table></figure>
+<pre><code class="Python"># Aligned with opening delimiter.
+foo = long_function_name(var_one, var_two,
+                         var_three, var_four)
+
+# More indentation included to distinguish this from the rest.
+def long_function_name(
+        var_one, var_two, var_three,
+        var_four):
+    print(var_one)
+
+# Hanging indents should add a level.
+foo = long_function_name(
+    var_one, var_two,
+    var_three, var_four)
+
+</code></pre>
 <p>不好的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Arguments on first line forbidden when not using vertical alignment.</span></span><br><span class="line">foo = long_function_name(var_one, var_two,</span><br><span class="line">    var_three, var_four)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Further indentation required as indentation is not distinguishable.</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">long_function_name</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    var_one, var_two, var_three,</span></span></span><br><span class="line"><span class="function"><span class="params">    var_four)</span>:</span></span><br><span class="line">    print(var_one)</span><br><span class="line"><span class="number">4</span>空格规则是可选的：</span><br><span class="line"></span><br><span class="line"><span class="comment"># Hanging indents *may* be indented to other than 4 spaces.</span></span><br><span class="line">foo = long_function_name(</span><br><span class="line">  var_one, var_two,</span><br><span class="line">  var_three, var_four)</span><br></pre></td></tr></table></figure>
+<pre><code class="python"># Arguments on first line forbidden when not using vertical alignment.
+foo = long_function_name(var_one, var_two,
+    var_three, var_four)
+
+# Further indentation required as indentation is not distinguishable.
+def long_function_name(
+    var_one, var_two, var_three,
+    var_four):
+    print(var_one)
+4空格规则是可选的：
+
+# Hanging indents *may* be indented to other than 4 spaces.
+foo = long_function_name(
+  var_one, var_two,
+  var_three, var_four)
+
+</code></pre>
 <p>当 if 语句的条件部分足够长，需要将它写入到多个行，值得注意的是两个连在一起的关键字（i.e. if），添加一个空格，给后续的多行条件添加一个左括号形成自然地4空格缩进。如果和嵌套在 if 语句内的缩进代码块产生了视觉冲突，也应该被自然缩进4个空格。这份增强建议书对于怎样（或是否）把条件行和 if 语句的缩进块在视觉上区分开来是没有明确规定的。可接受的情况包括，但不限于：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># No extra indentation.</span></span><br><span class="line"><span class="keyword">if</span> (this_is_one_thing <span class="keyword">and</span></span><br><span class="line">    that_is_another_thing):</span><br><span class="line">    do_something()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add a comment, which will provide some distinction in editors</span></span><br><span class="line"><span class="comment"># supporting syntax highlighting.</span></span><br><span class="line"><span class="keyword">if</span> (this_is_one_thing <span class="keyword">and</span></span><br><span class="line">    that_is_another_thing):</span><br><span class="line">    <span class="comment"># Since both conditions are true, we can frobnicate.</span></span><br><span class="line">    do_something()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add some extra indentation on the conditional continuation line.</span></span><br><span class="line"><span class="keyword">if</span> (this_is_one_thing</span><br><span class="line">        <span class="keyword">and</span> that_is_another_thing):</span><br><span class="line">    do_something()</span><br></pre></td></tr></table></figure>
+<pre><code class="python"># No extra indentation.
+if (this_is_one_thing and
+    that_is_another_thing):
+    do_something()
+
+# Add a comment, which will provide some distinction in editors
+# supporting syntax highlighting.
+if (this_is_one_thing and
+    that_is_another_thing):
+    # Since both conditions are true, we can frobnicate.
+    do_something()
+
+# Add some extra indentation on the conditional continuation line.
+if (this_is_one_thing
+        and that_is_another_thing):
+    do_something()
+
+</code></pre>
 <p>在多行结构中的右圆括号、右中括号、右大括号应该放在最后一行的第一个非空白字符的正下方，如下所示：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">my_list = [</span><br><span class="line">    <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,</span><br><span class="line">    <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>,</span><br><span class="line">    ]</span><br><span class="line">result = some_function_that_takes_arguments(</span><br><span class="line">    <span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>,</span><br><span class="line">    <span class="string">'d'</span>, <span class="string">'e'</span>, <span class="string">'f'</span>,</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<pre><code class="python">my_list = [
+    1, 2, 3,
+    4, 5, 6,
+    ]
+result = some_function_that_takes_arguments(
+    &#39;a&#39;, &#39;b&#39;, &#39;c&#39;,
+    &#39;d&#39;, &#39;e&#39;, &#39;f&#39;,
+    )
+
+</code></pre>
 <p>或者放在多行结构的起始行的第一个字符正下方，如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">my_list = [</span><br><span class="line">    <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,</span><br><span class="line">    <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>,</span><br><span class="line">]</span><br><span class="line">result = some_function_that_takes_arguments(</span><br><span class="line">    <span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>,</span><br><span class="line">    <span class="string">'d'</span>, <span class="string">'e'</span>, <span class="string">'f'</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<pre><code class="python">my_list = [
+    1, 2, 3,
+    4, 5, 6,
+]
+result = some_function_that_takes_arguments(
+    &#39;a&#39;, &#39;b&#39;, &#39;c&#39;,
+    &#39;d&#39;, &#39;e&#39;, &#39;f&#39;,
+)
+
+</code></pre>
 <h4 id="制表符还是空格？"><a href="#制表符还是空格？" class="headerlink" title="制表符还是空格？"></a>制表符还是空格？</h4><p>空格是首选的缩进方法。</p>
 <p>制表符（Tab）应该被用在那些以前就使用了制表符缩进的地方。</p>
 <p>Python 3 不允许混合使用制表符和空格来缩进代码。</p>
@@ -137,10 +521,31 @@
 <p>Python 标准库是非常专业的，限制最大代码长度为79个字符（注释和文档字符串最大长度为72个字符）。</p>
 <p>首选的换行方式是在括号（小中大）内隐式换行（非续行符\）。长行应该在括号表达式的包裹下换行。这比反斜杠作为续行符更好。</p>
 <p>反斜杠有时仍然适用。例如，多个很长的with语句不能使用隐式续行，因此反斜杠是可接受的。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'/path/to/some/file/you/want/to/read'</span>) <span class="keyword">as</span> file_1, \</span><br><span class="line">     open(<span class="string">'/path/to/some/file/being/written'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> file_2:</span><br><span class="line">    file_2.write(file_1.read())</span><br></pre></td></tr></table></figure>
+<pre><code class="python">with open(&#39;/path/to/some/file/you/want/to/read&#39;) as file_1, \
+     open(&#39;/path/to/some/file/being/written&#39;, &#39;w&#39;) as file_2:
+    file_2.write(file_1.read())
+
+</code></pre>
 <p>（见前面关于多行if语句的讨论来进一步思考这种多行with语句该如何缩进）</p>
 <p>另一种使用反斜杠续行的案例是assert语句。</p>
-<p>确保续行的缩进是恰到好处的。遇到二元操作符，首选的断行位置是操作符的后面而不是前面。这有一些例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rectangle</span><span class="params">(Blob)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, width, height,</span></span></span><br><span class="line"><span class="function"><span class="params">                 color=<span class="string">'black'</span>, emphasis=None, highlight=<span class="number">0</span>)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> (width == <span class="number">0</span> <span class="keyword">and</span> height == <span class="number">0</span> <span class="keyword">and</span></span><br><span class="line">                color == <span class="string">'red'</span> <span class="keyword">and</span> emphasis == <span class="string">'strong'</span> <span class="keyword">or</span></span><br><span class="line">                highlight &gt; <span class="number">100</span>):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">"sorry, you lose"</span>)</span><br><span class="line">        <span class="keyword">if</span> width == <span class="number">0</span> <span class="keyword">and</span> height == <span class="number">0</span> <span class="keyword">and</span> (color == <span class="string">'red'</span> <span class="keyword">or</span></span><br><span class="line">                                           emphasis <span class="keyword">is</span> <span class="keyword">None</span>):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">"I don't think so -- values are %s, %s"</span> %</span><br><span class="line">                             (width, height))</span><br><span class="line">        Blob.__init__(self, width, height,</span><br><span class="line">                      color, emphasis, highlight)</span><br></pre></td></tr></table></figure></p>
+<p>确保续行的缩进是恰到好处的。遇到二元操作符，首选的断行位置是操作符的后面而不是前面。这有一些例子：</p>
+<pre><code class="python">
+class Rectangle(Blob):
+
+    def __init__(self, width, height,
+                 color=&#39;black&#39;, emphasis=None, highlight=0):
+        if (width == 0 and height == 0 and
+                color == &#39;red&#39; and emphasis == &#39;strong&#39; or
+                highlight &gt; 100):
+            raise ValueError(&quot;sorry, you lose&quot;)
+        if width == 0 and height == 0 and (color == &#39;red&#39; or
+                                           emphasis is None):
+            raise ValueError(&quot;I don&#39;t think so -- values are %s, %s&quot; %
+                             (width, height))
+        Blob.__init__(self, width, height,
+                      color, emphasis, highlight)
+
+</code></pre>
 <h4 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h4><p>顶级函数和类定义上下使用两个空行分隔。</p>
 <p>类内的方法定义使用一个空行分隔。</p>
 <p>可以使用额外的空行（有节制的）来分隔相关联的函数组。在一系列相关联的单行代码中空行可以省略（e.g. 一组虚拟的实现）。</p>
@@ -152,69 +557,183 @@
 <p>对于 Python 3.0 和之后的版本，以下是有关标准库的政策（见PEP 3131）：所有 Python 标准库中的标识符必须使用只含ASCII的标识，并且应该使用英语单词只要可行（在多数情况下，缩略语和技术术语哪个不是英语）。此外，字符串和注释也必须是ASCII。仅有的例外是：(a)测试用例测试非ASCII特性时，(b)作者名。作者的名字不是基于拉丁字母的必须提供他们名字的拉丁字母音译。</p>
 <p>面向全球用户的开源项目，鼓励采取相似的政策。</p>
 <h4 id="导入包"><a href="#导入包" class="headerlink" title="导入包"></a>导入包</h4><p>import不同的模块应该独立一行，如：</p>
-<p>好的:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br></pre></td></tr></table></figure></p>
+<p>好的:</p>
+<pre><code class="python">
+import os
+import sys
+
+</code></pre>
 <p>  不好的:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys, os</span><br></pre></td></tr></table></figure>
+<pre><code class="python">import sys, os
+
+</code></pre>
 <p>  这样也是可行的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> subprocess <span class="keyword">import</span> Popen, PIPE</span><br></pre></td></tr></table></figure>
+<pre><code class="python">from subprocess import Popen, PIPE
+
+</code></pre>
 <p>import语句应该总是放在文件的顶部，在模块注释和文档字符串之下，在模块全局变量和常量之前。</p>
 <p>import语句分组顺序如下：</p>
 <p>导入标准库模块<br>导入相关第三方库模块<br>导入当前应用程序/库模块<br>每组之间应该用空行分开。</p>
 <p>然后用<strong>all</strong>声明本文件内的模块。</p>
 <p>绝对导入是推荐的，它们通常是更可读的，并且在错误的包系统配置（如一个目录包含一个以os.path结尾的包）下有良好的行为倾向（至少有更清晰的错误消息）：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> mypkg.sibling</span><br><span class="line"><span class="keyword">from</span> mypkg <span class="keyword">import</span> sibling</span><br><span class="line"><span class="keyword">from</span> mypkg.sibling <span class="keyword">import</span> example</span><br></pre></td></tr></table></figure>
+<pre><code class="python">import mypkg.sibling
+from mypkg import sibling
+from mypkg.sibling import example
+
+</code></pre>
 <p>  当然，相对于绝对导入，相对导入是个可选替代，特别是处理复杂的包结构时，绝对导入会有不必要的冗余：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> sibling</span><br><span class="line"><span class="keyword">from</span> .sibling <span class="keyword">import</span> example</span><br></pre></td></tr></table></figure>
+<pre><code class="python">from . import sibling
+from .sibling import example
+
+</code></pre>
 <p>  标准库代码应该避免复杂的包结构，并且永远使用绝对导入。</p>
 <p>  应该从不使用隐式的相对导入，而且在 Python 3 中已经被移除。</p>
-<p>从一个包含类的模块导入类时，这样写通常是可行的：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> myclass <span class="keyword">import</span> MyClass</span><br><span class="line"><span class="keyword">from</span> foo.bar.yourclass <span class="keyword">import</span> YourClass</span><br></pre></td></tr></table></figure></p>
+<p>从一个包含类的模块导入类时，这样写通常是可行的：</p>
+<pre><code class="python">from myclass import MyClass
+from foo.bar.yourclass import YourClass
+
+</code></pre>
 <p>  如果上面的方式会本地导致命名冲突，则这样写：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> myclass</span><br><span class="line"><span class="keyword">import</span> foo.bar.yourclass</span><br></pre></td></tr></table></figure>
+<pre><code class="python">import myclass
+import foo.bar.yourclass
+
+</code></pre>
 <p>  以myclass.MyClass和foo.bar.yourclass.YourClass这样的方式使用。</p>
 <p>应该避免通配符导入<code>（from import *）</code>，这会使名称空间里存在的名称变得不清晰，迷惑读者和自动化工具。这里有一个可辩护的通配符导入用例，，重新发布一个内部接口作为公共 API 的一部分（例如，使用纯 Python 实现一个可选的加速器模块的接口，但并不能预知这些定义会被覆盖）。</p>
 <p>当以这种方式重新发布名称时，下面关于公共和内部接口的指南仍然适用。</p>
 <h3 id="字符串引号"><a href="#字符串引号" class="headerlink" title="字符串引号"></a>字符串引号</h3><p>在 Python 里面，单引号字符串和双引号字符串是相同的。这份指南对这个不会有所建议。选择一种方式并坚持使用。一个字符串同时包含单引号和双引号字符时，用另外一种来包裹字符串，而不是使用反斜杠来转义，以提高可读性。</p>
 <p>对于三引号字符串，总是使用双引号字符来保持与文档字符串约定的一致性（PEP 257）。</p>
 <h3 id="表达式和语句中的空格"><a href="#表达式和语句中的空格" class="headerlink" title="表达式和语句中的空格"></a>表达式和语句中的空格</h3><h4 id="不能忍受的情况"><a href="#不能忍受的情况" class="headerlink" title="不能忍受的情况"></a>不能忍受的情况</h4><p>避免在下列情况中使用多余的空格：</p>
-<p>与括号保持紧凑（小括号、中括号、大括号）：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Yes: spam(ham[<span class="number">1</span>], &#123;eggs: <span class="number">2</span>&#125;)</span><br><span class="line">No:  spam( ham[ <span class="number">1</span> ], &#123; eggs: <span class="number">2</span> &#125; )</span><br></pre></td></tr></table></figure></p>
-<p>与后面的逗号、分号或冒号保持紧凑：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Yes: <span class="keyword">if</span> x == <span class="number">4</span>: <span class="keyword">print</span> x, y; x, y = y, x</span><br><span class="line">No:  <span class="keyword">if</span> x == <span class="number">4</span> : <span class="keyword">print</span> x , y ; x , y = y , x</span><br></pre></td></tr></table></figure></p>
+<p>与括号保持紧凑（小括号、中括号、大括号）：</p>
+<pre><code class="python">Yes: spam(ham[1], {eggs: 2})
+No:  spam( ham[ 1 ], { eggs: 2 } )
+
+</code></pre>
+<p>与后面的逗号、分号或冒号保持紧凑：</p>
+<pre><code class="python">Yes: if x == 4: print x, y; x, y = y, x
+No:  if x == 4 : print x , y ; x , y = y , x
+
+</code></pre>
 <p>切片内的冒号就像二元操作符一样，任意一侧应该被等同对待（把它当做一个极低优先级的操作）。在一个可扩展的切片中，冒号两侧必须有相同的空格数量。例外：切片参数省略时，空格也省略。</p>
 <p>好的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ham[<span class="number">1</span>:<span class="number">9</span>], ham[<span class="number">1</span>:<span class="number">9</span>:<span class="number">3</span>], ham[:<span class="number">9</span>:<span class="number">3</span>], ham[<span class="number">1</span>::<span class="number">3</span>], ham[<span class="number">1</span>:<span class="number">9</span>:]</span><br><span class="line">ham[lower:upper], ham[lower:upper:], ham[lower::step]</span><br><span class="line">ham[lower+offset : upper+offset]</span><br><span class="line">ham[: upper_fn(x) : step_fn(x)], ham[:: step_fn(x)]</span><br><span class="line">ham[lower + offset : upper + offset]</span><br></pre></td></tr></table></figure>
+<pre><code class="python">ham[1:9], ham[1:9:3], ham[:9:3], ham[1::3], ham[1:9:]
+ham[lower:upper], ham[lower:upper:], ham[lower::step]
+ham[lower+offset : upper+offset]
+ham[: upper_fn(x) : step_fn(x)], ham[:: step_fn(x)]
+ham[lower + offset : upper + offset]
+
+</code></pre>
 <p>  不好的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ham[lower + offset:upper + offset]</span><br><span class="line">ham[<span class="number">1</span>: <span class="number">9</span>], ham[<span class="number">1</span> :<span class="number">9</span>], ham[<span class="number">1</span>:<span class="number">9</span> :<span class="number">3</span>]</span><br><span class="line">ham[lower : : upper]</span><br><span class="line">ham[ : upper]</span><br></pre></td></tr></table></figure>
-<p>函数名与其后参数列表的左括号应该保持紧凑：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Yes: spam(<span class="number">1</span>)</span><br><span class="line">No:  spam (<span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
-<p>与切片或索引的左括号保持紧凑：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Yes: dct[<span class="string">'key'</span>] = lst[index]</span><br><span class="line">No:  dct [<span class="string">'key'</span>] = lst [index]</span><br></pre></td></tr></table></figure></p>
+<pre><code class="python">ham[lower + offset:upper + offset]
+ham[1: 9], ham[1 :9], ham[1:9 :3]
+ham[lower : : upper]
+ham[ : upper]
+
+</code></pre>
+<p>函数名与其后参数列表的左括号应该保持紧凑：</p>
+<pre><code class="python">Yes: spam(1)
+No:  spam (1)
+
+</code></pre>
+<p>与切片或索引的左括号保持紧凑：</p>
+<pre><code class="python">Yes: dct[&#39;key&#39;] = lst[index]
+No:  dct [&#39;key&#39;] = lst [index]
+
+</code></pre>
 <p>在复制操作符（或其它）的两侧保持多余一个的空格：</p>
-<p>好的：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">x = <span class="number">1</span></span><br><span class="line">y = <span class="number">2</span></span><br><span class="line">long_variable = <span class="number">3</span></span><br></pre></td></tr></table></figure></p>
+<p>好的：</p>
+<pre><code class="python">
+x = 1
+y = 2
+long_variable = 3
+
+</code></pre>
 <p>  不好的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x             = <span class="number">1</span></span><br><span class="line">y             = <span class="number">2</span></span><br><span class="line">long_variable = <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<pre><code class="python">x             = 1
+y             = 2
+long_variable = 3
+
+</code></pre>
 <p>5.2. 其他建议</p>
 <p>总是在这些二元操作符的两侧加入一个空格：赋值(=)，增量赋值(+=, -= etc.)，比较(==, &lt;, &gt;, !=, &lt;&gt;, &lt;=, &gt;=, in, not in, is, is not)，布尔运算(and, or, not)。</p>
 <p>在不同优先级之间，考虑在更低优先级的操作符两侧插入空格。用你自己的判断力；但不要使用超过一个空格，并且在二元操作符的两侧有相同的空格数。</p>
-<p>好的：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">i = i + <span class="number">1</span></span><br><span class="line">submitted += <span class="number">1</span></span><br><span class="line">x = x*<span class="number">2</span> - <span class="number">1</span></span><br><span class="line">hypot2 = x*x + y*y</span><br><span class="line">c = (a+b) * (a-b)</span><br></pre></td></tr></table></figure></p>
+<p>好的：</p>
+<pre><code class="python">
+i = i + 1
+submitted += 1
+x = x*2 - 1
+hypot2 = x*x + y*y
+c = (a+b) * (a-b)
+
+</code></pre>
 <p>  不好的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">i=i+<span class="number">1</span></span><br><span class="line">submitted +=<span class="number">1</span></span><br><span class="line">x = x * <span class="number">2</span> - <span class="number">1</span></span><br><span class="line">hypot2 = x * x + y * y</span><br><span class="line">c = (a + b) * (a - b)</span><br></pre></td></tr></table></figure>
+<pre><code class="python">i=i+1
+submitted +=1
+x = x * 2 - 1
+hypot2 = x * x + y * y
+c = (a + b) * (a - b)
+
+</code></pre>
 <p>不要在关键值参数或默认值参数的等号两边加入空格。</p>
 <p>好的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">complex</span><span class="params">(real, imag=<span class="number">0.0</span>)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> magic(r=real, i=imag)</span><br></pre></td></tr></table></figure>
+<pre><code class="python">def complex(real, imag=0.0):
+    return magic(r=real, i=imag)
+
+</code></pre>
 <p>  不好的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">complex</span><span class="params">(real, imag = <span class="number">0.0</span>)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> magic(r = real, i = imag)</span><br></pre></td></tr></table></figure>
+<pre><code class="python">def complex(real, imag = 0.0):
+    return magic(r = real, i = imag)
+
+</code></pre>
 <p>【注：Python 3】带注释的函数定义中的等号两侧要各插入空格。此外，在冒号后用一个单独的空格，也要在表明函数返回值类型的-&gt;左右各插入一个空格。</p>
 <p>好的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">munge</span><span class="params">(input: AnyStr)</span>:</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">munge</span><span class="params">(sep: AnyStr = None)</span>:</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">munge</span><span class="params">()</span> -&gt; AnyStr:</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">munge</span><span class="params">(input: AnyStr, sep: AnyStr = None, limit=<span class="number">1000</span>)</span>:</span></span><br></pre></td></tr></table></figure>
+<pre><code class="python">def munge(input: AnyStr):
+def munge(sep: AnyStr = None):
+def munge() -&gt; AnyStr:
+def munge(input: AnyStr, sep: AnyStr = None, limit=1000):
+
+</code></pre>
 <p>  不好的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">munge</span><span class="params">(input: AnyStr=None)</span>:</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">munge</span><span class="params">(input:AnyStr)</span>:</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">munge</span><span class="params">(input: AnyStr)</span>-&gt;PosInt:</span></span><br></pre></td></tr></table></figure>
+<pre><code class="python">def munge(input: AnyStr=None):
+def munge(input:AnyStr):
+def munge(input: AnyStr)-&gt;PosInt:
+
+</code></pre>
 <p>打消使用复合语句（多条语句在同一行）的念头。</p>
 <p>好的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">if</span> foo == <span class="string">'blah'</span>:</span><br><span class="line">    do_blah_thing()</span><br><span class="line">do_one()</span><br><span class="line">do_two()</span><br><span class="line">do_three()</span><br></pre></td></tr></table></figure>
+<pre><code class="python">
+if foo == &#39;blah&#39;:
+    do_blah_thing()
+do_one()
+do_two()
+do_three()
+
+</code></pre>
 <p>  宁可不：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> foo == <span class="string">'blah'</span>: do_blah_thing()</span><br><span class="line">do_one(); do_two(); do_three()</span><br></pre></td></tr></table></figure>
+<pre><code class="python">if foo == &#39;blah&#39;: do_blah_thing()
+do_one(); do_two(); do_three()
+
+</code></pre>
 <p>有时候把 if/for/while 和一个小的主体放在同一行也是可行的，千万不要在有多条语句的情况下这样做。此外，还要避免折叠，例如长行。</p>
 <p>宁可不：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> foo == <span class="string">'blah'</span>: do_blah_thing()</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> lst: total += x</span><br><span class="line"><span class="keyword">while</span> t &lt; <span class="number">10</span>: t = delay()</span><br></pre></td></tr></table></figure>
+<pre><code class="python">if foo == &#39;blah&#39;: do_blah_thing()
+for x in lst: total += x
+while t &lt; 10: t = delay()
+
+</code></pre>
 <p>  绝对不：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> foo == <span class="string">'blah'</span>: do_blah_thing()</span><br><span class="line"><span class="keyword">else</span>: do_non_blah_thing()</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>: something()</span><br><span class="line"><span class="keyword">finally</span>: cleanup()</span><br><span class="line"></span><br><span class="line">do_one(); do_two(); do_three(long, argument,</span><br><span class="line">                             list, like, this)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> foo == <span class="string">'blah'</span>: one(); two(); three()</span><br></pre></td></tr></table></figure>
+<pre><code class="python">if foo == &#39;blah&#39;: do_blah_thing()
+else: do_non_blah_thing()
+
+try: something()
+finally: cleanup()
+
+do_one(); do_two(); do_three(long, argument,
+                             list, like, this)
+
+if foo == &#39;blah&#39;: one(); two(); three()
+
+</code></pre>
 <h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>与代码相矛盾的注释不如没有。注释总是随着代码的变更而更新。</p>
 <p>注释应该是完整的句子。如果注释是一个短语或语句，第一个单词应该大写，除非是一个开头是小写的标识符（从不改变标识符的大小写）。</p>
 <p>如果注释很短，末尾的句点可以省略。块注释通常由一个或多个有完整句子的段落组成，并且每个句子应该由句点结束。</p>
@@ -225,11 +744,21 @@
 <h4 id="行内注释"><a href="#行内注释" class="headerlink" title="行内注释"></a>行内注释</h4><p>有节制的使用行内注释。</p>
 <p>一个行内注释与语句在同一行。行内注释应该至少与语句相隔两个空格。以#打头，#后接一个空格。</p>
 <p>无谓的行内注释如果状态明显，会转移注意力。不要这样做：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">x = x + <span class="number">1</span>                 <span class="comment"># Increment x</span></span><br></pre></td></tr></table></figure>
+<pre><code class="Python">
+x = x + 1                 # Increment x
+</code></pre>
 <p>但有的时候，这样是有用的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = x + <span class="number">1</span>                 <span class="comment"># Compensate for border</span></span><br></pre></td></tr></table></figure>
+<pre><code class="python">x = x + 1                 # Compensate for border
+
+</code></pre>
 <h3 id="文档字符串"><a href="#文档字符串" class="headerlink" title="文档字符串"></a>文档字符串</h3><p>编写良好的文档字符串（a.k.a “docstring”）的约定常驻在 PEP 257</p>
-<p>为所有的公共模块、函数、类和方法编写文档字符串。对于非公共的方法，文档字符串是不必要的，但是也应该有注释来说明代码是干什么的。这个注释应该放在方法声明的下面。<br>PEP 257 描述了良好的文档字符串的约定。注意，文档字符串的结尾”””应该放在单独的一行，例如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""Return a foobang</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Optional plotz says to frobnicate the bizbaz first.</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure></p>
+<p>为所有的公共模块、函数、类和方法编写文档字符串。对于非公共的方法，文档字符串是不必要的，但是也应该有注释来说明代码是干什么的。这个注释应该放在方法声明的下面。<br>PEP 257 描述了良好的文档字符串的约定。注意，文档字符串的结尾”””应该放在单独的一行，例如：</p>
+<pre><code class="python">&quot;&quot;&quot;Return a foobang
+
+Optional plotz says to frobnicate the bizbaz first.
+&quot;&quot;&quot;
+
+</code></pre>
 <p>对于单行的文档字符串，把结尾”””放在同一行。</p>
 <h3 id="版本注记"><a href="#版本注记" class="headerlink" title="版本注记"></a>版本注记</h3><p>如果必须要 Subversion，CVS 或 RCS 标记在你的源文件里，像这样做：</p>
 <p><strong>version</strong> = “$Revision$”</p>
@@ -238,7 +767,14 @@
 <h4 id="覆盖原则"><a href="#覆盖原则" class="headerlink" title="覆盖原则"></a>覆盖原则</h4><p>API 里对用户可见的公共部分应该遵循约定，反映的是使用而不是实现。</p>
 <h4 id="规定：命名约定"><a href="#规定：命名约定" class="headerlink" title="规定：命名约定"></a>规定：命名约定</h4><p>有许多不同的命名风格。这有助于识别正在使用的命名风格，独立于它们的用途。</p>
 <p>下面的命名风格通常是有区别的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">b (一个小写字母)</span><br><span class="line">B (一个大写字母)</span><br><span class="line">lowercase</span><br><span class="line">lower_case_with_underscores</span><br><span class="line">UPPERCASE</span><br><span class="line">UPPER_CASE_WITH_UNDERSCORES</span><br></pre></td></tr></table></figure>
+<pre><code class="python">b (一个小写字母)
+B (一个大写字母)
+lowercase
+lower_case_with_underscores
+UPPERCASE
+UPPER_CASE_WITH_UNDERSCORES
+
+</code></pre>
 <p>CapitalizedWords (又叫 CapWords，或者 CamelCase(骆驼命名法) – 如此命名因为字母看起来崎岖不平[3]。有时候也叫 StudlyCaps。<br>  注意：在 CapWords 使用缩略语时，所有缩略语的首字母都要大写。因此HTTPServerError比HttpServerError要好。</p>
 <p>mixedCase (和上面不同的是首字母小写)<br>Capitalized_Words_With_Underscores (丑陋无比！)<br>也有种风格用独一无二的短前缀来将相似的命名分组。在 Python 里用的不是很多，但是为了完整性被提及。例如，os.stat()函数返回一个元组，通常有像st_mode，st_size，st_mtime等名字。（强调与 POSIX 系统调用的字段结构一致，有助于程序员对此更熟悉）</p>
 <p>X11 库的所有公共函数都用 X 打头。在 Python 中这种风格被认为是不重要的，因为属性和方法名的前缀是一个对象，函数名的前缀为一个模块名。</p>
@@ -306,27 +842,82 @@
 <p>使用括号形式的异常意味着，当你传给异常的参数过长或者包含字符串格式化时，你就不需要使用续行符了，这要感谢括号！</p>
 <p>捕获异常时，尽可能使用明确的异常，而不是用一个空的except:语句。</p>
 <p>例如，用：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">import</span> platform_specific_module</span><br><span class="line"><span class="keyword">except</span> ImportError:</span><br><span class="line">    platform_specific_module = <span class="keyword">None</span></span><br></pre></td></tr></table></figure>
+<pre><code class="python">try:
+    import platform_specific_module
+except ImportError:
+    platform_specific_module = None
+
+</code></pre>
 <p>  一个空的except:语句将会捕获到SystemExit和KeyboardInterrupt异常，很难区分程序的中断到底是Ctrl+C还是其他问题引起的。如果你想捕获程序的所有错误，使用except Exception:(空except:等同于except BaseException)。</p>
 <p>  一个好的经验是限制使用空except语句，除了这两种情况：</p>
-<p>如果异常处理程序会打印出或者记录回溯信息；至少用户意识到错误的存在。<br>如果代码需要做一些清理工作，但后面用raise向上抛出异常。try .. finally是处理这种情况更好的方式。<br>绑定异常给一个名字时，最好使用 Python 2.6 里添加的明确的名字绑定语法：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    process_data()</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> exc:</span><br><span class="line">    <span class="keyword">raise</span> DataProcessingFailedError(str(exc))</span><br></pre></td></tr></table></figure></p>
+<p>如果异常处理程序会打印出或者记录回溯信息；至少用户意识到错误的存在。<br>如果代码需要做一些清理工作，但后面用raise向上抛出异常。try .. finally是处理这种情况更好的方式。<br>绑定异常给一个名字时，最好使用 Python 2.6 里添加的明确的名字绑定语法：</p>
+<pre><code class="python">try:
+    process_data()
+except Exception as exc:
+    raise DataProcessingFailedError(str(exc))
+
+</code></pre>
 <p>Python 3 只支持这种语法，避免与基于逗号的旧式语法产生二义性。</p>
 <p>捕获操作系统错误时，最好使用 Python 3.3 里引进的明确的异常结构层次，而不是自省的errno值。</p>
 <p>此外，对于所有的try/except语句来说，限制try里面有且仅有绝对必要的代码。在强调一次，这能避免屏蔽错误。</p>
 <p>好的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    value = collection[key]</span><br><span class="line"><span class="keyword">except</span> KeyError:</span><br><span class="line">    <span class="keyword">return</span> key_not_found(key)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">return</span> handle_value(value)</span><br></pre></td></tr></table></figure>
-<p>  不好的：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="comment"># Too broad!</span></span><br><span class="line">    <span class="keyword">return</span> handle_value(collection[key])</span><br><span class="line"><span class="keyword">except</span> KeyError:</span><br><span class="line">    <span class="comment"># Will also catch KeyError raised by handle_value()</span></span><br><span class="line">    <span class="keyword">return</span> key_not_found(key)</span><br></pre></td></tr></table></figure></p>
+<pre><code class="python">try:
+    value = collection[key]
+except KeyError:
+    return key_not_found(key)
+else:
+    return handle_value(value)
+
+</code></pre>
+<p>  不好的：</p>
+<pre><code class="python">
+try:
+    # Too broad!
+    return handle_value(collection[key])
+except KeyError:
+    # Will also catch KeyError raised by handle_value()
+    return key_not_found(key)
+
+</code></pre>
 <p>当资源是本地的特定代码段，用with语句确保其在使用后被立即干净的清除了，try/finally也是也接受的。</p>
 <p>当它们做一些除了获取和释放资源之外的事的时候，上下文管理器应该通过单独的函数或方法调用。例如：</p>
 <p>好的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> conn.begin_transaction():</span><br><span class="line">    do_stuff_in_transaction(conn)</span><br></pre></td></tr></table></figure>
+<pre><code class="python">with conn.begin_transaction():
+    do_stuff_in_transaction(conn)
+
+</code></pre>
 <p>  不好的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> conn:</span><br><span class="line">    do_stuff_in_transaction(conn)</span><br></pre></td></tr></table></figure>
+<pre><code class="python">with conn:
+    do_stuff_in_transaction(conn)
+
+</code></pre>
 <p>  第二个例子没有提供任何信息来表明<strong>enter</strong>和<strong>exit</strong>方法在完成一个事务后做了一些除了关闭连接以外的其它事。在这种情况下明确是很重要的。</p>
 <p>坚持使用return语句。函数内的return语句都应该返回一个表达式，或者None。如果一个return语句返回一个表达式，另一个没有返回值的应该用return None清晰的说明，并且在一个函数的结尾应该明确使用一个return语句（如果有返回值的话）。</p>
 <p>好的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> x &gt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> math.sqrt(x)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> x &lt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line">    <span class="keyword">return</span> math.sqrt(x)</span><br></pre></td></tr></table></figure>
-<p>  不好的：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> x &gt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> math.sqrt(x)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> x &lt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">return</span> math.sqrt(x)</span><br></pre></td></tr></table></figure></p>
+<pre><code class="python">def foo(x):
+    if x &gt;= 0:
+        return math.sqrt(x)
+    else:
+        return None
+
+def bar(x):
+    if x &lt; 0:
+        return None
+    return math.sqrt(x)
+
+</code></pre>
+<p>  不好的：</p>
+<pre><code class="python">
+def foo(x):
+    if x &gt;= 0:
+        return math.sqrt(x)
+
+def bar(x):
+    if x &lt; 0:
+        return
+    return math.sqrt(x)
+
+</code></pre>
 <p>用字符串方法代替字符串模块。</p>
 <p>字符串方法总是更快，与 unicode 字符串共享 API。如果需要向后兼容性覆盖这个规则，需要 Python 2.0 以上的版本。</p>
 <p>用’’.startswith()和’’.endswith()代替字符串切片来检查前缀和后缀。</p>
@@ -350,555 +941,490 @@
 <blockquote>
 <p>即使内容有点多，但每一个 Python 开发者都应该尽量遵守 PEP8</p>
 </blockquote>
-  
-	</div>
-		<footer class="article-footer clearfix">
-<div class="article-catetags">
 
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="../../../../categories/python/">python</a>
-</div>
+            </div>
+            <hr/>
 
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/PEP8/">PEP8</a>
-  </div>
-
-</div>
-
-
-
-	<div class="article-share" id="share">
-	
-	  <div data-url="http://yuanph.win/2016/09/11/PEP8代码风格/" data-title="PEP8代码风格 | 志鹏的技术博客" data-tsina="" class="share clearfix">
-	  </div>
-	
-	</div>
-
-
-</footer>
-
-   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2016/09/13/python-文件处理/" title="python 文件处理">
-  <strong>上一篇：</strong><br/>
-  <span>
-  python 文件处理</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2016/09/08/给MacOS-X下的Python3安装requests模块/"  title="给MacOS X下的Python3安装requests模块">
- <strong>下一篇：</strong><br/> 
- <span>给MacOS X下的Python3安装requests模块
-</span>
-</a>
-</div>
-
-</nav>
-
-	
-
-<section id="comments" class="comment">
-  <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  </div>
-</section>
-
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#愚蠢的一致性就像没脑子的妖怪"><span class="toc-number">2.</span> <span class="toc-text">愚蠢的一致性就像没脑子的妖怪</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码排版"><span class="toc-number">3.</span> <span class="toc-text">代码排版</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#缩进"><span class="toc-number">3.1.</span> <span class="toc-text">缩进</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#制表符还是空格？"><span class="toc-number">3.2.</span> <span class="toc-text">制表符还是空格？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#空行"><span class="toc-number">3.3.</span> <span class="toc-text">空行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#源文件编码"><span class="toc-number">3.4.</span> <span class="toc-text">源文件编码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#导入包"><span class="toc-number">3.5.</span> <span class="toc-text">导入包</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串引号"><span class="toc-number">4.</span> <span class="toc-text">字符串引号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表达式和语句中的空格"><span class="toc-number">5.</span> <span class="toc-text">表达式和语句中的空格</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#不能忍受的情况"><span class="toc-number">5.1.</span> <span class="toc-text">不能忍受的情况</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注释"><span class="toc-number">6.</span> <span class="toc-text">注释</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#块注释"><span class="toc-number">6.1.</span> <span class="toc-text">块注释</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#行内注释"><span class="toc-number">6.2.</span> <span class="toc-text">行内注释</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文档字符串"><span class="toc-number">7.</span> <span class="toc-text">文档字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#版本注记"><span class="toc-number">8.</span> <span class="toc-text">版本注记</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Source"><span class="toc-number"></span> <span class="toc-text">$Source$</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命名约定"><span class="toc-number">1.</span> <span class="toc-text">命名约定</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#覆盖原则"><span class="toc-number">1.1.</span> <span class="toc-text">覆盖原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#规定：命名约定"><span class="toc-number">1.2.</span> <span class="toc-text">规定：命名约定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#规定：命名约定-1"><span class="toc-number">1.3.</span> <span class="toc-text">规定：命名约定</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#应该避免的名字"><span class="toc-number">1.3.1.</span> <span class="toc-text">应该避免的名字</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#包和模块名"><span class="toc-number">1.3.2.</span> <span class="toc-text">包和模块名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#类名"><span class="toc-number">1.3.3.</span> <span class="toc-text">类名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#异常名"><span class="toc-number">1.3.4.</span> <span class="toc-text">异常名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#全局变量名"><span class="toc-number">1.3.5.</span> <span class="toc-text">全局变量名</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数名"><span class="toc-number">1.4.</span> <span class="toc-text">函数名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数和方法参数"><span class="toc-number">1.5.</span> <span class="toc-text">函数和方法参数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#方法名和实例变量"><span class="toc-number">1.5.1.</span> <span class="toc-text">方法名和实例变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#常量"><span class="toc-number">1.5.2.</span> <span class="toc-text">常量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#继承的设计"><span class="toc-number">1.5.3.</span> <span class="toc-text">继承的设计</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#公共和内部接口"><span class="toc-number">2.</span> <span class="toc-text">公共和内部接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#程序编写建议"><span class="toc-number">3.</span> <span class="toc-text">程序编写建议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考文献"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#版权"><span class="toc-number">5.</span> <span class="toc-text">版权</span></a></li></ol>
- 
-  </div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
-<aside class="clearfix">
-
-  
-
-
-  
-<div class="categorieslist">
-	<p class="asidetitle">Categories</p>
-		<ul>
-		
-		  
-			<li><a href="/categories/English/" title="English">English<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/GPUImage/" title="GPUImage">GPUImage<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/TCP/" title="TCP">TCP<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/XML/" title="XML">XML<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Xcode8/" title="Xcode8">Xcode8<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/cocoapods/" title="cocoapods">cocoapods<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/git/" title="git">git<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/iOS/" title="iOS">iOS<sup>23</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/python/" title="python">python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/xcode-archive/" title="xcode_archive">xcode_archive<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/其他/" title="其他">其他<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/工具/" title="工具">工具<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/数学/" title="数学">数学<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/正则表达式/" title="正则表达式">正则表达式<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/测试/" title="测试">测试<sup>1</sup></a></li>
-		  
-		
-		</ul>
-</div>
-
-
-  
-<div class="tagslist">
-	<p class="asidetitle">Tags</p>
-		<ul class="clearfix">
-		
-			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>9</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/English/" title="English">English<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/XML/" title="XML">XML<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Appache/" title="Appache">Appache<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/动画/" title="动画">动画<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/tips/" title="tips">tips<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/坐标转换/" title="-坐标转换">-坐标转换<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/CoreWlan/" title="CoreWlan">CoreWlan<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/内存问题/" title="内存问题">内存问题<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/AutoLayout/" title="AutoLayout">AutoLayout<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ARC/" title="ARC">ARC<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/CGRect/" title="CGRect">CGRect<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Location/" title="Location">Location<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/日期格式/" title="日期格式">日期格式<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ushow/" title="ushow">ushow<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/GCD/" title="GCD">GCD<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/iOS-GPUImage/" title="iOS-GPUImage">iOS-GPUImage<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/MD5/" title="MD5">MD5<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
-			
-		
-		</ul>
-</div>
-
-
-  <div class="linkslist">
-  <p class="asidetitle">Links</p>
-    <ul>
-        
-          <li>
             
-            	<a href="http://blog.scorplot.com/" target="_blank" title="蛟哥的博客">蛟哥的博客</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.bomobox.org/" target="_blank" title="贤凯的博客">贤凯的博客</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://ushareit.github.io/" target="_blank" title="Ushareit">Ushareit</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://janexzz.github.io" target="_blank" title="许珍珍">许珍珍</a>
-            
-          </li>
-        
-    </ul>
-</div>
-
-</aside>
-</div>
-    </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<section class="info">
-		<p> Hello ,I&#39;m zhipengbird. <br/>
-			This is my blog,believe it or not.</p>
-	</section>
-	 
-	<div class="social-font" class="clearfix">
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	</div>
-			
-		
-
-		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019
-		
-		<a href="/about" target="_blank" title="志鹏">志鹏</a>
-		
-		</br>
-		<span id="busuanzi_container_site_pv">
-					&nbsp;&nbsp;Total visits:&nbsp;<span id="busuanzi_value_site_pv"></span>
-		</span>
-		<span id="busuanzi_container_site_uv">
-				&nbsp;&nbsp;You are Visiter No.<span id="busuanzi_value_site_uv"></span>
-		</span>
-	
-		
-				
-		
-		</p>
-		
-		<script type="text/javascript">
-(function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-(w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-})(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-_st('install','VPgYp3Umx_FneUdxKodz','2.0.0');
-</script>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-</div>
-
-</footer>
-    <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-  
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else{
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
-        
+            <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
     }
-  });
-});
-</script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
-  });
-});
-</script>
+    #reward .reward-link {
+        font-size: 1.88rem;
+    }
 
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<div class="hoverqrcode clearfix"></div>',
-  '<a class="overlay" id="qrcode"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
 
-  $('.hoverqrcode').hide();
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
 
-  var myWidth = 0;
-  function updatehoverqrcode(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-    var qrsize = myWidth > 1024 ? 200:100;
-    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
-    var p = $('.article-share-qrcode').position();
-    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
-                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
-                          .qrcode(options);
-  };
-  $(window).resize(function(){
-    $('.hoverqrcode').hide();
-  });
-  $('.article-share-qrcode').click(function(){
-    updatehoverqrcode();
-    $('.hoverqrcode').toggle();
-  });
-  $('.article-share-qrcode').hover(function(){}, function(){
-      $('.hoverqrcode').hide();
-  });
-});   
-</script>
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
 
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
 
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
 
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
 
-<script type="text/javascript">
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
 
-var disqus_shortname = 'yuanpinghua';
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
 
-(function(){
-  var dsq = document.createElement('script');
-  dsq.type = 'text/javascript';
-  dsq.async = true;
-  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-}());
-(function(){
-  var dsq = document.createElement('script');
-  dsq.type = 'text/javascript';
-  dsq.async = true;
-  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
-  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-}());
-</script>
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
 
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
 
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
 
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
 
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
 
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.article-content').each(function(i){
-    $(this).find('img').each(function(){
-      if ($(this).parent().hasClass('fancybox')) return;
-      var alt = this.alt;
-      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
-      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
-    });
-    $(this).find('.fancybox').each(function(){
-      $(this).attr('rel', 'article' + i);
-    });
-  });
-  if($.fancybox){
-    $('.fancybox').fancybox();
-  }
-}); 
-</script>
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-large waves-effect waves-light red">赏</a>
 
-
-
-<!-- Analytics Begin -->
-
-
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fa fa-close"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
+    $(function () {
+        $('.tabs').tabs();
+    });
 </script>
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone, qq, weibo, douban"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>Reprint policy</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《PEP8代码风格》
+                </span> by
+            <a xmlns:cc="http://creativecommons.org/ns#" href="" property="cc:attributionName"
+               rel="cc:attributionURL">
+                志鹏
+            </a> is licensed under a
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+                Creative Commons Attribution 4.0 International License
+            </a> 
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="../../13/python-文件处理/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="python 文件处理">
+                        
+                        <span class="card-title">python 文件处理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            文件的打开
+open()语法函数参数open(file, mode=&#39;r&#39;, buffering=None, encoding=None, errors=None, newline=None, closefd=True)
+参
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2016-09-13
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-user fa-fw"></i>
+                            志鹏
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="../../../../tags/python/" target="_blank">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="../../08/给MacOS-X下的Python3安装requests模块/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="给MacOS X下的Python3安装requests模块">
+                        
+                        <span class="card-title">给MacOS X下的Python3安装requests模块</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            默认情况下直接用
+pip install requests
+
+会安装到MacOS 自带的Python 2下面，Python 3还是不能使用requests模块。解决方案
+下载request源代码：
+curl -OL https://gith
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-09-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-user fa-fw"></i>
+                            志鹏
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
 
 
 
-<!-- Analytics End -->
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
 
-<!-- Totop Begin -->
+<!-- TOC 悬浮按钮. -->
 
-	<div id="totop">
-	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
-	</div>
-	<script src="/js/totop.js"></script>
-
-<!-- Totop End -->
-
-<!-- MathJax Begin -->
-<!-- mathjax config similar to math.stackexchange -->
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
 
 
-<!-- MathJax End -->
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
 
-<!-- Tiny_search Begin -->
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
 
-<!-- Tiny_search End -->
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
 
-  </body>
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+
+    <a href="../../../../atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
 </html>
