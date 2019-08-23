@@ -417,11 +417,12 @@
 <h2 id="Modifying-Value-Types-from-Within-Instance-Methods"><a href="#Modifying-Value-Types-from-Within-Instance-Methods" class="headerlink" title="Modifying Value Types from Within Instance Methods"></a>Modifying Value Types from Within Instance Methods</h2><p>Structures and enumerations are value types. By default, the properties of a value type cannot be modified from within its instance methods.</p>
 <p>However, if you need to modify the properties of your structure or enumeration within a particular method, you can opt in to <strong>mutating</strong> behavior for that method.</p>
 <ul>
-<li>The method can then mutate (that is, change) its properties from within the method, and any changes that it makes are written back to the original structure when the method ends. </li>
+<li>The method can then mutate (that is, change) its properties from within the method, and any changes that it makes are written back to the original structure when the method ends</li>
 <li>The method can also assign a completely new instance to its implicit self property, and this new instance will replace the existing one when the method ends.</li>
 </ul>
 <blockquote>
 <p>You can opt in to this behavior by placing the <strong>mutating</strong> keyword before the <strong>func</strong> keyword for that method</p>
+</blockquote>
 <pre><code class="swift">struct Point {
     var x = 0.0, y = 0.0
     mutating func moveBy(x deltaX: Double, y deltaY: Double) {
@@ -430,7 +431,6 @@
     }
 }
 </code></pre>
-</blockquote>
 <blockquote>
 <p>Note that you <strong>cannot call a mutating method on a constant of structure type</strong>, <em>because its properties cannot be changed, even if they are variable properties</em>.</p>
 </blockquote>
@@ -457,7 +457,8 @@
     }
 }
 </code></pre>
-<h1 id="Type-Methods"><a href="#Type-Methods" class="headerlink" title="Type Methods"></a>Type Methods</h1><p>Instance methods, as described above, are methods that you call on an instance of a particular type. You can also define methods that are called on the type itself. These kinds of methods are called <code>type methods</code>. You indicate type methods by writing the <code>static</code>keyword before the method’s <code>func</code> keyword. Classes can use the<code>class</code>keyword instead, to allow subclasses to override the superclass’s implementation of that method</p>
+<p>#Type Methods</p>
+<p>Instance methods, as described above, are methods that you call on an instance of a particular type. You can also define methods that are called on the type itself. These kinds of methods are called <code>type methods</code>. You indicate type methods by writing the <code>static</code>keyword before the method’s <code>func</code> keyword. Classes can use the<code>class</code>keyword instead, to allow subclasses to override the superclass’s implementation of that method</p>
 <blockquote>
 <p>In Objective-C, you can define type-level methods only for Objective-C classes. In Swift, you can define type-level methods for all classes, structures, and enumerations. Each type method is explicitly scoped to the type it supports.</p>
 </blockquote>

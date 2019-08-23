@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="SwiftProperties, 志鹏的技术博客">
+    <meta name="keywords" content="Properties, 志鹏的技术博客">
     <meta name="description" content="Properties associate values with a particular class, structure, or enumeration.Stored properties store constant and vari">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>SwiftProperties | 志鹏的技术博客</title>
+    <title>Properties | 志鹏的技术博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -260,13 +260,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        SwiftProperties
+                        Properties
                     </div>
                 </div>
             </div>
@@ -438,12 +438,9 @@
 <li>didSet is called immediately after the new value is stored.</li>
 </ul>
 <blockquote>
-<p>The willSet and didSet observers of superclass properties are called when a property is set in a subclass initializer, after the superclass initializer has been called. They are not called while a class is setting its own properties, before the superclass initializer has been called.</p>
+<p>The willSet and didSet observers of superclass properties are called when a property is set in a subclass initializer, after the superclass initializer has been called. They are not called while a class is setting its own properties, before the superclass initializer has been called.<br>If you pass a property that has observers to a function as an in-out parameter, the willSet and didSet observers are always called. This is because of the copy-in copy-out memory model for in-out parameters: The value is always written back to the property at the end of the function</p>
 </blockquote>
-<blockquote>
-<p>If you pass a property that has observers to a function as an in-out parameter, the willSet and didSet observers are always called. This is because of the copy-in copy-out memory model for in-out parameters: The value is always written back to the property at the end of the function</p>
-</blockquote>
-<h2 id="Global-and-Local-Variables"><a href="#Global-and-Local-Variables" class="headerlink" title="Global and Local Variables"></a>Global and Local Variables</h2><p> Global variables are variables that are defined outside of any function, method, closure, or type context. Local variables are variables that are defined within a function, method, or closure context.</p>
+<h2 id="Global-and-Local-Variables"><a href="#Global-and-Local-Variables" class="headerlink" title="Global and Local Variables"></a>Global and Local Variables</h2><p>Global variables are variables that are defined outside of any function, method, closure, or type context. Local variables are variables that are defined within a function, method, or closure context.</p>
 
             </div>
             <hr/>
@@ -602,7 +599,7 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《SwiftProperties》
+                    《Properties》
                 </span> by
             <a xmlns:cc="http://creativecommons.org/ns#" href="" property="cc:attributionName"
                rel="cc:attributionURL">
