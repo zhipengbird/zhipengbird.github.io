@@ -5,9 +5,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="constellation, 志鹏的技术博客">
-    <meta name="description" content="- (NSString *) astrology {
-    NSString *astroString = @&amp;quot;魔羯水瓶双鱼白羊金牛双子巨蟹狮子处女天秤天蝎射手魔羯&amp;quot;;
-    NSString *astroForma">
+    <meta name="description" content="- (NSString *) astrology &amp;#123;    NSString *astroString = @&#34;魔羯水瓶双鱼白羊金牛双子巨蟹狮子处女天秤天蝎射手魔羯&#34;;    NSString *astroFormat = @&#34;1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -397,7 +395,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        216
+                        192
                     </div>
                     
 
@@ -420,38 +418,10 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <pre><code class="objc">- (NSString *) astrology {
-    NSString *astroString = @&quot;魔羯水瓶双鱼白羊金牛双子巨蟹狮子处女天秤天蝎射手魔羯&quot;;
-    NSString *astroFormat = @&quot;102123444543&quot;;
-    NSString *result;
+                <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">NSString</span> *) astrology &#123;</span><br><span class="line">    <span class="built_in">NSString</span> *astroString = <span class="string">@"魔羯水瓶双鱼白羊金牛双子巨蟹狮子处女天秤天蝎射手魔羯"</span>;</span><br><span class="line">    <span class="built_in">NSString</span> *astroFormat = <span class="string">@"102123444543"</span>;</span><br><span class="line">    <span class="built_in">NSString</span> *result;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSDateComponents</span> *components = [[<span class="built_in">NSCalendar</span> currentCalendar] components:<span class="built_in">NSCalendarUnitDay</span> | <span class="built_in">NSCalendarUnitMonth</span> | <span class="built_in">NSCalendarUnitYear</span> fromDate:<span class="keyword">self</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">long</span> m = [components month];</span><br><span class="line">    <span class="keyword">long</span> d = [components day];</span><br><span class="line"></span><br><span class="line">    result = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@座"</span>,[astroString substringWithRange:<span class="built_in">NSMakeRange</span>(m * <span class="number">2</span>-(d &lt; [[astroFormat substringWithRange:<span class="built_in">NSMakeRange</span>((m<span class="number">-1</span>), <span class="number">1</span>)] intValue] - (<span class="number">-19</span>)) * <span class="number">2</span>,<span class="number">2</span>)]];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:self];
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  根据月和日的下标获取星座名</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *  @param monthIndex 月的下标</span></span><br><span class="line"><span class="comment"> *  @param dayIndex   日的下标</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *  @return 星座名</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)getConstellationNameByMonthIndex:(<span class="built_in">NSInteger</span>)monthIndex dayIndex:(<span class="built_in">NSInteger</span>)dayIndex &#123;</span><br><span class="line">    <span class="built_in">NSArray</span> *constellations = @[<span class="string">@"水瓶座"</span>, <span class="string">@"双鱼座"</span>, <span class="string">@"白羊座"</span>, <span class="string">@"金牛座"</span>, <span class="string">@"双子座"</span>, <span class="string">@"巨蟹座"</span>, <span class="string">@"狮子座"</span>, <span class="string">@"处女座"</span>, <span class="string">@"天秤座"</span>, <span class="string">@"天蝎座"</span>, <span class="string">@"射手座"</span>, <span class="string">@"摩羯座"</span>];</span><br><span class="line">    <span class="built_in">NSInteger</span> index;</span><br><span class="line">    <span class="built_in">NSArray</span> *conIndexs = @[@(<span class="number">20</span>),@(<span class="number">19</span>),@(<span class="number">21</span>),@(<span class="number">20</span>),@(<span class="number">21</span>),@(<span class="number">22</span>),@(<span class="number">23</span>),@(<span class="number">23</span>),@(<span class="number">23</span>),@(<span class="number">24</span>),@(<span class="number">23</span>),@(<span class="number">22</span>)];</span><br><span class="line">    <span class="keyword">if</span> ([[conIndexs objectAtIndex:monthIndex] integerValue] &lt;= dayIndex + <span class="number">1</span>) &#123;</span><br><span class="line">        index = monthIndex;</span><br><span class="line">    &#125; <span class="keyword">else</span> index = (monthIndex - <span class="number">1</span> + <span class="number">12</span>) % <span class="number">12</span>;</span><br><span class="line">    <span class="keyword">return</span> [constellations objectAtIndex:index];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    long m = [components month];
-    long d = [components day];
-
-    result = [NSString stringWithFormat:@&quot;%@座&quot;,[astroString substringWithRange:NSMakeRange(m * 2-(d &lt; [[astroFormat substringWithRange:NSMakeRange((m-1), 1)] intValue] - (-19)) * 2,2)]];
-
-    return result;
-}</code></pre>
-<pre><code class="objc">/**
- *  根据月和日的下标获取星座名
- *
- *  @param monthIndex 月的下标
- *  @param dayIndex   日的下标
- *
- *  @return 星座名
- */
-- (NSString *)getConstellationNameByMonthIndex:(NSInteger)monthIndex dayIndex:(NSInteger)dayIndex {
-    NSArray *constellations = @[@&quot;水瓶座&quot;, @&quot;双鱼座&quot;, @&quot;白羊座&quot;, @&quot;金牛座&quot;, @&quot;双子座&quot;, @&quot;巨蟹座&quot;, @&quot;狮子座&quot;, @&quot;处女座&quot;, @&quot;天秤座&quot;, @&quot;天蝎座&quot;, @&quot;射手座&quot;, @&quot;摩羯座&quot;];
-    NSInteger index;
-    NSArray *conIndexs = @[@(20),@(19),@(21),@(20),@(21),@(22),@(23),@(23),@(23),@(24),@(23),@(22)];
-    if ([[conIndexs objectAtIndex:monthIndex] integerValue] &lt;= dayIndex + 1) {
-        index = monthIndex;
-    } else index = (monthIndex - 1 + 12) % 12;
-    return [constellations objectAtIndex:index];
-}
-</code></pre>
 
             </div>
             <hr/>
@@ -744,7 +714,7 @@
                         
                             pod 基础使用命令
 创建Podfile文件
- pod init
+pod init
 
 使用命令打开Podfile文件
 open -a Xcode Podfile
@@ -753,7 +723,7 @@ open -a Xcode Podfile
 pod search 库名
 
 更新本地Repo库
-pod repo updat
+pod repo update
                         
                     </div>
                     <div class="publish-info">
@@ -897,7 +867,7 @@ pod repo updat
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

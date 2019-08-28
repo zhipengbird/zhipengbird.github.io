@@ -6,12 +6,17 @@
     <meta charset="utf-8">
     <meta name="keywords" content="Mac上 Appache 的操作, 志鹏的技术博客">
     <meta name="description" content="常用操作：
-打开终端，运行启动Apache命令：sudo apachectl start
+打开终端，运行启动Apache命令：
+sudo apachectl start
 
+关闭命令：
+sudo apachectl stop
 
-2. 关闭命令：sudo apachectl stop
-3. 重启命令sudo apachectl restart
-4. 查看Apache版本命令">
+重启命令
+sudo apachectl restart
+
+查看Apache版本命令
+http">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -405,7 +410,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        548
+                        503
                     </div>
                     
 
@@ -429,69 +434,76 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="常用操作："><a href="#常用操作：" class="headerlink" title="常用操作："></a>常用操作：</h1><ol>
-<li>打开终端，运行启动Apache命令：<pre><code>sudo apachectl start
-</code></pre></li>
+<li><p>打开终端，运行启动Apache命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apachectl start</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关闭命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apachectl stop</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apachectl restart</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看Apache版本命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">httpd –v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>语法检测</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apachectl configtest</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看Apache版本号：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">httpd -v</span><br></pre></td></tr></table></figure>
+
+</li>
 </ol>
-<pre><code>2. 关闭命令：</code></pre><p>sudo apachectl stop</p>
-<pre><code>3. 重启命令</code></pre><p>sudo apachectl restart</p>
-<pre><code>4. 查看Apache版本命令</code></pre><p>httpd –v</p>
-<pre><code>5. 语法检测</code></pre><p>apachectl configtest</p>
-<pre><code>6. 查看Apache版本号：</code></pre><p>httpd -v</p>
-<pre><code>&lt;!-- more --&gt;
-# Root目录
+<a id="more"></a>
+<h1 id="Root目录"><a href="#Root目录" class="headerlink" title="Root目录"></a>Root目录</h1><p>启用Apache之后，可以直接在浏览器中访问<code>http://localhost</code>，如果出现”It works!”就表示运正常。<br>启用Apache之后，首先得知道网页文件应该放在哪个目录才能正常运行。Mac OS X 中默认有两个目录可以直接运行Web程序，一个是系统级的根目录，一个是用户级的根目录。</p>
+<ul>
+<li><p>系统级的根目录是：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/Library/WebServer/Documents/</span><br></pre></td></tr></table></figure>
 
-启用Apache之后，可以直接在浏览器中访问`http://localhost`，如果出现”It works!”就表示运正常。
-启用Apache之后，首先得知道网页文件应该放在哪个目录才能正常运行。Mac OS X 中默认有两个目录可以直接运行Web程序，一个是系统级的根目录，一个是用户级的根目录。
-* 系统级的根目录是：</code></pre><p>  /Library/WebServer/Documents/</p>
-<pre><code>  它对应的网址是:</code></pre><p>  <a href="http://localhost" target="_blank" rel="noopener">http://localhost</a></p>
-<pre><code>* 用户级的根目录是:</code></pre><p>  ~/Sites</p>
-<pre><code>  这里需要注意的~/Sites也就是你用户目录下面的”站点”目录，在OS X 10.8以后，这个目录可能没有，所以你需要手动建立一个同名目录。建立方式很简单，直接在终端中运行：</code></pre><p>  sudo mkdir ~/Sites</p>
-<pre><code>  或者可以直接在目录中新建Sites文件夹
+<p>它对应的网址是:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http://localhost</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用户级的根目录是:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">~/Sites</span><br></pre></td></tr></table></figure>
 
-## 配置用户级目录
-  1. 创建有户目录“Sites”文件夹，找开终端：
-    ```
-    sudo mkdir ~/Sites
-    ```
-  2. 进入 /etc/apache2/users/
-    ```
-    cd /etc/apache2/users/
-    sudo vim username.conf
+<p>这里需要注意的~/Sites也就是你用户目录下面的”站点”目录，在OS X 10.8以后，这个目录可能没有，所以你需要手动建立一个同名目录。建立方式很简单，直接在终端中运行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo mkdir ~/Sites</span><br></pre></td></tr></table></figure>
 
-    ```
-    添加内容为：
-    ```
-    &lt;Directory &quot;/Users/yuanpinghua/Sites/&quot;&gt;
-      AllowOverride All
-      Options Indexes MultiViews FollowSymLinks
-      Require all granted
-    &lt;/Directory&gt;
-    ```
-    上行中的`yuanpinghua`就是用户名，然后将该文件权限改为：644
-    ```
-    sudo chmod 644 username.conf
-    ```
-    3. 进到/etc/apache2/目录，sudo vim httpd.conf 将下面三句话的注释去掉：
-    ```
-      LoadModule authz_core_module libexec/apache2/mod_authz_core.so
-      LoadModule authz_host_module libexec/apache2/mod_authz_host.so
-      LoadModule userdir_module libexec/apache2/mod_userdir.so
-      Include /private/etc/apache2/extra/httpd-userdir.conf
-    ```
-    将这四句前的“#”去掉
-    4. 进到/etc/apache2/extra/目录，
-      ```
-      sudo vim httpd-userdir.conf
-       ```
-      将`Include /private/etc/apache2/users/*.conf `这句话放开注释。
-    5. 然后终端输入：`sudo apachectl restart `重启apache，浏览器输入：` loacal/~yuanpinghua/` 就可以正常显示该目录下的文件
+<p>或者可以直接在目录中新建Sites文件夹</p>
+</li>
+</ul>
+<h2 id="配置用户级目录"><a href="#配置用户级目录" class="headerlink" title="配置用户级目录"></a>配置用户级目录</h2><ol>
+<li><p>创建有户目录“Sites”文件夹，找开终端：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo mkdir ~/Sites</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入 /etc/apache2/users/</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd /etc/apache2/users/</span><br><span class="line">sudo vim username.conf</span><br></pre></td></tr></table></figure>
 
+<p>添加内容为：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;Directory &quot;/Users/yuanpinghua/Sites/&quot;&gt;</span><br><span class="line">  AllowOverride All</span><br><span class="line">  Options Indexes MultiViews FollowSymLinks</span><br><span class="line">  Require all granted</span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
 
-参考网页：
-[在Mac上配置Apache+PHP环境](http://www.aichengxu.com/view/4587749)
-[Mac OS X 上的Apache配置](http://www.jianshu.com/p/7b8d5d6f22c9)
-[Mac OS X EI Captitan 中Apache开启SSL (HTTPS)](http://www.aichengxu.com/view/10044030)
-[Mac OS X中Apache开启ssl](http://www.cnblogs.com/y500/p/3596473.html)</code></pre>
+<p>上行中的<code>yuanpinghua</code>就是用户名，然后将该文件权限改为：644</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo chmod 644 username.conf</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>进到/etc/apache2/目录，sudo vim httpd.conf 将下面三句话的注释去掉：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">LoadModule authz_core_module libexec/apache2/mod_authz_core.so</span><br><span class="line">LoadModule authz_host_module libexec/apache2/mod_authz_host.so</span><br><span class="line">LoadModule userdir_module libexec/apache2/mod_userdir.so</span><br><span class="line">Include /private/etc/apache2/extra/httpd-userdir.conf</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>将这四句前的“#”去掉</p>
+<ol start="4">
+<li><p>进到/etc/apache2/extra/目录，</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo vim httpd-userdir.conf</span><br></pre></td></tr></table></figure>
+
+<p>将<code>Include /private/etc/apache2/users/*.conf</code>这句话放开注释。</p>
+</li>
+<li><p>然后终端输入：<code>sudo apachectl restart</code>重启apache，浏览器输入：<code>loacal/~yuanpinghua/</code> 就可以正常显示该目录下的文件</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>参考网页：<br><a href="http://www.aichengxu.com/view/4587749" target="_blank" rel="noopener">在Mac上配置Apache+PHP环境</a><br><a href="http://www.jianshu.com/p/7b8d5d6f22c9" target="_blank" rel="noopener">Mac OS X 上的Apache配置</a><br><a href="http://www.aichengxu.com/view/10044030" target="_blank" rel="noopener">Mac OS X EI Captitan 中Apache开启SSL (HTTPS)</a><br><a href="http://www.cnblogs.com/y500/p/3596473.html" target="_blank" rel="noopener">Mac OS X中Apache开启ssl</a></p>
+
             </div>
             <hr/>
 
@@ -734,9 +746,8 @@
                         
                             
 生成主机密钥 这里会要求输入密码，不输入，直接回车
- sudo mkdir /private/etc/apache2/ssl
- cd /private/etc/apache2/ssl
- sudo ssh-keygen -f server.
+ sudo mkdir /private/etc/apache2/sslcd /private/etc/apache2/sslsudo ssh-keygen -f server.key
+
                         
                     </div>
                     <div class="publish-info">
@@ -785,7 +796,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            NSMutableArray * array  = [NSMutableArray arrayWithArray:@[@&quot;2&quot;,@&quot;2&quot;,@&quot;1&quot;,@&quot;fad&quot;
+                            NSMutableArray * array  = [NSMutableArray arrayWithArray:@[@"2",@"2",@"1",@"fad",@"23"]];for(NSString* str  in array)&#1
                         
                     </div>
                     <div class="publish-info">
@@ -929,7 +940,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

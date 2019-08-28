@@ -419,21 +419,11 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="可变字典中setValue-forKey和setObject-forKey的区别"><a href="#可变字典中setValue-forKey和setObject-forKey的区别" class="headerlink" title="可变字典中setValue:forKey和setObject:forKey的区别"></a>可变字典中setValue:forKey和setObject:forKey的区别</h1><p>在开发过程中，使用字典的频率也是非常高的，也经常会遇到一个类似<br><code>-[__NSPlaceholderDictionary initWithObjects:forKeys:count:]: attempt to insert nil object from objects[1]</code><br>crash,那发生这种crash的真实原因又是什么呢？在开发过程中我们调用<code>setValue:forKey</code>和<code>setObject:forKey</code>频率也是非常多，但大多数情况，后者居多。我们先来看下这两个函数有定义</p>
-<pre><code class="objc">@interface NSMutableDictionary&lt;KeyType, ObjectType&gt;(NSKeyValueCoding)
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSMutableDictionary</span>&lt;<span class="title">KeyType</span>, <span class="title">ObjectType</span>&gt;(<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">Send -setObject:forKey: to the receiver, unless the value is nil, in which case send -removeObjectForKey:</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> ObjectType)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 
-/* 
-Send -setObject:forKey: to the receiver, unless the value is nil, in which case send -removeObjectForKey:
-*/
-- (void)setValue:(nullable ObjectType)value forKey:(NSString *)key;
-
-@end</code></pre>
 <p>该方法内部分调用在<code>-setObject:forKey:</code>方法去给字典赋值，在<code>value</code>为空的情况下会调用<code>-removeObjectForKey:</code>移除已有key的值。这样在一定程度上避免了给字典赋空值crash的情况发生</p>
-<pre><code class="objc">
-@interface NSMutableDictionary&lt;KeyType, ObjectType&gt; : NSDictionary&lt;KeyType, ObjectType&gt;
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSMutableDictionary</span>&lt;<span class="title">KeyType</span>, <span class="title">ObjectType</span>&gt; : <span class="title">NSDictionary</span>&lt;<span class="title">KeyType</span>, <span class="title">ObjectType</span>&gt;</span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)removeObjectForKey:(KeyType)aKey;</span><br><span class="line">- (<span class="keyword">void</span>)setObject:(ObjectType)anObject forKey:(KeyType &lt;<span class="built_in">NSCopying</span>&gt;)aKey;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 
-- (void)removeObjectForKey:(KeyType)aKey;
-- (void)setObject:(ObjectType)anObject forKey:(KeyType &lt;NSCopying&gt;)aKey;
-@end</code></pre>
 <p>在API上我们发现没有注释，但在文档中其代码注释非常详细：<br><code>- (void)setObject:(ObjectType)anObject forKey:(KeyType &lt;NSCopying&gt;)aKey;</code></p>
 <ul>
 <li><code>anObject</code><br>The value for aKey. A strong reference to the object is maintained by the dictionary.</li>
@@ -869,7 +859,7 @@ Send -setObject:forKey: to the receiver, unless the value is nil, in which case 
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

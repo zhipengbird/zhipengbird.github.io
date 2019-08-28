@@ -439,7 +439,9 @@
 </li>
 </ul>
 <p>URL 的规则和主机部分不定义为区分大小写，但是路径和查询字符串是区分大小写的。通常，整个 URL 指定为小写字母。<br>URL 的组成部分如下所示进行组合和定界：</p>
-<pre><code>scheme://host:port/path?query</code></pre><ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">scheme://host:port/path?query</span><br></pre></td></tr></table></figure>
+
+<ul>
 <li>规则后跟冒号和两个正斜杠。</li>
 <li>如果指定端口号，那么主机名后面是号码，并用冒号分隔。</li>
 <li>路径名以单正斜杠开始。</li>
@@ -455,56 +457,16 @@
 <p>–+—————–+—————————————–&gt;&lt;<br>   ‘-?–query string-‘</p>
 </blockquote>
 <p>URL 的后面可以跟片段标识。URL 与片段标识之间使用的分隔符是字符 #。<strong>片段标识用于使 Web 浏览器指向它刚检索的项中的引用或函数</strong>。 例如，如果 URL 标识 HTML 页面，那么可使用片段标识，以子节的标识来指示页面中的子节。对于这种情况，Web 浏览器通常向用户显示页面， 以使用户可以看到子节。根据项的介质类型以及为该介质类型的片段标识所定义含义的不同，Web 浏览器为片段标识所采取的操作也会不同</p>
-<pre><code>https://item.jd.com/11818781778.html#crumb-wrap</code></pre><h1 id="OC中如何获取URL的中各个组成部分"><a href="#OC中如何获取URL的中各个组成部分" class="headerlink" title="OC中如何获取URL的中各个组成部分"></a>OC中如何获取URL的中各个组成部分</h1><p>为获取URL中的各个组成部分，Foundation框架为我们提供了一个<code>NSURLComponents</code>类，通过该类，可以获取到URL中和各个组成部分</p>
-<pre><code class="objc">    // NSURLComponents 相关字段
-    @property (nullable, copy) NSString *scheme; // 规则， Attempting to set the scheme with an invalid scheme string will cause an exception.
-    @property (nullable, copy) NSString *user;//用户
-    @property (nullable, copy) NSString *password;//密码
-    @property (nullable, copy) NSString *host;//主机
-    @property (nullable, copy) NSNumber *port; // 端口 Attempting to set a negative port number will cause an exception.
-    @property (nullable, copy) NSString *path;//路径
-    @property (nullable, copy) NSString *query;//查询字符
-    @property (nullable, copy) NSString *fragment;//片段标识
-    @property (nullable, copy) NSArray&lt;NSURLQueryItem *&gt; *queryItems; //查询字段数组</code></pre>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https://item.jd.com/11818781778.html#crumb-wrap</span><br></pre></td></tr></table></figure>
+
+<h1 id="OC中如何获取URL的中各个组成部分"><a href="#OC中如何获取URL的中各个组成部分" class="headerlink" title="OC中如何获取URL的中各个组成部分"></a>OC中如何获取URL的中各个组成部分</h1><p>为获取URL中的各个组成部分，Foundation框架为我们提供了一个<code>NSURLComponents</code>类，通过该类，可以获取到URL中和各个组成部分</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// NSURLComponents 相关字段</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *scheme; <span class="comment">// 规则， Attempting to set the scheme with an invalid scheme string will cause an exception.</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *user;<span class="comment">//用户</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *password;<span class="comment">//密码</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *host;<span class="comment">//主机</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSNumber</span> *port; <span class="comment">// 端口 Attempting to set a negative port number will cause an exception.</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *path;<span class="comment">//路径</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *query;<span class="comment">//查询字符</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *fragment;<span class="comment">//片段标识</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSArray</span>&lt;<span class="built_in">NSURLQueryItem</span> *&gt; *queryItems; <span class="comment">//查询字段数组</span></span><br></pre></td></tr></table></figure>
+
 <p>示例</p>
-<pre><code class="objc">    NSString * urlString = @&quot;http://54.223.156.84:9120/relayserver/spring/commands/command?commandType=cmd_type_ad&amp;commandName=&amp;commandStatus=&amp;code=10001&amp;id=test_snapshow_ios_first_test&amp;page=&amp;restrict=false&quot;;
-    urlString = @&quot;https://item.jd.com/11818781778.html#crumb-wrap&quot;;
-    // 创建组件对象
-    NSURLComponents *components = [NSURLComponents componentsWithString:urlString];
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * urlString = <span class="string">@"http://54.223.156.84:9120/relayserver/spring/commands/command?commandType=cmd_type_ad&amp;commandName=&amp;commandStatus=&amp;code=10001&amp;id=test_snapshow_ios_first_test&amp;page=&amp;restrict=false"</span>;</span><br><span class="line">urlString = <span class="string">@"https://item.jd.com/11818781778.html#crumb-wrap"</span>;</span><br><span class="line"><span class="comment">// 创建组件对象</span></span><br><span class="line"><span class="built_in">NSURLComponents</span> *components = [<span class="built_in">NSURLComponents</span> componentsWithString:urlString];</span><br><span class="line"></span><br><span class="line"><span class="comment">//规则</span></span><br><span class="line"><span class="built_in">NSString</span> * scheme = components.scheme;</span><br><span class="line"><span class="comment">// 路径</span></span><br><span class="line"><span class="built_in">NSString</span> * path = components.path;</span><br><span class="line"><span class="comment">//端口</span></span><br><span class="line"><span class="built_in">NSString</span> * port = components.port;</span><br><span class="line"><span class="comment">//查询字符串</span></span><br><span class="line"><span class="built_in">NSString</span> * query  = components.query;</span><br><span class="line"><span class="comment">//片段标识</span></span><br><span class="line"><span class="built_in">NSString</span> * fragment = components.fragment;</span><br><span class="line"><span class="comment">//获取查询参数</span></span><br><span class="line"><span class="built_in">NSMutableDictionary</span> *paramsDic = [<span class="built_in">NSMutableDictionary</span> dictionary];</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">NSURLQueryItem</span> *item <span class="keyword">in</span> components.queryItems) &#123;</span><br><span class="line">    [paramsDic setValue:item.value forKey:item.name];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    //规则
-    NSString * scheme = components.scheme;
-    // 路径
-    NSString * path = components.path;
-    //端口
-    NSString * port = components.port;
-    //查询字符串
-    NSString * query  = components.query;
-    //片段标识
-    NSString * fragment = components.fragment;
-    //获取查询参数
-    NSMutableDictionary *paramsDic = [NSMutableDictionary dictionary];
-    for (NSURLQueryItem *item in components.queryItems) {
-        [paramsDic setValue:item.value forKey:item.name];
-    }</code></pre>
 <p>添加查询字段</p>
-<pre><code class="objc">NS_ASSUME_NONNULL_BEGIN
-
-@interface NSURLComponents (addQueryItem)
--(void)addQueryItem:(NSURLQueryItem*)queryItem;
-@end
-
-NS_ASSUME_NONNULL_END
-
-@implementation NSURLComponents (addQueryItem)
--(void)addQueryItem:(NSURLQueryItem *)queryItem{
-    NSMutableArray * queryitems = [NSMutableArray arrayWithArray:self.queryItems];
-    [queryitems addObject:queryItem];
-    self.queryItems = queryitems;
-}
-@end
-</code></pre>
-
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NS_ASSUME_NONNULL_BEGIN</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSURLComponents</span> (<span class="title">addQueryItem</span>)</span></span><br><span class="line">-(<span class="keyword">void</span>)addQueryItem:(<span class="built_in">NSURLQueryItem</span>*)queryItem;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">NS_ASSUME_NONNULL_END</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSURLComponents</span> (<span class="title">addQueryItem</span>)</span></span><br><span class="line">-(<span class="keyword">void</span>)addQueryItem:(<span class="built_in">NSURLQueryItem</span> *)queryItem&#123;</span><br><span class="line">    <span class="built_in">NSMutableArray</span> * queryitems = [<span class="built_in">NSMutableArray</span> arrayWithArray:<span class="keyword">self</span>.queryItems];</span><br><span class="line">    [queryitems addObject:queryItem];</span><br><span class="line">    <span class="keyword">self</span>.queryItems = queryitems;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
             </div>
             <hr/>
 
@@ -914,7 +876,7 @@ NS_ASSUME_NONNULL_END
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

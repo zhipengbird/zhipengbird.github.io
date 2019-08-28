@@ -401,7 +401,7 @@ NSMutableParagraphStyle是NSParagra">
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        337
+                        339
                     </div>
                     
 
@@ -450,13 +450,8 @@ NSMutableParagraphStyle是NSParagra">
 <li>NSUnderlineColorAttributeName（下划线颜色）</li>
 </ul>
 <p>我们可以通过创建一个NSMutableParagraphStyle对象，设置我们想要的段落属性，然后将段落属性添加至属性文本中，</p>
-<pre><code class="objc">-(NSAttributedString *)adjustlineSpace:(float)space {
-    NSMutableAttributedString * attribute  = [[NSMutableAttributedString alloc]initWithAttributedString:self];//创建一个可变属性文本对象
-    NSMutableParagraphStyle * paragraph =[[NSMutableParagraphStyle alloc]init];//创建一个段落对象
-    [paragraph setLineSpacing:space];//设置段落属性
-    [attribute addAttribute:NSParagraphStyleAttributeName value:paragraph range:NSMakeRange(0, self.length)];//为属性文本添加属性
-    return attribute;
-}</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">-(<span class="built_in">NSAttributedString</span> *)adjustlineSpace:(<span class="keyword">float</span>)space &#123;</span><br><span class="line">    <span class="built_in">NSMutableAttributedString</span> * attribute  = [[<span class="built_in">NSMutableAttributedString</span> alloc]initWithAttributedString:<span class="keyword">self</span>];<span class="comment">//创建一个可变属性文本对象</span></span><br><span class="line">    <span class="built_in">NSMutableParagraphStyle</span> * paragraph =[[<span class="built_in">NSMutableParagraphStyle</span> alloc]init];<span class="comment">//创建一个段落对象</span></span><br><span class="line">    [paragraph setLineSpacing:space];<span class="comment">//设置段落属性</span></span><br><span class="line">    [attribute addAttribute:<span class="built_in">NSParagraphStyleAttributeName</span> value:paragraph range:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, <span class="keyword">self</span>.length)];<span class="comment">//为属性文本添加属性</span></span><br><span class="line">    <span class="keyword">return</span> attribute;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
             </div>
             <hr/>
@@ -887,7 +882,7 @@ NSMutableParagraphStyle是NSParagra">
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

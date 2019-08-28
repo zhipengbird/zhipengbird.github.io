@@ -455,23 +455,20 @@
 </li>
 </ul>
 <h2 id="ARC-需要看到方法声明"><a href="#ARC-需要看到方法声明" class="headerlink" title="ARC 需要看到方法声明"></a>ARC 需要看到方法声明</h2><p>ARC需要看到它在消息表达式中遇到的每个方法的声明，“看到”指方法在与消息表达式相同的文件中或者是在最终会导入的文件中或者最终会导入那个文件的某个文件声明中。<br>在手动引用计数下：</p>
-<pre><code>Foo  * foo = [[Foo alloc]init];
-[foo  undeclareMethod];</code></pre><p>会得到一个警告：<code>Instance method &#39;-undeclareMethod&#39; not found(return type defaults to &#39;id&#39;)</code><br>使用ARC，警告将会变成错误：<br><code>No visible @interface for &#39;Foo&#39; declares the selector &#39;undeclaredMethod&#39;</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Foo  * foo = [[Foo alloc]init];</span><br><span class="line">[foo  undeclareMethod];</span><br></pre></td></tr></table></figure>
+
+<p>会得到一个警告：<code>Instance method &#39;-undeclareMethod&#39; not found(return type defaults to &#39;id&#39;)</code><br>使用ARC，警告将会变成错误：<br><code>No visible @interface for &#39;Foo&#39; declares the selector &#39;undeclaredMethod&#39;</code></p>
 <p>这是由于ARC不能通过方法名确定方法将会返回一个对象还是一种基本数据类型。尽管有这些规则，ARC还是不能只通过查看方法名来判断返回对象的内存状态是什么以。可以通过向方法声明中添加<code>NS_RETURNS_NOT_RETAINED</code>或<code>NS_RETURNS_RETAINED</code>,改变方法期望的保留状态。</p>
 <h2 id="OC-指针与C结构"><a href="#OC-指针与C结构" class="headerlink" title="OC 指针与C结构"></a>OC 指针与C结构</h2><p>不能把指向OC对象的指针放在C结构（struce）或联合（union）中，ARC将不允许编写下面代码：</p>
-<pre><code>  struct _sentence{
-        NSString * noun;
-        NSString * verb
-    }sentence;
-    //    ARC forbids Objective-C objects in struct</code></pre><p>ARC无法可靠地遵循C结构的生存期，因此，它无法知道自己何时可以安全的释放赋予结构成员的任何对象，通过把结构体的成员声明为<code>__unsafe_unretained</code>就可以解决。</p>
-<pre><code>    struct _sentence{
-        __unsafe_unretained NSString * noun;
-        __unsafe_unretained NSString * verb
-    }sentence;</code></pre><p><code>__unsafe_unretained</code>是ARC引入的变量修饰符，当把一个变量声明为<code>__unsafe_unretained</code>时，它告诉ARC把在一个对象赋予该变量时放弃进行任何内存管理。<br>更好的解决方案是把结构变成一个类：</p>
-<pre><code>@interface Sentence: NSObject
-@property (nonatomic) NSString * noun;
-@property (nonatomic) NSString * verb;
-@end</code></pre><h1 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h1><p>ARC带来了新的引用类型：弱引用。其支持的引用类型有：强引用、弱引用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct _sentence&#123;</span><br><span class="line">      NSString * noun;</span><br><span class="line">      NSString * verb</span><br><span class="line">  &#125;sentence;</span><br><span class="line">  //    ARC forbids Objective-C objects in struct</span><br></pre></td></tr></table></figure>
+
+<p>ARC无法可靠地遵循C结构的生存期，因此，它无法知道自己何时可以安全的释放赋予结构成员的任何对象，通过把结构体的成员声明为<code>__unsafe_unretained</code>就可以解决。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct _sentence&#123;</span><br><span class="line">    __unsafe_unretained NSString * noun;</span><br><span class="line">    __unsafe_unretained NSString * verb</span><br><span class="line">&#125;sentence;</span><br></pre></td></tr></table></figure>
+
+<p><code>__unsafe_unretained</code>是ARC引入的变量修饰符，当把一个变量声明为<code>__unsafe_unretained</code>时，它告诉ARC把在一个对象赋予该变量时放弃进行任何内存管理。<br>更好的解决方案是把结构变成一个类：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@interface Sentence: NSObject</span><br><span class="line">@property (nonatomic) NSString * noun;</span><br><span class="line">@property (nonatomic) NSString * verb;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+
+<h1 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h1><p>ARC带来了新的引用类型：弱引用。其支持的引用类型有：强引用、弱引用</p>
 <ul>
 <li>强引用<br>  强引用是默认的引用类型。被强引用指向的内存不会被释放，强引用会对引用计数加1，从而扩展对象的生命周期。</li>
 <li>弱引用<br>  弱引用是一种特殊的引用类型。它不会增加引用计数，因而不会扩展对象的生命周期。在启用ARC的开发中，弱引用显得格外重要。</li>
@@ -511,31 +508,7 @@
 </li>
 </ul>
 <p>内存使用情况获取</p>
-<pre><code class="c">#import &lt;mach/mach.h&gt;
-/**获取使用内存大小*/
-vm_size_t getUsedMemory(){
-    task_basic_info_data_t info ;
-    mach_msg_type_number_t size = sizeof(info);
-    kern_return_t kerr = task_info(mach_task_self(), TASK_BASIC_INFO, (task_info_t)&amp;info, &amp;size);
-    if (kerr == KERN_SUCCESS) {
-        return info.resident_size;
-    }else{
-        return 0;
-    }
-}
-/**获取空余内存大小*/
-vm_size_t getFreeMemory(){
-    mach_port_t host  = mach_host_self();
-    mach_msg_type_number_t size = sizeof(vm_statistics_t)/sizeof(integer_t);
-
-    vm_size_t pagesize;
-    vm_statistics_data_t vmstat;
-    host_page_size(host, &amp;pagesize);
-    host_statistics(host, HOST_VM_INFO, (host_info_t)&amp;vmstat, &amp;size);
-
-    return vmstat.free_count * pagesize;
-}</code></pre>
-
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;mach/mach.h&gt;</span></span></span><br><span class="line"><span class="comment">/**获取使用内存大小*/</span></span><br><span class="line"><span class="keyword">vm_size_t</span> getUsedMemory()&#123;</span><br><span class="line">    <span class="keyword">task_basic_info_data_t</span> info ;</span><br><span class="line">    <span class="keyword">mach_msg_type_number_t</span> size = <span class="keyword">sizeof</span>(info);</span><br><span class="line">    <span class="keyword">kern_return_t</span> kerr = task_info(mach_task_self(), TASK_BASIC_INFO, (<span class="keyword">task_info_t</span>)&amp;info, &amp;size);</span><br><span class="line">    <span class="keyword">if</span> (kerr == KERN_SUCCESS) &#123;</span><br><span class="line">        <span class="keyword">return</span> info.resident_size;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**获取空余内存大小*/</span></span><br><span class="line"><span class="keyword">vm_size_t</span> getFreeMemory()&#123;</span><br><span class="line">    <span class="keyword">mach_port_t</span> host  = mach_host_self();</span><br><span class="line">    <span class="keyword">mach_msg_type_number_t</span> size = <span class="keyword">sizeof</span>(<span class="keyword">vm_statistics_t</span>)/<span class="keyword">sizeof</span>(<span class="keyword">integer_t</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">vm_size_t</span> pagesize;</span><br><span class="line">    <span class="keyword">vm_statistics_data_t</span> vmstat;</span><br><span class="line">    host_page_size(host, &amp;pagesize);</span><br><span class="line">    host_statistics(host, HOST_VM_INFO, (<span class="keyword">host_info_t</span>)&amp;vmstat, &amp;size);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> vmstat.free_count * pagesize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
             </div>
             <hr/>
 
@@ -945,7 +918,7 @@ vm_size_t getFreeMemory(){
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

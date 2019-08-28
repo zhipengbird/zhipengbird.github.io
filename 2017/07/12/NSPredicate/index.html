@@ -409,14 +409,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        1.5k
+                        1.4k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
-                        6 Min
+                        5 Min
                     </div>
                     
                 
@@ -438,65 +438,17 @@
 <p>可变集合，NSMutableArray&amp;NSMutableSet，可以使用方法filterUsingPredicate:，它可以通过运行接收到的谓词来移除评估结果为FALSE的对象。</p>
 <p>NSDictionary可以用谓词来过滤它的键和值（两者都为NSArray对象）。NSOrderedSet可以由过滤的NSArray或NSSet生成一个新的有序的集，或者NSMutableSet可以简单的removeObjectsInArray:，来传递通过_否定_predicate过滤的对象。</p>
 <h1 id="Core-Data中使用NSPredicate"><a href="#Core-Data中使用NSPredicate" class="headerlink" title="Core Data中使用NSPredicate"></a>Core Data中使用NSPredicate</h1><p>NSFetchRequest有一个predicate属性，它可以指定管理对象应该被获取的逻辑条件。谓词的使用规则在这里同样适用，唯一的区别在于，在管理对象环境中，谓词由持久化存储助理（persistent store coordinator）评估，而不像集合那样在内存中被过滤</p>
-<pre><code>@interface Person : NSObject
-@property NSString *firstName;
-@property NSString *lastName;
-@property NSNumber *age;
-@end
-
-@implementation Person
-
-- (NSString *)description {
-    return [NSString stringWithFormat:@&quot;%@ %@&quot;, self.firstName, self.lastName];
-}
-
-@end
-
-#pragma mark -
-
-NSArray *firstNames = @[ @&quot;Alice&quot;, @&quot;Bob&quot;, @&quot;Charlie&quot;, @&quot;Quentin&quot; ];
-NSArray *lastNames = @[ @&quot;Smith&quot;, @&quot;Jones&quot;, @&quot;Smith&quot;, @&quot;Alberts&quot; ];
-NSArray *ages = @[ @24, @27, @33, @31 ];
-
-NSMutableArray *people = [NSMutableArray array];
-[firstNames enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-    Person *person = [[Person alloc] init];
-    person.firstName = firstNames[idx];
-    person.lastName = lastNames[idx];
-    person.age = ages[idx];
-    [people addObject:person];
-}];
-
-NSPredicate *bobPredicate = [NSPredicate predicateWithFormat:@&quot;firstName = &#39;Bob&#39;&quot;];
-NSPredicate *smithPredicate = [NSPredicate predicateWithFormat:@&quot;lastName = %@&quot;, @&quot;Smith&quot;];
-NSPredicate *thirtiesPredicate = [NSPredicate predicateWithFormat:@&quot;age &gt;= 30&quot;];
-
-&#x2F;&#x2F; [&quot;Bob Jones&quot;]
-NSLog(@&quot;Bobs: %@&quot;, [people filteredArrayUsingPredicate:bobPredicate]);
-
-&#x2F;&#x2F; [&quot;Alice Smith&quot;, &quot;Charlie Smith&quot;]
-NSLog(@&quot;Smiths: %@&quot;, [people filteredArrayUsingPredicate:smithPredicate]);
-
-&#x2F;&#x2F; [&quot;Charlie Smith&quot;, &quot;Quentin Alberts&quot;]
-NSLog(@&quot;30&#39;s: %@&quot;, [people filteredArrayUsingPredicate:thirtiesPredicate]);
-
-</code></pre>
+<figure class="highlight objc"><figcaption><span>data</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Person</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="keyword">@property</span> <span class="built_in">NSString</span> *firstName;</span><br><span class="line"><span class="keyword">@property</span> <span class="built_in">NSString</span> *lastName;</span><br><span class="line"><span class="keyword">@property</span> <span class="built_in">NSNumber</span> *age;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Person</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="built_in">NSString</span> *)description &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@ %@"</span>, <span class="keyword">self</span>.firstName, <span class="keyword">self</span>.lastName];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark -</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">NSArray</span> *firstNames = @[ <span class="string">@"Alice"</span>, <span class="string">@"Bob"</span>, <span class="string">@"Charlie"</span>, <span class="string">@"Quentin"</span> ];</span><br><span class="line"><span class="built_in">NSArray</span> *lastNames = @[ <span class="string">@"Smith"</span>, <span class="string">@"Jones"</span>, <span class="string">@"Smith"</span>, <span class="string">@"Alberts"</span> ];</span><br><span class="line"><span class="built_in">NSArray</span> *ages = @[ @<span class="number">24</span>, @<span class="number">27</span>, @<span class="number">33</span>, @<span class="number">31</span> ];</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSMutableArray</span> *people = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">[firstNames enumerateObjectsUsingBlock:^(<span class="keyword">id</span> obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">    Person *person = [[Person alloc] init];</span><br><span class="line">    person.firstName = firstNames[idx];</span><br><span class="line">    person.lastName = lastNames[idx];</span><br><span class="line">    person.age = ages[idx];</span><br><span class="line">    [people addObject:person];</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSPredicate</span> *bobPredicate = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"firstName = 'Bob'"</span>];</span><br><span class="line"><span class="built_in">NSPredicate</span> *smithPredicate = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"lastName = %@"</span>, <span class="string">@"Smith"</span>];</span><br><span class="line"><span class="built_in">NSPredicate</span> *thirtiesPredicate = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"age &gt;= 30"</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["Bob Jones"]</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"Bobs: %@"</span>, [people filteredArrayUsingPredicate:bobPredicate]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["Alice Smith", "Charlie Smith"]</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"Smiths: %@"</span>, [people filteredArrayUsingPredicate:smithPredicate]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["Charlie Smith", "Quentin Alberts"]</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"30's: %@"</span>, [people filteredArrayUsingPredicate:thirtiesPredicate]);</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 <h1 id="谓词语法"><a href="#谓词语法" class="headerlink" title="谓词语法"></a>谓词语法</h1><h2 id="替换（占位符）"><a href="#替换（占位符）" class="headerlink" title="替换（占位符）"></a>替换（占位符）</h2><ul>
 <li><p>%@是对值为字符串，数字或者日期的对象的替换值。(变量值)</p>
 </li>
 <li><p>%K是key path的替换值。（变量名）</p>
-<pre><code>NSPredicate *ageIs33Predicate = [NSPredicate predicateWithFormat:@&quot;%K = %@&quot;, @&quot;age&quot;, @33];
-
-&#x2F;&#x2F; [&quot;Charlie Smith&quot;]
-NSLog(@&quot;Age 33: %@&quot;, [people filteredArrayUsingPredicate:ageIs33Predicate]);</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSPredicate</span> *ageIs33Predicate = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"%K = %@"</span>, <span class="string">@"age"</span>, @<span class="number">33</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["Charlie Smith"]</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"Age 33: %@"</span>, [people filteredArrayUsingPredicate:ageIs33Predicate]);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>$VARIABLE_NAME是可以被NSPredicate -predicateWithSubstitutionVariables:替换的值。</p>
-<pre><code>NSPredicate *namesBeginningWithLetterPredicate = [NSPredicate predicateWithFormat:@&quot;(firstName BEGINSWITH[cd] $letter) OR (lastName BEGINSWITH[cd] $letter)&quot;];
-
-&#x2F;&#x2F; [&quot;Alice Smith&quot;, &quot;Quentin Alberts&quot;]
-NSLog(@&quot;&#39;A&#39; Names: %@&quot;, [people filteredArrayUsingPredicate:[namesBeginningWithLetterPredicate predicateWithSubstitutionVariables:@{@&quot;letter&quot;: @&quot;A&quot;}]]);</code></pre>
+<figure class="highlight objc"><figcaption><span>变量</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSPredicate</span> *namesBeginningWithLetterPredicate = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"(firstName BEGINSWITH[cd] $letter) OR (lastName BEGINSWITH[cd] $letter)"</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["Alice Smith", "Quentin Alberts"]</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"'A' Names: %@"</span>, [people filteredArrayUsingPredicate:[namesBeginningWithLetterPredicate predicateWithSubstitutionVariables:@&#123;<span class="string">@"letter"</span>: <span class="string">@"A"</span>&#125;]]);</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -561,10 +513,7 @@ NSLog(@&quot;&#39;A&#39; Names: %@&quot;, [people filteredArrayUsingPredicate:[n
 <p>注：虽然大小写都可以，但是更推荐使用大写来表示这些保留字</p>
 </blockquote>
 <h1 id="NSCompoundPredicate"><a href="#NSCompoundPredicate" class="headerlink" title="NSCompoundPredicate"></a>NSCompoundPredicate</h1><p>我们见过与&amp;或被用在谓词格式字符串中以创建复合谓词。然而，我们也可以用NSCompoundPredicate来完成同样的工作</p>
-<pre><code>[NSCompoundPredicate andPredicateWithSubpredicates:@[[NSPredicate predicateWithFormat:@&quot;age &gt; 25&quot;], [NSPredicate predicateWithFormat:@&quot;firstName = %@&quot;, @&quot;Quentin&quot;]]];
-
-[NSPredicate predicateWithFormat:@&quot;(age &gt; 25) AND (firstName = %@)&quot;, @&quot;Quentin&quot;];
-</code></pre>
+<figure class="highlight objc"><figcaption><span>下列谓词是相等的</span></figcaption><table><tr><td class="code"><pre><span class="line">[<span class="built_in">NSCompoundPredicate</span> andPredicateWithSubpredicates:@[[<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"age &gt; 25"</span>], [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"firstName = %@"</span>, <span class="string">@"Quentin"</span>]]];</span><br><span class="line"></span><br><span class="line">[<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"(age &gt; 25) AND (firstName = %@)"</span>, <span class="string">@"Quentin"</span>];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
             </div>
             <hr/>
@@ -807,8 +756,7 @@ NSLog(@&quot;&#39;A&#39; Names: %@&quot;, [people filteredArrayUsingPredicate:[n
                     <div class="summary block-with-text">
                         
                             
-移除本地仓库的远程git使用 git remote rm命令解除本地创建与远程git的绑定关系git remote rm命令需要传入一个参数 远程仓库名示例：$git remote -v 
-origin	git@192.168.250.7
+移除本地仓库的远程git使用 git remote rm命令解除本地创建与远程git的绑定关系git remote rm命令需要传入一个参数 远程仓库名示例：查看当前的远程仓库$git remote -v origin	git@192.1
                         
                     </div>
                     <div class="publish-info">
@@ -991,7 +939,7 @@ origin	git@192.168.250.7
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

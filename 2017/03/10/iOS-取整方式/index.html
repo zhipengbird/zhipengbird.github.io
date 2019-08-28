@@ -6,15 +6,7 @@
     <meta charset="utf-8">
     <meta name="keywords" content="iOS 取整方式, 志鹏的技术博客">
     <meta name="description" content="ios的向上，向下以及四舍五入的取整方式
-import UIKit
-
-/**凑整*/
-ceil(2)//2
-ceil(2.3)//3
-ceil(2.5)//3
-ceil(2.8)//3
-ceil(-2.1)//-2
-ceil(-2.9)//">
+import UIKit/**凑整*/ceil(2)//2ceil(2.3)//3ceil(2.5)//3ceil(2.8)//3ceil(-2.1)//-2ceil(-2.9)//-2/**四舍五">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -417,7 +409,7 @@ ceil(-2.9)//">
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        190
+                        166
                     </div>
                     
 
@@ -441,52 +433,8 @@ ceil(-2.9)//">
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p><strong><em>ios的向上，向下以及四舍五入的取整方式</em></strong></p>
-<pre><code class="swift">import UIKit
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"></span><br><span class="line"><span class="comment">/**凑整*/</span></span><br><span class="line">ceil(<span class="number">2</span>)<span class="comment">//2</span></span><br><span class="line">ceil(<span class="number">2.3</span>)<span class="comment">//3</span></span><br><span class="line">ceil(<span class="number">2.5</span>)<span class="comment">//3</span></span><br><span class="line">ceil(<span class="number">2.8</span>)<span class="comment">//3</span></span><br><span class="line">ceil(-<span class="number">2.1</span>)<span class="comment">//-2</span></span><br><span class="line">ceil(-<span class="number">2.9</span>)<span class="comment">//-2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**四舍五入取整*/</span></span><br><span class="line"><span class="comment">//rint(2)//2</span></span><br><span class="line">rint(<span class="number">2.1</span>)<span class="comment">//2</span></span><br><span class="line">rint(<span class="number">2.2</span>)<span class="comment">//2</span></span><br><span class="line">rint(<span class="number">2.5</span>)<span class="comment">//2</span></span><br><span class="line">rint(<span class="number">2.6</span>)<span class="comment">//3</span></span><br><span class="line">rint(<span class="number">2.9</span>)<span class="comment">//3</span></span><br><span class="line"></span><br><span class="line">rint(-<span class="number">2.1</span>)<span class="comment">//-2</span></span><br><span class="line">rint(-<span class="number">2.5</span>)<span class="comment">//-2</span></span><br><span class="line">rint(-<span class="number">2.8</span>)<span class="comment">//-3</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**舍掉小数取整*/</span></span><br><span class="line">floor(<span class="number">2.1</span>)<span class="comment">//2</span></span><br><span class="line">floor(<span class="number">2</span>)<span class="comment">//2</span></span><br><span class="line">floor(<span class="number">2.5</span>)<span class="comment">//2</span></span><br><span class="line">floor(<span class="number">2.9</span>)<span class="comment">//2</span></span><br><span class="line"></span><br><span class="line">floor(-<span class="number">2</span>)<span class="comment">//-2</span></span><br><span class="line">floor(-<span class="number">2.3</span>)<span class="comment">//-3</span></span><br><span class="line">floor(-<span class="number">2.9</span>)<span class="comment">//-3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**四舍五入*/</span></span><br><span class="line">round(<span class="number">2.1</span>)<span class="comment">//2</span></span><br><span class="line">round(<span class="number">2.5</span>)<span class="comment">//3</span></span><br><span class="line">round(<span class="number">2.8</span>)<span class="comment">//3</span></span><br><span class="line">round(-<span class="number">2.1</span>)<span class="comment">//-2</span></span><br><span class="line">round(-<span class="number">2.5</span>)<span class="comment">//-3</span></span><br><span class="line">round(-<span class="number">2.9</span>)<span class="comment">//-3</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> floor向下取整，ceil向上取整；round和rint四舍五入，取绝对值后舍入，然后加上符号，遇到.5的时候向绝对值小的方向舍之</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
 
-/**凑整*/
-ceil(2)//2
-ceil(2.3)//3
-ceil(2.5)//3
-ceil(2.8)//3
-ceil(-2.1)//-2
-ceil(-2.9)//-2
-
-/**四舍五入取整*/
-//rint(2)//2
-rint(2.1)//2
-rint(2.2)//2
-rint(2.5)//2
-rint(2.6)//3
-rint(2.9)//3
-
-rint(-2.1)//-2
-rint(-2.5)//-2
-rint(-2.8)//-3
-
-
-/**舍掉小数取整*/
-floor(2.1)//2
-floor(2)//2
-floor(2.5)//2
-floor(2.9)//2
-
-floor(-2)//-2
-floor(-2.3)//-3
-floor(-2.9)//-3
-
-/**四舍五入*/
-round(2.1)//2
-round(2.5)//3
-round(2.8)//3
-round(-2.1)//-2
-round(-2.5)//-3
-round(-2.9)//-3
-
-
-/**
- floor向下取整，ceil向上取整；round和rint四舍五入，取绝对值后舍入，然后加上符号，遇到.5的时候向绝对值小的方向舍之
- */
-</code></pre>
 
             </div>
             <hr/>
@@ -922,7 +870,7 @@ round(-2.9)//-3
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

@@ -408,7 +408,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        1.7k
+                        1.8k
                     </div>
                     
 
@@ -449,87 +449,46 @@
 <li>数组内容的排序操作</li>
 </ol>
 <p>下面我将各部分的相关函数贴出，以便大家更好的直观了解。</p>
-<h3 id="创建和初始化一个可变数组"><a href="#创建和初始化一个可变数组" class="headerlink" title="创建和初始化一个可变数组"></a>创建和初始化一个可变数组</h3><pre><code>+ arrayWithCapacity:
-+ arrayWithContentsOfFile:
-+ arrayWithContentsOfURL:</code></pre>
-<pre><code>- init
-- initWithCapacity:
-- initWithContentsOfFile:
-- initWithContentsOfURL:</code></pre>
+<h3 id="创建和初始化一个可变数组"><a href="#创建和初始化一个可变数组" class="headerlink" title="创建和初始化一个可变数组"></a>创建和初始化一个可变数组</h3><figure class="highlight objc"><figcaption><span>类方法</span></figcaption><table><tr><td class="code"><pre><span class="line">+ arrayWithCapacity:</span><br><span class="line">+ arrayWithContentsOfFile:</span><br><span class="line">+ arrayWithContentsOfURL:</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><figcaption><span>实例方法</span></figcaption><table><tr><td class="code"><pre><span class="line">- init</span><br><span class="line">- initWithCapacity:</span><br><span class="line">- initWithContentsOfFile:</span><br><span class="line">- initWithContentsOfURL:</span><br></pre></td></tr></table></figure>
 
-<h3 id="数组元素的添加操作"><a href="#数组元素的添加操作" class="headerlink" title="数组元素的添加操作"></a>数组元素的添加操作</h3><pre><code>- addObject:
-- addObjectsFromArray:</code></pre>
+<h3 id="数组元素的添加操作"><a href="#数组元素的添加操作" class="headerlink" title="数组元素的添加操作"></a>数组元素的添加操作</h3><figure class="highlight objc"><figcaption><span>元素的添加</span></figcaption><table><tr><td class="code"><pre><span class="line">- addObject:</span><br><span class="line">- addObjectsFromArray:</span><br></pre></td></tr></table></figure>
 
-<pre><code>- insertObject:atIndex:
-- insertObjects:atIndexes:</code></pre>
+<figure class="highlight objc"><figcaption><span>元素的插入</span></figcaption><table><tr><td class="code"><pre><span class="line">- insertObject:atIndex:</span><br><span class="line">- insertObjects:atIndexes:</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>ps:批量元素的插入会调用多次单个元素的插入方法，<strong><em>在以后的监听过程中需要做些特殊的处理</em></strong></p>
 </blockquote>
-<pre><code>- void insertObjects:(NSArray *)additions atIndexes:(NSIndexSet *)indexes
-{
-    NSUInteger currentIndex = [indexes firstIndex];
-    NSUInteger i, count = [indexes count];
-    for (i = 0; i &lt; count; i++)
-    {
-        [self insertObject:[additions objectAtIndex:i] atIndex:currentIndex];
-        currentIndex = [indexes indexGreaterThanIndex:currentIndex];
-    }
-}</code></pre>
+<figure class="highlight objc"><figcaption><span>批量元素的插入</span></figcaption><table><tr><td class="code"><pre><span class="line">- <span class="keyword">void</span> insertObjects:(<span class="built_in">NSArray</span> *)additions atIndexes:(<span class="built_in">NSIndexSet</span> *)indexes</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSUInteger</span> currentIndex = [indexes firstIndex];</span><br><span class="line">    <span class="built_in">NSUInteger</span> i, count = [indexes count];</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        [<span class="keyword">self</span> insertObject:[additions objectAtIndex:i] atIndex:currentIndex];</span><br><span class="line">        currentIndex = [indexes indexGreaterThanIndex:currentIndex];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="数组元素的删除操作"><a href="#数组元素的删除操作" class="headerlink" title="数组元素的删除操作"></a>数组元素的删除操作</h3><pre><code>&#x2F;&#x2F;删除元素的删除
-- removeLastObject
-- removeObjectAtIndex:
-</code></pre>
-<pre><code>&#x2F;&#x2F; 批量元素的删除
-- removeAllObjects
-- removeObject:
-- removeObject:inRange:
-- removeObjectsAtIndexes:
-- removeObjectIdenticalTo:
-- removeObjectIdenticalTo:inRange:
-- removeObjectsInArray:
-- removeObjectsInRange:</code></pre>
+<h3 id="数组元素的删除操作"><a href="#数组元素的删除操作" class="headerlink" title="数组元素的删除操作"></a>数组元素的删除操作</h3><figure class="highlight objc"><figcaption><span>删除单个元素</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//删除元素的删除</span></span><br><span class="line">- removeLastObject</span><br><span class="line">- removeObjectAtIndex:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><figcaption><span>批量删除</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">// 批量元素的删除</span></span><br><span class="line">- removeAllObjects</span><br><span class="line">- removeObject:</span><br><span class="line">- removeObject:inRange:</span><br><span class="line">- removeObjectsAtIndexes:</span><br><span class="line">- removeObjectIdenticalTo:</span><br><span class="line">- removeObjectIdenticalTo:inRange:</span><br><span class="line">- removeObjectsInArray:</span><br><span class="line">- removeObjectsInRange:</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>ps： 以下方法会多次调用<code>- removeObjectAtIndex:</code>方法：,在监听过程中需要处理多次调用问题。</p>
 </blockquote>
-<pre><code>- removeObject:
-- removeObject:inRange:
-- removeObjectIdenticalTo:
-- removeObjectIdenticalTo:inRange:
-- removeObjectsInArray:</code></pre>
+<figure class="highlight objc"><figcaption><span>多次调用- removeObjectAtIndex:</span></figcaption><table><tr><td class="code"><pre><span class="line">- removeObject:</span><br><span class="line">- removeObject:inRange:</span><br><span class="line">- removeObjectIdenticalTo:</span><br><span class="line">- removeObjectIdenticalTo:inRange:</span><br><span class="line">- removeObjectsInArray:</span><br></pre></td></tr></table></figure>
 
-<h3 id="数组元素的替换操作"><a href="#数组元素的替换操作" class="headerlink" title="数组元素的替换操作"></a>数组元素的替换操作</h3><pre><code>- replaceObjectAtIndex:withObject:
-- setObject:atIndexedSubscript:</code></pre>
+<h3 id="数组元素的替换操作"><a href="#数组元素的替换操作" class="headerlink" title="数组元素的替换操作"></a>数组元素的替换操作</h3><figure class="highlight objc"><figcaption><span>单个元素的替换</span></figcaption><table><tr><td class="code"><pre><span class="line">- replaceObjectAtIndex:withObject:</span><br><span class="line">- setObject:atIndexedSubscript:</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>ps：<code>- setObject:atIndexedSubscript:</code>这个方法我们最好不要直接使用而是使用语法糖的形式调用。</p>
 </blockquote>
-<pre><code class="objc">mutableArray[3] = @&quot;someValue&quot;; 
-// equivalent to 
-[mutableArray replaceObjectAtIndex:3 withObject:@&quot;someValue&quot;];</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">mutableArray[<span class="number">3</span>] = <span class="string">@"someValue"</span>; </span><br><span class="line"><span class="comment">// equivalent to </span></span><br><span class="line">[mutableArray replaceObjectAtIndex:<span class="number">3</span> withObject:<span class="string">@"someValue"</span>];</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>若替换对象为空会抛出<code>NSInvalidArgumentException</code>异常，若索引下标越界会抛出<code>NSRangeException</code>异常</p>
 </blockquote>
-<pre><code>- replaceObjectsAtIndexes:withObjects:
-- replaceObjectsInRange:withObjectsFromArray:range:
-- replaceObjectsInRange:withObjectsFromArray:
-- setArray:</code></pre>
+<figure class="highlight objc"><figcaption><span>批量元素的替换</span></figcaption><table><tr><td class="code"><pre><span class="line">- replaceObjectsAtIndexes:withObjects:</span><br><span class="line">- replaceObjectsInRange:withObjectsFromArray:range:</span><br><span class="line">- replaceObjectsInRange:withObjectsFromArray:</span><br><span class="line">- setArray:</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>ps: 以下方法会调用多次<code>- replaceObjectAtIndex:withObject:</code>方法</p>
 </blockquote>
-<pre><code>- replaceObjectsAtIndexes:withObjects:
-&#x2F;&#x2F;PS: objects的个数必须与indexes的个数相同，否则会抛出异常</code></pre>
+<figure class="highlight objc"><figcaption><span>多次调用- replaceObjectAtIndex:withObject:</span></figcaption><table><tr><td class="code"><pre><span class="line">- replaceObjectsAtIndexes:withObjects:</span><br><span class="line"><span class="comment">//PS: objects的个数必须与indexes的个数相同，否则会抛出异常</span></span><br></pre></td></tr></table></figure>
 
 
-<h3 id="数组元素的筛选"><a href="#数组元素的筛选" class="headerlink" title="数组元素的筛选"></a>数组元素的筛选</h3><pre><code>- filterUsingPredicate:</code></pre>
+<h3 id="数组元素的筛选"><a href="#数组元素的筛选" class="headerlink" title="数组元素的筛选"></a>数组元素的筛选</h3><figure class="highlight objc"><figcaption><span>筛选</span></figcaption><table><tr><td class="code"><pre><span class="line">- filterUsingPredicate:</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>ps： 会在数组中直接筛选出符合条件的数组元素，不符合的会直接删除</p>
 </blockquote>
-<h3 id="数组元素的排序"><a href="#数组元素的排序" class="headerlink" title="数组元素的排序"></a>数组元素的排序</h3><pre><code>- exchangeObjectAtIndex:withObjectAtIndex:</code></pre>
-<pre><code>- sortUsingDescriptors:
-- sortUsingComparator:
-- sortWithOptions:usingComparator:
-- sortUsingFunction:context:
-- sortUsingSelector:</code></pre>
+<h3 id="数组元素的排序"><a href="#数组元素的排序" class="headerlink" title="数组元素的排序"></a>数组元素的排序</h3><figure class="highlight objc"><figcaption><span>下标元素的交换</span></figcaption><table><tr><td class="code"><pre><span class="line">- exchangeObjectAtIndex:withObjectAtIndex:</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><figcaption><span>排序操作</span></figcaption><table><tr><td class="code"><pre><span class="line">- sortUsingDescriptors:</span><br><span class="line">- sortUsingComparator:</span><br><span class="line">- sortWithOptions:usingComparator:</span><br><span class="line">- sortUsingFunction:context:</span><br><span class="line">- sortUsingSelector:</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>ps:数组的排序方法会递归调用 <code>- replaceObjectAtIndex:withObject:</code><strong>在监听数组排序时需要处理多次回调的问题</strong></p>
 </blockquote>
@@ -582,56 +541,12 @@
 <li>交换的下标1</li>
 <li>将交的下标2</li>
 </ul>
-<h2 id="协议确认"><a href="#协议确认" class="headerlink" title="协议确认"></a>协议确认</h2><pre><code>@protocol NSmutableArrayOberver &lt;NSObject&gt;
-@optional
-#pragma mark - 增加
--(void)mutableArray:(NSMutableArray*)array didAddObject:(id)anObject atIndex:(NSInteger)index;
--(void)mutableArray:(NSMutableArray*)array didAddObjects:(NSArray *)objects atIndexes:(NSIndexSet*)indexSet;
-
-#pragma mark - 删除
--(void)mutableArray:(NSMutableArray *)array didDeleteObject:(id)anObject atIndex:(NSInteger)index;
-
--(void)mutableArray:(NSMutableArray *)array didDeleteObjects:(NSArray*)objects atIndexes:(NSIndexSet*)indexes;
-
-#pragma mark  - 替换
-
--(void)mutableArray:(NSMutableArray*)array replaceObject:(id )object withObject:(id)anObject atIndex:(NSUInteger)index;
-
-#pragma mark  - 改变（排序）
-
--(void)mutableArrayhasChanged:(NSMutableArray*)array;
-
-#pragma mark - 位置交换
--(void)mutableArray:(NSMutableArray*)array exchangeObjectAtIndex:(NSUInteger)index1 withObjectAtIndex:(NSUInteger)index2;
-@end
-</code></pre>
+<h2 id="协议确认"><a href="#协议确认" class="headerlink" title="协议确认"></a>协议确认</h2><figure class="highlight objc"><figcaption><span>数组监听协议</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">NSmutableArrayOberver</span> &lt;<span class="title">NSObject</span>&gt;</span></span><br><span class="line"><span class="keyword">@optional</span></span><br><span class="line"><span class="meta">#pragma mark - 增加</span></span><br><span class="line">-(<span class="keyword">void</span>)mutableArray:(<span class="built_in">NSMutableArray</span>*)array didAddObject:(<span class="keyword">id</span>)anObject atIndex:(<span class="built_in">NSInteger</span>)index;</span><br><span class="line">-(<span class="keyword">void</span>)mutableArray:(<span class="built_in">NSMutableArray</span>*)array didAddObjects:(<span class="built_in">NSArray</span> *)objects atIndexes:(<span class="built_in">NSIndexSet</span>*)indexSet;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark - 删除</span></span><br><span class="line">-(<span class="keyword">void</span>)mutableArray:(<span class="built_in">NSMutableArray</span> *)array didDeleteObject:(<span class="keyword">id</span>)anObject atIndex:(<span class="built_in">NSInteger</span>)index;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)mutableArray:(<span class="built_in">NSMutableArray</span> *)array didDeleteObjects:(<span class="built_in">NSArray</span>*)objects atIndexes:(<span class="built_in">NSIndexSet</span>*)indexes;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark  - 替换</span></span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)mutableArray:(<span class="built_in">NSMutableArray</span>*)array replaceObject:(<span class="keyword">id</span> )object withObject:(<span class="keyword">id</span>)anObject atIndex:(<span class="built_in">NSUInteger</span>)index;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark  - 改变（排序）</span></span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)mutableArrayhasChanged:(<span class="built_in">NSMutableArray</span>*)array;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark - 位置交换</span></span><br><span class="line">-(<span class="keyword">void</span>)mutableArray:(<span class="built_in">NSMutableArray</span>*)array exchangeObjectAtIndex:(<span class="built_in">NSUInteger</span>)index1 withObjectAtIndex:(<span class="built_in">NSUInteger</span>)index2;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h1 id="使用runtime机制替换或者交换对应的函数指针IMP"><a href="#使用runtime机制替换或者交换对应的函数指针IMP" class="headerlink" title="使用runtime机制替换或者交换对应的函数指针IMP"></a>使用runtime机制替换或者交换对应的函数指针IMP</h1><ol>
 <li>创建一个数组的扩展，并添加代理属性（使用<strong>关联属性</strong>添加）</li>
-<li>创建相应的函数指针，并替换数组对应的方法IMP<br>这里以- insertObject:atIndex:为例：<br>创建C函数指针：<pre><code>typedef void (*insertObject_atIndex_IMP)(id self, SEL _cmd ,id anObject ,NSUInteger index);
-static insertObject_atIndex_IMP origin_insertObject_atIndex = nil;
-static void replace_insertObject_atIndex(id self, SEL _cmd ,id anObject ,NSUInteger index){
-    NSMutableArray * array = self;
-    if ([array.delegate conformsToProtocol:@protocol(NSmutableArrayOberver) ]&amp;&amp; [array.delegate respondsToSelector:@selector(mutableArray:didAddObject:atIndex:)]) {
-        
-        NSInteger number = addCount();
-        origin_insertObject_atIndex(self,_cmd,anObject,index);
-        if (number==1) {
-            [array.delegate mutableArray:self didAddObject:anObject atIndex:index];
-        }
-        decreaseCount();
-        
-    }else{
-        origin_insertObject_atIndex(self,_cmd,anObject,index);
-    }
-}</code></pre>
-<pre><code>+(void)load{
-     Method method;
-    Class  class = NSClassFromString(@&quot;__NSArrayM&quot;);
-#pragma mark - 添加
-    method = class_getInstanceMethod(class, @selector(insertObject:atIndex:));
-    origin_insertObject_atIndex = (insertObject_atIndex_IMP)method_setImplementation(method, (IMP)replace_insertObject_atIndex);
-}</code></pre>
+<li>创建相应的函数指针，并替换数组对应的方法IMP<br>这里以- insertObject:atIndex:为例：<br>创建C函数指针：<figure class="highlight c"><figcaption><span>插入一个元素的函数指针</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*insertObject_atIndex_IMP)</span><span class="params">(id self, SEL _cmd ,id anObject ,NSUInteger index)</span></span>;</span><br><span class="line"><span class="keyword">static</span> insertObject_atIndex_IMP origin_insertObject_atIndex = nil;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">replace_insertObject_atIndex</span><span class="params">(id self, SEL _cmd ,id anObject ,NSUInteger index)</span></span>&#123;</span><br><span class="line">    NSMutableArray * <span class="built_in">array</span> = self;</span><br><span class="line">    <span class="keyword">if</span> ([<span class="built_in">array</span>.delegate conformsToProtocol:@protocol(NSmutableArrayOberver) ]&amp;&amp; [<span class="built_in">array</span>.delegate respondsToSelector:@selector(mutableArray:didAddObject:atIndex:)]) &#123;</span><br><span class="line">        </span><br><span class="line">        NSInteger number = addCount();</span><br><span class="line">        origin_insertObject_atIndex(self,_cmd,anObject,index);</span><br><span class="line">        <span class="keyword">if</span> (number==<span class="number">1</span>) &#123;</span><br><span class="line">            [<span class="built_in">array</span>.delegate mutableArray:self didAddObject:anObject atIndex:index];</span><br><span class="line">        &#125;</span><br><span class="line">        decreaseCount();</span><br><span class="line">        </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        origin_insertObject_atIndex(self,_cmd,anObject,index);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><figcaption><span>替换IMP</span></figcaption><table><tr><td class="code"><pre><span class="line">+(<span class="keyword">void</span>)load&#123;</span><br><span class="line">     Method method;</span><br><span class="line">    Class  <span class="keyword">class</span> = <span class="built_in">NSClassFromString</span>(<span class="string">@"__NSArrayM"</span>);</span><br><span class="line"><span class="meta">#pragma mark - 添加</span></span><br><span class="line">    method = class_getInstanceMethod(<span class="keyword">class</span>, <span class="keyword">@selector</span>(insertObject:atIndex:));</span><br><span class="line">    origin_insertObject_atIndex = (insertObject_atIndex_IMP)method_setImplementation(method, (IMP)replace_insertObject_atIndex);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
@@ -1068,7 +983,7 @@ static void replace_insertObject_atIndex(id self, SEL _cmd ,id anObject ,NSUInte
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

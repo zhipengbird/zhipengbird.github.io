@@ -5,7 +5,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="ARC环境下内存问题, 志鹏的技术博客">
-    <meta name="description" content="NSMutableArray * array  = [NSMutableArray arrayWithArray:@[@&amp;quot;2&amp;quot;,@&amp;quot;2&amp;quot;,@&amp;quot;1&amp;quot;,@&amp;quot;fad&amp;quot;">
+    <meta name="description" content="NSMutableArray * array  = [NSMutableArray arrayWithArray:@[@&#34;2&#34;,@&#34;2&#34;,@&#34;1&#34;,@&#34;fad&#34;,@&#34;23&#34;]];for(NSString* str  in array)&amp;#1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -408,7 +408,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        124
+                        112
                     </div>
                     
 
@@ -431,28 +431,15 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <pre><code class="objc">NSMutableArray * array  = [NSMutableArray arrayWithArray:@[@&quot;2&quot;,@&quot;2&quot;,@&quot;1&quot;,@&quot;fad&quot;,@&quot;23&quot;]];
-for(NSString* str  in array)
-{
-  if (str isEqualToString:@&quot;fad&quot;]) {
-    [array removeObject:str];
-  }
-}</code></pre>
+                <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSMutableArray</span> * array  = [<span class="built_in">NSMutableArray</span> arrayWithArray:@[<span class="string">@"2"</span>,<span class="string">@"2"</span>,<span class="string">@"1"</span>,<span class="string">@"fad"</span>,<span class="string">@"23"</span>]];</span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">NSString</span>* str  <span class="keyword">in</span> array)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span> (str isEqualToString:<span class="string">@"fad"</span>]) &#123;</span><br><span class="line">    [array removeObject:str];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>编译运行时出现崩溃：</p>
-<pre><code>Terminating app due to uncaught exception &#39;NSGenericException&#39;, reason: &#39;*** Collection &lt;__NSArrayM: 0x100103560&gt; was mutated while being enumerated.&#39;
-</code></pre><pre><code class="objc">NSMutableArray * array  = [NSMutableArray arrayWithArray:@[@&quot;2&quot;,@&quot;2&quot;,@&quot;1&quot;,@&quot;fad&quot;,@&quot;23&quot;]];
-[array enumerateObjectsUsingBlock:^(NSString*  obj, NSUInteger idx, BOOL *  stop) {
-           if ([obj isEqualToString:@&quot;fad&quot;]) {
-               [array removeObject:obj];
-           }
-       }];   </code></pre>
-<pre><code class="objc">NSMutableArray * arrayNum  = [NSMutableArray arrayWithArray:@[@(2),@(21),@(1),@(100),@(23)]];
-[arrayNum enumerateObjectsUsingBlock:^(NSNumber *  obj, NSUInteger idx, BOOL *  stop) {
-           if ([obj isEqualToString:@(2)]) {
-               [arrayNum removeObject:obj];
-           }
-       }];   
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Terminating app due to uncaught exception &apos;NSGenericException&apos;, reason: &apos;*** Collection &lt;__NSArrayM: 0x100103560&gt; was mutated while being enumerated.&apos;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSMutableArray</span> * array  = [<span class="built_in">NSMutableArray</span> arrayWithArray:@[<span class="string">@"2"</span>,<span class="string">@"2"</span>,<span class="string">@"1"</span>,<span class="string">@"fad"</span>,<span class="string">@"23"</span>]];</span><br><span class="line">[array enumerateObjectsUsingBlock:^(<span class="built_in">NSString</span>*  obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *  stop) &#123;</span><br><span class="line">           <span class="keyword">if</span> ([obj isEqualToString:<span class="string">@"fad"</span>]) &#123;</span><br><span class="line">               [array removeObject:obj];</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;];</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSMutableArray</span> * arrayNum  = [<span class="built_in">NSMutableArray</span> arrayWithArray:@[@(<span class="number">2</span>),@(<span class="number">21</span>),@(<span class="number">1</span>),@(<span class="number">100</span>),@(<span class="number">23</span>)]];</span><br><span class="line">[arrayNum enumerateObjectsUsingBlock:^(<span class="built_in">NSNumber</span> *  obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *  stop) &#123;</span><br><span class="line">           <span class="keyword">if</span> ([obj isEqualToString:@(<span class="number">2</span>)]) &#123;</span><br><span class="line">               [arrayNum removeObject:obj];</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;];</span><br></pre></td></tr></table></figure>
+
 
             </div>
             <hr/>
@@ -695,12 +682,17 @@ for(NSString* str  in array)
                     <div class="summary block-with-text">
                         
                             常用操作：
-打开终端，运行启动Apache命令：sudo apachectl start
+打开终端，运行启动Apache命令：
+sudo apachectl start
 
+关闭命令：
+sudo apachectl stop
 
-2. 关闭命令：sudo apachectl stop
-3. 重启命令sudo apachectl restart
-4. 查看Apache版本命令
+重启命令
+sudo apachectl restart
+
+查看Apache版本命令
+http
                         
                     </div>
                     <div class="publish-info">
@@ -884,7 +876,7 @@ int function(int
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

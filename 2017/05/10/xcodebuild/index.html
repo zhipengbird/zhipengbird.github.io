@@ -444,20 +444,8 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
 </blockquote>
 <hr>
 <ol>
-<li><p>查看xcodebuild的简洁用法 <code>xcodebuild -usage</code></p>
-<pre><code class="sh">Usage: 
-    xcodebuild [-project &lt;projectname&gt;] [[-target &lt;targetname&gt;]...|-alltargets] [-configuration &lt;configurationname&gt;] [-arch &lt;architecture&gt;]... [-sdk [&lt;sdkname&gt;|&lt;sdkpath&gt;]] [-showBuildSettings] [&lt;buildsetting&gt;=&lt;value&gt;]... [&lt;buildaction&gt;]...
+<li>查看xcodebuild的简洁用法 <code>xcodebuild -usage</code><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">Usage: </span><br><span class="line">       xcodebuild [-project &lt;projectname&gt;] [[-target &lt;targetname&gt;]...|-alltargets] [-configuration &lt;configurationname&gt;] [-arch &lt;architecture&gt;]... [-sdk [&lt;sdkname&gt;|&lt;sdkpath&gt;]] [-showBuildSettings] [&lt;buildsetting&gt;=&lt;value&gt;]... [&lt;buildaction&gt;]...</span><br><span class="line"></span><br><span class="line">       xcodebuild [-project &lt;projectname&gt;] -scheme &lt;schemeName&gt; [-destination &lt;destinationspecifier&gt;]... [-configuration &lt;configurationname&gt;] [-arch &lt;architecture&gt;]... [-sdk [&lt;sdkname&gt;|&lt;sdkpath&gt;]] [-showBuildSettings] [&lt;buildsetting&gt;=&lt;value&gt;]... [&lt;buildaction&gt;]...</span><br><span class="line"></span><br><span class="line">       xcodebuild -workspace &lt;workspacename&gt; -scheme &lt;schemeName&gt; [-destination &lt;destinationspecifier&gt;]... [-configuration &lt;configurationname&gt;] [-arch &lt;architecture&gt;]... [-sdk [&lt;sdkname&gt;|&lt;sdkpath&gt;]] [-showBuildSettings] [&lt;buildsetting&gt;=&lt;value&gt;]... [&lt;buildaction&gt;]...</span><br><span class="line"></span><br><span class="line">       xcodebuild -version [-sdk [&lt;sdkfullpath&gt;|&lt;sdkname&gt;] [&lt;infoitem&gt;] ]</span><br><span class="line">       xcodebuild -list [[-project &lt;projectname&gt;]|[-workspace &lt;workspacename&gt;]] [-json]</span><br><span class="line">       xcodebuild -showsdks</span><br><span class="line">       xcodebuild -exportArchive -archivePath &lt;xcarchivepath&gt; -exportPath &lt;destinationpath&gt; -exportOptionsPlist &lt;plistpath&gt;</span><br><span class="line">       xcodebuild -exportLocalizations -localizationPath &lt;path&gt; -project &lt;projectname&gt; [-exportLanguage &lt;targetlanguage&gt;...]</span><br><span class="line">       xcodebuild -importLocalizations -localizationPath &lt;path&gt; -project &lt;projectname&gt;</span><br></pre></td></tr></table></figure>
 
-    xcodebuild [-project &lt;projectname&gt;] -scheme &lt;schemeName&gt; [-destination &lt;destinationspecifier&gt;]... [-configuration &lt;configurationname&gt;] [-arch &lt;architecture&gt;]... [-sdk [&lt;sdkname&gt;|&lt;sdkpath&gt;]] [-showBuildSettings] [&lt;buildsetting&gt;=&lt;value&gt;]... [&lt;buildaction&gt;]...
-
-    xcodebuild -workspace &lt;workspacename&gt; -scheme &lt;schemeName&gt; [-destination &lt;destinationspecifier&gt;]... [-configuration &lt;configurationname&gt;] [-arch &lt;architecture&gt;]... [-sdk [&lt;sdkname&gt;|&lt;sdkpath&gt;]] [-showBuildSettings] [&lt;buildsetting&gt;=&lt;value&gt;]... [&lt;buildaction&gt;]...
-
-    xcodebuild -version [-sdk [&lt;sdkfullpath&gt;|&lt;sdkname&gt;] [&lt;infoitem&gt;] ]
-    xcodebuild -list [[-project &lt;projectname&gt;]|[-workspace &lt;workspacename&gt;]] [-json]
-    xcodebuild -showsdks
-    xcodebuild -exportArchive -archivePath &lt;xcarchivepath&gt; -exportPath &lt;destinationpath&gt; -exportOptionsPlist &lt;plistpath&gt;
-    xcodebuild -exportLocalizations -localizationPath &lt;path&gt; -project &lt;projectname&gt; [-exportLanguage &lt;targetlanguage&gt;...]
-    xcodebuild -importLocalizations -localizationPath &lt;path&gt; -project &lt;projectname&gt;</code></pre>
 </li>
 </ol>
 <p>参数详解：<br><code>-project projectname</code></p>
@@ -585,18 +573,18 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
 <ol start="3">
 <li>编译并生成.xcarchive包xcodebuild archive [-optionName]…</li>
 </ol>
-<pre><code>xcodebuild archive -archivePath /Users/UserName/Desktop/App/archive/XXX -workspace XXX.xcworkspace -scheme XXX -configuration Debug -sdk iphoneos9.3</code></pre><pre><code>命令                                  说明
--archivePath PATH                    保存生成.xcarchive包路径
--workspace NAME                        指定工作空间文件XXX.xcworkspace
--scheme NAME                        指定构建工程名称
--configuration [Debug/Release]      选择Debug或者Release构建
--sdk NAME                            指定编译时使用的SDK</code></pre><ol start="4">
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">xcodebuild archive -archivePath /Users/UserName/Desktop/App/archive/XXX -workspace XXX.xcworkspace -scheme XXX -configuration Debug -sdk iphoneos9.3</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">命令              	                说明</span><br><span class="line">-archivePath PATH	                保存生成.xcarchive包路径</span><br><span class="line">-workspace NAME	                    指定工作空间文件XXX.xcworkspace</span><br><span class="line">-scheme NAME	                    指定构建工程名称</span><br><span class="line">-configuration [Debug/Release]  	选择Debug或者Release构建</span><br><span class="line">-sdk NAME	                        指定编译时使用的SDK</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
 <li>.archive包导出ipa文件xcodebuild -exportArchive [-optionName]…</li>
 </ol>
-<pre><code>xcodebuild -exportArchive -archivePath /Users/UserName/Desktop/App/archive/XXX.xcarchive -exportPath /Users/UserName/Desktop/App/ipa/ -exportOptionsPlist /Users/UserName/Desktop/App/XXX.plist</code></pre><pre><code>命令                      说明
--archivePath            选择要导出的.xcarchive包路径
--exportPath                导出ipa保存目录
--exportOptionsPlist        导出过程中需要的配置文件路径</code></pre><ol start="5">
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">xcodebuild -exportArchive -archivePath /Users/UserName/Desktop/App/archive/XXX.xcarchive -exportPath /Users/UserName/Desktop/App/ipa/ -exportOptionsPlist /Users/UserName/Desktop/App/XXX.plist</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">命令              	    说明</span><br><span class="line">-archivePath        	选择要导出的.xcarchive包路径</span><br><span class="line">-exportPath	            导出ipa保存目录</span><br><span class="line">-exportOptionsPlist	    导出过程中需要的配置文件路径</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
 <li>Export Options Plist 打包plist文件method 选项<br>method: (String) The method of distribution, which can be set as any of the following:</li>
 </ol>
 <ul>
@@ -608,43 +596,17 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
 <li>uploadSymbols: (Boolean) Option to include symbols in the generated ipa file.</li>
 <li>uploadBitcode: (Boolean) Option to include Bitcode.<br>生成plist文件中需要包含作上述的 method键值对  其他三个可选</li>
 </ul>
-<p>ps: plist文件格式如下，字段可根据需要增加：(小编就因格式不对，折腾了好久)</p>
-<pre><code>  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
-&lt;plist version=&quot;1.0&quot;&gt;
-&lt;dict&gt;
-        &lt;key&gt;teamID&lt;/key&gt;
-        &lt;string&gt;****&lt;/string&gt;
-        &lt;key&gt;method&lt;/key&gt;
-        &lt;string&gt;app-store&lt;/string&gt;
-        &lt;key&gt;uploadSymbols&lt;/key&gt;
-        &lt;true/&gt;
-&lt;/dict&gt;
-&lt;/plist&gt;</code></pre><ol start="6">
-<li>获取工程的target列表 <code>xcodebuild -list -json</code> 得以一个json字符串<pre><code>{
-&quot;project&quot; : {
- &quot;targets&quot; : [
-   &quot;Mask&quot;,
-   &quot;MaskTests&quot;,
-   &quot;MaskUITests&quot;,
-   &quot;MaskRandomUITests&quot;
- ],
- &quot;schemes&quot; : [
-   &quot;Mask&quot;
- ],
- &quot;configurations&quot; : [
-   &quot;Debug&quot;,
-   &quot;Release&quot;
- ],
- &quot;name&quot; : &quot;Mask&quot;
-}
-}%</code></pre></li>
+<p>ps: plist文件格式如下，字段可根据需要增加：(小编就因格式不对，折腾了好久)<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</span><br><span class="line">&lt;plist version=&quot;1.0&quot;&gt;</span><br><span class="line">&lt;dict&gt;</span><br><span class="line">        &lt;key&gt;teamID&lt;/key&gt;</span><br><span class="line">        &lt;string&gt;****&lt;/string&gt;</span><br><span class="line">        &lt;key&gt;method&lt;/key&gt;</span><br><span class="line">        &lt;string&gt;app-store&lt;/string&gt;</span><br><span class="line">        &lt;key&gt;uploadSymbols&lt;/key&gt;</span><br><span class="line">        &lt;true/&gt;</span><br><span class="line">&lt;/dict&gt;</span><br><span class="line">&lt;/plist&gt;</span><br></pre></td></tr></table></figure></p>
+<ol start="6">
+<li>获取工程的target列表 <code>xcodebuild -list -json</code> 得以一个json字符串<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;project&quot; : &#123;</span><br><span class="line">    &quot;targets&quot; : [</span><br><span class="line">      &quot;Mask&quot;,</span><br><span class="line">      &quot;MaskTests&quot;,</span><br><span class="line">      &quot;MaskUITests&quot;,</span><br><span class="line">      &quot;MaskRandomUITests&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;schemes&quot; : [</span><br><span class="line">      &quot;Mask&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;configurations&quot; : [</span><br><span class="line">      &quot;Debug&quot;,</span><br><span class="line">      &quot;Release&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;name&quot; : &quot;Mask&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;%</span><br></pre></td></tr></table></figure>
+
+</li>
 </ol>
 <h1 id="altool-上传-ipa"><a href="#altool-上传-ipa" class="headerlink" title="altool 上传 ipa"></a>altool 上传 ipa</h1><p>您可用 altool：Application Loader 的命令行工具来验证并上传您的应用程序二进制文件到 App Store。</p>
 <p>若要在上传或自动上传有效的构建版本到 App Store 之前验证您的构建版本，可将 altool 包含进您的持续集成系统中。altool 在 <code>Application\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/</code> 文件夹中。</p>
 <p>若要运行 altool，请在命令行执行以下一项操作：</p>
-<pre><code class="sh"> altool --validate-app -f file -u username [-p password] [--output-format xml]
- altool --upload-app -f file -u username [-p password] [--output-format xml]</code></pre>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">altool --validate-app -f file -u username [-p password] [--output-format xml]</span><br><span class="line">altool --upload-app -f file -u username [-p password] [--output-format xml]</span><br></pre></td></tr></table></figure>
+
 <p>参数详解<br>其中                指定<br><code>--validate-app</code>      您要验证的应用程序。<br><code>--upload-app</code>        您要上传的应用程序。<br><code>-f file</code>             您正在验证或上传的应用程序的路径和文件名。<br><code>-u username</code>         您的用户名。<br><code>-p password</code>         您的用户密码。<br><code>--output-format [xml | normal]</code><br>您要 Application Loader 以结构化的 XML 格式还是非结构化的文本格式返回输出信息。Application Loader 默认以文本格式返回输出信息。<br><a href="http://help.apple.com/itc/apploader/#/apdATD1E53-D1E1A1303-D1E53A1126" target="_blank" rel="noopener">Application Loader</a></p>
 <p>另附上小编编写一个便捷的打包工具 <a href="https://github.com/zhipengbird/xcode_archive" target="_blank" rel="noopener">xcodearchive</a>,欢迎各位star^_^</p>
 
@@ -1086,7 +1048,7 @@ TCP 是一个可靠的协议，也就是说，除非整个网络出现问题，�
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

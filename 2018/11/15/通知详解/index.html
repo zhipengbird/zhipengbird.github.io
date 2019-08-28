@@ -404,7 +404,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        828
+                        824
                     </div>
                     
 
@@ -429,52 +429,17 @@
             <div id="articleContent">
                 <h1 id="iOS通知详解-不同线程发出通知的处理"><a href="#iOS通知详解-不同线程发出通知的处理" class="headerlink" title="iOS通知详解 不同线程发出通知的处理"></a>iOS通知详解 不同线程发出通知的处理</h1><h2 id="通知的基础知识"><a href="#通知的基础知识" class="headerlink" title="通知的基础知识"></a>通知的基础知识</h2><p>每一个应用程序都有一个通知中心，专门负责协助不同 对象之间的消息通信。</p>
 <p>任何一个对象都可以向通知中心发布通知，描述自己在做什么。其他感兴趣的对象可以申请在某个特定通知发布时（或在某个特定的对象发布通知时）收到这个通知。</p>
-<pre><code class="objc">/****************    Notifications    ****************/
-//一个通知一般包含三个属性：
-@property (readonly, copy) NSString *name;//通知名称
-@property (nullable, readonly, retain) id object;//通知发布者（是谁要发布通知）
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">/****************	Notifications	****************/</span></span><br><span class="line"><span class="comment">//一个通知一般包含三个属性：</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *name;<span class="comment">//通知名称</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">readonly</span>, <span class="keyword">retain</span>) <span class="keyword">id</span> object;<span class="comment">//通知发布者（是谁要发布通知）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//一些额外的信息(通知发布者传递给通知接收者的信息内容)</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">readonly</span>, <span class="keyword">copy</span>) <span class="built_in">NSDictionary</span> *userInfo;</span><br><span class="line"><span class="comment">//初始化一个通知：(NSNotification)对象</span></span><br><span class="line"> - (<span class="keyword">instancetype</span>)initWithName:(<span class="built_in">NSNotificationName</span>)name object:(<span class="keyword">nullable</span> <span class="keyword">id</span>)object userInfo:(<span class="keyword">nullable</span> <span class="built_in">NSDictionary</span> *)userInfo</span><br><span class="line"> + (<span class="keyword">instancetype</span>)notificationWithName:(<span class="built_in">NSString</span> *)aName object:(<span class="keyword">nullable</span> <span class="keyword">id</span>)anObject;</span><br><span class="line"> + (<span class="keyword">instancetype</span>)notificationWithName:(<span class="built_in">NSString</span> *)aName object:(<span class="keyword">nullable</span> <span class="keyword">id</span>)anObject userInfo:(<span class="keyword">nullable</span> <span class="built_in">NSDictionary</span> *)aUserInfo;</span><br></pre></td></tr></table></figure>
 
-//一些额外的信息(通知发布者传递给通知接收者的信息内容)
-@property (nullable, readonly, copy) NSDictionary *userInfo;
-//初始化一个通知：(NSNotification)对象
- - (instancetype)initWithName:(NSNotificationName)name object:(nullable id)object userInfo:(nullable NSDictionary *)userInfo
- + (instancetype)notificationWithName:(NSString *)aName object:(nullable id)anObject;
- + (instancetype)notificationWithName:(NSString *)aName object:(nullable id)anObject userInfo:(nullable NSDictionary *)aUserInfo;</code></pre>
-<pre><code class="objc">/****************    Notification Center    ****************/
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">/****************	Notification Center	****************/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//发布通知方法(通知中心提供了相应的方法来帮助发布通知)</span></span><br><span class="line"><span class="comment">//1.发布一个notification通知，可在notification对象中设置通知的名称，通知发布者、额外的信息等</span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)postNotification:(<span class="built_in">NSNotification</span> *)notification; </span><br><span class="line"></span><br><span class="line"><span class="comment">//2.发布一个名称为aName的通知，anObject为这个通知的发布者</span></span><br><span class="line">- (<span class="keyword">void</span>)postNotificationName:(<span class="built_in">NSString</span> *)aName object:(<span class="keyword">nullable</span> <span class="keyword">id</span>)anObject;</span><br><span class="line"></span><br><span class="line"><span class="comment">//3.发布一个名称为aName的通知，anObject为这个通知的发布者，aUserInfo为额外信息(通知的内容)</span></span><br><span class="line">- (<span class="keyword">void</span>)postNotificationName:(<span class="built_in">NSString</span> *)aName object:(<span class="keyword">nullable</span> <span class="keyword">id</span>)anObject userInfo:(<span class="keyword">nullable</span> <span class="built_in">NSDictionary</span> *)aUserInfo;</span><br><span class="line"><span class="comment">/// 监听通知方法</span></span><br><span class="line">- (<span class="keyword">void</span>)addObserver:(<span class="keyword">id</span>)observer selector:(SEL)aSelector name:(<span class="keyword">nullable</span> <span class="built_in">NSNotificationName</span>)aName object:(<span class="keyword">nullable</span> <span class="keyword">id</span>)anObject;</span><br><span class="line"></span><br><span class="line"><span class="comment">///使用block处理通知回调用 </span></span><br><span class="line"><span class="comment">// The return value is retained by the system, and should be held onto by the caller in</span></span><br><span class="line"><span class="comment">// order to remove the observer with removeObserver: later, to stop observation.</span></span><br><span class="line"><span class="comment">//Name: 通知的名称</span></span><br><span class="line"><span class="comment">//object:谁发出的通知</span></span><br><span class="line"><span class="comment">//queue: 队列,决定 block 在哪个线程中执行, nil  在发布通知的线程中执行</span></span><br><span class="line"><span class="comment">//usingBlock: 只要监听到通知,就会执行这个 block</span></span><br><span class="line">- (<span class="keyword">id</span> &lt;<span class="built_in">NSObject</span>&gt;)addObserverForName:(<span class="keyword">nullable</span> <span class="built_in">NSNotificationName</span>)name object:(<span class="keyword">nullable</span> <span class="keyword">id</span>)obj queue:(<span class="keyword">nullable</span> <span class="built_in">NSOperationQueue</span> *)queue usingBlock:(<span class="keyword">void</span> (^)(<span class="built_in">NSNotification</span> *note))block API_AVAILABLE(macos(<span class="number">10.6</span>), ios(<span class="number">4.0</span>), watchos(<span class="number">2.0</span>), tvos(<span class="number">9.0</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//移除观察者</span></span><br><span class="line">- (<span class="keyword">void</span>)removeObserver:(<span class="keyword">id</span>)observer;</span><br><span class="line">- (<span class="keyword">void</span>)removeObserver:(<span class="keyword">id</span>)observer name:(<span class="keyword">nullable</span> <span class="built_in">NSNotificationName</span>)aName object:(<span class="keyword">nullable</span> <span class="keyword">id</span>)anObject;</span><br></pre></td></tr></table></figure>
 
-//发布通知方法(通知中心提供了相应的方法来帮助发布通知)
-//1.发布一个notification通知，可在notification对象中设置通知的名称，通知发布者、额外的信息等
-
-- (void)postNotification:(NSNotification *)notification; 
-
-//2.发布一个名称为aName的通知，anObject为这个通知的发布者
-- (void)postNotificationName:(NSString *)aName object:(nullable id)anObject;
-
-//3.发布一个名称为aName的通知，anObject为这个通知的发布者，aUserInfo为额外信息(通知的内容)
-- (void)postNotificationName:(NSString *)aName object:(nullable id)anObject userInfo:(nullable NSDictionary *)aUserInfo;
-/// 监听通知方法
-- (void)addObserver:(id)observer selector:(SEL)aSelector name:(nullable NSNotificationName)aName object:(nullable id)anObject;
-
-///使用block处理通知回调用 
-// The return value is retained by the system, and should be held onto by the caller in
-// order to remove the observer with removeObserver: later, to stop observation.
-//Name: 通知的名称
-//object:谁发出的通知
-//queue: 队列,决定 block 在哪个线程中执行, nil  在发布通知的线程中执行
-//usingBlock: 只要监听到通知,就会执行这个 block
-- (id &lt;NSObject&gt;)addObserverForName:(nullable NSNotificationName)name object:(nullable id)obj queue:(nullable NSOperationQueue *)queue usingBlock:(void (^)(NSNotification *note))block API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
-
-//移除观察者
-- (void)removeObserver:(id)observer;
-- (void)removeObserver:(id)observer name:(nullable NSNotificationName)aName object:(nullable id)anObject;
-</code></pre>
 <blockquote>
 <p>在通知中心注册过的对象，需要在该对象释放前移除监听。否则，当相应的通知再次出现时，通知中心仍然会向该监听器发送消息。因为相应的监听器对象已经被释放了，所以可能会导致应用闪退.<br>执行顺序：一定要先向通知中心注册通知监听器，也就是谁要监听谁发布的消息，然后再执行发布消息，不然会导致消息发出来了没人接收的情况</p>
 </blockquote>
 <h2 id="同步或异步"><a href="#同步或异步" class="headerlink" title="同步或异步"></a>同步或异步</h2><p><code>[NotificationCenter defaultCenter] postNotification]</code>，这种方式是同步的，并且在哪个线程发，就在哪个线程收。<br>由于消息收和发都在同一个线程中。所以，尽量在主线程中post，不然会引起不必要的麻烦，ui刷新问题，崩溃问题等等<br>参考文档</p>
 <h2 id="addObserver调用多次"><a href="#addObserver调用多次" class="headerlink" title="addObserver调用多次"></a>addObserver调用多次</h2><p>addObserver如果添加多次，当post的时候，也会收到多次。类似这种：</p>
-<pre><code class="objc">[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@&quot;TestNotification&quot; object:nil];
- [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@&quot;TestNotification&quot; object:nil];</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[[<span class="built_in">NSNotificationCenter</span> defaultCenter] addObserver:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(handleNotification:) name:<span class="string">@"TestNotification"</span> object:<span class="literal">nil</span>];</span><br><span class="line"> [[<span class="built_in">NSNotificationCenter</span> defaultCenter] addObserver:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(handleNotification:) name:<span class="string">@"TestNotification"</span> object:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+
 <p><a href="https://www.jianshu.com/p/617dfb533a34" target="_blank" rel="noopener">你可能不知道的Notification</a><br><a href="http://www.cnblogs.com/QianChia/p/5771055.html" target="_blank" rel="noopener">iOS - Notification    通知</a><br><a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Notifications/Introduction/introNotifications.html#//apple_ref/doc/uid/10000043i" target="_blank" rel="noopener">NSNotification</a></p>
 
             </div>
@@ -905,7 +870,7 @@ OC
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

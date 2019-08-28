@@ -413,7 +413,7 @@ XML 验证
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        889
+                        838
                     </div>
                     
 
@@ -442,74 +442,31 @@ XML 验证
 <p>拥有正确语法的 XML 被称为“形式良好”的 XML.<br>  通过 DTD 验证的 XML 是“合法”的 XML.</p>
 </blockquote>
 <h2 id="形式良好的-XML-文档"><a href="#形式良好的-XML-文档" class="headerlink" title="形式良好的 XML 文档"></a>形式良好的 XML 文档</h2><p>  “形式良好”或“结构良好”的 XML 文档拥有正确的语法。<br>  “形式良好”（Well Formed）的 XML 文档会遵守前面介绍过的 XML 语法规则：<br>    * XML 文档必须有根元素<br>    * XML 文档必须有关闭标签<br>    * XML 标签对大小写敏感<br>    * XML 元素必须被正确的嵌套<br>    * XML 属性必须加引号</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;note&gt;
-  &lt;date&gt;2016-10-1&lt;/date&gt;
-  &lt;weather&gt;sunny &lt;/weather&gt;
-  &lt;title&gt;Learning xml&lt;/title&gt;
-  &lt;body&gt;xml is very funny and easy&lt;/body&gt;
-&lt;/note&gt;</code></pre>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">note</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">date</span>&gt;</span>2016-10-1<span class="tag">&lt;/<span class="name">date</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">weather</span>&gt;</span>sunny <span class="tag">&lt;/<span class="name">weather</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Learning xml<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span>xml is very funny and easy<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">note</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="验证XML文档"><a href="#验证XML文档" class="headerlink" title="验证XML文档"></a>验证XML文档</h2><p>合法的 XML 文档是“形式良好”的 XML 文档，同样遵守文档类型定义 (DTD) 的语法规则：</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE note SYSTEM &quot;note.dtd&quot;&gt;
-&lt;note&gt;
-  &lt;date&gt;2016-10-1&lt;/date&gt;
-  &lt;weather&gt;sunny &lt;/weather&gt;
-  &lt;title&gt;Learning xml&lt;/title&gt;
-  &lt;body&gt;xml is very funny and easy&lt;/body&gt;
-&lt;/note&gt;</code></pre>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="meta">&lt;!DOCTYPE note SYSTEM "note.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">note</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">date</span>&gt;</span>2016-10-1<span class="tag">&lt;/<span class="name">date</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">weather</span>&gt;</span>sunny <span class="tag">&lt;/<span class="name">weather</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Learning xml<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span>xml is very funny and easy<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">note</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p>DOCTYPE 声明是对外部 DTD 文件的引用。下面的段落展示了这个文件的内容</p>
 <ul>
-<li><p>XML DTD<br>DTD 的作用是定义 XML 文档的结构。它使用一系列合法的元素来定义文档结构：</p>
-<pre><code class="xml">&lt;!DOCTYPE note[
-&lt;!ELEMENT note(date,weather,title,body)&gt;
-&lt;!ELEMENT date (#PCDATA)&gt;
-&lt;!ELEMENT weather (#PCDATA)&gt;
-&lt;!ELEMENT title (#PCDATA)&gt;
-&lt;!ELEMENT body (#PCDATA)&gt;
-]&gt;</code></pre>
-<p><a href="http://www.w3school.com.cn/dtd/index.asp" target="_blank" rel="noopener">DTD教程</a></p>
-</li>
-<li><p>XML Schema<br>W3C 支持一种基于 XML 的 DTD 代替者，它名为 XML Schema：</p>
-<pre><code class="xml">&lt;xs:element name=&quot;note&quot;&gt;
-&lt;xs:complexType&gt;
-&lt;xs:sequence&gt;
-  &lt;xs:element name=&quot;date&quot;      type=&quot;xs:string&quot;/&gt;
-  &lt;xs:element name=&quot;weather&quot;    type=&quot;xs:string&quot;/&gt;
-  &lt;xs:element name=&quot;title&quot; type=&quot;xs:string&quot;/&gt;
-  &lt;xs:element name=&quot;body&quot;    type=&quot;xs:string&quot;/&gt;
-&lt;/xs:sequence&gt;
-&lt;/xs:complexType&gt;
-</code></pre>
+<li>XML DTD<br>DTD 的作用是定义 XML 文档的结构。它使用一系列合法的元素来定义文档结构：<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE note[</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT note(date,weather,title,body)&gt;</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT date (#PCDATA)&gt;</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT weather (#PCDATA)&gt;</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT title (#PCDATA)&gt;</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT body (#PCDATA)&gt;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
-<p></p>
-<pre><code>[XML Schema 教程](http://www.w3school.com.cn/schema/index.asp)
+<p><a href="http://www.w3school.com.cn/dtd/index.asp" target="_blank" rel="noopener">DTD教程</a></p>
+<ul>
+<li>XML Schema<br>W3C 支持一种基于 XML 的 DTD 代替者，它名为 XML Schema：<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xs:element</span> <span class="attr">name</span>=<span class="string">"note"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">xs:complexType</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">xs:sequence</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">xs:element</span> <span class="attr">name</span>=<span class="string">"date"</span>      <span class="attr">type</span>=<span class="string">"xs:string"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">xs:element</span> <span class="attr">name</span>=<span class="string">"weather"</span>    <span class="attr">type</span>=<span class="string">"xs:string"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">xs:element</span> <span class="attr">name</span>=<span class="string">"title"</span> <span class="attr">type</span>=<span class="string">"xs:string"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">xs:element</span> <span class="attr">name</span>=<span class="string">"body"</span>    <span class="attr">type</span>=<span class="string">"xs:string"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">xs:sequence</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">xs:complexType</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">xs:element</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-# XML 验证器
-## XML 错误会终止您的程序
-XML 文档中的错误会终止你的 XML 程序。
-W3C 的 XML 规范声明：如果 XML 文档存在错误，那么程序就不应当继续处理这个文档。理由是，XML 软件应当轻巧，快速，具有良好的兼容性。
+</li>
+</ul>
+<p><a href="http://www.w3school.com.cn/schema/index.asp" target="_blank" rel="noopener">XML Schema 教程</a></p>
+<h1 id="XML-验证器"><a href="#XML-验证器" class="headerlink" title="XML 验证器"></a>XML 验证器</h1><h2 id="XML-错误会终止您的程序"><a href="#XML-错误会终止您的程序" class="headerlink" title="XML 错误会终止您的程序"></a>XML 错误会终止您的程序</h2><p>XML 文档中的错误会终止你的 XML 程序。<br>W3C 的 XML 规范声明：如果 XML 文档存在错误，那么程序就不应当继续处理这个文档。理由是，XML 软件应当轻巧，快速，具有良好的兼容性。</p>
+<p>如果使用 HTML，创建包含大量错误的文档是有可能的（比如你忘记了结束标签）。其中一个主要的原因是 HTML 浏览器相当臃肿，兼容性也很差，并且它们有自己的方式来确定当发现错误时文档应该显示为什么样子。<br>注释：只有在 Internet Explorer 中，可以根据 DTD 来验证 XML。Firefox, Mozilla, Netscape 以及 Opera 做不到这一点。</p>
+<h1 id="XML-浏览器支持"><a href="#XML-浏览器支持" class="headerlink" title="XML 浏览器支持"></a>XML 浏览器支持</h1><p>  几乎所有的主流浏览器均支持 XML 和 XSLT。</p>
+<h1 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h1><p>DOM （Document Object Model，文档对象模型）定义了访问和操作文档的标准方法。</p>
+<h2 id="XML-DOM"><a href="#XML-DOM" class="headerlink" title="XML DOM"></a>XML DOM</h2><p>XML DOM (XML Document Object Model) 定义了访问和操作 XML 文档的标准方法。<br>DOM 把 XML 文档作为树结构来查看。能够通过 DOM 树来访问所有元素。可以修改或删除它们的内容，并创建新的元素。元素，它们的文本，以及它们的属性，都被认为是节点。<br><a href="http://www.w3school.com.cn/xmldom/index.asp" target="_blank" rel="noopener">XML DOM 教程</a></p>
+<h2 id="HTML-DOM"><a href="#HTML-DOM" class="headerlink" title="HTML DOM"></a>HTML DOM</h2><p>HTML DOM (HTML Document Object Model) 定义了访问和操作 HTML 文档的标准方法。<br><a href="http://www.w3school.com.cn/htmldom/index.asp" target="_blank" rel="noopener"> HTML DOM 教程</a></p>
 
-如果使用 HTML，创建包含大量错误的文档是有可能的（比如你忘记了结束标签）。其中一个主要的原因是 HTML 浏览器相当臃肿，兼容性也很差，并且它们有自己的方式来确定当发现错误时文档应该显示为什么样子。
-注释：只有在 Internet Explorer 中，可以根据 DTD 来验证 XML。Firefox, Mozilla, Netscape 以及 Opera 做不到这一点。
-
-# XML 浏览器支持
-  几乎所有的主流浏览器均支持 XML 和 XSLT。
-
-
-# DOM
-
-DOM （Document Object Model，文档对象模型）定义了访问和操作文档的标准方法。
-
-## XML DOM
-XML DOM (XML Document Object Model) 定义了访问和操作 XML 文档的标准方法。
-DOM 把 XML 文档作为树结构来查看。能够通过 DOM 树来访问所有元素。可以修改或删除它们的内容，并创建新的元素。元素，它们的文本，以及它们的属性，都被认为是节点。
-[XML DOM 教程](http://www.w3school.com.cn/xmldom/index.asp)
-
-## HTML DOM
-HTML DOM (HTML Document Object Model) 定义了访问和操作 HTML 文档的标准方法。
-[ HTML DOM 教程](http://www.w3school.com.cn/htmldom/index.asp)</code></pre>
             </div>
             <hr/>
 
@@ -816,9 +773,7 @@ marriage
                             今天我们主要学习XML的语法规,元素，属性
 
 XML语法规则
-所有XML元素都必须有关闭标签&emsp;在hmtl中经常会看到没有关闭标签的元素
-&lt;p&gt;This is a paragraph
-&lt;p&gt;This is a
+所有XML元素都必须有关闭标签&emsp;在hmtl中经常会看到没有关闭标签的元素&lt;p&gt;This is a paragraph&lt;p&gt;This is a a
                         
                     </div>
                     <div class="publish-info">
@@ -962,7 +917,7 @@ XML语法规则
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

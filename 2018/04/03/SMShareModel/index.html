@@ -441,85 +441,8 @@ Message(短信)、Email">
 <li>强分享</li>
 <li>h5分享</li>
 </ol>
-<h2 id="代码目录结构"><a href="#代码目录结构" class="headerlink" title="代码目录结构"></a>代码目录结构</h2><pre><code class="c">.
-├── SMH5UploadShare(web分享)
-│   ├── SMH5GuideShareScollerView 
-│   ├── SMH5GuideShareViewController 
-│   ├── SMH5UploadShareScollerView 
-│   ├── SMH5UploadViewController 
-│   ├── SMWebGuideTopShareView 
-│   ├── SMWebShareDataSource 
-│   └── SMWebShareItemModel 
-├── SMShare
-│   ├── SMCustomShareView 
-│   ├── SMShareCompetitionActivitiesInfoModel 
-│   ├── SMShareDynamicConfigurationModel 
-│   ├── SMShareFriendsModel 
-│   ├── SMShareFriendsViewController 
-│   ├── SMShareFriensDataSource 
-│   ├── SMShareFriensTableViewCell 
-│   ├── SMShareItemModel 
-│   ├── SMShareItemSucessState 
-│   ├── SMShareList.plist
-│   ├── SMShareManager 
-│   ├── SMShareScrollView 
-│   ├── SMShareVideoDownloadProgressView 
-│   ├── SMShareVideoDownloadTransitionAnimator 
-│   ├── SMShareVideoDownloadViewController 
-│   └── SMShareWebService 
-├── SMShareAPIUI
-│   ├── SMShareActivityGuideView 
-│   ├── SMShareActivityGuideViewController 
-│   ├── SMShareInstrumentLikesView 
-│   ├── SMShareItemButton 
-│   ├── SMShareOrdinaryContentView 
-│   ├── SMShareOrdinaryView 
-│   ├── SMShareOrdinaryViewController 
-│   ├── SMShareToChannelModel 
-│   ├── SMShareViewController 
-│   ├── SMStrongShareCell+Rate 
-│   ├── SMStrongShareCell+ad 
-│   ├── SMStrongShareCell+winIpad 
-│   ├── SMStrongShareCell 
-│   ├── SMStrongShareHeaderView 
-│   ├── SMStrongShareViewController 
-│   └── SMStrongShareWinIpadView 
-├── SMShareBounced
-│   ├── SMShareBouncedView 
-│   └── SMShareBouncedViewController
-├── SMShareManager(核心)
-│   ├── SMMFMessageViewController 
-│   ├── SMShareAPIContent 
-│   ├── SMShareAPIManager 
-│   ├── SMShareHelper
-│   │   ├── SMShareAppContentManager 
-│   │   ├── SMShareContentHelper 
-│   │   └── SMShareHelper 
-│   └── SMShareTypeDefine 
-├── SMShareModel
-│   ├── SMShareFromContent 
-│   ├── SMShareTrackModel 
-│   ├── SMStrongShareDataSource 
-│   └── SMStrongShareModel 
-├── SMSharePublishSuccess（发布成功后的分享视图）
-│   ├── SMActivityPublishView 
-│   ├── SMSharePublishErrorView 
-│   ├── SMSharePublishFailureView 
-│   ├── SMSharePublishSuccessView 
-│   └── SMSharePublishView 
-└── SMStrongShare(强分享)
-    ├── Controller
-    │   ├── SMStrongChorusViewController 
-    │   └── SMStrongSoloViewController 
-    ├── Model
-    │   ├── SMShareStrongSoloItemModel 
-    │   └── SMStrongChorusDataSource
-    └── View
-        ├── SMStrongChorusHeadView 
-        ├── SMStrongChorusNaverView 
-        ├── SMStrongScollerView 
-        ├── SMStrongSoloExcellentShareView 
-        └── SMStrongSoloOrdinaryShareView</code></pre>
+<h2 id="代码目录结构"><a href="#代码目录结构" class="headerlink" title="代码目录结构"></a>代码目录结构</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── SMH5UploadShare(web分享)</span><br><span class="line">│   ├── SMH5GuideShareScollerView </span><br><span class="line">│   ├── SMH5GuideShareViewController </span><br><span class="line">│   ├── SMH5UploadShareScollerView </span><br><span class="line">│   ├── SMH5UploadViewController </span><br><span class="line">│   ├── SMWebGuideTopShareView </span><br><span class="line">│   ├── SMWebShareDataSource </span><br><span class="line">│   └── SMWebShareItemModel </span><br><span class="line">├── SMShare</span><br><span class="line">│   ├── SMCustomShareView </span><br><span class="line">│   ├── SMShareCompetitionActivitiesInfoModel </span><br><span class="line">│   ├── SMShareDynamicConfigurationModel </span><br><span class="line">│   ├── SMShareFriendsModel </span><br><span class="line">│   ├── SMShareFriendsViewController </span><br><span class="line">│   ├── SMShareFriensDataSource </span><br><span class="line">│   ├── SMShareFriensTableViewCell </span><br><span class="line">│   ├── SMShareItemModel </span><br><span class="line">│   ├── SMShareItemSucessState </span><br><span class="line">│   ├── SMShareList.plist</span><br><span class="line">│   ├── SMShareManager </span><br><span class="line">│   ├── SMShareScrollView </span><br><span class="line">│   ├── SMShareVideoDownloadProgressView </span><br><span class="line">│   ├── SMShareVideoDownloadTransitionAnimator </span><br><span class="line">│   ├── SMShareVideoDownloadViewController </span><br><span class="line">│   └── SMShareWebService </span><br><span class="line">├── SMShareAPIUI</span><br><span class="line">│   ├── SMShareActivityGuideView </span><br><span class="line">│   ├── SMShareActivityGuideViewController </span><br><span class="line">│   ├── SMShareInstrumentLikesView </span><br><span class="line">│   ├── SMShareItemButton </span><br><span class="line">│   ├── SMShareOrdinaryContentView </span><br><span class="line">│   ├── SMShareOrdinaryView </span><br><span class="line">│   ├── SMShareOrdinaryViewController </span><br><span class="line">│   ├── SMShareToChannelModel </span><br><span class="line">│   ├── SMShareViewController </span><br><span class="line">│   ├── SMStrongShareCell+Rate </span><br><span class="line">│   ├── SMStrongShareCell+ad </span><br><span class="line">│   ├── SMStrongShareCell+winIpad </span><br><span class="line">│   ├── SMStrongShareCell </span><br><span class="line">│   ├── SMStrongShareHeaderView </span><br><span class="line">│   ├── SMStrongShareViewController </span><br><span class="line">│   └── SMStrongShareWinIpadView </span><br><span class="line">├── SMShareBounced</span><br><span class="line">│   ├── SMShareBouncedView </span><br><span class="line">│   └── SMShareBouncedViewController</span><br><span class="line">├── SMShareManager(核心)</span><br><span class="line">│   ├── SMMFMessageViewController </span><br><span class="line">│   ├── SMShareAPIContent </span><br><span class="line">│   ├── SMShareAPIManager </span><br><span class="line">│   ├── SMShareHelper</span><br><span class="line">│   │   ├── SMShareAppContentManager </span><br><span class="line">│   │   ├── SMShareContentHelper </span><br><span class="line">│   │   └── SMShareHelper </span><br><span class="line">│   └── SMShareTypeDefine </span><br><span class="line">├── SMShareModel</span><br><span class="line">│   ├── SMShareFromContent </span><br><span class="line">│   ├── SMShareTrackModel </span><br><span class="line">│   ├── SMStrongShareDataSource </span><br><span class="line">│   └── SMStrongShareModel </span><br><span class="line">├── SMSharePublishSuccess（发布成功后的分享视图）</span><br><span class="line">│   ├── SMActivityPublishView </span><br><span class="line">│   ├── SMSharePublishErrorView </span><br><span class="line">│   ├── SMSharePublishFailureView </span><br><span class="line">│   ├── SMSharePublishSuccessView </span><br><span class="line">│   └── SMSharePublishView </span><br><span class="line">└── SMStrongShare(强分享)</span><br><span class="line">    ├── Controller</span><br><span class="line">    │   ├── SMStrongChorusViewController </span><br><span class="line">    │   └── SMStrongSoloViewController </span><br><span class="line">    ├── Model</span><br><span class="line">    │   ├── SMShareStrongSoloItemModel </span><br><span class="line">    │   └── SMStrongChorusDataSource</span><br><span class="line">    └── View</span><br><span class="line">        ├── SMStrongChorusHeadView </span><br><span class="line">        ├── SMStrongChorusNaverView </span><br><span class="line">        ├── SMStrongScollerView </span><br><span class="line">        ├── SMStrongSoloExcellentShareView </span><br><span class="line">        └── SMStrongSoloOrdinaryShareView</span><br></pre></td></tr></table></figure>
+
 <p>主要使用对象类：</p>
 <ol>
 <li>公共分享控件<ul>
@@ -547,371 +470,34 @@ Message(短信)、Email">
 </ol>
 <h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><h3 id="分享控件接口"><a href="#分享控件接口" class="headerlink" title="分享控件接口"></a>分享控件接口</h3><h4 id="普通分享"><a href="#普通分享" class="headerlink" title="普通分享"></a>普通分享</h4><ol>
 <li><p>SMShareOrdinaryViewController</p>
-<pre><code class="objc">     - (instancetype)initWithShareItme:(SMShareItemModel *)aItemModel
-                             returnBack:(ReturnBack)returnBack;
-
- /**
-  SMShareModuleTypeVipInvite 这种类型才需要外部赋值
- */
- - (instancetype)initWithShareItem:(SMShareItemModel *)aItemModel
-                     inviteAPIContent:(SMShareAPIContent *)apiContent
-                         returnBack:(ReturnBack)returnBack;  </code></pre>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    - (<span class="keyword">instancetype</span>)initWithShareItme:(SMShareItemModel *)aItemModel</span><br><span class="line">                            returnBack:(ReturnBack)returnBack;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> SMShareModuleTypeVipInvite 这种类型才需要外部赋值</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithShareItem:(SMShareItemModel *)aItemModel</span><br><span class="line">                    inviteAPIContent:(SMShareAPIContent *)apiContent</span><br><span class="line">                        returnBack:(ReturnBack)returnBack;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>SMShareViewController</p>
-<pre><code class="objc">  /**
-     自定义分享
-     目前只支持已知的分享平台类型,之后会增加自定义分享平台的逻辑
-     @param shareItems
-     分享按钮的item
-     例如:
-     {
-     shareTitle:@&quot;Copy Link&quot;,
-     shareImage:@&quot;CopylinkImage&quot;,
-     shareHighlightedImage:@&quot;CopylinkImage&quot;,
-     }
-     @param shareContent 分享的内容
-     @param returnBack
-     @return
-     */
-     - (instancetype)initWithShareItems:(NSMutableArray &lt;NSDictionary *&gt;*)shareItems
-                         shareContent:(SMShareAPIContent *)shareContent
-                             returnBack:(ReturnBack)returnBack;</code></pre>
-<h4 id="强分享"><a href="#强分享" class="headerlink" title="强分享"></a>强分享</h4></li>
-<li><p>SMStrongSoloViewController（独唱分享）</p>
-<pre><code class="objc"> @interface SMStrongSoloViewController : SMSNSBaseViewController
- //视频是否可以分享的状态
- @property (assign, nonatomic) BOOL isShareVideoState;
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   自定义分享</span></span><br><span class="line"><span class="comment">   目前只支持已知的分享平台类型,之后会增加自定义分享平台的逻辑</span></span><br><span class="line"><span class="comment">   @param shareItems</span></span><br><span class="line"><span class="comment">   分享按钮的item</span></span><br><span class="line"><span class="comment">   例如:</span></span><br><span class="line"><span class="comment">   &#123;</span></span><br><span class="line"><span class="comment">   shareTitle:@"Copy Link",</span></span><br><span class="line"><span class="comment">   shareImage:@"CopylinkImage",</span></span><br><span class="line"><span class="comment">   shareHighlightedImage:@"CopylinkImage",</span></span><br><span class="line"><span class="comment">   &#125;</span></span><br><span class="line"><span class="comment">   @param shareContent 分享的内容</span></span><br><span class="line"><span class="comment">   @param returnBack</span></span><br><span class="line"><span class="comment">   @return</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">   - (<span class="keyword">instancetype</span>)initWithShareItems:(<span class="built_in">NSMutableArray</span> &lt;<span class="built_in">NSDictionary</span> *&gt;*)shareItems</span><br><span class="line">                       shareContent:(SMShareAPIContent *)shareContent</span><br><span class="line">                           returnBack:(ReturnBack)returnBack;</span><br></pre></td></tr></table></figure>
 
- - (instancetype)initWithShareStrongSoloItemModel:(SMShareStrongSoloItemModel *)itemModel
-                                     returnBlock:(ReturnBlock)returnBlock;
-
- @end
-</code></pre>
-</li>
-<li><p>SMStrongChorusViewController（合唱分享） </p>
-<pre><code class="objc"> @interface SMStrongChorusViewController : SMSNSBaseViewController
-
- //视频是否可以分享的状态
- @property (assign, nonatomic) BOOL isShareVideoState;
-
- - (instancetype)initWithShareStrongSoloItemModel:(SMShareStrongSoloItemModel *)itemModel
-                         returnBlock:(ReturnBlock)returnBlock;
-
- @end</code></pre>
-<h3 id="SMShareAPIManager"><a href="#SMShareAPIManager" class="headerlink" title="SMShareAPIManager"></a>SMShareAPIManager</h3><p> 该分享管理器提供了各平台单独的分享内容接口，在使用过程中调用相应的方法并传入正确的参数即可。</p>
 </li>
 </ol>
-<pre><code class="objc">    /**
-    分享 (目前这个是支持的旧的分享 随时可能废弃 如果要调用分享建议使用下面的方法)
-
-    @required aContent 分享的内容
-    @param aContentType 分享内容的类型 (目前只有Instagram 需要区分分享图片或者视频 其他分享平台暂时未用到可以使用SMShareContentTypeAuto)
-    @param aPlatformType 分享平台类型
-    @required fromViewController 当前控制器
-    @param aStateChangedHandler 返回结果
-    */
-    - (void)initWithShareContent:(SMShareAPIContent *)aContent
-                shareItemModel:(SMShareItemModel *)aShareItemModel
-            fromViewController:(UIViewController *)aFromViewController
-        popPresenterSourceView:(UIView *)aSourceView
-                    platformType:(SMSharePlatformType)aPlatformType
-                onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;
-
-
-    /**
-    分享
-    @required aContent 分享的内容
-    @required aFromViewController 当前的viewController
-    @required aSourceView 当前的来源视图
-    @param aPlatformType 分享平台类型
-    @param aStateChangedHandler 返回结果
-    */
-    - (void)initWithShareContent:(SMShareAPIContent *)aContent
-            fromViewController:(UIViewController *)aFromViewController
-        popPresenterSourceView:(UIView *)aSourceView
-                    platformType:(SMSharePlatformType)aPlatformType
-                onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;
-    /**
-    whatsApp分享
-
-    @required message 分享内容 需要用到shareTitle + shareLink
-    */
-    - (void)shareWhatsAppWithShareContent:(SMShareAPIContent *)aContent
-                        onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;
-
-
-    /**
-    Facebook分享
-
-    @required aContent  shareLink + shareHashtag (link 为必需的 hastag 可选)
-    @required fromViewController 当前控制器
-    @param aStateChangedHandler
-    */
-    - (void)shareFacebookWithOpenGraphContent:(SMShareAPIContent *)aContent
-                        fromViewController:(UIViewController *)fromViewController
-                            onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;
-
-
-    /**
-    Messenger分享
-
-    @required aContent shareLink
-    @param aStateChangedHandler
-    */
-    - (void)shareMessengerWithOpenGraphContent:(SMShareAPIContent *)aContent
-                                onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;
-
-
-    /**
-    Instagram分享
-
-    @required aContent 图片地址 shareVieoURL 或者 视频
-    @param aStateChangedHandler
-    */
-    - (void)shareInstagramWithContent:(SMShareAPIContent *)aContent
-                    onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;
-
-
-    /**
-    分享到 Twitter
-
-    @required aContent shareTitle +  shareLink +  shareImageURL (必须保证至少一个不是空的)
-    @param aStateChangedHandler 
-    */
-    - (void)shareTwitterContent:(SMShareAPIContent *)aContent
-                onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;
-
-
-    /**
-    分享到短信
-
-    @required aContent shareTitle + shareLink
-    @required fromViewController
-    @param aStateChangedHandler
-    */
-    - (void)shareTextWithContent:(SMShareAPIContent *)aContent
-            fromViewController:(UIViewController *)fromViewController
-                onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;
-
-
-    /**
-    分享到邮件
-
-    @required aContent shareTitle + shareLink + shareDescription
-    @required fromViewController
-    @param state
-    */
-    - (void)shareEMailWithContent:(SMShareAPIContent *)aContent
-            fromViewController:(UIViewController *)fromViewController
-                onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;
-
-    // 自动发布facebook
-    - (void)automaticShareFacebookWithOpenGraphContent:(SMShareAPIContent *)aContent
-                                        onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;
-    // 当前的FB自动发布权限是否可用
-    + (BOOL)isFacebookShareHasGranted;
-
-    // 获取当前的FB自动发布权限
-    + (void)facebookShareHasGrantedWithViewController:(UIViewController *)aFromViewController
-                                    onStateChanged:(SMFacebookSyncToState)aStateChangedHandler;
-
-    // 删除facebook上传权限 (PM 要求内部控制删除权限 不走facebook的删除权限接口 但是已经实现 如果需要可以把注释掉的内容打开)
-    + (void)facebookDeletePublishactionOnStateChanged:(SMFacebookSyncToState)aStateChangedHandler;
-
-    // 判断Twitter是否登陆
-    + (void)isTwitterLogin:(SMShareTwitterState)state;
-    ```
-
-### SMShareAPIContent （分享内容模型）
-1. 属性
-    ```objc
-    @property (copy, nonatomic) NSString *shareRecordingId; //分享的唯一标识  不要重复
-    @property (assign, nonatomic) SMShareContentType shareContentSourceType; //之后会废弃这个字段
-    @property (copy,  nonatomic) NSString *shareTitle; //分享标题
-    @property (copy,  nonatomic) NSString *shareDescription; // 分享内容
-    @property (copy,  nonatomic) NSString *shareType; //分享类型 invite ，打点使用
-    @property (assign, nonatomic) SMShareContentType shareContentType; //分享内容类型
-    @property (copy,  nonatomic) NSString *shareLink; //分享链接
-    @property (copy,  nonatomic) NSString *shareImageURL;//分享图片
-    @property (copy,  nonatomic) NSString *shareVieoURL;//分享视频下载地址
-    @property (copy,  nonatomic) NSString *shareVideoPath;//分享视频本地地址
-    @property (copy,  nonatomic) NSString *shareHashtag; //分享Hashtag
-    @property (assign, nonatomic) BOOL isShareVideoType; // 是否是分享视频
-    @property (assign, nonatomic) NSInteger shareIspublic;//是否是私密状态
-    @property (copy, nonatomic) NSString *isContested;//是否是参赛作品 1，参赛 0，未参赛
-
-
-    /****************************************
-    * 以下为IM分享携带信息
-    * 如果可以取到信息请尽量传入避免之后请求
-    *
-    ****************************************/
-
-    @property (strong,  nonatomic) SMShareFromContent *fromContent; //分享发送方信息
-    @property (copy, nonatomic) NSString *shareSingID;//分享作品歌手id
-    @property (copy, nonatomic) NSString *shareSingName;//分享作品歌手名字
-    @property (copy, nonatomic) NSString *shareSingCover;//分享作品歌手头像url
-    @property (assign, nonatomic) BOOL isVerified;//分享作品歌手是否是认证歌手
-    @property (nonatomic,assign) NSInteger  isRecordingPublic;//是否是我创建的作品
-    ```
-便捷方法：
-```objc
-- (instancetype)initWithShareContentTitle:(NSString *) aTitle
-                              description:(NSString *) aDescription
-                              recordingId:(NSString *) aRecordingId
-                                     link:(NSString *) aLink
-                                 imageURl:(NSString *) aImageUrl
-                                 videoURL:(NSString *) aVideoUrl
-                                  hashtag:(NSString *) ahashtag
-                              contentType:(SMShareContentType) aContentType;</code></pre>
-<h3 id="SMShareHelper"><a href="#SMShareHelper" class="headerlink" title="SMShareHelper"></a>SMShareHelper</h3><p>   根据title获取分享平台类型 、获取全部分享平台类型 、分享私信好友状态是否可用等功能接口</p>
-<pre><code>    /**
-    根据返回传入item的title，获取分享平台类型
-
-    @param title 分享的title
-    @return 分享平台类型
-    */
-    + (SMSharePlatformType)getShareTypeForTitle:(NSString *)title;
-
-    /**
-    根据分享平台类型返回分享平台名字
-
-    @param aPlatformType 分享平台类型
-    @return 平台名字
-    */
-    + (NSString *)channelWithPlatformType:(SMSharePlatformType)aPlatformType;
-
-
-    /**
-    根据分享平台类型配置link 规则：link + shareType + appName
-
-    @param link 分享的链接
-    @param shareType 分享类型
-    @return 返回配置后的分享URL
-    */
-    + (NSString *)shareTitleInfoCombinationLink:(NSString *)link shareType:(SMSharePlatformType)shareType;
-
-    /**
-    获取可分享平台的Items
-
-    @param songId 判断当前分享歌曲是否在在白名单内，如果不在会默认不显示Instagram分享平台 （如果不要做这个判断直接传空）
-    @param imageName 是否需要替换不同的More图片 （因为项目中多个地方使用了不同的moreIcon图片，所以特别加这个接口.如果不需要替换可以不传会显示默认icon）
-    @return 返回生产的分享平台的Items信息
-    */
-    + (NSMutableArray *)shareItemArrayIsCanShareSongID:(NSString *)songId
-                                    andMoreImageName:(NSString *)imageName
-                                        hideInstagram:(BOOL)hideInstagram;
-
-
-    + (NSMutableArray *)shareItemKtvAndLiveArrayMoreImageName:(NSString *)imageName;
-
-    /**
-    增加点击分享平台数量
-
-    @param aPlatformType 平台
-    */
-    + (void)writeToFile:(SMSharePlatformType)aPlatformType;
-
-    /**
-    根据分享返回结果返回分享结果
-
-    @param responseState 分享返回的结果
-    @return 结果的描述
-    */
-    + (NSString *)resultWithResponseState:(SMShareResponseState)responseState;
-
-
-    /**
-    分享私信是否可用
-
-    @return
-    */
-    - (BOOL)isShareThroughChat;
-
-
-
-    /**
-    获取分享应用下载link
-    starmaker 和 the voice 使用旧的链接不进行修改
-
-    印度和印尼以及以后的app链接 遵守（ https://m.singit.vip/download + apptype） 规则 具体参考：T23035
-
-    @return
-    */
-    + (NSString *)getShareAppDownloadLink;/**
-    根据返回传入item的title，获取分享平台类型
-
-    @param title 分享的title
-    @return 分享平台类型
-    */
-    + (SMSharePlatformType)getShareTypeForTitle:(NSString *)title;
-
-    /**
-    根据分享平台类型返回分享平台名字
-
-    @param aPlatformType 分享平台类型
-    @return 平台名字
-    */
-    + (NSString *)channelWithPlatformType:(SMSharePlatformType)aPlatformType;
-
-
-    /**
-    根据分享平台类型配置link 规则：link + shareType + appName
-
-    @param link 分享的链接
-    @param shareType 分享类型
-    @return 返回配置后的分享URL
-    */
-    + (NSString *)shareTitleInfoCombinationLink:(NSString *)link shareType:(SMSharePlatformType)shareType;
-
-    /**
-    获取可分享平台的Items
-
-    @param songId 判断当前分享歌曲是否在在白名单内，如果不在会默认不显示Instagram分享平台 （如果不要做这个判断直接传空）
-    @param imageName 是否需要替换不同的More图片 （因为项目中多个地方使用了不同的moreIcon图片，所以特别加这个接口.如果不需要替换可以不传会显示默认icon）
-    @return 返回生产的分享平台的Items信息
-    */
-    + (NSMutableArray *)shareItemArrayIsCanShareSongID:(NSString *)songId
-                                    andMoreImageName:(NSString *)imageName
-                                        hideInstagram:(BOOL)hideInstagram;
-
-
-    + (NSMutableArray *)shareItemKtvAndLiveArrayMoreImageName:(NSString *)imageName;
-
-    /**
-    增加点击分享平台数量
-
-    @param aPlatformType 平台
-    */
-    + (void)writeToFile:(SMSharePlatformType)aPlatformType;
-
-    /**
-    根据分享返回结果返回分享结果
-
-    @param responseState 分享返回的结果
-    @return 结果的描述
-    */
-    + (NSString *)resultWithResponseState:(SMShareResponseState)responseState;
-
-
-    /**
-    分享私信是否可用
-
-    @return
-    */
-    - (BOOL)isShareThroughChat;
-
-
-
-    /**
-    获取分享应用下载link
-    starmaker 和 the voice 使用旧的链接不进行修改
-
-    印度和印尼以及以后的app链接 遵守（ https://m.singit.vip/download + apptype） 规则 具体参考：T23035
-
-    @return
-    */
-    + (NSString *)getShareAppDownloadLink;</code></pre><p>目录结构存在的问题(<strong>已修复</strong>)：</p>
+<h4 id="强分享"><a href="#强分享" class="headerlink" title="强分享"></a>强分享</h4><ol>
+<li><p>SMStrongSoloViewController（独唱分享）</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">SMStrongSoloViewController</span> : <span class="title">SMSNSBaseViewController</span></span></span><br><span class="line"><span class="comment">//视频是否可以分享的状态</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) <span class="built_in">BOOL</span> isShareVideoState;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithShareStrongSoloItemModel:(SMShareStrongSoloItemModel *)itemModel</span><br><span class="line">                                    returnBlock:(ReturnBlock)returnBlock;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>SMStrongChorusViewController（合唱分享） </p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">SMStrongChorusViewController</span> : <span class="title">SMSNSBaseViewController</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//视频是否可以分享的状态</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) <span class="built_in">BOOL</span> isShareVideoState;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithShareStrongSoloItemModel:(SMShareStrongSoloItemModel *)itemModel</span><br><span class="line">                        returnBlock:(ReturnBlock)returnBlock;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="SMShareAPIManager"><a href="#SMShareAPIManager" class="headerlink" title="SMShareAPIManager"></a>SMShareAPIManager</h3><pre><code>该分享管理器提供了各平台单独的分享内容接口，在使用过程中调用相应的方法并传入正确的参数即可。</code></pre><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">分享 (目前这个是支持的旧的分享 随时可能废弃 如果要调用分享建议使用下面的方法)</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">@required aContent 分享的内容</span></span><br><span class="line"><span class="comment">@param aContentType 分享内容的类型 (目前只有Instagram 需要区分分享图片或者视频 其他分享平台暂时未用到可以使用SMShareContentTypeAuto)</span></span><br><span class="line"><span class="comment">@param aPlatformType 分享平台类型</span></span><br><span class="line"><span class="comment">@required fromViewController 当前控制器</span></span><br><span class="line"><span class="comment">@param aStateChangedHandler 返回结果</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)initWithShareContent:(SMShareAPIContent *)aContent</span><br><span class="line">            shareItemModel:(SMShareItemModel *)aShareItemModel</span><br><span class="line">        fromViewController:(<span class="built_in">UIViewController</span> *)aFromViewController</span><br><span class="line">    popPresenterSourceView:(<span class="built_in">UIView</span> *)aSourceView</span><br><span class="line">                platformType:(SMSharePlatformType)aPlatformType</span><br><span class="line">            onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">分享</span></span><br><span class="line"><span class="comment">@required aContent 分享的内容</span></span><br><span class="line"><span class="comment">@required aFromViewController 当前的viewController</span></span><br><span class="line"><span class="comment">@required aSourceView 当前的来源视图</span></span><br><span class="line"><span class="comment">@param aPlatformType 分享平台类型</span></span><br><span class="line"><span class="comment">@param aStateChangedHandler 返回结果</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)initWithShareContent:(SMShareAPIContent *)aContent</span><br><span class="line">        fromViewController:(<span class="built_in">UIViewController</span> *)aFromViewController</span><br><span class="line">    popPresenterSourceView:(<span class="built_in">UIView</span> *)aSourceView</span><br><span class="line">                platformType:(SMSharePlatformType)aPlatformType</span><br><span class="line">            onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">whatsApp分享</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">@required message 分享内容 需要用到shareTitle + shareLink</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)shareWhatsAppWithShareContent:(SMShareAPIContent *)aContent</span><br><span class="line">                    onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">Facebook分享</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">@required aContent  shareLink + shareHashtag (link 为必需的 hastag 可选)</span></span><br><span class="line"><span class="comment">@required fromViewController 当前控制器</span></span><br><span class="line"><span class="comment">@param aStateChangedHandler</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)shareFacebookWithOpenGraphContent:(SMShareAPIContent *)aContent</span><br><span class="line">                    fromViewController:(<span class="built_in">UIViewController</span> *)fromViewController</span><br><span class="line">                        onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">Messenger分享</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">@required aContent shareLink</span></span><br><span class="line"><span class="comment">@param aStateChangedHandler</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)shareMessengerWithOpenGraphContent:(SMShareAPIContent *)aContent</span><br><span class="line">                            onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">Instagram分享</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">@required aContent 图片地址 shareVieoURL 或者 视频</span></span><br><span class="line"><span class="comment">@param aStateChangedHandler</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)shareInstagramWithContent:(SMShareAPIContent *)aContent</span><br><span class="line">                onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">分享到 Twitter</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">@required aContent shareTitle +  shareLink +  shareImageURL (必须保证至少一个不是空的)</span></span><br><span class="line"><span class="comment">@param aStateChangedHandler </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)shareTwitterContent:(SMShareAPIContent *)aContent</span><br><span class="line">            onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">分享到短信</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">@required aContent shareTitle + shareLink</span></span><br><span class="line"><span class="comment">@required fromViewController</span></span><br><span class="line"><span class="comment">@param aStateChangedHandler</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)shareTextWithContent:(SMShareAPIContent *)aContent</span><br><span class="line">        fromViewController:(<span class="built_in">UIViewController</span> *)fromViewController</span><br><span class="line">            onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">分享到邮件</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">@required aContent shareTitle + shareLink + shareDescription</span></span><br><span class="line"><span class="comment">@required fromViewController</span></span><br><span class="line"><span class="comment">@param state</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)shareEMailWithContent:(SMShareAPIContent *)aContent</span><br><span class="line">        fromViewController:(<span class="built_in">UIViewController</span> *)fromViewController</span><br><span class="line">            onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自动发布facebook</span></span><br><span class="line">- (<span class="keyword">void</span>)automaticShareFacebookWithOpenGraphContent:(SMShareAPIContent *)aContent</span><br><span class="line">                                    onStateChanged:(SMShareCallApiStateChangedHandler)aStateChangedHandler;</span><br><span class="line"><span class="comment">// 当前的FB自动发布权限是否可用</span></span><br><span class="line">+ (<span class="built_in">BOOL</span>)isFacebookShareHasGranted;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取当前的FB自动发布权限</span></span><br><span class="line">+ (<span class="keyword">void</span>)facebookShareHasGrantedWithViewController:(<span class="built_in">UIViewController</span> *)aFromViewController</span><br><span class="line">                                onStateChanged:(SMFacebookSyncToState)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除facebook上传权限 (PM 要求内部控制删除权限 不走facebook的删除权限接口 但是已经实现 如果需要可以把注释掉的内容打开)</span></span><br><span class="line">+ (<span class="keyword">void</span>)facebookDeletePublishactionOnStateChanged:(SMFacebookSyncToState)aStateChangedHandler;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断Twitter是否登陆</span></span><br><span class="line">+ (<span class="keyword">void</span>)isTwitterLogin:(SMShareTwitterState)state;</span><br></pre></td></tr></table></figure>
+
+<h3 id="SMShareAPIContent-（分享内容模型）"><a href="#SMShareAPIContent-（分享内容模型）" class="headerlink" title="SMShareAPIContent （分享内容模型）"></a>SMShareAPIContent （分享内容模型）</h3><ol>
+<li>属性 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>, <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareRecordingId; <span class="comment">//分享的唯一标识  不要重复</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) SMShareContentType shareContentSourceType; <span class="comment">//之后会废弃这个字段</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>,  <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareTitle; <span class="comment">//分享标题</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>,  <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareDescription; <span class="comment">// 分享内容</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>,  <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareType; <span class="comment">//分享类型 invite ，打点使用</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) SMShareContentType shareContentType; <span class="comment">//分享内容类型</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>,  <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareLink; <span class="comment">//分享链接</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>,  <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareImageURL;<span class="comment">//分享图片</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>,  <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareVieoURL;<span class="comment">//分享视频下载地址</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>,  <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareVideoPath;<span class="comment">//分享视频本地地址</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>,  <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareHashtag; <span class="comment">//分享Hashtag</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) <span class="built_in">BOOL</span> isShareVideoType; <span class="comment">// 是否是分享视频</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) <span class="built_in">NSInteger</span> shareIspublic;<span class="comment">//是否是私密状态</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>, <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *isContested;<span class="comment">//是否是参赛作品 1，参赛 0，未参赛</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/****************************************</span></span><br><span class="line"><span class="comment">* 以下为IM分享携带信息</span></span><br><span class="line"><span class="comment">* 如果可以取到信息请尽量传入避免之后请求</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">****************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">strong</span>,  <span class="keyword">nonatomic</span>) SMShareFromContent *fromContent; <span class="comment">//分享发送方信息</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>, <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareSingID;<span class="comment">//分享作品歌手id</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>, <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareSingName;<span class="comment">//分享作品歌手名字</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>, <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *shareSingCover;<span class="comment">//分享作品歌手头像url</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) <span class="built_in">BOOL</span> isVerified;<span class="comment">//分享作品歌手是否是认证歌手</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="built_in">NSInteger</span>  isRecordingPublic;<span class="comment">//是否是我创建的作品</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>便捷方法：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">instancetype</span>)initWithShareContentTitle:(<span class="built_in">NSString</span> *) aTitle</span><br><span class="line">                              description:(<span class="built_in">NSString</span> *) aDescription</span><br><span class="line">                              recordingId:(<span class="built_in">NSString</span> *) aRecordingId</span><br><span class="line">                                     link:(<span class="built_in">NSString</span> *) aLink</span><br><span class="line">                                 imageURl:(<span class="built_in">NSString</span> *) aImageUrl</span><br><span class="line">                                 videoURL:(<span class="built_in">NSString</span> *) aVideoUrl</span><br><span class="line">                                  hashtag:(<span class="built_in">NSString</span> *) ahashtag</span><br><span class="line">                              contentType:(SMShareContentType) aContentType;</span><br></pre></td></tr></table></figure>
+
+<h3 id="SMShareHelper"><a href="#SMShareHelper" class="headerlink" title="SMShareHelper"></a>SMShareHelper</h3><p>   根据title获取分享平台类型 、获取全部分享平台类型 、分享私信好友状态是否可用等功能接口<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">根据返回传入item的title，获取分享平台类型</span><br><span class="line"></span><br><span class="line">@param title 分享的title</span><br><span class="line">@return 分享平台类型</span><br><span class="line">*/</span><br><span class="line">+ (SMSharePlatformType)getShareTypeForTitle:(NSString *)title;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">根据分享平台类型返回分享平台名字</span><br><span class="line"></span><br><span class="line">@param aPlatformType 分享平台类型</span><br><span class="line">@return 平台名字</span><br><span class="line">*/</span><br><span class="line">+ (NSString *)channelWithPlatformType:(SMSharePlatformType)aPlatformType;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">根据分享平台类型配置link 规则：link + shareType + appName</span><br><span class="line"></span><br><span class="line">@param link 分享的链接</span><br><span class="line">@param shareType 分享类型</span><br><span class="line">@return 返回配置后的分享URL</span><br><span class="line">*/</span><br><span class="line">+ (NSString *)shareTitleInfoCombinationLink:(NSString *)link shareType:(SMSharePlatformType)shareType;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">获取可分享平台的Items</span><br><span class="line"></span><br><span class="line">@param songId 判断当前分享歌曲是否在在白名单内，如果不在会默认不显示Instagram分享平台 （如果不要做这个判断直接传空）</span><br><span class="line">@param imageName 是否需要替换不同的More图片 （因为项目中多个地方使用了不同的moreIcon图片，所以特别加这个接口.如果不需要替换可以不传会显示默认icon）</span><br><span class="line">@return 返回生产的分享平台的Items信息</span><br><span class="line">*/</span><br><span class="line">+ (NSMutableArray *)shareItemArrayIsCanShareSongID:(NSString *)songId</span><br><span class="line">                                andMoreImageName:(NSString *)imageName</span><br><span class="line">                                    hideInstagram:(BOOL)hideInstagram;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">+ (NSMutableArray *)shareItemKtvAndLiveArrayMoreImageName:(NSString *)imageName;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">增加点击分享平台数量</span><br><span class="line"></span><br><span class="line">@param aPlatformType 平台</span><br><span class="line">*/</span><br><span class="line">+ (void)writeToFile:(SMSharePlatformType)aPlatformType;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">根据分享返回结果返回分享结果</span><br><span class="line"></span><br><span class="line">@param responseState 分享返回的结果</span><br><span class="line">@return 结果的描述</span><br><span class="line">*/</span><br><span class="line">+ (NSString *)resultWithResponseState:(SMShareResponseState)responseState;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">分享私信是否可用</span><br><span class="line"></span><br><span class="line">@return</span><br><span class="line">*/</span><br><span class="line">- (BOOL)isShareThroughChat;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">获取分享应用下载link</span><br><span class="line">starmaker 和 the voice 使用旧的链接不进行修改</span><br><span class="line"></span><br><span class="line">印度和印尼以及以后的app链接 遵守（ https://m.singit.vip/download + apptype） 规则 具体参考：T23035</span><br><span class="line"></span><br><span class="line">@return</span><br><span class="line">*/</span><br><span class="line">+ (NSString *)getShareAppDownloadLink;/**</span><br><span class="line">根据返回传入item的title，获取分享平台类型</span><br><span class="line"></span><br><span class="line">@param title 分享的title</span><br><span class="line">@return 分享平台类型</span><br><span class="line">*/</span><br><span class="line">+ (SMSharePlatformType)getShareTypeForTitle:(NSString *)title;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">根据分享平台类型返回分享平台名字</span><br><span class="line"></span><br><span class="line">@param aPlatformType 分享平台类型</span><br><span class="line">@return 平台名字</span><br><span class="line">*/</span><br><span class="line">+ (NSString *)channelWithPlatformType:(SMSharePlatformType)aPlatformType;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">根据分享平台类型配置link 规则：link + shareType + appName</span><br><span class="line"></span><br><span class="line">@param link 分享的链接</span><br><span class="line">@param shareType 分享类型</span><br><span class="line">@return 返回配置后的分享URL</span><br><span class="line">*/</span><br><span class="line">+ (NSString *)shareTitleInfoCombinationLink:(NSString *)link shareType:(SMSharePlatformType)shareType;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">获取可分享平台的Items</span><br><span class="line"></span><br><span class="line">@param songId 判断当前分享歌曲是否在在白名单内，如果不在会默认不显示Instagram分享平台 （如果不要做这个判断直接传空）</span><br><span class="line">@param imageName 是否需要替换不同的More图片 （因为项目中多个地方使用了不同的moreIcon图片，所以特别加这个接口.如果不需要替换可以不传会显示默认icon）</span><br><span class="line">@return 返回生产的分享平台的Items信息</span><br><span class="line">*/</span><br><span class="line">+ (NSMutableArray *)shareItemArrayIsCanShareSongID:(NSString *)songId</span><br><span class="line">                                andMoreImageName:(NSString *)imageName</span><br><span class="line">                                    hideInstagram:(BOOL)hideInstagram;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">+ (NSMutableArray *)shareItemKtvAndLiveArrayMoreImageName:(NSString *)imageName;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">增加点击分享平台数量</span><br><span class="line"></span><br><span class="line">@param aPlatformType 平台</span><br><span class="line">*/</span><br><span class="line">+ (void)writeToFile:(SMSharePlatformType)aPlatformType;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">根据分享返回结果返回分享结果</span><br><span class="line"></span><br><span class="line">@param responseState 分享返回的结果</span><br><span class="line">@return 结果的描述</span><br><span class="line">*/</span><br><span class="line">+ (NSString *)resultWithResponseState:(SMShareResponseState)responseState;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">分享私信是否可用</span><br><span class="line"></span><br><span class="line">@return</span><br><span class="line">*/</span><br><span class="line">- (BOOL)isShareThroughChat;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">获取分享应用下载link</span><br><span class="line">starmaker 和 the voice 使用旧的链接不进行修改</span><br><span class="line"></span><br><span class="line">印度和印尼以及以后的app链接 遵守（ https://m.singit.vip/download + apptype） 规则 具体参考：T23035</span><br><span class="line"></span><br><span class="line">@return</span><br><span class="line">*/</span><br><span class="line">+ (NSString *)getShareAppDownloadLink;</span><br></pre></td></tr></table></figure></p>
+<p>目录结构存在的问题(<strong>已修复</strong>)：</p>
 <ol>
 <li>SMSharePublisthSuccess 代码存放目录不对</li>
 <li>SMStrongShare 存放目录不对  </li>
@@ -928,15 +514,15 @@ Message(短信)、Email">
 <p>Q： 我们项目中很多视图控制器都重写了init方法，如果我们的视图控制器由xib/sb加载，则这个方法是不会走的。 </p>
 <p>补充：</p>
 <ol>
-<li>在项目中隐藏系统的导航栏<pre><code> - (void)viewWillAppear:(BOOL)animated
- {
-     [super viewWillAppear:animated];
-     [self.navigationController setNavigationBarHidden:YES animated:NO];
- }   </code></pre> 这样在push页面过程中导航栏会出黑色<br> 建议把这个动画打开<pre><code> - (void)viewWillAppear:(BOOL)animated
- {
-     [super viewWillAppear:animated];
-     [self.navigationController setNavigationBarHidden:YES animated:YES];
- }  </code></pre><h2 id="改进的地方"><a href="#改进的地方" class="headerlink" title="改进的地方"></a>改进的地方</h2></li>
+<li><p>在项目中隐藏系统的导航栏</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- (void)viewWillAppear:(BOOL)animated</span><br><span class="line">&#123;</span><br><span class="line">    [super viewWillAppear:animated];</span><br><span class="line">    [self.navigationController setNavigationBarHidden:YES animated:NO];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这样在push页面过程中导航栏会出黑色<br> 建议把这个动画打开</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- (void)viewWillAppear:(BOOL)animated</span><br><span class="line">&#123;</span><br><span class="line">    [super viewWillAppear:animated];</span><br><span class="line">    [self.navigationController setNavigationBarHidden:YES animated:YES];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="改进的地方"><a href="#改进的地方" class="headerlink" title="改进的地方"></a>改进的地方</h2><ol>
 <li>项目中代码的逻辑目录需要有对应的物理文件夹</li>
 <li>将代码按不同的功能模块归纳到相应的目录下</li>
 <li>重复使用的代码可以考虑提取成一个方法，供使用</li>
@@ -946,7 +532,7 @@ Message(短信)、Email">
 <p>参考文档：<br><a href="https://phabricator.ushow.media/w/starmaker/ios/ios_sharesdk%E6%96%87%E6%A1%A3%E8%AF%B4%E6%98%8E/" target="_blank" rel="noopener">ShareSDK</a></p>
 <!-- # h5
 活动(web) -->
-<!-- <img src="/2018/04/03/SMShareModel/publishsuccess1.png" title="代码实际位置"> 
+<!-- {% asset_img 'publishsuccess1.png' '代码实际位置' %} 
 <pre><code>{% asset_img 'publishsuccess2.png' '代码实际位置' %} 
 {% asset_img 'SMStrongShare1.png' '代码实际位置' %} 
 {% asset_img 'SMStrongShare2.png' '代码实际位置' %} 
@@ -1367,7 +953,7 @@ Runloop什么是Runloop
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

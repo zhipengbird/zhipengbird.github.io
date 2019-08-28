@@ -6,9 +6,7 @@
     <meta charset="utf-8">
     <meta name="keywords" content="UIImagePickerController, 志鹏的技术博客">
     <meta name="description" content="创建对象
-//去相册选择图片
- UIImagePickerController * pickerController =[[UIImagePickerController alloc]init];
- pickerController.med">
+//去相册选择图片 UIImagePickerController * pickerController =[[UIImagePickerController alloc]init]; pickerController.media">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -407,7 +405,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        333
+                        343
                     </div>
                     
 
@@ -431,74 +429,15 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>创建对象</p>
-<pre><code class="objc">//去相册选择图片
- UIImagePickerController * pickerController =[[UIImagePickerController alloc]init];
- pickerController.mediaTypes = @[(NSString *)kUTTypeImage,(NSString *)kUTTypeMovie,(NSString *)kUTTypeVideo];//设置选择的资源类型
- if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-     pickerController.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
-     pickerController.delegate=self;
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//去相册选择图片</span></span><br><span class="line"> <span class="built_in">UIImagePickerController</span> * pickerController =[[<span class="built_in">UIImagePickerController</span> alloc]init];</span><br><span class="line"> pickerController.mediaTypes = @[(<span class="built_in">NSString</span> *)kUTTypeImage,(<span class="built_in">NSString</span> *)kUTTypeMovie,(<span class="built_in">NSString</span> *)kUTTypeVideo];<span class="comment">//设置选择的资源类型</span></span><br><span class="line"> <span class="keyword">if</span> ([<span class="built_in">UIImagePickerController</span> isSourceTypeAvailable:<span class="built_in">UIImagePickerControllerSourceTypePhotoLibrary</span>]) &#123;</span><br><span class="line">     pickerController.sourceType=<span class="built_in">UIImagePickerControllerSourceTypePhotoLibrary</span>;</span><br><span class="line">     pickerController.delegate=<span class="keyword">self</span>;</span><br><span class="line"></span><br><span class="line">     [<span class="keyword">self</span>.navigationController presentViewController:pickerController animated:<span class="literal">YES</span> completion:^&#123;</span><br><span class="line"></span><br><span class="line">     &#125;];</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
-     [self.navigationController presentViewController:pickerController animated:YES completion:^{
-
-     }];
- }</code></pre>
 <p>代理方法实现：</p>
-<pre><code class="objc">-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary&lt;NSString *,id&gt; *)info{
-    [picker dismissViewControllerAnimated:NO completion:nil];
-    NSString * file= nil;
-    NSString *mdeiaTye = [info objectForKey:UIImagePickerControllerMediaType]; //获取媒体类型
-    if ([mdeiaTye isEqualToString:(NSString*)kUTTypeImage]) {
-      //获取的是图片资源
-        UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-        NSString *docPath = [paths lastObject];
-        file = [docPath stringByAppendingPathComponent:@&quot;output.png&quot;];
-        [[NSFileManager defaultManager]removeItemAtPath:file error:nil];
-        NSData *imageData = UIImagePNGRepresentation(image);
-        [imageData writeToFile:file atomically:YES];
-        NSString* uuid = [[NSString stringWithFormat:@&quot;tmp://%@&quot;, [[NSUUID UUID] UUIDString]] stringByAppendingPathExtension:[file pathExtension]];
-        [[NSFileManager defaultManager] moveItemAtPath:file toPath:[FileDownloader cacheFileWithUrl:uuid] error:nil];
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)imagePickerController:(<span class="built_in">UIImagePickerController</span> *)picker didFinishPickingMediaWithInfo:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *,<span class="keyword">id</span>&gt; *)info&#123;</span><br><span class="line">    [picker dismissViewControllerAnimated:<span class="literal">NO</span> completion:<span class="literal">nil</span>];</span><br><span class="line">    <span class="built_in">NSString</span> * file= <span class="literal">nil</span>;</span><br><span class="line">    <span class="built_in">NSString</span> *mdeiaTye = [info objectForKey:<span class="built_in">UIImagePickerControllerMediaType</span>]; <span class="comment">//获取媒体类型</span></span><br><span class="line">    <span class="keyword">if</span> ([mdeiaTye isEqualToString:(<span class="built_in">NSString</span>*)kUTTypeImage]) &#123;</span><br><span class="line">      <span class="comment">//获取的是图片资源</span></span><br><span class="line">        <span class="built_in">UIImage</span> *image = [info objectForKey:<span class="built_in">UIImagePickerControllerOriginalImage</span>];</span><br><span class="line">        <span class="built_in">NSArray</span> *paths = <span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSCachesDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>);</span><br><span class="line">        <span class="built_in">NSString</span> *docPath = [paths lastObject];</span><br><span class="line">        file = [docPath stringByAppendingPathComponent:<span class="string">@"output.png"</span>];</span><br><span class="line">        [[<span class="built_in">NSFileManager</span> defaultManager]removeItemAtPath:file error:<span class="literal">nil</span>];</span><br><span class="line">        <span class="built_in">NSData</span> *imageData = <span class="built_in">UIImagePNGRepresentation</span>(image);</span><br><span class="line">        [imageData writeToFile:file atomically:<span class="literal">YES</span>];</span><br><span class="line">        <span class="built_in">NSString</span>* uuid = [[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"tmp://%@"</span>, [[<span class="built_in">NSUUID</span> UUID] UUIDString]] stringByAppendingPathExtension:[file pathExtension]];</span><br><span class="line">        [[<span class="built_in">NSFileManager</span> defaultManager] moveItemAtPath:file toPath:[FileDownloader cacheFileWithUrl:uuid] error:<span class="literal">nil</span>];</span><br><span class="line"></span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 获取的是视频资源</span></span><br><span class="line">        <span class="built_in">NSArray</span> *paths = <span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSCachesDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>);</span><br><span class="line">        <span class="built_in">NSString</span> *docPath = [paths lastObject];</span><br><span class="line">        file = [docPath stringByAppendingPathComponent:<span class="string">@"output.mp4"</span>];</span><br><span class="line">        [[<span class="built_in">NSFileManager</span> defaultManager]removeItemAtPath:file error:<span class="literal">nil</span>];</span><br><span class="line">        <span class="built_in">NSURL</span> * url =[info objectForKey:<span class="built_in">UIImagePickerControllerMediaURL</span>];</span><br><span class="line">        <span class="built_in">NSData</span> * data =[<span class="built_in">NSData</span> dataWithContentsOfURL:url];</span><br><span class="line">        [data writeToFile:file atomically:<span class="literal">YES</span>];<span class="comment">//将视频移到本应用的目录下</span></span><br><span class="line">        <span class="built_in">NSString</span>* uuid = [[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"tmp://%@"</span>, [[<span class="built_in">NSUUID</span> UUID] UUIDString]] stringByAppendingPathExtension:[file pathExtension]];</span><br><span class="line">        [[<span class="built_in">NSFileManager</span> defaultManager] moveItemAtPath:file toPath:[FileDownloader cacheFileWithUrl:uuid] error:<span class="literal">nil</span>];</span><br><span class="line">        <span class="comment">// 获取视频时长</span></span><br><span class="line">        <span class="built_in">CGFloat</span> duration = [<span class="keyword">self</span> getVideoDuration:url];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    }else {
-      // 获取的是视频资源
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-        NSString *docPath = [paths lastObject];
-        file = [docPath stringByAppendingPathComponent:@&quot;output.mp4&quot;];
-        [[NSFileManager defaultManager]removeItemAtPath:file error:nil];
-        NSURL * url =[info objectForKey:UIImagePickerControllerMediaURL];
-        NSData * data =[NSData dataWithContentsOfURL:url];
-        [data writeToFile:file atomically:YES];//将视频移到本应用的目录下
-        NSString* uuid = [[NSString stringWithFormat:@&quot;tmp://%@&quot;, [[NSUUID UUID] UUIDString]] stringByAppendingPathExtension:[file pathExtension]];
-        [[NSFileManager defaultManager] moveItemAtPath:file toPath:[FileDownloader cacheFileWithUrl:uuid] error:nil];
-        // 获取视频时长
-        CGFloat duration = [self getVideoDuration:url];
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获取视频时长</span></span><br><span class="line">-(<span class="built_in">CGFloat</span>) getVideoDuration:(<span class="built_in">NSURL</span>*) URL &#123;</span><br><span class="line">    <span class="built_in">NSDictionary</span>* opts = [<span class="built_in">NSDictionary</span> dictionaryWithObject:[<span class="built_in">NSNumber</span> numberWithBool:<span class="literal">NO</span>] forKey:<span class="built_in">AVURLAssetPreferPreciseDurationAndTimingKey</span>];</span><br><span class="line">    <span class="built_in">AVURLAsset</span> *urlAsset = [<span class="built_in">AVURLAsset</span> URLAssetWithURL:URL options:opts];</span><br><span class="line">    <span class="keyword">float</span> second = <span class="number">0</span>;</span><br><span class="line">    second = urlAsset.duration.value/urlAsset.duration.timescale;</span><br><span class="line">    <span class="keyword">return</span> second;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    }
-}
-</code></pre>
-<pre><code class="objc">//获取视频时长
--(CGFloat) getVideoDuration:(NSURL*) URL {
-    NSDictionary* opts = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:AVURLAssetPreferPreciseDurationAndTimingKey];
-    AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:URL options:opts];
-    float second = 0;
-    second = urlAsset.duration.value/urlAsset.duration.timescale;
-    return second;
-}
-</code></pre>
-<pre><code class="objc">// 获取文件大小
--(NSInteger) getFileSize:(NSString*) path {
-    NSFileManager *filemanager = [[NSFileManager alloc]init];
-    if([filemanager fileExistsAtPath:path]){
-        NSDictionary* attributes = [filemanager attributesOfItemAtPath:path error:nil];
-        NSNumber *theFileSize;
-        if ( (theFileSize = [attributes objectForKey:NSFileSize]) )
-            return [theFileSize intValue]/1024; else return -1;
-    }
-    else {
-        return -1;
-    }
-}
-</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 获取文件大小</span></span><br><span class="line">-(<span class="built_in">NSInteger</span>) getFileSize:(<span class="built_in">NSString</span>*) path &#123;</span><br><span class="line">    <span class="built_in">NSFileManager</span> *filemanager = [[<span class="built_in">NSFileManager</span> alloc]init];</span><br><span class="line">    <span class="keyword">if</span>([filemanager fileExistsAtPath:path])&#123;</span><br><span class="line">        <span class="built_in">NSDictionary</span>* attributes = [filemanager attributesOfItemAtPath:path error:<span class="literal">nil</span>];</span><br><span class="line">        <span class="built_in">NSNumber</span> *theFileSize;</span><br><span class="line">        <span class="keyword">if</span> ( (theFileSize = [attributes objectForKey:<span class="built_in">NSFileSize</span>]) )</span><br><span class="line">            <span class="keyword">return</span> [theFileSize intValue]/<span class="number">1024</span>; <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
             </div>
             <hr/>
@@ -795,8 +734,7 @@
                     <div class="summary block-with-text">
                         
                             UITableViewCell学习选中状态颜色设置
-系统自带的效果：typedef NS_ENUM(NSInteger, UITableViewCellSelectionStyle) {
-UITableViewCellSelectionSt
+系统自带的效果：  typedef NS_ENUM(NSInteger, UITableViewCellSelectionStyle) &#123;    UITableViewCellS
                         
                     </div>
                     <div class="publish-info">
@@ -936,7 +874,7 @@ UITableViewCellSelectionSt
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

@@ -408,7 +408,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        971
+                        957
                     </div>
                     
 
@@ -447,65 +447,61 @@
 </li>
 </ul>
 <h1 id="协议的定义"><a href="#协议的定义" class="headerlink" title="协议的定义"></a>协议的定义</h1><ol>
-<li>协方式的定义<pre><code class="objc">@protocol Protocolname &lt;NSObject&gt;
-@required
-//一系列必选方法
-@optional
-//一系列可选方法
-</code></pre>
+<li><p>协方式的定义</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">Protocolname</span> &lt;<span class="title">NSObject</span>&gt;</span></span><br><span class="line"><span class="keyword">@required</span></span><br><span class="line"><span class="comment">//一系列必选方法</span></span><br><span class="line"><span class="keyword">@optional</span></span><br><span class="line"><span class="comment">//一系列可选方法</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//属性的声明</span></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>协议里可以定义哪些东西：</p>
+<blockquote>
+<p>Protocols can include declarations for both instance methods and class methods, as well as properties.</p>
+</blockquote>
+<p>协议可以定义实例方法，类方法以及属性  </p>
+</li>
+<li><p>协议的继承  </p>
+<blockquote>
+<p>In the same way that an Objective-C class can inherit from a superclass, you can also specify that one protocol conforms to another.<br>It’s best practice to define your protocols to conform to the <strong>NSObject</strong> protocol (some of the <strong>NSObject</strong> behavior is split from its class interface into a separate protocol; the <strong>NSObject</strong> class adopts the <strong>NSObject</strong> protocol)</p>
+</blockquote>
+<p> 协议默认继承 <strong>*&lt; NSObject &gt;*</strong> 协议 ,你也可以指定一个其他协议进行继承</p>
+</li>
+<li><p>协议中定义属性<br> 协议里是支持定义属性的，但这只是定义了getter和setter方法，并没有具体的实现。所以当协议属性修饰符为@required时，如果遵守协议的类不实现这两方法，编译器会报出警告。最简单的方式是加上属性同步语句@synthesize propertyName;</p>
 </li>
 </ol>
-<p>//属性的声明<br>@end</p>
-<pre><code>2. 协议里可以定义哪些东西：
-  &gt;Protocols can include declarations for both instance methods and class methods, as well as properties.
+<h1 id="协议的关键字"><a href="#协议的关键字" class="headerlink" title="协议的关键字"></a>协议的关键字</h1><ol>
+<li><p>@required</p>
+<blockquote>
+<p>By default, all methods declared in a protocol are required methods. This means that any class that conforms to the protocol must implement those methods.</p>
+</blockquote>
+<p> @required修改的协议方法为必要方法，任何遵守该协议的类都必须实现这些方法</p>
+</li>
+<li><p>@optional</p>
+<blockquote>
+<p>It’s also possible to specify optional methods in a protocol. These are methods that a class can implement only if it needs to. </p>
+</blockquote>
+<p> @optional修饰的方法为可选方法，这些方法可以根据类的需要进行实现。</p>
+</li>
+</ol>
+<h1 id="遵守协议"><a href="#遵守协议" class="headerlink" title="遵守协议"></a>遵守协议</h1><ol>
+<li><p>设置代理属性</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Object</span> : <span class="title">NSObject</span>&lt;<span class="title">Protocolname</span>&gt;</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">weak</span>)<span class="keyword">id</span>&lt;Protocolname&gt;delegate;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 
- 协议可以定义实例方法，类方法以及属性  
+<ul>
+<li>&lt;协议列表&gt;<br>  若需要遵守多个协议，将协议用逗号隔开，并放在尖括号&lt;&gt;中 </li>
+<li>添加代理属性<br>  代理属性通常用<strong>weak</strong>修饰，避免强引用</li>
+</ul>
+</li>
+<li><p>实现协议方法</p>
+<ul>
+<li>@required修饰的协议方法，需要在.m文件中对这些方法进行实现 </li>
+<li>@optional修饰的协议方法，可根据需要在.m文件中进行实现    </li>
+</ul>
+</li>
+</ol>
+<h1 id="检测对象是否遵守协议"><a href="#检测对象是否遵守协议" class="headerlink" title="检测对象是否遵守协议"></a>检测对象是否遵守协议</h1><ol>
+<li><p>检测某对象是否遵守该协议<br>使用 <code>- (BOOL)conformsToProtocol:(Protocol *)aProtocol;</code>进行检测</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[delegate conformsToProtocol:<span class="class"><span class="keyword">@protocol</span>(<span class="title">Protocolname</span>)];</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检测对象是否实现了某方法<br>使用 <code>- (BOOL)respondsToSelector:(SEL)aSelector;</code>进行检测</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[delegate respondsToSelector:<span class="keyword">@selector</span>(methodname)];</span><br></pre></td></tr></table></figure>
 
-3. 协议的继承  
-&gt;In the same way that an Objective-C class can inherit from a superclass, you can also specify that one protocol conforms to another.  
-It’s best practice to define your protocols to conform to the **NSObject** protocol (some of the **NSObject** behavior is split from its class interface into a separate protocol; the **NSObject** class adopts the **NSObject** protocol)
-
-    协议默认继承 ***&lt; NSObject &gt;*** 协议 ,你也可以指定一个其他协议进行继承
-
-4. 协议中定义属性
-    协议里是支持定义属性的，但这只是定义了getter和setter方法，并没有具体的实现。所以当协议属性修饰符为@required时，如果遵守协议的类不实现这两方法，编译器会报出警告。最简单的方式是加上属性同步语句@synthesize propertyName;
-
-
-# 协议的关键字
-1. @required
-&gt; By default, all methods declared in a protocol are required methods. This means that any class that conforms to the protocol must implement those methods.
-
-    @required修改的协议方法为必要方法，任何遵守该协议的类都必须实现这些方法
-
-2. @optional
-&gt; It’s also possible to specify optional methods in a protocol. These are methods that a class can implement only if it needs to. 
-
-    @optional修饰的方法为可选方法，这些方法可以根据类的需要进行实现。
-
-
-# 遵守协议
-1. 设置代理属性
-    ```objc
-    @interface Object : NSObject&lt;Protocolname&gt;
-    @property(nonatomic,weak)id&lt;Protocolname&gt;delegate;
-    ...
-    @end
-    ```
-    * &lt;协议列表&gt;
-        若需要遵守多个协议，将协议用逗号隔开，并放在尖括号&lt;&gt;中 
-    * 添加代理属性
-        代理属性通常用**weak**修饰，避免强引用
-2. 实现协议方法
-    * @required修饰的协议方法，需要在.m文件中对这些方法进行实现 
-    * @optional修饰的协议方法，可根据需要在.m文件中进行实现    
-
-
-# 检测对象是否遵守协议
-1. 检测某对象是否遵守该协议 
-使用 `- (BOOL)conformsToProtocol:(Protocol *)aProtocol;`进行检测
-```objc
-[delegate conformsToProtocol:@protocol(Protocolname)];</code></pre><ol start="2">
-<li>检测对象是否实现了某方法<br>使用 <code>- (BOOL)respondsToSelector:(SEL)aSelector;</code>进行检测<pre><code class="objc">[delegate respondsToSelector:@selector(methodname)];</code></pre>
 </li>
 </ol>
 
@@ -801,7 +797,7 @@ It’s best practice to define your protocols to conform to the **NSObject** pro
                             本节详细介绍pip的安装以及使用方法
 pip 下载/安装/更新下载
 从python官网下载 pip
-使用工具下载wget &#39;https://pypi.python.org/packages/11/b6/abcb525026a4be0
+使用工具下载wget &apos;https://pypi.python.org/packages/11/b6/abcb525026a4be
                         
                     </div>
                     <div class="publish-info">
@@ -945,7 +941,7 @@ pip 下载/安装/更新下载
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

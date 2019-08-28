@@ -359,9 +359,8 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                             
                                 
 生成主机密钥 这里会要求输入密码，不输入，直接回车
- sudo mkdir /private/etc/apache2/ssl
- cd /private/etc/apache2/ssl
- sudo ssh-keygen -f server.
+ sudo mkdir /private/etc/apache2/sslcd /private/etc/apache2/sslsudo ssh-keygen -f server.key
+
                             
                         </div>
                         <div class="publish-info">
@@ -409,12 +408,17 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="summary block-with-text">
                             
                                 常用操作：
-打开终端，运行启动Apache命令：sudo apachectl start
+打开终端，运行启动Apache命令：
+sudo apachectl start
 
+关闭命令：
+sudo apachectl stop
 
-2. 关闭命令：sudo apachectl stop
-3. 重启命令sudo apachectl restart
-4. 查看Apache版本命令
+重启命令
+sudo apachectl restart
+
+查看Apache版本命令
+http
                             
                         </div>
                         <div class="publish-info">
@@ -457,7 +461,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                NSMutableArray * array  = [NSMutableArray arrayWithArray:@[@&quot;2&quot;,@&quot;2&quot;,@&quot;1&quot;,@&quot;fad&quot;
+                                NSMutableArray * array  = [NSMutableArray arrayWithArray:@[@"2",@"2",@"1",@"fad",@"23"]];for(NSString* str  in array)&#1
                             
                         </div>
                         <div class="publish-info">
@@ -591,8 +595,7 @@ int function(int
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                 [[UIApplication sharedApplication] setIdleTimerDisabled:YES];//禁止自动锁屏
-  [[UIApplication sharedApplication] setIdleTimer
+                                [[UIApplication sharedApplication] setIdleTimerDisabled:YES];//禁止自动锁屏 [[UIApplication sharedApplication] setIdleTimerDis
                             
                         </div>
                         <div class="publish-info">
@@ -690,8 +693,7 @@ int function(int
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                一、创建+ (NSTimer *)timerWithTimeInterval:(NSTimeInterval)ti invocation:(NSInvocation *)invocation repeats:(BOOL)yesOrNo;
-+
+                                一、创建+ (NSTimer *)timerWithTimeInterval:(NSTimeInterval)ti invocation:(NSInvocation *)invocation repeats:(BOOL)yesOrNo;+ 
                             
                         </div>
                         <div class="publish-info">
@@ -799,7 +801,7 @@ int function(int
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

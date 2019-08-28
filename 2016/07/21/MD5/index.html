@@ -6,13 +6,10 @@
     <meta charset="utf-8">
     <meta name="keywords" content="MD5, 志鹏的技术博客">
     <meta name="description" content="由NSString、NSData 生成的MD5字符串
-@interface NSString (MD5)
--(NSString*)MD5;
+@interface NSString (MD5)-(NSString*)MD5;@end@interface NSData (MD5)-(NSString*)MD5;@end
 
-@end
-@interface NSData (MD5)
--(NSString*)MD5;
-@en">
+
+#i">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -414,7 +411,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        193
+                        197
                     </div>
                     
 
@@ -438,61 +435,11 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>由NSString、NSData 生成的MD5字符串</p>
-<pre><code class="objc">@interface NSString (MD5)
--(NSString*)MD5;
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSString</span> (<span class="title">MD5</span>)</span></span><br><span class="line">-(<span class="built_in">NSString</span>*)MD5;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSData</span> (<span class="title">MD5</span>)</span></span><br><span class="line">-(<span class="built_in">NSString</span>*)MD5;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 
-@end
-@interface NSData (MD5)
--(NSString*)MD5;
-@end</code></pre>
 <a id="more"></a>
-<pre><code class="objc">#import &lt;CommonCrypto/CommonDigest.h&gt;
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;CommonCrypto/CommonDigest.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSString</span> (<span class="title">MD5</span>)</span></span><br><span class="line"></span><br><span class="line">-(<span class="built_in">NSString</span> * )MD5&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">self</span>.length) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"string not be nil"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Create pointer to the string as UTF8</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> * ptr = [<span class="keyword">self</span> UTF8String];</span><br><span class="line">    <span class="comment">// Create byte array of unsigned chars</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> md5Buffer[CC_MD5_DIGEST_LENGTH];</span><br><span class="line">    <span class="comment">// Create 16 byte MD5 hash value, store in buffer</span></span><br><span class="line">    CC_MD5(ptr,(CC_LONG)strlen(ptr),md5Buffer);</span><br><span class="line">    <span class="comment">// Convert MD5 value in the buffer to NSString of hex values</span></span><br><span class="line">    <span class="built_in">NSMutableString</span> * output = [<span class="built_in">NSMutableString</span> stringWithCapacity:CC_MD5_DIGEST_LENGTH*<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;CC_MD5_DIGEST_LENGTH; i++) &#123;</span><br><span class="line">        [output appendFormat:<span class="string">@"%02x"</span>,md5Buffer[i]];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> output;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSData</span> (<span class="title">MD5</span>)</span></span><br><span class="line"></span><br><span class="line">-(<span class="built_in">NSString</span> * )MD5&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">self</span>.length) &#123;</span><br><span class="line">         <span class="built_in">NSLog</span>(<span class="string">@"data not be nil"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Create byte array of unsigned chars</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> md5Buffer[CC_MD5_DIGEST_LENGTH];</span><br><span class="line">     <span class="comment">// Create 16 byte MD5 hash value, store in buffer</span></span><br><span class="line">    CC_MD5(<span class="keyword">self</span>.bytes, (CC_LONG)<span class="keyword">self</span>.length, md5Buffer);</span><br><span class="line">     <span class="comment">// Convert unsigned char buffer to NSString of hex values</span></span><br><span class="line">    <span class="built_in">NSMutableString</span> * output =[<span class="built_in">NSMutableString</span> stringWithCapacity:CC_MD5_DIGEST_LENGTH*<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span> ; i&lt;CC_MD5_DIGEST_LENGTH; i++) &#123;</span><br><span class="line">        [output appendFormat:<span class="string">@"%02x"</span>,md5Buffer[i] ];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> output;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 
-@implementation NSString (MD5)
-
--(NSString * )MD5{
-    if (!self.length) {
-        NSLog(@&quot;string not be nil&quot;);
-        return nil;
-    }
-    // Create pointer to the string as UTF8
-    const char * ptr = [self UTF8String];
-    // Create byte array of unsigned chars
-    unsigned char md5Buffer[CC_MD5_DIGEST_LENGTH];
-    // Create 16 byte MD5 hash value, store in buffer
-    CC_MD5(ptr,(CC_LONG)strlen(ptr),md5Buffer);
-    // Convert MD5 value in the buffer to NSString of hex values
-    NSMutableString * output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH*2];
-    for (int i = 0; i&lt;CC_MD5_DIGEST_LENGTH; i++) {
-        [output appendFormat:@&quot;%02x&quot;,md5Buffer[i]];
-    }
-
-    return output;
-}
-
-@end
-
-@implementation NSData (MD5)
-
--(NSString * )MD5{
-    if (!self.length) {
-         NSLog(@&quot;data not be nil&quot;);
-        return nil;
-    }
-    // Create byte array of unsigned chars
-    unsigned char md5Buffer[CC_MD5_DIGEST_LENGTH];
-     // Create 16 byte MD5 hash value, store in buffer
-    CC_MD5(self.bytes, (CC_LONG)self.length, md5Buffer);
-     // Convert unsigned char buffer to NSString of hex values
-    NSMutableString * output =[NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH*2];
-    for (int i = 0 ; i&lt;CC_MD5_DIGEST_LENGTH; i++) {
-        [output appendFormat:@&quot;%02x&quot;,md5Buffer[i] ];
-    }
-    return output;
-
-}
-@end
-</code></pre>
 
             </div>
             <hr/>
@@ -905,7 +852,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

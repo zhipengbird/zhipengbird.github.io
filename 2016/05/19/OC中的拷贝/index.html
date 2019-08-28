@@ -416,7 +416,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        445
+                        434
                     </div>
                     
 
@@ -445,18 +445,7 @@
 <blockquote>
 <p>内存的堆区 : 一般由程序员分配释放, 若程序员不释放, 程序结束时可能由OS回 收. 注意它与数据结构中的堆是两回事, 分配方式倒是类似于链表.</p>
 </blockquote>
-<h1 id="用copy和multableCopy对外象"><a href="#用copy和multableCopy对外象" class="headerlink" title="用copy和multableCopy对外象"></a>用copy和multableCopy对外象</h1><p>  当我们要创建一个与源对象内容相同的对象时，可以考虑使用copy和multableCopy。</p>
-<pre><code class="objc">      NSString * string = @&quot;yuanph&quot;;
-      NSString * copyString = [string copy];//拷贝出内容为yuanph的NSString类型的字符串
-      NSString * multiString = [string mutableCopy];//拷贝出内容为yuanph的NSMutableString类型的字符串
-
-      NSArray * array = @[@&quot;yuanph&quot;];
-      NSArray * copyArray = [array copy];//拷贝出内容与array相同的NSArray类型的数组
-      NSArray * multiArray  =[array mutableCopy];//拷贝出内容与array相同的NSMutableArray类型的数组
-
-      NSDictionary * dict = @{@&quot;name&quot;:@&quot;yuanph&quot;};
-      NSDictionary * copyDict = [dict copy];//拷贝出内容与dict相同的NSDictionary类型的字典
-      NSDictionary * multiDict = [dict mutableCopy];//拷贝出内容与dict相同的NSMutableDictionary类型的字典</code></pre>
+<h1 id="用copy和multableCopy对外象"><a href="#用copy和multableCopy对外象" class="headerlink" title="用copy和multableCopy对外象"></a>用copy和multableCopy对外象</h1><p>  当我们要创建一个与源对象内容相同的对象时，可以考虑使用copy和multableCopy。<br>  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * string = <span class="string">@"yuanph"</span>;</span><br><span class="line"><span class="built_in">NSString</span> * copyString = [string <span class="keyword">copy</span>];<span class="comment">//拷贝出内容为yuanph的NSString类型的字符串</span></span><br><span class="line"><span class="built_in">NSString</span> * multiString = [string mutableCopy];<span class="comment">//拷贝出内容为yuanph的NSMutableString类型的字符串</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">NSArray</span> * array = @[<span class="string">@"yuanph"</span>];</span><br><span class="line"><span class="built_in">NSArray</span> * copyArray = [array <span class="keyword">copy</span>];<span class="comment">//拷贝出内容与array相同的NSArray类型的数组</span></span><br><span class="line"><span class="built_in">NSArray</span> * multiArray  =[array mutableCopy];<span class="comment">//拷贝出内容与array相同的NSMutableArray类型的数组</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">NSDictionary</span> * dict = @&#123;<span class="string">@"name"</span>:<span class="string">@"yuanph"</span>&#125;;</span><br><span class="line"><span class="built_in">NSDictionary</span> * copyDict = [dict <span class="keyword">copy</span>];<span class="comment">//拷贝出内容与dict相同的NSDictionary类型的字典</span></span><br><span class="line"><span class="built_in">NSDictionary</span> * multiDict = [dict mutableCopy];<span class="comment">//拷贝出内容与dict相同的NSMutableDictionary类型的字典</span></span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>1.copy拷贝出来的对象类型总是不可变类型(例如, NSString, NSDictionary, NSArray等等)<br> 2.mutableCopy拷贝出来的对象类型总是可变类型(例如, NSMutableString, NSMutableDictionary, NSMutableArray等等)</p>
 </blockquote>
@@ -905,7 +894,7 @@ NSMutableParagraphStyle是NSParagra
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

@@ -434,110 +434,47 @@
             <div id="articleContent">
                 <p>在iOS9 中苹果推出了很多新的关键字，目的其实很明确，主要是提高开发人员的效率，有益于程序员之间的沟通与交流，在开发中代码更加规范。</p>
 <h2 id="关键字：-nullable-与-nonull"><a href="#关键字：-nullable-与-nonull" class="headerlink" title="关键字： nullable 与 nonull"></a>关键字： nullable 与 nonull</h2><p>   nullable:表示可以为nil<br>   nonull: 表示不可以为nil<br>   这两关键字只能修改对象，不能修饰基本数据类型，可以用在属性、方法的参数、方法的返回值中使用，在默认情况下，不加nonull，setter和getter都是可以为空nil的<br>   在定义属性中可以像如下一样使用：</p>
-<pre><code class="objc">&lt;!-- more --&gt;
-//这样定义属性会得到以下的警告
-// Pointer is missing a nullability type specifier (_Nonnull, _Nullable, or _Null_unspecified)
-@property(nonatomic,strong)NSArray * array;
-//以下属性值不能为空
-@property(nonatomic,strong,nonnull) NSArray * array1;
-@property(nonatomic,strong)NSArray * _Nonnull array2;
-@property(nonatomic,strong)NSArray * __nonnull array3;
-//以下属性值可以为空
-@property(nonatomic,nullable)NSArray * array4;
-@property(nonatomic,strong)NSArray * __nullable array5;
-@property(nonatomic,strong)NSArray * _Nullable array6;</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">&lt;!-- more --&gt;</span><br><span class="line"><span class="comment">//这样定义属性会得到以下的警告</span></span><br><span class="line"><span class="comment">// Pointer is missing a nullability type specifier (_Nonnull, _Nullable, or _Null_unspecified)</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>)<span class="built_in">NSArray</span> * array;</span><br><span class="line"><span class="comment">//以下属性值不能为空</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>,<span class="keyword">nonnull</span>) <span class="built_in">NSArray</span> * array1;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>)<span class="built_in">NSArray</span> * _Nonnull array2;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>)<span class="built_in">NSArray</span> * __<span class="keyword">nonnull</span> array3;</span><br><span class="line"><span class="comment">//以下属性值可以为空</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">nullable</span>)<span class="built_in">NSArray</span> * array4;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>)<span class="built_in">NSArray</span> * __<span class="keyword">nullable</span> array5;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>)<span class="built_in">NSArray</span> * _Nullable array6;</span><br></pre></td></tr></table></figure>
+
 <p>在方法中可以与如下示例一样使用：</p>
-<pre><code class="objc">//以下方法中参数不能为空，如若为空，系统会有警告提示
-//nonnull ,_Nonnull,__nonnull 这三个关键字可以起到同样的效果，具体区别是什么呢？？？
--(nonnull NSString * )testString:(nonnull NSString  * )string;
--(NSString * _Nonnull)testString1:(NSString* _Nonnull)string;
--(NSString * __nonnull)testString2:(NSString*__nonnull)string;
-//以下方法中参数，返回值可以为空
-//__nullable,nullable ,_Nullable 这三个关键字可以起到同样的效果，具体区别是什么？？？
--(nullable NSString * )testString3:(nullable NSString  * )string;
--(NSString * _Nullable)testString4:(NSString* _Nullable)string;
--(NSString * __nullable)testString5:(NSString*__nullable)string;</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//以下方法中参数不能为空，如若为空，系统会有警告提示</span></span><br><span class="line"><span class="comment">//nonnull ,_Nonnull,__nonnull 这三个关键字可以起到同样的效果，具体区别是什么呢？？？</span></span><br><span class="line">-(<span class="keyword">nonnull</span> <span class="built_in">NSString</span> * )testString:(<span class="keyword">nonnull</span> <span class="built_in">NSString</span>  * )string;</span><br><span class="line">-(<span class="built_in">NSString</span> * _Nonnull)testString1:(<span class="built_in">NSString</span>* _Nonnull)string;</span><br><span class="line">-(<span class="built_in">NSString</span> * __<span class="keyword">nonnull</span>)testString2:(<span class="built_in">NSString</span>*__<span class="keyword">nonnull</span>)string;</span><br><span class="line"><span class="comment">//以下方法中参数，返回值可以为空</span></span><br><span class="line"><span class="comment">//__nullable,nullable ,_Nullable 这三个关键字可以起到同样的效果，具体区别是什么？？？</span></span><br><span class="line">-(<span class="keyword">nullable</span> <span class="built_in">NSString</span> * )testString3:(<span class="keyword">nullable</span> <span class="built_in">NSString</span>  * )string;</span><br><span class="line">-(<span class="built_in">NSString</span> * _Nullable)testString4:(<span class="built_in">NSString</span>* _Nullable)string;</span><br><span class="line">-(<span class="built_in">NSString</span> * __<span class="keyword">nullable</span>)testString5:(<span class="built_in">NSString</span>*__<span class="keyword">nullable</span>)string;</span><br></pre></td></tr></table></figure>
+
 <p>在以下两个宏之间定义的所有对象属性都默认为nonull</p>
-<pre><code class="objc">NS_ASSUME_NONNULL_BEGIN
-NS_ASSUME_NONNULL_END
-</code></pre>
-<pre><code class="objc">@interface LocationDataController : NSObject
-NS_ASSUME_NONNULL_BEGIN
-//在这之间的所有属性的是非空的
-@property (nonatomic, readonly) NSArray *locations;
-@property (nullable, nonatomic, readonly) NSObject *latestLocation;
-//方法里的参数默认也是非空的
-- (void)addPhoto:(NSObject *)photo forLocation:(NSObject *)location;
-- (nullable NSObject *)photoForLocation:(NSObject *)location;
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NS_ASSUME_NONNULL_BEGIN</span></span><br><span class="line"><span class="built_in">NS_ASSUME_NONNULL_END</span></span><br></pre></td></tr></table></figure>
 
-NS_ASSUME_NONNULL_END
-@end</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">LocationDataController</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="built_in">NS_ASSUME_NONNULL_BEGIN</span></span><br><span class="line"><span class="comment">//在这之间的所有属性的是非空的</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>) <span class="built_in">NSArray</span> *locations;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>) <span class="built_in">NSObject</span> *latestLocation;</span><br><span class="line"><span class="comment">//方法里的参数默认也是非空的</span></span><br><span class="line">- (<span class="keyword">void</span>)addPhoto:(<span class="built_in">NSObject</span> *)photo forLocation:(<span class="built_in">NSObject</span> *)location;</span><br><span class="line">- (<span class="keyword">nullable</span> <span class="built_in">NSObject</span> *)photoForLocation:(<span class="built_in">NSObject</span> *)location;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NS_ASSUME_NONNULL_END</span></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="关键字-null-resettable"><a href="#关键字-null-resettable" class="headerlink" title="关键字: null_resettable"></a>关键字: null_resettable</h2><p>getter :不可以为nil<br>setter :可以为nil<br>如果使用 null_resettable 就必须重写 getter或者setter方法. 目的是为了处理值为空的情况<br>使用方法如下</p>
-<pre><code class="objc">//如果使用下null_resettable，没有实现setter方法或getter 方法会得到如下的警告
-// Synthesized setter &#39;setObjc:&#39; for null_resettable property &#39;objc&#39; does not handle nil
-@property(nonatomic,strong,null_resettable)NSObject * objc;
-</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//如果使用下null_resettable，没有实现setter方法或getter 方法会得到如下的警告</span></span><br><span class="line"><span class="comment">// Synthesized setter 'setObjc:' for null_resettable property 'objc' does not handle nil</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>,<span class="keyword">null_resettable</span>)<span class="built_in">NSObject</span> * objc;</span><br></pre></td></tr></table></figure>
+
 <h2 id="关键字-Null-unspecified"><a href="#关键字-Null-unspecified" class="headerlink" title="关键字: _Null_unspecified"></a>关键字: _Null_unspecified</h2><p>这个关键字作用感觉不是那么大，因为默认情况下，都是不确定</p>
-<pre><code class="objc">  //在不确定对象中是否为空的情况下可以使用null_unspecified关键字
-  @property(nonatomic,null_unspecified)NSObject * objc1;
-  @property(nonatomic)NSObject* _Null_unspecified objec2;
-  @property(nonatomic)NSObject * __null_unspecified objec3;</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//在不确定对象中是否为空的情况下可以使用null_unspecified关键字</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">null_unspecified</span>)<span class="built_in">NSObject</span> * objc1;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>)<span class="built_in">NSObject</span>* _Null_unspecified objec2;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>)<span class="built_in">NSObject</span> * __<span class="keyword">null_unspecified</span> objec3;</span><br></pre></td></tr></table></figure>
+
 <h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>通过使用泛型, 我们可以非常容易地获取其中的元素，并访问其特有的属性和方法, 一般使用在集合中使用(例如:数组,字典), 当方法调用的时候才有效果, 我们来看看如何使用:</p>
-<pre><code class="objc">//如下定义属性与方法会得到下面的警告
-// Pointer is missing a nullability type specifier (_Nonnull, _Nullable, or _Null_unspecified)
-@property(nonatomic,strong)NSMutableArray&lt;NSString*&gt; * mutableArray;
--(NSArray * )testArray:(NSArray * )array;
--(NSArray&lt;NSString*&gt;*)testArray2:(NSArray&lt;NSString*&gt;*)array;
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//如下定义属性与方法会得到下面的警告</span></span><br><span class="line"><span class="comment">// Pointer is missing a nullability type specifier (_Nonnull, _Nullable, or _Null_unspecified)</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>)<span class="built_in">NSMutableArray</span>&lt;<span class="built_in">NSString</span>*&gt; * mutableArray;</span><br><span class="line">-(<span class="built_in">NSArray</span> * )testArray:(<span class="built_in">NSArray</span> * )array;</span><br><span class="line">-(<span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span>*&gt;*)testArray2:(<span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span>*&gt;*)array;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//加上_Nonnull、_Nullable、_Null_unspecified这几个关键字中的一个，都不会出现以上警告</span></span><br><span class="line">-(<span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span>*&gt;* __<span class="keyword">nonnull</span>)testArray3:(<span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span>*&gt;*__<span class="keyword">nonnull</span>)array;</span><br><span class="line">-(__kindof <span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span>*&gt;* __<span class="keyword">nonnull</span>)testArray4:(<span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span>*&gt;*__<span class="keyword">nonnull</span>)array;</span><br></pre></td></tr></table></figure>
 
-
-//加上_Nonnull、_Nullable、_Null_unspecified这几个关键字中的一个，都不会出现以上警告
--(NSArray&lt;NSString*&gt;* __nonnull)testArray3:(NSArray&lt;NSString*&gt;*__nonnull)array;
--(__kindof NSArray&lt;NSString*&gt;* __nonnull)testArray4:(NSArray&lt;NSString*&gt;*__nonnull)array;</code></pre>
-<h3 id="带泛型的容器"><a href="#带泛型的容器" class="headerlink" title="带泛型的容器"></a>带泛型的容器</h3><p>  有了泛型后可以指定容器类中对象的类型了</p>
-<pre><code class="objc">  NSArray&lt;NSString *&gt; * strings= @[@&quot;sun&quot;,@&quot;moon&quot;];
-  //这什么这样定义的数组不会报提示呢，它们的类型不是不一样的吗？？
-  NSArray &lt;NSString * &gt;* string = @[@&quot;su&quot;,@&quot;fasd&quot;,@10,@{@10:@10}];
-
-  NSMutableArray &lt;NSString*&gt;* array = [NSMutableArray array];
-
-//如下加入一个NSNumber会得到以下提示
-// Incompatible pointer types sending &#39;NSNumber *&#39; to parameter of type &#39;NSString * _Nonnull&#39;
-  [array addObject:@(10)];
-  //为什么我在泛型中指定值的类型为NSString，在实际给值中没有给string而是NSNumber，却没有给出提示信息，这是为什么呢？？
-  NSDictionary&lt;NSNumber *,NSString*&gt; * dic =@{@100:@100};
-
-//    指定字典键值类型
-  NSMutableDictionary&lt;NSString *,NSString*&gt; * mDic =[NSMutableDictionary dictionary];
-//    为什么在可变字典里，设置不同类型的键值，会有如下提示？
-//    Incompatible pointer types sending &#39;NSNumber *&#39; to parameter of type &#39;NSString * _Nullable&#39;
-  [mDic setValue:@10 forKey:@&quot;age&quot;];
-  [mDic setObject:@10 forKey:@10];
-  [mDic setValue:@&quot;yuan&quot; forKey:@10];</code></pre>
+<h3 id="带泛型的容器"><a href="#带泛型的容器" class="headerlink" title="带泛型的容器"></a>带泛型的容器</h3><p>  有了泛型后可以指定容器类中对象的类型了<br>  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; * strings= @[<span class="string">@"sun"</span>,<span class="string">@"moon"</span>];</span><br><span class="line">  <span class="comment">//这什么这样定义的数组不会报提示呢，它们的类型不是不一样的吗？？</span></span><br><span class="line">  <span class="built_in">NSArray</span> &lt;<span class="built_in">NSString</span> * &gt;* string = @[<span class="string">@"su"</span>,<span class="string">@"fasd"</span>,@<span class="number">10</span>,@&#123;@<span class="number">10</span>:@<span class="number">10</span>&#125;];</span><br><span class="line"></span><br><span class="line">  <span class="built_in">NSMutableArray</span> &lt;<span class="built_in">NSString</span>*&gt;* array = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line"></span><br><span class="line"><span class="comment">//如下加入一个NSNumber会得到以下提示</span></span><br><span class="line"><span class="comment">// Incompatible pointer types sending 'NSNumber *' to parameter of type 'NSString * _Nonnull'</span></span><br><span class="line">  [array addObject:@(<span class="number">10</span>)];</span><br><span class="line">  <span class="comment">//为什么我在泛型中指定值的类型为NSString，在实际给值中没有给string而是NSNumber，却没有给出提示信息，这是为什么呢？？</span></span><br><span class="line">  <span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSNumber</span> *,<span class="built_in">NSString</span>*&gt; * dic =@&#123;@<span class="number">100</span>:@<span class="number">100</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    指定字典键值类型</span></span><br><span class="line">  <span class="built_in">NSMutableDictionary</span>&lt;<span class="built_in">NSString</span> *,<span class="built_in">NSString</span>*&gt; * mDic =[<span class="built_in">NSMutableDictionary</span> dictionary];</span><br><span class="line"><span class="comment">//    为什么在可变字典里，设置不同类型的键值，会有如下提示？</span></span><br><span class="line"><span class="comment">//    Incompatible pointer types sending 'NSNumber *' to parameter of type 'NSString * _Nullable'</span></span><br><span class="line">  [mDic setValue:@<span class="number">10</span> forKey:<span class="string">@"age"</span>];</span><br><span class="line">  [mDic setObject:@<span class="number">10</span> forKey:@<span class="number">10</span>];</span><br><span class="line">  [mDic setValue:<span class="string">@"yuan"</span> forKey:@<span class="number">10</span>];</span><br></pre></td></tr></table></figure></p>
 <p>系统中常用的一系列容器类型都增加了泛型支持，甚至连 NSEnumerator 都支持了，这是非常 Nice 的改进。和 Nullability 一样，我认为最大的意义还是丰富了接口描述信息，对比下面两种写法：</p>
-<pre><code class="objc">@property (readonly) NSArray *imageURLs;
-@property (readonly) NSArray&lt;NSURL *&gt; *imageURLs;</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>) <span class="built_in">NSArray</span> *imageURLs;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>) <span class="built_in">NSArray</span>&lt;<span class="built_in">NSURL</span> *&gt; *imageURLs;</span><br></pre></td></tr></table></figure>
+
 <p>不用多想就清楚下面的数组中存的是什么，避免了 NSString 和 NSURL 的混乱。</p>
 <h3 id="自定义泛型类"><a href="#自定义泛型类" class="headerlink" title="自定义泛型类"></a>自定义泛型类</h3><p>比起系统的泛型容器，更好 玩的是自定义一个泛型类</p>
-<pre><code class="objc">@interface Stack&lt;ObjectType&gt; : NSObject
-- (void)pushObject:(ObjectType)object;
-- (ObjectType)popObject;
-@property (nonatomic, readonly) NSArray&lt;ObjectType&gt; *allObjects;
-@end
-</code></pre>
-<p>  这个 ObjectType 是传入类型的 placeholder，它只能在 @interface 上定义（类声明、类扩展、Category），如果你喜欢用 T 表示也 ok，这个类型在 @interface 和 @end 区间的作用域有效，可以把它作为入参、出参、甚至内部 NSArray 属性的泛型类型，应该说一切都是符合预期的。我们还可以给 ObjectType 增加类型限制，比如：</p>
-<pre><code class="objc">  // 只接受 NSNumber * 的泛型
-  @interface Stack&lt;ObjectType: NSNumber *&gt; : NSObject
-  // 只接受满足 NSCopying 协议的泛型
-  @interface Stack&lt;ObjectType: id&lt;NSCopying&gt;&gt; : NSObject</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Stack</span>&lt;<span class="title">ObjectType</span>&gt; : <span class="title">NSObject</span></span></span><br><span class="line">- (<span class="keyword">void</span>)pushObject:(ObjectType)object;</span><br><span class="line">- (ObjectType)popObject;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>) <span class="built_in">NSArray</span>&lt;ObjectType&gt; *allObjects;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+
+<p>  这个 ObjectType 是传入类型的 placeholder，它只能在 @interface 上定义（类声明、类扩展、Category），如果你喜欢用 T 表示也 ok，这个类型在 @interface 和 @end 区间的作用域有效，可以把它作为入参、出参、甚至内部 NSArray 属性的泛型类型，应该说一切都是符合预期的。我们还可以给 ObjectType 增加类型限制，比如：<br>  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 只接受 NSNumber * 的泛型</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Stack</span>&lt;<span class="title">ObjectType</span>: <span class="title">NSNumber</span> *&gt; : <span class="title">NSObject</span></span></span><br><span class="line"><span class="comment">// 只接受满足 NSCopying 协议的泛型</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Stack</span>&lt;<span class="title">ObjectType</span>: <span class="title">id</span>&lt;<span class="title">NSCopying</span>&gt;&gt; : <span class="title">NSObject</span></span></span><br></pre></td></tr></table></figure></p>
 <p>若什么都不加，表示接受任意类型 ( id )；当类型不满足时编译器将产生 error。<br><img src="imagesource/logo.jpg" alt="logo.jpg"></p>
 <h2 id="关键字：-kindof"><a href="#关键字：-kindof" class="headerlink" title="关键字： __kindof"></a>关键字： __kindof</h2><p>表示当前类, 或者它的子类(__kindof使用: 放在类型前面, 表示修饰此类型)<br>__kindof 这修饰符还是很实用的，解决了一个长期以来的小痛点，拿原来的 UITableView 的这个方法来说：</p>
-<pre><code class="objc">- (id)dequeueReusableCellWithIdentifier:(NSString *)identifier;</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">id</span>)dequeueReusableCellWithIdentifier:(<span class="built_in">NSString</span> *)identifier;</span><br></pre></td></tr></table></figure>
+
 <p>使用时前面基本会使用 UITableViewCell 子类型的指针来接收返回值，所以这个 API 为了让开发者不必每次都蛋疼的写显式强转，把返回值定义成了 id 类型，而这个 API 实际上的意思是返回一个 UITableViewCell 或 UITableViewCell 子类的实例，于是新的 __kindof 关键字解决了这个问题：</p>
-<pre><code class="objc">- (__kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (__kindof <span class="built_in">UITableViewCell</span> *)dequeueReusableCellWithIdentifier:(<span class="built_in">NSString</span> *)identifier;</span><br></pre></td></tr></table></figure>
+
 <p>既明确表明了返回值，又让使用者不必写强转。再举个带泛型的例子，UIView 的 subviews 属性被修改成了：</p>
-<pre><code class="objc">@property (nonatomic, readonly, copy) NSArray&lt;__kindof UIView *&gt; *subviews;</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>, <span class="keyword">copy</span>) <span class="built_in">NSArray</span>&lt;__kindof <span class="built_in">UIView</span> *&gt; *subviews;</span><br></pre></td></tr></table></figure>
+
 <p>这样，写下面的代码时就没有任何警告了：</p>
-<pre><code class="objc">UIButton *button = view.subviews.lastObject;</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIButton</span> *button = view.subviews.lastObject;</span><br></pre></td></tr></table></figure>
+
 
             </div>
             <hr/>
@@ -961,7 +898,7 @@ NS_ASSUME_NONNULL_END
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             

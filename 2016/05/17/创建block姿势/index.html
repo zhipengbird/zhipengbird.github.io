@@ -6,9 +6,10 @@
     <meta charset="utf-8">
     <meta name="keywords" content="创建block姿势, 志鹏的技术博客">
     <meta name="description" content="如何在OC中声明一个block? 作为一个本地变量：
-returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...};
+returnType (^blockName)(parameterTypes) = ^returnType(parameters) &amp;#123;...&amp;#125;;
+
  作为一个属性：
-@property (">
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -415,7 +416,7 @@ returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...};
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        75
+                        81
                     </div>
                     
 
@@ -439,17 +440,21 @@ returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...};
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="如何在OC中声明一个block"><a href="#如何在OC中声明一个block" class="headerlink" title="如何在OC中声明一个block?"></a>如何在OC中声明一个block?</h2><p><font color="#2E73D6"> 作为一个本地变量：</font></p>
-<pre><code class="objc">returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...};</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">returnType (^blockName)(parameterTypes) = ^returnType(parameters) &#123;...&#125;;</span><br></pre></td></tr></table></figure>
+
 <p><font color="#2E73D6"> 作为一个属性：</font></p>
-<pre><code class="objc">@property (nonatomic, copy, nullability) returnType (^blockName)(parameterTypes);</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>, nullability) returnType (^blockName)(parameterTypes);</span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
 <p><font color="#2E73D6">作为一个方法参数：</font></p>
-<pre><code class="objc">- (void)someMethodThatTakesABlock:(returnType (^nullability)(parameterTypes))blockName;</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)someMethodThatTakesABlock:(returnType (^nullability)(parameterTypes))blockName;</span><br></pre></td></tr></table></figure>
+
 <p><font color="#2E73D6">作为参数传递：</font></p>
-<pre><code class="objc">[someObject someMethodThatTakesABlock:^returnType (parameters) {...}];</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[someObject someMethodThatTakesABlock:^returnType (parameters) &#123;...&#125;];</span><br></pre></td></tr></table></figure>
+
 <p><font color="#2E73D6">作为自定义类型：typedef</font></p>
-<pre><code class="objc">typedef returnType (^TypeName)(parameterTypes);
-TypeName blockName = ^returnType(parameters) {...};</code></pre>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> returnType (^TypeName)(parameterTypes);</span><br><span class="line">TypeName blockName = ^returnType(parameters) &#123;...&#125;;</span><br></pre></td></tr></table></figure>
+
 
             </div>
             <hr/>
@@ -749,11 +754,7 @@ TypeName blockName = ^returnType(parameters) {...};</code></pre>
                     <div class="summary block-with-text">
                         
                             十六进制字符串转成整数
-unsigned int HEX2int(NSString  * hexString)
-{
-    unsigned int nReval = 0;
-    int nPower = 1;
-    size_t nS
+unsigned int HEX2int(NSString  * hexString)&#123;    unsigned int nReval = 0;    int nPower = 1;    size_t n
                         
                     </div>
                     <div class="publish-info">
@@ -885,7 +886,7 @@ unsigned int HEX2int(NSString  * hexString)
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.1k</span>
+                <span class="white-color">134.5k</span>
             
 
             
