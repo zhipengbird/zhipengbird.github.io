@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="pip安装使用详解, 志鹏的技术博客">
     <meta name="description" content="本节详细介绍pip的安装以及使用方法
@@ -408,6 +408,20 @@ pip 下载/安装/更新下载
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        409
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        1 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -423,22 +437,16 @@ pip 下载/安装/更新下载
                 <p>本节详细介绍pip的安装以及使用方法</p>
 <h1 id="pip-下载-安装-更新"><a href="#pip-下载-安装-更新" class="headerlink" title="pip 下载/安装/更新"></a>pip 下载/安装/更新</h1><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><ul>
 <li>从python官网下载 <a href="https://pypi.python.org/pypi/pip" target="_blank" rel="noopener">pip</a></li>
-<li>使用工具下载<pre><code>wget &#39;https://pypi.python.org/packages/11/b6/abcb525026a4be042b486df43905d6893fb04f05aac21c32c638e939e447/pip-9.0.1.tar.gz#md5=35f01da33009719497f01a4ba69d63c9&#39;
-</code></pre><h2 id="pip-安装"><a href="#pip-安装" class="headerlink" title="pip 安装"></a>pip 安装</h2><pre><code>tar -xzvf pip-9.0.1.tar.gz # 解压
+<li>使用工具下载<pre><code>wget &#39;https://pypi.python.org/packages/11/b6/abcb525026a4be042b486df43905d6893fb04f05aac21c32c638e939e447/pip-9.0.1.tar.gz#md5=35f01da33009719497f01a4ba69d63c9&#39;</code></pre><h2 id="pip-安装"><a href="#pip-安装" class="headerlink" title="pip 安装"></a>pip 安装</h2><pre><code>tar -xzvf pip-9.0.1.tar.gz # 解压
 cd pip-9.0.1 # 切换至目录
-sudo python setup.py install   # 安装
-</code></pre><h2 id="pip-更新"><a href="#pip-更新" class="headerlink" title="pip 更新"></a>pip 更新</h2><pre><code>pip install -U pip
-</code></pre></li>
+sudo python setup.py install   # 安装</code></pre><h2 id="pip-更新"><a href="#pip-更新" class="headerlink" title="pip 更新"></a>pip 更新</h2><pre><code>pip install -U pip</code></pre></li>
 </ul>
-<h1 id="pip-使用详解"><a href="#pip-使用详解" class="headerlink" title="pip 使用详解"></a>pip 使用详解</h1><h2 id="pip-安装包"><a href="#pip-安装包" class="headerlink" title="pip 安装包"></a>pip 安装包</h2><pre><code>pip install packagename
-</code></pre><h2 id="查看已安装的包详情"><a href="#查看已安装的包详情" class="headerlink" title="查看已安装的包详情"></a>查看已安装的包详情</h2><pre><code>pip show  packagename
-</code></pre>
-<h2 id="pip-列出所有安装的包"><a href="#pip-列出所有安装的包" class="headerlink" title="pip 列出所有安装的包"></a>pip 列出所有安装的包</h2><pre><code>pip list --format=columns
-</code></pre>
-<h2 id="pip-升级包"><a href="#pip-升级包" class="headerlink" title="pip 升级包"></a>pip 升级包</h2><pre><code>pip install -U  packagename
-</code></pre><h2 id="pip-卸载包"><a href="#pip-卸载包" class="headerlink" title="pip 卸载包"></a>pip 卸载包</h2><pre><code>pip uninstall packagename
-</code></pre><h2 id="检查需要更新的包"><a href="#检查需要更新的包" class="headerlink" title="检查需要更新的包"></a>检查需要更新的包</h2><pre><code>pip list --outdate --format=columns
-</code></pre>
+<h1 id="pip-使用详解"><a href="#pip-使用详解" class="headerlink" title="pip 使用详解"></a>pip 使用详解</h1><h2 id="pip-安装包"><a href="#pip-安装包" class="headerlink" title="pip 安装包"></a>pip 安装包</h2><pre><code>pip install packagename</code></pre><h2 id="查看已安装的包详情"><a href="#查看已安装的包详情" class="headerlink" title="查看已安装的包详情"></a>查看已安装的包详情</h2><pre><code>pip show  packagename</code></pre>{% asset_img pip_show.png  查看安装包详情 %}
+
+<h2 id="pip-列出所有安装的包"><a href="#pip-列出所有安装的包" class="headerlink" title="pip 列出所有安装的包"></a>pip 列出所有安装的包</h2><pre><code>pip list --format=columns</code></pre>
+<h2 id="pip-升级包"><a href="#pip-升级包" class="headerlink" title="pip 升级包"></a>pip 升级包</h2><pre><code>pip install -U  packagename</code></pre><h2 id="pip-卸载包"><a href="#pip-卸载包" class="headerlink" title="pip 卸载包"></a>pip 卸载包</h2><pre><code>pip uninstall packagename</code></pre><h2 id="检查需要更新的包"><a href="#检查需要更新的包" class="headerlink" title="检查需要更新的包"></a>检查需要更新的包</h2><pre><code>pip list --outdate --format=columns</code></pre>{% asset_img pip_outdate.png  查看需要更新安装包列表 %}
+
+
 <h1 id="pip参数解释"><a href="#pip参数解释" class="headerlink" title="pip参数解释"></a>pip参数解释</h1><pre><code> pip --help
 
 Usage:   
@@ -467,8 +475,7 @@ General Options:
   --proxy &lt;proxy&gt;             Specify a proxy in the form [user:passwd@]proxy.server:port.
   --timeout &lt;sec&gt;             连接超时时间 (默认15秒).
   --exists-action &lt;action&gt;    Default action when a path already exists: (s)witch, (i)gnore, (w)ipe, (b)ackup.
-  --cert &lt;path&gt;               证书.
-</code></pre>
+  --cert &lt;path&gt;               证书.</code></pre>
             </div>
             <hr/>
 
@@ -583,7 +590,7 @@ General Options:
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -657,6 +664,31 @@ General Options:
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2017/06/27/pip安装使用详解/';
+        this.page.identifier = '/2017/06/27/pip安装使用详解/';
+        this.page.title = 'pip安装使用详解';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -878,6 +910,9 @@ General Options:
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -899,15 +934,11 @@ General Options:
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

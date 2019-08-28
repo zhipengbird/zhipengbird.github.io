@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="ARC学习笔记, 志鹏的技术博客">
     <meta name="description" content="ARCARC代表自动引用计数（Automatic Reference Counting）,它是在开发Clang Anlyzer时所获得的经验的基础上构建的，是检查代码并在任何需要的地方插入retain,release和autorelease">
@@ -396,6 +396,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        2.4k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        8 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -442,26 +456,22 @@
 </ul>
 <h2 id="ARC-需要看到方法声明"><a href="#ARC-需要看到方法声明" class="headerlink" title="ARC 需要看到方法声明"></a>ARC 需要看到方法声明</h2><p>ARC需要看到它在消息表达式中遇到的每个方法的声明，“看到”指方法在与消息表达式相同的文件中或者是在最终会导入的文件中或者最终会导入那个文件的某个文件声明中。<br>在手动引用计数下：</p>
 <pre><code>Foo  * foo = [[Foo alloc]init];
-[foo  undeclareMethod];
-</code></pre><p>会得到一个警告：<code>Instance method &#39;-undeclareMethod&#39; not found(return type defaults to &#39;id&#39;)</code><br>使用ARC，警告将会变成错误：<br><code>No visible @interface for &#39;Foo&#39; declares the selector &#39;undeclaredMethod&#39;</code></p>
+[foo  undeclareMethod];</code></pre><p>会得到一个警告：<code>Instance method &#39;-undeclareMethod&#39; not found(return type defaults to &#39;id&#39;)</code><br>使用ARC，警告将会变成错误：<br><code>No visible @interface for &#39;Foo&#39; declares the selector &#39;undeclaredMethod&#39;</code></p>
 <p>这是由于ARC不能通过方法名确定方法将会返回一个对象还是一种基本数据类型。尽管有这些规则，ARC还是不能只通过查看方法名来判断返回对象的内存状态是什么以。可以通过向方法声明中添加<code>NS_RETURNS_NOT_RETAINED</code>或<code>NS_RETURNS_RETAINED</code>,改变方法期望的保留状态。</p>
 <h2 id="OC-指针与C结构"><a href="#OC-指针与C结构" class="headerlink" title="OC 指针与C结构"></a>OC 指针与C结构</h2><p>不能把指向OC对象的指针放在C结构（struce）或联合（union）中，ARC将不允许编写下面代码：</p>
 <pre><code>  struct _sentence{
         NSString * noun;
         NSString * verb
     }sentence;
-    //    ARC forbids Objective-C objects in struct
-</code></pre><p>ARC无法可靠地遵循C结构的生存期，因此，它无法知道自己何时可以安全的释放赋予结构成员的任何对象，通过把结构体的成员声明为<code>__unsafe_unretained</code>就可以解决。</p>
+    //    ARC forbids Objective-C objects in struct</code></pre><p>ARC无法可靠地遵循C结构的生存期，因此，它无法知道自己何时可以安全的释放赋予结构成员的任何对象，通过把结构体的成员声明为<code>__unsafe_unretained</code>就可以解决。</p>
 <pre><code>    struct _sentence{
         __unsafe_unretained NSString * noun;
         __unsafe_unretained NSString * verb
-    }sentence;
-</code></pre><p><code>__unsafe_unretained</code>是ARC引入的变量修饰符，当把一个变量声明为<code>__unsafe_unretained</code>时，它告诉ARC把在一个对象赋予该变量时放弃进行任何内存管理。<br>更好的解决方案是把结构变成一个类：</p>
+    }sentence;</code></pre><p><code>__unsafe_unretained</code>是ARC引入的变量修饰符，当把一个变量声明为<code>__unsafe_unretained</code>时，它告诉ARC把在一个对象赋予该变量时放弃进行任何内存管理。<br>更好的解决方案是把结构变成一个类：</p>
 <pre><code>@interface Sentence: NSObject
 @property (nonatomic) NSString * noun;
 @property (nonatomic) NSString * verb;
-@end
-</code></pre><h1 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h1><p>ARC带来了新的引用类型：弱引用。其支持的引用类型有：强引用、弱引用</p>
+@end</code></pre><h1 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h1><p>ARC带来了新的引用类型：弱引用。其支持的引用类型有：强引用、弱引用</p>
 <ul>
 <li>强引用<br>  强引用是默认的引用类型。被强引用指向的内存不会被释放，强引用会对引用计数加1，从而扩展对象的生命周期。</li>
 <li>弱引用<br>  弱引用是一种特殊的引用类型。它不会增加引用计数，因而不会扩展对象的生命周期。在启用ARC的开发中，弱引用显得格外重要。</li>
@@ -524,8 +534,7 @@ vm_size_t getFreeMemory(){
     host_statistics(host, HOST_VM_INFO, (host_info_t)&amp;vmstat, &amp;size);
 
     return vmstat.free_count * pagesize;
-}
-</code></pre>
+}</code></pre>
 
             </div>
             <hr/>
@@ -641,7 +650,7 @@ vm_size_t getFreeMemory(){
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -715,6 +724,31 @@ vm_size_t getFreeMemory(){
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2018/02/04/ARC学习笔记/';
+        this.page.identifier = '/2018/02/04/ARC学习笔记/';
+        this.page.title = 'ARC学习笔记';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -910,6 +944,9 @@ vm_size_t getFreeMemory(){
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -931,15 +968,11 @@ vm_size_t getFreeMemory(){
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

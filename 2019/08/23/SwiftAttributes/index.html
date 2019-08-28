@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Attributes, 志鹏的技术博客">
     <meta name="description" content="AttributesThere are two kinds of attributes in Swift—those that apply to declarations and those that apply to types. An ">
@@ -396,6 +396,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        692
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        4 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -411,8 +425,7 @@
                 <h1 id="Attributes"><a href="#Attributes" class="headerlink" title="Attributes"></a>Attributes</h1><p>There are two kinds of attributes in Swift—those that apply to declarations and those that apply to types. An attribute provides additional information about the declaration or type.</p>
 <p>You specify an attribute by writing the @ symbol followed by the attribute’s name and any arguments that the attribute accepts:</p>
 <pre><code class="swift">@attribute name
-@attribute name(attribute arguments)
-</code></pre>
+@attribute name(attribute arguments)</code></pre>
 <p>Some declaration attributes accept arguments that specify more information about the attribute and how it applies to a particular declaration. These attribute arguments are enclosed in parentheses, and their format is defined by the attribute they belong to.</p>
 <h2 id="Declaration-Attributes"><a href="#Declaration-Attributes" class="headerlink" title="Declaration Attributes"></a>Declaration Attributes</h2><p>You can apply a declaration attribute to declarations only.</p>
 <h3 id="available"><a href="#available" class="headerlink" title="available"></a>available</h3><p>Apply this attribute to indicate a declaration’s life cycle relative to certain Swift language versions or certain platforms and operating system versions.<br>The available attribute always appears with a list of two or more comma-separated attribute arguments. These arguments begin with one of the following platform or language names:</p>
@@ -432,17 +445,14 @@
 <li>The <code>unavailable</code> argument indicates that the declaration isn’t available on the specified platform. This argument can’t be used when specifying Swift version availability.</li>
 <li>The <code>introduced</code> argument indicates the first version of the specified platform or language in which the declaration was introduced. It has the following form:</li>
 </ul>
-<pre><code class="swift">introduced: `version number`
-</code></pre>
+<pre><code class="swift">introduced: `version number`</code></pre>
 <p>The version number consists of one to three positive integers, separated by periods.</p>
 <ul>
 <li><p>The <code>deprecated</code> argument indicates the first version of the specified platform or language in which the declaration was deprecated. It has the following form:</p>
-<pre><code class="swift">deprecated: version number
-</code></pre>
+<pre><code class="swift">deprecated: version number</code></pre>
 </li>
 <li><p>The <code>obsoleted</code> argument indicates the first version of the specified platform or language in which the declaration was obsoleted. When a declaration is obsoleted, it’s removed from the specified platform or language and can no longer be used. It has the following form:</p>
-<pre><code class="swift">obsoleted: version number
-</code></pre>
+<pre><code class="swift">obsoleted: version number</code></pre>
 </li>
 <li><p>The <code>message</code> argument provides a textual message that the compiler displays when emitting a warning or error about the use of a deprecated or obsoleted declaration. It has the following form:<br><code>message: message</code><br>The message consists of a string literal.</p>
 </li>
@@ -572,7 +582,7 @@
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -646,6 +656,31 @@
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2019/08/23/SwiftAttributes/';
+        this.page.identifier = '/2019/08/23/SwiftAttributes/';
+        this.page.title = 'Attributes';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -850,6 +885,9 @@
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -871,15 +909,11 @@
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

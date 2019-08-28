@@ -2,20 +2,21 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="pod command, 志鹏的技术博客">
     <meta name="description" content="pod 基础使用命令
-创建Podfile文件 pod init
+创建Podfile文件
+ pod init
 
+使用命令打开Podfile文件
+open -a Xcode Podfile
 
-使用命令打开Podfile文件open -a Xcode Podfile
+搜索pod 库
+pod search 库名
 
-
-搜索pod 库pod search 库名
-
-
-更新本地Repo库pod repo update">
+更新本地Repo库
+pod repo updat">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -415,6 +416,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        208
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        1 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -428,56 +443,52 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="pod-基础使用命令"><a href="#pod-基础使用命令" class="headerlink" title="pod 基础使用命令"></a>pod 基础使用命令</h1><ol>
-<li>创建Podfile文件<pre><code class="sh"> pod init
-</code></pre>
+<li><p>创建Podfile文件</p>
+<pre><code class="sh"> pod init</code></pre>
 </li>
-<li>使用命令打开Podfile文件<pre><code class="sh">open -a Xcode Podfile
-</code></pre>
+<li><p>使用命令打开Podfile文件</p>
+<pre><code class="sh">open -a Xcode Podfile</code></pre>
 </li>
-<li>搜索pod 库<pre><code class="sh">pod search 库名
-</code></pre>
+<li><p>搜索pod 库</p>
+<pre><code class="sh">pod search 库名</code></pre>
 </li>
-<li>更新本地Repo库<pre><code class="sh">pod repo update
-</code></pre>
+<li><p>更新本地Repo库</p>
+<pre><code class="sh">pod repo update</code></pre>
 </li>
 <li><p>安装pod 库</p>
 <pre><code class="sh">pod install
-pod install --verbose --no-repo-update
-</code></pre>
+pod install --verbose --no-repo-update</code></pre>
 </li>
 <li><p>升级pod 库</p>
 <pre><code class="sh">pod update
-pod upadte --verbose --no-repo-update
-</code></pre>
+pod upadte --verbose --no-repo-update</code></pre>
 <a id="more"></a>
+
 </li>
 </ol>
 <h1 id="cocoapods库安装命令"><a href="#cocoapods库安装命令" class="headerlink" title="cocoapods库安装命令"></a>cocoapods库安装命令</h1><ul>
 <li><p>检查ruby源</p>
-<pre><code class="sh">gem sources -l
-</code></pre>
+<pre><code class="sh">gem sources -l</code></pre>
 </li>
 <li><p>删除原有ruby源</p>
-<pre><code class="sh">gem sources -remove https://rubygems.org/
-</code></pre>
+<pre><code class="sh">gem sources -remove https://rubygems.org/</code></pre>
 </li>
 <li><p>添加你找到的可用镜像源</p>
-<pre><code class="sh">gem sources -a http://rubygems-china.oss.aliyuncs.com
-</code></pre>
+<pre><code class="sh">gem sources -a http://rubygems-china.oss.aliyuncs.com</code></pre>
 </li>
-<li>安装cocoapods<pre><code class="sh">sudo gem install cocoapods
-pod  setup
-</code></pre>
+<li><p>安装cocoapods</p>
+<pre><code class="sh">sudo gem install cocoapods
+pod  setup</code></pre>
 </li>
 <li><p>查看cocoapods当前版本号</p>
-<pre><code class="sh">pod --version
-</code></pre>
+<pre><code class="sh">pod --version</code></pre>
 </li>
 <li><p>更新gem到最新版本</p>
-<pre><code class="sh">sudo gem update --system
-</code></pre>
+<pre><code class="sh">sudo gem update --system</code></pre>
 </li>
-<li><p>更新cocoapods版本<br><code>`</code>sh<br>sudo gem update cocoapods</p>
+<li><p>更新cocoapods版本</p>
+<pre><code class="sh">sudo gem update cocoapods
+</code></pre>
 </li>
 </ul>
 <pre><code># 查看已安装的cocoapods库
@@ -487,13 +498,10 @@ pod  setup
 
 14. 查看 repo list
 ```sh
-pod repo list
-</code></pre><ol start="15">
-<li>查看文件大小<pre><code class="sh">du -sh
-</code></pre>
+pod repo list</code></pre><ol start="15">
+<li>查看文件大小<pre><code class="sh">du -sh</code></pre>
 </li>
-<li>查看安装列表<pre><code class="sh">pod list
-</code></pre>
+<li>查看安装列表<pre><code class="sh">pod list</code></pre>
 </li>
 </ol>
 
@@ -611,7 +619,7 @@ pod repo list
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -685,6 +693,31 @@ pod repo list
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2017/03/07/pod-command/';
+        this.page.identifier = '/2017/03/07/pod-command/';
+        this.page.title = 'pod command';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -885,6 +918,9 @@ pod repo list
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -906,15 +942,11 @@ pod repo list
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

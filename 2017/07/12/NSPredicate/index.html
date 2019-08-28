@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="NSPredicate, 志鹏的技术博客">
     <meta name="description" content="NSPredicate是什么？NSPredicate是一个Foundation类，它指定数据被获取或者过滤的方式。它的查询语言就像SQL的WHERE和正则表达式的交叉一样，提供了具有表现力的，自然语言界面来定义一个集合被搜寻的逻辑条件
@@ -406,6 +406,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        1.5k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        6 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -467,8 +481,11 @@ NSLog(@&quot;Smiths: %@&quot;, [people filteredArrayUsingPredicate:smithPredicat
 NSLog(@&quot;30&#39;s: %@&quot;, [people filteredArrayUsingPredicate:thirtiesPredicate]);
 
 </code></pre>
+
+
 <h1 id="谓词语法"><a href="#谓词语法" class="headerlink" title="谓词语法"></a>谓词语法</h1><h2 id="替换（占位符）"><a href="#替换（占位符）" class="headerlink" title="替换（占位符）"></a>替换（占位符）</h2><ul>
-<li>%@是对值为字符串，数字或者日期的对象的替换值。(变量值)</li>
+<li><p>%@是对值为字符串，数字或者日期的对象的替换值。(变量值)</p>
+</li>
 <li><p>%K是key path的替换值。（变量名）</p>
 <pre><code>NSPredicate *ageIs33Predicate = [NSPredicate predicateWithFormat:@&quot;%K = %@&quot;, @&quot;age&quot;, @33];
 
@@ -480,6 +497,7 @@ NSLog(@&quot;Age 33: %@&quot;, [people filteredArrayUsingPredicate:ageIs33Predic
 
 &#x2F;&#x2F; [&quot;Alice Smith&quot;, &quot;Quentin Alberts&quot;]
 NSLog(@&quot;&#39;A&#39; Names: %@&quot;, [people filteredArrayUsingPredicate:[namesBeginningWithLetterPredicate predicateWithSubstitutionVariables:@{@&quot;letter&quot;: @&quot;A&quot;}]]);</code></pre>
+
 </li>
 </ul>
 <h2 id="基本比较"><a href="#基本比较" class="headerlink" title="基本比较"></a>基本比较</h2><ul>
@@ -662,7 +680,7 @@ NSLog(@&quot;&#39;A&#39; Names: %@&quot;, [people filteredArrayUsingPredicate:[n
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -736,6 +754,31 @@ NSLog(@&quot;&#39;A&#39; Names: %@&quot;, [people filteredArrayUsingPredicate:[n
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2017/07/12/NSPredicate/';
+        this.page.identifier = '/2017/07/12/NSPredicate/';
+        this.page.title = 'NSPredicate';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -947,6 +990,9 @@ origin	git@192.168.250.7
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -968,15 +1014,11 @@ origin	git@192.168.250.7
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

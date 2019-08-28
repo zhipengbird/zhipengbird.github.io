@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="OC中常用的遍历方式, 志鹏的技术博客">
     <meta name="description" content="&amp;emsp;&amp;emsp;在开发过程中经常需要列举collection中的元素，在ＯＣ语言中可以有多种方法实现该功能，标准的Ｃ语言循环，OC 1.0的枚举器（ＮSNumerator）,OC 2.0中的快速遍历。在引入块这一特性后，又新增了几种">
@@ -409,6 +409,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        1.8k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        7 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -421,7 +435,8 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>&emsp;&emsp;在开发过程中经常需要列举collection中的元素，在ＯＣ语言中可以有多种方法实现该功能，标准的Ｃ语言循环，OC 1.0的枚举器（ＮSNumerator）,OC 2.0中的快速遍历。在引入块这一特性后，又新增了几种新的遍历方式，采用这几种新方式遍历collection时，可以传入块，而collection中的每个元素都可能会放在块里运行一遍，这样可以大幅度简化编码过程。<br><a id="more"></a></p>
+                <p>&emsp;&emsp;在开发过程中经常需要列举collection中的元素，在ＯＣ语言中可以有多种方法实现该功能，标准的Ｃ语言循环，OC 1.0的枚举器（ＮSNumerator）,OC 2.0中的快速遍历。在引入块这一特性后，又新增了几种新的遍历方式，采用这几种新方式遍历collection时，可以传入块，而collection中的每个元素都可能会放在块里运行一遍，这样可以大幅度简化编码过程。</p>
+<a id="more"></a>
 <h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><p>&emsp;&emsp;遍边数组的第一种方式就是采用老式的for循环。在作为OC的根基的Ｃ语言中就有了些特征。通常的代码样式：</p>
 <pre><code class="objc">void traditionalForArray(NSArray * array){
 
@@ -429,8 +444,7 @@
         id object = array[i];
         //TODO::to do something with object
     }
-}
-</code></pre>
+}</code></pre>
 <p>&emsp;&emsp;那么遍历字典跟set集合可以会更复杂些：<br>&emsp;&emsp;<em>直接遍历字典的所有值</em></p>
 <pre><code class="objc">void traditionalForDictonary(NSDictionary * dict){
     NSArray * allValues = [dict allValues];
@@ -438,8 +452,7 @@
         id value = allValues[i];
         //TODO::to do something with value
     }
-}
-</code></pre>
+}</code></pre>
 <p>&emsp;&emsp;<em>直接遍历字典的所有键</em></p>
 <pre><code class="objc">void traditionalForDictonary(NSDictionary * dict){
     NSArray * allKeys = [dict allKeys];
@@ -448,8 +461,7 @@
         id value = dict[key];
         //TODO::to do something with  key and value
     }
-}
-</code></pre>
+}</code></pre>
 <p>&emsp;&emsp;<em>遍历set中所有对象</em></p>
 <pre><code class="objc">void traditionalForSet(NSSet * set){
     NSArray * allObject = [set allObjects];
@@ -457,16 +469,14 @@
         id object = allObject[i];
         //TODO::to do something with object
     }
-}
-</code></pre>
+}</code></pre>
 <p>&emsp;&emsp;根据定义，字典和set都是“无序的（unordered）”所以无法根据特定的下标来获取其中的值，为此，需要先获取字典里所有的键/值或set中所有的对象，在获取到的有序数组里就可以使用for循环获取对应下标的键/值或对象了.但创建这个附加的数组会有额外的开销，而且还会多创建一个数组对象，它会保留collection中的所有以元素对象，在释放数组时这些附加对象也会释放，这些操作看起来有点多余，因为其他方式都可以不用这么做。<br>&emsp;&emsp;for循环可以实现反向遍历，计数器的值从“元素的个数减一”开始，每次迭代时递减直至为0结束。执行反向遍历时，会比其他方式简单。</p>
 <blockquote>
 <p>总结优缺点：<br>优点：被广泛使用，容易接受，操作简单；<br>缺点：遍历字典和set是比较繁琐，会占用比较多的系统资源。</p>
 </blockquote>
 <h3 id="枚举器（NSEnumerator）"><a href="#枚举器（NSEnumerator）" class="headerlink" title="枚举器（NSEnumerator）"></a>枚举器（<code>NSEnumerator</code>）</h3><p>&emsp;&emsp;<code>NSEnumerator</code> 是个抽象基类，其只定义了两个方法，供其具体子类实现:   </p>
 <pre><code class="objc">- (nullable ObjectType)nextObject;
-- ( NSArray&lt;ObjectType&gt; *)allObjects;
-</code></pre>
+- ( NSArray&lt;ObjectType&gt; *)allObjects;</code></pre>
 <p>&emsp;&emsp;<code>nextObject</code>方法是关键，它返回枚举里的下一个对象，每次调用都会更新内部结构，使得下次调用时能返回下一个对象。枚举里的全部对象返回后，再调用将会返回nil.这表示已经枚举完了。下面是各容器使用Enumerator的样式：<br><em>正向枚举数组</em></p>
 <pre><code class="objc">void enumeratorForArray(NSArray * array ){
     NSEnumerator * enumerator =[array objectEnumerator];
@@ -474,8 +484,7 @@
     while (( object =  [enumerator nextObject])!= nil) {
          //TODO::to do something with object
     }
-}
-</code></pre>
+}</code></pre>
 <p><em>逆向枚举数组</em></p>
 <pre><code class="objc">void enumeratorForReverseArray(NSArray * array ){
     NSEnumerator * enumerator =[array reverseObjectEnumerator];
@@ -483,8 +492,7 @@
     while (( object =  [enumerator nextObject])!= nil) {
         //TODO::to do something with object
     }
-}
-</code></pre>
+}</code></pre>
 <p><em>使用key枚举字典</em></p>
 <pre><code class="objc">void enumeratorForDictionaryAllKeys(NSDictionary * dict){
     NSEnumerator * keyEnumerator = [dict keyEnumerator];
@@ -493,8 +501,7 @@
         id value = dict[key];
         //TODO::to do something with value
     }
-}
-</code></pre>
+}</code></pre>
 <p><em>使用value 枚举字典</em></p>
 <pre><code class="objc">void enumeratorForDictionaryAllValues(NSDictionary * dict){
     NSEnumerator * valueEnumerator = [dict objectEnumerator];
@@ -503,8 +510,7 @@
 
         //TODO::to do something with value
     }
-}
-</code></pre>
+}</code></pre>
 <p><em>枚举set集合</em></p>
 <pre><code class="objc">void enumeratorForSet(NSSet * set){
     NSEnumerator * objectEnumerator = [set objectEnumerator];
@@ -513,41 +519,33 @@
         //TODO::to do something with object
     }
 }
-
 </code></pre>
 <p>枚举的写法跟标准的for循环相似，但代码多了一点，其优势在于：不论遍历哪种collection，都可以采用这种相似的语法。</p>
 <blockquote>
-<p>总结优缺点：<br>优点：代码更易读，不需要定义额外的数组；<br>缺点：</p>
-<pre><code>1. 无法直接获取遍历操作的下标，需要另外声明变量记录；
-2. 需要自行创建NSEnumerator对象，稍显麻烦。
-</code></pre></blockquote>
+<p>总结优缺点：<br>优点：代码更易读，不需要定义额外的数组；<br>缺点：<br>    1. 无法直接获取遍历操作的下标，需要另外声明变量记录；<br>    2. 需要自行创建NSEnumerator对象，稍显麻烦。</p>
+</blockquote>
 <h3 id="快速遍历-forin"><a href="#快速遍历-forin" class="headerlink" title="快速遍历 (forin)"></a>快速遍历 (forin)</h3><p>字典</p>
 <pre><code class="objc">void forinDic(NSDictionary * dict){
     for (id key in dict) {
         id value = dict[key];
          //TODO::to do something with key &amp;&amp; value
     }
-}
-</code></pre>
+}</code></pre>
 <p>数组</p>
 <pre><code class="objc">void forinArray(NSArray * array){
     for (id object in array) {
        //TODO::to do something with object
     }
-}
-</code></pre>
+}</code></pre>
 <p>SET集合</p>
 <pre><code class="objc">void forinSet(NSSet * set){
     for (id object in set) {
          //TODO::to do something with object
     }
-}
-</code></pre>
+}</code></pre>
 <blockquote>
-<p>forin小结：<br>优点：<br>  语法简洁，使用方便，效率高；<br>缺点：</p>
-<pre><code>1. 无法方便获取当前遍历的下标；
-2. 无法在遍历过程中修改被遍历的collection，否则会导致崩溃。
-</code></pre></blockquote>
+<p>forin小结：<br>优点：<br>  语法简洁，使用方便，效率高；<br>缺点：<br>    1. 无法方便获取当前遍历的下标；<br>    2. 无法在遍历过程中修改被遍历的collection，否则会导致崩溃。</p>
+</blockquote>
 <h3 id="块方法（block）"><a href="#块方法（block）" class="headerlink" title="块方法（block）"></a>块方法（block）</h3><p>数组</p>
 <pre><code class="objc">void blockEnumeratorArray(NSArray * array){
 
@@ -571,8 +569,7 @@
     [array enumerateObjectsAtIndexes:indexset options:NSEnumerationReverse usingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         //TODO::to do something with object  &amp; index  &amp; stop
     }];
-}
-</code></pre>
+}</code></pre>
 <p>字典</p>
 <pre><code class="objc">void blockEnumeratorDict(NSDictionary *dict){
 
@@ -584,8 +581,7 @@
     [dict enumerateKeysAndObjectsWithOptions:NSEnumerationReverse usingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         //TODO::to do something with object  &amp; key  &amp; stop
     }];
-}
-</code></pre>
+}</code></pre>
 <p>SET集合</p>
 <pre><code class="objc">void blockEnumeratorSet(NSSet * set){
     [set enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
@@ -595,11 +591,11 @@
     [set enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
          //TODO::to do something with object    &amp; stop
     }];
-}
-</code></pre>
+}</code></pre>
 <p><strong>若提前知道遍历的集合含有何种对象，则应修改块签名，指出对象的具体类型。</strong></p>
 <blockquote>
 <p>小结：<br>优点：</p>
+</blockquote>
 <ol>
 <li>可以完美实现for循环的所有功能；</li>
 <li>可以方便获取集合中的每一项元素；</li>
@@ -608,14 +604,13 @@
 <li>当开启NSEnumerationConcurrent选项时，可以实现for循环和快速遍历无法轻易实现的并发循环功能，系统底层会通过GCD处理并发事宜，这样可以充分利用系统和硬件资源，达到最优的遍历效果；</li>
 <li>可以修改块签名，当我们已经明确集合中的元素类型时，可以把默认的签名id类型修改成已知类型，比如常见的NSString，这样既可以节省系统资源开销，也可以防止误向对象发送不存在的方法是引起的崩溃。</li>
 </ol>
-</blockquote>
 <blockquote>
 <p>缺点：</p>
+</blockquote>
 <ol>
 <li>很多开发者不知道这种遍历方式；</li>
-<li>这里使用了block，需要注意在block里容易引起的保留环问题，比如使用self调用方法时，把self转化成若引用即可打破保留环。如：<strong>weak </strong>typeof(self)weakSelf = self 或者 __weak MyController *weakSelf = self; 在block里使用weakSelf即可。</li>
+<li>这里使用了block，需要注意在block里容易引起的保留环问题，比如使用self调用方法时，把self转化成若引用即可打破保留环。如：__weak __typeof(self)weakSelf = self 或者 __weak MyController *weakSelf = self; 在block里使用weakSelf即可。</li>
 </ol>
-</blockquote>
 
             </div>
             <hr/>
@@ -731,7 +726,7 @@
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -805,6 +800,31 @@
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/05/08/OC中常用的遍历方式/';
+        this.page.identifier = '/2016/05/08/OC中常用的遍历方式/';
+        this.page.title = 'OC中常用的遍历方式';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -1014,6 +1034,9 @@
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -1035,15 +1058,11 @@
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

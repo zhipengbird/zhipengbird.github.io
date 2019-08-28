@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="CoreLocation, 志鹏的技术博客">
     <meta name="description" content="获取定位信息iOS开发者使用CoreLocation.framework框架进行定位非常简单CoreLocation框架的常用API主要有如下几个。
@@ -408,6 +408,20 @@ CLLocationManagerde">
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        1.1k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        3 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -426,7 +440,7 @@ CLLocationManagerde">
 <li><code>CLLocationManagerdelegate</code>该协议代表定位管理器的<code>delegate</code>协议。实现该协议的对象可负责处理<code>CLLocationManager</code>的定位事件。</li>
 <li><code>CLLocation</code>该对象代表位置。该对象包含了当前设备的 <em>经度</em>、<em>纬度</em>、<em>高度</em>、<em>速度</em>、<em>路线</em>等信息还包含了该定位信息的水平精确度、垂直精确度以及时间戳信息。</li>
 <li><code>CLHeading</code>该对象代表设备的移动方向。</li>
-<li><code>CLRegion</code>该对象代表一个区域。一般程序不会直接使用该类而是使用它的两个子类即<code>CLCircularRegion</code>圆形区域和<code>CLBeaconRegion</code>蓝牙信号区。<br>除此之外<code>CoreLocation</code>框架还涉及一个<code>CLLocationCoordinate2D</code>结构体变量该结构体变量包含 <em>经度</em>、<em>纬度</em> 两个值。其中<code>CLLocation</code>对象的<code>coordinate</code>属性就是一个<code>CLLocationCoordinate2D</code>结构体变量。</li>
+<li><code>CLRegion</code>该对象代表一个区域。一般程序不会直接使用该类而是使用它的两个子类即<code>CLCircularRegion</code>圆形区域和<code>CLBeaconRegion</code>蓝牙信号区。<br>除此之外<code>CoreLocation</code>框架还涉及一个<code>CLLocationCoordinate2D</code>结构体变量该结构体变量包含 <em>经度<em>、</em>纬度</em> 两个值。其中<code>CLLocation</code>对象的<code>coordinate</code>属性就是一个<code>CLLocationCoordinate2D</code>结构体变量。</li>
 </ul>
 <h1 id="获取位置信息"><a href="#获取位置信息" class="headerlink" title="获取位置信息"></a>获取位置信息</h1><p>使用<code>CoreLocation.framework</code>进行定位只要如下3步即可。</p>
 <ul>
@@ -477,14 +491,18 @@ CLLocationManagerde">
 </li>
 </ul>
 <h2 id="CLLocation对象中包含如下属性这些属性包含了定位相关信息。"><a href="#CLLocation对象中包含如下属性这些属性包含了定位相关信息。" class="headerlink" title="CLLocation对象中包含如下属性这些属性包含了定位相关信息。"></a>CLLocation对象中包含如下属性这些属性包含了定位相关信息。</h2><ul>
-<li><code>altitude</code>该属性表示当前设备的海拔高度单位是米。</li>
-<li><code>coordinate</code>该属性返回一个<code>CLLocationCoordinate2D</code>结构体变量该结构体变量中包含<em>经度</em>、<em>纬度</em>信息。</li>
-<li><code>course</code>该属性表示当前设备前进的方向。该值为0°表示向北90°表示向东180°表示向南270°表示向西。</li>
+<li><p><code>altitude</code>该属性表示当前设备的海拔高度单位是米。</p>
+</li>
+<li><p><code>coordinate</code>该属性返回一个<code>CLLocationCoordinate2D</code>结构体变量该结构体变量中包含<em>经度</em>、<em>纬度</em>信息。</p>
+</li>
+<li><p><code>course</code>该属性表示当前设备前进的方向。该值为0°表示向北90°表示向东180°表示向南270°表示向西。</p>
+</li>
 <li><p><code>horizontalAccuracy</code>该属性表明定位信息的水平精确度。将返回的坐标作为圆心并将水平精确度视为半径。真正的设备位置落在此圆内的某处。此圆越小位置就越精确此圆越大则位置越不精确。如果精确度为负值则表明测量精确度失败。</p>
 </li>
 <li><p><code>verticalAccuracy</code>该属性表明定位信息的垂直精确度。也就是说iOS设备的实际高度在该定位信息的高度加或减该属性值的范围内。<br>timestamp该属性返回定位信息的返回时间。</p>
 </li>
-<li><code>speed</code>该属性表示返回设备的移动速度单位是米/秒。实际上该属性适用于行车速度而不太适用于步行速度。</li>
+<li><p><code>speed</code>该属性表示返回设备的移动速度单位是米/秒。实际上该属性适用于行车速度而不太适用于步行速度。</p>
+</li>
 </ul>
 
             </div>
@@ -601,7 +619,7 @@ CLLocationManagerde">
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -675,6 +693,31 @@ CLLocationManagerde">
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2017/03/22/CoreLocation/';
+        this.page.identifier = '/2017/03/22/CoreLocation/';
+        this.page.title = 'CoreLocation';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -756,9 +799,8 @@ MMM:       月，显示为英文月份简写,如 J
                     <div class="summary block-with-text">
                         
                             URL什么是URL* Uniform Resource Location（统一资源定位符）
-*  网络中每一个资源都对应一个地址--&gt; URL 
-URL的基本格式* 协议://主机地址:端口号/路径
-    * 协议 ： 不同协议代表
+*  网络中每一个资源都对应一个地址--&gt; URL URL的基本格式* 协议://主机地址:端口号/路径
+    * 协议 ： 不同协议代表不
                         
                     </div>
                     <div class="publish-info">
@@ -897,6 +939,9 @@ URL的基本格式* 协议://主机地址:端口号/路径
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -918,15 +963,11 @@ URL的基本格式* 协议://主机地址:端口号/路径
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

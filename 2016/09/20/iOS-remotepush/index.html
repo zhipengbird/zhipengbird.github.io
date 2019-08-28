@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="iOS 远程推送, 志鹏的技术博客">
     <meta name="description" content="iOS 通知分类：
@@ -410,6 +410,20 @@ iOS 7在推送方面最大的变化就是允许，应用收到通知后在后台
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        708
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        3 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -427,7 +441,7 @@ iOS 7在推送方面最大的变化就是允许，应用收到通知后在后台
 <ul>
 <li>silent remote notifications</li>
 </ul>
-<p>iOS 7在推送方面最大的变化就是允许，应用收到通知后在后台（background）状态下运行一段代码，可用于从服务器获取内容更新。功能使用场景：（多媒体）聊天，Email更新，基于通知的订阅内容同步等功能，提升了终端用户的体验。<br>Remote Notifications 与之前版本的对比可以参考下面两张 Apple 官方的图片便可一目了然。<br><img src="http://docs.jpush.cn/download/attachments/7865069/iOS6+push.jpg?version=1&amp;modificationDate=1384927835000" alt="iOS6"><br><img src="http://docs.jpush.cn/download/attachments/7865069/iOS7.png?version=1&amp;modificationDate=1384927835000" alt="iOS7"><br>如果只携带content-available: 1 不携带任何badge，sound 和消息内容等参数，则可以不打扰用户的情况下进行内容更新等操作即为“Silent Remote Notifications”。<br><img src="http://docs.jpush.cn/download/attachments/7865069/silent.png?version=1&amp;modificationDate=1384932801000" alt="Slient Remote Notifications"></p>
+<p>iOS 7在推送方面最大的变化就是允许，应用收到通知后在后台（background）状态下运行一段代码，可用于从服务器获取内容更新。功能使用场景：（多媒体）聊天，Email更新，基于通知的订阅内容同步等功能，提升了终端用户的体验。<br>Remote Notifications 与之前版本的对比可以参考下面两张 Apple 官方的图片便可一目了然。<br><img src="http://docs.jpush.cn/download/attachments/7865069/iOS6+push.jpg?version=1&modificationDate=1384927835000" alt="iOS6"><br><img src="http://docs.jpush.cn/download/attachments/7865069/iOS7.png?version=1&modificationDate=1384927835000" alt="iOS7"><br>如果只携带content-available: 1 不携带任何badge，sound 和消息内容等参数，则可以不打扰用户的情况下进行内容更新等操作即为“Silent Remote Notifications”。<br><img src="http://docs.jpush.cn/download/attachments/7865069/silent.png?version=1&modificationDate=1384932801000" alt="Slient Remote Notifications"></p>
 <blockquote>
 <p>若有<code>content-available: 1</code> 字段并带有任何badge，sound 和消息内容等参数一个或多个，都会在手机端有一个的表现行式（如声单，提示框，badge 并会调用：<code>[UIApplicationDelegate application:didReceiveRemoteNotification:fetchCompletionHandler:]</code>方法<br>若只带<code>content-available: 1</code>字段只会调用<code>[UIApplicationDelegate application:didReceiveRemoteNotification:fetchCompletionHandler:]</code>,在手机端没有其他的表现。</p>
 </blockquote>
@@ -436,15 +450,14 @@ iOS 7在推送方面最大的变化就是允许，应用收到通知后在后台
 <ol start="2">
 <li><p>不同版本的通知注册及回调用情况</p>
 <ol>
-<li>iOS8 以前<pre><code class="objc">[[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-</code></pre>
+<li><p>iOS8 以前</p>
+<pre><code class="objc">[[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];</code></pre>
 </li>
 <li><p>iOS8~iOS9</p>
 <pre><code class="objc">UIUserNotificationSettings * settings = [UIUserNotificationSettings settingsForTypes:( UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)      categories:nil];
 [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
 
-[[UIApplication sharedApplication] registerForRemoteNotifications];
-</code></pre>
+[[UIApplication sharedApplication] registerForRemoteNotifications];</code></pre>
 <ol start="3">
 <li><p>iOS10</p>
 <pre><code class="objc">// iOS10.0 register remote notification
@@ -455,8 +468,7 @@ if (granted) {
 }
 
 }];
-}
-</code></pre>
+}</code></pre>
 <blockquote>
 <p>在iOS10，苹果将用户通知相关操作集合在了<code>UserNotifications.framework</code>中，通知的回调用采用代理方式。</p>
 </blockquote>
@@ -508,8 +520,7 @@ if (granted) {
 
     }
 
-    ```
-</code></pre>
+    ```</code></pre>
             </div>
             <hr/>
 
@@ -624,7 +635,7 @@ if (granted) {
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -698,6 +709,31 @@ if (granted) {
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/09/20/iOS-remotepush/';
+        this.page.identifier = '/2016/09/20/iOS-remotepush/';
+        this.page.title = 'iOS 远程推送';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -902,6 +938,9 @@ Xcode8注释快捷键失
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -923,15 +962,11 @@ Xcode8注释快捷键失
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

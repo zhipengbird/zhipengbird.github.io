@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="xcode solutions, 志鹏的技术博客">
     <meta name="description" content="
@@ -404,6 +404,20 @@ Xcode8注释快捷键失">
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        549
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        2 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -419,95 +433,87 @@ Xcode8注释快捷键失">
                 <ol>
 <li><p>屏蔽系统日志<br><code>Xcode8</code>里边 <code>Edit Scheme</code>-&gt; <code>Run</code> -&gt; <code>Arguments</code>, 在<code>Environment Variables</code>里边添加<br><code>OS_ACTIVITY_MODE = Disable</code></p>
 </li>
-<li><p>Xcode8注释快捷键失效注释快捷键 <code>⌘ `</code>+<code></code> / `失效，在终端输入下面的命令，重启系统即可</p>
-<pre><code class="sh">sudo /usr/libexec/xpccachectl
-</code></pre>
+<li><p>Xcode8注释快捷键失效注释快捷键 <code>⌘ ``+`` /</code>失效，在终端输入下面的命令，重启系统即可</p>
+<pre><code class="sh">sudo /usr/libexec/xpccachectl</code></pre>
 </li>
 </ol>
-<p><code>__aaa</code></p>
-<ol start="3">
-<li><p>ios10相机等权限获取时的崩溃<br>出现的提示信息有：</p>
-<pre><code>This app has crashed because it attempted to access privacy-sensitive data without a usage description. The app&#39;s Info.plist must contain an NSCameraUsageDescription key with a string value explaining to the user how the app uses this data.
-</code></pre><p>意思是没有获取相机的权限，需要添加在plist文件中添加这项权限</p>
-<pre><code class="json">// 相机权限
-&lt;key&gt;NSCameraUsageDescription&lt;/key&gt;
-&lt;string&gt;CameraUsageDescription&lt;/string&gt;
-</code></pre>
-<p>以下是所有权限的相关键值：</p>
-<pre><code class="js">// 蓝牙权限
-&lt;key&gt;NSBluetoothPeripheralUsageDescription&lt;/key&gt;
- &lt;string&gt;BluetoothPeripheralUsageDescription&lt;/string&gt;
+<p><code>__aaa</code><br>3. ios10相机等权限获取时的崩溃<br>  出现的提示信息有：</p>
+<pre><code>  This app has crashed because it attempted to access privacy-sensitive data without a usage description. The app&#39;s Info.plist must contain an NSCameraUsageDescription key with a string value explaining to the user how the app uses this data.</code></pre><p>  意思是没有获取相机的权限，需要添加在plist文件中添加这项权限</p>
+<pre><code class="json">  // 相机权限
+  &lt;key&gt;NSCameraUsageDescription&lt;/key&gt;
+  &lt;string&gt;CameraUsageDescription&lt;/string&gt;</code></pre>
+<p>  以下是所有权限的相关键值：</p>
+<pre><code class="js">  // 蓝牙权限
+  &lt;key&gt;NSBluetoothPeripheralUsageDescription&lt;/key&gt;
+    &lt;string&gt;BluetoothPeripheralUsageDescription&lt;/string&gt;
 
-// 日历权限
- &lt;key&gt;NSCalendarsUsageDescription&lt;/key&gt;
- &lt;string&gt;CalendarsUsageDescription&lt;/string&gt;
-// 相机权限
- &lt;key&gt;NSCameraUsageDescription&lt;/key&gt;
- &lt;string&gt;CameraUsageDescription&lt;/string&gt;
+  // 日历权限
+    &lt;key&gt;NSCalendarsUsageDescription&lt;/key&gt;
+    &lt;string&gt;CalendarsUsageDescription&lt;/string&gt;
+  // 相机权限
+    &lt;key&gt;NSCameraUsageDescription&lt;/key&gt;
+    &lt;string&gt;CameraUsageDescription&lt;/string&gt;
 
-// 联系人
- &lt;key&gt;NSContactsUsageDescription&lt;/key&gt;
- &lt;string&gt;ContactsUsageDescription&lt;/string&gt;
+  // 联系人
+    &lt;key&gt;NSContactsUsageDescription&lt;/key&gt;
+    &lt;string&gt;ContactsUsageDescription&lt;/string&gt;
 
-// 健康分享权限
- &lt;key&gt;NSHealthShareUsageDescription&lt;/key&gt;
- &lt;string&gt;HealthShareUsageDescription&lt;/string&gt;
-// 健康更新权限
- &lt;key&gt;NSHealthUpdateUsageDescription&lt;/key&gt;
- &lt;string&gt;HealthUpdateUsageDescription&lt;/string&gt;
+  // 健康分享权限
+    &lt;key&gt;NSHealthShareUsageDescription&lt;/key&gt;
+    &lt;string&gt;HealthShareUsageDescription&lt;/string&gt;
+  // 健康更新权限
+    &lt;key&gt;NSHealthUpdateUsageDescription&lt;/key&gt;
+    &lt;string&gt;HealthUpdateUsageDescription&lt;/string&gt;
 
-// HomeKit使用权限
- &lt;key&gt;NSHomeKitUsageDescription&lt;/key&gt;
- &lt;string&gt;HomeKitUsageDescription&lt;/string&gt;
-//  位置一直使用权限
- &lt;key&gt;NSLocationAlwaysUsageDescription&lt;/key&gt;
- &lt;string&gt;LocationAlwaysUsageDescription&lt;/string&gt;
+  // HomeKit使用权限
+    &lt;key&gt;NSHomeKitUsageDescription&lt;/key&gt;
+    &lt;string&gt;HomeKitUsageDescription&lt;/string&gt;
+  //  位置一直使用权限
+    &lt;key&gt;NSLocationAlwaysUsageDescription&lt;/key&gt;
+    &lt;string&gt;LocationAlwaysUsageDescription&lt;/string&gt;
 
-// 使用位置权限
- &lt;key&gt;NSLocationUsageDescription&lt;/key&gt;
- &lt;string&gt;LocationUsageDescription&lt;/string&gt;
-// 程序运行时使用位置权限
- &lt;key&gt;NSLocationWhenInUseUsageDescription&lt;/key&gt;
- &lt;string&gt;LocationWhenInUseUsageDescription&lt;/string&gt;
+  // 使用位置权限
+    &lt;key&gt;NSLocationUsageDescription&lt;/key&gt;
+    &lt;string&gt;LocationUsageDescription&lt;/string&gt;
+  // 程序运行时使用位置权限
+    &lt;key&gt;NSLocationWhenInUseUsageDescription&lt;/key&gt;
+    &lt;string&gt;LocationWhenInUseUsageDescription&lt;/string&gt;
 
-// 获取appleMusic权限
- &lt;key&gt;NSAppleMusicUsageDescription&lt;/key&gt;
- &lt;string&gt;AppleMusicUsageDescription&lt;/string&gt;
+  // 获取appleMusic权限
+    &lt;key&gt;NSAppleMusicUsageDescription&lt;/key&gt;
+    &lt;string&gt;AppleMusicUsageDescription&lt;/string&gt;
 
-// 麦克锋使用权限
- &lt;key&gt;NSMicrophoneUsageDescription&lt;/key&gt;
- &lt;string&gt;MicrophoneUsageDescription&lt;/string&gt;
+  // 麦克锋使用权限
+    &lt;key&gt;NSMicrophoneUsageDescription&lt;/key&gt;
+    &lt;string&gt;MicrophoneUsageDescription&lt;/string&gt;
 
-// 陀螺仪使用权限
- &lt;key&gt;NSMotionUsageDescription&lt;/key&gt;
- &lt;string&gt;MotionUsageDescription&lt;/string&gt;
+  // 陀螺仪使用权限
+    &lt;key&gt;NSMotionUsageDescription&lt;/key&gt;
+    &lt;string&gt;MotionUsageDescription&lt;/string&gt;
 
-// 相册使用权限
- &lt;key&gt;NSPhotoLibraryUsageDescription&lt;/key&gt;
- &lt;string&gt;PhotoLibraryUsageDescription&lt;/string&gt;
+  // 相册使用权限
+    &lt;key&gt;NSPhotoLibraryUsageDescription&lt;/key&gt;
+    &lt;string&gt;PhotoLibraryUsageDescription&lt;/string&gt;
 
-// 提醒权限
- &lt;key&gt;NSRemindersUsageDescription&lt;/key&gt;
- &lt;string&gt;RemindersUsageDescription&lt;/string&gt;
+  // 提醒权限
+    &lt;key&gt;NSRemindersUsageDescription&lt;/key&gt;
+    &lt;string&gt;RemindersUsageDescription&lt;/string&gt;
 
-// Siri 使用权限
- &lt;key&gt;NSSiriUsageDescription&lt;/key&gt;
- &lt;string&gt;SiriUsageDescription&lt;/string&gt;
+  // Siri 使用权限
+    &lt;key&gt;NSSiriUsageDescription&lt;/key&gt;
+    &lt;string&gt;SiriUsageDescription&lt;/string&gt;
 
-// 语音识别权限
- &lt;key&gt;NSSpeechRecognitionUsageDescription&lt;/key&gt;
- &lt;string&gt;SpeechRecognitionUsageDescription&lt;/string&gt;
+  // 语音识别权限
+    &lt;key&gt;NSSpeechRecognitionUsageDescription&lt;/key&gt;
+    &lt;string&gt;SpeechRecognitionUsageDescription&lt;/string&gt;
 
-// 视频权限
- &lt;key&gt;NSVideoSubscriberAccountUsageDescription&lt;/key&gt;
- &lt;string&gt;VideoSubscriberAccountUsageDescription&lt;/string&gt;
+  // 视频权限
+    &lt;key&gt;NSVideoSubscriberAccountUsageDescription&lt;/key&gt;
+    &lt;string&gt;VideoSubscriberAccountUsageDescription&lt;/string&gt;
 
-// 音乐库权限
- &lt;key&gt;kTCCServiceMediaLibrary&lt;/key&gt;
- &lt;string&gt;CCServiceMediaLibrary&lt;/string&gt;
-</code></pre>
-</li>
-</ol>
+  // 音乐库权限
+    &lt;key&gt;kTCCServiceMediaLibrary&lt;/key&gt;
+    &lt;string&gt;CCServiceMediaLibrary&lt;/string&gt;</code></pre>
 
             </div>
             <hr/>
@@ -623,7 +629,7 @@ Xcode8注释快捷键失">
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -697,6 +703,31 @@ Xcode8注释快捷键失">
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/09/18/xcode-solutions/';
+        this.page.identifier = '/2016/09/18/xcode-solutions/';
+        this.page.title = 'xcode solutions';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -779,8 +810,7 @@ iOS 7在推送方面最大的变化就是允许，应用收到通知后在后台
                     <div class="summary block-with-text">
                         
                             文件的打开
-open()语法函数参数open(file, mode=&#39;r&#39;, buffering=None, encoding=None, errors=None, newline=None, closefd=True)
-参
+open()语法函数参数open(file, mode=&#39;r&#39;, buffering=None, encoding=None, errors=None, newline=None, closefd=True)参数
                         
                     </div>
                     <div class="publish-info">
@@ -919,6 +949,9 @@ open()语法函数参数open(file, mode=&#39;r&#39;, buffering=None, encoding=No
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -940,15 +973,11 @@ open()语法函数参数open(file, mode=&#39;r&#39;, buffering=None, encoding=No
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

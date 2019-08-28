@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="OC中的拷贝, 志鹏的技术博客">
     <meta name="description" content="
@@ -413,6 +413,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        445
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        1 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -442,15 +456,13 @@
 
       NSDictionary * dict = @{@&quot;name&quot;:@&quot;yuanph&quot;};
       NSDictionary * copyDict = [dict copy];//拷贝出内容与dict相同的NSDictionary类型的字典
-      NSDictionary * multiDict = [dict mutableCopy];//拷贝出内容与dict相同的NSMutableDictionary类型的字典
-</code></pre>
+      NSDictionary * multiDict = [dict mutableCopy];//拷贝出内容与dict相同的NSMutableDictionary类型的字典</code></pre>
 <blockquote>
 <p>1.copy拷贝出来的对象类型总是不可变类型(例如, NSString, NSDictionary, NSArray等等)<br> 2.mutableCopy拷贝出来的对象类型总是可变类型(例如, NSMutableString, NSMutableDictionary, NSMutableArray等等)</p>
 </blockquote>
 <h1 id="深拷贝与浅拷贝"><a href="#深拷贝与浅拷贝" class="headerlink" title="深拷贝与浅拷贝"></a>深拷贝与浅拷贝</h1><p>深拷贝 : 拷贝出来的对象与源对象地址不一致! ＝＝＝&gt;修改拷贝对象的值对源对象的值没有任何影响.</p>
 <p>浅拷贝 : 拷贝出来的对象与源对象地址一致!   =====&gt;修改拷贝对象的值会直接影响到源对象.</p>
-<font color="ff0000">copy都是浅拷贝, mutableCopy都是深拷贝???????</font>
-
+<p><font color="ff0000">copy都是浅拷贝, mutableCopy都是深拷贝???????</font></p>
 <p>用copy从一个可变对象拷贝出一个不可变对象 =====&gt;深拷贝</p>
 <p> 不完全拷贝与完全拷贝</p>
 
@@ -568,7 +580,7 @@
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -643,6 +655,31 @@
     
 
     
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/05/19/OC中的拷贝/';
+        this.page.identifier = '/2016/05/19/OC中的拷贝/';
+        this.page.title = 'OC中的拷贝';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+    
 
     
 
@@ -669,7 +706,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            在iOS开发过程中对文本的处理，可以需要去调整字间距，行间距之类，在这里给大伙介绍一个工具类（NSMutableParagraphStyle），它可以帮我们实现这个需求：NSMutableParagraphStyle是NSParagraph
+                            在iOS开发过程中对文本的处理，可以需要去调整字间距，行间距之类，在这里给大伙介绍一个工具类（NSMutableParagraphStyle），它可以帮我们实现这个需求：
+
+NSMutableParagraphStyle是NSParagra
                         
                     </div>
                     <div class="publish-info">
@@ -865,6 +904,9 @@
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -886,15 +928,11 @@
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

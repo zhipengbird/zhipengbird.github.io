@@ -2,13 +2,13 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="安装组件时遇到的一些问题, 志鹏的技术博客">
     <meta name="description" content="
 安装 mpv 终端播放器时遇到的问题brew install mpv
-
-在终端执行上述命令时遇到如下的提示：`shError: You must brew link lua before mpv can be installedlocal">
+在终端执行上述命令时遇到如下的提示：Error: You must `brew link lua` before mpv can be installed
+localh">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -408,6 +408,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        167
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        1 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -421,9 +435,16 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <ul>
-<li>安装 mpv 终端播放器时遇到的问题<pre><code class="sh">brew install mpv
+<li>安装 mpv 终端播放器时遇到的问题<pre><code class="sh">brew install mpv</code></pre>
+在终端执行上述命令时遇到如下的提示：<pre><code class="sh">Error: You must `brew link lua` before mpv can be installed
+localhost:~ yuanpinghua$ brew link lua
+Linking /usr/local/Cellar/lua/5.2.4_4...
+Error: Could not symlink bin/lua
+Target /usr/local/bin/lua
+already exists. You may want to remove it:
+rm &#39;/usr/local/bin/lua&#39;
 </code></pre>
-在终端执行上述命令时遇到如下的提示：<br><code>`</code>sh<br>Error: You must <code>brew link lua</code> before mpv can be installed<br>localhost:~ yuanpinghua$ brew link lua<br>Linking /usr/local/Cellar/lua/5.2.4_4…<br>Error: Could not symlink bin/lua<br>Target /usr/local/bin/lua<br>already exists. You may want to remove it:<br>rm ‘/usr/local/bin/lua’</li>
+</li>
 </ul>
 <p>To force the link and overwrite all conflicting files:<br>  brew link –overwrite lua</p>
 <p>To list all files that would be deleted:<br>  brew link –overwrite –dry-run lua</p>
@@ -431,13 +452,10 @@
 解决方案：
 ```sh
 sudo chown -R $(whoami) /usr/local/
-brew link lua
-</code></pre><p>执行上述命令会得到如下的提示：</p>
-<pre><code class="sh">Linking /usr/local/Cellar/lua/5.2.4_4... 55 symlinks created
-</code></pre>
+brew link lua</code></pre><p>执行上述命令会得到如下的提示：</p>
+<pre><code class="sh">Linking /usr/local/Cellar/lua/5.2.4_4... 55 symlinks created</code></pre>
 <p>再次执行:</p>
-<pre><code class="sh">brew install mpv 
-</code></pre>
+<pre><code class="sh">brew install mpv </code></pre>
 <p>这时就可以安装成功了</p>
 
             </div>
@@ -554,7 +572,7 @@ brew link lua
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -629,6 +647,31 @@ brew link lua
     
 
     
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/09/27/安装组件时遇到的一些问题/';
+        this.page.identifier = '/2016/09/27/安装组件时遇到的一些问题/';
+        this.page.title = '安装组件时遇到的一些问题';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+    
 
     
 
@@ -699,17 +742,13 @@ Beautiful Soup 是一个可以从HTML或XML文件中提取数据的Python库.它
                             线程相关操作
 获取当前线程的IDos.getpid()
 
-
 获取父线程的IDos.getppid()
-
 
 当前线程的用户IDos.getuid()
 
 
-
 用户相关操作
 获取当前登录的用户名os.getlogin()
-
 
 
 系统环境相关
@@ -855,6 +894,9 @@ Beautiful Soup 是一个可以从HTML或XML文件中提取数据的Python库.它
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -876,15 +918,11 @@ Beautiful Soup 是一个可以从HTML或XML文件中提取数据的Python库.它
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

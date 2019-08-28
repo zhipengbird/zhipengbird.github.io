@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="GCD锁, 志鹏的技术博客">
     <meta name="description" content="
@@ -409,6 +409,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        590
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        2 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -429,12 +443,11 @@
 <h2 id="dispatch-semaphore语法说明"><a href="#dispatch-semaphore语法说明" class="headerlink" title="dispatch_semaphore语法说明"></a>dispatch_semaphore语法说明</h2><ol>
 <li>通过<code>dispatch_semaphore_create(long value);</code>函数创建<code>Dispatch_Semaphore</code>,参数表示计数的初始值<pre><code class="objc">//参数说明
 //long value:表示计数的初始值
-dispatch_semaphore_t semaphore = dispatch_semaphore_create(long value);
-</code></pre>
+dispatch_semaphore_t semaphore = dispatch_semaphore_create(long value);</code></pre>
 </li>
 </ol>
 <ol start="2">
-<li><code>dispatch_semaphore_wait(dispatch_semaphore_t dsema, dispatch_time_t timeout);</code>函数等待<code>Dispatch Semaphore</code>的计数值大于或者等于1,当满足条件时计数器执行减法,并从wait函数中返回<br><strong>_当dispatch_semaphore_wait函数返回0时,可以安全地执行排他控制的处理_</strong></li>
+<li><code>dispatch_semaphore_wait(dispatch_semaphore_t dsema, dispatch_time_t timeout);</code>函数等待<code>Dispatch Semaphore</code>的计数值大于或者等于1,当满足条件时计数器执行减法,并从wait函数中返回<br><strong><em>当dispatch_semaphore_wait函数返回0时,可以安全地执行排他控制的处理</em></strong></li>
 </ol>
 <pre><code class="objc">//参数说明
 
@@ -442,15 +455,13 @@ dispatch_semaphore_t semaphore = dispatch_semaphore_create(long value);
 
 //dispatch_time_t timeout:由dispatch_time_t类型值指定等待时间
 
-dispatch_semaphore_wait(dispatch_semaphore_t dsema, dispatch_time_t timeout);
-</code></pre>
+dispatch_semaphore_wait(dispatch_semaphore_t dsema, dispatch_time_t timeout);</code></pre>
 <ol start="3">
 <li><code>dispatch_semaphore_signal(dispatch_semaphore_t dsema);</code>函数将 <code>Dispatch_Semaphore</code>的计数器加1</li>
 </ol>
 <pre><code class="objc">//参数说明
 //dispatch_semaphore_t dsema:操作的Dispatch_Semaphore对象
-dispatch_semaphore_signal(dispatch_semaphore_t dsema);
-</code></pre>
+dispatch_semaphore_signal(dispatch_semaphore_t dsema);</code></pre>
 <h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>  没有加锁的情况下，异步添加1000个数据到数组中</p>
 <pre><code class="objc">  void unusesemaphoreSameple(){
      //1.创建全局队列
@@ -466,12 +477,10 @@ dispatch_semaphore_signal(dispatch_semaphore_t dsema);
         });
     }
     NSLog(@&quot;%@&quot;,array);
-}
-</code></pre>
+}</code></pre>
 <p>  执行结果是：代码出现问题，不能正常添加数据</p>
 <pre><code>  GCDdispatch_semaphore(23505,0x700000081000) malloc: *** error for object 0x100700330: double free
-*** set a breakpoint in malloc_error_break to debug
-</code></pre><p>  加锁情况下，异步添加1000个数据到数组中</p>
+*** set a breakpoint in malloc_error_break to debug</code></pre><p>  加锁情况下，异步添加1000个数据到数组中</p>
 <pre><code class="objc">  void usesemaphoreSameple(){
     //1.创建全局队列
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -492,8 +501,7 @@ dispatch_semaphore_signal(dispatch_semaphore_t dsema);
         });
     }
     NSLog(@&quot;%@&quot;,array);
-}
-</code></pre>
+}</code></pre>
 <p>   执行结果：按顺序正常添加了1000个数据</p>
 <pre><code class="objc">   0,
    1,
@@ -518,8 +526,7 @@ dispatch_semaphore_signal(dispatch_semaphore_t dsema);
    20,
    21,
    22,
-   ....
-</code></pre>
+   ....</code></pre>
 
             </div>
             <hr/>
@@ -635,7 +642,7 @@ dispatch_semaphore_signal(dispatch_semaphore_t dsema);
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -709,6 +716,31 @@ dispatch_semaphore_signal(dispatch_semaphore_t dsema);
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/08/16/GCD锁/';
+        this.page.identifier = '/2016/08/16/GCD锁/';
+        this.page.title = 'GCD锁';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -918,6 +950,9 @@ dispatch_semaphore_signal(dispatch_semaphore_t dsema);
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -939,15 +974,11 @@ dispatch_semaphore_signal(dispatch_semaphore_t dsema);
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

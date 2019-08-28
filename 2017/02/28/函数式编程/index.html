@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="函数式编程, 志鹏的技术博客">
     <meta name="description" content="
@@ -395,6 +395,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        1.7k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        6 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -439,10 +453,11 @@
 </ol>
 </blockquote>
 <ol start="2">
-<li><code>RACSubscriber</code>:表示订阅者的意思，用于发送信号，这是一个协议，不是一个类，只要遵守这个协议，并且实现方法才能成为订阅者。通过create创建的信号，都有一个订阅者，帮助他发送数据。<br><code>`</code>objc<br>-(void)createSimpleSignal{<br>// RACSignal使用步骤：<br>// 1.创建信号 + (RACSignal <em> )createSignal:(RACDisposable </em> (^)(id<racsubscriber> subscriber))didSubscribe<br>// 2.订阅信号,才会激活信号. - (RACDisposable * )subscribeNext:(void (^)(id x))nextBlock<br>// 3.发送信号 - (void)sendNext:(id)value</racsubscriber></li>
+<li><code>RACSubscriber</code>:表示订阅者的意思，用于发送信号，这是一个协议，不是一个类，只要遵守这个协议，并且实现方法才能成为订阅者。通过create创建的信号，都有一个订阅者，帮助他发送数据。<br>```objc</li>
 </ol>
+<p>-(void)createSimpleSignal{<br>  // RACSignal使用步骤：<br>  // 1.创建信号 + (RACSignal * )createSignal:(RACDisposable * (^)(id<racsubscriber> subscriber))didSubscribe<br>  // 2.订阅信号,才会激活信号. - (RACDisposable * )subscribeNext:(void (^)(id x))nextBlock<br>  // 3.发送信号 - (void)sendNext:(id)value</racsubscriber></p>
 <p>  // RACSignal底层实现：<br>  // 1.创建信号，首先把didSubscribe保存到信号中，还不会触发。<br>  // 2.当信号被订阅，也就是调用signal的subscribeNext:nextBlock<br>  // 2.2 subscribeNext内部会创建订阅者subscriber，并且把nextBlock保存到subscriber中。<br>  // 2.1 subscribeNext内部会调用siganl的didSubscribe<br>  // 3.siganl的didSubscribe中调用[subscriber sendNext:@1];<br>  // 3.1 sendNext底层其实就是执行subscriber的nextBlock</p>
-<p>  //    1.创建信息<br>  RACSignal <em> signal =  [RACSignal createSignal:^RACDisposable </em> _Nullable(id<racsubscriber>   subscriber) {<br>    // block调用时刻：每当有订阅者订阅信号，就会调用block。<br>    //        2.发送信号<br>    [subscriber sendNext:@1];<br>    // 如果不在发送数据，最好发送信号完成，内部会自动调用[RACDisposable disposable]取消订阅信号。</racsubscriber></p>
+<p>  //    1.创建信息<br>  RACSignal * signal =  [RACSignal createSignal:^RACDisposable * _Nullable(id<racsubscriber>   subscriber) {<br>    // block调用时刻：每当有订阅者订阅信号，就会调用block。<br>    //        2.发送信号<br>    [subscriber sendNext:@1];<br>    // 如果不在发送数据，最好发送信号完成，内部会自动调用[RACDisposable disposable]取消订阅信号。</racsubscriber></p>
 <pre><code>[subscriber sendCompleted];
 return [RACDisposable disposableWithBlock:^{
   // block调用时刻：当信号发送完成或者发送错误，就会自动执行这个block,取消订阅信号。
@@ -450,8 +465,7 @@ return [RACDisposable disposableWithBlock:^{
   // 执行完Block后，当前信号就不在被订阅了。
   NSLog(@&quot;信号销毁了&quot;);
 
-}];
-</code></pre><p>  }];<br>  //    3. 订阅信号，才会激活信号<br>  [signal subscribeNext:^(id   x) {<br>     // block调用时刻：每当有信号发出数据，就会调用block.<br>   NSLog(@”接收到数据：%@”,x);<br>  }];<br>}</p>
+}];</code></pre><p>  }];<br>  //    3. 订阅信号，才会激活信号<br>  [signal subscribeNext:^(id   x) {<br>     // block调用时刻：每当有信号发出数据，就会调用block.<br>   NSLog(@”接收到数据：%@”,x);<br>  }];<br>}</p>
 <pre><code>3. `RACDisposable`:用于取消订阅或者清理资源，当信号发送完成或者发送错误的时候，就会自动触发它。
 **使用场景**: 不想监听某个信号时，可以通过它主动取消订阅信号。
 
@@ -490,8 +504,7 @@ return [RACDisposable disposableWithBlock:^{
   //3. 发送信息
   [subject sendNext:@&quot;1&quot;];
 
-}
-</code></pre><pre><code class="objc">-(void)createReplaySubject{
+}</code></pre><pre><code class="objc">-(void)createReplaySubject{
 
 
   // RACReplaySubject使用步骤:
@@ -525,26 +538,24 @@ return [RACDisposable disposableWithBlock:^{
   }];
 
 }
-
 </code></pre>
 <ol start="5">
 <li><p><code>RACTuple</code>:元组类,类似<code>NSArray</code>,用来包装值.</p>
 </li>
-<li><p><code>RACSequence</code>:RAC中的集合类，用于代替<code>NSArray</code>,<code>NSDictionary</code>,可以使用它来快速遍历数组和字典。<br><code>`</code>objc<br>-( void )RACIterator{<br> // 1.遍历数组<br> NSArray * numbers = @[@1,@3,@4];<br> // 这里其实是三步<br> // 第一步: 把数组转换成集合RACSequence numbers.rac_sequence<br> // 第二步: 把集合RACSequence转换RACSignal信号类,numbers.rac_sequence.signal<br> // 第三步: 订阅信号，激活信号，会自动把集合中的所有值，遍历出来。<br> [numbers.rac_sequence.signal subscribeNext:^(id   x) {</p>
-<pre><code> NSLog(@&quot;%@&quot;,x);
-</code></pre><p> }];</p>
-<p> // 2.遍历字典,遍历出来的键值对会包装成RACTuple(元组对象)<br> NSDictionary <em> dict = @{@”name”:@”yuanph”,@”age”:@18,@”country”:@”china”};<br> [dict.rac_sequence.signal subscribeNext:^(RACTuple </em>  x) {</p>
-<pre><code> // 解包元组，会把元组的值，按顺序给参数里面的变量赋值
- RACTupleUnpack(NSString * key,NSString * value)= x;
- NSLog(@&quot;%@:%@&quot;,key,value);
-</code></pre><p> }];<br>}</p>
+<li><p><code>RACSequence</code>:RAC中的集合类，用于代替<code>NSArray</code>,<code>NSDictionary</code>,可以使用它来快速遍历数组和字典。<br>```objc</p>
 </li>
 </ol>
-<p><code>`</code></p>
-<ol start="7">
-<li><code>RACCommand</code>:<code>RAC</code>中用于处理事件的类，可以把事件如何处理,事件中的数据如何传递，包装到这个类中，他可以很方便的监控事件的执行过程<br> <strong>使用场景</strong>:监听按钮点击，网络请求</li>
-</ol>
-
+<p>-( void )RACIterator{<br>    // 1.遍历数组<br>    NSArray * numbers = @[@1,@3,@4];<br>    // 这里其实是三步<br>    // 第一步: 把数组转换成集合RACSequence numbers.rac_sequence<br>    // 第二步: 把集合RACSequence转换RACSignal信号类,numbers.rac_sequence.signal<br>    // 第三步: 订阅信号，激活信号，会自动把集合中的所有值，遍历出来。<br>    [numbers.rac_sequence.signal subscribeNext:^(id   x) {<br>        NSLog(@”%@”,x);<br>    }];</p>
+<pre><code>// 2.遍历字典,遍历出来的键值对会包装成RACTuple(元组对象)
+NSDictionary * dict = @{@&quot;name&quot;:@&quot;yuanph&quot;,@&quot;age&quot;:@18,@&quot;country&quot;:@&quot;china&quot;};
+[dict.rac_sequence.signal subscribeNext:^(RACTuple *  x) {
+    // 解包元组，会把元组的值，按顺序给参数里面的变量赋值
+    RACTupleUnpack(NSString * key,NSString * value)= x;
+    NSLog(@&quot;%@:%@&quot;,key,value);
+}];</code></pre><p>}</p>
+<pre><code>
+7. `RACCommand`:`RAC`中用于处理事件的类，可以把事件如何处理,事件中的数据如何传递，包装到这个类中，他可以很方便的监控事件的执行过程
+    **使用场景**:监听按钮点击，网络请求</code></pre>
             </div>
             <hr/>
 
@@ -659,7 +670,7 @@ return [RACDisposable disposableWithBlock:^{
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -734,6 +745,31 @@ return [RACDisposable disposableWithBlock:^{
     
 
     
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2017/02/28/函数式编程/';
+        this.page.identifier = '/2017/02/28/函数式编程/';
+        this.page.title = '函数式编程';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+    
 
     
 
@@ -761,16 +797,17 @@ return [RACDisposable disposableWithBlock:^{
                     <div class="summary block-with-text">
                         
                             pod 基础使用命令
-创建Podfile文件 pod init
+创建Podfile文件
+ pod init
 
+使用命令打开Podfile文件
+open -a Xcode Podfile
 
-使用命令打开Podfile文件open -a Xcode Podfile
+搜索pod 库
+pod search 库名
 
-
-搜索pod 库pod search 库名
-
-
-更新本地Repo库pod repo update
+更新本地Repo库
+pod repo updat
                         
                     </div>
                     <div class="publish-info">
@@ -960,6 +997,9 @@ UI Test 的重要性 在实际开
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -981,15 +1021,11 @@ UI Test 的重要性 在实际开
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

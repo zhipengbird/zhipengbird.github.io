@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="SMShareModel, 志鹏的技术博客">
     <meta name="description" content="SMShareModel 简介该分享模块是一个相对独立的功能模块，主要负责内容分享. 目前可分享的平台如下：
@@ -403,6 +403,20 @@ Message(短信)、Email">
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        2.5k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        10 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -505,8 +519,7 @@ Message(短信)、Email">
         ├── SMStrongChorusNaverView 
         ├── SMStrongScollerView 
         ├── SMStrongSoloExcellentShareView 
-        └── SMStrongSoloOrdinaryShareView
-</code></pre>
+        └── SMStrongSoloOrdinaryShareView</code></pre>
 <p>主要使用对象类：</p>
 <ol>
 <li>公共分享控件<ul>
@@ -542,8 +555,7 @@ Message(短信)、Email">
  */
  - (instancetype)initWithShareItem:(SMShareItemModel *)aItemModel
                      inviteAPIContent:(SMShareAPIContent *)apiContent
-                         returnBack:(ReturnBack)returnBack;  
-</code></pre>
+                         returnBack:(ReturnBack)returnBack;  </code></pre>
 </li>
 <li><p>SMShareViewController</p>
 <pre><code class="objc">  /**
@@ -563,8 +575,7 @@ Message(短信)、Email">
      */
      - (instancetype)initWithShareItems:(NSMutableArray &lt;NSDictionary *&gt;*)shareItems
                          shareContent:(SMShareAPIContent *)shareContent
-                             returnBack:(ReturnBack)returnBack;
-</code></pre>
+                             returnBack:(ReturnBack)returnBack;</code></pre>
 <h4 id="强分享"><a href="#强分享" class="headerlink" title="强分享"></a>强分享</h4></li>
 <li><p>SMStrongSoloViewController（独唱分享）</p>
 <pre><code class="objc"> @interface SMStrongSoloViewController : SMSNSBaseViewController
@@ -575,7 +586,6 @@ Message(短信)、Email">
                                      returnBlock:(ReturnBlock)returnBlock;
 
  @end
-
 </code></pre>
 </li>
 <li><p>SMStrongChorusViewController（合唱分享） </p>
@@ -587,8 +597,7 @@ Message(短信)、Email">
  - (instancetype)initWithShareStrongSoloItemModel:(SMShareStrongSoloItemModel *)itemModel
                          returnBlock:(ReturnBlock)returnBlock;
 
- @end
-</code></pre>
+ @end</code></pre>
 <h3 id="SMShareAPIManager"><a href="#SMShareAPIManager" class="headerlink" title="SMShareAPIManager"></a>SMShareAPIManager</h3><p> 该分享管理器提供了各平台单独的分享内容接口，在使用过程中调用相应的方法并传入正确的参数即可。</p>
 </li>
 </ol>
@@ -711,33 +720,50 @@ Message(短信)、Email">
 
     // 判断Twitter是否登陆
     + (void)isTwitterLogin:(SMShareTwitterState)state;
-</code></pre>
-<h3 id="SMShareAPIContent-（分享内容模型）"><a href="#SMShareAPIContent-（分享内容模型）" class="headerlink" title="SMShareAPIContent （分享内容模型）"></a>SMShareAPIContent （分享内容模型）</h3><ol>
-<li>属性<br> <code>`</code>objc<br> @property (copy, nonatomic) NSString <em>shareRecordingId; //分享的唯一标识  不要重复<br> @property (assign, nonatomic) SMShareContentType shareContentSourceType; //之后会废弃这个字段<br> @property (copy,  nonatomic) NSString </em>shareTitle; //分享标题<br> @property (copy,  nonatomic) NSString <em>shareDescription; // 分享内容<br> @property (copy,  nonatomic) NSString </em>shareType; //分享类型 invite ，打点使用<br> @property (assign, nonatomic) SMShareContentType shareContentType; //分享内容类型<br> @property (copy,  nonatomic) NSString <em>shareLink; //分享链接<br> @property (copy,  nonatomic) NSString </em>shareImageURL;//分享图片<br> @property (copy,  nonatomic) NSString <em>shareVieoURL;//分享视频下载地址<br> @property (copy,  nonatomic) NSString </em>shareVideoPath;//分享视频本地地址<br> @property (copy,  nonatomic) NSString <em>shareHashtag; //分享Hashtag<br> @property (assign, nonatomic) BOOL isShareVideoType; // 是否是分享视频<br> @property (assign, nonatomic) NSInteger shareIspublic;//是否是私密状态<br> @property (copy, nonatomic) NSString </em>isContested;//是否是参赛作品 1，参赛 0，未参赛</li>
-</ol>
-<pre><code>/****************************************
-* 以下为IM分享携带信息
-* 如果可以取到信息请尽量传入避免之后请求
-*
-****************************************/
+    ```
 
-@property (strong,  nonatomic) SMShareFromContent *fromContent; //分享发送方信息
-@property (copy, nonatomic) NSString *shareSingID;//分享作品歌手id
-@property (copy, nonatomic) NSString *shareSingName;//分享作品歌手名字
-@property (copy, nonatomic) NSString *shareSingCover;//分享作品歌手头像url
-@property (assign, nonatomic) BOOL isVerified;//分享作品歌手是否是认证歌手
-@property (nonatomic,assign) NSInteger  isRecordingPublic;//是否是我创建的作品
-```
-</code></pre><p>便捷方法：</p>
-<pre><code class="objc">- (instancetype)initWithShareContentTitle:(NSString *) aTitle
+### SMShareAPIContent （分享内容模型）
+1. 属性
+    ```objc
+    @property (copy, nonatomic) NSString *shareRecordingId; //分享的唯一标识  不要重复
+    @property (assign, nonatomic) SMShareContentType shareContentSourceType; //之后会废弃这个字段
+    @property (copy,  nonatomic) NSString *shareTitle; //分享标题
+    @property (copy,  nonatomic) NSString *shareDescription; // 分享内容
+    @property (copy,  nonatomic) NSString *shareType; //分享类型 invite ，打点使用
+    @property (assign, nonatomic) SMShareContentType shareContentType; //分享内容类型
+    @property (copy,  nonatomic) NSString *shareLink; //分享链接
+    @property (copy,  nonatomic) NSString *shareImageURL;//分享图片
+    @property (copy,  nonatomic) NSString *shareVieoURL;//分享视频下载地址
+    @property (copy,  nonatomic) NSString *shareVideoPath;//分享视频本地地址
+    @property (copy,  nonatomic) NSString *shareHashtag; //分享Hashtag
+    @property (assign, nonatomic) BOOL isShareVideoType; // 是否是分享视频
+    @property (assign, nonatomic) NSInteger shareIspublic;//是否是私密状态
+    @property (copy, nonatomic) NSString *isContested;//是否是参赛作品 1，参赛 0，未参赛
+
+
+    /****************************************
+    * 以下为IM分享携带信息
+    * 如果可以取到信息请尽量传入避免之后请求
+    *
+    ****************************************/
+
+    @property (strong,  nonatomic) SMShareFromContent *fromContent; //分享发送方信息
+    @property (copy, nonatomic) NSString *shareSingID;//分享作品歌手id
+    @property (copy, nonatomic) NSString *shareSingName;//分享作品歌手名字
+    @property (copy, nonatomic) NSString *shareSingCover;//分享作品歌手头像url
+    @property (assign, nonatomic) BOOL isVerified;//分享作品歌手是否是认证歌手
+    @property (nonatomic,assign) NSInteger  isRecordingPublic;//是否是我创建的作品
+    ```
+便捷方法：
+```objc
+- (instancetype)initWithShareContentTitle:(NSString *) aTitle
                               description:(NSString *) aDescription
                               recordingId:(NSString *) aRecordingId
                                      link:(NSString *) aLink
                                  imageURl:(NSString *) aImageUrl
                                  videoURL:(NSString *) aVideoUrl
                                   hashtag:(NSString *) ahashtag
-                              contentType:(SMShareContentType) aContentType;
-</code></pre>
+                              contentType:(SMShareContentType) aContentType;</code></pre>
 <h3 id="SMShareHelper"><a href="#SMShareHelper" class="headerlink" title="SMShareHelper"></a>SMShareHelper</h3><p>   根据title获取分享平台类型 、获取全部分享平台类型 、分享私信好友状态是否可用等功能接口</p>
 <pre><code>    /**
     根据返回传入item的title，获取分享平台类型
@@ -885,8 +911,7 @@ Message(短信)、Email">
 
     @return
     */
-    + (NSString *)getShareAppDownloadLink;
-</code></pre><p>目录结构存在的问题(<strong>已修复</strong>)：</p>
+    + (NSString *)getShareAppDownloadLink;</code></pre><p>目录结构存在的问题(<strong>已修复</strong>)：</p>
 <ol>
 <li>SMSharePublisthSuccess 代码存放目录不对</li>
 <li>SMStrongShare 存放目录不对  </li>
@@ -907,22 +932,29 @@ Message(短信)、Email">
  {
      [super viewWillAppear:animated];
      [self.navigationController setNavigationBarHidden:YES animated:NO];
- }   
-</code></pre> 这样在push页面过程中导航栏会出黑色<br> 建议把这个动画打开<pre><code> - (void)viewWillAppear:(BOOL)animated
+ }   </code></pre> 这样在push页面过程中导航栏会出黑色<br> 建议把这个动画打开<pre><code> - (void)viewWillAppear:(BOOL)animated
  {
      [super viewWillAppear:animated];
      [self.navigationController setNavigationBarHidden:YES animated:YES];
- }  
-</code></pre><h2 id="改进的地方"><a href="#改进的地方" class="headerlink" title="改进的地方"></a>改进的地方</h2></li>
+ }  </code></pre><h2 id="改进的地方"><a href="#改进的地方" class="headerlink" title="改进的地方"></a>改进的地方</h2></li>
 <li>项目中代码的逻辑目录需要有对应的物理文件夹</li>
 <li>将代码按不同的功能模块归纳到相应的目录下</li>
 <li>重复使用的代码可以考虑提取成一个方法，供使用</li>
 <li>一个代码文件里的代码可以按不同的方法类型 使用 <code>#pragma mark  -</code>进行归纳区分，方便阅读</li>
 <li>项目中的注释有点少，.h文件里的接口加上相应的注释，有利于自己和他们阅读与理解</li>
 </ol>
-<p>参考文档：<br><a href="https://phabricator.ushow.media/w/starmaker/ios/ios_sharesdk%E6%96%87%E6%A1%A3%E8%AF%B4%E6%98%8E/" target="_blank" rel="noopener">ShareSDK</a><br><!-- # h5
-活动(web) --><br><!-- <img src="/2018/04/03/SMShareModel/publishsuccess1.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/publishsuccess2.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMStrongShare1.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMStrongShare2.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMStrongShare3.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMShare1.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMShare2.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMShare3.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMShare4.png" title="代码实际位置">  –&gt;</p>
---></p>
+<p>参考文档：<br><a href="https://phabricator.ushow.media/w/starmaker/ios/ios_sharesdk%E6%96%87%E6%A1%A3%E8%AF%B4%E6%98%8E/" target="_blank" rel="noopener">ShareSDK</a></p>
+<!-- # h5
+活动(web) -->
+<!-- <img src="/2018/04/03/SMShareModel/publishsuccess1.png" title="代码实际位置"> 
+<pre><code>{% asset_img 'publishsuccess2.png' '代码实际位置' %} 
+{% asset_img 'SMStrongShare1.png' '代码实际位置' %} 
+{% asset_img 'SMStrongShare2.png' '代码实际位置' %} 
+{% asset_img 'SMStrongShare3.png' '代码实际位置' %} 
+{% asset_img 'SMShare1.png' '代码实际位置' %} 
+{% asset_img 'SMShare2.png' '代码实际位置' %} 
+{% asset_img 'SMShare3.png' '代码实际位置' %} 
+{% asset_img 'SMShare4.png' '代码实际位置' %}  --&gt;</code></pre>-->
             </div>
             <hr/>
 
@@ -1037,7 +1069,7 @@ Message(短信)、Email">
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1111,6 +1143,31 @@ Message(短信)、Email">
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2018/04/03/SMShareModel/';
+        this.page.identifier = '/2018/04/03/SMShareModel/';
+        this.page.title = 'SMShareModel';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -1309,6 +1366,9 @@ Runloop什么是Runloop
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -1330,15 +1390,11 @@ Runloop什么是Runloop
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

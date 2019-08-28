@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Xcode8 新增扩展, 志鹏的技术博客">
     <meta name="description" content="
@@ -407,6 +407,20 @@ let imageview = UIImageView(image: #imageLiteral(resourceName: &amp;quot;frie">
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        188
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        1 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -421,14 +435,15 @@ let imageview = UIImageView(image: #imageLiteral(resourceName: &amp;quot;frie">
             <div id="articleContent">
                 <ol>
 <li>Xcode8 中新增文档注释功能<br>实现方法：option+cmd+/<pre><code class="swift">/// 创建一个图片视图
-let imageview = UIImageView(image: #imageLiteral(resourceName: &quot;friend&quot;))
-</code></pre>
+let imageview = UIImageView(image: #imageLiteral(resourceName: &quot;friend&quot;))</code></pre>
 </li>
 <li>新增颜色选择器<br>实现方法: color+回车<pre><code class="swift">//color+回车
-v.backgroundColor=#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
-</code></pre>
+v.backgroundColor=#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)</code></pre>
 <img src="http://7xw3wp.com1.z0.glb.clouddn.com/swift_select_color.png" alt="颜色选择">  </li>
-<li>Xcode8中取消预编译指令,原来的#pragma mark替换为//MARK:<br>实现方法: //MARK: -<br><code>`</code>swift<br>//MARK: - 设置图片的frame<br>img.frame = CGRect(x: 0, y: 0, width: 200, height: 100)</li>
+<li>Xcode8中取消预编译指令,原来的#pragma mark替换为//MARK:<br>实现方法: //MARK: -<pre><code class="swift">//MARK: - 设置图片的frame
+img.frame = CGRect(x: 0, y: 0, width: 200, height: 100)
+</code></pre>
+</li>
 </ol>
 <p>//MARK: 设置图片的center<br>img.center = view.center</p>
 <pre><code>
@@ -441,7 +456,6 @@ v.backgroundColor=#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.
     view.addSubview(v)
         /// 创建一个图片视图
     let imageview = UIImageView(image: #imageLiteral(resourceName: &quot;friend&quot;)) //FIXME: 设置对应的图像
-
 </code></pre><ol start="5">
 <li>图片展示<br><img src="http://7xw3wp.com1.z0.glb.clouddn.com/swift_image_select.png" alt="图片预览"></li>
 </ol>
@@ -560,7 +574,7 @@ v.backgroundColor=#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -634,6 +648,31 @@ v.backgroundColor=#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2017/02/14/Xcode8-新增扩展/';
+        this.page.identifier = '/2017/02/14/Xcode8-新增扩展/';
+        this.page.title = 'Xcode8 新增扩展';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -711,8 +750,7 @@ UI Test 的重要性 在实际开
                             
 去除字符串首尾空格//可以指定字符集
 [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-
-常用字符集：@property (re
+常用字符集：@property (rea
                         
                     </div>
                     <div class="publish-info">
@@ -855,6 +893,9 @@ UI Test 的重要性 在实际开
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -876,15 +917,11 @@ UI Test 的重要性 在实际开
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

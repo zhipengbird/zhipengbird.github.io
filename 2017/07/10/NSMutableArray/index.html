@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="监听NSMutableArray的变化, 志鹏的技术博客">
     <meta name="description" content="平时工作中我们接触最多的容器，可能就数字典与数组了。有时我们在使用这些容器时有这样一个困惑，容器中的数据改变了，我们却无法立即知道。近日小编因为这个感到有些小苦恼，思来想去发现还是有途径可以做到监听容器的变化。接下来我将会用文字将我的想法叙">
@@ -405,6 +405,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        1.7k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        6 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -442,12 +456,16 @@
 - initWithCapacity:
 - initWithContentsOfFile:
 - initWithContentsOfURL:</code></pre>
+
 <h3 id="数组元素的添加操作"><a href="#数组元素的添加操作" class="headerlink" title="数组元素的添加操作"></a>数组元素的添加操作</h3><pre><code>- addObject:
 - addObjectsFromArray:</code></pre>
+
 <pre><code>- insertObject:atIndex:
 - insertObjects:atIndexes:</code></pre>
 <blockquote>
-<p>ps:批量元素的插入会调用多次单个元素的插入方法，<strong><em>在以后的监听过程中需要做些特殊的处理</em></strong><br><pre><code>- void insertObjects:(NSArray *)additions atIndexes:(NSIndexSet *)indexes
+<p>ps:批量元素的插入会调用多次单个元素的插入方法，<strong><em>在以后的监听过程中需要做些特殊的处理</em></strong></p>
+</blockquote>
+<pre><code>- void insertObjects:(NSArray *)additions atIndexes:(NSIndexSet *)indexes
 {
     NSUInteger currentIndex = [indexes firstIndex];
     NSUInteger i, count = [indexes count];
@@ -456,8 +474,8 @@
         [self insertObject:[additions objectAtIndex:i] atIndex:currentIndex];
         currentIndex = [indexes indexGreaterThanIndex:currentIndex];
     }
-}</code></pre></p>
-</blockquote>
+}</code></pre>
+
 <h3 id="数组元素的删除操作"><a href="#数组元素的删除操作" class="headerlink" title="数组元素的删除操作"></a>数组元素的删除操作</h3><pre><code>&#x2F;&#x2F;删除元素的删除
 - removeLastObject
 - removeObjectAtIndex:
@@ -472,20 +490,23 @@
 - removeObjectsInArray:
 - removeObjectsInRange:</code></pre>
 <blockquote>
-<p>ps： 以下方法会多次调用<code>- removeObjectAtIndex:</code>方法：,在监听过程中需要处理多次调用问题。<br><pre><code>- removeObject:
+<p>ps： 以下方法会多次调用<code>- removeObjectAtIndex:</code>方法：,在监听过程中需要处理多次调用问题。</p>
+</blockquote>
+<pre><code>- removeObject:
 - removeObject:inRange:
 - removeObjectIdenticalTo:
 - removeObjectIdenticalTo:inRange:
-- removeObjectsInArray:</code></pre></p>
-</blockquote>
+- removeObjectsInArray:</code></pre>
+
 <h3 id="数组元素的替换操作"><a href="#数组元素的替换操作" class="headerlink" title="数组元素的替换操作"></a>数组元素的替换操作</h3><pre><code>- replaceObjectAtIndex:withObject:
 - setObject:atIndexedSubscript:</code></pre>
 <blockquote>
 <p>ps：<code>- setObject:atIndexedSubscript:</code>这个方法我们最好不要直接使用而是使用语法糖的形式调用。</p>
+</blockquote>
 <pre><code class="objc">mutableArray[3] = @&quot;someValue&quot;; 
 // equivalent to 
-[mutableArray replaceObjectAtIndex:3 withObject:@&quot;someValue&quot;];
-</code></pre>
+[mutableArray replaceObjectAtIndex:3 withObject:@&quot;someValue&quot;];</code></pre>
+<blockquote>
 <p>若替换对象为空会抛出<code>NSInvalidArgumentException</code>异常，若索引下标越界会抛出<code>NSRangeException</code>异常</p>
 </blockquote>
 <pre><code>- replaceObjectsAtIndexes:withObjects:
@@ -493,9 +514,12 @@
 - replaceObjectsInRange:withObjectsFromArray:
 - setArray:</code></pre>
 <blockquote>
-<p>ps: 以下方法会调用多次<code>- replaceObjectAtIndex:withObject:</code>方法<br><pre><code>- replaceObjectsAtIndexes:withObjects:
-&#x2F;&#x2F;PS: objects的个数必须与indexes的个数相同，否则会抛出异常</code></pre></p>
+<p>ps: 以下方法会调用多次<code>- replaceObjectAtIndex:withObject:</code>方法</p>
 </blockquote>
+<pre><code>- replaceObjectsAtIndexes:withObjects:
+&#x2F;&#x2F;PS: objects的个数必须与indexes的个数相同，否则会抛出异常</code></pre>
+
+
 <h3 id="数组元素的筛选"><a href="#数组元素的筛选" class="headerlink" title="数组元素的筛选"></a>数组元素的筛选</h3><pre><code>- filterUsingPredicate:</code></pre>
 <blockquote>
 <p>ps： 会在数组中直接筛选出符合条件的数组元素，不符合的会直接删除</p>
@@ -581,6 +605,7 @@
 -(void)mutableArray:(NSMutableArray*)array exchangeObjectAtIndex:(NSUInteger)index1 withObjectAtIndex:(NSUInteger)index2;
 @end
 </code></pre>
+
 <h1 id="使用runtime机制替换或者交换对应的函数指针IMP"><a href="#使用runtime机制替换或者交换对应的函数指针IMP" class="headerlink" title="使用runtime机制替换或者交换对应的函数指针IMP"></a>使用runtime机制替换或者交换对应的函数指针IMP</h1><ol>
 <li>创建一个数组的扩展，并添加代理属性（使用<strong>关联属性</strong>添加）</li>
 <li>创建相应的函数指针，并替换数组对应的方法IMP<br>这里以- insertObject:atIndex:为例：<br>创建C函数指针：<pre><code>typedef void (*insertObject_atIndex_IMP)(id self, SEL _cmd ,id anObject ,NSUInteger index);
@@ -607,6 +632,7 @@ static void replace_insertObject_atIndex(id self, SEL _cmd ,id anObject ,NSUInte
     method = class_getInstanceMethod(class, @selector(insertObject:atIndex:));
     origin_insertObject_atIndex = (insertObject_atIndex_IMP)method_setImplementation(method, (IMP)replace_insertObject_atIndex);
 }</code></pre>
+
 </li>
 </ol>
 <blockquote>
@@ -733,7 +759,7 @@ static void replace_insertObject_atIndex(id self, SEL _cmd ,id anObject ,NSUInte
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -807,6 +833,31 @@ static void replace_insertObject_atIndex(id self, SEL _cmd ,id anObject ,NSUInte
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2017/07/10/NSMutableArray/';
+        this.page.identifier = '/2017/07/10/NSMutableArray/';
+        this.page.title = '监听NSMutableArray的变化';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -1016,6 +1067,9 @@ static void replace_insertObject_atIndex(id self, SEL _cmd ,id anObject ,NSUInte
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -1037,15 +1091,11 @@ static void replace_insertObject_atIndex(id self, SEL _cmd ,id anObject ,NSUInte
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

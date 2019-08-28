@@ -2,17 +2,16 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Mac上 Appache 的操作, 志鹏的技术博客">
     <meta name="description" content="常用操作：
-打开终端，运行启动Apache命令：`sudo apachectl start
+打开终端，运行启动Apache命令：sudo apachectl start
 
-2. 关闭命令：
-sudo apachectl stop
-3. 重启命令
-sudo apachectl restart
-4. 查看Apache版本">
+
+2. 关闭命令：sudo apachectl stop
+3. 重启命令sudo apachectl restart
+4. 查看Apache版本命令">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -403,6 +402,20 @@ sudo apachectl restart
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        548
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        2 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -416,64 +429,69 @@ sudo apachectl restart
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="常用操作："><a href="#常用操作：" class="headerlink" title="常用操作："></a>常用操作：</h1><ol>
-<li>打开终端，运行启动Apache命令：<br><code>`</code><br>sudo apachectl start</li>
+<li>打开终端，运行启动Apache命令：<pre><code>sudo apachectl start
+</code></pre></li>
 </ol>
-<pre><code>2. 关闭命令：
-</code></pre><p>sudo apachectl stop</p>
-<pre><code>3. 重启命令
-</code></pre><p>sudo apachectl restart</p>
-<pre><code>4. 查看Apache版本命令
-</code></pre><p>httpd –v</p>
-<pre><code>5. 语法检测
-</code></pre><p>apachectl configtest</p>
-<pre><code>6. 查看Apache版本号：
-</code></pre><p>httpd -v</p>
+<pre><code>2. 关闭命令：</code></pre><p>sudo apachectl stop</p>
+<pre><code>3. 重启命令</code></pre><p>sudo apachectl restart</p>
+<pre><code>4. 查看Apache版本命令</code></pre><p>httpd –v</p>
+<pre><code>5. 语法检测</code></pre><p>apachectl configtest</p>
+<pre><code>6. 查看Apache版本号：</code></pre><p>httpd -v</p>
 <pre><code>&lt;!-- more --&gt;
 # Root目录
 
 启用Apache之后，可以直接在浏览器中访问`http://localhost`，如果出现”It works!”就表示运正常。
 启用Apache之后，首先得知道网页文件应该放在哪个目录才能正常运行。Mac OS X 中默认有两个目录可以直接运行Web程序，一个是系统级的根目录，一个是用户级的根目录。
-* 系统级的根目录是：
-</code></pre><p>  /Library/WebServer/Documents/</p>
-<pre><code>  它对应的网址是:
-</code></pre><p>  <a href="http://localhost" target="_blank" rel="noopener">http://localhost</a></p>
-<pre><code>* 用户级的根目录是:
-</code></pre><p>  ~/Sites</p>
-<pre><code>  这里需要注意的~/Sites也就是你用户目录下面的”站点”目录，在OS X 10.8以后，这个目录可能没有，所以你需要手动建立一个同名目录。建立方式很简单，直接在终端中运行：
-</code></pre><p>  sudo mkdir ~/Sites</p>
+* 系统级的根目录是：</code></pre><p>  /Library/WebServer/Documents/</p>
+<pre><code>  它对应的网址是:</code></pre><p>  <a href="http://localhost" target="_blank" rel="noopener">http://localhost</a></p>
+<pre><code>* 用户级的根目录是:</code></pre><p>  ~/Sites</p>
+<pre><code>  这里需要注意的~/Sites也就是你用户目录下面的”站点”目录，在OS X 10.8以后，这个目录可能没有，所以你需要手动建立一个同名目录。建立方式很简单，直接在终端中运行：</code></pre><p>  sudo mkdir ~/Sites</p>
 <pre><code>  或者可以直接在目录中新建Sites文件夹
 
 ## 配置用户级目录
   1. 创建有户目录“Sites”文件夹，找开终端：
-</code></pre><pre><code>sudo mkdir ~/Sites
-```
-</code></pre><ol start="2">
-<li><p>进入 /etc/apache2/users/</p>
-<pre><code>cd /etc/apache2/users/
-sudo vim username.conf
+    ```
+    sudo mkdir ~/Sites
+    ```
+  2. 进入 /etc/apache2/users/
+    ```
+    cd /etc/apache2/users/
+    sudo vim username.conf
 
-</code></pre><p>添加内容为：</p>
-<pre><code>&lt;Directory &quot;/Users/yuanpinghua/Sites/&quot;&gt;
- AllowOverride All
- Options Indexes MultiViews FollowSymLinks
- Require all granted
-&lt;/Directory&gt;
-</code></pre><p>上行中的<code>yuanpinghua</code>就是用户名，然后将该文件权限改为：644</p>
-<pre><code>sudo chmod 644 username.conf
-</code></pre><ol start="3">
-<li>进到/etc/apache2/目录，sudo vim httpd.conf 将下面三句话的注释去掉：<pre><code>LoadModule authz_core_module libexec/apache2/mod_authz_core.so
-LoadModule authz_host_module libexec/apache2/mod_authz_host.so
-LoadModule userdir_module libexec/apache2/mod_userdir.so
-Include /private/etc/apache2/extra/httpd-userdir.conf
-</code></pre>将这四句前的“#”去掉</li>
-<li>进到/etc/apache2/extra/目录，<pre><code>sudo vim httpd-userdir.conf
-</code></pre>将<code>Include /private/etc/apache2/users/*.conf</code>这句话放开注释。</li>
-<li>然后终端输入：<code>sudo apachectl restart</code>重启apache，浏览器输入：<code>loacal/~yuanpinghua/</code> 就可以正常显示该目录下的文件</li>
-</ol>
-</li>
-</ol>
-<p>参考网页：<br><a href="http://www.aichengxu.com/view/4587749" target="_blank" rel="noopener">在Mac上配置Apache+PHP环境</a><br><a href="http://www.jianshu.com/p/7b8d5d6f22c9" target="_blank" rel="noopener">Mac OS X 上的Apache配置</a><br><a href="http://www.aichengxu.com/view/10044030" target="_blank" rel="noopener">Mac OS X EI Captitan 中Apache开启SSL (HTTPS)</a><br><a href="http://www.cnblogs.com/y500/p/3596473.html" target="_blank" rel="noopener">Mac OS X中Apache开启ssl</a></p>
+    ```
+    添加内容为：
+    ```
+    &lt;Directory &quot;/Users/yuanpinghua/Sites/&quot;&gt;
+      AllowOverride All
+      Options Indexes MultiViews FollowSymLinks
+      Require all granted
+    &lt;/Directory&gt;
+    ```
+    上行中的`yuanpinghua`就是用户名，然后将该文件权限改为：644
+    ```
+    sudo chmod 644 username.conf
+    ```
+    3. 进到/etc/apache2/目录，sudo vim httpd.conf 将下面三句话的注释去掉：
+    ```
+      LoadModule authz_core_module libexec/apache2/mod_authz_core.so
+      LoadModule authz_host_module libexec/apache2/mod_authz_host.so
+      LoadModule userdir_module libexec/apache2/mod_userdir.so
+      Include /private/etc/apache2/extra/httpd-userdir.conf
+    ```
+    将这四句前的“#”去掉
+    4. 进到/etc/apache2/extra/目录，
+      ```
+      sudo vim httpd-userdir.conf
+       ```
+      将`Include /private/etc/apache2/users/*.conf `这句话放开注释。
+    5. 然后终端输入：`sudo apachectl restart `重启apache，浏览器输入：` loacal/~yuanpinghua/` 就可以正常显示该目录下的文件
 
+
+参考网页：
+[在Mac上配置Apache+PHP环境](http://www.aichengxu.com/view/4587749)
+[Mac OS X 上的Apache配置](http://www.jianshu.com/p/7b8d5d6f22c9)
+[Mac OS X EI Captitan 中Apache开启SSL (HTTPS)](http://www.aichengxu.com/view/10044030)
+[Mac OS X中Apache开启ssl](http://www.cnblogs.com/y500/p/3596473.html)</code></pre>
             </div>
             <hr/>
 
@@ -588,7 +606,7 @@ Include /private/etc/apache2/extra/httpd-userdir.conf
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -663,6 +681,31 @@ Include /private/etc/apache2/extra/httpd-userdir.conf
     
 
     
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/09/02/Mac上-Appache-的操作/';
+        this.page.identifier = '/2016/09/02/Mac上-Appache-的操作/';
+        this.page.title = 'Mac上 Appache 的操作';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+    
 
     
 
@@ -690,9 +733,10 @@ Include /private/etc/apache2/extra/httpd-userdir.conf
                     <div class="summary block-with-text">
                         
                             
-生成主机密钥 这里会要求输入密码，不输入，直接回车 sudo mkdir /private/etc/apache2/ssl
+生成主机密钥 这里会要求输入密码，不输入，直接回车
+ sudo mkdir /private/etc/apache2/ssl
  cd /private/etc/apache2/ssl
- sudo ssh-keygen -f server.k
+ sudo ssh-keygen -f server.
                         
                     </div>
                     <div class="publish-info">
@@ -884,6 +928,9 @@ Include /private/etc/apache2/extra/httpd-userdir.conf
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -905,15 +952,11 @@ Include /private/etc/apache2/extra/httpd-userdir.conf
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

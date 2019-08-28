@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Protocol的使用及相关事项, 志鹏的技术博客">
     <meta name="description" content="在iOS开发中，Protocol是一种经常用到的设计模式，苹果的系统框架中也普遍用到了这种方式，比如UITableView中的，以及、这样的协议。我想大家也都自定义过协议，一般都用于回调，或者数据传递. 接下来我们来了解下协议使用及相关事项">
@@ -405,6 +405,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        971
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        4 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -433,7 +447,13 @@
 </li>
 </ul>
 <h1 id="协议的定义"><a href="#协议的定义" class="headerlink" title="协议的定义"></a>协议的定义</h1><ol>
-<li>协方式的定义<br><code>`</code>objc<br>@protocol Protocolname <nsobject><br>@required<br>//一系列必选方法<br>@optional<br>//一系列可选方法</nsobject></li>
+<li>协方式的定义<pre><code class="objc">@protocol Protocolname &lt;NSObject&gt;
+@required
+//一系列必选方法
+@optional
+//一系列可选方法
+</code></pre>
+</li>
 </ol>
 <p>//属性的声明<br>@end</p>
 <pre><code>2. 协议里可以定义哪些东西：
@@ -470,23 +490,22 @@ It’s best practice to define your protocols to conform to the **NSObject** pro
     @property(nonatomic,weak)id&lt;Protocolname&gt;delegate;
     ...
     @end
-</code></pre><pre><code>* &lt;协议列表&gt;
-    若需要遵守多个协议，将协议用逗号隔开，并放在尖括号&lt;&gt;中 
-* 添加代理属性
-    代理属性通常用**weak**修饰，避免强引用
-</code></pre><ol start="2">
-<li>实现协议方法<ul>
-<li>@required修饰的协议方法，需要在.m文件中对这些方法进行实现 </li>
-<li>@optional修饰的协议方法，可根据需要在.m文件中进行实现    </li>
-</ul>
-</li>
-</ol>
-<h1 id="检测对象是否遵守协议"><a href="#检测对象是否遵守协议" class="headerlink" title="检测对象是否遵守协议"></a>检测对象是否遵守协议</h1><ol>
-<li>检测某对象是否遵守该协议<br>使用 <code>- (BOOL)conformsToProtocol:(Protocol *)aProtocol;</code>进行检测<pre><code class="objc">[delegate conformsToProtocol:@protocol(Protocolname)];
-</code></pre>
-</li>
-<li>检测对象是否实现了某方法<br>使用 <code>- (BOOL)respondsToSelector:(SEL)aSelector;</code>进行检测<pre><code class="objc">[delegate respondsToSelector:@selector(methodname)];
-</code></pre>
+    ```
+    * &lt;协议列表&gt;
+        若需要遵守多个协议，将协议用逗号隔开，并放在尖括号&lt;&gt;中 
+    * 添加代理属性
+        代理属性通常用**weak**修饰，避免强引用
+2. 实现协议方法
+    * @required修饰的协议方法，需要在.m文件中对这些方法进行实现 
+    * @optional修饰的协议方法，可根据需要在.m文件中进行实现    
+
+
+# 检测对象是否遵守协议
+1. 检测某对象是否遵守该协议 
+使用 `- (BOOL)conformsToProtocol:(Protocol *)aProtocol;`进行检测
+```objc
+[delegate conformsToProtocol:@protocol(Protocolname)];</code></pre><ol start="2">
+<li>检测对象是否实现了某方法<br>使用 <code>- (BOOL)respondsToSelector:(SEL)aSelector;</code>进行检测<pre><code class="objc">[delegate respondsToSelector:@selector(methodname)];</code></pre>
 </li>
 </ol>
 
@@ -604,7 +623,7 @@ It’s best practice to define your protocols to conform to the **NSObject** pro
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -678,6 +697,31 @@ It’s best practice to define your protocols to conform to the **NSObject** pro
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2017/06/29/Protocol/';
+        this.page.identifier = '/2017/06/29/Protocol/';
+        this.page.title = 'Protocol的使用及相关事项';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -900,6 +944,9 @@ pip 下载/安装/更新下载
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -921,15 +968,11 @@ pip 下载/安装/更新下载
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

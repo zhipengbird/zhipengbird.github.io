@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="通知详解, 志鹏的技术博客">
     <meta name="description" content="iOS通知详解 不同线程发出通知的处理通知的基础知识每一个应用程序都有一个通知中心，专门负责协助不同 对象之间的消息通信。
@@ -401,6 +401,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        828
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        3 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -425,8 +439,7 @@
 //初始化一个通知：(NSNotification)对象
  - (instancetype)initWithName:(NSNotificationName)name object:(nullable id)object userInfo:(nullable NSDictionary *)userInfo
  + (instancetype)notificationWithName:(NSString *)aName object:(nullable id)anObject;
- + (instancetype)notificationWithName:(NSString *)aName object:(nullable id)anObject userInfo:(nullable NSDictionary *)aUserInfo;
-</code></pre>
+ + (instancetype)notificationWithName:(NSString *)aName object:(nullable id)anObject userInfo:(nullable NSDictionary *)aUserInfo;</code></pre>
 <pre><code class="objc">/****************    Notification Center    ****************/
 
 //发布通知方法(通知中心提供了相应的方法来帮助发布通知)
@@ -454,7 +467,6 @@
 //移除观察者
 - (void)removeObserver:(id)observer;
 - (void)removeObserver:(id)observer name:(nullable NSNotificationName)aName object:(nullable id)anObject;
-
 </code></pre>
 <blockquote>
 <p>在通知中心注册过的对象，需要在该对象释放前移除监听。否则，当相应的通知再次出现时，通知中心仍然会向该监听器发送消息。因为相应的监听器对象已经被释放了，所以可能会导致应用闪退.<br>执行顺序：一定要先向通知中心注册通知监听器，也就是谁要监听谁发布的消息，然后再执行发布消息，不然会导致消息发出来了没人接收的情况</p>
@@ -462,8 +474,7 @@
 <h2 id="同步或异步"><a href="#同步或异步" class="headerlink" title="同步或异步"></a>同步或异步</h2><p><code>[NotificationCenter defaultCenter] postNotification]</code>，这种方式是同步的，并且在哪个线程发，就在哪个线程收。<br>由于消息收和发都在同一个线程中。所以，尽量在主线程中post，不然会引起不必要的麻烦，ui刷新问题，崩溃问题等等<br>参考文档</p>
 <h2 id="addObserver调用多次"><a href="#addObserver调用多次" class="headerlink" title="addObserver调用多次"></a>addObserver调用多次</h2><p>addObserver如果添加多次，当post的时候，也会收到多次。类似这种：</p>
 <pre><code class="objc">[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@&quot;TestNotification&quot; object:nil];
- [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@&quot;TestNotification&quot; object:nil];
-</code></pre>
+ [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@&quot;TestNotification&quot; object:nil];</code></pre>
 <p><a href="https://www.jianshu.com/p/617dfb533a34" target="_blank" rel="noopener">你可能不知道的Notification</a><br><a href="http://www.cnblogs.com/QianChia/p/5771055.html" target="_blank" rel="noopener">iOS - Notification    通知</a><br><a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Notifications/Introduction/introNotifications.html#//apple_ref/doc/uid/10000043i" target="_blank" rel="noopener">NSNotification</a></p>
 
             </div>
@@ -580,7 +591,7 @@
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -654,6 +665,31 @@
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2018/11/15/通知详解/';
+        this.page.identifier = '/2018/11/15/通知详解/';
+        this.page.title = '通知详解';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -868,6 +904,9 @@ OC
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -889,15 +928,11 @@ OC
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

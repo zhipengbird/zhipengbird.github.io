@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="NSTimer, 志鹏的技术博客">
     <meta name="description" content="一、创建+ (NSTimer *)timerWithTimeInterval:(NSTimeInterval)ti invocation:(NSInvocation *)invocation repeats:(BOOL)yesOrNo;
@@ -393,6 +393,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        1.2k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        4 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -411,8 +425,7 @@
 + (NSTimer *)timerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo;
 + (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo;
 
-- (instancetype)initWithFireDate:(NSDate *)date interval:(NSTimeInterval)ti target:(id)t selector:(SEL)s userInfo:(nullable id)ui repeats:(BOOL)rep NS_DESIGNATED_INITIALIZER;
-</code></pre>
+- (instancetype)initWithFireDate:(NSDate *)date interval:(NSTimeInterval)ti target:(id)t selector:(SEL)s userInfo:(nullable id)ui repeats:(BOOL)rep NS_DESIGNATED_INITIALIZER;</code></pre>
 <a id="more"></a>
 <p>注：</p>
 <ol>
@@ -430,7 +443,6 @@
 <h2 id="二、使用（触发）"><a href="#二、使用（触发）" class="headerlink" title="二、使用（触发）"></a>二、使用（触发）</h2><pre><code class="objc">- (void)fire; //立即触发计时器
 @property (copy) NSDate *fireDate; //触发时间
 @property NSTimeInterval tolerance NS_AVAILABLE(10_9, 7_0); //误差值
-
 </code></pre>
 <p>计时器允许其触发比预定触发的日期晚,计时器可能在预定时间 到 预定时间 ＋ 误差值 之间被触发。预定触发之前不会触发。对于重复计时器,下一次触发时间是从原先的预定时间计算从而会单个触发的时间的误差值。默认值为0。系统有权运用少量的宽容某些计时器而忽略这个属性的值。</p>
 <p>注：</p>
@@ -460,10 +472,8 @@
 <p>2、使用setKeepAliveTimeout: handler:方法来注册一个周期性执行的任务, 而不管是否运行在后台.使用clearKeepAliveTimeout可以相应地清除该定时任务.</p>
 <p>例：</p>
 <pre><code class="objc">[[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^{[self reportDeviceInfo];}];
-
 </code></pre>
 <h2 id="三、释放"><a href="#三、释放" class="headerlink" title="三、释放"></a>三、释放</h2><pre><code class="objc">- (void)invalidate;
-
 </code></pre>
 <p>注：</p>
 <ol>
@@ -588,7 +598,7 @@
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -662,6 +672,31 @@
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/08/12/NSTimer/';
+        this.page.identifier = '/2016/08/12/NSTimer/';
+        this.page.title = 'NSTimer';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -885,6 +920,9 @@
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -906,15 +944,11 @@
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

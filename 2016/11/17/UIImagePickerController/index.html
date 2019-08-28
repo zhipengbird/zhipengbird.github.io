@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="UIImagePickerController, 志鹏的技术博客">
     <meta name="description" content="创建对象
@@ -404,6 +404,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        333
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        1 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -427,8 +441,7 @@
      [self.navigationController presentViewController:pickerController animated:YES completion:^{
 
      }];
- }
-</code></pre>
+ }</code></pre>
 <p>代理方法实现：</p>
 <pre><code class="objc">-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary&lt;NSString *,id&gt; *)info{
     [picker dismissViewControllerAnimated:NO completion:nil];
@@ -462,7 +475,6 @@
 
     }
 }
-
 </code></pre>
 <pre><code class="objc">//获取视频时长
 -(CGFloat) getVideoDuration:(NSURL*) URL {
@@ -472,7 +484,6 @@
     second = urlAsset.duration.value/urlAsset.duration.timescale;
     return second;
 }
-
 </code></pre>
 <pre><code class="objc">// 获取文件大小
 -(NSInteger) getFileSize:(NSString*) path {
@@ -487,7 +498,6 @@
         return -1;
     }
 }
-
 </code></pre>
 
             </div>
@@ -604,7 +614,7 @@
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -678,6 +688,31 @@
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/11/17/UIImagePickerController/';
+        this.page.identifier = '/2016/11/17/UIImagePickerController/';
+        this.page.title = 'UIImagePickerController';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -760,7 +795,8 @@
                     <div class="summary block-with-text">
                         
                             UITableViewCell学习选中状态颜色设置
-系统自带的效果：`objctypedef NS_ENUM(NSInteger, UITableViewCellSelectionStyle) {UITableViewCellSelecti
+系统自带的效果：typedef NS_ENUM(NSInteger, UITableViewCellSelectionStyle) {
+UITableViewCellSelectionSt
                         
                     </div>
                     <div class="publish-info">
@@ -899,6 +935,9 @@
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -920,15 +959,11 @@
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

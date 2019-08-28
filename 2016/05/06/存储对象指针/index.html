@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="工作随笔, 志鹏的技术博客">
     <meta name="description" content="将对象指针存入属性文件因项目需要上一补丁，需求如下：在SDWebImageDownloaderOperation类中的connectionDidFinishLoading函数里发现一些崩溃的迹象，其中一些迹象表明可能是下载的网络图片达大，而">
@@ -405,6 +405,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        725
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        2 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -417,37 +431,33 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>将对象指针存入属性文件</strong><br>因项目需要上一补丁，需求如下：<br>在SDWebImageDownloaderOperation类中的connectionDidFinishLoading函数里发现一些崩溃的迹象，其中一些迹象表明可能是下载的网络图片达大，而导至生成image对象时崩溃，现想要知到是哪里链接下的图片导致这些问题。初步的解决方案为在方法开头将url保存至userdefault中，并在函数尾部将这个url移除。再下次再次调用这个函数时，先检查是否有存在的url,有则说明发生了崩溃，因此将这个url上传上来。这里隐藏着一些问题，如这个涵数可能在多个线程里调用，如果用这个对象的url绑定一个userdefault中的一个key，那么这值会不断被覆盖，没有起到任何作用，因此我们需要做个map来存储NSURLConnection对象及相应的url,那么问题题来了，谁来做map的key值，用NSURLConnection对象指针来做吧，我们最先想到的是用指针对象NSNumber,最初代码会像下面一样：<br><a id="more"></a></p>
+                <p><strong>将对象指针存入属性文件</strong><br>因项目需要上一补丁，需求如下：<br>在SDWebImageDownloaderOperation类中的connectionDidFinishLoading函数里发现一些崩溃的迹象，其中一些迹象表明可能是下载的网络图片达大，而导至生成image对象时崩溃，现想要知到是哪里链接下的图片导致这些问题。初步的解决方案为在方法开头将url保存至userdefault中，并在函数尾部将这个url移除。再下次再次调用这个函数时，先检查是否有存在的url,有则说明发生了崩溃，因此将这个url上传上来。这里隐藏着一些问题，如这个涵数可能在多个线程里调用，如果用这个对象的url绑定一个userdefault中的一个key，那么这值会不断被覆盖，没有起到任何作用，因此我们需要做个map来存储NSURLConnection对象及相应的url,那么问题题来了，谁来做map的key值，用NSURLConnection对象指针来做吧，我们最先想到的是用指针对象NSNumber,最初代码会像下面一样：  </p>
+<a id="more"></a>
 <pre><code class="objc"> NSUserDefaults * defaults =[NSUserDefaults standardUserDefaults];
  NSMutableDictionary * dict = [NSMutableDictionary dictionary];
  [dict setObject:[NSNumber valueWithPointer:(__bridge const void * _Nullable)(aConnection)] forKey:aConnection.currentRequest.URL.absoluteString];
  [defaults setObject:dict forKey:@&quot;URL&quot;];
- [defaults synchronize];
-</code></pre>
+ [defaults synchronize];</code></pre>
 <p>代码看起来行完美，运行来看下结果吧</p>
 <pre><code class="objc">Attempt to set a non-property-list object {
     &quot;http://i7.ushareit.com/feed/xgeitCrB.png&quot; = &quot;&lt;10f3541a&gt;&quot;;
-} as an NSUserDefaults/CFPreferences value for key URL
-</code></pre>
+} as an NSUserDefaults/CFPreferences value for key URL</code></pre>
 <p>我们得到了如上的一个提示，并且界面处理卡住状态。这个提示已经很明了了， 它说这是一个非序列化对象，不能存入userdefault中，从中我们可以得到另外的一些信息，用NSNumber去装一个非序列化的指针对象，得到的还是一个非序列化的NSValue对象，我们知道在序列化中，只能对字典或数组中特定的序列化对象进行序列化，其他非序列化对象不能完成这操作。那这样不能实现需要，那就将其地址转成字符串，并做为key,这应该可以吧。</p>
 <pre><code class="objc">NSUserDefaults * defaults =[NSUserDefaults standardUserDefaults];
    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
    [dict setObject:[NSString stringWithFormat:@&quot;%p&quot;,aConnection] forKey:aConnection.currentRequest.URL.absoluteString];
    [defaults setObject:dict forKey:@&quot;URL&quot;];
-   [defaults synchronize];
-</code></pre>
+   [defaults synchronize];</code></pre>
 <p>字典里的值是这样的</p>
 <pre><code class="objc">{
     &quot;http://i7.ushareit.com/feed/xgeitCrB.png&quot; = 0x1a98db60;
-}
-</code></pre>
+}</code></pre>
 <p>运行结果很完美，实现了我们的需求，但是，我们要写的是补丁啊，NSString 在jspatch中不能使用stringWithFormat方法，对NSURLConnection这个类扫了一遍发现有使用它的description可以满足我们的需要。</p>
 <pre><code class="objc">   NSUserDefaults * defaults =[NSUserDefaults standardUserDefaults];
    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
    [dict setObject:[aConnection description] forKey:aConnection.currentRequest.URL.absoluteString];
    [defaults setObject:dict forKey:@&quot;URL&quot;];
-   [defaults synchronize];
-</code></pre>
+   [defaults synchronize];</code></pre>
 <p>这就是我们最终需要的代码，只要把这些翻译成js代码就大功告成了！<br><strong>ps:非序列化对象装在各容器集合中也不能写入文件和userdefault中</strong></p>
 
             </div>
@@ -564,7 +574,7 @@
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -638,6 +648,31 @@
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/05/06/存储对象指针/';
+        this.page.identifier = '/2016/05/06/存储对象指针/';
+        this.page.title = '工作随笔';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -861,6 +896,9 @@
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -882,15 +920,11 @@
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

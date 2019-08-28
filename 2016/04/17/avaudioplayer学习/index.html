@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="AVAudioPlayer学习, 志鹏的技术博客">
     <meta name="description" content="AVAudioPlayer 使用方式
@@ -401,6 +401,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        1.4k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        5 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -420,8 +434,9 @@
 <p><strong>创建实例对象的方式方法</strong>  </p>
 <ol>
 <li>使用包含要播放音频的内存版本的NSData <code>initWithData:error:</code>  </li>
-<li>使用本地音频文件的NSURL<code>initWithContentsOfURL:error:</code><br><strong><em>在用上述方法返回一个有效实例时，建议调用<code>prepareToPlay</code>方法。如此一来会取得需要的音频硬件并预加载<code>Audio Queue</code>的缓冲区</em></strong></li>
+<li>使用本地音频文件的NSURL<code>initWithContentsOfURL:error:</code>  </li>
 </ol>
+<p><strong><em>在用上述方法返回一个有效实例时，建议调用<code>prepareToPlay</code>方法。如此一来会取得需要的音频硬件并预加载<code>Audio Queue</code>的缓冲区</em></strong></p>
 <p><strong>对播放实例的控制操作</strong>  </p>
 <ol>
 <li>基础功能：<code>play</code> 、<code>pause</code>、<code>stop</code>  </li>
@@ -447,16 +462,14 @@
     }
     if (![session setActive:YES error:&amp;error]) {
         NSLog(@&quot;%@&quot;,error.localizedDescription);
-    }
-</code></pre>
+    }</code></pre>
 <ul>
 <li>在<code>info.plist</code>文件中添加键值，该值表示应用程序允许在后台播放音频内容</li>
 </ul>
 <pre><code class="objc">&lt;key&gt;UIBackgroundModes&lt;/key&gt;
     &lt;array&gt;
         &lt;string&gt;audio&lt;/string&gt;
-    &lt;/array&gt;
-</code></pre>
+    &lt;/array&gt;</code></pre>
 <p><strong>音频会话中断通知处理</strong></p>
 <blockquote>
 <p>测试你的应用程序是否做了会话中断处理：  </p>
@@ -468,8 +481,7 @@
 </blockquote>
 <p>注册监听</p>
 <pre><code class="objc">//        监听中断通知
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleInterruption: ) name:AVAudioSessionInterruptionNotification object:[AVAudioSession sharedInstance]];
-</code></pre>
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleInterruption: ) name:AVAudioSessionInterruptionNotification object:[AVAudioSession sharedInstance]];</code></pre>
 <p>处理中断通知：</p>
 <pre><code class="objc">-(void)handleInterruption:(NSNotification*)notification{
 
@@ -485,15 +497,13 @@
         }
     }
 }
-
 </code></pre>
 <p><em>线路改变通知处理</em></p>
 <blockquote>
 <p>如何确保应用程序对线路变换做出正确的响应。在iOS设备上添加或移除音频输入或输出线路时，会发现线路改变。有多重因会导致线路变化，如用户插入耳机或断开ＵＳＢ麦克风，这些事件的发生时，音频会根据情况改变输入输出线路，同时会广播一个描述该变化的通知给所有相关的监听器。<br>我们做这么一个小测试：运行你的应用，并播放音频，在播放期间插入耳机，音频输出线路变为耳机插孔并继续正常播放，这是我们希望的效果。断开耳机连接。音频线路再次回到设备的内置扬声器，我们再次听到了声音。虽然这和我们预期的效果一样，不过按苹果公司的相关文档，该音频应处理静音状态。当用插入耳机时隐含的意思是用户不希望外界听到具体的音频内容，这就意味着用户断开耳机，播放的内容需要继续保密，所有我们需要停止音频播放。    </p>
 </blockquote>
 <p>监听线路改变通知</p>
-<pre><code class="objc">    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleRouteChange:) name:AVAudioSessionRouteChangeNotification object:[AVAudioSession sharedInstance]];
-</code></pre>
+<pre><code class="objc">    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleRouteChange:) name:AVAudioSessionRouteChangeNotification object:[AVAudioSession sharedInstance]];</code></pre>
 <p>处理通知：</p>
 <pre><code class="objc">-(void)handleRouteChange:(NSNotification*)notification{
 //    通过AVAudioSessionRouteChangeReasonKey来确认发现改变的原因
@@ -515,8 +525,7 @@
         }
 
     }
-}
-</code></pre>
+}</code></pre>
 
             </div>
             <hr/>
@@ -632,7 +641,7 @@
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -706,6 +715,31 @@
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/04/17/avaudioplayer学习/';
+        this.page.identifier = '/2016/04/17/avaudioplayer学习/';
+        this.page.title = 'AVAudioPlayer学习';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -930,6 +964,9 @@ CWConfiguration与CW
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -951,15 +988,11 @@ CWConfiguration与CW
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

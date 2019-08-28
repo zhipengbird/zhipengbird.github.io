@@ -2,12 +2,10 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="iOS 日期处理, 志鹏的技术博客">
-    <meta name="description" content="在开发过程中，我们经常会遇到一些跟时间处理相关的工作，比如说，时间的比较，加减，格式化，NSString  NSDate, NSDate  NSCanlendar等等。今天我们来做个整理，理个头绪。方便我们自己记忆。
-NSDate 介绍
-N">
+    <meta name="description" content="在开发过程中，我们经常会遇到一些跟时间处理相关的工作，比如说，时间的比较，加减，格式化，NSString &amp;lt;—-&amp;gt; NSDate, NSDate &amp;lt;—&amp;gt; NSCanlendar等等。今天我们来做个整理，理个头绪。方便">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -411,6 +409,20 @@ N">
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        1.2k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        4 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -423,7 +435,7 @@ N">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>在开发过程中，我们经常会遇到一些跟时间处理相关的工作，比如说，时间的比较，加减，格式化，NSString <----> NSDate, NSDate <---> NSCanlendar等等。今天我们来做个整理，理个头绪。方便我们自己记忆。</---></----></p>
+                <p>在开发过程中，我们经常会遇到一些跟时间处理相关的工作，比如说，时间的比较，加减，格式化，NSString &lt;—-&gt; NSDate, NSDate &lt;—&gt; NSCanlendar等等。今天我们来做个整理，理个头绪。方便我们自己记忆。</p>
 <h1 id="NSDate-介绍"><a href="#NSDate-介绍" class="headerlink" title="NSDate 介绍"></a>NSDate 介绍</h1><ol>
 <li>NSDate对象用来表示一个具体的时间点；</li>
 <li>NSDate是一个类簇。我们所使用的NSDate对象，都是NSDate的私有之类的实体；</li>
@@ -445,10 +457,9 @@ N">
 +(instancetype)dateWithTimeIntervalSince1970:(NSTimeInterval)secs;
 
 //返回以date时间为基准，过了secsToBeAdded秒的时间
-+(instancetype)dateWithTimeInterval:(NSTimeInterval)secsToBeAdded sinceDate:(NSDate *)date;
-</code></pre>
++(instancetype)dateWithTimeInterval:(NSTimeInterval)secsToBeAdded sinceDate:(NSDate *)date;</code></pre>
 <ul>
-<li>实例方法初始化<br><code>`</code>objc<br>//初始化当前时间(获取的是GMT时间,需要获取某个时区的时间，看常用方法)</li>
+<li>实例方法初始化<br>```objc<br>//初始化当前时间(获取的是GMT时间,需要获取某个时区的时间，看常用方法)</li>
 </ul>
 <ul>
 <li>(instancetype)init;</li>
@@ -463,28 +474,28 @@ N">
 </ul>
 <p>//初始化以date时间为基准，过了secsToBeAdded秒的时间</p>
 <ul>
-<li>(instancetype)initWithTimeInterval:(NSTimeInterval)secsToBeAdded sinceDate:(NSDate *)date;<br><code>`</code></li>
+<li>(instancetype)initWithTimeInterval:(NSTimeInterval)secsToBeAdded sinceDate:(NSDate *)date;<pre><code></code></pre></li>
 </ul>
 <ul>
-<li>时间之间的比较<br><code>`</code>objc<br>//与anotherDate比较，返回较早的那个日期</li>
+<li>时间之间的比较<br>```objc<br>//与anotherDate比较，返回较早的那个日期</li>
 </ul>
 <ul>
-<li>(NSDate <em>)earlierDate:(NSDate </em>)anotherDate;</li>
+<li>(NSDate *)earlierDate:(NSDate *)anotherDate;</li>
 </ul>
 <p>//与anotherDate比较，返回较晚的那个日期</p>
 <ul>
-<li>(NSDate <em>)laterDate:(NSDate </em>)anotherDate;</li>
+<li>(NSDate *)laterDate:(NSDate *)anotherDate;</li>
 </ul>
-<p>/<em>该方法用于排序时调用:<br>  当实例保存的日期值与anotherDate相同时返回NSOrderedSame<br>  当实例保存的日期值晚于anotherDate时返回NSOrderedDescending<br>  当实例保存的日期值早于anotherDate时返回NSOrderedAscending </em>/</p>
+<p>/*该方法用于排序时调用:<br>  当实例保存的日期值与anotherDate相同时返回NSOrderedSame<br>  当实例保存的日期值晚于anotherDate时返回NSOrderedDescending<br>  当实例保存的日期值早于anotherDate时返回NSOrderedAscending */</p>
 <ul>
 <li>(NSComparisonResult)compare:(NSDate *)other;</li>
 </ul>
 <p>//与otherDate比较，相同返回YES</p>
 <ul>
-<li>(BOOL)isEqualToDate:(NSDate *)otherDate;<br><code>`</code></li>
+<li>(BOOL)isEqualToDate:(NSDate *)otherDate;<br>```</li>
 </ul>
 <ul>
-<li>取回时间间隔<br><code>`</code>objc<br>//以refDate为基准时间，返回实例保存的时间与refDate的时间间隔</li>
+<li>取回时间间隔<br>```objc<br>//以refDate为基准时间，返回实例保存的时间与refDate的时间间隔</li>
 </ul>
 <ul>
 <li>(NSTimeInterval)timeIntervalSinceDate:(NSDate *)anotherDate;</li>
@@ -502,99 +513,82 @@ N">
 <li>(NSTimeInterval)timeIntervalSinceReferenceDate;</li>
 </ul>
 <ul>
-<li>(NSTimeInterval)timeIntervalSinceReferenceDate;<br><code>`</code></li>
+<li>(NSTimeInterval)timeIntervalSinceReferenceDate;<pre><code>
+</code></pre></li>
 </ul>
 <h1 id="时间的创建"><a href="#时间的创建" class="headerlink" title="时间的创建"></a>时间的创建</h1><ul>
 <li><p>创建当前时间</p>
-<pre><code class="objc">  NSDate * now =  [NSDate date];
-</code></pre>
+<pre><code class="objc">  NSDate * now =  [NSDate date];</code></pre>
 </li>
 <li><p>根据指定的时间差创建时间</p>
 <pre><code class="objc">  NSTimeInterval day = 24*60*60;
   NSDate * yesterday = [NSDate dateWithTimeIntervalSinceNow:-day];
-  NSDate  *tomarror  =[NSDate dateWithTimeIntervalSinceNow:day];
-</code></pre>
+  NSDate  *tomarror  =[NSDate dateWithTimeIntervalSinceNow:day];</code></pre>
 </li>
-<li>根据已有时间创建日期<pre><code class="objc">  NSTimeInterval day = 24*60*60;
+<li><p>根据已有时间创建日期</p>
+<pre><code class="objc">  NSTimeInterval day = 24*60*60;
   NSDate * now =  [NSDate date];
   NSDate * nextDay = [now dateByAddingTimeInterval:day];
-  NSDate * lastDay = [now dateByAddingTimeInterval:-day];
-</code></pre>
+  NSDate * lastDay = [now dateByAddingTimeInterval:-day];</code></pre>
 </li>
 </ul>
 <h1 id="日期的比较"><a href="#日期的比较" class="headerlink" title="日期的比较"></a>日期的比较</h1><ul>
-<li>两日期是否相同<pre><code class="objc">  BOOL isEqual = [nextDay isEqualToDate:lastDay];
-</code></pre>
+<li><p>两日期是否相同</p>
+<pre><code class="objc">  BOOL isEqual = [nextDay isEqualToDate:lastDay];</code></pre>
 </li>
 <li><p>比较哪个日期更早</p>
-<pre><code class="objc">  NSDate * earlier_date = [nextDay earlierDate:lastDay];
-</code></pre>
+<pre><code class="objc">  NSDate * earlier_date = [nextDay earlierDate:lastDay];</code></pre>
 </li>
 <li><p>比较哪个日期更晚</p>
-<pre><code class="objc">  NSDate * later_date = [nextDay laterDate:lastDay];
-</code></pre>
+<pre><code class="objc">  NSDate * later_date = [nextDay laterDate:lastDay];</code></pre>
 </li>
 <li><p>求两个时间相同秒数</p>
-<pre><code class="objc">  NSTimeInterval time = [nextDay timeIntervalSinceDate:lastDay];
-</code></pre>
+<pre><code class="objc">  NSTimeInterval time = [nextDay timeIntervalSinceDate:lastDay];</code></pre>
 </li>
 </ul>
 <h1 id="设置日期格式"><a href="#设置日期格式" class="headerlink" title="设置日期格式"></a>设置日期格式</h1><ul>
-<li>根据系统预设创建日期格式<br><code>`</code>objc</li>
+<li>根据系统预设创建日期格式<br>```objc</li>
 </ul>
 <ul>
 <li>( NSDateFormatter * )formate{<br>  if (!_formate) {<pre><code>  _formate = [[NSDateFormatter alloc]init];
   [_formate setTimeStyle:NSDateFormatterLongStyle];
-  [_formate setDateStyle:NSDateFormatterLongStyle];
-</code></pre>  }<br>  return _formate;<br>}<br><code>`</code></li>
+  [_formate setDateStyle:NSDateFormatterLongStyle];</code></pre>  }<br>  return _formate;<br>}<br>```</li>
 </ul>
 <ul>
-<li><p>根据格式化字符创建日期格式</p>
-<pre><code class="objc">-(NSDateFormatter*)formate{
-  if (!_formate) {
-      _formate = [[NSDateFormatter alloc]init];
-
-      [_formate setDateFormat:@&quot;yyyy/MM/dd HH/mm/ss Z&quot;];
-  }
-  return _formate;
-}
-</code></pre>
-<blockquote>
-<p>ps:这里的formate尽量使用一个懒加载的方式，并持有一个实例，有利用节约创建时间。</p>
-</blockquote>
-</li>
+<li>根据格式化字符创建日期格式<br>```objc </li>
 </ul>
-<h1 id="字符串时间"><a href="#字符串时间" class="headerlink" title="字符串时间"></a>字符串<--->时间</---></h1><ul>
-<li><p>字符串转时间</p>
-<pre><code class="objc">  // 1.时间字符串
-  NSString * datestring = @&quot;2017-06-13 14:44:11 +0800&quot;;
-  // 2.格式化对象的样式/z大小写都行/格式必须严格和字符串时间一样
-  [self.formate setDateFormat:@&quot;yyyy-MM-dd HH:mm:ss Z&quot;];
-  // 3.利用时间格式化对象让字符串转换成时间 (自动转换0时区/东加西减)
-  NSDate * date = [self.formate dateFromString:datestring];
-</code></pre>
-</li>
-<li><p>时间转字符串</p>
-</li>
+<p>-(NSDateFormatter*)formate{<br>    if (!_formate) {<br>        _formate = [[NSDateFormatter alloc]init];</p>
+<pre><code>    [_formate setDateFormat:@&quot;yyyy/MM/dd HH/mm/ss Z&quot;];
+}
+return _formate;</code></pre><p>}</p>
+<pre><code>&gt; ps:这里的formate尽量使用一个懒加载的方式，并持有一个实例，有利用节约创建时间。
+
+# 字符串&lt;---&gt;时间
+* 字符串转时间
+```objc
+    // 1.时间字符串
+    NSString * datestring = @&quot;2017-06-13 14:44:11 +0800&quot;;
+    // 2.格式化对象的样式/z大小写都行/格式必须严格和字符串时间一样
+    [self.formate setDateFormat:@&quot;yyyy-MM-dd HH:mm:ss Z&quot;];
+    // 3.利用时间格式化对象让字符串转换成时间 (自动转换0时区/东加西减)
+    NSDate * date = [self.formate dateFromString:datestring];</code></pre><ul>
+<li>时间转字符串</li>
 </ul>
 <pre><code class="objc">    // 1.创建一个时间对象
     NSDate * date = [NSDate date];
     // 2.设置时间格式化对象的样式
     [self.formate setDateFormat:@&quot;yyyy/MM/dd HH:mm:s&quot;];
     // 3.利用时间格式化对象对时间进行格式化
-    NSString * datestring = [self.formate stringFromDate:date];
-</code></pre>
+    NSString * datestring = [self.formate stringFromDate:date];</code></pre>
 <h1 id="时区"><a href="#时区" class="headerlink" title="时区"></a>时区</h1><ul>
-<li>获取当前时区<pre><code class="objc">  NSTimeZone * zone =  [NSTimeZone systemTimeZone];
-</code></pre>
+<li>获取当前时区<pre><code class="objc">  NSTimeZone * zone =  [NSTimeZone systemTimeZone];</code></pre>
 </li>
 <li>获取时差<pre><code class="objc">  //时区
   NSTimeZone * zone =  [NSTimeZone systemTimeZone];
   //时间格式
   NSDate * date = [NSDate date];
   //时差
-  NSInteger seconds = [zone secondsFromGMTForDate:date];
-</code></pre>
+  NSInteger seconds = [zone secondsFromGMTForDate:date];</code></pre>
 </li>
 </ul>
 <h1 id="NSCalendar"><a href="#NSCalendar" class="headerlink" title="NSCalendar"></a>NSCalendar</h1><p>NSCalendar：日历。对世界上现存的常用历法进行了封装，即提供了不同的历法的时间信息，又支持日历的计算。</p>
@@ -714,7 +708,7 @@ N">
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -788,6 +782,31 @@ N">
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2017/06/13/日期处理/';
+        this.page.identifier = '/2017/06/13/日期处理/';
+        this.page.title = 'iOS 日期处理';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -867,9 +886,9 @@ N">
                     <div class="summary block-with-text">
                         
                             解释你和某个人的相识过程过去进行时
-使用过去进行时表示过去发生并持续了一段时间的一个动作或事件。用动词 be 的过去时和动词的 + ing 形式构成过去进行时。`
+使用过去进行时表示过去发生并持续了一段时间的一个动作或事件。用动词 be 的过去时和动词的 + ing 形式构成过去进行时。
 
-A: I met Elsa in Spain. I was visitin
+A: I met Elsa in Spain. I was visiting
                         
                     </div>
                     <div class="publish-info">
@@ -1000,6 +1019,9 @@ A: I met Elsa in Spain. I was visitin
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -1021,15 +1043,11 @@ A: I met Elsa in Spain. I was visitin
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

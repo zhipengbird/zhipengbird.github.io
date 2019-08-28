@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="cocoapods系列教程1, 志鹏的技术博客">
     <meta name="description" content="cocoapods 打包类库需要使用一个cocoapods的插件cocoapods-packager来完成类库的打包。当然也可以手动编译打包，但是过程会相当繁琐。
@@ -404,6 +404,20 @@ sudo gem install cocoa">
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        215
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        1 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -419,21 +433,21 @@ sudo gem install cocoa">
                 <h1 id="cocoapods-打包类库"><a href="#cocoapods-打包类库" class="headerlink" title="cocoapods 打包类库"></a>cocoapods 打包类库</h1><p>需要使用一个cocoapods的插件cocoapods-packager来完成类库的打包。当然也可以手动编译打包，但是过程会相当繁琐。</p>
 <ul>
 <li><p>安装打包插件<br>终端执行以下命令</p>
-<pre><code class="sh">sudo gem install cocoapods-packager
-</code></pre>
+<pre><code class="sh">sudo gem install cocoapods-packager</code></pre>
 </li>
 <li><p>打包<br>命令很简单，执行</p>
-<pre><code class="sh">pod package XXXX.podspec --library --force
-</code></pre>
-<p>命令参数<br><code>`</code>sh<br>//强制覆盖之前已经生成过的二进制库<br>–force</p>
+<pre><code class="sh">pod package XXXX.podspec --library --force</code></pre>
+<p>命令参数<br>```sh<br>//强制覆盖之前已经生成过的二进制库 </p>
 </li>
 </ul>
+<p>–force</p>
 <p>//生成静态.framework<br>–embedded</p>
 <p>//生成静态.a<br>–library</p>
 <p>//生成动态.framework<br>–dynamic</p>
 <p>//动态.framework是需要签名的，所以只有生成动态库的时候需要这个BundleId<br>–bundle-identifier</p>
 <p>//不包含依赖的符号表，生成动态库的时候不能包含这个命令，动态库一定需要包含依赖的符号表。<br>–exclude-deps</p>
-<p>//表示生成的库是debug还是release，默认是release。–configuration=Debug<br>–configuration<br><code>`</code></p>
+<p>//表示生成的库是debug还是release，默认是release。–configuration=Debug<br>–configuration</p>
+<p>```</p>
 <p>参考链接<br><a href="https://www.zybuluo.com/qidiandasheng/note/595740" target="_blank" rel="noopener">pod 二进制化</a></p>
 <p><a href="https://segmentfault.com/a/1190000007076865" target="_blank" rel="noopener">use_frameworks!</a></p>
 
@@ -551,7 +565,7 @@ sudo gem install cocoa">
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -626,6 +640,31 @@ sudo gem install cocoa">
     
 
     
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2017/06/02/cocoapods系列教程1/';
+        this.page.identifier = '/2017/06/02/cocoapods系列教程1/';
+        this.page.title = 'cocoapods系列教程1';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+    
 
     
 
@@ -653,9 +692,9 @@ sudo gem install cocoa">
                     <div class="summary block-with-text">
                         
                             解释你和某个人的相识过程过去进行时
-使用过去进行时表示过去发生并持续了一段时间的一个动作或事件。用动词 be 的过去时和动词的 + ing 形式构成过去进行时。`
+使用过去进行时表示过去发生并持续了一段时间的一个动作或事件。用动词 be 的过去时和动词的 + ing 形式构成过去进行时。
 
-A: I met Elsa in Spain. I was visitin
+A: I met Elsa in Spain. I was visiting
                         
                     </div>
                     <div class="publish-info">
@@ -692,7 +731,10 @@ A: I met Elsa in Spain. I was visitin
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            GPUImage示例：
+                            GPUImage示例：  
+
+
+
 
                         
                     </div>
@@ -824,6 +866,9 @@ A: I met Elsa in Spain. I was visitin
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -845,15 +890,11 @@ A: I met Elsa in Spain. I was visitin
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

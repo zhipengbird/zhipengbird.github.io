@@ -2,14 +2,15 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="手把手教你使用charles抓取https消息, 志鹏的技术博客">
     <meta name="description" content="
 安装charles
+
 安装sslproxy证书
 
-电脑端（Mac）：  charles–&amp;gt;help–&amp;gt;SSL Proxying –&amp;gt; install charles Root certificate在密钥管理中将该证书设置">
+电脑端（Mac）：  charles–&amp;gt;help–&amp;gt;SSL Proxying –&amp;gt; install charles Root certificate在密钥管理中将该证书设">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -400,6 +401,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        754
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        3 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -413,7 +428,8 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <ol>
-<li>安装charles</li>
+<li><p>安装charles</p>
+</li>
 <li><p>安装sslproxy证书</p>
 <ul>
 <li>电脑端（Mac）：  charles–&gt;help–&gt;SSL Proxying –&gt; install charles Root certificate<br>在密钥管理中将该证书设置信任。</li>
@@ -423,13 +439,12 @@
 <li><p>制作对应用网站的crt证书 这里以”<a href="https://cf.ushareit.com&quot;为例" target="_blank" rel="noopener">https://cf.ushareit.com&quot;为例</a></p>
 <a id="more"></a>
 <h1 id="制作流程："><a href="#制作流程：" class="headerlink" title="制作流程："></a>制作流程：</h1></li>
-<li>生成密钥<br> 打开终端，输入以下命令：<pre><code class="js"> cd /private/etc/apache2/ssl //进行该文件夹中
- sudo ssh-keygen -f server.key //生成key ,若要求输入密码，可以按Enter进入下一步
-</code></pre>
+<li><p>生成密钥<br> 打开终端，输入以下命令：</p>
+<pre><code class="js"> cd /private/etc/apache2/ssl //进行该文件夹中
+ sudo ssh-keygen -f server.key //生成key ,若要求输入密码，可以按Enter进入下一步</code></pre>
 </li>
 <li><p>用上面生成的server.key 生成证书请求文件<br>   输入以命令：</p>
-<pre><code class="js">   sudo openssl req -new -key server.key -out cf.ushareit.com.csr
-</code></pre>
+<pre><code class="js">   sudo openssl req -new -key server.key -out cf.ushareit.com.csr</code></pre>
 <p>   执行记录：</p>
 <pre><code class="js">   localhost:ssl yuanpinghua$ sudo openssl req -new -key server.key -out cf.ushareit.com.csr
              Password:
@@ -452,10 +467,10 @@
              to be sent with your certificate request
              A challenge password []:
              An optional company name []:
-
 </code></pre>
 </li>
-<li>使用上述生成的server.key 和证书请求文件生成ssl 证书:<pre><code> 输入如下命令：
+<li><p>使用上述生成的server.key 和证书请求文件生成ssl 证书:</p>
+<pre><code> 输入如下命令：
  ```js
  sudo openssl x509 -req -days 365 -in cf.ushareit.com.csr -signkey server.key -out cf.ushareit.com.crt
  ```
@@ -465,8 +480,7 @@
  Signature ok
  subject=/C=AU/ST=Some-State/O=Internet Widgits Pty Ltd/CN=cf.ushareit.com
  Getting Private key
- ```
-</code></pre></li>
+ ```</code></pre></li>
 <li><p>到此证书已经制作完成，接下来要进行Appache网络配置：</p>
 <pre><code> 使用编辑器打开`/etc/apache2/httpd.conf`文件 将下面两行前的`#`号去掉,后保存。
  ```js
@@ -495,21 +509,19 @@
    RewriteRule ^(.*)$ /abc.php
  &lt;/VirtualHost&gt;
  ```
- 在`/Library/WebServer/Documents/`站点下创建`cf_ushareit_com`文件夹。同时创建一个  `crt`文件夹，用来存放刚创建的`cf_ushareit_com.crt`证书
-</code></pre></li>
+ 在`/Library/WebServer/Documents/`站点下创建`cf_ushareit_com`文件夹。同时创建一个  `crt`文件夹，用来存放刚创建的`cf_ushareit_com.crt`证书</code></pre></li>
 <li><p>在命令行中输入以下命令，检查刚加入的文件进行语法检查，并重新启动Appache:</p>
 <pre><code>```js
 sudo apachectl configtest //检查配置
 sudo apachectl -k restart  //强制重启
-```
-</code></pre></li>
-<li>证书安装与sslproxy设置<pre><code> 在手机端安装刚才创建的crt证书。
+```</code></pre></li>
+<li><p>证书安装与sslproxy设置</p>
+<pre><code> 在手机端安装刚才创建的crt证书。
  在charles中进行ssl设置：
  ```
  charles --&gt;Proxy--&gt;SSL Proxying Setting --&gt; add --&gt;Host:cf.ushareit.com /port:443 --&gt; ok
  ```
- 现在可以尽情使用了！哈哈
-</code></pre></li>
+ 现在可以尽情使用了！哈哈</code></pre></li>
 </ol>
 
             </div>
@@ -626,7 +638,7 @@ sudo apachectl -k restart  //强制重启
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -701,6 +713,31 @@ sudo apachectl -k restart  //强制重启
     
 
     
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/09/03/手把手教你使用charles抓取https消息/';
+        this.page.identifier = '/2016/09/03/手把手教你使用charles抓取https消息/';
+        this.page.title = '手把手教你使用charles抓取https消息';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+    
 
     
 
@@ -729,10 +766,9 @@ sudo apachectl -k restart  //强制重启
                         
                             默认情况下直接用
 pip install requests
-
 会安装到MacOS 自带的Python 2下面，Python 3还是不能使用requests模块。解决方案
 下载request源代码：
-curl -OL https://gith
+curl -OL https://githu
                         
                     </div>
                     <div class="publish-info">
@@ -770,9 +806,10 @@ curl -OL https://gith
                     <div class="summary block-with-text">
                         
                             
-生成主机密钥 这里会要求输入密码，不输入，直接回车 sudo mkdir /private/etc/apache2/ssl
+生成主机密钥 这里会要求输入密码，不输入，直接回车
+ sudo mkdir /private/etc/apache2/ssl
  cd /private/etc/apache2/ssl
- sudo ssh-keygen -f server.k
+ sudo ssh-keygen -f server.
                         
                     </div>
                     <div class="publish-info">
@@ -915,6 +952,9 @@ curl -OL https://gith
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -936,15 +976,11 @@ curl -OL https://gith
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

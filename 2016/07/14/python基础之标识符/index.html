@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="python基础之标识符, 志鹏的技术博客">
     <meta name="description" content="标识符  标识符是计算机语言中允许用为名字的有效字符串集合。有一部分是关键字，构成语言的标识符。这样的标识符是保留字，不能用于其他用途，否则会引起语法错误。python中的“内建”标识符也不推荐使用。
@@ -394,6 +394,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        957
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        3 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -452,7 +466,10 @@
 <p><code>__name__</code>系统变量：</p>
 <ul>
 <li>如果模块是导被导入，<code>__name__</code>的值为模块名</li>
-<li>如果模块被直接执行,<code>__name__</code> 的值为<code>__main__</code><br><code>`</code>python<h1 id="coding-utf-8-起始行"><a href="#coding-utf-8-起始行" class="headerlink" title="coding=utf-8              # 起始行"></a>coding=utf-8              # 起始行</h1></li>
+<li>如果模块被直接执行,<code>__name__</code> 的值为<code>__main__</code><pre><code class="python"># coding=utf-8              # 起始行
+
+</code></pre>
+</li>
 </ul>
 <p>“this is a module document”  # 模块文档</p>
 <p>import sys<br>import os  # 模块导入</p>
@@ -465,19 +482,18 @@ def __init__(self):
 def testFunction(self):  # 函数定义
     &quot;this is a test function&quot;  # 函数文档
     test = Test()
-    print(&#39;this test function&#39;)
-</code></pre><p>def test():  # 函数定义<br>    “test”<br>    print(“test”)</p>
+    print(&#39;this test function&#39;)</code></pre><p>def test():  # 函数定义<br>    “test”<br>    print(“test”)</p>
 <p>if <strong>name</strong> == ‘<strong>main</strong>‘:  # 主程序<br>    test()<br>    print(<strong>name</strong>)</p>
-<p><code>`</code></p>
-<h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><ul>
-<li>变量无须事先声明</li>
-<li>变量无须指定类型</li>
-<li>开发人员不用关心内存管理</li>
-<li>变量名会被“回收”</li>
-<li>del 语句能够直接释放资源</li>
-</ul>
-<h3 id="为什么变量无需事先声明，也无需类型声明"><a href="#为什么变量无需事先声明，也无需类型声明" class="headerlink" title="为什么变量无需事先声明，也无需类型声明"></a>为什么变量无需事先声明，也无需类型声明</h3><p>  在Python语言中，对象的类型和内存占用都是运行时确定的。尽管代码被编译成字节码，python依然是一种解释型语言。在创建时，解释器会根据语法和右侧的操作数来决定新对象的类型。在对象创建后，该对象的引用会被赋值给左侧的变量。</p>
+<pre><code>
+## 内存管理
+  * 变量无须事先声明
+  * 变量无须指定类型
+  * 开发人员不用关心内存管理
+  * 变量名会被“回收”
+  * del 语句能够直接释放资源
 
+### 为什么变量无需事先声明，也无需类型声明
+  在Python语言中，对象的类型和内存占用都是运行时确定的。尽管代码被编译成字节码，python依然是一种解释型语言。在创建时，解释器会根据语法和右侧的操作数来决定新对象的类型。在对象创建后，该对象的引用会被赋值给左侧的变量。</code></pre>
             </div>
             <hr/>
 
@@ -592,7 +608,7 @@ def testFunction(self):  # 函数定义
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -666,6 +682,31 @@ def testFunction(self):  # 函数定义
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/07/14/python基础之标识符/';
+        this.page.identifier = '/2016/07/14/python基础之标识符/';
+        this.page.title = 'python基础之标识符';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -893,6 +934,9 @@ def testFunction(self):  # 函数定义
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -914,15 +958,11 @@ def testFunction(self):  # 函数定义
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

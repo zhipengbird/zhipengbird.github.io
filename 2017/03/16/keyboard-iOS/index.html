@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="keyboard_iOS, 志鹏的技术博客">
     <meta name="description" content="一. 键盘通知  当文本View(如UITextField,UITextView, UIWebView内的输入框)进入编辑模式成为first responder时，系统会自动显示键盘。成为firstresponder可能由用户点击触发，也可">
@@ -405,6 +405,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        1.2k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        4 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -417,26 +431,23 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="一-键盘通知"><a href="#一-键盘通知" class="headerlink" title="一. 键盘通知"></a>一. 键盘通知</h1><p>  当文本<code>View</code>(如<code>UITextField</code>,<code>UITextView</code>, <code>UIWebView</code>内的输入框)进入编辑模式成为first responder时，系统会自动显示键盘。成为firstresponder可能由用户点击触发，也可向文本View发送<code>becomeFirstResponder</code>消息触发。当文本视图退出first responder时，键盘会消失。文本View退出first responder可能由用户点击键盘上的Done或Return键结束输入触发，也可向文本View发送<code>resignFirstResponder</code>消息触发。<br>  当键盘显示或消失时，系统会发送相关的通知:</p>
-<pre><code>1. UIKeyboardWillShowNotification
-2. UIKeyboardDidShowNotification
-3. UIKeyboardWillHideNotification
-4. UIKeyboardDidHideNotification
-</code></pre><p>  通知消息 <code>NSNotification</code>中的 userInfo字典中包含键盘的位置和大小信息，对应的key为</p>
-<pre><code>1. UIKeyboardFrameBeginUserInfoKey
-2. UIKeyboardFrameEndUserInfoKey
-3. UIKeyboardAnimationDurationUserInfoKey
-4. UIKeyboardAnimationCurveUserInfoKey
-</code></pre><p>  <code>UIKeyboardFrameBeginUserInfoKey</code>,<code>UIKeyboardFrameEndUserInfoKey</code>对应的<code>Value</code>是个<code>NSValue</code>对象，内部包含<code>CGRect</code>结构，分别为 <strong>键盘起始时和终止时的位置信息</strong>。<br>  <code>UIKeyboardAnimationCurveUserInfoKey</code>对应的<code>Value</code>是<code>NSNumber</code>对象，内部为<code>UIViewAnimationCurve</code>类型的数据，表示键盘显示或消失的 <strong>动画类型</strong>。<br>  <code>UIKeyboardAnimationDurationUserInfoKey</code>对应的<code>Value</code>也是<code>NSNumber</code>对象，内部为<code>double</code>类型的数据，表示键盘显示或消失时动画的持续时间。</p>
+                <h1 id="一-键盘通知"><a href="#一-键盘通知" class="headerlink" title="一. 键盘通知"></a>一. 键盘通知</h1><p>  当文本<code>View</code>(如<code>UITextField</code>,<code>UITextView</code>, <code>UIWebView</code>内的输入框)进入编辑模式成为first responder时，系统会自动显示键盘。成为firstresponder可能由用户点击触发，也可向文本View发送<code>becomeFirstResponder</code>消息触发。当文本视图退出first responder时，键盘会消失。文本View退出first responder可能由用户点击键盘上的Done或Return键结束输入触发，也可向文本View发送<code>resignFirstResponder</code>消息触发。<br>  当键盘显示或消失时，系统会发送相关的通知:<br>    1. UIKeyboardWillShowNotification<br>    2. UIKeyboardDidShowNotification<br>    3. UIKeyboardWillHideNotification<br>    4. UIKeyboardDidHideNotification<br>  通知消息 <code>NSNotification</code>中的 userInfo字典中包含键盘的位置和大小信息，对应的key为<br>    1. UIKeyboardFrameBeginUserInfoKey<br>    2. UIKeyboardFrameEndUserInfoKey<br>    3. UIKeyboardAnimationDurationUserInfoKey<br>    4. UIKeyboardAnimationCurveUserInfoKey<br>  <code>UIKeyboardFrameBeginUserInfoKey</code>,<code>UIKeyboardFrameEndUserInfoKey</code>对应的<code>Value</code>是个<code>NSValue</code>对象，内部包含<code>CGRect</code>结构，分别为 <strong>键盘起始时和终止时的位置信息</strong>。<br>  <code>UIKeyboardAnimationCurveUserInfoKey</code>对应的<code>Value</code>是<code>NSNumber</code>对象，内部为<code>UIViewAnimationCurve</code>类型的数据，表示键盘显示或消失的 <strong>动画类型</strong>。<br>  <code>UIKeyboardAnimationDurationUserInfoKey</code>对应的<code>Value</code>也是<code>NSNumber</code>对象，内部为<code>double</code>类型的数据，表示键盘显示或消失时动画的持续时间。</p>
 <h1 id="文本对象与WebView键盘设置"><a href="#文本对象与WebView键盘设置" class="headerlink" title="文本对象与WebView键盘设置"></a>文本对象与WebView键盘设置</h1><p> <code>UITextFiled</code>和 <code>UITextView</code>都遵循 <code>[UITextInputTraits](https://developer.apple.com/reference/uikit/uitextinputtraits#//apple_ref/occ/intfp/UITextInputTraits/returnKeyType)</code>协议，在<code>UITextInputTraits</code>协议中定义了设置键盘的属性，有</p>
 <ol>
-<li>keyboardType:键盘类型，如UIKeyboardTypeDefault,UIKeyboardTypeURL,UIKeyboardTypeEmailAddress,UIKeyboardTypePhonePad等</li>
-<li>returnKeyType:键盘Return键显示的文本，默认为”Return”,其他可选择的包括Go,Next,Done,Send,Google等。</li>
-<li>keyboardAppearance：键盘外观，默认为 UIKeyboardAppearanceDefault，即上图中的浅兰色不透明背景，另外还有一种为 UIKeyboardAppearanceAlert</li>
-<li>autocapitalizationType:文本大小写样式，见 UITextAutocapitalizationType。</li>
-<li>autocorrectionType:是否自动更正，见 UITextAutocorrectionType。</li>
-<li>spellCheckingType:拼写检查设置，见UITextSpellCheckingType。</li>
-<li>enablesReturnKeyAutomatically：是否在无文本时禁用Return键，默认为NO。若为YES,则用户至少输入一个字符后Return键才被激活。</li>
+<li><p>keyboardType:键盘类型，如UIKeyboardTypeDefault,UIKeyboardTypeURL,UIKeyboardTypeEmailAddress,UIKeyboardTypePhonePad等</p>
+</li>
+<li><p>returnKeyType:键盘Return键显示的文本，默认为”Return”,其他可选择的包括Go,Next,Done,Send,Google等。</p>
+</li>
+<li><p>keyboardAppearance：键盘外观，默认为 UIKeyboardAppearanceDefault，即上图中的浅兰色不透明背景，另外还有一种为 UIKeyboardAppearanceAlert</p>
+</li>
+<li><p>autocapitalizationType:文本大小写样式，见 UITextAutocapitalizationType。</p>
+</li>
+<li><p>autocorrectionType:是否自动更正，见 UITextAutocorrectionType。</p>
+</li>
+<li><p>spellCheckingType:拼写检查设置，见UITextSpellCheckingType。</p>
+</li>
+<li><p>enablesReturnKeyAutomatically：是否在无文本时禁用Return键，默认为NO。若为YES,则用户至少输入一个字符后Return键才被激活。</p>
+</li>
 <li><p>secureTextEntry：若输入的是密码，可设置此类型为YES,输入字符时可显示最后一个字符，其他字符显示为点。</p>
 <p>UIWebView本身不直接遵循 UITextInputTraits协议，但同样可设置其内部输入部件的键盘属性。如Configuring the Keyboard for Web Views中所述。<br>设置autocorrect, auto-capitalization属性。</p>
 </li>
@@ -455,14 +466,12 @@
     UIKeyboardTypeNamePhonePad,           // 电话键盘，也支持输入人名字  
     UIKeyboardTypeEmailAddress,           // 用于输入电子邮件地址的键盘  
 } UIKeyboardType;  
-
 </code></pre>
 <p>eg:<br><code>textView.keyboardtype = UIKeyboardTypeNumberPad;</code></p>
 <h2 id="键盘外观"><a href="#键盘外观" class="headerlink" title="键盘外观"></a>键盘外观</h2><pre><code class="objc">typedef enum {  
     UIKeyboardAppearanceDefault,    // 默认外观：浅灰色  
     UIKeyboardAppearanceAlert,      //深灰/石墨色  
-} UIKeyboardAppearance;
-</code></pre>
+} UIKeyboardAppearance;</code></pre>
 <p>eg :<br><code>textView.keyboardAppearance=UIKeyboardAppearanceDefault;</code></p>
 <h2 id="回车键"><a href="#回车键" class="headerlink" title="回车键"></a>回车键</h2><pre><code class="objc">typedef enum {  
     UIReturnKeyDefault,  //默认：灰色按钮，标有Return
@@ -476,23 +485,20 @@
     UIReturnKeyYahoo,  //标有Yahoo!的蓝色按钮，用于搜索
     UIReturnKeyDone,  //标有Done的蓝色按钮
     UIReturnKeyEmergencyCall,  //紧急呼叫按钮
-} UIReturnKeyType;
-</code></pre>
+} UIReturnKeyType;</code></pre>
 <p>eg:<br><code>textView.returnKeyType=UIReturnKeyGo;</code></p>
 <h2 id="自动大写"><a href="#自动大写" class="headerlink" title="自动大写"></a>自动大写</h2><pre><code class="objc">typedef enum {  
     UITextAutocapitalizationTypeNone, //不自动大写  
     UITextAutocapitalizationTypeWords, //单词首字母大写  
     UITextAutocapitalizationTypeSentences, //句子首字母大写  
     UITextAutocapitalizationTypeAllCharacters, //所有字母大写  
-} UITextAutocapitalizationType;  
-</code></pre>
+} UITextAutocapitalizationType;  </code></pre>
 <p>eg:<br><code>textField.autocapitalizationType = UITextAutocapitalizationTypeWords;</code></p>
 <h2 id="自动更正"><a href="#自动更正" class="headerlink" title="自动更正"></a>自动更正</h2><pre><code class="objc">typedef enum {  
     UITextAutocorrectionTypeDefault,//默认  
     UITextAutocorrectionTypeNo,//不自动更正  
     UITextAutocorrectionTypeYes,//自动更正  
-} UITextAutocorrectionType;
-</code></pre>
+} UITextAutocorrectionType;</code></pre>
 <p>eg:<br><code>textField.autocorrectionType = UITextAutocorrectionTypeYes;</code></p>
 <h2 id="安全文本输入"><a href="#安全文本输入" class="headerlink" title="安全文本输入"></a>安全文本输入</h2><p><code>textView.secureTextEntry=YES;</code><br>开启安全输入主要是用于密码或一些私人数据的输入，此时会禁用自动更正和自此缓存。</p>
 
@@ -610,7 +616,7 @@
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -685,6 +691,31 @@
     
 
     
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2017/03/16/keyboard-iOS/';
+        this.page.identifier = '/2017/03/16/keyboard-iOS/';
+        this.page.title = 'keyboard_iOS';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+    
 
     
 
@@ -712,9 +743,8 @@
                     <div class="summary block-with-text">
                         
                             URL什么是URL* Uniform Resource Location（统一资源定位符）
-*  网络中每一个资源都对应一个地址--&gt; URL 
-URL的基本格式* 协议://主机地址:端口号/路径
-    * 协议 ： 不同协议代表
+*  网络中每一个资源都对应一个地址--&gt; URL URL的基本格式* 协议://主机地址:端口号/路径
+    * 协议 ： 不同协议代表不
                         
                     </div>
                     <div class="publish-info">
@@ -891,6 +921,9 @@ ps: 字符显示程序的快捷键应该是 Control +
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -912,15 +945,11 @@ ps: 字符显示程序的快捷键应该是 Control +
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

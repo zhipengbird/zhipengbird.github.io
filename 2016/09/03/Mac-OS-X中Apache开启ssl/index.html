@@ -2,13 +2,14 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Mac OS X中Apache开启ssl, 志鹏的技术博客">
     <meta name="description" content="
-生成主机密钥 这里会要求输入密码，不输入，直接回车 sudo mkdir /private/etc/apache2/ssl
+生成主机密钥 这里会要求输入密码，不输入，直接回车
+ sudo mkdir /private/etc/apache2/ssl
  cd /private/etc/apache2/ssl
- sudo ssh-keygen -f server.k">
+ sudo ssh-keygen -f server.">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -403,6 +404,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        596
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        3 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -416,10 +431,11 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <ol>
-<li>生成主机密钥<br> 这里会要求输入密码，不输入，直接回车<pre><code> sudo mkdir /private/etc/apache2/ssl
+<li><p>生成主机密钥<br> 这里会要求输入密码，不输入，直接回车</p>
+<pre><code> sudo mkdir /private/etc/apache2/ssl
  cd /private/etc/apache2/ssl
- sudo ssh-keygen -f server.key
-</code></pre> 执行过程：<pre><code> localhost:~ yuanpinghua$ sudo mkdir  /private/etc/apache2/ssl
+ sudo ssh-keygen -f server.key</code></pre><p> 执行过程：</p>
+<pre><code> localhost:~ yuanpinghua$ sudo mkdir  /private/etc/apache2/ssl
  Password:
  localhost:~ yuanpinghua$ cd /private/etc/apache2/ssl
  localhost:ssl yuanpinghua$ sudo ssh-keygen -f server.key
@@ -441,11 +457,9 @@
  |      =.+. o o   |
  |     + .o.. o    |
  |    . ..  .o     |
- +----[SHA256]-----+
-</code></pre> <a id="more"></a></li>
+ +----[SHA256]-----+</code></pre> <a id="more"></a></li>
 <li><p>生成证书请求文件</p>
-<pre><code>   sudo openssl req -new -key server.key -out request.csr
-</code></pre><p>   执行过程：</p>
+<pre><code>   sudo openssl req -new -key server.key -out request.csr</code></pre><p>   执行过程：</p>
 <pre><code>   localhost:ssl yuanpinghua$ sudo openssl req -new -key server.key -out request.csr
    You are about to be asked to enter information that will be incorporated
    into your certificate request.
@@ -465,23 +479,19 @@
    Please enter the following &#39;extra&#39; attributes
    to be sent with your certificate request
    A challenge password []:
-   An optional company name []:
-</code></pre></li>
+   An optional company name []:</code></pre></li>
 <li><p>生成ssl证书<br> 用上一步生成的文件生成ssl证书</p>
-<pre><code> sudo openssl x509 -req -days 365 -in request.csr -signkey server.key -out server.crt
-</code></pre><p> 到这里，自签名证书就生成好了，下面就开始配置Apache</p>
+<pre><code> sudo openssl x509 -req -days 365 -in request.csr -signkey server.key -out server.crt</code></pre><p> 到这里，自签名证书就生成好了，下面就开始配置Apache</p>
 <ul>
 <li><p><code>/private/etc/apache2/httpd.conf</code>，编辑这个文件去掉下面三行前面的 ‘#’</p>
 <pre><code> LoadModule ssl_module libexec/apache2/mod_ssl.so
  Include /private/etc/apache2/extra/httpd-ssl.conf
- Include/private/etc/apache2/extra/httpd-vhosts.conf
-</code></pre></li>
+ Include/private/etc/apache2/extra/httpd-vhosts.conf</code></pre></li>
 <li><p><code>/private/etc/apache2/extra/httpd-ssl.conf</code>，编辑这个文件去掉下面两行前面的 ‘#’</p>
 <pre><code> ```          
  SSLCertificateFile &quot;/private/etc/apache2/ssl/server.crt&quot;
  SSLCertificateKeyFile &quot;/private/etc/apache2/ssl/server.key&quot;
- ```
-</code></pre></li>
+ ```</code></pre></li>
 <li><p><code>/private/etc/apache2/extra/httpd-vhosts.conf</code>，编辑这个文件在<code>&#39;NameVirtualHost*:80&#39;</code> 后面添加</p>
 <pre><code> &lt;VirtualHost *:443&gt;
      SSLEngine on
@@ -490,16 +500,14 @@
      SSLCertificateKeyFile /private/etc/apache2/ssl/server.key
      ServerName localhost
      DocumentRoot &quot;/Library/WebServer/Documents&quot;
- &lt;/VirtualHost&gt;
-</code></pre></li>
+ &lt;/VirtualHost&gt;</code></pre></li>
 </ul>
 </li>
 <li><p>复制凭证和密钥到apache2目录下<br>将/private/ect/apache2/ssl中的server.crt,server.key 复制到/private/ect/apache2/下</p>
 </li>
 <li><p>到这里就配置完了，检查配置，没问题的话重启Apache就好了</p>
 <pre><code> sudo apachectl configtest 检查配置
- sudo apachectl -k restart 强制重启
-</code></pre></li>
+ sudo apachectl -k restart 强制重启</code></pre></li>
 <li><p>在浏览器中输入：可以正常访问<br><a href="https://localhost/" target="_blank" rel="noopener">https://localhost/</a> , <a href="https://192.168.0.1/" target="_blank" rel="noopener">https://192.168.0.1/</a> ,<a href="http://localhost/" target="_blank" rel="noopener">http://localhost/</a> , <a href="http://192.168.0.106/" target="_blank" rel="noopener">http://192.168.0.106/</a></p>
 </li>
 </ol>
@@ -618,7 +626,7 @@
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -693,6 +701,31 @@
     
 
     
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/09/03/Mac-OS-X中Apache开启ssl/';
+        this.page.identifier = '/2016/09/03/Mac-OS-X中Apache开启ssl/';
+        this.page.title = 'Mac OS X中Apache开启ssl';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+    
 
     
 
@@ -721,9 +754,10 @@
                         
                             
 安装charles
+
 安装sslproxy证书
 
-电脑端（Mac）：  charles–&gt;help–&gt;SSL Proxying –&gt; install charles Root certificate在密钥管理中将该证书设置
+电脑端（Mac）：  charles–&gt;help–&gt;SSL Proxying –&gt; install charles Root certificate在密钥管理中将该证书设
                         
                     </div>
                     <div class="publish-info">
@@ -769,13 +803,12 @@
                     <div class="summary block-with-text">
                         
                             常用操作：
-打开终端，运行启动Apache命令：`sudo apachectl start
+打开终端，运行启动Apache命令：sudo apachectl start
 
-2. 关闭命令：
-sudo apachectl stop
-3. 重启命令
-sudo apachectl restart
-4. 查看Apache版本
+
+2. 关闭命令：sudo apachectl stop
+3. 重启命令sudo apachectl restart
+4. 查看Apache版本命令
                         
                     </div>
                     <div class="publish-info">
@@ -914,6 +947,9 @@ sudo apachectl restart
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -935,15 +971,11 @@ sudo apachectl restart
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

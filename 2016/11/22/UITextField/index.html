@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="UITextField, 志鹏的技术博客">
     <meta name="description" content="思路：使用runtime 获取textfiled的所有属性
@@ -403,6 +403,20 @@ Ivar *ivarList = class_copyIvarList([UITextField class]">
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        922
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        4 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -423,39 +437,38 @@ for (int i = 0; i&lt;count; i++) {
     Ivar ivar = ivarList[i];
     NSLog(@&quot;%s&quot;,ivar_getName(ivar));
 }
-free(ivarList);
-</code></pre>
+free(ivarList);</code></pre>
 <p>修改文本框内的placehold字体颜色</p>
 <ol>
 <li><p>使用runtime // 利用KVC设置它颜色,结果成功 这里有一个问题，可能会出现低版本没有该属性，你需要进行检验下。</p>
 <pre><code class="objc">[textField setValue:[UIColor redColor]forKeyPath:@&quot;_placeholderLabel.textColor&quot;];  
-[textField setValue: [UIFontboldSystemFontOfSize:16] forKeyPath :@&quot;_placeholderLabel.font&quot;];  
-</code></pre>
+[textField setValue: [UIFontboldSystemFontOfSize:16] forKeyPath :@&quot;_placeholderLabel.font&quot;];  </code></pre>
 </li>
 <li><p>设置属性文本</p>
 <pre><code class="objc">NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 dict[NSForegroundColorAttributeName] = [UIColor redColor];
 NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:self.placeholder attributes:dict];
-[self setAttributedPlaceholder:attribute];
-</code></pre>
+[self setAttributedPlaceholder:attribute];</code></pre>
 </li>
-<li>设置光标颜色<br>使用<code>@property(null_resettable, nonatomic, strong) UIColor *tintColor</code>属性<pre><code class="objc">textField.tintColor = UIColorFromRGBA(rgbValue,A) 
-</code></pre>
+<li><p>设置光标颜色<br>使用<code>@property(null_resettable, nonatomic, strong) UIColor *tintColor</code>属性</p>
+<pre><code class="objc">textField.tintColor = UIColorFromRGBA(rgbValue,A) </code></pre>
 </li>
-<li>捕捉键盘的return事件<br>遵守UITextFieldDelegate,并设置相关代理。实现如下代理方法<br><code>`</code>objc</li>
+<li><p>捕捉键盘的return事件<br>遵守UITextFieldDelegate,并设置相关代理。实现如下代理方法<br>```objc</p>
+</li>
 </ol>
 <ul>
-<li>(BOOL)textFieldShouldReturn:(UITextField *)textField;<br>// called when ‘return’ key pressed. return NO to ignore.<br><code>`</code></li>
+<li>(BOOL)textFieldShouldReturn:(UITextField *)textField;<br>// called when ‘return’ key pressed. return NO to ignore.<pre><code></code></pre></li>
 </ul>
 <ol start="5">
-<li>捕捉文本改变事件通知<br>要想获取到文本改变事件通知，需要监听一个通知 <code>UITextFieldTextDidChangeNotification</code><br><code>`</code>objc<br>[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFiledDidChange:) name:UITextFieldTextDidChangeNotification object:<code>文本框对象</code>];</li>
+<li>捕捉文本改变事件通知<br>要想获取到文本改变事件通知，需要监听一个通知 <code>UITextFieldTextDidChangeNotification</code><pre><code class="objc">[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFiledDidChange:) name:UITextFieldTextDidChangeNotification object:`文本框对象`];
+</code></pre>
+</li>
 </ol>
 <pre><code>&gt; PS: 文本常用通知
 ```objc
 UIKIT_EXTERN NSNotificationName const UITextFieldTextDidBeginEditingNotification; //输入框已经开始编辑
 UIKIT_EXTERN NSNotificationName const UITextFieldTextDidEndEditingNotification;         //输入框已经结束编辑
-UIKIT_EXTERN NSNotificationName const UITextFieldTextDidChangeNotification;         //输入框已经改变
-</code></pre><ol start="6">
+UIKIT_EXTERN NSNotificationName const UITextFieldTextDidChangeNotification;         //输入框已经改变</code></pre><ol start="6">
 <li>限制文本字数<br>监听<code>UITextFieldTextDidChangeNotification</code>通知，并在方法里做如下操作。下面是我的一个代码片段。</li>
 </ol>
 <pre><code class="objc">#pragma mark - 文本改变通知
@@ -494,13 +507,23 @@ UIKIT_EXTERN NSNotificationName const UITextFieldTextDidChangeNotification;     
             }
         }
     }
-}
-</code></pre>
+}</code></pre>
 <ol start="7">
-<li><p>个性化定制文本框右边的视图( <code>rightView</code>)<br><code>`</code>objc</p>
-<p> // 初始化一个视图（可以是任一视图（UILabel,UIButton,…）），Ps 需要指定一个框高  ,你可以对这个视图添加你想要的事件<br> _characterNumber = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 50, 30)];<br> _characterNumber.text = @”0/30”;<br> _characterNumber.textAlignment = NSTextAlignmentRight;<br> _characterNumber.font = [UIFont systemFontOfSize:12];<br> _characterNumber.textColor = UIColorFromRGBA(0xb4b4b4, 1);</p>
-<p> // 设置右边视图<br> _remark_textfield.rightView = _characterNumber;</p>
-<p> // 设置右边视图的显示模式<br> _remark_textfield.rightViewMode = UITextFieldViewModeAlways;</p>
+<li><p>个性化定制文本框右边的视图( <code>rightView</code>)</p>
+<pre><code class="objc">
+ // 初始化一个视图（可以是任一视图（UILabel,UIButton,...）），Ps 需要指定一个框高  ,你可以对这个视图添加你想要的事件
+ _characterNumber = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 50, 30)];
+ _characterNumber.text = @&quot;0/30&quot;;
+ _characterNumber.textAlignment = NSTextAlignmentRight;
+ _characterNumber.font = [UIFont systemFontOfSize:12];
+ _characterNumber.textColor = UIColorFromRGBA(0xb4b4b4, 1);
+
+ // 设置右边视图
+ _remark_textfield.rightView = _characterNumber;
+
+ // 设置右边视图的显示模式
+ _remark_textfield.rightViewMode = UITextFieldViewModeAlways;
+</code></pre>
 </li>
 </ol>
 <pre><code>
@@ -519,60 +542,38 @@ UIKIT_EXTERN NSNotificationName const UITextFieldTextDidChangeNotification;     
     CGFloat keyboardTop = keyboardRect.origin.y;
 
     //进行你的想要的布局操作
-}
-</code></pre><blockquote>
-<p>PS：常见的键盘通知<br> <code>`</code>objc<br>    UIKIT_EXTERN NSNotificationName const UIKeyboardWillChangeFrameNotification  NS_AVAILABLE_IOS(5_0) <strong>TVOS_PROHIBITED; //键盘将要改变通知<br>    UIKIT_EXTERN NSNotificationName const UIKeyboardDidChangeFrameNotification   NS_AVAILABLE_IOS(5_0) </strong>TVOS_PROHIBITED; //键盘已经改变通知</p>
+}</code></pre><blockquote>
+<p>PS：常见的键盘通知</p>
 </blockquote>
-<pre><code>UIKIT_EXTERN NSNotificationName const UIKeyboardWillShowNotification __TVOS_PROHIBITED; //键盘将要显示通知
-UIKIT_EXTERN NSNotificationName const UIKeyboardDidShowNotification __TVOS_PROHIBITED;  //键盘已经显示
-UIKIT_EXTERN NSNotificationName const UIKeyboardWillHideNotification __TVOS_PROHIBITED; //键盘将要隐藏
-UIKIT_EXTERN NSNotificationName const UIKeyboardDidHideNotification __TVOS_PROHIBITED;  //键盘已经隐藏
-</code></pre><pre><code>
-9. 给文本框加上一根横线
-对于这个，你可以给做一个子类，继承自UITextFiled. 重写drawRect方法如下所示
-```objc
-@interface TextFieldExtension : UITextField
-/**
- 显示下划线
- */
--(void)showUnderLine:(UIColor* _Nullable)lineColor;
-@end
-#import &quot;TextFieldExtension.h&quot;
+<pre><code class="objc">    UIKIT_EXTERN NSNotificationName const UIKeyboardWillChangeFrameNotification  NS_AVAILABLE_IOS(5_0) __TVOS_PROHIBITED; //键盘将要改变通知
+    UIKIT_EXTERN NSNotificationName const UIKeyboardDidChangeFrameNotification   NS_AVAILABLE_IOS(5_0) __TVOS_PROHIBITED; //键盘已经改变通知
 
-@interface TextFieldExtension ()
-@property(nonatomic,assign) BOOL showunderline;
-@property(nonatomic,strong)UIColor * lineColor;
-@end
+    UIKIT_EXTERN NSNotificationName const UIKeyboardWillShowNotification __TVOS_PROHIBITED; //键盘将要显示通知
+    UIKIT_EXTERN NSNotificationName const UIKeyboardDidShowNotification __TVOS_PROHIBITED;  //键盘已经显示
+    UIKIT_EXTERN NSNotificationName const UIKeyboardWillHideNotification __TVOS_PROHIBITED; //键盘将要隐藏
+    UIKIT_EXTERN NSNotificationName const UIKeyboardDidHideNotification __TVOS_PROHIBITED;  //键盘已经隐藏</code></pre>
+<ol start="9">
+<li>给文本框加上一根横线<br>对于这个，你可以给做一个子类，继承自UITextFiled. 重写drawRect方法如下所示<br>```objc<br>@interface TextFieldExtension : UITextField<br>/**<br>显示下划线<br>*/</li>
+</ol>
+<p>-(void)showUnderLine:(UIColor* _Nullable)lineColor;<br>@end<br>#import “TextFieldExtension.h”</p>
+<p>@interface TextFieldExtension ()<br>@property(nonatomic,assign) BOOL showunderline;<br>@property(nonatomic,strong)UIColor * lineColor;<br>@end</p>
+<p>@implementation TextFieldExtension</p>
+<ul>
+<li>(void)drawRect:(CGRect)rect {<br>  if (_showunderline) {<pre><code>  // Drawing code
+  CGContextRef context = UIGraphicsGetCurrentContext();       
+  [self.lineColor set];//设置下划线颜色 这里是红色 可以自定义        
+  CGFloat y = CGRectGetHeight(self.frame);
+  CGContextMoveToPoint(context, 0, y);        
+  CGContextAddLineToPoint(context, CGRectGetWidth(self.frame), y);
+  //设置线的宽度        
+  CGContextSetLineWidth(context, 1);     
+  //渲染 显示到self上      
+  CGContextStrokePath(context);</code></pre>  }<br>}</li>
+<li>(void)showUnderLine:(UIColor *)lineColor{<br>   _showunderline=YES;<br>   _lineColor=lineColor;<br>   [self setNeedsDisplay];<br>}</li>
+<li>(UIColor *)lineColor{<br>   if (!_lineColor) {<pre><code>   _lineColor =[UIColor grayColor];</code></pre>   }<br>   return _lineColor;<br>}<br>@end</li>
+</ul>
+<p>```</p>
 
-@implementation TextFieldExtension
-- (void)drawRect:(CGRect)rect {
-    if (_showunderline) {
-        // Drawing code
-        CGContextRef context = UIGraphicsGetCurrentContext();       
-        [self.lineColor set];//设置下划线颜色 这里是红色 可以自定义        
-        CGFloat y = CGRectGetHeight(self.frame);
-        CGContextMoveToPoint(context, 0, y);        
-        CGContextAddLineToPoint(context, CGRectGetWidth(self.frame), y);
-        //设置线的宽度        
-        CGContextSetLineWidth(context, 1);     
-        //渲染 显示到self上      
-        CGContextStrokePath(context);
-    }
-}
--(void)showUnderLine:(UIColor *)lineColor{
-    _showunderline=YES;
-    _lineColor=lineColor;
-    [self setNeedsDisplay];
-}
--(UIColor *)lineColor{
-    if (!_lineColor) {
-        _lineColor =[UIColor grayColor];
-    }
-    return _lineColor;
-}
-@end
-
-</code></pre>
             </div>
             <hr/>
 
@@ -687,7 +688,7 @@ UIKIT_EXTERN NSNotificationName const UIKeyboardDidHideNotification __TVOS_PROHI
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -762,6 +763,31 @@ UIKIT_EXTERN NSNotificationName const UIKeyboardDidHideNotification __TVOS_PROHI
     
 
     
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/11/22/UITextField/';
+        this.page.identifier = '/2016/11/22/UITextField/';
+        this.page.title = 'UITextField';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+    
 
     
 
@@ -791,8 +817,7 @@ UIKIT_EXTERN NSNotificationName const UIKeyboardDidHideNotification __TVOS_PROHI
                             
 去除字符串首尾空格//可以指定字符集
 [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-
-常用字符集：@property (re
+常用字符集：@property (rea
                         
                     </div>
                     <div class="publish-info">
@@ -986,6 +1011,9 @@ It g
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -1007,15 +1035,11 @@ It g
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="断言, 志鹏的技术博客">
     <meta name="description" content="断言的定义：
@@ -394,6 +394,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        818
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        3 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -410,14 +424,17 @@
 <blockquote>
 <p>断言（assertion）是指在开发期间使用的、让程序在运行时进行自检的代码（通常是一个子程序或宏）。断言为真，则表明程序运行正常，而断言为假，则意味着它已经在代码中发现了意料之外的错误。断言对于大型的复杂程序或可靠性要求极高的程序来说尤其有用</p>
 </blockquote>
-<p>断言使用的准则与建议：<br><blockquote><ol>
+<p>断言使用的准则与建议：</p>
+<blockquote><ol>
 <li>用错误处理代码来处理预期会发生的状况，用断言来处理绝不应该发生的状况。</li>
 <li>避免把需要执行的代码放到断言中</li>
 <li>用断言来注解并验证前条件和后条件</li>
 <li>对于高健壮性的代码，应该先使用断言再处理错误</li>
 </ol>
-<footer><strong>《代码大全2》</strong><cite>-防御式编程</cite></footer></blockquote></p>
-<h1 id="NSAssert"><a href="#NSAssert" class="headerlink" title="NSAssert()"></a>NSAssert()</h1><p>NSAssert()是一个宏，用于开发阶段调试程序中的Bug，通过为NSAssert()传递条件表达式来断定是否属于Bug，满足条件返回真值，程序继续运行，如果返回假值，则抛出异常，并且可以自定义异常描述。<br><pre><code>#define NSAssert(condition, desc)</code></pre></p>
+<footer><strong>《代码大全2》</strong><cite>-防御式编程</cite></footer></blockquote>
+
+<h1 id="NSAssert"><a href="#NSAssert" class="headerlink" title="NSAssert()"></a>NSAssert()</h1><p>NSAssert()是一个宏，用于开发阶段调试程序中的Bug，通过为NSAssert()传递条件表达式来断定是否属于Bug，满足条件返回真值，程序继续运行，如果返回假值，则抛出异常，并且可以自定义异常描述。</p>
+<pre><code>#define NSAssert(condition, desc)</code></pre>
 <blockquote>
 <ul>
 <li>condition是条件表达式，值为YES或NO；</li>
@@ -430,7 +447,8 @@
 <p>小延伸：如何切换Debug和Release呢？</p>
 <p>自答吧：<br>1、点击工程名，点这里。选择Edit Scheme<br>2、选择Run，在Info 中将Build Configuration 修改为release</p>
 <h1 id="NOTE"><a href="#NOTE" class="headerlink" title="NOTE"></a>NOTE</h1><ol>
-<li>使用NSAssert的时候，每个NSAssert只检验一个条件，因为同事检验多个条件时，如果断言失败，无法直观地判断是那个条件失败</li>
+<li><p>使用NSAssert的时候，每个NSAssert只检验一个条件，因为同事检验多个条件时，如果断言失败，无法直观地判断是那个条件失败</p>
+</li>
 <li><p>Block中使用NSAssert要特别注意循环引用。<br> 有没有搞错，用断言也会出现循环引用,不信，那我们看看宏定义展开后是啥样的？：</p>
  <pre><code>   #define NSAssert(condition, desc, ...)	\
    do {				\
@@ -581,7 +599,7 @@ if (!(condition)) {		\
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -655,6 +673,31 @@ if (!(condition)) {		\
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2017/07/11/断言/';
+        this.page.identifier = '/2017/07/11/断言/';
+        this.page.title = '断言';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -875,6 +918,9 @@ if (!(condition)) {		\
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -896,15 +942,11 @@ if (!(condition)) {		\
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

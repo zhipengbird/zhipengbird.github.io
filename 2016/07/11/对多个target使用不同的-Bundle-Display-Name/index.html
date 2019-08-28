@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="对多个target使用不同的 Bundle Display Name, 志鹏的技术博客">
     <meta name="description" content="在项目多语言包xx.lproj里引入一个叫InfoPlist.strings的文件，可以对同一个App在不同系统语方中显示不同的Display Name 如：
@@ -393,6 +393,20 @@ InfoPlist.strings (English) - &amp;quot;CFBu">
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        318
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        1 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -407,16 +421,14 @@ InfoPlist.strings (English) - &amp;quot;CFBu">
             <div id="articleContent">
                 <p>在项目多语言包xx.lproj里引入一个叫InfoPlist.strings的文件，可以对同一个App在不同系统语方中显示不同的Display Name 如：</p>
 <pre><code class="objc">InfoPlist.strings (English) - &quot;CFBundleDisplayName&quot; = &quot;English Name&quot;;
-InfoPlist.strings (Chinese) - &quot;CFBundleDisplayName&quot; = &quot;中文&quot;;
-</code></pre>
+InfoPlist.strings (Chinese) - &quot;CFBundleDisplayName&quot; = &quot;中文&quot;;</code></pre>
 <p>在单个target中很容易做，多个target的时候需要做一点额外的处理，在项目目录下新建与target同名的文件夹（为了方便区分），然后将xx.lproj文件夹复制到各target 下面，目录结构会是这样的</p>
 <pre><code class="objc">./Target1/
           en.lproj/InfoPlist.strings
           zh-Hans.lproj/InfoPlist.strings
 ./Target2/
           en.lproj/InfoPlist.strings
-          zh-Hans.lproj/InfoPlist.strings
-</code></pre>
+          zh-Hans.lproj/InfoPlist.strings</code></pre>
 <p>复制后保持项目目录下还有 xx.lproj 文件夹，里面保留 Localizable.strings，因为多语言化一般是通用的，没必要针对每一个 Target 做多语言。复制后的 Target1/xx.lproj 下只有 InfoPlist.strings。然后添加到 Xcode 项目里，打开 Xcode - Views - Utilities （Command+Option+0），在 Target Membership 下针对不同的 Target 把对应文件夹下的 InfoPlist.strings 对应连接起来。<br>另外有一点需要注意的是：不同target对应着不同的info.plist文件，在不同的target中的<code>Build Settings</code>—&gt;<code>Packaging</code>—&gt;<code>Info.plist File</code>中设置对应的文件路路径，（最好使用相对路径如<code>$(SRCROOT)/文件夹名/Info.plist</code>）。<br><img src="http://7xw3wp.com1.z0.glb.clouddn.com/infoplistRoote.png" alt="infoplistRoote"></p>
 
             </div>
@@ -533,7 +545,7 @@ InfoPlist.strings (Chinese) - &quot;CFBundleDisplayName&quot; = &quot;中文&quo
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -607,6 +619,31 @@ InfoPlist.strings (Chinese) - &quot;CFBundleDisplayName&quot; = &quot;中文&quo
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/07/11/对多个target使用不同的-Bundle-Display-Name/';
+        this.page.identifier = '/2016/07/11/对多个target使用不同的-Bundle-Display-Name/';
+        this.page.title = '对多个target使用不同的 Bundle Display Name';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -803,6 +840,9 @@ NSDictio
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -824,15 +864,11 @@ NSDictio
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

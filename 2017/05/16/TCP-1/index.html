@@ -2,14 +2,15 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="TCP 基础入门, 志鹏的技术博客">
     <meta name="description" content="
 TCP连接的端点是由一个IP地址和一个端口号来唯一标识的 
+
 TCP 是一个可靠的协议，也就是说，除非整个网络出现问题，数据将被完好地按原样正确的传送到另一外一端。这个可靠性是通过以下几个规则来实现的：
 
-为了防止数据在传输过程中被损坏，每">
+为了防止数据在传输过程中被损坏，">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -409,6 +410,20 @@ TCP 是一个可靠的协议，也就是说，除非整个网络出现问题，�
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        1.2k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        4 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -422,7 +437,8 @@ TCP 是一个可靠的协议，也就是说，除非整个网络出现问题，�
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <ul>
-<li>TCP连接的端点是由一个IP地址和一个端口号来唯一标识的 </li>
+<li><p>TCP连接的端点是由一个IP地址和一个端口号来唯一标识的 </p>
+</li>
 <li><p>TCP 是一个可靠的协议，也就是说，除非整个网络出现问题，数据将被完好地按原样正确的传送到另一外一端。这个可靠性是通过以下几个规则来实现的：</p>
 <ul>
 <li><p>为了防止数据在传输过程中被损坏，每个信息包都包含一个<strong>校验码</strong>。这个校验码就是一个用来保证信息包在传输过程中没有被更改的代码。当信息包到达目的地的时候，接收方会对比校验码和收到的信息中的数据，如果校验码不对，该信息包被省略。</p>
@@ -477,18 +493,19 @@ TCP 是一个可靠的协议，也就是说，除非整个网络出现问题，�
 </ul>
 <blockquote>
 <p>通信类型基本上都是AF_INET(IPv4)<br>  协议家族一般表示：</p>
+</blockquote>
 <ol>
 <li>TCP通信的SOCK_STREAM</li>
 <li>UDP通信的SOCK_DGRAM</li>
 </ol>
-</blockquote>
 <p>建立一个实际的socket对象:<br><code>s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)</code><br>连接socket，提供一个tupe（远程主机名／IP地址 , 远程端口）<br><code>s.connect((&#39;www.baidu.com&#39;,80))</code></p>
 <blockquote>
 <p>Ps: C语言的connect()函数需要远程机器的IP地址，在Python中socket对象的connect()函数会根据需要利用DNS把域名自动转换为IP地址，但对端口号则不是这样.</p>
 </blockquote>
 <h2 id="利用socket通信"><a href="#利用socket通信" class="headerlink" title="利用socket通信"></a>利用socket通信</h2><p>利用socket发送和接收数据，python提供了两种方法：socket对象和文件类对象</p>
 <ol>
-<li>socket对象<ul>
+<li><p>socket对象</p>
+<ul>
 <li>socket对象提供了操作系统的send(),sendto(),recv(),和recvfrom()调用的接口</li>
 <li>使用场景：<ul>
 <li>读写数据、需要协议可以详细的控制时、使用二进制传送固定大小数据时、数据超时需要特殊处理时，</li>
@@ -499,7 +516,8 @@ TCP 是一个可靠的协议，也就是说，除非整个网络出现问题，�
 </li>
 <li><p>文件类对象</p>
 <ul>
-<li>文件类对象提供了read(),write(),readline()接口</li>
+<li><p>文件类对象提供了read(),write(),readline()接口</p>
+</li>
 <li><p>文件类对象一般用于面向线性的协议，因为它能够通过提供的readline()函数自动为您处理大多数的解析。</p>
 <blockquote>
 <p>文件类对象一般只对TCP连接工作表现很好，对UDP连接反而不好。原因如下：  </p>
@@ -634,7 +652,7 @@ TCP 是一个可靠的协议，也就是说，除非整个网络出现问题，�
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -708,6 +726,31 @@ TCP 是一个可靠的协议，也就是说，除非整个网络出现问题，�
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2017/05/16/TCP-1/';
+        this.page.identifier = '/2017/05/16/TCP-1/';
+        this.page.title = 'TCP 基础入门';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -923,6 +966,9 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -944,15 +990,11 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

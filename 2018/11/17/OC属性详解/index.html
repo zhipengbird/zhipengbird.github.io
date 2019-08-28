@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="编写高质量代码的有效方法(6)-理解“属性”, 志鹏的技术博客">
     <meta name="description" content="在OC等面向对象语言编程时，“对象”就是“基本构造单元”，开发者可以通过对象来存储并传递数据。在对象之间传递数据并执行任务的过程就叫做“消息传递”。要编写出高效且易维护的代码。就一定要熟悉这两个特性的工作原理。当应用程序运行起来以后，为其提">
@@ -396,6 +396,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        3.3k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        11 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -412,7 +426,8 @@
 <h1 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h1><blockquote>
 <p>属性（property）是OC的一项特性，用于封装对象中的数据。</p>
 </blockquote>
-<p>属性（property）是OC的一项特性，用于封装对象中的数据。OC对象通常会把其所需要的数据保存为各种实例变量。实例变量一般通过“存取方法”来访问。其中“获取方法（getter）”用于读取变量值，而“设置方法(Setter)”用于写入值。OC2.0中“属性”成为OC的一种特性，开发者阿以令编译器自动编写与属性相关的存取方法。此特性引入了一种新的“点语法”，使用开发者可以更为容易地对类对象来访问存放于其中的数据。<br>我们来看下下面示例：<br><pre><code>@interface Person : NSObject
+<p>属性（property）是OC的一项特性，用于封装对象中的数据。OC对象通常会把其所需要的数据保存为各种实例变量。实例变量一般通过“存取方法”来访问。其中“获取方法（getter）”用于读取变量值，而“设置方法(Setter)”用于写入值。OC2.0中“属性”成为OC的一种特性，开发者阿以令编译器自动编写与属性相关的存取方法。此特性引入了一种新的“点语法”，使用开发者可以更为容易地对类对象来访问存放于其中的数据。<br>我们来看下下面示例：</p>
+<pre><code>@interface Person : NSObject
 {
     @public
     NSString *_firstName;
@@ -420,8 +435,10 @@
     @private
     NSString *_age;
 }
-@end</code></pre></p>
-<p>这种写法是java或者C++中常用的写法。用<code>@public</code> 、<code>@private</code> 来给变量加上作用域。在OC中很少这么做。为什么呢？ 这种写法存在以下问题：对象布局在编译期就已固定了，只要碰到<code>_firstName</code>变量的代码，编译器就把其替换成偏移量（offset）。这个偏移量是硬编码，表示该变量距离存放对象的内存区域的起始地址有多远。<br>那么在原有基础上再增加一个实例变量会有什么问题呢？<br><pre><code>@interface Person : NSObject
+@end</code></pre>
+
+<p>这种写法是java或者C++中常用的写法。用<code>@public</code> 、<code>@private</code> 来给变量加上作用域。在OC中很少这么做。为什么呢？ 这种写法存在以下问题：对象布局在编译期就已固定了，只要碰到<code>_firstName</code>变量的代码，编译器就把其替换成偏移量（offset）。这个偏移量是硬编码，表示该变量距离存放对象的内存区域的起始地址有多远。<br>那么在原有基础上再增加一个实例变量会有什么问题呢？</p>
+<pre><code>@interface Person : NSObject
 {
     @public
     NSDate * _dateOfBirth;
@@ -430,7 +447,8 @@
     @private
     NSString *_age;
 }
-@end</code></pre></p>
+@end</code></pre>
+
 <p>原来表示<code>_firstName</code>的偏移量现在指向了<code>_dateOfBirth</code>.把偏移量硬编码于其中的那些代码都会读取到错误的值。<br>如下布局表</p>
 <table>
 <thead>
@@ -442,8 +460,7 @@
 <th>Person</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>+0</td>
 <td>_firstName</td>
 <td></td>
@@ -471,10 +488,10 @@
 <td>+12</td>
 <td>_age</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>若代码使用了编译时期计算出来的偏移量，那么在修改类定义之后必须要重新编译，否则就会出错。<br><strong>OC是如何处理这种问题的呢？</strong><br>OC的做法是，把实例变量当做一种存储偏移量所用的“特殊变量”，交由“类对象”保管。偏移量会在运行期查找，如果类的定义发生了改变，那么存储的偏移量也就变量。这样无论何时访问实例变量，总能使用正确的偏移量。甚至可以在运行时向类新增实例变量。这就是稳固的“应用程序二进制接口（Application Binary Interface,ABI）”.ABI 定义了许多内容，其中一项就是生成代码时所遵循的规范。有了这种ABI，我们就可以在分类或都实现文件中定义实例变量了。</p>
-<p>最好的解决方法是使用OC的属性。。在对象接口的定义中，使用属性是一种标准的写法，能够访问封装在对象里的数据。因此，也可把属性当作一种简称。其意思是说：“编译器会自动写出一套存取方法，用以访问给定类型中具有给定名称的变量。”<br>以下两种方式是等效的<br><pre><code>@interface Person : NSObject
+<p>最好的解决方法是使用OC的属性。。在对象接口的定义中，使用属性是一种标准的写法，能够访问封装在对象里的数据。因此，也可把属性当作一种简称。其意思是说：“编译器会自动写出一套存取方法，用以访问给定类型中具有给定名称的变量。”<br>以下两种方式是等效的</p>
+<pre><code>@interface Person : NSObject
 @property (nonatomic,copy) NSString *firstName;
 @property (nonatomic,copy) NSString *lastName;
 @end
@@ -484,7 +501,9 @@
 - (void)setFirstName:(NSString*)firstName;
 - (NSString*)lastName;
 - (void)setLastName:(NSString*)lastName;
-@end</code></pre><br><strong><em>如何访问属性？</em></strong><br>要访问属性，可以使用“点语法”，在纯C中，要想访问分配在栈上的结构体里的成员，也需要使用点语法。编译器会把“点语法”转换为对存取方法的调用。使用点语法的效果与直接调用存取方法相同。<br>以下是点语法与直接调用存取方法的示例：<br><pre><code>Person * person = [[Person alloc] init];
+@end</code></pre>
+<p><strong><em>如何访问属性？</em></strong><br>要访问属性，可以使用“点语法”，在纯C中，要想访问分配在栈上的结构体里的成员，也需要使用点语法。编译器会把“点语法”转换为对存取方法的调用。使用点语法的效果与直接调用存取方法相同。<br>以下是点语法与直接调用存取方法的示例：</p>
+<pre><code>Person * person = [[Person alloc] init];
 
 person.firstName = @&quot;pinghua&quot;;
 &#x2F;&#x2F;与下述方式效果一致
@@ -492,7 +511,8 @@ person.firstName = @&quot;pinghua&quot;;
 
 NSString *firstName = person.firstName;
 &#x2F;&#x2F;与下述方式效果一致
-NSString *firstName2 = [person firstName];</code></pre></p>
+NSString *firstName2 = [person firstName];</code></pre>
+
 <p><strong>使用属性的其他优势</strong></p>
 <ol>
 <li>在对象接口中使用属性，那么编译器就会自动编写访问这些属性所需的方法。此过程叫“自动合成”（autosynthesis）.<strong>这个过程由编译器在编译期执行，所以在编辑器中看不到这些合成方法的源码</strong></li>
@@ -557,7 +577,8 @@ NSString *_lastName;
 <li>在开发时应用nonatomic属性，因为atomic属性会严重影响性能</li>
 </ol>
 </blockquote>
-<h1 id="在对象内部尽量直接访问实例变量"><a href="#在对象内部尽量直接访问实例变量" class="headerlink" title="在对象内部尽量直接访问实例变量"></a>在对象内部尽量直接访问实例变量</h1><p>在对象之外访问实例变量时，总是应该通过属性来做，那么在对象内部访问实例变量时，要怎么做呢？<br>我们来观察下列代码段：<br><pre><code>-(void)setFullName:(NSString *)fullName{
+<h1 id="在对象内部尽量直接访问实例变量"><a href="#在对象内部尽量直接访问实例变量" class="headerlink" title="在对象内部尽量直接访问实例变量"></a>在对象内部尽量直接访问实例变量</h1><p>在对象之外访问实例变量时，总是应该通过属性来做，那么在对象内部访问实例变量时，要怎么做呢？<br>我们来观察下列代码段：</p>
+<pre><code>-(void)setFullName:(NSString *)fullName{
     NSArray *components = [fullName componentsSeparatedByString:@&quot; &quot;];
     self.firstName = [components firstObject];
     self.lastName = [components lastObject];
@@ -565,7 +586,8 @@ NSString *_lastName;
 
 -(NSString *)fullName{
     return [NSString stringWithFormat:@&quot;%@ %@&quot;,self.firstName,self.lastName];
-}</code></pre><br><pre><code>-(void)setFullName:(NSString *)fullName{
+}</code></pre>
+<pre><code>-(void)setFullName:(NSString *)fullName{
     NSArray *components = [fullName componentsSeparatedByString:@&quot; &quot;];
     _firstName = [components firstObject];
     _lastName = [components lastObject];
@@ -573,7 +595,8 @@ NSString *_lastName;
 
 -(NSString *)fullName{
     return [NSString stringWithFormat:@&quot;%@ %@&quot;,_firstName,_lastName];
-}</code></pre><br><strong>这两种写法有什么区别？</strong></p>
+}</code></pre>
+<p><strong>这两种写法有什么区别？</strong></p>
 <ol>
 <li>由于不经过OC的“消息派发”，所以直接访问实例变量的速度会比较快。这种情况下，编译器所生成的代码会直接访问保存对象实例变量的那块内存。</li>
 <li>直接访问实例变量时，不会调用其设置方法，这样绕过了相关属性所定义的内存管理语义。（在ARC下直接访问一个声明为Copy的属性，那么并不会拷贝该属性，，只会保留新值，释放旧值）</li>
@@ -582,16 +605,11 @@ NSString *_lastName;
 </ol>
 <p><strong><em>有没有一种即能提高读写操作的速度，又能控制对属性的写入操作的方案：</em></strong><br>在写入实例变量时，通过其设置方法来做，而在读取实例变量时，直接访问实例变量。</p>
 <blockquote>
-<p>使用这种方法需要注意以下两点：</p>
-<pre><code>1. 在初始方法中应该如何设置属性值。
-2. 在使用“懒加载初始化时”，需要通过属性的获取方法来访问属性，否则实例变量永远不会初始化
-</code></pre></blockquote>
+<p>使用这种方法需要注意以下两点：<br>    1. 在初始方法中应该如何设置属性值。<br>    2. 在使用“懒加载初始化时”，需要通过属性的获取方法来访问属性，否则实例变量永远不会初始化</p>
+</blockquote>
 <blockquote>
-<p>小结</p>
-<pre><code>1. 在对象内部读取数据时应该直接通过实例变量获取，而写入数据时，应通过属性来写。
-2. 在初始化及dealloc方法中，应直接通过实例变量来读写数据。
-3. 有时会使用懒加载初始化技术配置某份数据，这种情况下，需要通过属性来读取数据
-</code></pre></blockquote>
+<p>小结<br>    1. 在对象内部读取数据时应该直接通过实例变量获取，而写入数据时，应通过属性来写。<br>    2. 在初始化及dealloc方法中，应直接通过实例变量来读写数据。<br>    3. 有时会使用懒加载初始化技术配置某份数据，这种情况下，需要通过属性来读取数据</p>
+</blockquote>
 
             </div>
             <hr/>
@@ -707,7 +725,7 @@ NSString *_lastName;
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -781,6 +799,31 @@ NSString *_lastName;
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2018/11/17/OC属性详解/';
+        this.page.identifier = '/2018/11/17/OC属性详解/';
+        this.page.title = '编写高质量代码的有效方法(6)-理解“属性”';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -986,6 +1029,9 @@ UIImagePickerController的代理方法，
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -1007,15 +1053,11 @@ UIImagePickerController的代理方法，
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="类图, 志鹏的技术博客">
     <meta name="description" content="类图类图用于描述系统中所包含的类以及它们之间的相互关系，帮助人们简化对系统理解，它是系统分析和设计阶段的重要产物，也是系统编码和测试的重要模型依据。
@@ -397,6 +397,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        2.6k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        8 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -421,9 +435,10 @@
 </li>
 </ul>
 <p>在面向对象分析与设计的初级阶段，通常首先识别出实体类，绘制出初始类图，此时的类图也可称为领域模型，包括实体类及它们之间的相互关系。</p>
-<h1 id="类的UML图示"><a href="#类的UML图示" class="headerlink" title="类的UML图示"></a>类的UML图示</h1><p>在UML中，类使用包含类名、属性和操作且带有分隔线的长方形来表示：如定义一个Person类，它包含属性<code>name</code>,<code>age</code>,<code>phone</code>以及操作<code>walk()</code>,<code>speak()</code>,<code>eat()</code>在UML类图中该类如下图所示：<br><img src="" alt=""><br>在<code>UML</code>类图中，类一般由三部臾组成：</p>
+<h1 id="类的UML图示"><a href="#类的UML图示" class="headerlink" title="类的UML图示"></a>类的UML图示</h1><p>在UML中，类使用包含类名、属性和操作且带有分隔线的长方形来表示：如定义一个Person类，它包含属性<code>name</code>,<code>age</code>,<code>phone</code>以及操作<code>walk()</code>,<code>speak()</code>,<code>eat()</code>在UML类图中该类如下图所示：<br><img src alt><br>在<code>UML</code>类图中，类一般由三部臾组成：</p>
 <ul>
-<li>类名： 每个类都必须有一个名字，类名是一个字符串</li>
+<li><p>类名： 每个类都必须有一个名字，类名是一个字符串</p>
+</li>
 <li><p>类的属性（Attributes）：属性指类的性质，即类的成员变量。 一个可以有任意多个属性，也可以没有属性。<br>UML中规定属性的表示方式为：<br><code>可见性 名称 : 类型 [=缺省值]</code></p>
 <ul>
 <li>“可见性”表示该属性对于类外的元素是否可见。包括：公有<code>+</code>(Public)、私有<code>-</code>(Private)、和受保护<code>#</code>(protected),三种，在类图中分别用符号<code>+</code>,<code>-</code>,<code>#</code>表示</li>
@@ -455,8 +470,7 @@
 <th>多重性说明</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>1..1</td>
 <td>表示另一个类的一个对象只与该类的一个对象有关系</td>
 </tr>
@@ -476,9 +490,15 @@
 <td>m..n</td>
 <td>表示另一个类的一个对象与该类最少m，最多n个对象有关系 (m≤n)</td>
 </tr>
-</tbody>
-</table>
-<p>例如：一个界面(Form)可以拥有零个或多个按钮(Button)，但是一个按钮只能属于一个界面，因此，一个Form类的对象可以与零个或多个Button类的对象相关联，但一个Button类的对象只能与一个Form类的对象关联，如图5所示：<br><img src="" alt="多重性关联实例"></p>
+<tr>
+<td>例如：一个界面(Form)可以拥有零个或多个按钮(Button)，但是一个按钮只能属于一个界面，因此，一个Form类的对象可以与零个或多个Button类的对象相关联，但一个Button类的对象只能与一个Form类的对象关联，如图5所示：</td>
+<td></td>
+</tr>
+<tr>
+<td><img src alt="多重性关联实例"></td>
+<td></td>
+</tr>
+</tbody></table>
 <ul>
 <li>聚合关系<br>聚合(Aggregation)关系表示整体与部分的关系。在聚合关系中，成员对象是整体对象的一部分，但是成员对象可以脱离整体对象独立存在。在UML中，聚合关系用带空心菱形的直线表示。例如：汽车发动机(Engine)是汽车(Car)的组成部分，但是汽车发动机可以独立存在，因此，汽车和发动机是聚合关系，如图6所示：<br><img src="http://www.uml.org.cn/oobject/images/2012112319.jpg" alt="聚合关系实例"></li>
 <li>组合关系<br>组合(Composition)关系也表示类之间整体和部分的关系，但是在组合关系中整体对象可以控制成员对象的生命周期，一旦整体对象不存在，成员对象也将不存在，成员对象与整体对象之间具有同生共死的关系。在UML中，组合关系用带实心菱形的直线表示。例如：人的头(Head)与嘴巴(Mouth)，嘴巴是头的组成部分之一，而且如果头没了，嘴巴也就没了，因此头和嘴巴是组合关系，如图7所示：<br><img src="http://www.uml.org.cn/oobject/images/20121123110.jpg" alt="组合关系实例"></li>
@@ -601,7 +621,7 @@
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -675,6 +695,31 @@
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2018/08/26/类图/';
+        this.page.identifier = '/2018/08/26/类图/';
+        this.page.title = '类图';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -887,6 +932,9 @@ Runloop什么是Runloop
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -908,15 +956,11 @@ Runloop什么是Runloop
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

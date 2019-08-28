@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="URL的组成部分, 志鹏的技术博客">
     <meta name="description" content="URL的组成部分URL(统一资源定位符)是URI(通用资源标识)的特定类型，URL通常在因特网上查找现有资源。当Web客户机向服务器发出对资源的请求时，使用URL。URI 和 URL 的概念由因特网协会和 IETF（因特网工程任务组织）请求">
@@ -392,6 +392,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        978
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        4 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -425,8 +439,7 @@
 </li>
 </ul>
 <p>URL 的规则和主机部分不定义为区分大小写，但是路径和查询字符串是区分大小写的。通常，整个 URL 指定为小写字母。<br>URL 的组成部分如下所示进行组合和定界：</p>
-<pre><code>scheme://host:port/path?query
-</code></pre><ul>
+<pre><code>scheme://host:port/path?query</code></pre><ul>
 <li>规则后跟冒号和两个正斜杠。</li>
 <li>如果指定端口号，那么主机名后面是号码，并用冒号分隔。</li>
 <li>路径名以单正斜杠开始。</li>
@@ -442,8 +455,7 @@
 <p>–+—————–+—————————————–&gt;&lt;<br>   ‘-?–query string-‘</p>
 </blockquote>
 <p>URL 的后面可以跟片段标识。URL 与片段标识之间使用的分隔符是字符 #。<strong>片段标识用于使 Web 浏览器指向它刚检索的项中的引用或函数</strong>。 例如，如果 URL 标识 HTML 页面，那么可使用片段标识，以子节的标识来指示页面中的子节。对于这种情况，Web 浏览器通常向用户显示页面， 以使用户可以看到子节。根据项的介质类型以及为该介质类型的片段标识所定义含义的不同，Web 浏览器为片段标识所采取的操作也会不同</p>
-<pre><code>https://item.jd.com/11818781778.html#crumb-wrap
-</code></pre><h1 id="OC中如何获取URL的中各个组成部分"><a href="#OC中如何获取URL的中各个组成部分" class="headerlink" title="OC中如何获取URL的中各个组成部分"></a>OC中如何获取URL的中各个组成部分</h1><p>为获取URL中的各个组成部分，Foundation框架为我们提供了一个<code>NSURLComponents</code>类，通过该类，可以获取到URL中和各个组成部分</p>
+<pre><code>https://item.jd.com/11818781778.html#crumb-wrap</code></pre><h1 id="OC中如何获取URL的中各个组成部分"><a href="#OC中如何获取URL的中各个组成部分" class="headerlink" title="OC中如何获取URL的中各个组成部分"></a>OC中如何获取URL的中各个组成部分</h1><p>为获取URL中的各个组成部分，Foundation框架为我们提供了一个<code>NSURLComponents</code>类，通过该类，可以获取到URL中和各个组成部分</p>
 <pre><code class="objc">    // NSURLComponents 相关字段
     @property (nullable, copy) NSString *scheme; // 规则， Attempting to set the scheme with an invalid scheme string will cause an exception.
     @property (nullable, copy) NSString *user;//用户
@@ -453,8 +465,7 @@
     @property (nullable, copy) NSString *path;//路径
     @property (nullable, copy) NSString *query;//查询字符
     @property (nullable, copy) NSString *fragment;//片段标识
-    @property (nullable, copy) NSArray&lt;NSURLQueryItem *&gt; *queryItems; //查询字段数组
-</code></pre>
+    @property (nullable, copy) NSArray&lt;NSURLQueryItem *&gt; *queryItems; //查询字段数组</code></pre>
 <p>示例</p>
 <pre><code class="objc">    NSString * urlString = @&quot;http://54.223.156.84:9120/relayserver/spring/commands/command?commandType=cmd_type_ad&amp;commandName=&amp;commandStatus=&amp;code=10001&amp;id=test_snapshow_ios_first_test&amp;page=&amp;restrict=false&quot;;
     urlString = @&quot;https://item.jd.com/11818781778.html#crumb-wrap&quot;;
@@ -475,8 +486,7 @@
     NSMutableDictionary *paramsDic = [NSMutableDictionary dictionary];
     for (NSURLQueryItem *item in components.queryItems) {
         [paramsDic setValue:item.value forKey:item.name];
-    }
-</code></pre>
+    }</code></pre>
 <p>添加查询字段</p>
 <pre><code class="objc">NS_ASSUME_NONNULL_BEGIN
 
@@ -493,7 +503,6 @@ NS_ASSUME_NONNULL_END
     self.queryItems = queryitems;
 }
 @end
-
 </code></pre>
 
             </div>
@@ -610,7 +619,7 @@ NS_ASSUME_NONNULL_END
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -684,6 +693,31 @@ NS_ASSUME_NONNULL_END
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2018/01/10/URL的组成部分/';
+        this.page.identifier = '/2018/01/10/URL的组成部分/';
+        this.page.title = 'URL的组成部分';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -879,6 +913,9 @@ NS_ASSUME_NONNULL_END
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -900,15 +937,11 @@ NS_ASSUME_NONNULL_END
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

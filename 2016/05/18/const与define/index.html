@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="const与define, 志鹏的技术博客">
     <meta name="description" content="const和#define使用
@@ -413,6 +413,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        791
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        3 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -429,13 +443,11 @@
 <p>1.什么是const?<br>2.什么是#define?<br>3.有什么用？<br>4.区别是什么？<br>5.应该怎么用？</p>
 </blockquote>
 <a id="more"></a>
-<h1 id="什么是const"><a href="#什么是const" class="headerlink" title="什么是const?"></a>什么是const?</h1><pre><code>const 是c/c++中的一个关键字（修饰符），const一般用来定义一个常量。该常量的值不能修改。
-</code></pre><pre><code class="objc">      const int var  = 100;
+<h1 id="什么是const"><a href="#什么是const" class="headerlink" title="什么是const?"></a>什么是const?</h1><pre><code>const 是c/c++中的一个关键字（修饰符），const一般用来定义一个常量。该常量的值不能修改。</code></pre><pre><code class="objc">      const int var  = 100;
       int var1 = var;
       int var2 = var;
       var = 2000;//这样会报如下错误
-    //    Cannot assign to variable &#39;var&#39; with const-qualified type &#39;const int&#39;
-</code></pre>
+    //    Cannot assign to variable &#39;var&#39; with const-qualified type &#39;const int&#39;</code></pre>
 <h1 id="什么是-define"><a href="#什么是-define" class="headerlink" title="什么是#define?"></a>什么是#define?</h1><p>  而define, 宏定义, 则是一条预编译指令, 编译器在编译阶段会将所有使用到宏的地方简单地进行替换</p>
 <pre><code class="objc">  #define kconst 1000
   int defvar1 = kconst;
@@ -444,26 +456,20 @@
    编译后生成以下代码：
    int defvar1 = 1000;
    int defvar2 = 1000;
-   */
-</code></pre>
+   */</code></pre>
 <h1 id="有什么用？"><a href="#有什么用？" class="headerlink" title="有什么用？"></a>有什么用？</h1><ol>
 <li>const和define都可以定义一个常量，都能实现只改值一次，就可以所有用上该常量的地方同步改值，一句代码也都不用改。</li>
 <li>使代码更易维护</li>
 <li>提高代码的效率</li>
 </ol>
-<h1 id="有什么区别？"><a href="#有什么区别？" class="headerlink" title="有什么区别？"></a>有什么区别？</h1><p>  相同点：</p>
-<pre><code>* 都能定义常量
-</code></pre><p>  不同点:</p>
-<pre><code>* const定义常量从汇编的角度来看，只是给出了对应的内存地址，而不是象#define一样给出的是立即数,  
-所以，const定义的常量在程序运行过程中只有一份拷贝，而#define定义的常量在内存中有若干个拷贝??????????
-</code></pre><pre><code class="objc">            const int var  = 100;
+<h1 id="有什么区别？"><a href="#有什么区别？" class="headerlink" title="有什么区别？"></a>有什么区别？</h1><p>  相同点：<br>    * 都能定义常量<br>  不同点:<br>    * const定义常量从汇编的角度来看，只是给出了对应的内存地址，而不是象#define一样给出的是立即数,<br>    所以，const定义的常量在程序运行过程中只有一份拷贝，而#define定义的常量在内存中有若干个拷贝??????????</p>
+<pre><code class="objc">            const int var  = 100;
            #define kconst 1000
            int var1 = var;//此时为var分配内存，以后不在分配
            int var2 = var;//不再分配内存
 
            int defvar1 = kconst;//编译时进行宏替换，分配内存
-           int defvar2 = kconst;//编译时进行宏替换，再分配内存
-</code></pre>
+           int defvar2 = kconst;//编译时进行宏替换，再分配内存</code></pre>
 <ul>
 <li>编译器通常不为普通const常量分配存储空间，而是将它们保存在符号表中，这使得它成为一个编译期间的常量没有了存储与读内存的操作，使得它的效率比宏定义要高</li>
 </ul>
@@ -476,14 +482,12 @@
         int  const c = 200;// c 不可变，const和数据类型 位置可换
         int const *p1 =&amp;a;//*p1 不可变，p1 可变
         int * const p2 = &amp;a;//p2 不可变， *p2 可变
-        const int * const p3 = &amp;a;//p3 不可变，*p3不可变
-</code></pre>
+        const int * const p3 = &amp;a;//p3 不可变，*p3不可变</code></pre>
 <p>const 不可变原则：<br>用const修饰的函数形参，则能提高代码的安全性，同时减少程序员之间的沟通成本</p>
 <pre><code class="objc">int add(const int * x,const int * y){
     //不能对x,y进行修改
     return *x + *y;
-}
-</code></pre>
+}</code></pre>
 <p>宏多用于条件编译，如需要对于不同的情况下执行不同的代码块，则可以使用宏的条件编译来进行判断</p>
 <blockquote>
 <p>在Objective-C中, 随处可见const常量, 所以大家应该大胆地使用const, 它会带给你大大的益处. 同时, 只要某个数据是定义之后永远都不需要也不能修改的, 请使用const!</p>
@@ -603,7 +607,7 @@
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -677,6 +681,31 @@
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/05/18/const与define/';
+        this.page.identifier = '/2016/05/18/const与define/';
+        this.page.title = 'const与define';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -761,10 +790,10 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            如何在OC中声明一个block? 作为一个本地变量：objc
-returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...}; 作为一个属性：
-
-@proper
+                            如何在OC中声明一个block? 作为一个本地变量：
+returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...};
+ 作为一个属性：
+@property (
                         
                     </div>
                     <div class="publish-info">
@@ -911,6 +940,9 @@ returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...}; 作为�
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -932,15 +964,11 @@ returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...}; 作为�
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

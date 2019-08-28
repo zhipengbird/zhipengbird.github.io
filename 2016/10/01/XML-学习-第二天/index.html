@@ -2,13 +2,15 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="XML 学习 第二天 , 志鹏的技术博客">
     <meta name="description" content="今天我们主要学习XML的语法规,元素，属性
+
 XML语法规则
-所有XML元素都必须有关闭标签&amp;emsp;在hmtl中经常会看到没有关闭标签的元素&amp;lt;p&amp;gt;This is a paragraph
-&amp;lt;p&amp;gt;This is a a">
+所有XML元素都必须有关闭标签&amp;emsp;在hmtl中经常会看到没有关闭标签的元素
+&amp;lt;p&amp;gt;This is a paragraph
+&amp;lt;p&amp;gt;This is a">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -408,6 +410,20 @@ XML语法规则
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        2.1k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        9 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -420,51 +436,47 @@ XML语法规则
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>今天我们主要学习XML的语法规,元素，属性<br><a id="more"></a></p>
+                <p>今天我们主要学习XML的语法规,元素，属性</p>
+<a id="more"></a>
 <h1 id="XML语法规则"><a href="#XML语法规则" class="headerlink" title="XML语法规则"></a>XML语法规则</h1><ul>
-<li>所有XML元素都必须有关闭标签<br>&emsp;在hmtl中经常会看到没有关闭标签的元素<pre><code class="HTML">&lt;p&gt;This is a paragraph
-&lt;p&gt;This is a another paragraph
-</code></pre>
-&emsp;在XML中，省略关闭标签是非法的。所有元素都必须有关闭标签<pre><code class="XML">&lt;p&gt;This is a paragraph&lt;/p&gt;
-&lt;p&gt;This is a another paragraph&lt;/p&gt;
-</code></pre>
+<li><p>所有XML元素都必须有关闭标签<br>&emsp;在hmtl中经常会看到没有关闭标签的元素</p>
+<pre><code class="HTML">&lt;p&gt;This is a paragraph
+&lt;p&gt;This is a another paragraph</code></pre>
+<p>&emsp;在XML中，省略关闭标签是非法的。所有元素都必须有关闭标签</p>
+<pre><code class="XML">&lt;p&gt;This is a paragraph&lt;/p&gt;
+&lt;p&gt;This is a another paragraph&lt;/p&gt;</code></pre>
 </li>
 <li><p>XML标签对大小写敏感<br>&emsp;XML元素使用XML标签进行定义。<br>XML 标签对大小写敏感。在 XML 中，标签 <letter> 与标签 <letter> 是不同的。</letter></letter></p>
 <pre><code class="XML">&lt;Message&gt;This is a error&lt;/message&gt;
-&lt;message&gt;This is right&lt;/message&gt;
-</code></pre>
+&lt;message&gt;This is right&lt;/message&gt;</code></pre>
 <blockquote>
 <p>注释：打开标签和关闭标签通常被称为开始标签和结束标签。不论您喜欢哪种术语，它们的概念都是相同的。</p>
 </blockquote>
 </li>
 <li><p>XML 必须正确地嵌套<br>&emsp;在 HTML 中，常会看到没有正确嵌套的元素：</p>
-<pre><code class="html">&lt;b&gt;&lt;i&gt;This text is bold and italic&lt;/b&gt;&lt;/i&gt;
-</code></pre>
+<pre><code class="html">&lt;b&gt;&lt;i&gt;This text is bold and italic&lt;/b&gt;&lt;/i&gt;</code></pre>
 <p>&emsp;在 XML 中，所有元素都必须彼此正确地嵌套：</p>
-<pre><code class="XML">&lt;b&gt;&lt;i&gt;This text is bold and italic&lt;/i&gt;&lt;/b&gt;
-</code></pre>
+<pre><code class="XML">&lt;b&gt;&lt;i&gt;This text is bold and italic&lt;/i&gt;&lt;/b&gt;</code></pre>
 <p>&emsp;在上例中，正确嵌套的意思是：由于 <i> 元素是在 <b> 元素内打开的，那么它必须在 <b> 元素内关闭。</b></b></i></p>
 </li>
 </ul>
 <ul>
-<li>XML 文档必须有根元素<br>&emsp;XML 文档必须有一个元素是所有其他元素的父元素。该元素称为根元素。<pre><code class="xml">&lt;root&gt;
+<li><p>XML 文档必须有根元素<br>&emsp;XML 文档必须有一个元素是所有其他元素的父元素。该元素称为根元素。</p>
+<pre><code class="xml">&lt;root&gt;
 &lt;child&gt;
   &lt;subchild&gt;.....&lt;/subchild&gt;
 &lt;/child&gt;
-&lt;/root&gt;
-</code></pre>
+&lt;/root&gt;</code></pre>
 </li>
 <li><p>XML 的属性值须加引号<br>&emsp;与 HTML 类似，XML 也可拥有属性（名称/值的对）。<br>在 XML 中，XML 的属性值须加引号。请研究下面的两个 XML 文档。第一个是错误的，第二个是正确的：</p>
 <pre><code class="xml">&lt;note date=08/08/2008&gt;
 &lt;to&gt;George&lt;/to&gt;
 &lt;from&gt;John&lt;/from&gt;
-&lt;/note&gt;
-</code></pre>
+&lt;/note&gt;</code></pre>
 <pre><code class="xml">&lt;note date=&quot;08/08/2008&quot;&gt;
 &lt;to&gt;George&lt;/to&gt;
 &lt;from&gt;John&lt;/from&gt;
-&lt;/note&gt;
-</code></pre>
+&lt;/note&gt;</code></pre>
 <p>在第一个文档中的错误是，note 元素中的 date 属性没有加引号。</p>
 </li>
 <li><p>实体引用<br>在 XML 中，一些字符拥有特殊的意义。<br>在 XML 中，有 5 个预定义的实体引用：</p>
@@ -473,39 +485,37 @@ XML语法规则
 <table>
 <thead>
 <tr>
-<th style="text-align:left">实体引用</th>
-<th style="text-align:left">字符</th>
+<th align="left">实体引用</th>
+<th align="left">字符</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">&lt;</td>
-<td style="text-align:left">&lt;</td>
+<tbody><tr>
+<td align="left">&lt;</td>
+<td align="left">&lt;</td>
 </tr>
 <tr>
-<td style="text-align:left">&glt;</td>
-<td style="text-align:left">&gt;</td>
+<td align="left">&glt;</td>
+<td align="left">&gt;</td>
 </tr>
 <tr>
-<td style="text-align:left">&amp;</td>
-<td style="text-align:left">&amp;</td>
+<td align="left">&amp;</td>
+<td align="left">&amp;</td>
 </tr>
 <tr>
-<td style="text-align:left">&amp;apos</td>
-<td style="text-align:left">‘</td>
+<td align="left">&amp;apos</td>
+<td align="left">‘</td>
 </tr>
 <tr>
-<td style="text-align:left">&amp;quot</td>
-<td style="text-align:left">“</td>
+<td align="left">&amp;quot</td>
+<td align="left">“</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <blockquote>
 <p>注释：在 XML 中，只有字符 “&lt;” 和 “&amp;” 确实是非法的。大于号是合法的，但是用实体引用来代替它是一个好习惯。</p>
 </blockquote>
 <ul>
-<li>XML 中的注释<br>&emsp;在 XML 中编写注释的语法与 HTML 的语法很相似：<pre><code class="XML">&lt;!-- This is a comment --&gt;
-</code></pre>
+<li><p>XML 中的注释<br>&emsp;在 XML 中编写注释的语法与 HTML 的语法很相似：</p>
+<pre><code class="XML">&lt;!-- This is a comment --&gt;</code></pre>
 </li>
 <li><p>在 XML 中，空格会被保留<br>&emsp;HTML 会把多个连续的空格字符裁减（合并）为一个：<br>在 XML 中，文档中的空格不会被删节。</p>
 </li>
@@ -527,18 +537,16 @@ XML语法规则
     &lt;year&gt;2005&lt;/year&gt;
     &lt;price&gt;29.9&lt;/price&gt;
   &lt;/book&gt;
-&lt;/bookstore&gt;
-</code></pre>
+&lt;/bookstore&gt;</code></pre>
 <h2 id="XML-命名规则"><a href="#XML-命名规则" class="headerlink" title="XML 命名规则"></a>XML 命名规则</h2><p>XML 元素必须遵循以下命名规则：</p>
 <pre><code>* 名称可以含字母、数字以及其他的字符
 * 名称不能以数字或者标点符号开始
 * 名称不能以字符 “xml”（或者 XML、Xml）开始
-* 名称不能包含空格
-</code></pre><p>可使用任何名称，没有保留的字词。</p>
+* 名称不能包含空格</code></pre><p>可使用任何名称，没有保留的字词。</p>
 <h2 id="最佳命名习惯"><a href="#最佳命名习惯" class="headerlink" title="最佳命名习惯"></a>最佳命名习惯</h2><ul>
 <li><p>使名称具有描述性。使用下划线的名称也很不错。</p>
 </li>
-<li><p>名称应当比较简短，比如：&lt;book_title&gt;，而不是：&lt;the_title_of_the_book&gt;。</p>
+<li><p>名称应当比较简短，比如：<book_title>，而不是：<the_title_of_the_book>。</the_title_of_the_book></book_title></p>
 </li>
 <li><p>避免 “-“ 字符。如果您按照这样的方式进行命名：”first-name”，一些软件会认为你需要提取第一个单词。</p>
 </li>
@@ -555,8 +563,7 @@ XML语法规则
   &lt;to&gt;George&lt;/to&gt;
   &lt;from&gt;John&lt;/from&gt;
   &lt;body&gt;Don&#39;t forget the meeting!&lt;/body&gt;
-&lt;/note&gt;
-</code></pre>
+&lt;/note&gt;</code></pre>
 <p>  增加字段</p>
 <pre><code class="xml">  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
   &lt;note&gt;
@@ -565,32 +572,28 @@ XML语法规则
       &lt;from&gt;John&lt;/from&gt;
       &lt;heading&gt;Reminder&lt;/heading&gt;
       &lt;body&gt;Don&#39;t forget the meeting!&lt;/body&gt;
-&lt;/note&gt;
-</code></pre>
+&lt;/note&gt;</code></pre>
 <h1 id="XML-属性"><a href="#XML-属性" class="headerlink" title="XML 属性"></a>XML 属性</h1><blockquote>
 <p>XML 元素可以在开始标签中包含属性，类似 HTML。<br>属性 (Attribute) 提供关于元素的额外（附加）信息。</p>
 </blockquote>
 <h2 id="XML属性"><a href="#XML属性" class="headerlink" title="XML属性"></a>XML属性</h2><p> 从 HTML，你会回忆起这个：<code>&lt;img src=&quot;computer.gif&quot;&gt;</code>。<code>&quot;src&quot;</code> 属性提供有关 <code>&lt;img&gt;</code>元素的额外信息。<br> 在 HTML 中（以及在 XML 中），属性提供有关元素的额外信息：</p>
 <pre><code class="HTML"> &lt;img src=&quot;computer.png&quot;&gt;
- &lt;a href=&quot;index.html&quot;&gt;
-</code></pre>
+ &lt;a href=&quot;index.html&quot;&gt;</code></pre>
 <p> 属性通常提供不属于数据组成部分的信息。在下面的例子中，文件类型与数据无关，但是对需要处理这个元素的软件来说却很重要：</p>
 <pre><code class="XML"> &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
- &lt;file type=&#39;gif&#39;&gt;computer.gif&lt;/file&gt;
-</code></pre>
+ &lt;file type=&#39;gif&#39;&gt;computer.gif&lt;/file&gt;</code></pre>
 <ul>
 <li>XML 属性必须加引号<br>属性值必须被引号包围，不过单引号和双引号均可使用。比如一个人的性别，person 标签可以这样写：<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;person sex=&#39;man&#39;&gt;tom&lt;/person&gt;
 &lt;!-- 下面是一样的效果 --&gt;
-&lt;!-- &lt;person sex=&quot;man&quot;&gt;tom&lt;/person&gt; --&gt;
-</code></pre>
-<strong>注释：如果属性值本身包含双引号，那么有必要使用单引号包围它，就像这个例子：</strong></li>
+&lt;!-- &lt;person sex=&quot;man&quot;&gt;tom&lt;/person&gt; --&gt;</code></pre>
+</li>
+<li><em>注释：如果属性值本身包含双引号，那么有必要使用单引号包围它，就像这个例子：*</em></li>
 </ul>
 <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;gangster name=&#39;George &quot;Shotgun&quot; Ziegler&#39;&gt;&lt;/gangster&gt;
 &lt;!-- 同样的效果 --&gt;
-&lt;gangster name=&quot;George &amp;quot;Shotgun&amp;quot; Ziegler&quot;&gt;
-</code></pre>
+&lt;gangster name=&quot;George &amp;quot;Shotgun&amp;quot; Ziegler&quot;&gt;</code></pre>
 <ul>
 <li><p>XML 元素 vs. 属性</p>
 <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
@@ -604,8 +607,7 @@ XML语法规则
 &lt;sex&gt;boy&lt;/sex&gt;
 &lt;firstname&gt;Alan&lt;/firstname&gt;
 &lt;lastname&gt;Yuan&lt;/lastname&gt;
-&lt;/person&gt;
-</code></pre>
+&lt;/person&gt;</code></pre>
 <blockquote>
 <p>没有什么规矩可以告诉我们什么时候该使用属性，而什么时候该使用子元素。我的经验是在 HTML 中，属性用起来很便利，但是在 XML 中，您应该尽量避免使用属性。如果信息感觉起来很像数据，那么请使用子元素吧。</p>
 </blockquote>
@@ -613,19 +615,13 @@ XML语法规则
 <li><p>避免 XML 属性？</p>
 </li>
 </ul>
-<p>因使用属性而引起的一些问题：</p>
-<pre><code>* 属性无法包含多重的值（元素可以）
-* 属性无法描述树结构（元素可以）
-* 属性不易扩展（为未来的变化）
-* 属性难以阅读和维护
-</code></pre><p>请尽量使用元素来描述数据。而仅仅使用属性来提供与数据无关的信息。</p>
+<p>因使用属性而引起的一些问题：<br>    * 属性无法包含多重的值（元素可以）<br>    * 属性无法描述树结构（元素可以）<br>    * 属性不易扩展（为未来的变化）<br>    * 属性难以阅读和维护<br>请尽量使用元素来描述数据。而仅仅使用属性来提供与数据无关的信息。</p>
 <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!-- 错误的使用 --&gt;
 &lt;note day=&quot;08&quot; month=&quot;08&quot; year=&quot;2008&quot;
 to=&quot;George&quot; from=&quot;John&quot; heading=&quot;Reminder&quot;
 body=&quot;Don&#39;t forget the meeting!&quot;&gt;
 &lt;/note&gt;
-
 </code></pre>
 <blockquote>
 <p>在此极力向您传递的理念是：元数据（有关数据的数据）应当存储为属性，而数据本身应当存储为元素。</p>
@@ -745,7 +741,7 @@ body=&quot;Don&#39;t forget the meeting!&quot;&gt;
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -820,6 +816,31 @@ body=&quot;Don&#39;t forget the meeting!&quot;&gt;
     
 
     
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/10/01/XML-学习-第二天/';
+        this.page.identifier = '/2016/10/01/XML-学习-第二天/';
+        this.page.title = 'XML 学习 第二天 ';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+    
 
     
 
@@ -847,10 +868,11 @@ body=&quot;Don&#39;t forget the meeting!&quot;&gt;
                     <div class="summary block-with-text">
                         
                             今天要学习的XML的验证，验证器及流览器 ,初略DOM
+
 XML 验证
 拥有正确语法的 XML 被称为“形式良好”的 XML.  通过 DTD 验证的 XML 是“合法”的 XML.
 
-形式良好的 XML 文档  “形式良好”或“结构良好”的
+形式良好的 XML 文档  “形式良好”或“结构良好”
                         
                     </div>
                     <div class="publish-info">
@@ -900,10 +922,11 @@ XML 验证
                     <div class="summary block-with-text">
                         
                             今天主要学习下XML的基础概念，以及XML可以用在哪些地方，以及XML是一种怎样的结构。
+
 XML简介什么是 XML?
 XML是可扩展标记语言(EXtensible Markup Language)
 XML是一种标记语言，很类似HTML
-XM
+X
                         
                     </div>
                     <div class="publish-info">
@@ -1046,6 +1069,9 @@ XM
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -1067,15 +1093,11 @@ XM
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

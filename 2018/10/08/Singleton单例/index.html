@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Singleton单例, 志鹏的技术博客">
     <meta name="description" content="
@@ -397,6 +397,20 @@ NS_ASSUME_NONNULL_BEGIN
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        1.1k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        4 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -428,8 +442,7 @@ static TestManager * manager = nil;
     }
     return manager;
 }
-@end
-</code></pre>
+@end</code></pre>
 <p>这不是一个“严格”意义上的单例，要想在实际中使用，需要面对以下两个主要的障碍：</p>
 <ul>
 <li>发起调用的对象不能以其他分配方式实例化单例对象。否则，就有可以创建单例类的多个实例</li>
@@ -440,8 +453,7 @@ static TestManager * manager = nil;
     test1.name = @&quot;1&quot;;
     TestManager * test2 = [[TestManager  alloc] init];
     test2.name = @&quot;rewq&quot;;
-    NSLog(@&quot;%@:%@&quot;,test1.name,test2.name); // 1:rewq
-</code></pre>
+    NSLog(@&quot;%@:%@&quot;,test1.name,test2.name); // 1:rewq</code></pre>
 <p>此模式下，调用test1的copy方法会crash ，<code>-[TestManager copyWithZone:]: unrecognized selector sent to instance 0x6000003b05f0</code> TestManager类未实现<code>NSCopying</code>协议 </p>
 <p>版本2</p>
 <pre><code class="objc">@implementation TestManager
@@ -454,8 +466,7 @@ static TestManager * manager = nil;
     });
     return manager;
 }
-@end
-</code></pre>
+@end</code></pre>
 <p>此版本依然是一个非“严格“意义上的单例，但这个是线程安全的。</p>
 <p>下面我们来实现一个严格意上的单例：<br>版本3：</p>
 <pre><code class="objc">NS_ASSUME_NONNULL_BEGIN
@@ -486,8 +497,7 @@ NS_ASSUME_NONNULL_END
 -(id)mutableCopyWithZone:(NSZone *)zone{
     return self;
 }
-@end
-</code></pre>
+@end</code></pre>
 <p>和前两个版本一样，首先检查类的唯一实例是否已创建，如果没有，就创建一个新的实例并将其返回。但是，这里没有使用alloc这样的方法，而是调用<code>[[super allocWithZone:NULL] init]</code>来生成新的实例。为什么是super而不是self？因为已经在self中重载了基本的对象分配方法，所以需要“借用”其父类的功能来帮助处理底层内存分配的杂务。<br>Ps:这里没有考虑到多线程问题，如果在多线程中使用的话需要考虑到线程安全<br>版本4（线程安全）</p>
 <pre><code class="objc">@implementation TestManager
 +(instancetype)shareInstance{
@@ -512,8 +522,7 @@ NS_ASSUME_NONNULL_END
 -(id)mutableCopyWithZone:(NSZone *)zone{
     return self;
 }
-@end
-</code></pre>
+@end</code></pre>
 <p>版本5（线程安全):</p>
 <pre><code class="objc">+(instancetype)shareInstance{
     return [[[self class] alloc]init];
@@ -536,8 +545,7 @@ NS_ASSUME_NONNULL_END
 -(id)mutableCopyWithZone:(NSZone *)zone{
     return self;
 }
-@end
-</code></pre>
+@end</code></pre>
 <h2 id="一劳永逸，单例模式的优化"><a href="#一劳永逸，单例模式的优化" class="headerlink" title="一劳永逸，单例模式的优化"></a>一劳永逸，单例模式的优化</h2><p>如果想要一劳永逸，我们将面临两个问题</p>
 <ol>
 <li>如何写一份单例代码在ARC和MRC环境下都适用？</li>
@@ -548,8 +556,7 @@ NS_ASSUME_NONNULL_END
 //如果是ARC，那么就执行这里的代码1
 #else
 //如果不是ARC，那么就执行代理的代码2
-#endif
-</code></pre>
+#endif</code></pre>
 <p>将单例方法写成宏定义：</p>
 <pre><code class="objc">#define singleH(name) +(instancetype)shareInstance;
 
@@ -617,8 +624,7 @@ return _instance;\
 {\
 return MAXFLOAT;\
 }
-#endif
-</code></pre>
+#endif</code></pre>
 <p>在.h文件中调用singleH(类名)<br>在.m文件中调用singleM(类名)</p>
 
             </div>
@@ -735,7 +741,7 @@ return MAXFLOAT;\
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -809,6 +815,31 @@ return MAXFLOAT;\
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2018/10/08/Singleton单例/';
+        this.page.identifier = '/2018/10/08/Singleton单例/';
+        this.page.title = 'Singleton单例';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -1031,6 +1062,9 @@ Tagged Pointer 专门用来存储小的对象，例如 NSNumber
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -1052,15 +1086,11 @@ Tagged Pointer 专门用来存储小的对象，例如 NSNumber
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

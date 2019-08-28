@@ -2,13 +2,13 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="创建block姿势, 志鹏的技术博客">
-    <meta name="description" content="如何在OC中声明一个block? 作为一个本地变量：objc
-returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...}; 作为一个属性：
-
-@proper">
+    <meta name="description" content="如何在OC中声明一个block? 作为一个本地变量：
+returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...};
+ 作为一个属性：
+@property (">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -412,6 +412,20 @@ returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...}; 作为�
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        75
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        1 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -424,25 +438,18 @@ returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...}; 作为�
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="如何在OC中声明一个block"><a href="#如何在OC中声明一个block" class="headerlink" title="如何在OC中声明一个block?"></a>如何在OC中声明一个block?</h2><font color="#2E73D6"> 作为一个本地变量：</font><br><code>objc
-returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...};</code><br><br><br><font color="#2E73D6"> 作为一个属性：</font>
-
-<pre><code class="objc">@property (nonatomic, copy, nullability) returnType (^blockName)(parameterTypes);
-</code></pre>
+                <h2 id="如何在OC中声明一个block"><a href="#如何在OC中声明一个block" class="headerlink" title="如何在OC中声明一个block?"></a>如何在OC中声明一个block?</h2><p><font color="#2E73D6"> 作为一个本地变量：</font></p>
+<pre><code class="objc">returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...};</code></pre>
+<p><font color="#2E73D6"> 作为一个属性：</font></p>
+<pre><code class="objc">@property (nonatomic, copy, nullability) returnType (^blockName)(parameterTypes);</code></pre>
 <a id="more"></a>
-<font color="#2E73D6">作为一个方法参数：</font>
-
-<pre><code class="objc">- (void)someMethodThatTakesABlock:(returnType (^nullability)(parameterTypes))blockName;
-</code></pre>
-<font color="#2E73D6">作为参数传递：</font>
-
-<pre><code class="objc">[someObject someMethodThatTakesABlock:^returnType (parameters) {...}];
-</code></pre>
-<font color="#2E73D6">作为自定义类型：typedef</font>
-
+<p><font color="#2E73D6">作为一个方法参数：</font></p>
+<pre><code class="objc">- (void)someMethodThatTakesABlock:(returnType (^nullability)(parameterTypes))blockName;</code></pre>
+<p><font color="#2E73D6">作为参数传递：</font></p>
+<pre><code class="objc">[someObject someMethodThatTakesABlock:^returnType (parameters) {...}];</code></pre>
+<p><font color="#2E73D6">作为自定义类型：typedef</font></p>
 <pre><code class="objc">typedef returnType (^TypeName)(parameterTypes);
-TypeName blockName = ^returnType(parameters) {...};
-</code></pre>
+TypeName blockName = ^returnType(parameters) {...};</code></pre>
 
             </div>
             <hr/>
@@ -558,7 +565,7 @@ TypeName blockName = ^returnType(parameters) {...};
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -632,6 +639,31 @@ TypeName blockName = ^returnType(parameters) {...};
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/05/17/创建block姿势/';
+        this.page.identifier = '/2016/05/17/创建block姿势/';
+        this.page.title = '创建block姿势';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -852,6 +884,9 @@ unsigned int HEX2int(NSString  * hexString)
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -873,15 +908,11 @@ unsigned int HEX2int(NSString  * hexString)
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

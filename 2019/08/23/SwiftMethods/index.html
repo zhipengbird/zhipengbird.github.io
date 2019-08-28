@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Methods, 志鹏的技术博客">
     <meta name="description" content="MethodsMethods are functions that are associated with a particular type. Classes, structures, and enumerations can all d">
@@ -396,6 +396,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        813
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        5 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -429,8 +443,7 @@
         x += deltaX
         y += deltaY
     }
-}
-</code></pre>
+}</code></pre>
 <blockquote>
 <p>Note that you <strong>cannot call a mutating method on a constant of structure type</strong>, <em>because its properties cannot be changed, even if they are variable properties</em>.</p>
 </blockquote>
@@ -440,8 +453,7 @@
     mutating func moveBy(x deltaX: Double, y deltaY: Double) {
         self = Point(x: x + deltaX, y: y + deltaY)
     }
-}
-</code></pre>
+}</code></pre>
 <p>Mutating methods for enumerations can set the implicit self parameter to be a different case from the same enumeration:</p>
 <pre><code class="swift">enum TriStateSwitch {
     case off, low, high
@@ -455,8 +467,7 @@
             self = .off
         }
     }
-}
-</code></pre>
+}</code></pre>
 <p>#Type Methods</p>
 <p>Instance methods, as described above, are methods that you call on an instance of a particular type. You can also define methods that are called on the type itself. These kinds of methods are called <code>type methods</code>. You indicate type methods by writing the <code>static</code>keyword before the method’s <code>func</code> keyword. Classes can use the<code>class</code>keyword instead, to allow subclasses to override the superclass’s implementation of that method</p>
 <blockquote>
@@ -468,8 +479,7 @@
         // type method implementation goes here
     }
 }
-SomeClass.someTypeMethod()
-</code></pre>
+SomeClass.someTypeMethod()</code></pre>
 <p>Within the body of a type method, the implicit self property refers to the type itself, rather than an instance of that type. This means that you can use self to disambiguate between type properties and type method parameters, just as you do for instance properties and instance method parameters</p>
 <p>More generally, any unqualified method and property names that you use within the body of a type method will refer to other type-level methods and properties. A type method can call another type method with the other method’s name, without needing to prefix it with the type name. Similarly, type methods on structures and enumerations can access type properties by using the type property’s name without a type name prefix.</p>
 
@@ -587,7 +597,7 @@ SomeClass.someTypeMethod()
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -661,6 +671,31 @@ SomeClass.someTypeMethod()
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2019/08/23/SwiftMethods/';
+        this.page.identifier = '/2019/08/23/SwiftMethods/';
+        this.page.title = 'Methods';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -881,6 +916,9 @@ SomeClass.someTypeMethod()
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -902,15 +940,11 @@ SomeClass.someTypeMethod()
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

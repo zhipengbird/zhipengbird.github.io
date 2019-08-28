@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="顶点着色器, 志鹏的技术博客">
     <meta name="description" content="顶点着色器顶点着色器实现了顶点操作的通秀可编程方法
@@ -410,6 +410,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        604
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        2 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -431,11 +445,11 @@
 <li>采样器： 代表顶点着色器使用纹理的特殊统一变量类型</li>
 </ul>
 <p>顶点着色器可以用来通过矩阵变换位置、计算照明公式来生成逐顶点颜色以及生成或者变换纹理坐标等基于顶点的传统操作。此外，顶点着色器由应用程序规定，所以它可以用于执行自定义计算，实施新的变换、照明或者较传统的固定功能管线所不允许的基于顶点的效果。</p>
-<p> <img src="/Users/yuanpinghua/Desktop/screen capture/屏幕快照 2016-11-16 下午2.38.39.png" alt="屏幕快照 2016-11-16 下午2.38.39"></p>
+<p> ![屏幕快照 2016-11-16 下午2.38.39](/Users/yuanpinghua/Desktop/screen capture/屏幕快照 2016-11-16 下午2.38.39.png)</p>
 <h4 id="图元装配"><a href="#图元装配" class="headerlink" title="图元装配"></a>图元装配</h4><p>顶点着色器之后，OpenGL ES3.0图形管线的下一阶段是图元装配。</p>
 <p>图元（Primitive）是三角形、直线或者精灵等几何对象。图元的每个顶点被发送到顶点着色器的不同拷贝。在图元装配期间，这些顶点被组合成图元。</p>
 <h4 id="光栅化"><a href="#光栅化" class="headerlink" title="光栅化"></a>光栅化</h4><p>此阶段绘制对应的图元。光栅化是将图元转化为一组二维片段的过程，然后，这些片段由片段着色器处理。这些二维片段代表着可在屏幕上绘制的像素。</p>
-<p> <img src="/Users/yuanpinghua/Desktop/screen capture/屏幕快照 2016-11-16 下午2.38.55.png" alt="屏幕快照 2016-11-16 下午2.38.55"></p>
+<p> ![屏幕快照 2016-11-16 下午2.38.55](/Users/yuanpinghua/Desktop/screen capture/屏幕快照 2016-11-16 下午2.38.55.png)</p>
 <h4 id="片段着色器"><a href="#片段着色器" class="headerlink" title="片段着色器"></a>片段着色器</h4><p>片段着色器为片段上的操作实现了通用的可编程方法，对光栅化阶段生成的每个片段执行这个着色器，采用如下输入：</p>
 <ul>
 <li>着色器程序：描述片段上执行操作的片段着色器程序源代码或可执行文件。</li>
@@ -558,7 +572,7 @@
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -632,6 +646,31 @@
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/11/17/顶点着色器/';
+        this.page.identifier = '/2016/11/17/顶点着色器/';
+        this.page.title = '顶点着色器';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -848,6 +887,9 @@ It g
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -869,15 +911,11 @@ It g
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

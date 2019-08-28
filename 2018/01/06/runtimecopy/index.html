@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="runtime - 实现对象的自动拷贝, 志鹏的技术博客">
     <meta name="description" content="在我们开发过程中，有时会遇到对象进行拷贝的情况，在对象属性少的情况下，我们可以直接在 copyWithZone:/mutableCopyWithZone: 方法里手动对复制后的对象的相应属性赋值，但在属性成员很多的情况及通过runtime在">
@@ -392,6 +392,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        557
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        2 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -406,10 +420,10 @@
             <div id="articleContent">
                 <p>在我们开发过程中，有时会遇到对象进行拷贝的情况，在对象属性少的情况下，我们可以直接在 <code>copyWithZone:/mutableCopyWithZone:</code> 方法里手动对复制后的对象的相应属性赋值，但在属性成员很多的情况及通过runtime在运行时关联属性时，我们这种手动赋值的方式就有点应赋不过来了。runtime是OC的一把利器，用得好可以帮我们节省很多事情。废话不多说，用代码说话。</p>
 <ol>
-<li>为对象增加一个扩展并遵守 <code>&lt;NSCopying,NSMutableCopying&gt;</code>协议 <pre><code> #import &lt;objc/runtime.h&gt;
+<li><p>为对象增加一个扩展并遵守 <code>&lt;NSCopying,NSMutableCopying&gt;</code>协议 </p>
+<pre><code> #import &lt;objc/runtime.h&gt;
  @interface Person()&lt;NSCopying,NSMutableCopying&gt;
- @end
-</code></pre></li>
+ @end</code></pre></li>
 <li><p>实现协议  </p>
 <pre><code> -(id)copyWithZone:(NSZone * )zone{
      id objCopy = [[[self class] allocWithZone:zone] init];
@@ -440,8 +454,7 @@
      //*****切记需要手动释放
      free(propertyArray);
      return objCopy;
- }
-</code></pre><pre><code> -(id)mutableCopyWithZone:(NSZone *)zone{
+ }</code></pre><pre><code> -(id)mutableCopyWithZone:(NSZone *)zone{
      id objcopy = [[[self class]allocWithZone:zone] init];
      //    1.获取属性列表
      unsigned int count = 0;
@@ -466,23 +479,12 @@
      free(propertylist);
      return objcopy;
 
- }
-</code></pre></li>
+ }</code></pre></li>
 </ol>
 <p>通过以上两个方法的实现，可以应付对象的拷贝场景。</p>
 <blockquote>
-<p>小结下:<br>    使用runtime机制实现对象的拷贝有以下几个步骤:</p>
-<pre><code>* 导入&lt;objc/runtime.h&gt;头文件
-* 遵守`&lt;NSCopying,NSMutableCopying&gt;`协议
-* 实现`mutableCopyWithZone:/copyWithZone:`方法
-    * 获取类的属性列表
-    * 对属性列表进行遍历
-        * 拿到属性
-        * 拿到属性名
-        * 通过属性名拿到属性值, 使用`valueForKey:`方法
-        * 判断值对象是否响应协议方法，将值赋值给新对象的相应属性
-    * 释放属性指针
-</code></pre></blockquote>
+<p>小结下:<br>    使用runtime机制实现对象的拷贝有以下几个步骤:<br>    * 导入&lt;objc/runtime.h&gt;头文件<br>    * 遵守<code>&lt;NSCopying,NSMutableCopying&gt;</code>协议<br>    * 实现<code>mutableCopyWithZone:/copyWithZone:</code>方法<br>        * 获取类的属性列表<br>        * 对属性列表进行遍历<br>            * 拿到属性<br>            * 拿到属性名<br>            * 通过属性名拿到属性值, 使用<code>valueForKey:</code>方法<br>            * 判断值对象是否响应协议方法，将值赋值给新对象的相应属性<br>        * 释放属性指针</p>
+</blockquote>
 
             </div>
             <hr/>
@@ -598,7 +600,7 @@
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -672,6 +674,31 @@
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2018/01/06/runtimecopy/';
+        this.page.identifier = '/2018/01/06/runtimecopy/';
+        this.page.title = 'runtime - 实现对象的自动拷贝';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -867,6 +894,9 @@
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -888,15 +918,11 @@
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

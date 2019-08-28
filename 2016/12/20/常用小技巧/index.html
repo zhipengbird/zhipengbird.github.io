@@ -2,14 +2,13 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="iOS常用小技巧, 志鹏的技术博客">
     <meta name="description" content="
 去除字符串首尾空格//可以指定字符集
 [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-
-常用字符集：@property (re">
+常用字符集：@property (rea">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -409,6 +408,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        365
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        1 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -423,8 +436,7 @@
             <div id="articleContent">
                 <ol>
 <li>去除字符串首尾空格<pre><code class="objc">//可以指定字符集
-[text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-</code></pre>
+[text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];</code></pre>
 常用字符集：<pre><code class="objc">@property (readonly, class, copy) NSCharacterSet *controlCharacterSet; //控制符
 @property (readonly, class, copy) NSCharacterSet *whitespaceCharacterSet;//空格
 @property (readonly, class, copy) NSCharacterSet *whitespaceAndNewlineCharacterSet;//空格和换行
@@ -439,8 +451,7 @@
 @property (readonly, class, copy) NSCharacterSet *punctuationCharacterSet;//标点符号
 @property (readonly, class, copy) NSCharacterSet *capitalizedLetterCharacterSet;//大写字符
 @property (readonly, class, copy) NSCharacterSet *symbolCharacterSet;//符号
-@property (readonly, class, copy) NSCharacterSet *newlineCharacterSet NS_AVAILABLE(10_5, 2_0);//换行符
-</code></pre>
+@property (readonly, class, copy) NSCharacterSet *newlineCharacterSet NS_AVAILABLE(10_5, 2_0);//换行符</code></pre>
 </li>
 </ol>
 <ol start="2">
@@ -448,18 +459,20 @@
 <ul>
 <li><p>自定义返回按钮</p>
 <pre><code class="objc">UIImage * backButtonImage = [[UIImage imageNamed:@&quot;back_bg&quot;] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 30, 0, 0)];
-[[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-</code></pre>
+[[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];</code></pre>
 </li>
 <li><p>将返回按钮的文字position设置不在屏幕上显示</p>
-<pre><code class="objc">[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(NSIntegerMin, NSIntegerMin) forBarMetrics:UIBarMetricsDefault];
-</code></pre>
+<pre><code class="objc">[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(NSIntegerMin, NSIntegerMin) forBarMetrics:UIBarMetricsDefault];</code></pre>
 </li>
 <li><p>用系统的返回按钮的时候 会发现显示的是蓝色的，想要改变成白色的添加下面一句话</p>
-<pre><code class="objc">[[UINavigationBar appearance]setTintColor:[UIColor whiteColor]];
+<pre><code class="objc">[[UINavigationBar appearance]setTintColor:[UIColor whiteColor]];</code></pre>
+</li>
+<li><p>去除导航栏的黑色分隔线</p>
+<pre><code class="objc">//    去除导航栏的黑色分隔线
+[self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
+self.navigationController.navigationBar.shadowImage = [UIImage imageWithColor:[UIColor clearColor]];
 </code></pre>
 </li>
-<li>去除导航栏的黑色分隔线<br><code>`</code>objc<br>//    去除导航栏的黑色分隔线<br>[self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];<br>self.navigationController.navigationBar.shadowImage = [UIImage imageWithColor:[UIColor clearColor]];</li>
 </ul>
 </li>
 </ol>
@@ -476,8 +489,7 @@ placeHolderLabel.textAlignment= NSTextAlignmentLeft;
 [self.textView addSubview:placeHolderLabel];
 // same font
 placeHolderLabel.font = [UIFont systemFontOfSize:16.f];
-[self.textView setValue:placeHolderLabel forKey:@&quot;_placeholderLabel&quot;];
-</code></pre>
+[self.textView setValue:placeHolderLabel forKey:@&quot;_placeholderLabel&quot;];</code></pre>
             </div>
             <hr/>
 
@@ -592,7 +604,7 @@ placeHolderLabel.font = [UIFont systemFontOfSize:16.f];
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -666,6 +678,31 @@ placeHolderLabel.font = [UIFont systemFontOfSize:16.f];
 
     
 
+    
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/12/20/常用小技巧/';
+        this.page.identifier = '/2016/12/20/常用小技巧/';
+        this.page.title = 'iOS常用小技巧';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
     
 
     
@@ -890,6 +927,9 @@ Ivar *ivarList = class_copyIvarList([UITextField class]
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -911,15 +951,11 @@ Ivar *ivarList = class_copyIvarList([UITextField class]
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 

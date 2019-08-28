@@ -2,7 +2,7 @@
 <html lang="">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="python基础之变量赋值, 志鹏的技术博客">
     <meta name="description" content="今天主要来学习下python的变量赋值方面的知识，及注意事项
@@ -397,6 +397,20 @@
                 </div>
 
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        851
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
+                        3 Min
+                    </div>
+                    
+                
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
@@ -416,76 +430,79 @@ astring = &#39;yuanph&#39;
 afloat= -3.141582653
 aotherString  = &#39;ping&#39;+&#39;hua&#39;
 alist =[3,1.4,&#39;ufasd&#39;,8.3-1.9]
-print(aint,astring,afloat,aotherString,alist)
-</code></pre>
+print(aint,astring,afloat,aotherString,alist)</code></pre>
 <p>以下的赋值语句是非法的</p>
 <pre><code class="python">&gt;&gt;&gt; x=1
 &gt;&gt;&gt; y= (x=x+1)
   File &quot;&lt;stdin&gt;&quot;, line 1
     y= (x=x+1)
          ^
-SyntaxError: invalid syntax
-</code></pre>
+SyntaxError: invalid syntax</code></pre>
 <p>如果你较为熟悉Ｃ的话，赋值语句其实就是当成一个表达式（可以返回值）,上述赋值在Ｃ中是合法的</p>
 <pre><code class="C">int x = 1;
 int y  = (x=x+1);
 printf(&quot;%d\t%d&quot;,x,y);
-//2    2
-</code></pre>
+//2    2</code></pre>
 <p>如将上述的语句改成链接赋值，那是合法的</p>
 <pre><code class="python">&gt;&gt;&gt; x=1
 &gt;&gt;&gt; y = x =x+1
 &gt;&gt;&gt; x,y
-(2, 2)
-</code></pre>
+(2, 2)</code></pre>
 <h4 id="增量赋值"><a href="#增量赋值" class="headerlink" title="增量赋值"></a>增量赋值</h4><p>从python2.0开始，等号可以和一个算述操作符组合在一起，将计算结果重新赋值给左边的变量，这被称为<font style="color:red;">增量赋值</font><br>增量赋值通过使用赋值运行算，将数学运算隐藏在赋值过程中，如果学过其他语言，对下面的增量运算符会比较熟悉：</p>
 <table>
 <thead>
 <tr>
 <th></th>
-<th style="text-align:center"></th>
-<th style="text-align:center"></th>
-<th style="text-align:center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><code>+=</code></td>
-<td style="text-align:center"><code>-=</code></td>
-<td style="text-align:center"><code>*=</code></td>
-<td style="text-align:center"><code>/=</code></td>
+<td align="center"><code>-=</code></td>
+<td align="center"><code>*=</code></td>
+<td align="center"><code>/=</code></td>
 </tr>
 <tr>
 <td><code>%=</code></td>
-<td style="text-align:center"><code>**=</code></td>
-<td style="text-align:center"><code>&lt;&lt;=</code></td>
-<td style="text-align:center"><code>&gt;&gt;=</code></td>
+<td align="center"><code>**=</code></td>
+<td align="center"><code>&lt;&lt;=</code></td>
+<td align="center"><code>&gt;&gt;=</code></td>
 </tr>
 <tr>
 <td><code>&amp;=</code></td>
-<td style="text-align:center"><code>^=</code></td>
-<td style="text-align:center">&#124;=</td>
+<td align="center"><code>^=</code></td>
+<td align="center">&#124;=</td>
+<td align="center"></td>
 </tr>
-</tbody>
-</table>
-<p><em>增量赋值相对于普通和赋值不仅是写法改变，最有意义的变化是第一个对象仅被处理一次。可变对象会被就地修改（无需拷贝引用），不可变对象则和Ａ＝Ａ＋Ｂ的结果一样（分配一个新的对象）</em><br><strong><em>不支持<code>++</code>、<code>--</code>这样的前/后置的自增/减运算</em></strong></p>
+<tr>
+<td><em>增量赋值相对于普通和赋值不仅是写法改变，最有意义的变化是第一个对象仅被处理一次。可变对象会被就地修改（无需拷贝引用），不可变对象则和Ａ＝Ａ＋Ｂ的结果一样（分配一个新的对象）</em></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td><strong><em>不支持<code>++</code>、<code>--</code>这样的前/后置的自增/减运算</em></strong></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
 <h4 id="多重赋值"><a href="#多重赋值" class="headerlink" title="多重赋值"></a>多重赋值</h4><pre><code class="python">&gt;&gt;&gt; x=y = z= b= 1
 &gt;&gt;&gt; x,y,z,b
-(1, 1, 1, 1)
-</code></pre>
+(1, 1, 1, 1)</code></pre>
 <p> 上述代码说明：一个值为1的整形对象被创建，该对象的同一个引用被赋值给x,y,z,b.d 在python中可以将多个对象赋给多个变量，请下看下的多元赋值</p>
 <h4 id="多元赋值"><a href="#多元赋值" class="headerlink" title="多元赋值"></a>多元赋值</h4><p>将多个变量同时赋值的方法＝＝＝&gt;多元赋值（非官方术语）<br>采用这种赋值时，等号两边的对象都是元组（一种基本数据类型）</p>
 <pre><code class="python">&gt;&gt;&gt; x,y,z = 1,2,&#39;yph&#39;
 &gt;&gt;&gt; x,y,z
-(1, 2, &#39;yph&#39;)
-</code></pre>
+(1, 2, &#39;yph&#39;)</code></pre>
 <p>上述代码中，将两个整型变量和一个字符串对象，分别赋值给x,y,z.通常情况下元组需要用括号括起来，增加可读性（这是可选操作），但推荐使用。<br>我们来看下使用多元赋值来完成两个变量值的交换，先看c的实现</p>
 <pre><code class="c">int x = 10;
 int y = 100;
 int temp = x;
 x = y;
-y = temp;
-</code></pre>
+y = temp;</code></pre>
 <p>一般情况下我们需要一个中间变量来完成我们的数据交换，接下来我们看下python是如何快速实现这两值的交换的</p>
 <pre><code class="python">&gt;&gt;&gt; x,y= 10,100
 &gt;&gt;&gt; x,y
@@ -493,7 +510,6 @@ y = temp;
 &gt;&gt;&gt; x,y= y,x
 &gt;&gt;&gt; x,y
 (100, 10)
-
 </code></pre>
 <p>非常的方便快捷，显然，python在赋值之前已经对x,y的新值做了计算。</p>
 
@@ -611,7 +627,7 @@ y = temp;
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -686,6 +702,31 @@ y = temp;
     
 
     
+        <div class="disqus-card card" data-aos="fade-up">
+    <div id="disqus_thread" class="card-content">
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+</div>
+
+<script type="text/javascript">
+    disqus_config = function () {
+        this.page.url = 'http://yuanph.win/2016/07/13/python基础之变量赋值/';
+        this.page.identifier = '/2016/07/13/python基础之变量赋值/';
+        this.page.title = 'python基础之变量赋值';
+    };
+    let disqus_shortname = 'yuanpinghua';
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        let d = document, s = d.createElement('script');
+        // 如：s.src = 'https://blinkfox.disqus.com/embed.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+    
 
     
 
@@ -752,9 +793,10 @@ y = temp;
                     <div class="summary block-with-text">
                         
                             在本文中主要了解python的基本语法，介绍基本的编程风格，了解变量、关键字以及变量占用的内存分配和回收。
+
 语法与句法python语句中的一些基本规则和特殊字符：
 井号（#）表示之后的字符为python注释
-换行（’\n’)是标准的行分隔符
+换行（’\n’)是标准的行分隔
                         
                     </div>
                     <div class="publish-info">
@@ -885,6 +927,9 @@ y = temp;
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
 
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">135.1k</span>
+            
 
             
 			
@@ -906,15 +951,11 @@ y = temp;
         <div class="col s12 m4 l4 social-link social-statis">
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:yuanpinghua@yeah.net" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
-        <i class="fa fa-qq"></i>
-    </a>
 
 
 
