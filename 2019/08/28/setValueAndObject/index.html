@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Attributes, 志鹏的技术博客">
-    <meta name="description" content="AttributesThere are two kinds of attributes in Swift—those that apply to declarations and those that apply to types. An ">
+    <meta name="keywords" content="可变字典中setValue:forKey和setObject:forKey的区别, 志鹏的技术博客">
+    <meta name="description" content="可变字典中setValue:forKey和setObject:forKey的区别在开发过程中，使用字典的频率也是非常高的，也经常会遇到一个类似-[__NSPlaceholderDictionary initWithObjects:forKe">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Attributes | 志鹏的技术博客</title>
+    <title>可变字典中setValue:forKey和setObject:forKey的区别 | 志鹏的技术博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -260,13 +260,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Attributes
+                        可变字典中setValue:forKey和setObject:forKey的区别
                     </div>
                 </div>
             </div>
@@ -375,13 +375,9 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="../../../../tags/Swift/" target="_blank">
-                                <span class="chip bg-color">Swift</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">No tag</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -392,7 +388,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2019-08-23
+                    2019-08-28
                 </div>
 
                 
@@ -408,55 +404,46 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Attributes"><a href="#Attributes" class="headerlink" title="Attributes"></a>Attributes</h1><p>There are two kinds of attributes in Swift—those that apply to declarations and those that apply to types. An attribute provides additional information about the declaration or type.</p>
-<p>You specify an attribute by writing the @ symbol followed by the attribute’s name and any arguments that the attribute accepts:</p>
-<pre><code class="swift">@attribute name
-@attribute name(attribute arguments)
+                <h1 id="可变字典中setValue-forKey和setObject-forKey的区别"><a href="#可变字典中setValue-forKey和setObject-forKey的区别" class="headerlink" title="可变字典中setValue:forKey和setObject:forKey的区别"></a>可变字典中setValue:forKey和setObject:forKey的区别</h1><p>在开发过程中，使用字典的频率也是非常高的，也经常会遇到一个类似<br><code>-[__NSPlaceholderDictionary initWithObjects:forKeys:count:]: attempt to insert nil object from objects[1]</code><br>crash,那发生这种crash的真实原因又是什么呢？在开发过程中我们调用<code>setValue:forKey</code>和<code>setObject:forKey</code>频率也是非常多，但大多数情况，后者居多。我们先来看下这两个函数有定义</p>
+<pre><code class="objc">@interface NSMutableDictionary&lt;KeyType, ObjectType&gt;(NSKeyValueCoding)
+
+/* 
+Send -setObject:forKey: to the receiver, unless the value is nil, in which case send -removeObjectForKey:
+*/
+- (void)setValue:(nullable ObjectType)value forKey:(NSString *)key;
+
+@end
 </code></pre>
-<p>Some declaration attributes accept arguments that specify more information about the attribute and how it applies to a particular declaration. These attribute arguments are enclosed in parentheses, and their format is defined by the attribute they belong to.</p>
-<h2 id="Declaration-Attributes"><a href="#Declaration-Attributes" class="headerlink" title="Declaration Attributes"></a>Declaration Attributes</h2><p>You can apply a declaration attribute to declarations only.</p>
-<h3 id="available"><a href="#available" class="headerlink" title="available"></a>available</h3><p>Apply this attribute to indicate a declaration’s life cycle relative to certain Swift language versions or certain platforms and operating system versions.<br>The available attribute always appears with a list of two or more comma-separated attribute arguments. These arguments begin with one of the following platform or language names:</p>
+<p>该方法内部分调用在<code>-setObject:forKey:</code>方法去给字典赋值，在<code>value</code>为空的情况下会调用<code>-removeObjectForKey:</code>移除已有key的值。这样在一定程度上避免了给字典赋空值crash的情况发生</p>
+<pre><code class="objc">
+@interface NSMutableDictionary&lt;KeyType, ObjectType&gt; : NSDictionary&lt;KeyType, ObjectType&gt;
+
+- (void)removeObjectForKey:(KeyType)aKey;
+- (void)setObject:(ObjectType)anObject forKey:(KeyType &lt;NSCopying&gt;)aKey;
+@end
+</code></pre>
+<p>在API上我们发现没有注释，但在文档中其代码注释非常详细：<br><code>- (void)setObject:(ObjectType)anObject forKey:(KeyType &lt;NSCopying&gt;)aKey;</code></p>
 <ul>
-<li>iOS</li>
-<li>iOSApplicationExtension</li>
-<li>macOS</li>
-<li>macOSApplicationExtension</li>
-<li>watchOS</li>
-<li>watchOSApplicationExtension</li>
-<li>tvOS</li>
-<li>tvOSApplicationExtension</li>
-<li>swift</li>
+<li><code>anObject</code><br>The value for aKey. A strong reference to the object is maintained by the dictionary.</li>
 </ul>
-<p>The remaining arguments can appear in any order and specify additional information about the declaration’s life cycle, including important milestones</p>
+<blockquote>
+<p>Important<br>Raises an NSInvalidArgumentException if anObject is nil. If you need to represent a nil value in the dictionary, use NSNull.<br>当anobject为空时会抛出NSInvalidArgumentException异常，如果需要保存一个空值，可以使用NSNull实例</p>
+</blockquote>
 <ul>
-<li>The <code>unavailable</code> argument indicates that the declaration isn’t available on the specified platform. This argument can’t be used when specifying Swift version availability.</li>
-<li>The <code>introduced</code> argument indicates the first version of the specified platform or language in which the declaration was introduced. It has the following form:</li>
+<li><code>aKey</code></li>
 </ul>
-<pre><code class="swift">introduced: `version number`
-</code></pre>
-<p>The version number consists of one to three positive integers, separated by periods.</p>
+<p>The key for value. The key is copied (<strong><em>using copyWithZone:; keys must conform to the NSCopying protocol</em></strong>). If aKey already exists in the dictionary, anObject takes its place.</p>
+<blockquote>
+<p>Important<br>Raises an NSInvalidArgumentException if aKey is nil.</p>
+</blockquote>
+<p>从上述API定义和文档注释中我们可以得出以下区别：</p>
 <ul>
-<li><p>The <code>deprecated</code> argument indicates the first version of the specified platform or language in which the declaration was deprecated. It has the following form:</p>
-<pre><code class="swift">deprecated: version number
-</code></pre>
-</li>
-<li><p>The <code>obsoleted</code> argument indicates the first version of the specified platform or language in which the declaration was obsoleted. When a declaration is obsoleted, it’s removed from the specified platform or language and can no longer be used. It has the following form:</p>
-<pre><code class="swift">obsoleted: version number
-</code></pre>
-</li>
-<li><p>The <code>message</code> argument provides a textual message that the compiler displays when emitting a warning or error about the use of a deprecated or obsoleted declaration. It has the following form:<br><code>message: message</code><br>The message consists of a string literal.</p>
-</li>
-<li><p>The renamed argument provides a textual message that indicates the new name for a declaration that’s been renamed. The compiler displays the new name when emitting an error about the use of a renamed declaration. It has the following form:<br><code>renamed: new name</code><br>The new name consists of a string literal.</p>
-</li>
+<li><code>setObject:forKey:</code>中<code>object</code>不能为空，若为空则会抛出异常，若要展示一个空值，需要使用NSNull实例代替</li>
+<li><code>setValue:forKey:</code>中<code>value</code>可以为空，若<code>value</code>为空，内部会调用<code>removeObjectForKey：</code>方法，移除该key所对应的值<br><code>setValue:forKey:</code>可以认为是对<code>setObject:forKey:</code>再次封装，对异常情况做了处理。</li>
 </ul>
-<h3 id="discardableResult"><a href="#discardableResult" class="headerlink" title="discardableResult"></a>discardableResult</h3><p>Apply this attribute to a function or method declaration to suppress the compiler warning when the function or method that returns a value is called without using its result.</p>
-<h3 id="dynamicCallable"><a href="#dynamicCallable" class="headerlink" title="dynamicCallable"></a>dynamicCallable</h3><p>Apply this attribute to a class, structure, enumeration, or protocol to treat instances of the type as callable functions. The type must implement either a dynamicallyCall(withArguments:) method, a dynamicallyCall(withKeywordArguments:) method, or both.</p>
-<h3 id="dynamicMemberLookup"><a href="#dynamicMemberLookup" class="headerlink" title="dynamicMemberLookup"></a>dynamicMemberLookup</h3><p>Apply this attribute to a class, structure, enumeration, or protocol to enable members to be looked up by name at runtime. The type must implement a <code>subscript(dynamicMemberLookup:)</code>subscript.</p>
-<h3 id="GKInspectable"><a href="#GKInspectable" class="headerlink" title="GKInspectable"></a>GKInspectable</h3><p>Apply this attribute to expose a custom GameplayKit component property to the SpriteKit editor UI. Applying this attribute also implies the objc attribute.</p>
-<h3 id="inlinable"><a href="#inlinable" class="headerlink" title="inlinable"></a>inlinable</h3><p>Apply this attribute to a function, method, computed property, subscript, convenience initializer, or deinitializer declaration to expose that declaration’s implementation as part of the module’s public interface. The compiler is allowed to replace calls to an inlinable symbol with a copy of the symbol’s implementation at the call site.</p>
-<p>Inlinable code can interact with public symbols declared in any module, and it can interact with internal symbols declared in the same module that are marked with the usableFromInline attribute. Inlinable code can’t interact with private or fileprivate symbols.</p>
-<h3 id="nonobjc"><a href="#nonobjc" class="headerlink" title="nonobjc"></a>nonobjc</h3><p>Apply this attribute to a method, property, subscript, or initializer declaration to suppress an implicit <code>objc</code> attribute. The <code>nonobjc</code> attribute tells the compiler to make the declaration unavailable in Objective-C code, even though it’s possible to represent it in Objective-C.</p>
-<p>Applying this attribute to an extension has the same effect as applying it to every member of that extension that isn’t explicitly marked with the <code>objc</code> attribute.</p>
+<blockquote>
+<p>我们开发过程中遇到的字典的crash，多数是因为在调用<code>setObject:forKey:</code>时，传入的object为空导致的！在使用过程要尽可以有object做判空处理，若不想这么做，可以使用<code>setValue:forKey:</code>方法替代</p>
+</blockquote>
 
             </div>
             <hr/>
@@ -615,7 +602,7 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《Attributes》
+                    《可变字典中setValue:forKey和setObject:forKey的区别》
                 </span> by
             <a xmlns:cc="http://creativecommons.org/ns#" href="" property="cc:attributionName"
                rel="cc:attributionURL">
@@ -657,9 +644,48 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;Current
+            </div>
+            <div class="card">
+                <a href="">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="可变字典中setValue:forKey和setObject:forKey的区别">
+                        
+                        <span class="card-title">可变字典中setValue:forKey和setObject:forKey的区别</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            可变字典中setValue:forKey和setObject:forKey的区别在开发过程中，使用字典的频率也是非常高的，也经常会遇到一个类似-[__NSPlaceholderDictionary initWithObjects:forKe
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-user fa-fw"></i>
+                            志鹏
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="../../27/UIStackView/">
                     <div class="card-image">
@@ -678,45 +704,8 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-27
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-user fa-fw"></i>
-                            志鹏
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fa fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="../SwiftMethods/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Methods">
-                        
-                        <span class="card-title">Methods</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            MethodsMethods are functions that are associated with a particular type. Classes, structures, and enumerations can all d
-                        
-                    </div>
-                    <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-23
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-27
                             </span>
                         <span class="publish-author">
                             
@@ -725,14 +714,6 @@
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="../../../../tags/Swift/" target="_blank">
-                        <span class="chip bg-color">Swift</span>
-                    </a>
-                    
                 </div>
                 
             </div>
