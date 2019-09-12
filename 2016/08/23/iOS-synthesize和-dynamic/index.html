@@ -433,7 +433,7 @@
 <h1 id="property对应两个选择"><a href="#property对应两个选择" class="headerlink" title="@property对应两个选择"></a><code>@property</code>对应两个选择</h1><h2 id="synthesize"><a href="#synthesize" class="headerlink" title="@synthesize"></a><code>@synthesize</code></h2><ul>
 <li><code>@synthesize</code> 能够为您的属性的<code>getter</code>和<code>setter</code>方法。有自定义会屏蔽自动生成的<code>getter</code>和<code>setter</code></li>
 <li>Xcode6以后省略这个了, 默认在 <code>@implementation</code> .m中添加了<code>@synthesize xxx = _xxx</code>;</li>
-<li>如果我们希望使用默认的实例变量命名方式，那么我们在.m文件中就不需要使用<code>@synthesize</code>声明，系统会帮我们自动完成。<pre><code>如果我们希望自己命名实例变量命，那么我们就使用`@synthesize`显示声明我们希望的实例变量名。</code></pre></li>
+<li>如果我们希望使用默认的实例变量命名方式，那么我们在.m文件中就不需要使用<code>@synthesize</code>声明，系统会帮我们自动完成。<pre><code>    如果我们希望自己命名实例变量命，那么我们就使用`@synthesize`显示声明我们希望的实例变量名。</code></pre></li>
 </ul>
 <h2 id="dynamic"><a href="#dynamic" class="headerlink" title="@dynamic"></a><code>@dynamic</code></h2><ul>
 <li><code>@dynamic</code> 不会自动生成<code>getter/setter</code>方法，需要自己实现，不然会报错</li>
@@ -446,13 +446,10 @@
 </ul>
 <h2 id="存取器控制"><a href="#存取器控制" class="headerlink" title="存取器控制"></a>存取器控制</h2><ul>
 <li><code>readwrite</code>（默认）：<code>readwrite</code>是默认值，表示该属性同时拥有<code>setter</code>和<code>getter</code>。</li>
-<li><code>readonly</code>： readonly表示只有<code>getter</code>没有<code>setter</code>。<br>有时候为了语意更明确可能需要自定义访问器的名字：<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">setter</span> = mySetter:,<span class="keyword">getter</span> = myGetter ) <span class="built_in">NSString</span> *name;</span><br></pre></td></tr></table></figure>
-
+<li><code>readonly</code>： readonly表示只有<code>getter</code>没有<code>setter</code>。<br>有时候为了语意更明确可能需要自定义访问器的名字：<pre><code class="objc">@property (nonatomic, setter = mySetter:,getter = myGetter ) NSString *name;</code></pre>
+最常见的是BOOL类型，比如标识View是否隐藏的属性hidden。可以这样声明：<pre><code class="objc">@property (nonatomic,getter = isHidden ) BOOL hidden;</code></pre>
 </li>
 </ul>
-<p>最常见的是BOOL类型，比如标识View是否隐藏的属性hidden。可以这样声明：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">getter</span> = isHidden ) <span class="built_in">BOOL</span> hidden;</span><br></pre></td></tr></table></figure>
-
 <h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><blockquote>
 <p><code>@property</code>有显示的内存管理策略。这使得我们只需要看一眼<code>@property</code>声明就明白它会怎样对待传入的值</p>
 </blockquote>
@@ -460,7 +457,14 @@
 <li><p><code>assign</code>（默认）：<code>assign</code>用于值类型，如<code>int</code>、<code>float</code>、<code>double</code>和<code>NSInteger</code>、<code>CGFloat</code>等表示单纯的复制。还包括不存在所有权关系的对象，比如常见的delegate。</p>
 </li>
 <li><p><code>retain</code>：在<code>setter</code>方法中，需要对传入的对象进行引用计数加1的操作。<br>简单来说，就是对传入的对象拥有所有权，只要对该对象拥有所有权，该对象就不会被释放。如下代码所示：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  -(<span class="keyword">void</span>)setName:(<span class="built_in">NSString</span> * )_name&#123;  </span><br><span class="line">     <span class="comment">//首先判断是否与旧对象一致，如果不一致进行赋值。  </span></span><br><span class="line">     <span class="comment">//因为如果是一个对象的话，进行if内的代码会造成一个极端的情况：当此name的retain为1时，使此次的set操作让实例name提前释放，而达不到赋值目的。  </span></span><br><span class="line">     <span class="keyword">if</span> ( name !=_name)&#123;  </span><br><span class="line">          [name release];  </span><br><span class="line">          name = [_name <span class="keyword">retain</span>];  </span><br><span class="line">     &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">-(void)setName:(NSString * )_name{  
+   //首先判断是否与旧对象一致，如果不一致进行赋值。  
+   //因为如果是一个对象的话，进行if内的代码会造成一个极端的情况：当此name的retain为1时，使此次的set操作让实例name提前释放，而达不到赋值目的。  
+   if ( name !=_name){  
+        [name release];  
+        name = [_name retain];  
+   }  
+}</code></pre>
 </li>
 <li><p><code>strong</code>：<code>strong</code>是在<code>iOS</code>引入<code>ARC</code>的时候引入的关键字，是<code>retain</code>的一个可选的替代。表示实例变量对传入的对象要有所有权关系，即强引用。<code>strong</code>跟<code>retain</code>的意思相同并产生相同的代码，但是语意上更好更能体现对象的关系。</p>
 </li>
@@ -757,7 +761,8 @@ int function(int
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            [[UIApplication sharedApplication] setIdleTimerDisabled:YES];//禁止自动锁屏 [[UIApplication sharedApplication] setIdleTimerDis
+                             [[UIApplication sharedApplication] setIdleTimerDisabled:YES];//禁止自动锁屏
+  [[UIApplication sharedApplication] setIdleTimer
                         
                     </div>
                     <div class="publish-info">
@@ -901,7 +906,7 @@ int function(int
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

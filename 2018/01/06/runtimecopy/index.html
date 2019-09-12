@@ -395,7 +395,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        565
+                        557
                     </div>
                     
 
@@ -421,36 +421,65 @@
                 <p>在我们开发过程中，有时会遇到对象进行拷贝的情况，在对象属性少的情况下，我们可以直接在 <code>copyWithZone:/mutableCopyWithZone:</code> 方法里手动对复制后的对象的相应属性赋值，但在属性成员很多的情况及通过runtime在运行时关联属性时，我们这种手动赋值的方式就有点应赋不过来了。runtime是OC的一把利器，用得好可以帮我们节省很多事情。废话不多说，用代码说话。</p>
 <ol>
 <li><p>为对象增加一个扩展并遵守 <code>&lt;NSCopying,NSMutableCopying&gt;</code>协议 </p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#import &lt;objc/runtime.h&gt;</span><br><span class="line">@interface Person()&lt;NSCopying,NSMutableCopying&gt;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
-</li>
+<pre><code> #import &lt;objc/runtime.h&gt;
+ @interface Person()&lt;NSCopying,NSMutableCopying&gt;
+ @end</code></pre></li>
 <li><p>实现协议  </p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-(id)copyWithZone:(NSZone * )zone&#123;</span><br><span class="line">    id objCopy = [[[self class] allocWithZone:zone] init];</span><br><span class="line">    // 1.获取属性列表</span><br><span class="line">    unsigned int propertyCount = 0;</span><br><span class="line">    objc_property_t * propertyArray = class_copyPropertyList([self class], &amp;propertyCount);</span><br><span class="line">    </span><br><span class="line">    for (int i=0; i&lt;propertyCount; i++) &#123;</span><br><span class="line">        </span><br><span class="line">        objc_property_t  property = propertyArray[i];</span><br><span class="line">        </span><br><span class="line">        // 2.属性名字</span><br><span class="line">        const char * propertyName = property_getName(property);</span><br><span class="line">        NSString * key = [NSString stringWithUTF8String:propertyName];</span><br><span class="line">        </span><br><span class="line">        // 3.通过属性名拿到属性值</span><br><span class="line">        id value=[self valueForKey:key];</span><br><span class="line">        NSLog(@&quot;name:%s,value:%@&quot;,propertyName,value);</span><br><span class="line">        </span><br><span class="line">        // 4.判断 值对象是否响应copyWithZone</span><br><span class="line">        if ([value respondsToSelector:@selector(copyWithZone:)]) &#123;</span><br><span class="line">            //5. 设置属性值</span><br><span class="line">            [objCopy setValue:[value copy] forKey:key];</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            [objCopy setValue:value forKey:key];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //*****切记需要手动释放</span><br><span class="line">    free(propertyArray);</span><br><span class="line">    return objCopy;</span><br><span class="line">&#125;</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
+<pre><code> -(id)copyWithZone:(NSZone * )zone{
+     id objCopy = [[[self class] allocWithZone:zone] init];
+     // 1.获取属性列表
+     unsigned int propertyCount = 0;
+     objc_property_t * propertyArray = class_copyPropertyList([self class], &amp;propertyCount);
 
-<p> -(id)mutableCopyWithZone:(NSZone *)zone{</p>
-<pre><code>id objcopy = [[[self class]allocWithZone:zone] init];
-//    1.获取属性列表
-unsigned int count = 0;
-objc_property_t* propertylist = class_copyPropertyList([self class], &amp;count);
+     for (int i=0; i&lt;propertyCount; i++) {
 
-for (int i = 0; i &lt; count ; i++) {
-    objc_property_t property = propertylist[i];
-    //    2.获取属性名
-    const char * propertyName = property_getName(property);
-    NSString * key = [NSString stringWithUTF8String:propertyName];
-    //    3.获取属性值
-    id value = [self valueForKey:key];
-    //    4.判断属性值对象是否遵守NSMutableCopying协议
-    if ([value respondsToSelector:@selector(mutableCopyWithZone:)]) {
-        //    5.设置对象属性值
-        [objcopy setValue:[value mutableCopy] forKey:key];
-    }else{
-        [objcopy setValue:value forKey:key];
-    }
-}
-//*****切记需要手动释放
-free(propertylist);
-return objcopy;</code></pre><p> }</p>
-<pre><code></code></pre></li>
+         objc_property_t  property = propertyArray[i];
+
+         // 2.属性名字
+         const char * propertyName = property_getName(property);
+         NSString * key = [NSString stringWithUTF8String:propertyName];
+
+         // 3.通过属性名拿到属性值
+         id value=[self valueForKey:key];
+         NSLog(@&quot;name:%s,value:%@&quot;,propertyName,value);
+
+         // 4.判断 值对象是否响应copyWithZone
+         if ([value respondsToSelector:@selector(copyWithZone:)]) {
+             //5. 设置属性值
+             [objCopy setValue:[value copy] forKey:key];
+         }else{
+             [objCopy setValue:value forKey:key];
+         }
+     }
+     //*****切记需要手动释放
+     free(propertyArray);
+     return objCopy;
+ }</code></pre><pre><code> -(id)mutableCopyWithZone:(NSZone *)zone{
+     id objcopy = [[[self class]allocWithZone:zone] init];
+     //    1.获取属性列表
+     unsigned int count = 0;
+     objc_property_t* propertylist = class_copyPropertyList([self class], &amp;count);
+
+     for (int i = 0; i &lt; count ; i++) {
+         objc_property_t property = propertylist[i];
+         //    2.获取属性名
+         const char * propertyName = property_getName(property);
+         NSString * key = [NSString stringWithUTF8String:propertyName];
+         //    3.获取属性值
+         id value = [self valueForKey:key];
+         //    4.判断属性值对象是否遵守NSMutableCopying协议
+         if ([value respondsToSelector:@selector(mutableCopyWithZone:)]) {
+             //    5.设置对象属性值
+             [objcopy setValue:[value mutableCopy] forKey:key];
+         }else{
+             [objcopy setValue:value forKey:key];
+         }
+     }
+     //*****切记需要手动释放
+     free(propertylist);
+     return objcopy;
+
+ }</code></pre></li>
 </ol>
 <p>通过以上两个方法的实现，可以应付对象的拷贝场景。</p>
 <blockquote>
@@ -866,7 +895,7 @@ return objcopy;</code></pre><p> }</p>
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

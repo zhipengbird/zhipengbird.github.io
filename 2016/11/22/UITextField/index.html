@@ -6,7 +6,9 @@
     <meta charset="utf-8">
     <meta name="keywords" content="UITextField, 志鹏的技术博客">
     <meta name="description" content="思路：使用runtime 获取textfiled的所有属性
-//获取类的所有属性unsigned int count = 0;Ivar *ivarList = class_copyIvarList([UITextField class], ">
+//获取类的所有属性
+unsigned int count = 0;
+Ivar *ivarList = class_copyIvarList([UITextField class]">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -404,7 +406,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        936
+                        922
                     </div>
                     
 
@@ -428,52 +430,149 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>思路：<br>使用runtime 获取textfiled的所有属性</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获取类的所有属性</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">Ivar *ivarList = class_copyIvarList([<span class="built_in">UITextField</span> <span class="keyword">class</span>], &amp;count);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;count; i++) &#123;</span><br><span class="line">    Ivar ivar = ivarList[i];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%s"</span>,ivar_getName(ivar));</span><br><span class="line">&#125;</span><br><span class="line">free(ivarList);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">//获取类的所有属性
+unsigned int count = 0;
+Ivar *ivarList = class_copyIvarList([UITextField class], &amp;count);
+for (int i = 0; i&lt;count; i++) {
+    Ivar ivar = ivarList[i];
+    NSLog(@&quot;%s&quot;,ivar_getName(ivar));
+}
+free(ivarList);</code></pre>
 <p>修改文本框内的placehold字体颜色</p>
 <ol>
 <li><p>使用runtime // 利用KVC设置它颜色,结果成功 这里有一个问题，可能会出现低版本没有该属性，你需要进行检验下。</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[textField setValue:[<span class="built_in">UIColor</span> redColor]forKeyPath:<span class="string">@"_placeholderLabel.textColor"</span>];  </span><br><span class="line">[textField setValue: [<span class="built_in">UIFontboldSystemFontOfSize</span>:<span class="number">16</span>] forKeyPath :<span class="string">@"_placeholderLabel.font"</span>];</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">[textField setValue:[UIColor redColor]forKeyPath:@&quot;_placeholderLabel.textColor&quot;];  
+[textField setValue: [UIFontboldSystemFontOfSize:16] forKeyPath :@&quot;_placeholderLabel.font&quot;];  </code></pre>
 </li>
 <li><p>设置属性文本</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSMutableDictionary</span> *dict = [<span class="built_in">NSMutableDictionary</span> dictionary];</span><br><span class="line">dict[<span class="built_in">NSForegroundColorAttributeName</span>] = [<span class="built_in">UIColor</span> redColor];</span><br><span class="line"><span class="built_in">NSAttributedString</span> *attribute = [[<span class="built_in">NSAttributedString</span> alloc] initWithString:<span class="keyword">self</span>.placeholder attributes:dict];</span><br><span class="line">[<span class="keyword">self</span> setAttributedPlaceholder:attribute];</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+dict[NSForegroundColorAttributeName] = [UIColor redColor];
+NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:self.placeholder attributes:dict];
+[self setAttributedPlaceholder:attribute];</code></pre>
 </li>
 <li><p>设置光标颜色<br>使用<code>@property(null_resettable, nonatomic, strong) UIColor *tintColor</code>属性</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">textField.tintColor = <span class="built_in">UIColorFromRGBA</span>(rgbValue,A)</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">textField.tintColor = UIColorFromRGBA(rgbValue,A) </code></pre>
 </li>
-<li><p>捕捉键盘的return事件<br>遵守UITextFieldDelegate,并设置相关代理。实现如下代理方法</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)textFieldShouldReturn:(<span class="built_in">UITextField</span> *)textField;  </span><br><span class="line"> <span class="comment">// called when 'return' key pressed. return NO to ignore.</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>捕捉文本改变事件通知<br>要想获取到文本改变事件通知，需要监听一个通知 <code>UITextFieldTextDidChangeNotification</code></p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[[<span class="built_in">NSNotificationCenter</span> defaultCenter]addObserver:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(textFiledDidChange:) name:<span class="built_in">UITextFieldTextDidChangeNotification</span> object:`文本框对象`];</span><br></pre></td></tr></table></figure>
-
+<li><p>捕捉键盘的return事件<br>遵守UITextFieldDelegate,并设置相关代理。实现如下代理方法<br>```objc</p>
 </li>
 </ol>
-<blockquote>
-<p>PS: 文本常用通知</p>
-</blockquote>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIKIT_EXTERN</span> <span class="built_in">NSNotificationName</span> <span class="keyword">const</span> <span class="built_in">UITextFieldTextDidBeginEditingNotification</span>; <span class="comment">//输入框已经开始编辑</span></span><br><span class="line"><span class="built_in">UIKIT_EXTERN</span> <span class="built_in">NSNotificationName</span> <span class="keyword">const</span> <span class="built_in">UITextFieldTextDidEndEditingNotification</span>;         <span class="comment">//输入框已经结束编辑</span></span><br><span class="line"><span class="built_in">UIKIT_EXTERN</span> <span class="built_in">NSNotificationName</span> <span class="keyword">const</span> <span class="built_in">UITextFieldTextDidChangeNotification</span>;         <span class="comment">//输入框已经改变</span></span><br></pre></td></tr></table></figure>
-
-<ol start="6">
+<ul>
+<li>(BOOL)textFieldShouldReturn:(UITextField *)textField;<br>// called when ‘return’ key pressed. return NO to ignore.<pre><code></code></pre></li>
+</ul>
+<ol start="5">
+<li>捕捉文本改变事件通知<br>要想获取到文本改变事件通知，需要监听一个通知 <code>UITextFieldTextDidChangeNotification</code><pre><code class="objc">[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFiledDidChange:) name:UITextFieldTextDidChangeNotification object:`文本框对象`];
+</code></pre>
+</li>
+</ol>
+<pre><code>&gt; PS: 文本常用通知
+```objc
+UIKIT_EXTERN NSNotificationName const UITextFieldTextDidBeginEditingNotification; //输入框已经开始编辑
+UIKIT_EXTERN NSNotificationName const UITextFieldTextDidEndEditingNotification;         //输入框已经结束编辑
+UIKIT_EXTERN NSNotificationName const UITextFieldTextDidChangeNotification;         //输入框已经改变</code></pre><ol start="6">
 <li>限制文本字数<br>监听<code>UITextFieldTextDidChangeNotification</code>通知，并在方法里做如下操作。下面是我的一个代码片段。</li>
 </ol>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="meta">#pragma mark - 文本改变通知</span></span><br><span class="line">-(<span class="keyword">void</span>)textFiledDidChange:(<span class="built_in">NSNotification</span>*)textChange&#123;</span><br><span class="line">    <span class="built_in">UITextField</span> * field = (<span class="built_in">UITextField</span>*)textChange.object;</span><br><span class="line">    <span class="built_in">NSString</span> * toBeString = field.text;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UITextRange</span>  * selectedRange =  [field markedTextRange];</span><br><span class="line">    <span class="built_in">UITextPosition</span>* position = [field positionFromPosition:selectedRange.start offset:<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!position) &#123;</span><br><span class="line">        <span class="comment">//判断文本字符数是否操作最大值</span></span><br><span class="line">        <span class="keyword">if</span> (toBeString.length&gt;<span class="number">30</span>) &#123;</span><br><span class="line">            <span class="built_in">NSRange</span>  rangeIndex = [toBeString rangeOfComposedCharacterSequenceAtIndex:<span class="number">30</span>];</span><br><span class="line">            <span class="keyword">if</span> (rangeIndex.length==<span class="number">1</span>) &#123;</span><br><span class="line">                field.text = [toBeString substringToIndex:<span class="number">30</span>];</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="built_in">NSRange</span> range = [toBeString rangeOfComposedCharacterSequencesForRange:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, <span class="number">30</span>)];</span><br><span class="line">                field.text = [toBeString substringWithRange:range];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (toBeString.length==<span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">//没有输入文本处理</span></span><br><span class="line">            _characterNumber.text=[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%d/30"</span>,(<span class="keyword">int</span>)field.text.length];</span><br><span class="line">            [_remark_textfield showUnderLine:<span class="built_in">UIColorFromRGBA</span>(<span class="number">0xb4b4b4</span>, <span class="number">1</span>)];</span><br><span class="line">            _remark_OK.enabled=<span class="literal">NO</span>;</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// 有文本处理</span></span><br><span class="line">            _characterNumber.text=[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%d/30"</span>,(<span class="keyword">int</span>)field.text.length];</span><br><span class="line">            [_remark_textfield showUnderLine:<span class="built_in">UIColorFromRGBA</span>(<span class="number">0xe62f17</span>, <span class="number">1</span>)];</span><br><span class="line">            <span class="keyword">if</span> ([CheckInputValid CheckForNicknameWithInString:field.text]) &#123;</span><br><span class="line">                _remark_OK.enabled=<span class="literal">YES</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                _remark_OK.enabled=<span class="literal">NO</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">#pragma mark - 文本改变通知
+-(void)textFiledDidChange:(NSNotification*)textChange{
+    UITextField * field = (UITextField*)textChange.object;
+    NSString * toBeString = field.text;
 
+    UITextRange  * selectedRange =  [field markedTextRange];
+    UITextPosition* position = [field positionFromPosition:selectedRange.start offset:0];
+
+    if (!position) {
+        //判断文本字符数是否操作最大值
+        if (toBeString.length&gt;30) {
+            NSRange  rangeIndex = [toBeString rangeOfComposedCharacterSequenceAtIndex:30];
+            if (rangeIndex.length==1) {
+                field.text = [toBeString substringToIndex:30];
+            }else{
+                NSRange range = [toBeString rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, 30)];
+                field.text = [toBeString substringWithRange:range];
+            }
+        }
+        if (toBeString.length==0) {
+            //没有输入文本处理
+            _characterNumber.text=[NSString stringWithFormat:@&quot;%d/30&quot;,(int)field.text.length];
+            [_remark_textfield showUnderLine:UIColorFromRGBA(0xb4b4b4, 1)];
+            _remark_OK.enabled=NO;
+
+        }else{
+            // 有文本处理
+            _characterNumber.text=[NSString stringWithFormat:@&quot;%d/30&quot;,(int)field.text.length];
+            [_remark_textfield showUnderLine:UIColorFromRGBA(0xe62f17, 1)];
+            if ([CheckInputValid CheckForNicknameWithInString:field.text]) {
+                _remark_OK.enabled=YES;
+            }else{
+                _remark_OK.enabled=NO;
+            }
+        }
+    }
+}</code></pre>
 <ol start="7">
 <li><p>个性化定制文本框右边的视图( <code>rightView</code>)</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 初始化一个视图（可以是任一视图（UILabel,UIButton,...）），Ps 需要指定一个框高  ,你可以对这个视图添加你想要的事件</span></span><br><span class="line">_characterNumber = [[<span class="built_in">UILabel</span> alloc]initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">30</span>)];</span><br><span class="line">_characterNumber.text = <span class="string">@"0/30"</span>;</span><br><span class="line">_characterNumber.textAlignment = <span class="built_in">NSTextAlignmentRight</span>;</span><br><span class="line">_characterNumber.font = [<span class="built_in">UIFont</span> systemFontOfSize:<span class="number">12</span>];</span><br><span class="line">_characterNumber.textColor = <span class="built_in">UIColorFromRGBA</span>(<span class="number">0xb4b4b4</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置右边视图</span></span><br><span class="line">_remark_textfield.rightView = _characterNumber;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置右边视图的显示模式</span></span><br><span class="line">_remark_textfield.rightViewMode = <span class="built_in">UITextFieldViewModeAlways</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>当键盘出现时，需要改变输入框的位置，要如何做？<br>要想实现这个，很简单，同样你需要监听<code>UIKeyboardDidChangeFrameNotification</code>这个通知。</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[[<span class="built_in">NSNotificationCenter</span> defaultCenter ]addObserver:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(keyBoardFrameChanged:) name:<span class="built_in">UIKeyboardDidChangeFrameNotification</span> object:<span class="literal">nil</span>];</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)keyBoardFrameChanged:( <span class="built_in">NSNotification</span> * )notification&#123;</span><br><span class="line">    <span class="built_in">NSDictionary</span> * userInfo = [notification userInfo];</span><br><span class="line">    <span class="built_in">NSValue</span> * value = [userInfo objectForKey:<span class="built_in">UIKeyboardFrameEndUserInfoKey</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取到键盘的位置</span></span><br><span class="line">    <span class="built_in">CGRect</span> keyboardRect =  [value <span class="built_in">CGRectValue</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">CGFloat</span> keyboardTop = keyboardRect.origin.y;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//进行你的想要的布局操作</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">
+ // 初始化一个视图（可以是任一视图（UILabel,UIButton,...）），Ps 需要指定一个框高  ,你可以对这个视图添加你想要的事件
+ _characterNumber = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 50, 30)];
+ _characterNumber.text = @&quot;0/30&quot;;
+ _characterNumber.textAlignment = NSTextAlignmentRight;
+ _characterNumber.font = [UIFont systemFontOfSize:12];
+ _characterNumber.textColor = UIColorFromRGBA(0xb4b4b4, 1);
 
+ // 设置右边视图
+ _remark_textfield.rightView = _characterNumber;
+
+ // 设置右边视图的显示模式
+ _remark_textfield.rightViewMode = UITextFieldViewModeAlways;
+</code></pre>
 </li>
 </ol>
-<blockquote>
-<p>PS：常见的键盘通知<br> <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIKIT_EXTERN</span> <span class="built_in">NSNotificationName</span> <span class="keyword">const</span> <span class="built_in">UIKeyboardWillChangeFrameNotification</span>  <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">5</span>_0) __TVOS_PROHIBITED; <span class="comment">//键盘将要改变通知</span></span><br><span class="line"><span class="built_in">UIKIT_EXTERN</span> <span class="built_in">NSNotificationName</span> <span class="keyword">const</span> <span class="built_in">UIKeyboardDidChangeFrameNotification</span>   <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">5</span>_0) __TVOS_PROHIBITED; <span class="comment">//键盘已经改变通知</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">UIKIT_EXTERN</span> <span class="built_in">NSNotificationName</span> <span class="keyword">const</span> <span class="built_in">UIKeyboardWillShowNotification</span> __TVOS_PROHIBITED; <span class="comment">//键盘将要显示通知</span></span><br><span class="line"><span class="built_in">UIKIT_EXTERN</span> <span class="built_in">NSNotificationName</span> <span class="keyword">const</span> <span class="built_in">UIKeyboardDidShowNotification</span> __TVOS_PROHIBITED;  <span class="comment">//键盘已经显示</span></span><br><span class="line"><span class="built_in">UIKIT_EXTERN</span> <span class="built_in">NSNotificationName</span> <span class="keyword">const</span> <span class="built_in">UIKeyboardWillHideNotification</span> __TVOS_PROHIBITED; <span class="comment">//键盘将要隐藏</span></span><br><span class="line"><span class="built_in">UIKIT_EXTERN</span> <span class="built_in">NSNotificationName</span> <span class="keyword">const</span> <span class="built_in">UIKeyboardDidHideNotification</span> __TVOS_PROHIBITED;  <span class="comment">//键盘已经隐藏</span></span><br></pre></td></tr></table></figure></p>
+<pre><code>
+8. 当键盘出现时，需要改变输入框的位置，要如何做？  
+要想实现这个，很简单，同样你需要监听`UIKeyboardDidChangeFrameNotification`这个通知。
+```objc
+[[NSNotificationCenter defaultCenter ]addObserver:self selector:@selector(keyBoardFrameChanged:) name:UIKeyboardDidChangeFrameNotification object:nil];
+
+-(void)keyBoardFrameChanged:( NSNotification * )notification{
+    NSDictionary * userInfo = [notification userInfo];
+    NSValue * value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+
+    // 获取到键盘的位置
+    CGRect keyboardRect =  [value CGRectValue];
+
+    CGFloat keyboardTop = keyboardRect.origin.y;
+
+    //进行你的想要的布局操作
+}</code></pre><blockquote>
+<p>PS：常见的键盘通知</p>
 </blockquote>
+<pre><code class="objc">    UIKIT_EXTERN NSNotificationName const UIKeyboardWillChangeFrameNotification  NS_AVAILABLE_IOS(5_0) __TVOS_PROHIBITED; //键盘将要改变通知
+    UIKIT_EXTERN NSNotificationName const UIKeyboardDidChangeFrameNotification   NS_AVAILABLE_IOS(5_0) __TVOS_PROHIBITED; //键盘已经改变通知
+
+    UIKIT_EXTERN NSNotificationName const UIKeyboardWillShowNotification __TVOS_PROHIBITED; //键盘将要显示通知
+    UIKIT_EXTERN NSNotificationName const UIKeyboardDidShowNotification __TVOS_PROHIBITED;  //键盘已经显示
+    UIKIT_EXTERN NSNotificationName const UIKeyboardWillHideNotification __TVOS_PROHIBITED; //键盘将要隐藏
+    UIKIT_EXTERN NSNotificationName const UIKeyboardDidHideNotification __TVOS_PROHIBITED;  //键盘已经隐藏</code></pre>
 <ol start="9">
-<li>给文本框加上一根横线<br>对于这个，你可以给做一个子类，继承自UITextFiled. 重写drawRect方法如下所示<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">TextFieldExtension</span> : <span class="title">UITextField</span></span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> 显示下划线</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">-(<span class="keyword">void</span>)showUnderLine:(<span class="built_in">UIColor</span>* _Nullable)lineColor;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"TextFieldExtension.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">TextFieldExtension</span> ()</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="built_in">BOOL</span> showunderline;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>)<span class="built_in">UIColor</span> * lineColor;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">TextFieldExtension</span></span></span><br><span class="line">- (<span class="keyword">void</span>)drawRect:(<span class="built_in">CGRect</span>)rect &#123;</span><br><span class="line">    <span class="keyword">if</span> (_showunderline) &#123;</span><br><span class="line">        <span class="comment">// Drawing code</span></span><br><span class="line">        <span class="built_in">CGContextRef</span> context = <span class="built_in">UIGraphicsGetCurrentContext</span>();       </span><br><span class="line">        [<span class="keyword">self</span>.lineColor set];<span class="comment">//设置下划线颜色 这里是红色 可以自定义        </span></span><br><span class="line">        <span class="built_in">CGFloat</span> y = <span class="built_in">CGRectGetHeight</span>(<span class="keyword">self</span>.frame);</span><br><span class="line">        <span class="built_in">CGContextMoveToPoint</span>(context, <span class="number">0</span>, y);        </span><br><span class="line">        <span class="built_in">CGContextAddLineToPoint</span>(context, <span class="built_in">CGRectGetWidth</span>(<span class="keyword">self</span>.frame), y);</span><br><span class="line">        <span class="comment">//设置线的宽度        </span></span><br><span class="line">        <span class="built_in">CGContextSetLineWidth</span>(context, <span class="number">1</span>);     </span><br><span class="line">        <span class="comment">//渲染 显示到self上      </span></span><br><span class="line">        <span class="built_in">CGContextStrokePath</span>(context);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="keyword">void</span>)showUnderLine:(<span class="built_in">UIColor</span> *)lineColor&#123;</span><br><span class="line">    _showunderline=<span class="literal">YES</span>;</span><br><span class="line">    _lineColor=lineColor;</span><br><span class="line">    [<span class="keyword">self</span> setNeedsDisplay];</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="built_in">UIColor</span> *)lineColor&#123;</span><br><span class="line">    <span class="keyword">if</span> (!_lineColor) &#123;</span><br><span class="line">        _lineColor =[<span class="built_in">UIColor</span> grayColor];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _lineColor;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></li>
+<li>给文本框加上一根横线<br>对于这个，你可以给做一个子类，继承自UITextFiled. 重写drawRect方法如下所示<br>```objc<br>@interface TextFieldExtension : UITextField<br>/**<br>显示下划线<br>*/</li>
 </ol>
+<p>-(void)showUnderLine:(UIColor* _Nullable)lineColor;<br>@end<br>#import “TextFieldExtension.h”</p>
+<p>@interface TextFieldExtension ()<br>@property(nonatomic,assign) BOOL showunderline;<br>@property(nonatomic,strong)UIColor * lineColor;<br>@end</p>
+<p>@implementation TextFieldExtension</p>
+<ul>
+<li>(void)drawRect:(CGRect)rect {<br>  if (_showunderline) {<pre><code>  // Drawing code
+  CGContextRef context = UIGraphicsGetCurrentContext();       
+  [self.lineColor set];//设置下划线颜色 这里是红色 可以自定义        
+  CGFloat y = CGRectGetHeight(self.frame);
+  CGContextMoveToPoint(context, 0, y);        
+  CGContextAddLineToPoint(context, CGRectGetWidth(self.frame), y);
+  //设置线的宽度        
+  CGContextSetLineWidth(context, 1);     
+  //渲染 显示到self上      
+  CGContextStrokePath(context);</code></pre>  }<br>}</li>
+<li>(void)showUnderLine:(UIColor *)lineColor{<br>   _showunderline=YES;<br>   _lineColor=lineColor;<br>   [self setNeedsDisplay];<br>}</li>
+<li>(UIColor *)lineColor{<br>   if (!_lineColor) {<pre><code>   _lineColor =[UIColor grayColor];</code></pre>   }<br>   return _lineColor;<br>}<br>@end</li>
+</ul>
+<p>```</p>
 
             </div>
             <hr/>
@@ -716,12 +815,9 @@
                     <div class="summary block-with-text">
                         
                             
-去除字符串首尾空格//可以指定字符集[text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-
-
-
-常用字符集：
-@property (
+去除字符串首尾空格//可以指定字符集
+[text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+常用字符集：@property (rea
                         
                     </div>
                     <div class="publish-info">
@@ -774,7 +870,9 @@
 谈论天气、季节和温度描述一个地方的天气和气候有多种方法。
 
 你可以描述天气和温度。
-It&apos;s often wendy.	常常刮风。It&apos;s so cold and cloudy.	天很阴，又很冷。It gets to
+It&#39;s often wendy.    常常刮风。
+It&#39;s so cold and cloudy.    天很阴，又很冷。
+It g
                         
                     </div>
                     <div class="publish-info">
@@ -914,7 +1012,7 @@ It&apos;s often wendy.	常常刮风。It&apos;s so cold and cloudy.	天很阴，
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

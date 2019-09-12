@@ -422,8 +422,7 @@ UIImagePickerController的代理方法，
             <div id="articleContent">
                 <p>给大家分享一个修改bug时遇到的情景和建议</p>
 <p>UIImagePickerController的代理方法，</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)imagePickerController:(<span class="built_in">UIImagePickerController</span> *)picker didFinishPickingMediaWithInfo:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *,<span class="keyword">id</span>&gt; *)info</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary&lt;NSString *,id&gt; *)info</code></pre>
 <p>不要通过picker push或者present一个新的controller</p>
 <p>原因：<br>1：这个方法调用时picker 要执行dismiss操作（苹果官方文档建议）<br>2：如果，picker不dismiss操作，直接通过picker push或者present一个新的controller，会出现难以控制的异常情况</p>
 
@@ -847,7 +846,7 @@ UIImagePickerController的代理方法，
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

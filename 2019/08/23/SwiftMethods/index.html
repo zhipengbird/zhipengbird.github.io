@@ -399,7 +399,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        831
+                        813
                     </div>
                     
 
@@ -437,25 +437,49 @@
 <blockquote>
 <p>You can opt in to this behavior by placing the <strong>mutating</strong> keyword before the <strong>func</strong> keyword for that method</p>
 </blockquote>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> x = <span class="number">0.0</span>, y = <span class="number">0.0</span></span><br><span class="line">    <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">moveBy</span><span class="params">(x deltaX: Double, y deltaY: Double)</span></span> &#123;</span><br><span class="line">        x += deltaX</span><br><span class="line">        y += deltaY</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="swift">struct Point {
+    var x = 0.0, y = 0.0
+    mutating func moveBy(x deltaX: Double, y deltaY: Double) {
+        x += deltaX
+        y += deltaY
+    }
+}</code></pre>
 <blockquote>
 <p>Note that you <strong>cannot call a mutating method on a constant of structure type</strong>, <em>because its properties cannot be changed, even if they are variable properties</em>.</p>
 </blockquote>
 <h2 id="Assigning-to-self-Within-a-Mutating-Method"><a href="#Assigning-to-self-Within-a-Mutating-Method" class="headerlink" title="Assigning to self Within a Mutating Method"></a>Assigning to self Within a Mutating Method</h2><p>Mutating methods can assign an entirely new instance to the implicit self property.</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> x = <span class="number">0.0</span>, y = <span class="number">0.0</span></span><br><span class="line">    <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">moveBy</span><span class="params">(x deltaX: Double, y deltaY: Double)</span></span> &#123;</span><br><span class="line">        <span class="keyword">self</span> = <span class="type">Point</span>(x: x + deltaX, y: y + deltaY)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="swift">struct Point {
+    var x = 0.0, y = 0.0
+    mutating func moveBy(x deltaX: Double, y deltaY: Double) {
+        self = Point(x: x + deltaX, y: y + deltaY)
+    }
+}</code></pre>
 <p>Mutating methods for enumerations can set the implicit self parameter to be a different case from the same enumeration:</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">TriStateSwitch</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> off, low, high</span><br><span class="line">    <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">next</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> <span class="keyword">self</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> .off:</span><br><span class="line">            <span class="keyword">self</span> = .low</span><br><span class="line">        <span class="keyword">case</span> .low:</span><br><span class="line">            <span class="keyword">self</span> = .high</span><br><span class="line">        <span class="keyword">case</span> .high:</span><br><span class="line">            <span class="keyword">self</span> = .off</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="swift">enum TriStateSwitch {
+    case off, low, high
+    mutating func next() {
+        switch self {
+        case .off:
+            self = .low
+        case .low:
+            self = .high
+        case .high:
+            self = .off
+        }
+    }
+}</code></pre>
 <p>#Type Methods</p>
 <p>Instance methods, as described above, are methods that you call on an instance of a particular type. You can also define methods that are called on the type itself. These kinds of methods are called <code>type methods</code>. You indicate type methods by writing the <code>static</code>keyword before the method’s <code>func</code> keyword. Classes can use the<code>class</code>keyword instead, to allow subclasses to override the superclass’s implementation of that method</p>
 <blockquote>
 <p>In Objective-C, you can define type-level methods only for Objective-C classes. In Swift, you can define type-level methods for all classes, structures, and enumerations. Each type method is explicitly scoped to the type it supports.</p>
 </blockquote>
 <p>Type methods are called with dot syntax, like instance methods. However, you call type methods on the type, not on an instance of that type.</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeClass</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">someTypeMethod</span>() </span>&#123;</span><br><span class="line">        <span class="comment">// type method implementation goes here</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">SomeClass</span>.someTypeMethod()</span><br></pre></td></tr></table></figure>
-
+<pre><code class="swift">class SomeClass {
+    class func someTypeMethod() {
+        // type method implementation goes here
+    }
+}
+SomeClass.someTypeMethod()</code></pre>
 <p>Within the body of a type method, the implicit self property refers to the type itself, rather than an instance of that type. This means that you can use self to disambiguate between type properties and type method parameters, just as you do for instance properties and instance method parameters</p>
 <p>More generally, any unqualified method and property names that you use within the body of a type method will refer to other type-level methods and properties. A type method can call another type method with the other method’s name, without needing to prefix it with the type name. Similarly, type methods on structures and enumerations can access type properties by using the type property’s name without a type name prefix.</p>
 
@@ -893,7 +917,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

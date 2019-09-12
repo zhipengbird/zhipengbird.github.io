@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <meta name="keywords" content="Xcode8 新增扩展, 志鹏的技术博客">
     <meta name="description" content="
-Xcode8 中新增文档注释功能实现方法：option+cmd+/
-/// 创建一个图片视图let imageview = UIImageView(image: #imageLiteral(resourceName: &#34;friend&#34;))">
+Xcode8 中新增文档注释功能实现方法：option+cmd+//// 创建一个图片视图
+let imageview = UIImageView(image: #imageLiteral(resourceName: &amp;quot;frie">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -410,7 +410,7 @@ Xcode8 中新增文档注释功能实现方法：option+cmd+/
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        182
+                        188
                     </div>
                     
 
@@ -434,23 +434,30 @@ Xcode8 中新增文档注释功能实现方法：option+cmd+/
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <ol>
-<li><p>Xcode8 中新增文档注释功能<br>实现方法：option+cmd+/</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="comment">/// 创建一个图片视图</span></span><br><span class="line"><span class="keyword">let</span> imageview = <span class="type">UIImageView</span>(image: #imageLiteral(resourceName: <span class="string">"friend"</span>))</span><br></pre></td></tr></table></figure>
+<li>Xcode8 中新增文档注释功能<br>实现方法：option+cmd+/<pre><code class="swift">/// 创建一个图片视图
+let imageview = UIImageView(image: #imageLiteral(resourceName: &quot;friend&quot;))</code></pre>
 </li>
-<li><p>新增颜色选择器<br>实现方法: color+回车</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">  <span class="comment">//color+回车</span></span><br><span class="line">v.backgroundColor=#colorLiteral(red: <span class="number">0.5568627715</span>, green: <span class="number">0.3529411852</span>, blue: <span class="number">0.9686274529</span>, alpha: <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
+<li>新增颜色选择器<br>实现方法: color+回车<pre><code class="swift">//color+回车
+v.backgroundColor=#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)</code></pre>
+<img src="http://7xw3wp.com1.z0.glb.clouddn.com/swift_select_color.png" alt="颜色选择">  </li>
+<li>Xcode8中取消预编译指令,原来的#pragma mark替换为//MARK:<br>实现方法: //MARK: -<pre><code class="swift">//MARK: - 设置图片的frame
+img.frame = CGRect(x: 0, y: 0, width: 200, height: 100)
+</code></pre>
 </li>
 </ol>
-<p><img src="http://7xw3wp.com1.z0.glb.clouddn.com/swift_select_color.png" alt="颜色选择"><br>3. Xcode8中取消预编译指令,原来的#pragma mark替换为//MARK:<br>实现方法: //MARK: -</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="comment">//MARK: - 设置图片的frame</span></span><br><span class="line">img.frame = <span class="type">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="number">200</span>, height: <span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//MARK: 设置图片的center</span></span><br><span class="line">img.center = view.center</span><br></pre></td></tr></table></figure>
+<p>//MARK: 设置图片的center<br>img.center = view.center</p>
+<pre><code>
 
-<ol start="4">
-<li><p>原来的#warning也相应的替换成 //TODO: 和//FIXME:</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="comment">//color+回车</span></span><br><span class="line">  v.backgroundColor=#colorLiteral(red: <span class="number">0.5568627715</span>, green: <span class="number">0.3529411852</span>, blue: <span class="number">0.9686274529</span>, alpha: <span class="number">1</span>) <span class="comment">//<span class="doctag">TODO:</span> 设置需要的颜色</span></span><br><span class="line"></span><br><span class="line">view.addSubview(v)</span><br><span class="line">    <span class="comment">/// 创建一个图片视图</span></span><br><span class="line"><span class="keyword">let</span> imageview = <span class="type">UIImageView</span>(image: #imageLiteral(resourceName: <span class="string">"friend"</span>)) <span class="comment">//<span class="doctag">FIXME:</span> 设置对应的图像</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>图片展示<br><img src="http://7xw3wp.com1.z0.glb.clouddn.com/swift_image_select.png" alt="图片预览"></p>
-</li>
+4. 原来的#warning也相应的替换成 //TODO: 和//FIXME:
+```swift    
+    //color+回车
+      v.backgroundColor=#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1) //TODO: 设置需要的颜色
+
+    view.addSubview(v)
+        /// 创建一个图片视图
+    let imageview = UIImageView(image: #imageLiteral(resourceName: &quot;friend&quot;)) //FIXME: 设置对应的图像
+</code></pre><ol start="5">
+<li>图片展示<br><img src="http://7xw3wp.com1.z0.glb.clouddn.com/swift_image_select.png" alt="图片预览"></li>
 </ol>
 
             </div>
@@ -741,12 +748,9 @@ UI Test 的重要性 在实际开
                     <div class="summary block-with-text">
                         
                             
-去除字符串首尾空格//可以指定字符集[text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-
-
-
-常用字符集：
-@property (
+去除字符串首尾空格//可以指定字符集
+[text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+常用字符集：@property (rea
                         
                     </div>
                     <div class="publish-info">
@@ -890,7 +894,7 @@ UI Test 的重要性 在实际开
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

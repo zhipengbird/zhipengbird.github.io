@@ -6,12 +6,9 @@
     <meta charset="utf-8">
     <meta name="keywords" content="iOS常用小技巧, 志鹏的技术博客">
     <meta name="description" content="
-去除字符串首尾空格//可以指定字符集[text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-
-
-
-常用字符集：
-@property (">
+去除字符串首尾空格//可以指定字符集
+[text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+常用字符集：@property (rea">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -414,7 +411,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        356
+                        365
                     </div>
                     
 
@@ -438,36 +435,61 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <ol>
-<li>去除字符串首尾空格<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//可以指定字符集</span></span><br><span class="line">[text stringByTrimmingCharactersInSet:[<span class="built_in">NSCharacterSet</span> whitespaceCharacterSet]];</span><br></pre></td></tr></table></figure>
-
+<li>去除字符串首尾空格<pre><code class="objc">//可以指定字符集
+[text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];</code></pre>
+常用字符集：<pre><code class="objc">@property (readonly, class, copy) NSCharacterSet *controlCharacterSet; //控制符
+@property (readonly, class, copy) NSCharacterSet *whitespaceCharacterSet;//空格
+@property (readonly, class, copy) NSCharacterSet *whitespaceAndNewlineCharacterSet;//空格和换行
+@property (readonly, class, copy) NSCharacterSet *decimalDigitCharacterSet;//数字
+@property (readonly, class, copy) NSCharacterSet *letterCharacterSet;//字母
+@property (readonly, class, copy) NSCharacterSet *lowercaseLetterCharacterSet;//小写字母
+@property (readonly, class, copy) NSCharacterSet *uppercaseLetterCharacterSet;//大写字母
+@property (readonly, class, copy) NSCharacterSet *nonBaseCharacterSet;//不知道
+@property (readonly, class, copy) NSCharacterSet *alphanumericCharacterSet;//字母数字
+@property (readonly, class, copy) NSCharacterSet *decomposableCharacterSet;//可分解字符集
+@property (readonly, class, copy) NSCharacterSet *illegalCharacterSet;//非法字符
+@property (readonly, class, copy) NSCharacterSet *punctuationCharacterSet;//标点符号
+@property (readonly, class, copy) NSCharacterSet *capitalizedLetterCharacterSet;//大写字符
+@property (readonly, class, copy) NSCharacterSet *symbolCharacterSet;//符号
+@property (readonly, class, copy) NSCharacterSet *newlineCharacterSet NS_AVAILABLE(10_5, 2_0);//换行符</code></pre>
 </li>
 </ol>
-<p>常用字符集：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">class</span>, <span class="keyword">copy</span>) <span class="built_in">NSCharacterSet</span> *controlCharacterSet; <span class="comment">//控制符</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">class</span>, <span class="keyword">copy</span>) <span class="built_in">NSCharacterSet</span> *whitespaceCharacterSet;<span class="comment">//空格</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">class</span>, <span class="keyword">copy</span>) <span class="built_in">NSCharacterSet</span> *whitespaceAndNewlineCharacterSet;<span class="comment">//空格和换行</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">class</span>, <span class="keyword">copy</span>) <span class="built_in">NSCharacterSet</span> *decimalDigitCharacterSet;<span class="comment">//数字</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">class</span>, <span class="keyword">copy</span>) <span class="built_in">NSCharacterSet</span> *letterCharacterSet;<span class="comment">//字母</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">class</span>, <span class="keyword">copy</span>) <span class="built_in">NSCharacterSet</span> *lowercaseLetterCharacterSet;<span class="comment">//小写字母</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">class</span>, <span class="keyword">copy</span>) <span class="built_in">NSCharacterSet</span> *uppercaseLetterCharacterSet;<span class="comment">//大写字母</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">class</span>, <span class="keyword">copy</span>) <span class="built_in">NSCharacterSet</span> *nonBaseCharacterSet;<span class="comment">//不知道</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">class</span>, <span class="keyword">copy</span>) <span class="built_in">NSCharacterSet</span> *alphanumericCharacterSet;<span class="comment">//字母数字</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">class</span>, <span class="keyword">copy</span>) <span class="built_in">NSCharacterSet</span> *decomposableCharacterSet;<span class="comment">//可分解字符集</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">class</span>, <span class="keyword">copy</span>) <span class="built_in">NSCharacterSet</span> *illegalCharacterSet;<span class="comment">//非法字符</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">class</span>, <span class="keyword">copy</span>) <span class="built_in">NSCharacterSet</span> *punctuationCharacterSet;<span class="comment">//标点符号</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">class</span>, <span class="keyword">copy</span>) <span class="built_in">NSCharacterSet</span> *capitalizedLetterCharacterSet;<span class="comment">//大写字符</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">class</span>, <span class="keyword">copy</span>) <span class="built_in">NSCharacterSet</span> *symbolCharacterSet;<span class="comment">//符号</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">class</span>, <span class="keyword">copy</span>) <span class="built_in">NSCharacterSet</span> *newlineCharacterSet <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_5, <span class="number">2</span>_0);<span class="comment">//换行符</span></span><br></pre></td></tr></table></figure>
-
 <ol start="2">
 <li><p>修改导航栏返回按钮</p>
 <ul>
 <li><p>自定义返回按钮</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIImage</span> * backButtonImage = [[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"back_bg"</span>] resizableImageWithCapInsets:<span class="built_in">UIEdgeInsetsMake</span>(<span class="number">0</span>, <span class="number">30</span>, <span class="number">0</span>, <span class="number">0</span>)];</span><br><span class="line">[[<span class="built_in">UIBarButtonItem</span> appearance] setBackButtonBackgroundImage:backButtonImage forState:<span class="built_in">UIControlStateNormal</span> barMetrics:<span class="built_in">UIBarMetricsDefault</span>];</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">UIImage * backButtonImage = [[UIImage imageNamed:@&quot;back_bg&quot;] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 30, 0, 0)];
+[[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];</code></pre>
 </li>
 <li><p>将返回按钮的文字position设置不在屏幕上显示</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[[<span class="built_in">UIBarButtonItem</span> appearance] setBackButtonTitlePositionAdjustment:<span class="built_in">UIOffsetMake</span>(<span class="built_in">NSIntegerMin</span>, <span class="built_in">NSIntegerMin</span>) forBarMetrics:<span class="built_in">UIBarMetricsDefault</span>];</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(NSIntegerMin, NSIntegerMin) forBarMetrics:UIBarMetricsDefault];</code></pre>
 </li>
 <li><p>用系统的返回按钮的时候 会发现显示的是蓝色的，想要改变成白色的添加下面一句话</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[[<span class="built_in">UINavigationBar</span> appearance]setTintColor:[<span class="built_in">UIColor</span> whiteColor]];</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">[[UINavigationBar appearance]setTintColor:[UIColor whiteColor]];</code></pre>
 </li>
 <li><p>去除导航栏的黑色分隔线</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//    去除导航栏的黑色分隔线</span></span><br><span class="line">    [<span class="keyword">self</span>.navigationController.navigationBar setBackgroundImage:[<span class="built_in">UIImage</span> imageWithColor:[<span class="built_in">UIColor</span> whiteColor]] forBarMetrics:<span class="built_in">UIBarMetricsDefault</span>];</span><br><span class="line">    <span class="keyword">self</span>.navigationController.navigationBar.shadowImage = [<span class="built_in">UIImage</span> imageWithColor:[<span class="built_in">UIColor</span> clearColor]];</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">//    去除导航栏的黑色分隔线
+[self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
+self.navigationController.navigationBar.shadowImage = [UIImage imageWithColor:[UIColor clearColor]];
+</code></pre>
 </li>
 </ul>
 </li>
-<li><p>给UITextView设置placehold </p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">UILabel</span> *placeHolderLabel = [[<span class="built_in">UILabel</span> alloc] init];</span><br><span class="line">placeHolderLabel.text = <span class="built_in">NSLocalizedString</span>(<span class="string">@"edit_signature_alert"</span>, <span class="literal">nil</span>);</span><br><span class="line">placeHolderLabel.numberOfLines = <span class="number">0</span>;</span><br><span class="line">placeHolderLabel.textColor = <span class="built_in">UIColorFromRGBA</span>(<span class="number">0xb4b4b4</span>, <span class="number">1</span>);</span><br><span class="line">[placeHolderLabel sizeToFit];</span><br><span class="line">placeHolderLabel.textAlignment= <span class="built_in">NSTextAlignmentLeft</span>;</span><br><span class="line">[<span class="keyword">self</span>.textView addSubview:placeHolderLabel];</span><br><span class="line"><span class="comment">// same font</span></span><br><span class="line">placeHolderLabel.font = [<span class="built_in">UIFont</span> systemFontOfSize:<span class="number">16.</span>f];</span><br><span class="line">[<span class="keyword">self</span>.textView setValue:placeHolderLabel forKey:<span class="string">@"_placeholderLabel"</span>];</span><br></pre></td></tr></table></figure>
-
-</li>
 </ol>
+<pre><code>
+3. 给UITextView设置placehold 
+```objc
 
+UILabel *placeHolderLabel = [[UILabel alloc] init];
+placeHolderLabel.text = NSLocalizedString(@&quot;edit_signature_alert&quot;, nil);
+placeHolderLabel.numberOfLines = 0;
+placeHolderLabel.textColor = UIColorFromRGBA(0xb4b4b4, 1);
+[placeHolderLabel sizeToFit];
+placeHolderLabel.textAlignment= NSTextAlignmentLeft;
+[self.textView addSubview:placeHolderLabel];
+// same font
+placeHolderLabel.font = [UIFont systemFontOfSize:16.f];
+[self.textView setValue:placeHolderLabel forKey:@&quot;_placeholderLabel&quot;];</code></pre>
             </div>
             <hr/>
 
@@ -709,8 +731,8 @@
                     <div class="summary block-with-text">
                         
                             
-Xcode8 中新增文档注释功能实现方法：option+cmd+/
-/// 创建一个图片视图let imageview = UIImageView(image: #imageLiteral(resourceName: "friend"))
+Xcode8 中新增文档注释功能实现方法：option+cmd+//// 创建一个图片视图
+let imageview = UIImageView(image: #imageLiteral(resourceName: &quot;frie
                         
                     </div>
                     <div class="publish-info">
@@ -760,7 +782,9 @@ Xcode8 中新增文档注释功能实现方法：option+cmd+/
                     <div class="summary block-with-text">
                         
                             思路：使用runtime 获取textfiled的所有属性
-//获取类的所有属性unsigned int count = 0;Ivar *ivarList = class_copyIvarList([UITextField class], 
+//获取类的所有属性
+unsigned int count = 0;
+Ivar *ivarList = class_copyIvarList([UITextField class]
                         
                     </div>
                     <div class="publish-info">
@@ -904,7 +928,7 @@ Xcode8 中新增文档注释功能实现方法：option+cmd+/
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

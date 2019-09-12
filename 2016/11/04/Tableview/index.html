@@ -6,7 +6,8 @@
     <meta charset="utf-8">
     <meta name="keywords" content="TableView表格学习笔记, 志鹏的技术博客">
     <meta name="description" content="UITableViewCell学习选中状态颜色设置
-系统自带的效果：  typedef NS_ENUM(NSInteger, UITableViewCellSelectionStyle) &amp;#123;    UITableViewCellS">
+系统自带的效果：typedef NS_ENUM(NSInteger, UITableViewCellSelectionStyle) {
+UITableViewCellSelectionSt">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -424,16 +425,23 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h3 id="UITableViewCell学习"><a href="#UITableViewCell学习" class="headerlink" title="UITableViewCell学习"></a>UITableViewCell学习</h3><h4 id="选中状态颜色设置"><a href="#选中状态颜色设置" class="headerlink" title="选中状态颜色设置"></a>选中状态颜色设置</h4><ol>
-<li>系统自带的效果：<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>, <span class="built_in">UITableViewCellSelectionStyle</span>) &#123;</span><br><span class="line">    <span class="built_in">UITableViewCellSelectionStyleNone</span>,<span class="comment">//没有效果</span></span><br><span class="line">    <span class="built_in">UITableViewCellSelectionStyleBlue</span>,<span class="comment">//蓝色</span></span><br><span class="line">    <span class="built_in">UITableViewCellSelectionStyleGray</span>,<span class="comment">//灰色</span></span><br><span class="line">    <span class="built_in">UITableViewCellSelectionStyleDefault</span> <span class="built_in">NS_ENUM_AVAILABLE_IOS</span>(<span class="number">7</span>_0)<span class="comment">//灰色</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<li>系统自带的效果：<pre><code class="objc">typedef NS_ENUM(NSInteger, UITableViewCellSelectionStyle) {
+UITableViewCellSelectionStyleNone,//没有效果
+UITableViewCellSelectionStyleBlue,//蓝色
+UITableViewCellSelectionStyleGray,//灰色
+UITableViewCellSelectionStyleDefault NS_ENUM_AVAILABLE_IOS(7_0)//灰色
+};
+</code></pre>
 </li>
 </ol>
-<ol start="2">
-<li><p>改变选中时的背景色</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">self</span>.selectionStyle= <span class="built_in">UITableViewCellSelectionStyleBlue</span>;</span><br><span class="line"><span class="keyword">self</span>.selectedBackgroundView=[[<span class="built_in">UIView</span> alloc]initWithFrame:<span class="keyword">self</span>.bounds];</span><br><span class="line"><span class="keyword">self</span>.selectedBackgroundView.backgroundColor=[<span class="built_in">UIColor</span> purpleColor];</span><br><span class="line"><span class="keyword">self</span>.multipleSelectionBackgroundView =[[<span class="built_in">UIView</span> alloc]initWithFrame:<span class="keyword">self</span>.bounds];</span><br><span class="line"><span class="keyword">self</span>.multipleSelectionBackgroundView.backgroundColor=[<span class="built_in">UIColor</span> cyanColor];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>选中状态背景设置的常用属性     </p>
-</li>
+<pre><code>2. 改变选中时的背景色
+```objc
+self.selectionStyle= UITableViewCellSelectionStyleBlue;
+self.selectedBackgroundView=[[UIView alloc]initWithFrame:self.bounds];
+self.selectedBackgroundView.backgroundColor=[UIColor purpleColor];
+self.multipleSelectionBackgroundView =[[UIView alloc]initWithFrame:self.bounds];
+self.multipleSelectionBackgroundView.backgroundColor=[UIColor cyanColor];</code></pre><ol start="3">
+<li>选中状态背景设置的常用属性     </li>
 </ol>
 <ul>
 <li><p><code>@property (nonatomic, strong, nullable) UIView *backgroundView;</code><br>当表格的样式处于<code>UITableViewStylePlain</code>时，该属性为空时，处于<code>UITableViewStyleGrouped</code>样式时，为非空。该背景视图将添加到其他视图的底部。</p>
@@ -445,28 +453,84 @@
 <ol start="4">
 <li>分隔线的样式</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">typedef NS_ENUM(NSInteger, UITableViewCellSeparatorStyle) &#123;</span><br><span class="line">    UITableViewCellSeparatorStyleNone,</span><br><span class="line">    UITableViewCellSeparatorStyleSingleLine,</span><br><span class="line">    UITableViewCellSeparatorStyleSingleLineEtched   // This separator style is only supported for grouped style table views currently</span><br><span class="line">&#125; __TVOS_PROHIBITED;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//设置分隔线的缩进</span><br><span class="line">@property (nonatomic) UIEdgeInsets                    separatorInset NS_AVAILABLE_IOS(7_0) UI_APPEARANCE_SELECTOR __TVOS_PROHIBITED; // allows customization of the separator frame</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objective-c"> typedef NS_ENUM(NSInteger, UITableViewCellSeparatorStyle) {
+     UITableViewCellSeparatorStyleNone,
+     UITableViewCellSeparatorStyleSingleLine,
+     UITableViewCellSeparatorStyleSingleLineEtched   // This separator style is only supported for grouped style table views currently
+ } __TVOS_PROHIBITED;</code></pre>
+<pre><code class="objective-c"> //设置分隔线的缩进
+ @property (nonatomic) UIEdgeInsets                    separatorInset NS_AVAILABLE_IOS(7_0) UI_APPEARANCE_SELECTOR __TVOS_PROHIBITED; // allows customization of the separator frame</code></pre>
 </li>
 </ul>
 <h3 id="表格的相操作"><a href="#表格的相操作" class="headerlink" title="表格的相操作"></a>表格的相操作</h3><h5 id="1-表格的删除操作"><a href="#1-表格的删除操作" class="headerlink" title="1. 表格的删除操作"></a>1. 表格的删除操作</h5><p>实现表格的如下代理方法：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">-(<span class="built_in">BOOL</span>)tableView:(<span class="built_in">UITableView</span> *)tableView canEditRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="built_in">NSString</span> *)tableView:(<span class="built_in">UITableView</span> *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath&#123;</span><br><span class="line">  <span class="comment">//设置左滑后，显示的操作说明，这里可以换成其操作</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">@"delte"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)tableView:(<span class="built_in">UITableView</span> *)tableView commitEditingStyle:(<span class="built_in">UITableViewCellEditingStyle</span>)editingStyle forRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath&#123;  </span><br><span class="line">  <span class="comment">//点击该操作后的处理，我这里所做的是删除操作，记住若要删除一个cell，同时也要对数据源进行更改</span></span><br><span class="line">  [ _ datasource removeObjectAtIndex:indexPath.row ];</span><br><span class="line">  [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:<span class="built_in">UITableViewRowAnimationLeft</span>];</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="built_in">UITableViewCellEditingStyle</span>)tableView:(<span class="built_in">UITableView</span> *)tableView editingStyleForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> * )indexPath&#123;</span><br><span class="line">  <span class="comment">//设置编辑的样式</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">UITableViewCellEditingStyleDelete</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+  //设置左滑后，显示的操作说明，这里可以换成其操作
+    return @&quot;delte&quot;;
+}</code></pre>
+<pre><code class="objc">-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{  
+  //点击该操作后的处理，我这里所做的是删除操作，记住若要删除一个cell，同时也要对数据源进行更改
+  [ _ datasource removeObjectAtIndex:indexPath.row ];
+  [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+}
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath * )indexPath{
+  //设置编辑的样式
+    return UITableViewCellEditingStyleDelete;
+}
+</code></pre>
 <p>如果左滑后要出现多个操作按钮该怎么处理呢，iOS8以后苹果官司方新增加了个类<code>UITableViewRowAction</code> ,这个类该怎么用，用在哪里？</p>
-<h5 id="2-UITableViewRowAction-使用"><a href="#2-UITableViewRowAction-使用" class="headerlink" title="2 . UITableViewRowAction 使用"></a>2 . <code>UITableViewRowAction</code> 使用</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">NS_CLASS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED @interface UITableViewRowAction : NSObject &lt;NSCopying&gt;</span><br><span class="line"></span><br><span class="line">+ (instancetype)rowActionWithStyle:(UITableViewRowActionStyle)style title:(nullable NSString * )title handler:(void (^)(UITableViewRowAction * action, NSIndexPath * indexPath))handler;</span><br><span class="line"></span><br><span class="line">@property (nonatomic, readonly) UITableViewRowActionStyle style;</span><br><span class="line">@property (nonatomic, copy, nullable) NSString *title;</span><br><span class="line">@property (nonatomic, copy, nullable) UIColor *backgroundColor; // default background color is dependent on style</span><br><span class="line">@property (nonatomic, copy, nullable) UIVisualEffect* backgroundEffect;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h5 id="2-UITableViewRowAction-使用"><a href="#2-UITableViewRowAction-使用" class="headerlink" title="2 . UITableViewRowAction 使用"></a>2 . <code>UITableViewRowAction</code> 使用</h5><pre><code class="objective-c">NS_CLASS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED @interface UITableViewRowAction : NSObject &lt;NSCopying&gt;
 
++ (instancetype)rowActionWithStyle:(UITableViewRowActionStyle)style title:(nullable NSString * )title handler:(void (^)(UITableViewRowAction * action, NSIndexPath * indexPath))handler;
+
+@property (nonatomic, readonly) UITableViewRowActionStyle style;
+@property (nonatomic, copy, nullable) NSString *title;
+@property (nonatomic, copy, nullable) UIColor *backgroundColor; // default background color is dependent on style
+@property (nonatomic, copy, nullable) UIVisualEffect* backgroundEffect;
+@end</code></pre>
 <p>​    该类非常简单，事件的响应使用block回调用，事件的名称以及背景色都可以自定义，那么在表格中哪里使用呢？</p>
 <p>   我们只需要简单实现表格的<code>- (nullable NSArray&lt;UITableViewRowAction *&gt; *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(8_0)</code>这个代理方法。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 设置显示多个按钮</span><br><span class="line">- (NSArray&lt;UITableViewRowAction *&gt; *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    //    UITableViewRowAction 通过此类创建按钮</span><br><span class="line">    /*</span><br><span class="line">     * 1. 我们在使用一些应用的时候，在滑动一些联系人的某一行的时候，会出现删除、置顶、更多等等的按钮，在iOS8之前，我们都需要自己去实现。到了iOS8，系统已经写好了，只需要一个代理方法和一个类就搞定了</span><br><span class="line"></span><br><span class="line">     * 2. iOS8的协议多了一个方法，返回值是数组的tableView:editActionsForRowAtIndexPath:方法，我们可以在方法内部写好几个按钮，然后放到数组中返回，那些按钮的类就是UITableViewRowAction</span><br><span class="line"></span><br><span class="line">     * 3. 在UITableViewRowAction类，我们可以设置按钮的样式、显示的文字、背景色、和按钮的事件（事件在Block中实现）</span><br><span class="line"></span><br><span class="line">     * 4. 在代理方法中，我们可以创建多个按钮放到数组中返回，最先放入数组的按钮显示在最右侧，最后放入的显示在最左侧</span><br><span class="line"></span><br><span class="line">     * 5. 注意：如果我们自己设定了一个或多个按钮，系统自带的删除按钮就消失了...</span><br><span class="line">     * /</span><br><span class="line">    UITableViewRowAction * deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@&quot;删除&quot; handler:^(UITableViewRowAction *  action, NSIndexPath *  indexPath) &#123;</span><br><span class="line">            //事件回调用处理</span><br><span class="line">    &#125;];</span><br><span class="line">    deleteRowAction.backgroundColor = [UIColor redColor];</span><br><span class="line"></span><br><span class="line">    UITableViewRowAction * topRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@&quot;置顶&quot; handler:^(UITableViewRowAction *  action, NSIndexPath * indexPath) &#123;</span><br><span class="line">       //事件回调用处理</span><br><span class="line">    &#125;];</span><br><span class="line">    topRowAction.backgroundColor = [UIColor blueColor];</span><br><span class="line"></span><br><span class="line">    UITableViewRowAction * moreRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@&quot;更多&quot; handler:^(UITableViewRowAction *  action, NSIndexPath * indexPath) &#123;</span><br><span class="line">            //事件回调用处理</span><br><span class="line">    &#125;];</span><br><span class="line"></span><br><span class="line">    return @[deleteRowAction,topRowAction,moreRowAction];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="objective-c">// 设置显示多个按钮
+- (NSArray&lt;UITableViewRowAction *&gt; *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //    UITableViewRowAction 通过此类创建按钮
+    /*
+     * 1. 我们在使用一些应用的时候，在滑动一些联系人的某一行的时候，会出现删除、置顶、更多等等的按钮，在iOS8之前，我们都需要自己去实现。到了iOS8，系统已经写好了，只需要一个代理方法和一个类就搞定了
 
-<h5 id="3-表格的单选与多选的设置"><a href="#3-表格的单选与多选的设置" class="headerlink" title="3. 表格的单选与多选的设置"></a>3. 表格的单选与多选的设置</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">_groupNumberTableview.allowsSelection=YES; // 是否允许选中</span><br><span class="line">_groupNumberTableview.editing=YES;//是否处于编辑状态</span><br><span class="line">_groupNumberTableview.allowsMultipleSelection=YES;//是否允许多选</span><br><span class="line">_groupNumberTableview.allowsMultipleSelectionDuringEditing=YES;//是否允许在编辑状态下多选</span><br></pre></td></tr></table></figure>
+     * 2. iOS8的协议多了一个方法，返回值是数组的tableView:editActionsForRowAtIndexPath:方法，我们可以在方法内部写好几个按钮，然后放到数组中返回，那些按钮的类就是UITableViewRowAction
 
-<h3 id="动态添加headerview"><a href="#动态添加headerview" class="headerlink" title="动态添加headerview"></a>动态添加headerview</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIView</span> *headerView = _tableView.tableHeaderView;  </span><br><span class="line">headerView.height = <span class="number">0</span>;  </span><br><span class="line">[_tableView beginUpdates];  </span><br><span class="line">[_tableView setTableHeaderView:headerView];<span class="comment">// 关键是这句话  </span></span><br><span class="line">[_tableView endUpdates];</span><br></pre></td></tr></table></figure>
+     * 3. 在UITableViewRowAction类，我们可以设置按钮的样式、显示的文字、背景色、和按钮的事件（事件在Block中实现）
 
+     * 4. 在代理方法中，我们可以创建多个按钮放到数组中返回，最先放入数组的按钮显示在最右侧，最后放入的显示在最左侧
+
+     * 5. 注意：如果我们自己设定了一个或多个按钮，系统自带的删除按钮就消失了...
+     * /
+    UITableViewRowAction * deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@&quot;删除&quot; handler:^(UITableViewRowAction *  action, NSIndexPath *  indexPath) {
+            //事件回调用处理
+    }];
+    deleteRowAction.backgroundColor = [UIColor redColor];
+
+    UITableViewRowAction * topRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@&quot;置顶&quot; handler:^(UITableViewRowAction *  action, NSIndexPath * indexPath) {
+       //事件回调用处理
+    }];
+    topRowAction.backgroundColor = [UIColor blueColor];
+
+    UITableViewRowAction * moreRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@&quot;更多&quot; handler:^(UITableViewRowAction *  action, NSIndexPath * indexPath) {
+            //事件回调用处理
+    }];
+
+    return @[deleteRowAction,topRowAction,moreRowAction];
+}</code></pre>
+<h5 id="3-表格的单选与多选的设置"><a href="#3-表格的单选与多选的设置" class="headerlink" title="3. 表格的单选与多选的设置"></a>3. 表格的单选与多选的设置</h5><pre><code class="objective-c">_groupNumberTableview.allowsSelection=YES; // 是否允许选中
+_groupNumberTableview.editing=YES;//是否处于编辑状态
+_groupNumberTableview.allowsMultipleSelection=YES;//是否允许多选
+_groupNumberTableview.allowsMultipleSelectionDuringEditing=YES;//是否允许在编辑状态下多选</code></pre>
+<h3 id="动态添加headerview"><a href="#动态添加headerview" class="headerlink" title="动态添加headerview"></a>动态添加headerview</h3><pre><code class="objc">UIView *headerView = _tableView.tableHeaderView;  
+headerView.height = 0;  
+[_tableView beginUpdates];  
+[_tableView setTableHeaderView:headerView];// 关键是这句话  
+[_tableView endUpdates];</code></pre>
 <p>这两句话可以让其过渡有动画效果</p>
 
             </div>
@@ -697,24 +761,22 @@
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="../../17/顶点着色器/">
+                <a href="../../17/UIImagePickerController/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="顶点着色器">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="UIImagePickerController">
                         
-                        <span class="card-title">顶点着色器</span>
+                        <span class="card-title">UIImagePickerController</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            顶点着色器顶点着色器实现了顶点操作的通秀可编程方法
-顶点着色器的输入：
-
-着色器程序 ： 描述顶点上执行操作的顶点着色器程序源代码或可执行文件
-顶点为着色器输入（属性）：用顶点数组提供的每个顶点的数据
-统一变量（uniform）：顶点着色器
+                            创建对象
+//去相册选择图片
+ UIImagePickerController * pickerController =[[UIImagePickerController alloc]init];
+ pickerController.med
                         
                     </div>
                     <div class="publish-info">
@@ -732,14 +794,6 @@
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="../../../../tags/iOS/" target="_blank">
-                        <span class="chip bg-color">iOS</span>
-                    </a>
-                    
                 </div>
                 
             </div>
@@ -908,7 +962,7 @@ GPUImage 是一个基于 GPU 图像和视频处理的开源 iOS 框架。由于�
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

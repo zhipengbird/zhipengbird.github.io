@@ -404,7 +404,7 @@ CWConfiguration与CW">
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        112
+                        110
                     </div>
                     
 
@@ -437,8 +437,15 @@ CWConfiguration与CW">
 <li><code>CoreWlanUtil</code></li>
 <li><code>CoreWLANTypes</code><br>主要由以上类组成，接下来我们一一来看下这些类给我们提供了什么功能接口，以及具有哪些属性:<br><strong>首先来看来有哪些类型的枚举</strong><ul>
 <li>[<a href="https://zh.wikipedia.org/wiki/IEEE_802.11" target="_blank" rel="noopener">IEEE 802.11 (无线局域网通用)的标准</a><ul>
-<li><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   <span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>, CWPHYMode)</span><br><span class="line">&#123;</span><br><span class="line">	kCWPHYModeNone		= <span class="number">0</span>,</span><br><span class="line">	kCWPHYMode11a		= <span class="number">1</span>,</span><br><span class="line">	kCWPHYMode11b		= <span class="number">2</span>,</span><br><span class="line">	kCWPHYMode11g		= <span class="number">3</span>,</span><br><span class="line">	kCWPHYMode11n		= <span class="number">4</span>,</span><br><span class="line">  kCWPHYMode11ac  = <span class="number">5</span>,</span><br><span class="line">&#125; <span class="built_in">NS_ENUM_AVAILABLE_MAC</span>(<span class="number">10</span>_7);</span><br></pre></td></tr></table></figure>
-
+<li><pre><code class="objc">typedef NS_ENUM(NSInteger, CWPHYMode)
+{
+kCWPHYModeNone        = 0,
+kCWPHYMode11a        = 1,
+kCWPHYMode11b        = 2,
+kCWPHYMode11g        = 3,
+kCWPHYMode11n        = 4,
+kCWPHYMode11ac  = 5,
+} NS_ENUM_AVAILABLE_MAC(10_7);  </code></pre>
 </li>
 </ul>
 </li>
@@ -882,7 +889,7 @@ CWConfiguration与CW
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

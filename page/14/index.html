@@ -296,6 +296,141 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="../../2016/06/02/Framework制作/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Framework制作">
+                            
+                            <span class="card-title">Framework制作</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                知识科谱： 什么是库? 库是程序代码的集合，是共享程序代码的一种方式。 依源代码的公开情况不同，库可以分为2种： 开源库  公开源代码，能看到具体实现（如我们常用的第三方库） 闭源库  不公开源代码，是经过编译后的二进制文件，看不到具体的实
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-06-02
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-user fa-fw"></i>
+                                志鹏
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="../../2016/05/19/设置行间距/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="设置行间距">
+                            
+                            <span class="card-title">设置行间距</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                在iOS开发过程中对文本的处理，可以需要去调整字间距，行间距之类，在这里给大伙介绍一个工具类（NSMutableParagraphStyle），它可以帮我们实现这个需求：
+
+NSMutableParagraphStyle是NSParagra
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-05-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-user fa-fw"></i>
+                                志鹏
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="../../tags/行间距，lineSpacing/" target="_blank">
+                            <span class="chip bg-color">行间距，lineSpacing</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="../../2016/05/19/OC中的拷贝/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="OC中的拷贝">
+                            
+                            <span class="card-title">OC中的拷贝</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                
+内存的栈区 : 由编译器自动分配释放, 存放函数的参数值, 局部变量的值等. 其 操作方式类似于数据结构中的栈.
+
+
+内存的堆区 : 一般由程序员分配释放, 若程序员不释放, 程序结束时可能由OS回 收. 注意它与数据结构中的堆是两回事,
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-05-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="../../categories/iOS/" class="post-category" target="_blank">
+                                    iOS
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="../../tags/copy/" target="_blank">
+                            <span class="chip bg-color">copy</span>
+                        </a>
+                        
+                        <a href="../../tags/multableCopy/" target="_blank">
+                            <span class="chip bg-color">multableCopy</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="../../2016/05/18/const与define/">
                         <div class="card-image">
                             
@@ -365,10 +500,9 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="summary block-with-text">
                             
                                 如何在OC中声明一个block? 作为一个本地变量：
-returnType (^blockName)(parameterTypes) = ^returnType(parameters) &#123;...&#125;;
-
+returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...};
  作为一个属性：
-
+@property (
                             
                         </div>
                         <div class="publish-info">
@@ -420,7 +554,11 @@ returnType (^blockName)(parameterTypes) = ^returnType(parameters) &#123;...&#125
                         <div class="summary block-with-text">
                             
                                 十六进制字符串转成整数
-unsigned int HEX2int(NSString  * hexString)&#123;    unsigned int nReval = 0;    int nPower = 1;    size_t n
+unsigned int HEX2int(NSString  * hexString)
+{
+    unsigned int nReval = 0;
+    int nPower = 1;
+    size_t nS
                             
                         </div>
                         <div class="publish-info">
@@ -622,153 +760,6 @@ unsigned int HEX2int(NSString  * hexString)&#123;    unsigned int nReval = 0;   
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="../../2016/04/19/scrollviewdelegate学习/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="ScrollViewDelegate学习">
-                            
-                            <span class="card-title">ScrollViewDelegate学习</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                用户拖动界面时所触发的代理方法调用有如下：
-
-当用户将手指放在界面中并开始拖动一定距离时会调用scrollViewWillBeginDragging：
-随之会触发scrollViewDidScroll方法的调用
-当用户手指离开界面时会触发s
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-04-19
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-user fa-fw"></i>
-                                志鹏
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="../../tags/iOS/" target="_blank">
-                            <span class="chip bg-color">iOS</span>
-                        </a>
-                        
-                        <a href="../../tags/ScrollViewDelegate/" target="_blank">
-                            <span class="chip bg-color">ScrollViewDelegate</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="../../2016/04/17/avaudioplayer学习/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="AVAudioPlayer学习">
-                            
-                            <span class="card-title">AVAudioPlayer学习</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                AVAudioPlayer 使用方式
-音频播放是很多应用程序的常见需求，AVFoundation让这一功能变得非常简单，这一点得归功于AVAudioPlayer这个类。这个类的实例提供了一种简单地从广西或内存中播放音频的方法。虽接口简单，但
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-04-17
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-user fa-fw"></i>
-                                志鹏
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="../../tags/AVAudioPlayer/" target="_blank">
-                            <span class="chip bg-color">AVAudioPlayer</span>
-                        </a>
-                        
-                        <a href="../../tags/AVAudioSession/" target="_blank">
-                            <span class="chip bg-color">AVAudioSession</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="../../2016/04/13/框架学习解析/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="CoreWlan框架学习解析">
-                            
-                            <span class="card-title">CoreWlan框架学习解析</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                CoreWlan 框架解析CoreWlan框基础类
-CWWiFiClient
-CWInterface
-CWNetwork
-CWNetworkProfile与CWMutableNetworkProfile
-CWConfiguration与CW
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-04-13
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-user fa-fw"></i>
-                                志鹏
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="../../tags/CoreWlan/" target="_blank">
-                            <span class="chip bg-color">CoreWlan</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
         </div>
     </article>
 
@@ -786,11 +777,12 @@ CWConfiguration与CW
             
         </div>
         <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">14 / 14</div>
+            <div class="center-align b-text-gray">14 / 15</div>
         </div>
         <div class="col s6 m4 l4">
             
-            <a class="right btn-floating btn-large disabled">
+            <a href="../15/"
+               class="right btn-floating btn-large waves-effect waves-light bg-color">
                 <i class="fa fa-angle-right"></i>
             </a>
             
@@ -809,7 +801,7 @@ CWConfiguration与CW
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

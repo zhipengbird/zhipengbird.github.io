@@ -413,7 +413,7 @@ iOS 7在推送方面最大的变化就是允许，应用收到通知后在后台
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        707
+                        708
                     </div>
                     
 
@@ -451,16 +451,24 @@ iOS 7在推送方面最大的变化就是允许，应用收到通知后在后台
 <li><p>不同版本的通知注册及回调用情况</p>
 <ol>
 <li><p>iOS8 以前</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] registerForRemoteNotificationTypes:(<span class="built_in">UIRemoteNotificationTypeBadge</span> | <span class="built_in">UIRemoteNotificationTypeSound</span> | <span class="built_in">UIRemoteNotificationTypeAlert</span>)];</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">[[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];</code></pre>
 </li>
 <li><p>iOS8~iOS9</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="built_in">UIUserNotificationSettings</span> * settings = [<span class="built_in">UIUserNotificationSettings</span> settingsForTypes:( <span class="built_in">UIUserNotificationTypeBadge</span> | <span class="built_in">UIUserNotificationTypeSound</span> | <span class="built_in">UIUserNotificationTypeAlert</span>)      categories:<span class="literal">nil</span>];</span><br><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] registerUserNotificationSettings:settings];</span><br><span class="line"></span><br><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] registerForRemoteNotifications];</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">UIUserNotificationSettings * settings = [UIUserNotificationSettings settingsForTypes:( UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)      categories:nil];
+[[UIApplication sharedApplication] registerUserNotificationSettings:settings];
 
+[[UIApplication sharedApplication] registerForRemoteNotifications];</code></pre>
 <ol start="3">
-<li>iOS10<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   <span class="comment">// iOS10.0 register remote notification</span></span><br><span class="line">   [[<span class="built_in">UIApplication</span> sharedApplication]registerForRemoteNotifications];</span><br><span class="line">[[UNUserNotificationCenter currentNotificationCenter]requestAuthorizationWithOptions:UNAuthorizationOptionAlert|UNAuthorizationOptionBadge|UNAuthorizationOptionSound completionHandler:^(<span class="built_in">BOOL</span> granted, <span class="built_in">NSError</span> * _ Nullable error) &#123;</span><br><span class="line">    <span class="keyword">if</span> (granted) &#123;</span><br><span class="line">        [UNUserNotificationCenter currentNotificationCenter].delegate= <span class="keyword">self</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   &#125;];</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<li><p>iOS10</p>
+<pre><code class="objc">// iOS10.0 register remote notification
+[[UIApplication sharedApplication]registerForRemoteNotifications];
+[[UNUserNotificationCenter currentNotificationCenter]requestAuthorizationWithOptions:UNAuthorizationOptionAlert|UNAuthorizationOptionBadge|UNAuthorizationOptionSound completionHandler:^(BOOL granted, NSError * _ Nullable error) {
+if (granted) {
+   [UNUserNotificationCenter currentNotificationCenter].delegate= self;
+}
 
-</li>
-</ol>
+}];
+}</code></pre>
 <blockquote>
 <p>在iOS10，苹果将用户通知相关操作集合在了<code>UserNotifications.framework</code>中，通知的回调用采用代理方式。</p>
 </blockquote>
@@ -468,19 +476,51 @@ iOS 7在推送方面最大的变化就是允许，应用收到通知后在后台
 </ol>
 </li>
 </ol>
-<pre><code>注册通知成功后，Token的获取回调用：
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didRegisterForRemoteNotificationsWithDeviceToken:(<span class="built_in">NSData</span> *)deviceToken <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">3</span>_0)&#123;</span><br><span class="line">  <span class="built_in">NSString</span> * strDeviceToken =[[deviceToken description] stringByTrimmingCharactersInSet:[<span class="built_in">NSCharacterSet</span> characterSetWithCharactersInString:<span class="string">@"&lt; &gt;"</span>]];</span><br><span class="line">  <span class="built_in">NSLog</span>(<span class="string">@"APNS token:%@"</span>, strDeviceToken);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<pre><code>    注册通知成功后，Token的获取回调用：
+    ```objc
+    - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken NS_AVAILABLE_IOS(3_0){
+      NSString * strDeviceToken =[[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@&quot;&lt; &gt;&quot;]];
+      NSLog(@&quot;APNS token:%@&quot;, strDeviceToken);
+    }
+    ```
+    注册通知失败的回调用：
+    ```objc
+    - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error NS_AVAILABLE_IOS(3_0);
+    ```
+    接收到通知的回调用处理方法：
+    iOS10以前：
+    ```objc
+    // 接收到远程通知
+    - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo;
+    // 接收到本地通知
+    - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification ；
+    ```
+    iOS10的回调：
+    实现UNUserNotificationCenterDelegate的代理方法：这些代理方法是可选的。
+    ```objc
+    // The method will be called on the delegate only if the application is in the foreground. If the method is not implemented or the handler is not called in a timely manner then the notification will not be presented. The application can choose to have the notification presented as a sound, badge, alert and/or in the notification list. This decision should be based on whether the information in the notification is otherwise visible to the user.
+    - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0);
 
-注册通知失败的回调用：
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didFailToRegisterForRemoteNotificationsWithError:(<span class="built_in">NSError</span> *)error <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">3</span>_0);</span><br></pre></td></tr></table></figure>
 
-接收到通知的回调用处理方法：
-iOS10以前：
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 接收到远程通知</span></span><br><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didReceiveRemoteNotification:(<span class="built_in">NSDictionary</span> *)userInfo;</span><br><span class="line"><span class="comment">// 接收到本地通知</span></span><br><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didReceiveLocalNotification:(<span class="built_in">UILocalNotification</span> *)notification ；</span><br></pre></td></tr></table></figure>
+    // The method will be called on the delegate when the user responded to the notification by opening the application, dismissing the notification or choosing a UNNotificationAction. The delegate must be set before the application returns from applicationDidFinishLaunching:.
+    - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler __IOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0) __TVOS_PROHIBITED{
 
-iOS10的回调：
-实现UNUserNotificationCenterDelegate的代理方法：这些代理方法是可选的。
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// The method will be called on the delegate only if the application is in the foreground. If the method is not implemented or the handler is not called in a timely manner then the notification will not be presented. The application can choose to have the notification presented as a sound, badge, alert and/or in the notification list. This decision should be based on whether the information in the notification is otherwise visible to the user.</span></span><br><span class="line"> - (<span class="keyword">void</span>)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(<span class="keyword">void</span> (^)(UNNotificationPresentationOptions options))completionHandler __IOS_AVAILABLE(<span class="number">10.0</span>) __TVOS_AVAILABLE(<span class="number">10.0</span>) __WATCHOS_AVAILABLE(<span class="number">3.0</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="comment">// The method will be called on the delegate when the user responded to the notification by opening the application, dismissing the notification or choosing a UNNotificationAction. The delegate must be set before the application returns from applicationDidFinishLaunching:.</span></span><br><span class="line"> - (<span class="keyword">void</span>)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(<span class="keyword">void</span>(^)())completionHandler __IOS_AVAILABLE(<span class="number">10.0</span>) __WATCHOS_AVAILABLE(<span class="number">3.0</span>) __TVOS_PROHIBITED&#123;</span><br><span class="line"></span><br><span class="line">   <span class="built_in">NSDictionary</span> * userinfo= response.notification.request.content.userInfo;</span><br><span class="line">     [<span class="keyword">self</span> analysisNotification:userinfo];</span><br><span class="line">     <span class="comment">// <span class="doctag">TODO:</span>: 如果有用户操作，可获取到对应的动作类型，并进行相关处理、</span></span><br><span class="line">     <span class="comment">// 例如</span></span><br><span class="line">         <span class="keyword">if</span> ([response.notification.request.content.categoryIdentifier isEqualToString:<span class="string">@"replaymessage"</span>]) &#123;</span><br><span class="line">    UNTextInputNotificationResponse * tresponse =(UNTextInputNotificationResponse*)response;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,tresponse.userText);</span><br><span class="line">     <span class="comment">//        get the user input text to dosomething</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></code></pre>
+      NSDictionary * userinfo= response.notification.request.content.userInfo;
+        [self analysisNotification:userinfo];
+        // TODO:: 如果有用户操作，可获取到对应的动作类型，并进行相关处理、
+        // 例如
+            if ([response.notification.request.content.categoryIdentifier isEqualToString:@&quot;replaymessage&quot;]) {
+       UNTextInputNotificationResponse * tresponse =(UNTextInputNotificationResponse*)response;
+       NSLog(@&quot;%@&quot;,tresponse.userText);
+        //        get the user input text to dosomething
+
+   }
+
+    }
+
+    ```</code></pre>
             </div>
             <hr/>
 
@@ -899,7 +939,7 @@ Xcode8注释快捷键失
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

@@ -7,8 +7,9 @@
     <meta name="keywords" content="Mac OS X中Apache开启ssl, 志鹏的技术博客">
     <meta name="description" content="
 生成主机密钥 这里会要求输入密码，不输入，直接回车
- sudo mkdir /private/etc/apache2/sslcd /private/etc/apache2/sslsudo ssh-keygen -f server.key
-">
+ sudo mkdir /private/etc/apache2/ssl
+ cd /private/etc/apache2/ssl
+ sudo ssh-keygen -f server.">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -406,7 +407,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        583
+                        596
                     </div>
                     
 
@@ -431,38 +432,82 @@
             <div id="articleContent">
                 <ol>
 <li><p>生成主机密钥<br> 这里会要求输入密码，不输入，直接回车</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo mkdir /private/etc/apache2/ssl</span><br><span class="line">cd /private/etc/apache2/ssl</span><br><span class="line">sudo ssh-keygen -f server.key</span><br></pre></td></tr></table></figure>
-
-<p> 执行过程：</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">localhost:~ yuanpinghua$ sudo mkdir  /private/etc/apache2/ssl</span><br><span class="line">Password:</span><br><span class="line">localhost:~ yuanpinghua$ cd /private/etc/apache2/ssl</span><br><span class="line">localhost:ssl yuanpinghua$ sudo ssh-keygen -f server.key</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in server.key.</span><br><span class="line">Your public key has been saved in server.key.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:MX4CY5k2ehZtPjp+SQ3F5Au+RKdYrlpN+ycdI43MlQw root@localhost</span><br><span class="line">The key&apos;s randomart image is:</span><br><span class="line">+---[RSA 2048]----+</span><br><span class="line">|         o.      |</span><br><span class="line">|       + .E      |</span><br><span class="line">|      X O.oo .   |</span><br><span class="line">|     + #.* .+    |</span><br><span class="line">|    . + S=o+     |</span><br><span class="line">|     o *.** +    |</span><br><span class="line">|      =.+. o o   |</span><br><span class="line">|     + .o.. o    |</span><br><span class="line">|    . ..  .o     |</span><br><span class="line">+----[SHA256]-----+</span><br></pre></td></tr></table></figure>
-
- <a id="more"></a></li>
+<pre><code> sudo mkdir /private/etc/apache2/ssl
+ cd /private/etc/apache2/ssl
+ sudo ssh-keygen -f server.key</code></pre><p> 执行过程：</p>
+<pre><code> localhost:~ yuanpinghua$ sudo mkdir  /private/etc/apache2/ssl
+ Password:
+ localhost:~ yuanpinghua$ cd /private/etc/apache2/ssl
+ localhost:ssl yuanpinghua$ sudo ssh-keygen -f server.key
+ Generating public/private rsa key pair.
+ Enter passphrase (empty for no passphrase):
+ Enter same passphrase again:
+ Your identification has been saved in server.key.
+ Your public key has been saved in server.key.pub.
+ The key fingerprint is:
+ SHA256:MX4CY5k2ehZtPjp+SQ3F5Au+RKdYrlpN+ycdI43MlQw root@localhost
+ The key&#39;s randomart image is:
+ +---[RSA 2048]----+
+ |         o.      |
+ |       + .E      |
+ |      X O.oo .   |
+ |     + #.* .+    |
+ |    . + S=o+     |
+ |     o *.** +    |
+ |      =.+. o o   |
+ |     + .o.. o    |
+ |    . ..  .o     |
+ +----[SHA256]-----+</code></pre> <a id="more"></a></li>
 <li><p>生成证书请求文件</p>
-   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo openssl req -new -key server.key -out request.csr</span><br></pre></td></tr></table></figure>
+<pre><code>   sudo openssl req -new -key server.key -out request.csr</code></pre><p>   执行过程：</p>
+<pre><code>   localhost:ssl yuanpinghua$ sudo openssl req -new -key server.key -out request.csr
+   You are about to be asked to enter information that will be incorporated
+   into your certificate request.
+   What you are about to enter is what is called a Distinguished Name or a DN.
+   There are quite a few fields but you can leave some blank
+   For some fields there will be a default value,
+   If you enter &#39;.&#39;, the field will be left blank.
+   -----
+   Country Name (2 letter code) [AU]:
+   State or Province Name (full name) [Some-State]:
+   Locality Name (eg, city) []:
+   Organization Name (eg, company) [Internet Widgits Pty Ltd]:
+   Organizational Unit Name (eg, section) []:
+   Common Name (e.g. server FQDN or YOUR name) []:
+   Email Address []:
 
-<p>   执行过程：</p>
-   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">localhost:ssl yuanpinghua$ sudo openssl req -new -key server.key -out request.csr</span><br><span class="line">You are about to be asked to enter information that will be incorporated</span><br><span class="line">into your certificate request.</span><br><span class="line">What you are about to enter is what is called a Distinguished Name or a DN.</span><br><span class="line">There are quite a few fields but you can leave some blank</span><br><span class="line">For some fields there will be a default value,</span><br><span class="line">If you enter &apos;.&apos;, the field will be left blank.</span><br><span class="line">-----</span><br><span class="line">Country Name (2 letter code) [AU]:</span><br><span class="line">State or Province Name (full name) [Some-State]:</span><br><span class="line">Locality Name (eg, city) []:</span><br><span class="line">Organization Name (eg, company) [Internet Widgits Pty Ltd]:</span><br><span class="line">Organizational Unit Name (eg, section) []:</span><br><span class="line">Common Name (e.g. server FQDN or YOUR name) []:</span><br><span class="line">Email Address []:</span><br><span class="line"></span><br><span class="line">Please enter the following &apos;extra&apos; attributes</span><br><span class="line">to be sent with your certificate request</span><br><span class="line">A challenge password []:</span><br><span class="line">An optional company name []:</span><br></pre></td></tr></table></figure>
-</li>
+   Please enter the following &#39;extra&#39; attributes
+   to be sent with your certificate request
+   A challenge password []:
+   An optional company name []:</code></pre></li>
 <li><p>生成ssl证书<br> 用上一步生成的文件生成ssl证书</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo openssl x509 -req -days 365 -in request.csr -signkey server.key -out server.crt</span><br></pre></td></tr></table></figure>
-
-<p> 到这里，自签名证书就生成好了，下面就开始配置Apache</p>
+<pre><code> sudo openssl x509 -req -days 365 -in request.csr -signkey server.key -out server.crt</code></pre><p> 到这里，自签名证书就生成好了，下面就开始配置Apache</p>
 <ul>
 <li><p><code>/private/etc/apache2/httpd.conf</code>，编辑这个文件去掉下面三行前面的 ‘#’</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">LoadModule ssl_module libexec/apache2/mod_ssl.so</span><br><span class="line">Include /private/etc/apache2/extra/httpd-ssl.conf</span><br><span class="line">Include/private/etc/apache2/extra/httpd-vhosts.conf</span><br></pre></td></tr></table></figure>
-</li>
+<pre><code> LoadModule ssl_module libexec/apache2/mod_ssl.so
+ Include /private/etc/apache2/extra/httpd-ssl.conf
+ Include/private/etc/apache2/extra/httpd-vhosts.conf</code></pre></li>
 <li><p><code>/private/etc/apache2/extra/httpd-ssl.conf</code>，编辑这个文件去掉下面两行前面的 ‘#’</p>
-<pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SSLCertificateFile &quot;/private/etc/apache2/ssl/server.crt&quot;</span><br><span class="line">SSLCertificateKeyFile &quot;/private/etc/apache2/ssl/server.key&quot;</span><br></pre></td></tr></table></figure></code></pre></li>
+<pre><code> ```          
+ SSLCertificateFile &quot;/private/etc/apache2/ssl/server.crt&quot;
+ SSLCertificateKeyFile &quot;/private/etc/apache2/ssl/server.key&quot;
+ ```</code></pre></li>
 <li><p><code>/private/etc/apache2/extra/httpd-vhosts.conf</code>，编辑这个文件在<code>&#39;NameVirtualHost*:80&#39;</code> 后面添加</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;VirtualHost *:443&gt;</span><br><span class="line">    SSLEngine on</span><br><span class="line">    SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL</span><br><span class="line">    SSLCertificateFile /private/etc/apache2/ssl/server.crt</span><br><span class="line">    SSLCertificateKeyFile /private/etc/apache2/ssl/server.key</span><br><span class="line">    ServerName localhost</span><br><span class="line">    DocumentRoot &quot;/Library/WebServer/Documents&quot;</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
-</li>
+<pre><code> &lt;VirtualHost *:443&gt;
+     SSLEngine on
+     SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL
+     SSLCertificateFile /private/etc/apache2/ssl/server.crt
+     SSLCertificateKeyFile /private/etc/apache2/ssl/server.key
+     ServerName localhost
+     DocumentRoot &quot;/Library/WebServer/Documents&quot;
+ &lt;/VirtualHost&gt;</code></pre></li>
 </ul>
 </li>
 <li><p>复制凭证和密钥到apache2目录下<br>将/private/ect/apache2/ssl中的server.crt,server.key 复制到/private/ect/apache2/下</p>
 </li>
 <li><p>到这里就配置完了，检查配置，没问题的话重启Apache就好了</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apachectl configtest 检查配置</span><br><span class="line">sudo apachectl -k restart 强制重启</span><br></pre></td></tr></table></figure>
-</li>
+<pre><code> sudo apachectl configtest 检查配置
+ sudo apachectl -k restart 强制重启</code></pre></li>
 <li><p>在浏览器中输入：可以正常访问<br><a href="https://localhost/" target="_blank" rel="noopener">https://localhost/</a> , <a href="https://192.168.0.1/" target="_blank" rel="noopener">https://192.168.0.1/</a> ,<a href="http://localhost/" target="_blank" rel="noopener">http://localhost/</a> , <a href="http://192.168.0.106/" target="_blank" rel="noopener">http://192.168.0.106/</a></p>
 </li>
 </ol>
@@ -758,17 +803,12 @@
                     <div class="summary block-with-text">
                         
                             常用操作：
-打开终端，运行启动Apache命令：
-sudo apachectl start
+打开终端，运行启动Apache命令：sudo apachectl start
 
-关闭命令：
-sudo apachectl stop
 
-重启命令
-sudo apachectl restart
-
-查看Apache版本命令
-http
+2. 关闭命令：sudo apachectl stop
+3. 重启命令sudo apachectl restart
+4. 查看Apache版本命令
                         
                     </div>
                     <div class="publish-info">
@@ -908,7 +948,7 @@ http
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

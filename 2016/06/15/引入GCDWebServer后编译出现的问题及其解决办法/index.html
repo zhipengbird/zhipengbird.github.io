@@ -5,7 +5,11 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="引入GCDWebServer后编译出现的问题及其解决办法, 志鹏的技术博客">
-    <meta name="description" content="Undefined symbols for architecture arm64:  &amp;quot;_deflate&amp;quot;, referenced from:      -[GCDWebServerGZipEncoder readDat">
+    <meta name="description" content="Undefined symbols for architecture arm64:
+
+  &amp;quot;_deflate&amp;quot;, referenced from:
+
+      -[GCDWebServerGZipEncoder rea">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -418,9 +422,35 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Undefined symbols for architecture arm64:</span><br><span class="line"></span><br><span class="line">  &quot;_deflate&quot;, referenced from:</span><br><span class="line"></span><br><span class="line">      -[GCDWebServerGZipEncoder readData:] in GCDWebServerResponse.o</span><br><span class="line"></span><br><span class="line">  &quot;_inflate&quot;, referenced from:</span><br><span class="line"></span><br><span class="line">      -[GCDWebServerGZipDecoder writeData:error:] in GCDWebServerRequest.o</span><br><span class="line"></span><br><span class="line">  &quot;_deflateInit2_&quot;, referenced from:</span><br><span class="line"></span><br><span class="line">      -[GCDWebServerGZipEncoder open:] in GCDWebServerResponse.o</span><br><span class="line"></span><br><span class="line">  &quot;_inflateEnd&quot;, referenced from:</span><br><span class="line"></span><br><span class="line">      -[GCDWebServerGZipDecoder close:] in GCDWebServerRequest.o</span><br><span class="line"></span><br><span class="line">  &quot;_inflateInit2_&quot;, referenced from:</span><br><span class="line"></span><br><span class="line">      -[GCDWebServerGZipDecoder open:] in GCDWebServerRequest.o</span><br><span class="line"></span><br><span class="line">  &quot;_deflateEnd&quot;, referenced from:</span><br><span class="line"></span><br><span class="line">      -[GCDWebServerGZipDecoder open:] in GCDWebServerRequest.o</span><br><span class="line"></span><br><span class="line">      -[GCDWebServerGZipEncoder open:] in GCDWebServerResponse.o</span><br><span class="line"></span><br><span class="line">      -[GCDWebServerGZipEncoder close] in GCDWebServerResponse.o</span><br></pre></td></tr></table></figure>
+                <pre><code>Undefined symbols for architecture arm64:
 
-<p>解决办法：</p>
+  &quot;_deflate&quot;, referenced from:
+
+      -[GCDWebServerGZipEncoder readData:] in GCDWebServerResponse.o
+
+  &quot;_inflate&quot;, referenced from:
+
+      -[GCDWebServerGZipDecoder writeData:error:] in GCDWebServerRequest.o
+
+  &quot;_deflateInit2_&quot;, referenced from:
+
+      -[GCDWebServerGZipEncoder open:] in GCDWebServerResponse.o
+
+  &quot;_inflateEnd&quot;, referenced from:
+
+      -[GCDWebServerGZipDecoder close:] in GCDWebServerRequest.o
+
+  &quot;_inflateInit2_&quot;, referenced from:
+
+      -[GCDWebServerGZipDecoder open:] in GCDWebServerRequest.o
+
+  &quot;_deflateEnd&quot;, referenced from:
+
+      -[GCDWebServerGZipDecoder open:] in GCDWebServerRequest.o
+
+      -[GCDWebServerGZipEncoder open:] in GCDWebServerResponse.o
+
+      -[GCDWebServerGZipEncoder close] in GCDWebServerResponse.o</code></pre><p>解决办法：</p>
 <p>在工程中添加 libz.dylib</p>
 
             </div>
@@ -832,7 +862,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

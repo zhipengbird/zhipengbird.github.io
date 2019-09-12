@@ -416,7 +416,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        787
+                        791
                     </div>
                     
 
@@ -443,19 +443,33 @@
 <p>1.什么是const?<br>2.什么是#define?<br>3.有什么用？<br>4.区别是什么？<br>5.应该怎么用？</p>
 </blockquote>
 <a id="more"></a>
-<h1 id="什么是const"><a href="#什么是const" class="headerlink" title="什么是const?"></a>什么是const?</h1><pre><code>const 是c/c++中的一个关键字（修饰符），const一般用来定义一个常量。该常量的值不能修改。</code></pre><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">const</span> <span class="keyword">int</span> var  = <span class="number">100</span>;</span><br><span class="line">  <span class="keyword">int</span> var1 = var;</span><br><span class="line">  <span class="keyword">int</span> var2 = var;</span><br><span class="line">  var = <span class="number">2000</span>;<span class="comment">//这样会报如下错误</span></span><br><span class="line"><span class="comment">//    Cannot assign to variable 'var' with const-qualified type 'const int'</span></span><br></pre></td></tr></table></figure>
-
+<h1 id="什么是const"><a href="#什么是const" class="headerlink" title="什么是const?"></a>什么是const?</h1><pre><code>const 是c/c++中的一个关键字（修饰符），const一般用来定义一个常量。该常量的值不能修改。</code></pre><pre><code class="objc">      const int var  = 100;
+      int var1 = var;
+      int var2 = var;
+      var = 2000;//这样会报如下错误
+    //    Cannot assign to variable &#39;var&#39; with const-qualified type &#39;const int&#39;</code></pre>
 <h1 id="什么是-define"><a href="#什么是-define" class="headerlink" title="什么是#define?"></a>什么是#define?</h1><p>  而define, 宏定义, 则是一条预编译指令, 编译器在编译阶段会将所有使用到宏的地方简单地进行替换</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="meta">#define kconst 1000</span></span><br><span class="line"><span class="keyword">int</span> defvar1 = kconst;</span><br><span class="line"><span class="keyword">int</span> defvar2 = kconst;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> 编译后生成以下代码：</span></span><br><span class="line"><span class="comment"> int defvar1 = 1000;</span></span><br><span class="line"><span class="comment"> int defvar2 = 1000;</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">  #define kconst 1000
+  int defvar1 = kconst;
+  int defvar2 = kconst;
+  /*
+   编译后生成以下代码：
+   int defvar1 = 1000;
+   int defvar2 = 1000;
+   */</code></pre>
 <h1 id="有什么用？"><a href="#有什么用？" class="headerlink" title="有什么用？"></a>有什么用？</h1><ol>
 <li>const和define都可以定义一个常量，都能实现只改值一次，就可以所有用上该常量的地方同步改值，一句代码也都不用改。</li>
 <li>使代码更易维护</li>
 <li>提高代码的效率</li>
 </ol>
 <h1 id="有什么区别？"><a href="#有什么区别？" class="headerlink" title="有什么区别？"></a>有什么区别？</h1><p>  相同点：<br>    * 都能定义常量<br>  不同点:<br>    * const定义常量从汇编的角度来看，只是给出了对应的内存地址，而不是象#define一样给出的是立即数,<br>    所以，const定义的常量在程序运行过程中只有一份拷贝，而#define定义的常量在内存中有若干个拷贝??????????</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">const</span> <span class="keyword">int</span> var  = <span class="number">100</span>;</span><br><span class="line"><span class="meta">#define kconst 1000</span></span><br><span class="line"><span class="keyword">int</span> var1 = var;<span class="comment">//此时为var分配内存，以后不在分配</span></span><br><span class="line"><span class="keyword">int</span> var2 = var;<span class="comment">//不再分配内存</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> defvar1 = kconst;<span class="comment">//编译时进行宏替换，分配内存</span></span><br><span class="line"><span class="keyword">int</span> defvar2 = kconst;<span class="comment">//编译时进行宏替换，再分配内存</span></span><br></pre></td></tr></table></figure>
+<pre><code class="objc">            const int var  = 100;
+           #define kconst 1000
+           int var1 = var;//此时为var分配内存，以后不在分配
+           int var2 = var;//不再分配内存
 
+           int defvar1 = kconst;//编译时进行宏替换，分配内存
+           int defvar2 = kconst;//编译时进行宏替换，再分配内存</code></pre>
 <ul>
 <li>编译器通常不为普通const常量分配存储空间，而是将它们保存在符号表中，这使得它成为一个编译期间的常量没有了存储与读内存的操作，使得它的效率比宏定义要高</li>
 </ul>
@@ -463,11 +477,17 @@
 <p>既然宏定义能做的事const都能做, 那宏还有什么存在的必要么?<br>宏能做到const不能办到的事.<br>  1.宏能定义函数<br>  2.OC的单例模式用到宏<br>  3.宏还能根据传入的参数生成字符串</p>
 </blockquote>
 <h1 id="该怎么用？"><a href="#该怎么用？" class="headerlink" title="该怎么用？"></a>该怎么用？</h1><p>const有条原则，那就是他右边是什么，什么就不可变，如下：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> b = <span class="number">100</span>;<span class="comment">//b 不可变</span></span><br><span class="line"><span class="keyword">int</span>  <span class="keyword">const</span> c = <span class="number">200</span>;<span class="comment">// c 不可变，const和数据类型 位置可换</span></span><br><span class="line"><span class="keyword">int</span> <span class="keyword">const</span> *p1 =&amp;a;<span class="comment">//*p1 不可变，p1 可变</span></span><br><span class="line"><span class="keyword">int</span> * <span class="keyword">const</span> p2 = &amp;a;<span class="comment">//p2 不可变， *p2 可变</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> * <span class="keyword">const</span> p3 = &amp;a;<span class="comment">//p3 不可变，*p3不可变</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">        int a = 2;
+        const int b = 100;//b 不可变
+        int  const c = 200;// c 不可变，const和数据类型 位置可换
+        int const *p1 =&amp;a;//*p1 不可变，p1 可变
+        int * const p2 = &amp;a;//p2 不可变， *p2 可变
+        const int * const p3 = &amp;a;//p3 不可变，*p3不可变</code></pre>
 <p>const 不可变原则：<br>用const修饰的函数形参，则能提高代码的安全性，同时减少程序员之间的沟通成本</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> add(<span class="keyword">const</span> <span class="keyword">int</span> * x,<span class="keyword">const</span> <span class="keyword">int</span> * y)&#123;</span><br><span class="line">    <span class="comment">//不能对x,y进行修改</span></span><br><span class="line">    <span class="keyword">return</span> *x + *y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">int add(const int * x,const int * y){
+    //不能对x,y进行修改
+    return *x + *y;
+}</code></pre>
 <p>宏多用于条件编译，如需要对于不同的情况下执行不同的代码块，则可以使用宏的条件编译来进行判断</p>
 <blockquote>
 <p>在Objective-C中, 随处可见const常量, 所以大家应该大胆地使用const, 它会带给你大大的益处. 同时, 只要某个数据是定义之后永远都不需要也不能修改的, 请使用const!</p>
@@ -771,10 +791,9 @@
                     <div class="summary block-with-text">
                         
                             如何在OC中声明一个block? 作为一个本地变量：
-returnType (^blockName)(parameterTypes) = ^returnType(parameters) &#123;...&#125;;
-
+returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...};
  作为一个属性：
-
+@property (
                         
                     </div>
                     <div class="publish-info">
@@ -922,7 +941,7 @@ returnType (^blockName)(parameterTypes) = ^returnType(parameters) &#123;...&#125
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

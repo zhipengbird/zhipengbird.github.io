@@ -400,7 +400,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        833
+                        851
                     </div>
                     
 
@@ -425,17 +425,29 @@
             <div id="articleContent">
                 <p>今天主要来学习下python的变量赋值方面的知识，及注意事项</p>
 <h3 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h3><h4 id="赋值操作符"><a href="#赋值操作符" class="headerlink" title="赋值操作符"></a>赋值操作符</h4><p>在python语言中，等号（＝）是主要的赋值运算符，其他的是增量赋值运算符。<br><strong><em>注意：赋值并不是直接将一个值赋给一个变量。在python语言中，对象是通过引用传递。在赋值时，不管这个对象是新创建的，还是已存在的变量，都是将该对象的引用（并不是值）赋值给变量。</em></strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">aint = <span class="number">12</span></span><br><span class="line">astring = <span class="string">'yuanph'</span></span><br><span class="line">afloat= <span class="number">-3.141582653</span></span><br><span class="line">aotherString  = <span class="string">'ping'</span>+<span class="string">'hua'</span></span><br><span class="line">alist =[<span class="number">3</span>,<span class="number">1.4</span>,<span class="string">'ufasd'</span>,<span class="number">8.3</span><span class="number">-1.9</span>]</span><br><span class="line">print(aint,astring,afloat,aotherString,alist)</span><br></pre></td></tr></table></figure>
-
+<pre><code class="python">aint = 12
+astring = &#39;yuanph&#39;
+afloat= -3.141582653
+aotherString  = &#39;ping&#39;+&#39;hua&#39;
+alist =[3,1.4,&#39;ufasd&#39;,8.3-1.9]
+print(aint,astring,afloat,aotherString,alist)</code></pre>
 <p>以下的赋值语句是非法的</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=<span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y= (x=x+<span class="number">1</span>)</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span></span><br><span class="line">    y= (x=x+<span class="number">1</span>)</span><br><span class="line">         ^</span><br><span class="line">SyntaxError: invalid syntax</span><br></pre></td></tr></table></figure>
-
+<pre><code class="python">&gt;&gt;&gt; x=1
+&gt;&gt;&gt; y= (x=x+1)
+  File &quot;&lt;stdin&gt;&quot;, line 1
+    y= (x=x+1)
+         ^
+SyntaxError: invalid syntax</code></pre>
 <p>如果你较为熟悉Ｃ的话，赋值语句其实就是当成一个表达式（可以返回值）,上述赋值在Ｃ中是合法的</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> y  = (x=x+<span class="number">1</span>);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\t%d"</span>,x,y);</span><br><span class="line"><span class="comment">//2	2</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="C">int x = 1;
+int y  = (x=x+1);
+printf(&quot;%d\t%d&quot;,x,y);
+//2    2</code></pre>
 <p>如将上述的语句改成链接赋值，那是合法的</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=<span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y = x =x+<span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x,y</span><br><span class="line">(<span class="number">2</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-
+<pre><code class="python">&gt;&gt;&gt; x=1
+&gt;&gt;&gt; y = x =x+1
+&gt;&gt;&gt; x,y
+(2, 2)</code></pre>
 <h4 id="增量赋值"><a href="#增量赋值" class="headerlink" title="增量赋值"></a>增量赋值</h4><p>从python2.0开始，等号可以和一个算述操作符组合在一起，将计算结果重新赋值给左边的变量，这被称为<font style="color:red;">增量赋值</font><br>增量赋值通过使用赋值运行算，将数学运算隐藏在赋值过程中，如果学过其他语言，对下面的增量运算符会比较熟悉：</p>
 <table>
 <thead>
@@ -477,18 +489,28 @@
 <td align="center"></td>
 </tr>
 </tbody></table>
-<h4 id="多重赋值"><a href="#多重赋值" class="headerlink" title="多重赋值"></a>多重赋值</h4> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=y = z= b= <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x,y,z,b</span><br><span class="line">(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
+<h4 id="多重赋值"><a href="#多重赋值" class="headerlink" title="多重赋值"></a>多重赋值</h4><pre><code class="python">&gt;&gt;&gt; x=y = z= b= 1
+&gt;&gt;&gt; x,y,z,b
+(1, 1, 1, 1)</code></pre>
 <p> 上述代码说明：一个值为1的整形对象被创建，该对象的同一个引用被赋值给x,y,z,b.d 在python中可以将多个对象赋给多个变量，请下看下的多元赋值</p>
 <h4 id="多元赋值"><a href="#多元赋值" class="headerlink" title="多元赋值"></a>多元赋值</h4><p>将多个变量同时赋值的方法＝＝＝&gt;多元赋值（非官方术语）<br>采用这种赋值时，等号两边的对象都是元组（一种基本数据类型）</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x,y,z = <span class="number">1</span>,<span class="number">2</span>,<span class="string">'yph'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x,y,z</span><br><span class="line">(<span class="number">1</span>, <span class="number">2</span>, <span class="string">'yph'</span>)</span><br></pre></td></tr></table></figure>
-
+<pre><code class="python">&gt;&gt;&gt; x,y,z = 1,2,&#39;yph&#39;
+&gt;&gt;&gt; x,y,z
+(1, 2, &#39;yph&#39;)</code></pre>
 <p>上述代码中，将两个整型变量和一个字符串对象，分别赋值给x,y,z.通常情况下元组需要用括号括起来，增加可读性（这是可选操作），但推荐使用。<br>我们来看下使用多元赋值来完成两个变量值的交换，先看c的实现</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> y = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">int</span> temp = x;</span><br><span class="line">x = y;</span><br><span class="line">y = temp;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c">int x = 10;
+int y = 100;
+int temp = x;
+x = y;
+y = temp;</code></pre>
 <p>一般情况下我们需要一个中间变量来完成我们的数据交换，接下来我们看下python是如何快速实现这两值的交换的</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x,y= <span class="number">10</span>,<span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x,y</span><br><span class="line">(<span class="number">10</span>, <span class="number">100</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x,y= y,x</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x,y</span><br><span class="line">(<span class="number">100</span>, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-
+<pre><code class="python">&gt;&gt;&gt; x,y= 10,100
+&gt;&gt;&gt; x,y
+(10, 100)
+&gt;&gt;&gt; x,y= y,x
+&gt;&gt;&gt; x,y
+(100, 10)
+</code></pre>
 <p>非常的方便快捷，显然，python在赋值之前已经对x,y的新值做了计算。</p>
 
             </div>
@@ -906,7 +928,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

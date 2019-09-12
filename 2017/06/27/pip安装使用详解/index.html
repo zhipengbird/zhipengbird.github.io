@@ -8,7 +8,7 @@
     <meta name="description" content="本节详细介绍pip的安装以及使用方法
 pip 下载/安装/更新下载
 从python官网下载 pip
-使用工具下载wget &amp;apos;https://pypi.python.org/packages/11/b6/abcb525026a4be">
+使用工具下载wget &amp;#39;https://pypi.python.org/packages/11/b6/abcb525026a4be0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -411,7 +411,7 @@ pip 下载/安装/更新下载
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        388
+                        409
                     </div>
                     
 
@@ -437,35 +437,45 @@ pip 下载/安装/更新下载
                 <p>本节详细介绍pip的安装以及使用方法</p>
 <h1 id="pip-下载-安装-更新"><a href="#pip-下载-安装-更新" class="headerlink" title="pip 下载/安装/更新"></a>pip 下载/安装/更新</h1><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><ul>
 <li>从python官网下载 <a href="https://pypi.python.org/pypi/pip" target="_blank" rel="noopener">pip</a></li>
-<li>使用工具下载<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget &apos;https://pypi.python.org/packages/11/b6/abcb525026a4be042b486df43905d6893fb04f05aac21c32c638e939e447/pip-9.0.1.tar.gz#md5=35f01da33009719497f01a4ba69d63c9&apos;</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>使用工具下载<pre><code>wget &#39;https://pypi.python.org/packages/11/b6/abcb525026a4be042b486df43905d6893fb04f05aac21c32c638e939e447/pip-9.0.1.tar.gz#md5=35f01da33009719497f01a4ba69d63c9&#39;</code></pre><h2 id="pip-安装"><a href="#pip-安装" class="headerlink" title="pip 安装"></a>pip 安装</h2><pre><code>tar -xzvf pip-9.0.1.tar.gz # 解压
+cd pip-9.0.1 # 切换至目录
+sudo python setup.py install   # 安装</code></pre><h2 id="pip-更新"><a href="#pip-更新" class="headerlink" title="pip 更新"></a>pip 更新</h2><pre><code>pip install -U pip</code></pre></li>
 </ul>
-<h2 id="pip-安装"><a href="#pip-安装" class="headerlink" title="pip 安装"></a>pip 安装</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -xzvf pip-9.0.1.tar.gz # 解压</span><br><span class="line">cd pip-9.0.1 # 切换至目录</span><br><span class="line">sudo python setup.py install   # 安装</span><br></pre></td></tr></table></figure>
+<h1 id="pip-使用详解"><a href="#pip-使用详解" class="headerlink" title="pip 使用详解"></a>pip 使用详解</h1><h2 id="pip-安装包"><a href="#pip-安装包" class="headerlink" title="pip 安装包"></a>pip 安装包</h2><pre><code>pip install packagename</code></pre><h2 id="查看已安装的包详情"><a href="#查看已安装的包详情" class="headerlink" title="查看已安装的包详情"></a>查看已安装的包详情</h2><pre><code>pip show  packagename</code></pre>{% asset_img pip_show.png  查看安装包详情 %}
 
-<h2 id="pip-更新"><a href="#pip-更新" class="headerlink" title="pip 更新"></a>pip 更新</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip install -U pip</span><br></pre></td></tr></table></figure>
-
-<h1 id="pip-使用详解"><a href="#pip-使用详解" class="headerlink" title="pip 使用详解"></a>pip 使用详解</h1><h2 id="pip-安装包"><a href="#pip-安装包" class="headerlink" title="pip 安装包"></a>pip 安装包</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip install packagename</span><br></pre></td></tr></table></figure>
-
-<h2 id="查看已安装的包详情"><a href="#查看已安装的包详情" class="headerlink" title="查看已安装的包详情"></a>查看已安装的包详情</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip show  packagename</span><br></pre></td></tr></table></figure>
+<h2 id="pip-列出所有安装的包"><a href="#pip-列出所有安装的包" class="headerlink" title="pip 列出所有安装的包"></a>pip 列出所有安装的包</h2><pre><code>pip list --format=columns</code></pre>
+<h2 id="pip-升级包"><a href="#pip-升级包" class="headerlink" title="pip 升级包"></a>pip 升级包</h2><pre><code>pip install -U  packagename</code></pre><h2 id="pip-卸载包"><a href="#pip-卸载包" class="headerlink" title="pip 卸载包"></a>pip 卸载包</h2><pre><code>pip uninstall packagename</code></pre><h2 id="检查需要更新的包"><a href="#检查需要更新的包" class="headerlink" title="检查需要更新的包"></a>检查需要更新的包</h2><pre><code>pip list --outdate --format=columns</code></pre>{% asset_img pip_outdate.png  查看需要更新安装包列表 %}
 
 
+<h1 id="pip参数解释"><a href="#pip参数解释" class="headerlink" title="pip参数解释"></a>pip参数解释</h1><pre><code> pip --help
 
-<h2 id="pip-列出所有安装的包"><a href="#pip-列出所有安装的包" class="headerlink" title="pip 列出所有安装的包"></a>pip 列出所有安装的包</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip list --format=columns</span><br></pre></td></tr></table></figure>
+Usage:   
+  pip &lt;command&gt; [options]
 
+Commands:
+  install                     安装包.
+  uninstall                   卸载包.
+  freeze                      按着一定格式输出已安装包列表
+  list                        列出已安装包.
+  show                        显示包详细信息.
+  search                      搜索包，类似yum里的search.
+  wheel                       Build wheels from your requirements.
+  zip                         不推荐. Zip individual packages.
+  unzip                       不推荐. Unzip individual packages.
+  bundle                      不推荐. Create pybundles.
+  help                        当前帮助.
 
-<h2 id="pip-升级包"><a href="#pip-升级包" class="headerlink" title="pip 升级包"></a>pip 升级包</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip install -U  packagename</span><br></pre></td></tr></table></figure>
-
-<h2 id="pip-卸载包"><a href="#pip-卸载包" class="headerlink" title="pip 卸载包"></a>pip 卸载包</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip uninstall packagename</span><br></pre></td></tr></table></figure>
-
-<h2 id="检查需要更新的包"><a href="#检查需要更新的包" class="headerlink" title="检查需要更新的包"></a>检查需要更新的包</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip list --outdate --format=columns</span><br></pre></td></tr></table></figure>
-
-
-
-
-<h1 id="pip参数解释"><a href="#pip参数解释" class="headerlink" title="pip参数解释"></a>pip参数解释</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> pip --help</span><br><span class="line"> </span><br><span class="line">Usage:   </span><br><span class="line">  pip &lt;command&gt; [options]</span><br><span class="line"> </span><br><span class="line">Commands:</span><br><span class="line">  install                     安装包.</span><br><span class="line">  uninstall                   卸载包.</span><br><span class="line">  freeze                      按着一定格式输出已安装包列表</span><br><span class="line">  list                        列出已安装包.</span><br><span class="line">  show                        显示包详细信息.</span><br><span class="line">  search                      搜索包，类似yum里的search.</span><br><span class="line">  wheel                       Build wheels from your requirements.</span><br><span class="line">  zip                         不推荐. Zip individual packages.</span><br><span class="line">  unzip                       不推荐. Unzip individual packages.</span><br><span class="line">  bundle                      不推荐. Create pybundles.</span><br><span class="line">  help                        当前帮助.</span><br><span class="line"> </span><br><span class="line">General Options:</span><br><span class="line">  -h, --help                  显示帮助.</span><br><span class="line">  -v, --verbose               更多的输出，最多可以使用3次</span><br><span class="line">  -V, --version               现实版本信息然后退出.</span><br><span class="line">  -q, --quiet                 最少的输出.</span><br><span class="line">  --log-file &lt;path&gt;           覆盖的方式记录verbose错误日志，默认文件：/root/.pip/pip.log</span><br><span class="line">  --log &lt;path&gt;                不覆盖记录verbose输出的日志.</span><br><span class="line">  --proxy &lt;proxy&gt;             Specify a proxy in the form [user:passwd@]proxy.server:port.</span><br><span class="line">  --timeout &lt;sec&gt;             连接超时时间 (默认15秒).</span><br><span class="line">  --exists-action &lt;action&gt;    Default action when a path already exists: (s)witch, (i)gnore, (w)ipe, (b)ackup.</span><br><span class="line">  --cert &lt;path&gt;               证书.</span><br></pre></td></tr></table></figure>
-
-
+General Options:
+  -h, --help                  显示帮助.
+  -v, --verbose               更多的输出，最多可以使用3次
+  -V, --version               现实版本信息然后退出.
+  -q, --quiet                 最少的输出.
+  --log-file &lt;path&gt;           覆盖的方式记录verbose错误日志，默认文件：/root/.pip/pip.log
+  --log &lt;path&gt;                不覆盖记录verbose输出的日志.
+  --proxy &lt;proxy&gt;             Specify a proxy in the form [user:passwd@]proxy.server:port.
+  --timeout &lt;sec&gt;             连接超时时间 (默认15秒).
+  --exists-action &lt;action&gt;    Default action when a path already exists: (s)witch, (i)gnore, (w)ipe, (b)ackup.
+  --cert &lt;path&gt;               证书.</code></pre>
             </div>
             <hr/>
 
@@ -901,7 +911,7 @@ pip 下载/安装/更新下载
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

@@ -434,16 +434,23 @@
 <p>以上方式只有在使用mas 或者系统的约束前提之下生效。</p>
 <p>附：之前使用mas 约束没有想过 left right  与leading  trailing 的区别，最近需要做阿拉伯语才明白只有使用 leading  trailing 的前提下 镜像功能才能生效， 使用 left right 或者 frame的情况下都是指定了具体的方向和坐标位置，因此无法调整。切记！！！<br>2. 针对阿拉伯地区的导航的跳转方向是相反的，从左往右跳转的解决方案</p>
 <ul>
-<li>push时</li>
-<li><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">CATransition</span>* transition = [<span class="built_in">CATransition</span> animation];</span><br><span class="line"></span><br><span class="line">transition.type = kCATransitionPush;<span class="comment">//可更改为其他方式</span></span><br><span class="line"></span><br><span class="line">transition.subtype = kCATransitionFromLeft;<span class="comment">//可更改为其他方式</span></span><br><span class="line"></span><br><span class="line">[<span class="keyword">self</span>.navigationController.view.layer addAnimation:transition forKey:kCATransition];</span><br><span class="line"></span><br><span class="line">[<span class="keyword">self</span>.navigationController pushViewController:target animated:<span class="literal">YES</span>];</span><br></pre></td></tr></table></figure>
-
-
+<li><p>push时</p>
 </li>
-</ul>
-<ul>
-<li><p>pop是与上述一样只需修改方向</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">transition.subtype = kCATransitionFromLeft;<span class="comment">//可更改为其他方式</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">self</span>.navigationController popViewControllerAnimated:<span class="literal">YES</span>];</span><br></pre></td></tr></table></figure>
+<li><pre><code class="objc">
+CATransition* transition = [CATransition animation];
 
+transition.type = kCATransitionPush;//可更改为其他方式
+
+transition.subtype = kCATransitionFromLeft;//可更改为其他方式
+
+[self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
+
+[self.navigationController pushViewController:target animated:YES];</code></pre>
+</li>
+<li><p>pop是与上述一样只需修改方向</p>
+<pre><code class="objc">transition.subtype = kCATransitionFromLeft;//可更改为其他方式
+
+self.navigationController popViewControllerAnimated:YES];</code></pre>
 </li>
 </ul>
 
@@ -868,7 +875,7 @@ UIImagePickerController的代理方法，
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

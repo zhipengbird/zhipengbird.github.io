@@ -7,11 +7,8 @@
     <meta name="keywords" content="安装组件时遇到的一些问题, 志鹏的技术博客">
     <meta name="description" content="
 安装 mpv 终端播放器时遇到的问题brew install mpv
-
-
-
-在终端执行上述命令时遇到如下的提示：
-Error: You must `brew link lua` before mpv can be installedloc">
+在终端执行上述命令时遇到如下的提示：Error: You must `brew link lua` before mpv can be installed
+localh">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -414,7 +411,7 @@ Error: You must `brew link lua` before mpv can be installedloc">
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        159
+                        167
                     </div>
                     
 
@@ -438,22 +435,27 @@ Error: You must `brew link lua` before mpv can be installedloc">
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <ul>
-<li>安装 mpv 终端播放器时遇到的问题<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">brew install mpv</span><br></pre></td></tr></table></figure>
-
+<li>安装 mpv 终端播放器时遇到的问题<pre><code class="sh">brew install mpv</code></pre>
+在终端执行上述命令时遇到如下的提示：<pre><code class="sh">Error: You must `brew link lua` before mpv can be installed
+localhost:~ yuanpinghua$ brew link lua
+Linking /usr/local/Cellar/lua/5.2.4_4...
+Error: Could not symlink bin/lua
+Target /usr/local/bin/lua
+already exists. You may want to remove it:
+rm &#39;/usr/local/bin/lua&#39;
+</code></pre>
 </li>
 </ul>
-<p>在终端执行上述命令时遇到如下的提示：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">Error: You must `brew link lua` before mpv can be installed</span><br><span class="line">localhost:~ yuanpinghua$ brew link lua</span><br><span class="line">Linking /usr/<span class="built_in">local</span>/Cellar/lua/5.2.4_4...</span><br><span class="line">Error: Could not symlink bin/lua</span><br><span class="line">Target /usr/<span class="built_in">local</span>/bin/lua</span><br><span class="line">already exists. You may want to remove it:</span><br><span class="line">  rm <span class="string">'/usr/local/bin/lua'</span></span><br><span class="line"></span><br><span class="line">To force the link and overwrite all conflicting files:</span><br><span class="line">  brew link --overwrite lua</span><br><span class="line"></span><br><span class="line">To list all files that would be deleted:</span><br><span class="line">  brew link --overwrite --dry-run lua</span><br></pre></td></tr></table></figure>
-
-<p>解决方案：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo chown -R $(whoami) /usr/<span class="built_in">local</span>/</span><br><span class="line">brew link lua</span><br></pre></td></tr></table></figure>
-
-<p>执行上述命令会得到如下的提示：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">Linking /usr/<span class="built_in">local</span>/Cellar/lua/5.2.4_4... 55 symlinks created</span><br></pre></td></tr></table></figure>
-
+<p>To force the link and overwrite all conflicting files:<br>  brew link –overwrite lua</p>
+<p>To list all files that would be deleted:<br>  brew link –overwrite –dry-run lua</p>
+<pre><code>
+解决方案：
+```sh
+sudo chown -R $(whoami) /usr/local/
+brew link lua</code></pre><p>执行上述命令会得到如下的提示：</p>
+<pre><code class="sh">Linking /usr/local/Cellar/lua/5.2.4_4... 55 symlinks created</code></pre>
 <p>再次执行:</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">brew install mpv</span><br></pre></td></tr></table></figure>
-
+<pre><code class="sh">brew install mpv </code></pre>
 <p>这时就可以安装成功了</p>
 
             </div>
@@ -738,20 +740,15 @@ Beautiful Soup 是一个可以从HTML或XML文件中提取数据的Python库.它
                     <div class="summary block-with-text">
                         
                             线程相关操作
-获取当前线程的ID
-os.getpid()
+获取当前线程的IDos.getpid()
 
-获取父线程的ID
-os.getppid()
+获取父线程的IDos.getppid()
 
-当前线程的用户ID
-os.getuid()
-
+当前线程的用户IDos.getuid()
 
 
 用户相关操作
 获取当前登录的用户名os.getlogin()
-
 
 
 系统环境相关
@@ -898,7 +895,7 @@ os.getuid()
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

@@ -438,64 +438,160 @@
                 <p>&emsp;&emsp;在开发过程中经常需要列举collection中的元素，在ＯＣ语言中可以有多种方法实现该功能，标准的Ｃ语言循环，OC 1.0的枚举器（ＮSNumerator）,OC 2.0中的快速遍历。在引入块这一特性后，又新增了几种新的遍历方式，采用这几种新方式遍历collection时，可以传入块，而collection中的每个元素都可能会放在块里运行一遍，这样可以大幅度简化编码过程。</p>
 <a id="more"></a>
 <h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><p>&emsp;&emsp;遍边数组的第一种方式就是采用老式的for循环。在作为OC的根基的Ｃ语言中就有了些特征。通常的代码样式：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> traditionalForArray(<span class="built_in">NSArray</span> * array)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.count; i++) &#123;</span><br><span class="line">        <span class="keyword">id</span> object = array[i];</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with object</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">void traditionalForArray(NSArray * array){
 
+    for (int i = 0; i &lt; array.count; i++) {
+        id object = array[i];
+        //TODO::to do something with object
+    }
+}</code></pre>
 <p>&emsp;&emsp;那么遍历字典跟set集合可以会更复杂些：<br>&emsp;&emsp;<em>直接遍历字典的所有值</em></p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> traditionalForDictonary(<span class="built_in">NSDictionary</span> * dict)&#123;</span><br><span class="line">    <span class="built_in">NSArray</span> * allValues = [dict allValues];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; allValues.count; i++) &#123;</span><br><span class="line">        <span class="keyword">id</span> value = allValues[i];</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with value</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">void traditionalForDictonary(NSDictionary * dict){
+    NSArray * allValues = [dict allValues];
+    for (int i = 0 ; i &lt; allValues.count; i++) {
+        id value = allValues[i];
+        //TODO::to do something with value
+    }
+}</code></pre>
 <p>&emsp;&emsp;<em>直接遍历字典的所有键</em></p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> traditionalForDictonary(<span class="built_in">NSDictionary</span> * dict)&#123;</span><br><span class="line">    <span class="built_in">NSArray</span> * allKeys = [dict allKeys];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; allKeys.count; i++) &#123;</span><br><span class="line">        <span class="keyword">id</span> key = allKeys[i];</span><br><span class="line">        <span class="keyword">id</span> value = dict[key];</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with  key and value</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">void traditionalForDictonary(NSDictionary * dict){
+    NSArray * allKeys = [dict allKeys];
+    for (int i = 0 ; i &lt; allKeys.count; i++) {
+        id key = allKeys[i];
+        id value = dict[key];
+        //TODO::to do something with  key and value
+    }
+}</code></pre>
 <p>&emsp;&emsp;<em>遍历set中所有对象</em></p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> traditionalForSet(<span class="built_in">NSSet</span> * set)&#123;</span><br><span class="line">    <span class="built_in">NSArray</span> * allObject = [set allObjects];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; allObject.count; i++) &#123;</span><br><span class="line">        <span class="keyword">id</span> object = allObject[i];</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with object</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">void traditionalForSet(NSSet * set){
+    NSArray * allObject = [set allObjects];
+    for (int i = 0 ; i &lt; allObject.count; i++) {
+        id object = allObject[i];
+        //TODO::to do something with object
+    }
+}</code></pre>
 <p>&emsp;&emsp;根据定义，字典和set都是“无序的（unordered）”所以无法根据特定的下标来获取其中的值，为此，需要先获取字典里所有的键/值或set中所有的对象，在获取到的有序数组里就可以使用for循环获取对应下标的键/值或对象了.但创建这个附加的数组会有额外的开销，而且还会多创建一个数组对象，它会保留collection中的所有以元素对象，在释放数组时这些附加对象也会释放，这些操作看起来有点多余，因为其他方式都可以不用这么做。<br>&emsp;&emsp;for循环可以实现反向遍历，计数器的值从“元素的个数减一”开始，每次迭代时递减直至为0结束。执行反向遍历时，会比其他方式简单。</p>
 <blockquote>
 <p>总结优缺点：<br>优点：被广泛使用，容易接受，操作简单；<br>缺点：遍历字典和set是比较繁琐，会占用比较多的系统资源。</p>
 </blockquote>
 <h3 id="枚举器（NSEnumerator）"><a href="#枚举器（NSEnumerator）" class="headerlink" title="枚举器（NSEnumerator）"></a>枚举器（<code>NSEnumerator</code>）</h3><p>&emsp;&emsp;<code>NSEnumerator</code> 是个抽象基类，其只定义了两个方法，供其具体子类实现:   </p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">nullable</span> ObjectType)nextObject;</span><br><span class="line">- ( <span class="built_in">NSArray</span>&lt;ObjectType&gt; *)allObjects;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">- (nullable ObjectType)nextObject;
+- ( NSArray&lt;ObjectType&gt; *)allObjects;</code></pre>
 <p>&emsp;&emsp;<code>nextObject</code>方法是关键，它返回枚举里的下一个对象，每次调用都会更新内部结构，使得下次调用时能返回下一个对象。枚举里的全部对象返回后，再调用将会返回nil.这表示已经枚举完了。下面是各容器使用Enumerator的样式：<br><em>正向枚举数组</em></p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> enumeratorForArray(<span class="built_in">NSArray</span> * array )&#123;</span><br><span class="line">    <span class="built_in">NSEnumerator</span> * enumerator =[array objectEnumerator];</span><br><span class="line">    <span class="keyword">id</span> object ;</span><br><span class="line">    <span class="keyword">while</span> (( object =  [enumerator nextObject])!= <span class="literal">nil</span>) &#123;</span><br><span class="line">         <span class="comment">//<span class="doctag">TODO:</span>:to do something with object</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">void enumeratorForArray(NSArray * array ){
+    NSEnumerator * enumerator =[array objectEnumerator];
+    id object ;
+    while (( object =  [enumerator nextObject])!= nil) {
+         //TODO::to do something with object
+    }
+}</code></pre>
 <p><em>逆向枚举数组</em></p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> enumeratorForReverseArray(<span class="built_in">NSArray</span> * array )&#123;</span><br><span class="line">    <span class="built_in">NSEnumerator</span> * enumerator =[array reverseObjectEnumerator];</span><br><span class="line">    <span class="keyword">id</span> object ;</span><br><span class="line">    <span class="keyword">while</span> (( object =  [enumerator nextObject])!= <span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with object</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">void enumeratorForReverseArray(NSArray * array ){
+    NSEnumerator * enumerator =[array reverseObjectEnumerator];
+    id object ;
+    while (( object =  [enumerator nextObject])!= nil) {
+        //TODO::to do something with object
+    }
+}</code></pre>
 <p><em>使用key枚举字典</em></p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> enumeratorForDictionaryAllKeys(<span class="built_in">NSDictionary</span> * dict)&#123;</span><br><span class="line">    <span class="built_in">NSEnumerator</span> * keyEnumerator = [dict keyEnumerator];</span><br><span class="line">    <span class="keyword">id</span> key ;</span><br><span class="line">    <span class="keyword">while</span> ((key = [keyEnumerator nextObject])!=<span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="keyword">id</span> value = dict[key];</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with value</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">void enumeratorForDictionaryAllKeys(NSDictionary * dict){
+    NSEnumerator * keyEnumerator = [dict keyEnumerator];
+    id key ;
+    while ((key = [keyEnumerator nextObject])!=nil) {
+        id value = dict[key];
+        //TODO::to do something with value
+    }
+}</code></pre>
 <p><em>使用value 枚举字典</em></p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> enumeratorForDictionaryAllValues(<span class="built_in">NSDictionary</span> * dict)&#123;</span><br><span class="line">    <span class="built_in">NSEnumerator</span> * valueEnumerator = [dict objectEnumerator];</span><br><span class="line">    <span class="keyword">id</span> value ;</span><br><span class="line">    <span class="keyword">while</span> ((value = [valueEnumerator nextObject])!=<span class="literal">nil</span>) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with value</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">void enumeratorForDictionaryAllValues(NSDictionary * dict){
+    NSEnumerator * valueEnumerator = [dict objectEnumerator];
+    id value ;
+    while ((value = [valueEnumerator nextObject])!=nil) {
 
+        //TODO::to do something with value
+    }
+}</code></pre>
 <p><em>枚举set集合</em></p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> enumeratorForSet(<span class="built_in">NSSet</span> * set)&#123;</span><br><span class="line">    <span class="built_in">NSEnumerator</span> * objectEnumerator = [set objectEnumerator];</span><br><span class="line">    <span class="keyword">id</span> object;</span><br><span class="line">    <span class="keyword">while</span> ((object = [objectEnumerator nextObject])!= <span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with object</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">void enumeratorForSet(NSSet * set){
+    NSEnumerator * objectEnumerator = [set objectEnumerator];
+    id object;
+    while ((object = [objectEnumerator nextObject])!= nil) {
+        //TODO::to do something with object
+    }
+}
+</code></pre>
 <p>枚举的写法跟标准的for循环相似，但代码多了一点，其优势在于：不论遍历哪种collection，都可以采用这种相似的语法。</p>
 <blockquote>
 <p>总结优缺点：<br>优点：代码更易读，不需要定义额外的数组；<br>缺点：<br>    1. 无法直接获取遍历操作的下标，需要另外声明变量记录；<br>    2. 需要自行创建NSEnumerator对象，稍显麻烦。</p>
 </blockquote>
 <h3 id="快速遍历-forin"><a href="#快速遍历-forin" class="headerlink" title="快速遍历 (forin)"></a>快速遍历 (forin)</h3><p>字典</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> forinDic(<span class="built_in">NSDictionary</span> * dict)&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">id</span> key <span class="keyword">in</span> dict) &#123;</span><br><span class="line">        <span class="keyword">id</span> value = dict[key];</span><br><span class="line">         <span class="comment">//<span class="doctag">TODO:</span>:to do something with key &amp;&amp; value</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">void forinDic(NSDictionary * dict){
+    for (id key in dict) {
+        id value = dict[key];
+         //TODO::to do something with key &amp;&amp; value
+    }
+}</code></pre>
 <p>数组</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> forinArray(<span class="built_in">NSArray</span> * array)&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">id</span> object <span class="keyword">in</span> array) &#123;</span><br><span class="line">       <span class="comment">//<span class="doctag">TODO:</span>:to do something with object</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">void forinArray(NSArray * array){
+    for (id object in array) {
+       //TODO::to do something with object
+    }
+}</code></pre>
 <p>SET集合</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> forinSet(<span class="built_in">NSSet</span> * set)&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">id</span> object <span class="keyword">in</span> set) &#123;</span><br><span class="line">         <span class="comment">//<span class="doctag">TODO:</span>:to do something with object</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">void forinSet(NSSet * set){
+    for (id object in set) {
+         //TODO::to do something with object
+    }
+}</code></pre>
 <blockquote>
 <p>forin小结：<br>优点：<br>  语法简洁，使用方便，效率高；<br>缺点：<br>    1. 无法方便获取当前遍历的下标；<br>    2. 无法在遍历过程中修改被遍历的collection，否则会导致崩溃。</p>
 </blockquote>
 <h3 id="块方法（block）"><a href="#块方法（block）" class="headerlink" title="块方法（block）"></a>块方法（block）</h3><p>数组</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> blockEnumeratorArray(<span class="built_in">NSArray</span> * array)&#123;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark － 对数组整个区间进行遍历</span></span><br><span class="line">    [array enumerateObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with object  &amp; index  &amp; stop</span></span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:可以增删除改？？</span></span><br><span class="line">    &#125;];</span><br><span class="line"></span><br><span class="line"><span class="comment">//    typedef NS_OPTIONS(NSUInteger, NSEnumerationOptions) &#123;</span></span><br><span class="line"><span class="comment">//        NSEnumerationConcurrent = (1UL &lt;&lt; 0),并发</span></span><br><span class="line"><span class="comment">//        NSEnumerationReverse = (1UL &lt;&lt; 1),逆序</span></span><br><span class="line"><span class="comment">//    &#125;;</span></span><br><span class="line"><span class="meta">#pragma mark - 对数组进行遍历，可设置遍历顺序，并发或反序</span></span><br><span class="line">    [array enumerateObjectsWithOptions:<span class="built_in">NSEnumerationConcurrent</span> usingBlock:^(<span class="keyword">id</span>  _Nonnull obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with object  &amp; index  &amp; stop</span></span><br><span class="line">    &#125;];</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark － 对数组的某个区间进行遍历操作</span></span><br><span class="line">    <span class="built_in">NSIndexSet</span> * indexset  =[<span class="built_in">NSIndexSet</span> indexSetWithIndexesInRange:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, array.count)];</span><br><span class="line">    [array enumerateObjectsAtIndexes:indexset options:<span class="built_in">NSEnumerationReverse</span> usingBlock:^(<span class="keyword">id</span>  _Nonnull obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with object  &amp; index  &amp; stop</span></span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">void blockEnumeratorArray(NSArray * array){
 
+#pragma mark － 对数组整个区间进行遍历
+    [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        //TODO::to do something with object  &amp; index  &amp; stop
+        //TODO::可以增删除改？？
+    }];
+
+//    typedef NS_OPTIONS(NSUInteger, NSEnumerationOptions) {
+//        NSEnumerationConcurrent = (1UL &lt;&lt; 0),并发
+//        NSEnumerationReverse = (1UL &lt;&lt; 1),逆序
+//    };
+#pragma mark - 对数组进行遍历，可设置遍历顺序，并发或反序
+    [array enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        //TODO::to do something with object  &amp; index  &amp; stop
+    }];
+
+#pragma mark － 对数组的某个区间进行遍历操作
+    NSIndexSet * indexset  =[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, array.count)];
+    [array enumerateObjectsAtIndexes:indexset options:NSEnumerationReverse usingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        //TODO::to do something with object  &amp; index  &amp; stop
+    }];
+}</code></pre>
 <p>字典</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> blockEnumeratorDict(<span class="built_in">NSDictionary</span> *dict)&#123;</span><br><span class="line"></span><br><span class="line">    [dict enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull key, <span class="keyword">id</span>  _Nonnull obj, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with object  &amp; key  &amp; stop</span></span><br><span class="line"></span><br><span class="line">    &#125;];</span><br><span class="line"><span class="meta">#pragma mark  设置遍历顺序方式（正序或逆序)</span></span><br><span class="line">    [dict enumerateKeysAndObjectsWithOptions:<span class="built_in">NSEnumerationReverse</span> usingBlock:^(<span class="keyword">id</span>  _Nonnull key, <span class="keyword">id</span>  _Nonnull obj, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>:to do something with object  &amp; key  &amp; stop</span></span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">void blockEnumeratorDict(NSDictionary *dict){
 
+    [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        //TODO::to do something with object  &amp; key  &amp; stop
+
+    }];
+#pragma mark  设置遍历顺序方式（正序或逆序)
+    [dict enumerateKeysAndObjectsWithOptions:NSEnumerationReverse usingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        //TODO::to do something with object  &amp; key  &amp; stop
+    }];
+}</code></pre>
 <p>SET集合</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> blockEnumeratorSet(<span class="built_in">NSSet</span> * set)&#123;</span><br><span class="line">    [set enumerateObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull obj, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">         <span class="comment">//<span class="doctag">TODO:</span>:to do something with object    &amp; stop</span></span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="meta">#pragma mark  设置遍历顺序方式（正序或逆序)</span></span><br><span class="line">    [set enumerateObjectsWithOptions:<span class="built_in">NSEnumerationReverse</span> usingBlock:^(<span class="keyword">id</span>  _Nonnull obj, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">         <span class="comment">//<span class="doctag">TODO:</span>:to do something with object    &amp; stop</span></span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">void blockEnumeratorSet(NSSet * set){
+    [set enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
+         //TODO::to do something with object    &amp; stop
+    }];
+    #pragma mark  设置遍历顺序方式（正序或逆序)
+    [set enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
+         //TODO::to do something with object    &amp; stop
+    }];
+}</code></pre>
 <p><strong>若提前知道遍历的集合含有何种对象，则应修改块签名，指出对象的具体类型。</strong></p>
 <blockquote>
 <p>小结：<br>优点：</p>
@@ -939,7 +1035,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

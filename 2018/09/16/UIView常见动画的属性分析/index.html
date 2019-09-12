@@ -405,7 +405,7 @@ UIView常见动画的属性分析UIView常见的属性有哪些？
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        661
+                        650
                     </div>
                     
 
@@ -438,28 +438,68 @@ UIView常见动画的属性分析UIView常见的属性有哪些？
 <ul>
 <li>swift版</li>
 </ul>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">struct</span> <span class="title">CGRect</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> origin: <span class="type">CGPoint</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> size: <span class="type">CGSize</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">init</span>()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">init</span>(origin: <span class="type">CGPoint</span>, size: <span class="type">CGSize</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="swift">public struct CGRect {
 
+    public var origin: CGPoint
+
+    public var size: CGSize
+
+    public init()
+
+    public init(origin: CGPoint, size: CGSize)
+}</code></pre>
 <ul>
 <li>OC版</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/* Rectangles. */</span><br><span class="line"></span><br><span class="line">struct CGRect &#123;</span><br><span class="line">    CGPoint origin;</span><br><span class="line">    CGSize size;</span><br><span class="line">&#125;;</span><br><span class="line">typedef struct CG_BOXABLE CGRect CGRect;</span><br></pre></td></tr></table></figure>
+<pre><code class="Objective-c">/* Rectangles. */
 
+struct CGRect {
+    CGPoint origin;
+    CGSize size;
+};
+typedef struct CG_BOXABLE CGRect CGRect;</code></pre>
 <p>再来看三者的数据类型。<code>frame</code>是<code>CGRect</code>类型，它是一个结构体，在结构体中包含<code>origin</code>,<code>size</code>两个属性，其中<code>origin</code>描述UIView的<code>x</code>,<code>y</code>坐标起点位置信息。<code>size</code>描述UIView的<code>width</code>、<code>height</code>宽高信息，我们再来看看<code>origin</code>的<code>CGPoint</code>和<code>size</code>的<code>CGSize</code> 又是什么？</p>
 <ul>
 <li>swift版</li>
 </ul>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* Points. */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">struct</span> <span class="title">CGPoint</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> x: <span class="type">CGFloat</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> y: <span class="type">CGFloat</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">init</span>()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">init</span>(x: <span class="type">CGFloat</span>, y: <span class="type">CGFloat</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="swift">/* Points. */
+public struct CGPoint {
+    public var x: CGFloat
 
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* Sizes. */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">struct</span> <span class="title">CGSize</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> width: <span class="type">CGFloat</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> height: <span class="type">CGFloat</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">init</span>()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">init</span>(width: <span class="type">CGFloat</span>, height: <span class="type">CGFloat</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    public var y: CGFloat
 
+    public init()
+
+    public init(x: CGFloat, y: CGFloat)
+}</code></pre>
+<pre><code class="swift">/* Sizes. */
+
+public struct CGSize {
+
+    public var width: CGFloat
+
+    public var height: CGFloat
+
+    public init()
+
+    public init(width: CGFloat, height: CGFloat)
+}</code></pre>
 <ul>
 <li>OC版</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/* Points. */</span><br><span class="line">struct</span><br><span class="line">CGPoint &#123;</span><br><span class="line">    CGFloat x;</span><br><span class="line">    CGFloat y;</span><br><span class="line">&#125;;</span><br><span class="line">typedef struct CG_BOXABLE CGPoint CGPoint;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/* Sizes. */</span><br><span class="line">struct CGSize &#123;</span><br><span class="line">    CGFloat width;</span><br><span class="line">    CGFloat height;</span><br><span class="line">&#125;;</span><br><span class="line">typedef struct CG_BOXABLE CGSize CGSize;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objective-c">/* Points. */
+struct
+CGPoint {
+    CGFloat x;
+    CGFloat y;
+};
+typedef struct CG_BOXABLE CGPoint CGPoint;</code></pre>
+<pre><code class="objective-c">/* Sizes. */
+struct CGSize {
+    CGFloat width;
+    CGFloat height;
+};
+typedef struct CG_BOXABLE CGSize CGSize;</code></pre>
 <p><code>CGPoint</code>中包含了<code>UIView</code>的<code>x</code>,<code>y</code>坐标，而<code>CGSize</code>中包含了<code>UIView</code>的<code>widt</code>,<code>height</code>信息。通过对<code>frame</code>中的数据类型进行追本溯源，可以得到以下结论：</p>
 <blockquote>
 <p><code>CGRecct</code>分别对应<code>x</code>坐标，<code>y</code>坐标、<code>width</code>、<code>height</code>四个属性，这四个属性表明当前UI在它的父视图上的位置<br>可能通过<code>x</code>,<code>y</code>坐标修改<code>UIView</code>的移动位置，还可以修改<code>width</code>,<code>height</code>来修改<code>UIView</code>的拉伸、收缩效果，对于<code>bounds</code>属性使用最多的还是<code>width</code>,<code>height</code>属必，<code>center</code>则经常使用<code>x</code>,<code>y</code>坐标属性。</p>
@@ -707,7 +747,15 @@ UIView常见动画的属性分析UIView常见的属性有哪些？
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            显示层初级动画属性预览extension UIView &#123;    open var frame: CGRect    open var bounds: CGRect    open var center: CGPoint    
+                            显示层初级动画属性预览extension UIView {
+
+    open var frame: CGRect
+
+    open var bounds: CGRect
+
+    open var center: CGPoint
+
+ 
                         
                     </div>
                     <div class="publish-info">
@@ -893,7 +941,7 @@ UIView常见动画的属性分析UIView常见的属性有哪些？
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

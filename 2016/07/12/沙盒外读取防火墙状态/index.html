@@ -396,7 +396,7 @@ NSDictio">
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        79
+                        83
                     </div>
                     
 
@@ -420,8 +420,13 @@ NSDictio">
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>读取沙盒外的防火墙状态信息 默认是读取该路径下的文件<code>Library/Preferences/com.apple.alf.plist</code>中的<code>globalstate</code>字段的值 ，<code>0</code>–&gt;<code>off</code>, <code>1</code>–&gt;<code>ON</code><br><strong><em>在沙盒内读取不了</em></strong></p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSDictionary</span>* dictionary = [<span class="built_in">NSDictionary</span> dictionaryWithContentsOfFile:<span class="string">@"/Library/Preferences/com.apple.alf.plist"</span>];</span><br><span class="line">       <span class="keyword">int</span> status = [[dictionary valueForKey:<span class="string">@"globalstate"</span>] intValue];</span><br><span class="line">      <span class="keyword">if</span> (status==<span class="number">0</span>) &#123;</span><br><span class="line">          <span class="built_in">NSLog</span>(<span class="string">@"close"</span>);</span><br><span class="line">      &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">           <span class="built_in">NSLog</span>(<span class="string">@"open"</span>);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">NSDictionary* dictionary = [NSDictionary dictionaryWithContentsOfFile:@&quot;/Library/Preferences/com.apple.alf.plist&quot;];
+       int status = [[dictionary valueForKey:@&quot;globalstate&quot;] intValue];
+      if (status==0) {
+          NSLog(@&quot;close&quot;);
+      }else{
+           NSLog(@&quot;open&quot;);
+      }</code></pre>
 
             </div>
             <hr/>
@@ -703,7 +708,7 @@ NSDictio">
                     <div class="summary block-with-text">
                         
                             在项目多语言包xx.lproj里引入一个叫InfoPlist.strings的文件，可以对同一个App在不同系统语方中显示不同的Display Name 如：
-InfoPlist.strings (English) - "CFBundleD
+InfoPlist.strings (English) - &quot;CFBu
                         
                     </div>
                     <div class="publish-info">
@@ -835,7 +840,7 @@ InfoPlist.strings (English) - "CFBundleD
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

@@ -408,7 +408,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        715
+                        725
                     </div>
                     
 
@@ -433,20 +433,31 @@
             <div id="articleContent">
                 <p><strong>将对象指针存入属性文件</strong><br>因项目需要上一补丁，需求如下：<br>在SDWebImageDownloaderOperation类中的connectionDidFinishLoading函数里发现一些崩溃的迹象，其中一些迹象表明可能是下载的网络图片达大，而导至生成image对象时崩溃，现想要知到是哪里链接下的图片导致这些问题。初步的解决方案为在方法开头将url保存至userdefault中，并在函数尾部将这个url移除。再下次再次调用这个函数时，先检查是否有存在的url,有则说明发生了崩溃，因此将这个url上传上来。这里隐藏着一些问题，如这个涵数可能在多个线程里调用，如果用这个对象的url绑定一个userdefault中的一个key，那么这值会不断被覆盖，没有起到任何作用，因此我们需要做个map来存储NSURLConnection对象及相应的url,那么问题题来了，谁来做map的key值，用NSURLConnection对象指针来做吧，我们最先想到的是用指针对象NSNumber,最初代码会像下面一样：  </p>
 <a id="more"></a>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSUserDefaults</span> * defaults =[<span class="built_in">NSUserDefaults</span> standardUserDefaults];</span><br><span class="line"><span class="built_in">NSMutableDictionary</span> * dict = [<span class="built_in">NSMutableDictionary</span> dictionary];</span><br><span class="line">[dict setObject:[<span class="built_in">NSNumber</span> valueWithPointer:(__bridge <span class="keyword">const</span> <span class="keyword">void</span> * _Nullable)(aConnection)] forKey:aConnection.currentRequest.URL.absoluteString];</span><br><span class="line">[defaults setObject:dict forKey:<span class="string">@"URL"</span>];</span><br><span class="line">[defaults synchronize];</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc"> NSUserDefaults * defaults =[NSUserDefaults standardUserDefaults];
+ NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+ [dict setObject:[NSNumber valueWithPointer:(__bridge const void * _Nullable)(aConnection)] forKey:aConnection.currentRequest.URL.absoluteString];
+ [defaults setObject:dict forKey:@&quot;URL&quot;];
+ [defaults synchronize];</code></pre>
 <p>代码看起来行完美，运行来看下结果吧</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">Attempt to set a non-property-list object &#123;</span><br><span class="line">    <span class="string">"http://i7.ushareit.com/feed/xgeitCrB.png"</span> = <span class="string">"&lt;10f3541a&gt;"</span>;</span><br><span class="line">&#125; as an <span class="built_in">NSUserDefaults</span>/<span class="built_in">CFPreferences</span> value <span class="keyword">for</span> key URL</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">Attempt to set a non-property-list object {
+    &quot;http://i7.ushareit.com/feed/xgeitCrB.png&quot; = &quot;&lt;10f3541a&gt;&quot;;
+} as an NSUserDefaults/CFPreferences value for key URL</code></pre>
 <p>我们得到了如上的一个提示，并且界面处理卡住状态。这个提示已经很明了了， 它说这是一个非序列化对象，不能存入userdefault中，从中我们可以得到另外的一些信息，用NSNumber去装一个非序列化的指针对象，得到的还是一个非序列化的NSValue对象，我们知道在序列化中，只能对字典或数组中特定的序列化对象进行序列化，其他非序列化对象不能完成这操作。那这样不能实现需要，那就将其地址转成字符串，并做为key,这应该可以吧。</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSUserDefaults</span> * defaults =[<span class="built_in">NSUserDefaults</span> standardUserDefaults];</span><br><span class="line">   <span class="built_in">NSMutableDictionary</span> *dict = [<span class="built_in">NSMutableDictionary</span> dictionary];</span><br><span class="line">   [dict setObject:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%p"</span>,aConnection] forKey:aConnection.currentRequest.URL.absoluteString];</span><br><span class="line">   [defaults setObject:dict forKey:<span class="string">@"URL"</span>];</span><br><span class="line">   [defaults synchronize];</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">NSUserDefaults * defaults =[NSUserDefaults standardUserDefaults];
+   NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+   [dict setObject:[NSString stringWithFormat:@&quot;%p&quot;,aConnection] forKey:aConnection.currentRequest.URL.absoluteString];
+   [defaults setObject:dict forKey:@&quot;URL&quot;];
+   [defaults synchronize];</code></pre>
 <p>字典里的值是这样的</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"http://i7.ushareit.com/feed/xgeitCrB.png"</span> = <span class="number">0x1a98db60</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">{
+    &quot;http://i7.ushareit.com/feed/xgeitCrB.png&quot; = 0x1a98db60;
+}</code></pre>
 <p>运行结果很完美，实现了我们的需求，但是，我们要写的是补丁啊，NSString 在jspatch中不能使用stringWithFormat方法，对NSURLConnection这个类扫了一遍发现有使用它的description可以满足我们的需要。</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSUserDefaults</span> * defaults =[<span class="built_in">NSUserDefaults</span> standardUserDefaults];</span><br><span class="line"><span class="built_in">NSMutableDictionary</span> *dict = [<span class="built_in">NSMutableDictionary</span> dictionary];</span><br><span class="line">[dict setObject:[aConnection description] forKey:aConnection.currentRequest.URL.absoluteString];</span><br><span class="line">[defaults setObject:dict forKey:<span class="string">@"URL"</span>];</span><br><span class="line">[defaults synchronize];</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">   NSUserDefaults * defaults =[NSUserDefaults standardUserDefaults];
+   NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+   [dict setObject:[aConnection description] forKey:aConnection.currentRequest.URL.absoluteString];
+   [defaults setObject:dict forKey:@&quot;URL&quot;];
+   [defaults synchronize];</code></pre>
 <p>这就是我们最终需要的代码，只要把这些翻译成js代码就大功告成了！<br><strong>ps:非序列化对象装在各容器集合中也不能写入文件和userdefault中</strong></p>
 
             </div>
@@ -886,7 +897,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

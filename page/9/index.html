@@ -296,26 +296,28 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="../../2016/11/17/UIImagePickerController/">
+                    <a href="../../2016/12/20/常用小技巧/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="UIImagePickerController">
+                            <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="iOS常用小技巧">
                             
-                            <span class="card-title">UIImagePickerController</span>
+                            <span class="card-title">iOS常用小技巧</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                创建对象
-//去相册选择图片 UIImagePickerController * pickerController =[[UIImagePickerController alloc]init]; pickerController.media
+                                
+去除字符串首尾空格//可以指定字符集
+[text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+常用字符集：@property (rea
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-11-17
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-12-20
                             </span>
                             <span class="publish-author">
                                 
@@ -330,6 +332,113 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         </div>
                     </div>
 
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="../../tags/iOS/" target="_blank">
+                            <span class="chip bg-color">iOS</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="../../2016/11/22/UITextField/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="UITextField">
+                            
+                            <span class="card-title">UITextField</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                思路：使用runtime 获取textfiled的所有属性
+//获取类的所有属性
+unsigned int count = 0;
+Ivar *ivarList = class_copyIvarList([UITextField class]
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-11-22
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-user fa-fw"></i>
+                                志鹏
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="../../tags/UITextField/" target="_blank">
+                            <span class="chip bg-color">UITextField</span>
+                        </a>
+                        
+                        <a href="../../tags/UI/" target="_blank">
+                            <span class="chip bg-color">UI</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="../../2016/11/19/English-Level2-UNIT6/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="English-UNIT6">
+                            
+                            <span class="card-title">English-UNIT6</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                #
+谈论天气、季节和温度描述一个地方的天气和气候有多种方法。
+
+你可以描述天气和温度。
+It&#39;s often wendy.    常常刮风。
+It&#39;s so cold and cloudy.    天很阴，又很冷。
+It g
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-11-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-user fa-fw"></i>
+                                志鹏
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="../../tags/English/" target="_blank">
+                            <span class="chip bg-color">English</span>
+                        </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -388,6 +497,48 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="../../2016/11/17/UIImagePickerController/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="UIImagePickerController">
+                            
+                            <span class="card-title">UIImagePickerController</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                创建对象
+//去相册选择图片
+ UIImagePickerController * pickerController =[[UIImagePickerController alloc]init];
+ pickerController.med
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-11-17
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="../../categories/iOS/" class="post-category" target="_blank">
+                                    iOS
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="../../2016/11/04/Tableview/">
                         <div class="card-image">
                             
@@ -402,7 +553,8 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="summary block-with-text">
                             
                                 UITableViewCell学习选中状态颜色设置
-系统自带的效果：  typedef NS_ENUM(NSInteger, UITableViewCellSelectionStyle) &#123;    UITableViewCellS
+系统自带的效果：typedef NS_ENUM(NSInteger, UITableViewCellSelectionStyle) {
+UITableViewCellSelectionSt
                             
                         </div>
                         <div class="publish-info">
@@ -639,160 +791,6 @@ marriage
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="../../2016/10/01/XML-学习-第三天/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="XML 学习 第三天">
-                            
-                            <span class="card-title">XML 学习 第三天</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                今天要学习的XML的验证，验证器及流览器 ,初略DOM
-
-XML 验证
-拥有正确语法的 XML 被称为“形式良好”的 XML.  通过 DTD 验证的 XML 是“合法”的 XML.
-
-形式良好的 XML 文档  “形式良好”或“结构良好”
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-10-01
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="../../categories/XML/" class="post-category" target="_blank">
-                                    XML
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="../../tags/XML/" target="_blank">
-                            <span class="chip bg-color">XML</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="../../2016/10/01/XML-学习-第二天/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="XML 学习 第二天 ">
-                            
-                            <span class="card-title">XML 学习 第二天 </span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                今天我们主要学习XML的语法规,元素，属性
-
-XML语法规则
-所有XML元素都必须有关闭标签&emsp;在hmtl中经常会看到没有关闭标签的元素&lt;p&gt;This is a paragraph&lt;p&gt;This is a a
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-10-01
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="../../categories/XML/" class="post-category" target="_blank">
-                                    XML
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="../../tags/XML/" target="_blank">
-                            <span class="chip bg-color">XML</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="../../2016/09/30/XML-学习-第一天/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="XML 学习 第一天">
-                            
-                            <span class="card-title">XML 学习 第一天</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                今天主要学习下XML的基础概念，以及XML可以用在哪些地方，以及XML是一种怎样的结构。
-
-XML简介什么是 XML?
-XML是可扩展标记语言(EXtensible Markup Language)
-XML是一种标记语言，很类似HTML
-X
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-09-30
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="../../categories/XML/" class="post-category" target="_blank">
-                                    XML
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="../../tags/XML/" target="_blank">
-                            <span class="chip bg-color">XML</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
         </div>
     </article>
 
@@ -810,7 +808,7 @@ X
             
         </div>
         <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">9 / 14</div>
+            <div class="center-align b-text-gray">9 / 15</div>
         </div>
         <div class="col s6 m4 l4">
             
@@ -834,7 +832,7 @@ X
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

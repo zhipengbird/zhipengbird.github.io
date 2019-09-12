@@ -408,7 +408,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        958
+                        931
                     </div>
                     
 
@@ -455,32 +455,83 @@
 </ul>
 </li>
 </ul>
-<h1 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h1><figure class="highlight objc"><figcaption><span>创建索引</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建一个空的索引集合。</span></span><br><span class="line">+ (<span class="keyword">instancetype</span>)indexSet;</span><br><span class="line"><span class="comment">//创建一个索引集合，根据索引值</span></span><br><span class="line">+ (<span class="keyword">instancetype</span>)indexSetWithIndex:(<span class="built_in">NSUInteger</span>)value;</span><br><span class="line"><span class="comment">//创建一个索引集合，根据一个NSRange对象</span></span><br><span class="line">+ (<span class="keyword">instancetype</span>)indexSetWithIndexesInRange:(<span class="built_in">NSRange</span>)range;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建一个索引集合，根据一个NSRange对象</span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithIndexesInRange:(<span class="built_in">NSRange</span>)range <span class="built_in">NS_DESIGNATED_INITIALIZER</span>;</span><br><span class="line"><span class="comment">//用一个已有集合创建一个新的集合</span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithIndexSet:(<span class="built_in">NSIndexSet</span> *)indexSet <span class="built_in">NS_DESIGNATED_INITIALIZER</span>;</span><br><span class="line"><span class="comment">//根据索引值创建一个索引集合</span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithIndex:(<span class="built_in">NSUInteger</span>)value;</span><br></pre></td></tr></table></figure>
+<h1 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h1><pre><code>&#x2F;&#x2F;创建一个空的索引集合。
++ (instancetype)indexSet;
+&#x2F;&#x2F;创建一个索引集合，根据索引值
++ (instancetype)indexSetWithIndex:(NSUInteger)value;
+&#x2F;&#x2F;创建一个索引集合，根据一个NSRange对象
++ (instancetype)indexSetWithIndexesInRange:(NSRange)range;
 
-<h1 id="查询索引"><a href="#查询索引" class="headerlink" title="查询索引"></a>查询索引</h1><figure class="highlight objc"><figcaption><span>包含索引</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">// ndicates whether the index set contains a specific index.</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)containsIndex:(<span class="built_in">NSUInteger</span>)value;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Indicates whether the receiving index set contains a superset of the indexes in another index set.</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)containsIndexes:(<span class="built_in">NSIndexSet</span> *)indexSet;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Indicates whether the index set contains the indexes represented by an index range.</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)containsIndexesInRange:(<span class="built_in">NSRange</span>)range;</span><br><span class="line"></span><br><span class="line"><span class="comment">//判断集合中的索引是否有一个或多个在Range中</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)intersectsIndexesInRange:(<span class="built_in">NSRange</span>)range;</span><br></pre></td></tr></table></figure>
+&#x2F;&#x2F;创建一个索引集合，根据一个NSRange对象
+- (instancetype)initWithIndexesInRange:(NSRange)range NS_DESIGNATED_INITIALIZER;
+&#x2F;&#x2F;用一个已有集合创建一个新的集合
+- (instancetype)initWithIndexSet:(NSIndexSet *)indexSet NS_DESIGNATED_INITIALIZER;
+&#x2F;&#x2F;根据索引值创建一个索引集合
+- (instancetype)initWithIndex:(NSUInteger)value;</code></pre>
 
-<figure class="highlight objc"><figcaption><span>block查询</span></figcaption><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">NSUInteger</span>)indexPassingTest:(<span class="built_in">BOOL</span> (<span class="built_in">NS_NOESCAPE</span> ^)(<span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop))predicate <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_6, <span class="number">4</span>_0);</span><br><span class="line">- (<span class="built_in">NSUInteger</span>)indexWithOptions:(<span class="built_in">NSEnumerationOptions</span>)opts passingTest:(<span class="built_in">BOOL</span> (<span class="built_in">NS_NOESCAPE</span> ^)(<span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop))predicate <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_6, <span class="number">4</span>_0);</span><br><span class="line">- (<span class="built_in">NSUInteger</span>)indexInRange:(<span class="built_in">NSRange</span>)range options:(<span class="built_in">NSEnumerationOptions</span>)opts passingTest:(<span class="built_in">BOOL</span> (<span class="built_in">NS_NOESCAPE</span> ^)(<span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop))predicate <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_6, <span class="number">4</span>_0);</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">NSIndexSet</span> *)indexesPassingTest:(<span class="built_in">BOOL</span> (<span class="built_in">NS_NOESCAPE</span> ^)(<span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop))predicate <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_6, <span class="number">4</span>_0);</span><br><span class="line">- (<span class="built_in">NSIndexSet</span> *)indexesWithOptions:(<span class="built_in">NSEnumerationOptions</span>)opts passingTest:(<span class="built_in">BOOL</span> (<span class="built_in">NS_NOESCAPE</span> ^)(<span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop))predicate <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_6, <span class="number">4</span>_0);</span><br><span class="line">- (<span class="built_in">NSIndexSet</span> *)indexesInRange:(<span class="built_in">NSRange</span>)range options:(<span class="built_in">NSEnumerationOptions</span>)opts passingTest:(<span class="built_in">BOOL</span> (<span class="built_in">NS_NOESCAPE</span> ^)(<span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop))predicate <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_6, <span class="number">4</span>_0);</span><br></pre></td></tr></table></figure>
+<h1 id="查询索引"><a href="#查询索引" class="headerlink" title="查询索引"></a>查询索引</h1><pre><code>&#x2F;&#x2F; ndicates whether the index set contains a specific index.
+- (BOOL)containsIndex:(NSUInteger)value;
+
+&#x2F;&#x2F; Indicates whether the receiving index set contains a superset of the indexes in another index set.
+- (BOOL)containsIndexes:(NSIndexSet *)indexSet;
+
+&#x2F;&#x2F; Indicates whether the index set contains the indexes represented by an index range.
+- (BOOL)containsIndexesInRange:(NSRange)range;
+
+&#x2F;&#x2F;判断集合中的索引是否有一个或多个在Range中
+- (BOOL)intersectsIndexesInRange:(NSRange)range;</code></pre>
+
+<pre><code>- (NSUInteger)indexPassingTest:(BOOL (NS_NOESCAPE ^)(NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
+- (NSUInteger)indexWithOptions:(NSEnumerationOptions)opts passingTest:(BOOL (NS_NOESCAPE ^)(NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
+- (NSUInteger)indexInRange:(NSRange)range options:(NSEnumerationOptions)opts passingTest:(BOOL (NS_NOESCAPE ^)(NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
+
+- (NSIndexSet *)indexesPassingTest:(BOOL (NS_NOESCAPE ^)(NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
+- (NSIndexSet *)indexesWithOptions:(NSEnumerationOptions)opts passingTest:(BOOL (NS_NOESCAPE ^)(NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
+- (NSIndexSet *)indexesInRange:(NSRange)range options:(NSEnumerationOptions)opts passingTest:(BOOL (NS_NOESCAPE ^)(NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);</code></pre>
 
 
-<figure class="highlight objc"><figcaption><span>获取大小</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">// 获取索引集合在某一范围中的个数</span></span><br><span class="line">- (<span class="built_in">NSUInteger</span>)countOfIndexesInRange:(<span class="built_in">NSRange</span>)range <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_5, <span class="number">2</span>_0);</span><br><span class="line"><span class="comment">//索引集合中元素的个数</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>) <span class="built_in">NSUInteger</span> count;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>&#x2F;&#x2F; 获取索引集合在某一范围中的个数
+- (NSUInteger)countOfIndexesInRange:(NSRange)range NS_AVAILABLE(10_5, 2_0);
+&#x2F;&#x2F;索引集合中元素的个数
+@property (readonly) NSUInteger count;
+</code></pre>
 
-<h1 id="枚举内容"><a href="#枚举内容" class="headerlink" title="枚举内容"></a>枚举内容</h1><figure class="highlight objc"><figcaption><span>枚举集合内容</span></figcaption><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)enumerateRangesUsingBlock:(<span class="keyword">void</span> (<span class="built_in">NS_NOESCAPE</span> ^)(<span class="built_in">NSRange</span> range, <span class="built_in">BOOL</span> *stop))block <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_7, <span class="number">5</span>_0);</span><br><span class="line">- (<span class="keyword">void</span>)enumerateRangesWithOptions:(<span class="built_in">NSEnumerationOptions</span>)opts usingBlock:(<span class="keyword">void</span> (<span class="built_in">NS_NOESCAPE</span> ^)(<span class="built_in">NSRange</span> range, <span class="built_in">BOOL</span> *stop))block <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_7, <span class="number">5</span>_0);</span><br><span class="line">- (<span class="keyword">void</span>)enumerateRangesInRange:(<span class="built_in">NSRange</span>)range options:(<span class="built_in">NSEnumerationOptions</span>)opts usingBlock:(<span class="keyword">void</span> (<span class="built_in">NS_NOESCAPE</span> ^)(<span class="built_in">NSRange</span> range, <span class="built_in">BOOL</span> *stop))block <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_7, <span class="number">5</span>_0);</span><br></pre></td></tr></table></figure>
+<h1 id="枚举内容"><a href="#枚举内容" class="headerlink" title="枚举内容"></a>枚举内容</h1><pre><code>- (void)enumerateRangesUsingBlock:(void (NS_NOESCAPE ^)(NSRange range, BOOL *stop))block NS_AVAILABLE(10_7, 5_0);
+- (void)enumerateRangesWithOptions:(NSEnumerationOptions)opts usingBlock:(void (NS_NOESCAPE ^)(NSRange range, BOOL *stop))block NS_AVAILABLE(10_7, 5_0);
+- (void)enumerateRangesInRange:(NSRange)range options:(NSEnumerationOptions)opts usingBlock:(void (NS_NOESCAPE ^)(NSRange range, BOOL *stop))block NS_AVAILABLE(10_7, 5_0);</code></pre>
 
-<h1 id="两集合的比较"><a href="#两集合的比较" class="headerlink" title="两集合的比较"></a>两集合的比较</h1><figure class="highlight objc"><figcaption><span>集合的比较</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//比较两集合是否相同</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)isEqualToIndexSet:(<span class="built_in">NSIndexSet</span> *)indexSet;</span><br></pre></td></tr></table></figure>
+<h1 id="两集合的比较"><a href="#两集合的比较" class="headerlink" title="两集合的比较"></a>两集合的比较</h1><pre><code>&#x2F;&#x2F;比较两集合是否相同
+- (BOOL)isEqualToIndexSet:(NSIndexSet *)indexSet;</code></pre>
 
-<h1 id="获取索引"><a href="#获取索引" class="headerlink" title="获取索引"></a>获取索引</h1><figure class="highlight objc"><figcaption><span>获取索引</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//The following six methods will return NSNotFound if there is no index in the set satisfying the query. </span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>) <span class="built_in">NSUInteger</span> firstIndex;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>) <span class="built_in">NSUInteger</span> lastIndex;</span><br><span class="line">- (<span class="built_in">NSUInteger</span>)indexGreaterThanIndex:(<span class="built_in">NSUInteger</span>)value;</span><br><span class="line">- (<span class="built_in">NSUInteger</span>)indexLessThanIndex:(<span class="built_in">NSUInteger</span>)value;</span><br><span class="line">- (<span class="built_in">NSUInteger</span>)indexGreaterThanOrEqualToIndex:(<span class="built_in">NSUInteger</span>)value;</span><br><span class="line">- (<span class="built_in">NSUInteger</span>)indexLessThanOrEqualToIndex:(<span class="built_in">NSUInteger</span>)value;</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><figcaption><span>获取索引</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//Fills up to bufferSize indexes in the specified range into the buffer and returns the number of indexes actually placed in the buffer;  </span></span><br><span class="line"><span class="comment">// also modifies the optional range passed in by pointer to be "positioned" after the last index filled into the buffer.  </span></span><br><span class="line"><span class="comment">// Example: if the index set contains the indexes 0, 2, 4, ..., 98, 100, for a buffer of size 10 and the range (20, 80)   </span></span><br><span class="line"><span class="comment">// the buffer would contain 20, 22, ..., 38 and the range would be modified to (40, 60).</span></span><br><span class="line">- (<span class="built_in">NSUInteger</span>)getIndexes:(<span class="built_in">NSUInteger</span> *)indexBuffer maxCount:(<span class="built_in">NSUInteger</span>)bufferSize inIndexRange:(<span class="keyword">nullable</span> <span class="built_in">NSRangePointer</span>)range;</span><br></pre></td></tr></table></figure>
+<h1 id="获取索引"><a href="#获取索引" class="headerlink" title="获取索引"></a>获取索引</h1><pre><code>&#x2F;&#x2F;The following six methods will return NSNotFound if there is no index in the set satisfying the query. 
+@property (readonly) NSUInteger firstIndex;
+@property (readonly) NSUInteger lastIndex;
+- (NSUInteger)indexGreaterThanIndex:(NSUInteger)value;
+- (NSUInteger)indexLessThanIndex:(NSUInteger)value;
+- (NSUInteger)indexGreaterThanOrEqualToIndex:(NSUInteger)value;
+- (NSUInteger)indexLessThanOrEqualToIndex:(NSUInteger)value;</code></pre>
+<pre><code>&#x2F;&#x2F;Fills up to bufferSize indexes in the specified range into the buffer and returns the number of indexes actually placed in the buffer;  
+&#x2F;&#x2F; also modifies the optional range passed in by pointer to be &quot;positioned&quot; after the last index filled into the buffer.  
+&#x2F;&#x2F; Example: if the index set contains the indexes 0, 2, 4, ..., 98, 100, for a buffer of size 10 and the range (20, 80)   
+&#x2F;&#x2F; the buffer would contain 20, 22, ..., 38 and the range would be modified to (40, 60).
+- (NSUInteger)getIndexes:(NSUInteger *)indexBuffer maxCount:(NSUInteger)bufferSize inIndexRange:(nullable NSRangePointer)range;</code></pre>
 
 
 
-<h1 id="枚举索引集合"><a href="#枚举索引集合" class="headerlink" title="枚举索引集合"></a>枚举索引集合</h1><figure class="highlight objc"><figcaption><span>枚举集合</span></figcaption><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)enumerateIndexesUsingBlock:(<span class="keyword">void</span> (<span class="built_in">NS_NOESCAPE</span> ^)(<span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop))block <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_6, <span class="number">4</span>_0);</span><br><span class="line">- (<span class="keyword">void</span>)enumerateIndexesWithOptions:(<span class="built_in">NSEnumerationOptions</span>)opts usingBlock:(<span class="keyword">void</span> (<span class="built_in">NS_NOESCAPE</span> ^)(<span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop))block <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_6, <span class="number">4</span>_0);</span><br><span class="line">- (<span class="keyword">void</span>)enumerateIndexesInRange:(<span class="built_in">NSRange</span>)range options:(<span class="built_in">NSEnumerationOptions</span>)opts usingBlock:(<span class="keyword">void</span> (<span class="built_in">NS_NOESCAPE</span> ^)(<span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop))block <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_6, <span class="number">4</span>_0);</span><br></pre></td></tr></table></figure>
+<h1 id="枚举索引集合"><a href="#枚举索引集合" class="headerlink" title="枚举索引集合"></a>枚举索引集合</h1><pre><code>- (void)enumerateIndexesUsingBlock:(void (NS_NOESCAPE ^)(NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
+- (void)enumerateIndexesWithOptions:(NSEnumerationOptions)opts usingBlock:(void (NS_NOESCAPE ^)(NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
+- (void)enumerateIndexesInRange:(NSRange)range options:(NSEnumerationOptions)opts usingBlock:(void (NS_NOESCAPE ^)(NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);</code></pre>
 
 
-<h1 id="可变集合的操作"><a href="#可变集合的操作" class="headerlink" title="可变集合的操作"></a>可变集合的操作</h1><h2 id="增加／删除一个索引集合"><a href="#增加／删除一个索引集合" class="headerlink" title="增加／删除一个索引集合"></a>增加／删除一个索引集合</h2><figure class="highlight objc"><figcaption><span>增加／删除一个索引集合</span></figcaption><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)addIndexes:(<span class="built_in">NSIndexSet</span> *)indexSet;</span><br><span class="line">- (<span class="keyword">void</span>)removeIndexes:(<span class="built_in">NSIndexSet</span> *)indexSet;</span><br><span class="line">- (<span class="keyword">void</span>)removeAllIndexes;</span><br></pre></td></tr></table></figure>
+<h1 id="可变集合的操作"><a href="#可变集合的操作" class="headerlink" title="可变集合的操作"></a>可变集合的操作</h1><h2 id="增加／删除一个索引集合"><a href="#增加／删除一个索引集合" class="headerlink" title="增加／删除一个索引集合"></a>增加／删除一个索引集合</h2><pre><code>- (void)addIndexes:(NSIndexSet *)indexSet;
+- (void)removeIndexes:(NSIndexSet *)indexSet;
+- (void)removeAllIndexes;</code></pre>
 
-<h2 id="增加／删除单个索引"><a href="#增加／删除单个索引" class="headerlink" title="增加／删除单个索引"></a>增加／删除单个索引</h2><figure class="highlight objc"><figcaption><span>增加／删除单个索引</span></figcaption><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)addIndex:(<span class="built_in">NSUInteger</span>)value;</span><br><span class="line">- (<span class="keyword">void</span>)removeIndex:(<span class="built_in">NSUInteger</span>)value;</span><br></pre></td></tr></table></figure>
+<h2 id="增加／删除单个索引"><a href="#增加／删除单个索引" class="headerlink" title="增加／删除单个索引"></a>增加／删除单个索引</h2><pre><code>- (void)addIndex:(NSUInteger)value;
+- (void)removeIndex:(NSUInteger)value;</code></pre>
 
-<h2 id="增加／删除一个子范围"><a href="#增加／删除一个子范围" class="headerlink" title="增加／删除一个子范围"></a>增加／删除一个子范围</h2><figure class="highlight objc"><figcaption><span>增加／删除一个子范围</span></figcaption><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)addIndexesInRange:(<span class="built_in">NSRange</span>)range;</span><br><span class="line">- (<span class="keyword">void</span>)removeIndexesInRange:(<span class="built_in">NSRange</span>)range;</span><br></pre></td></tr></table></figure>
+<h2 id="增加／删除一个子范围"><a href="#增加／删除一个子范围" class="headerlink" title="增加／删除一个子范围"></a>增加／删除一个子范围</h2><pre><code>- (void)addIndexesInRange:(NSRange)range;
+- (void)removeIndexesInRange:(NSRange)range;</code></pre>
 
 
 
@@ -921,7 +972,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

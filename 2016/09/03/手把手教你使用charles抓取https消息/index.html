@@ -404,7 +404,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        734
+                        754
                     </div>
                     
 
@@ -440,36 +440,88 @@
 <a id="more"></a>
 <h1 id="制作流程："><a href="#制作流程：" class="headerlink" title="制作流程："></a>制作流程：</h1></li>
 <li><p>生成密钥<br> 打开终端，输入以下命令：</p>
- <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">cd /private/etc/apache2/ssl <span class="comment">//进行该文件夹中</span></span><br><span class="line">sudo ssh-keygen -f server.key <span class="comment">//生成key ,若要求输入密码，可以按Enter进入下一步</span></span><br></pre></td></tr></table></figure>
+<pre><code class="js"> cd /private/etc/apache2/ssl //进行该文件夹中
+ sudo ssh-keygen -f server.key //生成key ,若要求输入密码，可以按Enter进入下一步</code></pre>
 </li>
 <li><p>用上面生成的server.key 生成证书请求文件<br>   输入以命令：</p>
-   <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">sudo openssl req -<span class="keyword">new</span> -key server.key -out cf.ushareit.com.csr</span><br></pre></td></tr></table></figure>
-
+<pre><code class="js">   sudo openssl req -new -key server.key -out cf.ushareit.com.csr</code></pre>
 <p>   执行记录：</p>
-   <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">localhost:ssl yuanpinghua$ sudo openssl req -<span class="keyword">new</span> -key server.key -out cf.ushareit.com.csr</span><br><span class="line">          Password:</span><br><span class="line">          You are about to be asked to enter information that will be incorporated</span><br><span class="line">          into your certificate request.</span><br><span class="line">          What you are about to enter is what is called a Distinguished Name or a DN.</span><br><span class="line">          There are quite a few fields but you can leave some blank</span><br><span class="line">          For some fields there will be a <span class="keyword">default</span> value,</span><br><span class="line">          If you enter <span class="string">'.'</span>, the field will be left blank.</span><br><span class="line">          -----</span><br><span class="line">          Country Name (<span class="number">2</span> letter code) [AU]:</span><br><span class="line">          State or Province Name (full name) [Some-State]:</span><br><span class="line">          Locality Name (eg, city) []:</span><br><span class="line">          Organization Name (eg, company) [Internet Widgits Pty Ltd]:</span><br><span class="line">          Organizational Unit Name (eg, section) []:</span><br><span class="line">          Common Name (e.g. server FQDN or YOUR name) []:cf.ushareit.com <span class="comment">//站点的域名</span></span><br><span class="line">          Email Address []:</span><br><span class="line"></span><br><span class="line">          Please enter the following <span class="string">'extra'</span> attributes</span><br><span class="line">          to be sent <span class="keyword">with</span> your certificate request</span><br><span class="line">          A challenge password []:</span><br><span class="line">          An optional company name []:</span><br></pre></td></tr></table></figure>
+<pre><code class="js">   localhost:ssl yuanpinghua$ sudo openssl req -new -key server.key -out cf.ushareit.com.csr
+             Password:
+             You are about to be asked to enter information that will be incorporated
+             into your certificate request.
+             What you are about to enter is what is called a Distinguished Name or a DN.
+             There are quite a few fields but you can leave some blank
+             For some fields there will be a default value,
+             If you enter &#39;.&#39;, the field will be left blank.
+             -----
+             Country Name (2 letter code) [AU]:
+             State or Province Name (full name) [Some-State]:
+             Locality Name (eg, city) []:
+             Organization Name (eg, company) [Internet Widgits Pty Ltd]:
+             Organizational Unit Name (eg, section) []:
+             Common Name (e.g. server FQDN or YOUR name) []:cf.ushareit.com //站点的域名
+             Email Address []:
+
+             Please enter the following &#39;extra&#39; attributes
+             to be sent with your certificate request
+             A challenge password []:
+             An optional company name []:
+</code></pre>
 </li>
 <li><p>使用上述生成的server.key 和证书请求文件生成ssl 证书:</p>
-<pre><code>输入如下命令：
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">sudo openssl x509 -req -days <span class="number">365</span> -<span class="keyword">in</span> cf.ushareit.com.csr -signkey server.key -out cf.ushareit.com.crt</span><br></pre></td></tr></table></figure>
-
-执行记录：
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">localhost:ssl yuanpinghua$     sudo openssl x509 -req -days <span class="number">365</span> -<span class="keyword">in</span> cf.ushareit.com.csr -signkey server.key -out cf.usharit.com.crt</span><br><span class="line">Signature ok</span><br><span class="line">subject=<span class="regexp">/C=AU/</span>ST=Some-State/O=Internet Widgits Pty Ltd/CN=cf.ushareit.com</span><br><span class="line">Getting Private key</span><br></pre></td></tr></table></figure></code></pre></li>
+<pre><code> 输入如下命令：
+ ```js
+ sudo openssl x509 -req -days 365 -in cf.ushareit.com.csr -signkey server.key -out cf.ushareit.com.crt
+ ```
+ 执行记录：
+ ```js
+ localhost:ssl yuanpinghua$     sudo openssl x509 -req -days 365 -in cf.ushareit.com.csr -signkey server.key -out cf.usharit.com.crt
+ Signature ok
+ subject=/C=AU/ST=Some-State/O=Internet Widgits Pty Ltd/CN=cf.ushareit.com
+ Getting Private key
+ ```</code></pre></li>
 <li><p>到此证书已经制作完成，接下来要进行Appache网络配置：</p>
-<pre><code>使用编辑器打开`/etc/apache2/httpd.conf`文件 将下面两行前的`#`号去掉,后保存。
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line"># LoadModule php5_module libexec/apache2/libphp5.so</span><br><span class="line"># LoadModule hfs_apple_module libexec/apache2/mod_hfs_apple.so</span><br></pre></td></tr></table></figure>
+<pre><code> 使用编辑器打开`/etc/apache2/httpd.conf`文件 将下面两行前的`#`号去掉,后保存。
+ ```js
+ # LoadModule php5_module libexec/apache2/libphp5.so
+ # LoadModule hfs_apple_module libexec/apache2/mod_hfs_apple.so
+ ```
+ 打开`/etc/apache2/extra/httpd-vhosts.conf`文件，在文件末尾添加如下内容：
+ ```js
+ &lt;VirtualHost *:80&gt;
+     DocumentRoot &quot;/Library/WebServer/Documents/cf_ushareit_com&quot;
+     ServerName cf.ushareit.com  
+     RewriteEngine on
+     RewriteRule ^(.*)$ /abc.php
+     ErrorLog &quot;/private/var/log/apache2/dummy-cm.ushareit.com-error_log&quot;
+     CustomLog &quot;/private/var/log/apache2/dummy-cm.ushareit.com-access_log&quot; common
+ &lt;/VirtualHost&gt;
 
-打开`/etc/apache2/extra/httpd-vhosts.conf`文件，在文件末尾添加如下内容：
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;VirtualHost *:<span class="number">80</span>&gt;</span><br><span class="line">    DocumentRoot <span class="string">"/Library/WebServer/Documents/cf_ushareit_com"</span></span><br><span class="line">    ServerName cf.ushareit.com  </span><br><span class="line">    RewriteEngine on</span><br><span class="line">    RewriteRule ^(.*)$ /abc.php</span><br><span class="line">    ErrorLog <span class="string">"/private/var/log/apache2/dummy-cm.ushareit.com-error_log"</span></span><br><span class="line">    CustomLog <span class="string">"/private/var/log/apache2/dummy-cm.ushareit.com-access_log"</span> common</span><br><span class="line">&lt;<span class="regexp">/VirtualHost&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;VirtualHost *:443&gt;</span></span><br><span class="line"><span class="regexp">  SSLEngine on</span></span><br><span class="line"><span class="regexp">  SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL</span></span><br><span class="line"><span class="regexp">  SSLCertificateFile /</span>private/etc/apache2/ssl/cf.ushareit.com.crt</span><br><span class="line">  SSLCertificateKeyFile /private/etc/apache2/ssl/server.key</span><br><span class="line">  DocumentRoot <span class="string">"/Library/WebServer/Documents/cf_ushareit_com"</span></span><br><span class="line">  ServerName cf.ushareit.com   </span><br><span class="line">  RewriteEngine on</span><br><span class="line">  RewriteRule ^(.*)$ /abc.php</span><br><span class="line">&lt;<span class="regexp">/VirtualHost&gt;</span></span><br></pre></td></tr></table></figure>
-
-在`/Library/WebServer/Documents/`站点下创建`cf_ushareit_com`文件夹。同时创建一个  `crt`文件夹，用来存放刚创建的`cf_ushareit_com.crt`证书</code></pre></li>
+ &lt;VirtualHost *:443&gt;
+   SSLEngine on
+   SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL
+   SSLCertificateFile /private/etc/apache2/ssl/cf.ushareit.com.crt
+   SSLCertificateKeyFile /private/etc/apache2/ssl/server.key
+   DocumentRoot &quot;/Library/WebServer/Documents/cf_ushareit_com&quot;
+   ServerName cf.ushareit.com   
+   RewriteEngine on
+   RewriteRule ^(.*)$ /abc.php
+ &lt;/VirtualHost&gt;
+ ```
+ 在`/Library/WebServer/Documents/`站点下创建`cf_ushareit_com`文件夹。同时创建一个  `crt`文件夹，用来存放刚创建的`cf_ushareit_com.crt`证书</code></pre></li>
 <li><p>在命令行中输入以下命令，检查刚加入的文件进行语法检查，并重新启动Appache:</p>
-<pre><code><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">sudo apachectl configtest <span class="comment">//检查配置</span></span><br><span class="line">sudo apachectl -k restart  <span class="comment">//强制重启</span></span><br></pre></td></tr></table></figure></code></pre></li>
+<pre><code>```js
+sudo apachectl configtest //检查配置
+sudo apachectl -k restart  //强制重启
+```</code></pre></li>
 <li><p>证书安装与sslproxy设置</p>
-<pre><code>在手机端安装刚才创建的crt证书。
-在charles中进行ssl设置：
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">charles --&gt;Proxy--&gt;SSL Proxying Setting --&gt; add --&gt;Host:cf.ushareit.com /port:443 --&gt; ok</span><br></pre></td></tr></table></figure>
-
-现在可以尽情使用了！哈哈</code></pre></li>
+<pre><code> 在手机端安装刚才创建的crt证书。
+ 在charles中进行ssl设置：
+ ```
+ charles --&gt;Proxy--&gt;SSL Proxying Setting --&gt; add --&gt;Host:cf.ushareit.com /port:443 --&gt; ok
+ ```
+ 现在可以尽情使用了！哈哈</code></pre></li>
 </ol>
 
             </div>
@@ -714,10 +766,9 @@
                         
                             默认情况下直接用
 pip install requests
-
 会安装到MacOS 自带的Python 2下面，Python 3还是不能使用requests模块。解决方案
 下载request源代码：
-curl -OL https://gith
+curl -OL https://githu
                         
                     </div>
                     <div class="publish-info">
@@ -756,8 +807,9 @@ curl -OL https://gith
                         
                             
 生成主机密钥 这里会要求输入密码，不输入，直接回车
- sudo mkdir /private/etc/apache2/sslcd /private/etc/apache2/sslsudo ssh-keygen -f server.key
-
+ sudo mkdir /private/etc/apache2/ssl
+ cd /private/etc/apache2/ssl
+ sudo ssh-keygen -f server.
                         
                     </div>
                     <div class="publish-info">
@@ -901,7 +953,7 @@ curl -OL https://gith
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

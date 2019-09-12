@@ -428,14 +428,24 @@
 <li>DISPATCH_QUEUE_PRIORITY_BACKGROUND<br>所有这些队列都是并发的，GCD调度与HIGH队列中线程数量相同的块。当high队列空了以后就转移到default队列。以些类推。系统根据当前的空余处理器核心数量和系统负载按需创建或销毁线程。<br>创建队列时，它被连接到某个全局对队列（全局队列就是它的目标）。默认情况下连接到default队列。当一个块到了队列的最前面，块其实就到了目标队列的最尾。块到了全局队列的最前面才会执行，可以使用<code>dispatch_set_target_queue</code>改变目标队列</li>
 </ul>
 <h2 id="分派组"><a href="#分派组" class="headerlink" title="分派组"></a>分派组</h2><p>分派组类似于NSOpertion中的依赖关系。首先创建一个组</p>
-<figure class="highlight objc"><figcaption><span>创建组</span></figcaption><table><tr><td class="code"><pre><span class="line">dispatch_group_t group = dispatch_group_create();</span><br></pre></td></tr></table></figure>
+<pre><code>dispatch_group_t group = dispatch_group_create();</code></pre>
 
 <p>*PS. 组本身没有任何配置项，它们没有绑到任何队列上，只是一个组块。一般通过<code>dispatch_group_async</code>把块添加到组，类似<code>dispatch_async</code>:</p>
-<figure class="highlight objc"><figcaption><span>加入块</span></figcaption><table><tr><td class="code"><pre><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">      </span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<pre><code>dispatch_group_async(group, queue, ^{
+      
+  });</code></pre>
 <p>然后调用<code>dispatch_gourp_notify</code>注册一个块，即当组执行完毕后调用它</p>
-<figure class="highlight objc"><figcaption><span>执行完后执行该块</span></figcaption><table><tr><td class="code"><pre><span class="line">dispatch_group_notify(group, queue, ^&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<pre><code>dispatch_group_notify(group, queue, ^{
+        
+    });</code></pre>
 <p>组里所有的块执行完毕时，block就会被调用到queue上，可以注册同一个组的多个通知。可以把这些通知块放到不同的队列上。如果调用<code>dispatch_group_notify</code>时队列上没有任何块，那么马上触发通知。可以在配置组上时用<code>dispatch_supend</code>暂停队列来防止这种情况，配置完后用<code>dispatch_resume</code>启动队列。<br>实际上组并不像追踪任务一样追踪块，可以直接使用<code>dispatch_group_enter</code>和<code>dispatch_group_leave</code>增加和减少任务数量。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    dispatch_group_enter(group);</span><br><span class="line">    dispatch_sync(queue, ^&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_group_leave(group);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<pre><code>dispatch_async(queue, ^{
+    dispatch_group_enter(group);
+    dispatch_sync(queue, ^{
+        
+    });
+    dispatch_group_leave(group);
+});</code></pre>
 <p>调用<code>dispatch_group_wait</code>会阻塞当前线程，直到整个组执行完毕。 </p>
 <h1 id="NSOperationQueue"><a href="#NSOperationQueue" class="headerlink" title="NSOperationQueue"></a>NSOperationQueue</h1><h2 id="什么时候应该使用GCD，什么时候应该使用NSOperationQueue"><a href="#什么时候应该使用GCD，什么时候应该使用NSOperationQueue" class="headerlink" title="什么时候应该使用GCD，什么时候应该使用NSOperationQueue?"></a>什么时候应该使用GCD，什么时候应该使用NSOperationQueue?</h2><p>两者的相同点与异点：</p>
 <ol>
@@ -450,7 +460,13 @@
 </blockquote>
 <p>NSTimer基于运行循环进行消息派发。调度NSTimer时，其实是要求当前的运行循环在某个特定的时间分派某个选择器。运行循环的每次迭代都会对时间进行检查并且触发所有过期的选择器，延迟执行的方法也是通过调度定时器实现的。</p>
 <h2 id="NSOperation"><a href="#NSOperation" class="headerlink" title="NSOperation"></a>NSOperation</h2><p>NSOperation是封装任务的基本单位，在OC中用块来表示，NSOperation支持优先级、依赖关系和取消<br>NSOperationQueue尝试管理生成的线程数，但是大多数情况下，它做得并不好。NSOperationQueue会同时调度太多的操作，如果明确告诉NSOperationQueue不要超过CPU数量的计算型密集操作，那么简单代码就跑得更快了。</p>
-<figure class="highlight plain"><figcaption><span>获取CPU核数</span></figcaption><table><tr><td class="code"><pre><span class="line">#include &lt;sys/sysctl.h&gt;</span><br><span class="line">unsigned int countOfCores() &#123;</span><br><span class="line">    unsigned int ncpu;</span><br><span class="line">    size_t len = sizeof(ncpu);</span><br><span class="line">    sysctlbyname(&quot;hw.ncpu&quot;, &amp;ncpu, &amp;len, NULL, 0);</span><br><span class="line">    return ncpu;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>#include &lt;sys&#x2F;sysctl.h&gt;
+unsigned int countOfCores() {
+    unsigned int ncpu;
+    size_t len = sizeof(ncpu);
+    sysctlbyname(&quot;hw.ncpu&quot;, &amp;ncpu, &amp;len, NULL, 0);
+    return ncpu;
+}</code></pre>
 
             </div>
             <hr/>
@@ -861,7 +877,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

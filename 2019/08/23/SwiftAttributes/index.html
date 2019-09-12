@@ -399,7 +399,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        693
+                        692
                     </div>
                     
 
@@ -424,8 +424,8 @@
             <div id="articleContent">
                 <h1 id="Attributes"><a href="#Attributes" class="headerlink" title="Attributes"></a>Attributes</h1><p>There are two kinds of attributes in Swift—those that apply to declarations and those that apply to types. An attribute provides additional information about the declaration or type.</p>
 <p>You specify an attribute by writing the @ symbol followed by the attribute’s name and any arguments that the attribute accepts:</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">@attribute name</span><br><span class="line">@attribute name(attribute arguments)</span><br></pre></td></tr></table></figure>
-
+<pre><code class="swift">@attribute name
+@attribute name(attribute arguments)</code></pre>
 <p>Some declaration attributes accept arguments that specify more information about the attribute and how it applies to a particular declaration. These attribute arguments are enclosed in parentheses, and their format is defined by the attribute they belong to.</p>
 <h2 id="Declaration-Attributes"><a href="#Declaration-Attributes" class="headerlink" title="Declaration Attributes"></a>Declaration Attributes</h2><p>You can apply a declaration attribute to declarations only.</p>
 <h3 id="available"><a href="#available" class="headerlink" title="available"></a>available</h3><p>Apply this attribute to indicate a declaration’s life cycle relative to certain Swift language versions or certain platforms and operating system versions.<br>The available attribute always appears with a list of two or more comma-separated attribute arguments. These arguments begin with one of the following platform or language names:</p>
@@ -445,22 +445,20 @@
 <li>The <code>unavailable</code> argument indicates that the declaration isn’t available on the specified platform. This argument can’t be used when specifying Swift version availability.</li>
 <li>The <code>introduced</code> argument indicates the first version of the specified platform or language in which the declaration was introduced. It has the following form:</li>
 </ul>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">introduced: `version number`</span><br></pre></td></tr></table></figure>
-
+<pre><code class="swift">introduced: `version number`</code></pre>
 <p>The version number consists of one to three positive integers, separated by periods.</p>
 <ul>
 <li><p>The <code>deprecated</code> argument indicates the first version of the specified platform or language in which the declaration was deprecated. It has the following form:</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">deprecated: version number</span><br></pre></td></tr></table></figure>
+<pre><code class="swift">deprecated: version number</code></pre>
 </li>
 <li><p>The <code>obsoleted</code> argument indicates the first version of the specified platform or language in which the declaration was obsoleted. When a declaration is obsoleted, it’s removed from the specified platform or language and can no longer be used. It has the following form:</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">obsoleted: version number</span><br></pre></td></tr></table></figure>
+<pre><code class="swift">obsoleted: version number</code></pre>
 </li>
-<li><p>The <code>message</code> argument provides a textual message that the compiler displays when emitting a warning or error about the use of a deprecated or obsoleted declaration. It has the following form:</p>
-<figure class="highlight plain"><figcaption><span>message```</span></figcaption><table><tr><td class="code"><pre><span class="line">The message consists of a string literal.</span><br><span class="line"></span><br><span class="line">* The renamed argument provides a textual message that indicates the new name for a declaration that’s been renamed. The compiler displays the new name when emitting an error about the use of a renamed declaration. It has the following form:</span><br><span class="line">```renamed: new name</span><br></pre></td></tr></table></figure>
-
+<li><p>The <code>message</code> argument provides a textual message that the compiler displays when emitting a warning or error about the use of a deprecated or obsoleted declaration. It has the following form:<br><code>message: message</code><br>The message consists of a string literal.</p>
+</li>
+<li><p>The renamed argument provides a textual message that indicates the new name for a declaration that’s been renamed. The compiler displays the new name when emitting an error about the use of a renamed declaration. It has the following form:<br><code>renamed: new name</code><br>The new name consists of a string literal.</p>
 </li>
 </ul>
-<p>The new name consists of a string literal.</p>
 <h3 id="discardableResult"><a href="#discardableResult" class="headerlink" title="discardableResult"></a>discardableResult</h3><p>Apply this attribute to a function or method declaration to suppress the compiler warning when the function or method that returns a value is called without using its result.</p>
 <h3 id="dynamicCallable"><a href="#dynamicCallable" class="headerlink" title="dynamicCallable"></a>dynamicCallable</h3><p>Apply this attribute to a class, structure, enumeration, or protocol to treat instances of the type as callable functions. The type must implement either a dynamicallyCall(withArguments:) method, a dynamicallyCall(withKeywordArguments:) method, or both.</p>
 <h3 id="dynamicMemberLookup"><a href="#dynamicMemberLookup" class="headerlink" title="dynamicMemberLookup"></a>dynamicMemberLookup</h3><p>Apply this attribute to a class, structure, enumeration, or protocol to enable members to be looked up by name at runtime. The type must implement a <code>subscript(dynamicMemberLookup:)</code>subscript.</p>
@@ -888,7 +886,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

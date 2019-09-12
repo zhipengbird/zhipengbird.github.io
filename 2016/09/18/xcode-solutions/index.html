@@ -434,13 +434,86 @@ Xcode8注释快捷键失">
 <li><p>屏蔽系统日志<br><code>Xcode8</code>里边 <code>Edit Scheme</code>-&gt; <code>Run</code> -&gt; <code>Arguments</code>, 在<code>Environment Variables</code>里边添加<br><code>OS_ACTIVITY_MODE = Disable</code></p>
 </li>
 <li><p>Xcode8注释快捷键失效注释快捷键 <code>⌘ ``+`` /</code>失效，在终端输入下面的命令，重启系统即可</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo /usr/libexec/xpccachectl</span><br></pre></td></tr></table></figure>
-
+<pre><code class="sh">sudo /usr/libexec/xpccachectl</code></pre>
 </li>
 </ol>
-<p><code>__aaa</code><br>3. ios10相机等权限获取时的崩溃<br>  出现的提示信息有：<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">This app has crashed because it attempted to access privacy-sensitive data without a usage description. The app&apos;s Info.plist must contain an NSCameraUsageDescription key with a string value explaining to the user how the app uses this data.</span><br></pre></td></tr></table></figure></p>
-<p>  意思是没有获取相机的权限，需要添加在plist文件中添加这项权限<br>  <figure class="highlight"><table><tr><td class="code"><pre><span class="line">// 相机权限</span><br><span class="line">&lt;key&gt;NSCameraUsageDescription&lt;/key&gt;</span><br><span class="line">&lt;string&gt;CameraUsageDescription&lt;/string&gt;</span><br></pre></td></tr></table></figure></p>
-<p>  以下是所有权限的相关键值：<br>  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// 蓝牙权限</span></span><br><span class="line"> &lt;key&gt;NSBluetoothPeripheralUsageDescription&lt;<span class="regexp">/key&gt;</span></span><br><span class="line"><span class="regexp">&lt;string&gt;BluetoothPeripheralUsageDescription&lt;/</span>string&gt;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 日历权限</span></span><br><span class="line">&lt;key&gt;NSCalendarsUsageDescription&lt;<span class="regexp">/key&gt;</span></span><br><span class="line"><span class="regexp">&lt;string&gt;CalendarsUsageDescription&lt;/</span>string&gt;</span><br><span class="line"> <span class="comment">// 相机权限</span></span><br><span class="line">&lt;key&gt;NSCameraUsageDescription&lt;<span class="regexp">/key&gt;</span></span><br><span class="line"><span class="regexp">&lt;string&gt;CameraUsageDescription&lt;/</span>string&gt;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 联系人</span></span><br><span class="line">&lt;key&gt;NSContactsUsageDescription&lt;<span class="regexp">/key&gt;</span></span><br><span class="line"><span class="regexp">&lt;string&gt;ContactsUsageDescription&lt;/</span>string&gt;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 健康分享权限</span></span><br><span class="line">&lt;key&gt;NSHealthShareUsageDescription&lt;<span class="regexp">/key&gt;</span></span><br><span class="line"><span class="regexp">&lt;string&gt;HealthShareUsageDescription&lt;/</span>string&gt;</span><br><span class="line"> <span class="comment">// 健康更新权限</span></span><br><span class="line">&lt;key&gt;NSHealthUpdateUsageDescription&lt;<span class="regexp">/key&gt;</span></span><br><span class="line"><span class="regexp">&lt;string&gt;HealthUpdateUsageDescription&lt;/</span>string&gt;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// HomeKit使用权限</span></span><br><span class="line">&lt;key&gt;NSHomeKitUsageDescription&lt;<span class="regexp">/key&gt;</span></span><br><span class="line"><span class="regexp">&lt;string&gt;HomeKitUsageDescription&lt;/</span>string&gt;</span><br><span class="line"> <span class="comment">//  位置一直使用权限</span></span><br><span class="line">&lt;key&gt;NSLocationAlwaysUsageDescription&lt;<span class="regexp">/key&gt;</span></span><br><span class="line"><span class="regexp">&lt;string&gt;LocationAlwaysUsageDescription&lt;/</span>string&gt;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 使用位置权限</span></span><br><span class="line">&lt;key&gt;NSLocationUsageDescription&lt;<span class="regexp">/key&gt;</span></span><br><span class="line"><span class="regexp">&lt;string&gt;LocationUsageDescription&lt;/</span>string&gt;</span><br><span class="line"> <span class="comment">// 程序运行时使用位置权限</span></span><br><span class="line">&lt;key&gt;NSLocationWhenInUseUsageDescription&lt;<span class="regexp">/key&gt;</span></span><br><span class="line"><span class="regexp">&lt;string&gt;LocationWhenInUseUsageDescription&lt;/</span>string&gt;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 获取appleMusic权限</span></span><br><span class="line">&lt;key&gt;NSAppleMusicUsageDescription&lt;<span class="regexp">/key&gt;</span></span><br><span class="line"><span class="regexp">&lt;string&gt;AppleMusicUsageDescription&lt;/</span>string&gt;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 麦克锋使用权限</span></span><br><span class="line">&lt;key&gt;NSMicrophoneUsageDescription&lt;<span class="regexp">/key&gt;</span></span><br><span class="line"><span class="regexp">&lt;string&gt;MicrophoneUsageDescription&lt;/</span>string&gt;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 陀螺仪使用权限</span></span><br><span class="line">&lt;key&gt;NSMotionUsageDescription&lt;<span class="regexp">/key&gt;</span></span><br><span class="line"><span class="regexp">&lt;string&gt;MotionUsageDescription&lt;/</span>string&gt;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 相册使用权限</span></span><br><span class="line">&lt;key&gt;NSPhotoLibraryUsageDescription&lt;<span class="regexp">/key&gt;</span></span><br><span class="line"><span class="regexp">&lt;string&gt;PhotoLibraryUsageDescription&lt;/</span>string&gt;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 提醒权限</span></span><br><span class="line">&lt;key&gt;NSRemindersUsageDescription&lt;<span class="regexp">/key&gt;</span></span><br><span class="line"><span class="regexp">&lt;string&gt;RemindersUsageDescription&lt;/</span>string&gt;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// Siri 使用权限</span></span><br><span class="line">&lt;key&gt;NSSiriUsageDescription&lt;<span class="regexp">/key&gt;</span></span><br><span class="line"><span class="regexp">&lt;string&gt;SiriUsageDescription&lt;/</span>string&gt;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 语音识别权限</span></span><br><span class="line">&lt;key&gt;NSSpeechRecognitionUsageDescription&lt;<span class="regexp">/key&gt;</span></span><br><span class="line"><span class="regexp">&lt;string&gt;SpeechRecognitionUsageDescription&lt;/</span>string&gt;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 视频权限</span></span><br><span class="line">&lt;key&gt;NSVideoSubscriberAccountUsageDescription&lt;<span class="regexp">/key&gt;</span></span><br><span class="line"><span class="regexp">&lt;string&gt;VideoSubscriberAccountUsageDescription&lt;/</span>string&gt;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 音乐库权限</span></span><br><span class="line">&lt;key&gt;kTCCServiceMediaLibrary&lt;<span class="regexp">/key&gt;</span></span><br><span class="line"><span class="regexp">&lt;string&gt;CCServiceMediaLibrary&lt;/</span>string&gt;</span><br></pre></td></tr></table></figure></p>
+<p><code>__aaa</code><br>3. ios10相机等权限获取时的崩溃<br>  出现的提示信息有：</p>
+<pre><code>  This app has crashed because it attempted to access privacy-sensitive data without a usage description. The app&#39;s Info.plist must contain an NSCameraUsageDescription key with a string value explaining to the user how the app uses this data.</code></pre><p>  意思是没有获取相机的权限，需要添加在plist文件中添加这项权限</p>
+<pre><code class="json">  // 相机权限
+  &lt;key&gt;NSCameraUsageDescription&lt;/key&gt;
+  &lt;string&gt;CameraUsageDescription&lt;/string&gt;</code></pre>
+<p>  以下是所有权限的相关键值：</p>
+<pre><code class="js">  // 蓝牙权限
+  &lt;key&gt;NSBluetoothPeripheralUsageDescription&lt;/key&gt;
+    &lt;string&gt;BluetoothPeripheralUsageDescription&lt;/string&gt;
+
+  // 日历权限
+    &lt;key&gt;NSCalendarsUsageDescription&lt;/key&gt;
+    &lt;string&gt;CalendarsUsageDescription&lt;/string&gt;
+  // 相机权限
+    &lt;key&gt;NSCameraUsageDescription&lt;/key&gt;
+    &lt;string&gt;CameraUsageDescription&lt;/string&gt;
+
+  // 联系人
+    &lt;key&gt;NSContactsUsageDescription&lt;/key&gt;
+    &lt;string&gt;ContactsUsageDescription&lt;/string&gt;
+
+  // 健康分享权限
+    &lt;key&gt;NSHealthShareUsageDescription&lt;/key&gt;
+    &lt;string&gt;HealthShareUsageDescription&lt;/string&gt;
+  // 健康更新权限
+    &lt;key&gt;NSHealthUpdateUsageDescription&lt;/key&gt;
+    &lt;string&gt;HealthUpdateUsageDescription&lt;/string&gt;
+
+  // HomeKit使用权限
+    &lt;key&gt;NSHomeKitUsageDescription&lt;/key&gt;
+    &lt;string&gt;HomeKitUsageDescription&lt;/string&gt;
+  //  位置一直使用权限
+    &lt;key&gt;NSLocationAlwaysUsageDescription&lt;/key&gt;
+    &lt;string&gt;LocationAlwaysUsageDescription&lt;/string&gt;
+
+  // 使用位置权限
+    &lt;key&gt;NSLocationUsageDescription&lt;/key&gt;
+    &lt;string&gt;LocationUsageDescription&lt;/string&gt;
+  // 程序运行时使用位置权限
+    &lt;key&gt;NSLocationWhenInUseUsageDescription&lt;/key&gt;
+    &lt;string&gt;LocationWhenInUseUsageDescription&lt;/string&gt;
+
+  // 获取appleMusic权限
+    &lt;key&gt;NSAppleMusicUsageDescription&lt;/key&gt;
+    &lt;string&gt;AppleMusicUsageDescription&lt;/string&gt;
+
+  // 麦克锋使用权限
+    &lt;key&gt;NSMicrophoneUsageDescription&lt;/key&gt;
+    &lt;string&gt;MicrophoneUsageDescription&lt;/string&gt;
+
+  // 陀螺仪使用权限
+    &lt;key&gt;NSMotionUsageDescription&lt;/key&gt;
+    &lt;string&gt;MotionUsageDescription&lt;/string&gt;
+
+  // 相册使用权限
+    &lt;key&gt;NSPhotoLibraryUsageDescription&lt;/key&gt;
+    &lt;string&gt;PhotoLibraryUsageDescription&lt;/string&gt;
+
+  // 提醒权限
+    &lt;key&gt;NSRemindersUsageDescription&lt;/key&gt;
+    &lt;string&gt;RemindersUsageDescription&lt;/string&gt;
+
+  // Siri 使用权限
+    &lt;key&gt;NSSiriUsageDescription&lt;/key&gt;
+    &lt;string&gt;SiriUsageDescription&lt;/string&gt;
+
+  // 语音识别权限
+    &lt;key&gt;NSSpeechRecognitionUsageDescription&lt;/key&gt;
+    &lt;string&gt;SpeechRecognitionUsageDescription&lt;/string&gt;
+
+  // 视频权限
+    &lt;key&gt;NSVideoSubscriberAccountUsageDescription&lt;/key&gt;
+    &lt;string&gt;VideoSubscriberAccountUsageDescription&lt;/string&gt;
+
+  // 音乐库权限
+    &lt;key&gt;kTCCServiceMediaLibrary&lt;/key&gt;
+    &lt;string&gt;CCServiceMediaLibrary&lt;/string&gt;</code></pre>
 
             </div>
             <hr/>
@@ -737,8 +810,7 @@ iOS 7在推送方面最大的变化就是允许，应用收到通知后在后台
                     <div class="summary block-with-text">
                         
                             文件的打开
-open()语法函数参数
-open(file, mode=&apos;r&apos;, buffering=None, encoding=None, errors=None, newline=None, closefd=True
+open()语法函数参数open(file, mode=&#39;r&#39;, buffering=None, encoding=None, errors=None, newline=None, closefd=True)参数
                         
                     </div>
                     <div class="publish-info">
@@ -878,7 +950,7 @@ open(file, mode=&apos;r&apos;, buffering=None, encoding=None, errors=None, newli
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

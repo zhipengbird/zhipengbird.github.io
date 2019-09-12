@@ -9,7 +9,8 @@
 单例类总是返回自己的同一个实例，它提供了对类的对象所提供资源的全局访问点。单例模式的意图：使得类的一个对象成为系统中的唯一实例。
 
 单例版本1：
-NS_ASSUME_NONNULL_BEGIN@interface TestManager ">
+NS_ASSUME_NONNULL_BEGIN
+@interface TestManager">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -406,7 +407,7 @@ NS_ASSUME_NONNULL_BEGIN@interface TestManager ">
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
-                        5 Min
+                        4 Min
                     </div>
                     
                 
@@ -426,37 +427,204 @@ NS_ASSUME_NONNULL_BEGIN@interface TestManager ">
 <p>单例类总是返回自己的同一个实例，它提供了对类的对象所提供资源的全局访问点。<br>单例模式的意图：<br>使得类的一个对象成为系统中的唯一实例。</p>
 </blockquote>
 <p>单例版本1：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NS_ASSUME_NONNULL_BEGIN</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">TestManager</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">copy</span>) <span class="built_in">NSString</span> * name;</span><br><span class="line">+ (<span class="keyword">instancetype</span>)shareInstance;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="built_in">NS_ASSUME_NONNULL_END</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">TestManager</span></span></span><br><span class="line"><span class="keyword">static</span> TestManager * manager = <span class="literal">nil</span>;</span><br><span class="line">+ (<span class="keyword">instancetype</span>)shareInstance&#123;</span><br><span class="line">    <span class="keyword">if</span> (manager== <span class="literal">nil</span>) &#123;</span><br><span class="line">        manager = [[TestManager alloc] init];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> manager;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<pre><code class="objc">NS_ASSUME_NONNULL_BEGIN
+@interface TestManager : NSObject
+@property (nonatomic,copy) NSString * name;
++ (instancetype)shareInstance;
+@end
+NS_ASSUME_NONNULL_END
 
+@implementation TestManager
+static TestManager * manager = nil;
++ (instancetype)shareInstance{
+    if (manager== nil) {
+        manager = [[TestManager alloc] init];
+    }
+    return manager;
+}
+@end</code></pre>
 <p>这不是一个“严格”意义上的单例，要想在实际中使用，需要面对以下两个主要的障碍：</p>
 <ul>
 <li>发起调用的对象不能以其他分配方式实例化单例对象。否则，就有可以创建单例类的多个实例</li>
 <li>对单例对象实例化的限制应该与引用计数内存模型共存</li>
 </ul>
 <p>以下测试代码对TestManager生成了多个不同的实例</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    TestManager * test1 = [TestManager shareInstance];</span><br><span class="line">    test1.name = <span class="string">@"1"</span>;</span><br><span class="line">    TestManager * test2 = [[TestManager  alloc] init];</span><br><span class="line">    test2.name = <span class="string">@"rewq"</span>;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@:%@"</span>,test1.name,test2.name); <span class="comment">// 1:rewq</span></span><br><span class="line">```  </span><br><span class="line">此模式下，调用test1的<span class="keyword">copy</span>方法会crash ，`-[TestManager copyWithZone:]: unrecognized selector sent to instance <span class="number">0x6000003b05f0</span>` TestManager类未实现`<span class="built_in">NSCopying</span>`协议 </span><br><span class="line"></span><br><span class="line">版本<span class="number">2</span></span><br><span class="line">```objc</span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">TestManager</span></span></span><br><span class="line"><span class="keyword">static</span> TestManager * manager = <span class="literal">nil</span>;</span><br><span class="line">+ (<span class="keyword">instancetype</span>)shareInstance&#123;</span><br><span class="line">    <span class="keyword">static</span> TestManager * manager = <span class="literal">nil</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</span><br><span class="line">    <span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</span><br><span class="line">        manager = [[TestManager alloc] init];</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> manager;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">    TestManager * test1 = [TestManager shareInstance];
+    test1.name = @&quot;1&quot;;
+    TestManager * test2 = [[TestManager  alloc] init];
+    test2.name = @&quot;rewq&quot;;
+    NSLog(@&quot;%@:%@&quot;,test1.name,test2.name); // 1:rewq</code></pre>
+<p>此模式下，调用test1的copy方法会crash ，<code>-[TestManager copyWithZone:]: unrecognized selector sent to instance 0x6000003b05f0</code> TestManager类未实现<code>NSCopying</code>协议 </p>
+<p>版本2</p>
+<pre><code class="objc">@implementation TestManager
+static TestManager * manager = nil;
++ (instancetype)shareInstance{
+    static TestManager * manager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&amp;onceToken, ^{
+        manager = [[TestManager alloc] init];
+    });
+    return manager;
+}
+@end</code></pre>
 <p>此版本依然是一个非“严格“意义上的单例，但这个是线程安全的。</p>
 <p>下面我们来实现一个严格意上的单例：<br>版本3：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NS_ASSUME_NONNULL_BEGIN</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">TestManager</span> : <span class="title">NSObject</span>&lt;<span class="title">NSCopying</span>,<span class="title">NSMutableCopying</span>&gt;</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">copy</span>) <span class="built_in">NSString</span> * name;</span><br><span class="line">+(<span class="keyword">instancetype</span>)shareInstance;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">NS_ASSUME_NONNULL_END</span></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">TestManager</span></span></span><br><span class="line">+(<span class="keyword">instancetype</span>)shareInstance&#123;</span><br><span class="line">    <span class="keyword">static</span> TestManager * manager = <span class="literal">nil</span>;</span><br><span class="line">    <span class="keyword">if</span> (manager== <span class="literal">nil</span>) &#123;</span><br><span class="line">        manager = [[<span class="keyword">super</span> allocWithZone:<span class="literal">NULL</span>] init];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> manager;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+(<span class="keyword">instancetype</span>)allocWithZone:(<span class="keyword">struct</span> _NSZone *)zone&#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="keyword">self</span> shareInstance];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//保证不返回实例的副本，通过返回self,返回同一个实例</span></span><br><span class="line">-(<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//保证不返回实例的副本，通过返回self,返回同一个实例</span></span><br><span class="line">-(<span class="keyword">id</span>)mutableCopyWithZone:(<span class="built_in">NSZone</span> *)zone&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<pre><code class="objc">NS_ASSUME_NONNULL_BEGIN
 
+@interface TestManager : NSObject&lt;NSCopying,NSMutableCopying&gt;
+@property (nonatomic,copy) NSString * name;
++(instancetype)shareInstance;
+@end
+
+NS_ASSUME_NONNULL_END
+@implementation TestManager
++(instancetype)shareInstance{
+    static TestManager * manager = nil;
+    if (manager== nil) {
+        manager = [[super allocWithZone:NULL] init];
+    }
+    return manager;
+}
+
++(instancetype)allocWithZone:(struct _NSZone *)zone{
+    return [self shareInstance];
+}
+//保证不返回实例的副本，通过返回self,返回同一个实例
+-(id)copyWithZone:(NSZone *)zone{
+    return self;
+}
+//保证不返回实例的副本，通过返回self,返回同一个实例
+-(id)mutableCopyWithZone:(NSZone *)zone{
+    return self;
+}
+@end</code></pre>
 <p>和前两个版本一样，首先检查类的唯一实例是否已创建，如果没有，就创建一个新的实例并将其返回。但是，这里没有使用alloc这样的方法，而是调用<code>[[super allocWithZone:NULL] init]</code>来生成新的实例。为什么是super而不是self？因为已经在self中重载了基本的对象分配方法，所以需要“借用”其父类的功能来帮助处理底层内存分配的杂务。<br>Ps:这里没有考虑到多线程问题，如果在多线程中使用的话需要考虑到线程安全<br>版本4（线程安全）</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">TestManager</span></span></span><br><span class="line">+(<span class="keyword">instancetype</span>)shareInstance&#123;</span><br><span class="line">    <span class="keyword">static</span> TestManager * manager = <span class="literal">nil</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</span><br><span class="line">    <span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</span><br><span class="line">        <span class="comment">//以下代码有crash的机率</span></span><br><span class="line">        <span class="comment">//manager = [[TestManager alloc] init];</span></span><br><span class="line">         manager = [[ <span class="keyword">super</span> allocWithZone:<span class="literal">NULL</span>] init];</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> manager;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+(<span class="keyword">instancetype</span>)allocWithZone:(<span class="keyword">struct</span> _NSZone *)zone&#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="keyword">self</span> shareInstance];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//保证不返回实例的副本，通过返回self,返回同一个实例</span></span><br><span class="line">-(<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//保证不返回实例的副本，通过返回self,返回同一个实例</span></span><br><span class="line">-(<span class="keyword">id</span>)mutableCopyWithZone:(<span class="built_in">NSZone</span> *)zone&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<pre><code class="objc">@implementation TestManager
++(instancetype)shareInstance{
+    static TestManager * manager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&amp;onceToken, ^{
+        //以下代码有crash的机率
+        //manager = [[TestManager alloc] init];
+         manager = [[ super allocWithZone:NULL] init];
+    });
+    return manager;
+}
 
++(instancetype)allocWithZone:(struct _NSZone *)zone{
+    return [self shareInstance];
+}
+//保证不返回实例的副本，通过返回self,返回同一个实例
+-(id)copyWithZone:(NSZone *)zone{
+    return self;
+}
+//保证不返回实例的副本，通过返回self,返回同一个实例
+-(id)mutableCopyWithZone:(NSZone *)zone{
+    return self;
+}
+@end</code></pre>
 <p>版本5（线程安全):</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">+(<span class="keyword">instancetype</span>)shareInstance&#123;</span><br><span class="line">    <span class="keyword">return</span> [[[<span class="keyword">self</span> <span class="keyword">class</span>] alloc]init];</span><br><span class="line">&#125;</span><br><span class="line">+(<span class="keyword">instancetype</span>)allocWithZone:(<span class="keyword">struct</span> _NSZone *)zone&#123;</span><br><span class="line">    <span class="keyword">static</span> TestManager * manager = <span class="literal">nil</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</span><br><span class="line">    <span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</span><br><span class="line">        <span class="comment">//不能这样添加，否则会crash</span></span><br><span class="line">        <span class="comment">// manager = [[TestManager alloc] init];</span></span><br><span class="line">         manager = [[ <span class="keyword">super</span> allocWithZone:zone] init];</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> manager;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//保证不返回实例的副本，通过返回self,返回同一个实例</span></span><br><span class="line">-(<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//保证不返回实例的副本，通过返回self,返回同一个实例</span></span><br><span class="line">-(<span class="keyword">id</span>)mutableCopyWithZone:(<span class="built_in">NSZone</span> *)zone&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">+(instancetype)shareInstance{
+    return [[[self class] alloc]init];
+}
++(instancetype)allocWithZone:(struct _NSZone *)zone{
+    static TestManager * manager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&amp;onceToken, ^{
+        //不能这样添加，否则会crash
+        // manager = [[TestManager alloc] init];
+         manager = [[ super allocWithZone:zone] init];
+    });
+    return manager;
+}
+//保证不返回实例的副本，通过返回self,返回同一个实例
+-(id)copyWithZone:(NSZone *)zone{
+    return self;
+}
+//保证不返回实例的副本，通过返回self,返回同一个实例
+-(id)mutableCopyWithZone:(NSZone *)zone{
+    return self;
+}
+@end</code></pre>
 <h2 id="一劳永逸，单例模式的优化"><a href="#一劳永逸，单例模式的优化" class="headerlink" title="一劳永逸，单例模式的优化"></a>一劳永逸，单例模式的优化</h2><p>如果想要一劳永逸，我们将面临两个问题</p>
 <ol>
 <li>如何写一份单例代码在ARC和MRC环境下都适用？</li>
 <li>如何使一份单例代码可以多个类共同使用  </li>
 </ol>
 <p>为了解决这两个问题，我们可以在PCH文件使用代参数的宏和条件编译<br>利用条件编译来判断是ARC还是MRC环境</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="meta">#if __has_feature(objc_arc)</span></span><br><span class="line"><span class="comment">//如果是ARC，那么就执行这里的代码1</span></span><br><span class="line"><span class="meta">#else</span></span><br><span class="line"><span class="comment">//如果不是ARC，那么就执行代理的代码2</span></span><br><span class="line"><span class="meta">#endif</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">#if __has_feature(objc_arc)
+//如果是ARC，那么就执行这里的代码1
+#else
+//如果不是ARC，那么就执行代理的代码2
+#endif</code></pre>
 <p>将单例方法写成宏定义：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="meta">#define singleH(name) +(instancetype)shareInstance;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#if __has_feature(objc_arc)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#define singleM(name) static id _instance;\</span></span><br><span class="line">+ (<span class="keyword">instancetype</span>)allocWithZone:(<span class="keyword">struct</span> _NSZone *)zone\</span><br><span class="line">&#123;\</span><br><span class="line"><span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;\</span><br><span class="line"><span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;\</span><br><span class="line">_instance = [<span class="keyword">super</span> allocWithZone:zone];\</span><br><span class="line">&#125;);\</span><br><span class="line"><span class="keyword">return</span> _instance;\</span><br><span class="line">&#125;\</span><br><span class="line">\</span><br><span class="line">+ (<span class="keyword">instancetype</span>)shareInstance\</span><br><span class="line">&#123;\</span><br><span class="line"><span class="keyword">return</span> [[<span class="keyword">self</span> alloc]init];\</span><br><span class="line">&#125;\</span><br><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone\</span><br><span class="line">&#123;\</span><br><span class="line"><span class="keyword">return</span> _instance;\</span><br><span class="line">&#125;\</span><br><span class="line">\</span><br><span class="line">- (<span class="keyword">id</span>)mutableCopyWithZone:(<span class="built_in">NSZone</span> *)zone\</span><br><span class="line">&#123;\</span><br><span class="line"><span class="keyword">return</span> _instance;\</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#else</span></span><br><span class="line"><span class="meta">#define singleM static id _instance;\</span></span><br><span class="line">+ (<span class="keyword">instancetype</span>)allocWithZone:(<span class="keyword">struct</span> _NSZone *)zone\</span><br><span class="line">&#123;\</span><br><span class="line"><span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;\</span><br><span class="line"><span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;\</span><br><span class="line">_instance = [<span class="keyword">super</span> allocWithZone:zone];\</span><br><span class="line">&#125;);\</span><br><span class="line"><span class="keyword">return</span> _instance;\</span><br><span class="line">&#125;\</span><br><span class="line">\</span><br><span class="line">+ (<span class="keyword">instancetype</span>)shareInstance\</span><br><span class="line">&#123;\</span><br><span class="line"><span class="keyword">return</span> [[<span class="keyword">self</span> alloc]init];\</span><br><span class="line">&#125;\</span><br><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone\</span><br><span class="line">&#123;\</span><br><span class="line"><span class="keyword">return</span> _instance;\</span><br><span class="line">&#125;\</span><br><span class="line">\</span><br><span class="line">- (<span class="keyword">id</span>)mutableCopyWithZone:(<span class="built_in">NSZone</span> *)zone\</span><br><span class="line">&#123;\</span><br><span class="line"><span class="keyword">return</span> _instance;\</span><br><span class="line">&#125;\</span><br><span class="line">- (<span class="keyword">oneway</span> <span class="keyword">void</span>)release\</span><br><span class="line">&#123;\</span><br><span class="line">&#125;\</span><br><span class="line">\</span><br><span class="line">- (<span class="keyword">instancetype</span>)<span class="keyword">retain</span>\</span><br><span class="line">&#123;\</span><br><span class="line"><span class="keyword">return</span> _instance;\</span><br><span class="line">&#125;\</span><br><span class="line">\</span><br><span class="line">- (<span class="built_in">NSUInteger</span>)retainCount\</span><br><span class="line">&#123;\</span><br><span class="line"><span class="keyword">return</span> MAXFLOAT;\</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#endif</span></span><br></pre></td></tr></table></figure>
+<pre><code class="objc">#define singleH(name) +(instancetype)shareInstance;
 
+#if __has_feature(objc_arc)
+
+#define singleM(name) static id _instance;\
++ (instancetype)allocWithZone:(struct _NSZone *)zone\
+{\
+static dispatch_once_t onceToken;\
+dispatch_once(&amp;onceToken, ^{\
+_instance = [super allocWithZone:zone];\
+});\
+return _instance;\
+}\
+\
++ (instancetype)shareInstance\
+{\
+return [[self alloc]init];\
+}\
+- (id)copyWithZone:(NSZone *)zone\
+{\
+return _instance;\
+}\
+\
+- (id)mutableCopyWithZone:(NSZone *)zone\
+{\
+return _instance;\
+}
+
+
+#else
+#define singleM static id _instance;\
++ (instancetype)allocWithZone:(struct _NSZone *)zone\
+{\
+static dispatch_once_t onceToken;\
+dispatch_once(&amp;onceToken, ^{\
+_instance = [super allocWithZone:zone];\
+});\
+return _instance;\
+}\
+\
++ (instancetype)shareInstance\
+{\
+return [[self alloc]init];\
+}\
+- (id)copyWithZone:(NSZone *)zone\
+{\
+return _instance;\
+}\
+\
+- (id)mutableCopyWithZone:(NSZone *)zone\
+{\
+return _instance;\
+}\
+- (oneway void)release\
+{\
+}\
+\
+- (instancetype)retain\
+{\
+return _instance;\
+}\
+\
+- (NSUInteger)retainCount\
+{\
+return MAXFLOAT;\
+}
+#endif</code></pre>
 <p>在.h文件中调用singleH(类名)<br>在.m文件中调用singleM(类名)</p>
 
             </div>
@@ -747,7 +915,15 @@ Tagged Pointer 专门用来存储小的对象，例如 NSNumber
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            显示层初级动画属性预览extension UIView &#123;    open var frame: CGRect    open var bounds: CGRect    open var center: CGPoint    
+                            显示层初级动画属性预览extension UIView {
+
+    open var frame: CGRect
+
+    open var bounds: CGRect
+
+    open var center: CGPoint
+
+ 
                         
                     </div>
                     <div class="publish-info">
@@ -887,7 +1063,7 @@ Tagged Pointer 专门用来存储小的对象，例如 NSNumber
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

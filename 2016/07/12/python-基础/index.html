@@ -399,7 +399,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        754
+                        759
                     </div>
                     
 
@@ -435,7 +435,11 @@
 <li>python文件以模块的形式组织</li>
 </ul>
 <h3 id="注释-："><a href="#注释-：" class="headerlink" title="注释(#)："></a>注释(#)：</h3><p>  python的注释语句从(#)号开始，注释可以在一行的任何地方开始，解析器会忽略该行(#)号之后的所有内容。我们需要正确使用注释，来提高代码的可读性</p>
-<h3 id="继续-‘-39"><a href="#继续-‘-39" class="headerlink" title="继续(‘&#39;) :"></a>继续(‘&#39;) :</h3><p>  一行过长的语句可以用(‘&#39;)分解成几行<br>  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#check condition</span></span><br><span class="line"><span class="keyword">if</span> (weather_is_hot == <span class="number">1</span> ) <span class="keyword">and</span> \</span><br><span class="line">        (shark_waring==<span class="number">0</span>):</span><br><span class="line">    send_goto_beach_mesg_to_pager()</span><br></pre></td></tr></table></figure></p>
+<h3 id="继续-‘-39"><a href="#继续-‘-39" class="headerlink" title="继续(‘&#39;) :"></a>继续(‘&#39;) :</h3><p>  一行过长的语句可以用(‘&#39;)分解成几行</p>
+<pre><code class="python">  #check condition
+  if (weather_is_hot == 1 ) and \
+          (shark_waring==0):
+      send_goto_beach_mesg_to_pager()</code></pre>
 <p>以下两种情况例外不使用\ 也可以换行</p>
 <ul>
 <li>使用闭合操作符，单一语句也可以跨多行：在含有小括号、中括号、花括号时可以多行书写</li>
@@ -446,7 +450,8 @@
 <blockquote>
 <p>因python使用空格缩进表达代码块逻辑，因此“神对的大括号战争”永不会发生在python身上。C、C++、java、OC开始使用大括号可以在第一行的尾部，也可以在第二行的头部，也可以在第二行空几格后开始，这就造成不同的人选择不同的风格。</p>
 </blockquote>
-<h3 id="同一行书写多个语句（-）"><a href="#同一行书写多个语句（-）" class="headerlink" title="同一行书写多个语句（;）"></a>同一行书写多个语句（;）</h3><p>  分号（;）允许将多个语句写在同一行上，语句之间用分号隔开，而这些语句也不能在这行开始新的代码块。<br>  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> sys;x= <span class="string">'food'</span>; sys.stdout.write(x+<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="同一行书写多个语句（-）"><a href="#同一行书写多个语句（-）" class="headerlink" title="同一行书写多个语句（;）"></a>同一行书写多个语句（;）</h3><p>  分号（;）允许将多个语句写在同一行上，语句之间用分号隔开，而这些语句也不能在这行开始新的代码块。</p>
+<pre><code class="python">  import sys;x= &#39;food&#39;; sys.stdout.write(x+&#39;\n&#39;)</code></pre>
 <h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><p>  每一个python脚本文件都可以当成一个模块。模块以磁盘文件形式存在，当一个模块变得过大，并且驱动了太多功能，应该考虑折分成多个模块。模块里的代码可能是一段直接执行的脚本，也可以是一堆类似库函数的代码，从而可以被别的模块导入（import）调用</p>
 
             </div>
@@ -869,7 +874,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

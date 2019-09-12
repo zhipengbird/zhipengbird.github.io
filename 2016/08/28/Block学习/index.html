@@ -409,7 +409,7 @@ int function(int">
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
-                        16 Min
+                        15 Min
                     </div>
                     
                 
@@ -432,19 +432,19 @@ int function(int">
 <a id="more"></a>
 <ol>
 <li><p>Ｃ语言中函数的声明与使用</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">function</span><span class="params">(<span class="keyword">int</span> count)</span></span>;<span class="comment">//声明名为func的函数</span></span><br><span class="line"><span class="keyword">int</span> res = function(<span class="number">10</span>);<span class="comment">//使用函数名称调用</span></span><br></pre></td></tr></table></figure>
+<pre><code class="c">int function(int count);//声明名为func的函数
+int res = function(10);//使用函数名称调用</code></pre>
 </li>
 <li><p>Ｃ中使用函数指针调用函数</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> (* funptr)(<span class="keyword">int</span>) = &amp;function;<span class="comment">//定义函数指针，取得函数的地址</span></span><br><span class="line"><span class="keyword">int</span> res = (* funptr)(<span class="number">10</span>);<span class="comment">//通过函数指针调用函数</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
+<pre><code class="c">int (* funptr)(int) = &amp;function;//定义函数指针，取得函数的地址
+int res = (* funptr)(10);//通过函数指针调用函数</code></pre>
 <p>通过Blocks，源代码中就能够使用匿名函数。</p>
 <blockquote>
 <p>对于开发人员而言，命名是工作的本质，函数名、变量名、方法名、属性名、类名和框架名等都必须具备。能够编写不带名称的函数对研发人员相当具有吸引力。</p>
 </blockquote>
-<ol start="3">
-<li>回顾Ｃ语言的函数中可能使用的变量<ul>
+</li>
+<li><p>回顾Ｃ语言的函数中可能使用的变量</p>
+<ul>
 <li>自动变量（局部变量）</li>
 <li>函数的参数</li>
 <li>静态变量（静态局部变量）</li>
@@ -494,58 +494,75 @@ int function(int">
 </tr>
 </tbody></table>
 <h1 id="Blocks模式"><a href="#Blocks模式" class="headerlink" title="Blocks模式"></a>Blocks模式</h1><h2 id="Block语法"><a href="#Block语法" class="headerlink" title="Block语法"></a>Block语法</h2><p>block块：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//使用block 定义一个加操作</span></span><br><span class="line">^(<span class="keyword">int</span> a,<span class="keyword">int</span> b)&#123;</span><br><span class="line">       <span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,a+b);</span><br><span class="line">   &#125;;</span><br><span class="line"><span class="comment">// 其完整的形式是</span></span><br><span class="line">^<span class="keyword">void</span>(<span class="keyword">int</span> a,<span class="keyword">int</span> b)&#123;</span><br><span class="line">       <span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,a+b);</span><br><span class="line">   &#125;;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">//使用block 定义一个加操作
+^(int a,int b){
+       NSLog(@&quot;%d&quot;,a+b);
+   };
+// 其完整的形式是
+^void(int a,int b){
+       NSLog(@&quot;%d&quot;,a+b);
+   };</code></pre>
 <p>C语言函数</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义一个加方法</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    NSLog(@<span class="string">"%d"</span>,a+b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c">//定义一个加方法
+void add(int a,int b){
+    NSLog(@&quot;%d&quot;,a+b);
+}</code></pre>
 <p>将上面两个代码进行比较，我们发现完整的Block语法与一般的Ｃ语言函数相比，有以下同点：</p>
 <ul>
 <li>没有函数:Block是匿名函数</li>
 <li>带有”^”: 返回值前带有“^”(插入记号).  </li>
 </ul>
 <ol>
-<li>Block的完整语法<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">^ 返回值类型 (参数列表)&#123;表达式&#125;;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>示例：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义一个加方法</span></span><br><span class="line"><span class="keyword">int</span>  add(<span class="keyword">int</span> a,<span class="keyword">int</span> b)&#123;</span><br><span class="line">    <span class="keyword">return</span> a+b ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<li><p>Block的完整语法</p>
+<pre><code>^ 返回值类型 (参数列表){表达式};</code></pre><p>示例：</p>
+<pre><code class="objc">//定义一个加方法
+int  add(int a,int b){
+ return a+b ;
+}</code></pre>
 <blockquote>
 <p>“返回值类型”同Ｃ语言函数的返回值类型，“参数列表”同Ｃ语言的参数列表，“表达式”同Ｃ语言函数中允许使用的表达式。当然与Ｃ语言函数一样，表达式中含有return语句时，其类型必须与返回值类型相同。</p>
 </blockquote>
-<ol start="2">
-<li>省略返回值类型<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    ^ 返回值类型 (参数列表)&#123;表达式&#125;;</span><br><span class="line">==&gt; ^ (参数列表)&#123;表达式&#125;;</span><br></pre></td></tr></table></figure>
-
 </li>
-</ol>
-<p>示例：  </p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">^(<span class="keyword">int</span> a,<span class="keyword">int</span> b)&#123;</span><br><span class="line">      <span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,a+b);</span><br><span class="line">  &#125;;</span><br><span class="line">  ^(<span class="keyword">int</span> a,<span class="keyword">int</span> b)&#123;</span><br><span class="line">      <span class="keyword">return</span> a+b;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
-
+<li><p>省略返回值类型</p>
+<pre><code> ^ 返回值类型 (参数列表){表达式};
+==&gt; ^ (参数列表){表达式};</code></pre><p>示例：  </p>
+<pre><code class="objc">^(int a,int b){
+   NSLog(@&quot;%d&quot;,a+b);
+};
+^(int a,int b){
+   return a+b;
+};</code></pre>
 <blockquote>
 <p>省略返回值类型，如果表达式中有return 语句就使用该返回值类型，如果表达式没有return语句，使用void类型。表达工中含有多个return语句时，所有return的返回值类型必须相同。</p>
 </blockquote>
-<ol start="3">
+</li>
 <li><p>省略返回值类型和参数列表</p>
 <blockquote>
 <p>如果不使用参数，参数列表也可以省略  </p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">^ 返回值类型 (参数列表)&#123;表达式&#125;;</span><br><span class="line">==&gt; ^&#123;表达式&#125;;</span><br></pre></td></tr></table></figure>
+<pre><code>^ 返回值类型 (参数列表){表达式};
+==&gt; ^{表达式};</code></pre><p>示例：</p>
+<pre><code class="objc">^{
+      //TODO:: do something
+      NSLog(@&quot;hello&quot;);
+  };
 
-<p>示例：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">^&#123;</span><br><span class="line">       <span class="comment">//<span class="doctag">TODO:</span>: do something</span></span><br><span class="line">       <span class="built_in">NSLog</span>(<span class="string">@"hello"</span>);</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">^&#123;</span><br><span class="line">     <span class="comment">//<span class="doctag">TODO:</span>:do something</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">@"hello"</span>;</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
-
+^{
+    //TODO::do something
+   return @&quot;hello&quot;;
+};</code></pre>
 </li>
 </ol>
 <h2 id="Block类型变量"><a href="#Block类型变量" class="headerlink" title="Block类型变量"></a>Block类型变量</h2><blockquote>
 <p>从Block语法的表述方式上来看，除了没有名称及带有“^”以外，其他都与Ｃ语言函数定义一样。在定义Ｃ函数时，可以将所定义的函数地址赋值给函数指针类型变量中。</p>
 </blockquote>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义名为add的一个加法</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> add1,<span class="keyword">int</span> add2)</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> add2+add1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> (*funcPtr)(<span class="keyword">int</span>,<span class="keyword">int</span>)=&amp;add;<span class="comment">//定义函数指针类型变量，并将变量指向add函数的地址</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="c">// 定义名为add的一个加法
+int add(int add1,int add2){
+  return add2+add1;
+}
+int (*funcPtr)(int,int)=&amp;add;//定义函数指针类型变量，并将变量指向add函数的地址</code></pre>
 <p>同样地，在Block语法下，可以将Block语法赋值给声明为Block类型的变量中。<br>声明Block类型变量示例：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> (^add)(<span class="keyword">int</span> add1,<span class="keyword">int</span> add2);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">int (^add)(int add1,int add2);</code></pre>
 <p>对比函数指针的定义，会发现声明Block类型变量仅仅是将声明函数指针类型变量的“＊”变成了“^”.Block类型变量与一般Ｃ语言变量完全相同，可以作以下用途使用：</p>
 <ul>
 <li>自动变量</li>
@@ -555,156 +572,334 @@ int function(int">
 <li>全局变量</li>
 </ul>
 <p>使用Block语法将Block赋值为Block类型变量：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> (^add)(<span class="keyword">int</span> add1,<span class="keyword">int</span> add2)=^(<span class="keyword">int</span> add1,<span class="keyword">int</span> add2)&#123;</span><br><span class="line">       <span class="keyword">return</span> add1+add2;</span><br><span class="line">   &#125;;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">int (^add)(int add1,int add2)=^(int add1,int add2){
+       return add1+add2;
+   };</code></pre>
 <p>由“^”开始的Block语法生成Block被赋值给变量add中，Block变量与一般的变量一样，所以，也可以由Block类型变量向Block类型变量赋值。</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> (^add1)(<span class="keyword">int</span>,<span class="keyword">int</span>)= add;</span><br><span class="line"><span class="keyword">int</span> (^add2)(<span class="keyword">int</span>,<span class="keyword">int</span>);</span><br><span class="line">add2= add1;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">    int (^add1)(int,int)= add;
+    int (^add2)(int,int);
+    add2= add1;</code></pre>
 <p>在函数参数中可以使用Block变量向函数传递Block:</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> addFunc(<span class="keyword">int</span> (^add)(<span class="keyword">int</span>))&#123;</span><br><span class="line">    add(<span class="number">12</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">void addFunc(int (^add)(int)){
+    add(12);
+}</code></pre>
 <p>在函数返回值中指字Block类型，可以将Block作为函数的返回值返回：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> (^func())(<span class="keyword">int</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span>^(<span class="keyword">int</span> count)&#123;</span><br><span class="line">        <span class="keyword">return</span> count+<span class="number">1</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">int (^func())(int) {
+    return^(int count){
+        return count+1;
+    };
+};</code></pre>
 <p>使用typedef简化Block的声明和使用：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// typedef 的语法规则</span></span><br><span class="line"><span class="keyword">typedef</span> &lt;<span class="meta">#returnType#&gt;(^<span class="meta-string">&lt;#name#&gt;</span>)(<span class="meta-string">&lt;#arguments#&gt;</span>);</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">// typedef 的语法规则
+typedef &lt;#returnType#&gt;(^&lt;#name#&gt;)(&lt;#arguments#&gt;);</code></pre>
 <p>通过typedef,我们将上述函数中使用的Block,和函数返回值指定Block返回类型重写：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> (^addBlock)(<span class="keyword">int</span>);<span class="comment">//定义一个block类型</span></span><br><span class="line"><span class="comment">// 在函数参数中传递block</span></span><br><span class="line"><span class="keyword">void</span> addFunc(addBlock add) &#123;</span><br><span class="line">  add(<span class="number">12</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 返回block类型返回值</span></span><br><span class="line">addBlock func()&#123;</span><br><span class="line">    <span class="keyword">return</span> ^(<span class="keyword">int</span> number)&#123;</span><br><span class="line">        <span class="keyword">return</span> number+<span class="number">1</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">typedef int (^addBlock)(int);//定义一个block类型
+// 在函数参数中传递block
+void addFunc(addBlock add) {
+  add(12);
+}
+// 返回block类型返回值
+addBlock func(){
+    return ^(int number){
+        return number+1;
+    };
+};</code></pre>
 <blockquote>
 <p>在Ｃ语言中可以使用函数指针，那么block是否也可以使用Block指针类型变量呢？<br>答案：那是肯定的 。block类型变量可以像Ｃ语言中其类型变量一亲使用。</p>
 </blockquote>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> (^pointBlock)(<span class="keyword">int</span>);</span><br><span class="line">pointBlock block = ^(<span class="keyword">int</span> count)&#123;</span><br><span class="line">  <span class="keyword">return</span> count+<span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line">pointBlock * pointB= &amp;block;</span><br><span class="line">(*pointB)(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">typedef int (^pointBlock)(int);
+pointBlock block = ^(int count){
+  return count+1;
+};
+pointBlock * pointB= &amp;block;
+(*pointB)(10);</code></pre>
 <h2 id="截获自动变量值"><a href="#截获自动变量值" class="headerlink" title="截获自动变量值"></a>截获自动变量值</h2><blockquote>
 <p>通过前面的block语法和block类型变量的说明，我们已经知道，block是“带有自动变量值的匿名函数”，与Ｃ语言函相比中，我们对匿名函数的理解会更加深入，“带有自动变量值”在block中是怎么样的表现形式？＝＝＝&gt; “截获自动变量值”</p>
 </blockquote>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> val = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *fmt = <span class="string">"val = %d\n"</span>;</span><br><span class="line"><span class="keyword">void</span> (^block)() =^&#123;</span><br><span class="line">  printf(fmt,val );</span><br><span class="line">&#125;;</span><br><span class="line">val = <span class="number">1000</span>;</span><br><span class="line">fmt =<span class="string">"val value was changed .val = %d\n"</span>;</span><br><span class="line">block();</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">  int val = 100;
+  const char *fmt = &quot;val = %d\n&quot;;
+  void (^block)() =^{
+    printf(fmt,val );
+  };
+  val = 1000;
+  fmt =&quot;val value was changed .val = %d\n&quot;;
+  block();</code></pre>
 <p><strong>Block语法的表达式中使用的是在它之前声明的自动变量fmt和val.在Block中Block表达式截获所使用的局部变量的值，即何存该局部变量的瞬间值。因为Block表达式保存了局部变量的值，所以在执行Block语法后，改动block表达式中使用的局部变量的值也不会影响Block执行时局部变量的值</strong></p>
 <h2 id="block说明符"><a href="#block说明符" class="headerlink" title="__block说明符"></a><code>__block</code>说明符</h2><blockquote>
 <p>局部变量值截获只能保存执行Block语法瞬间的值，保存后不能改写该值</p>
 </blockquote>
 <p>尝试改写截获的局部变量的值：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> val = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">void</span> (&amp;block)()=^ &#123;</span><br><span class="line">  val = <span class="number">10000</span>;<span class="comment">//给局部变量赋上新值</span></span><br><span class="line">&#125;;</span><br><span class="line">block();</span><br><span class="line">printf(<span class="string">"val = %d\n"</span>,val );</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">int val = 100;
+void (&amp;block)()=^ {
+  val = 10000;//给局部变量赋上新值
+};
+block();
+printf(&quot;val = %d\n&quot;,val );</code></pre>
 <p>尝试编译该段代码，Xcode6会给一个大大的红色错误警告，警告内容为：<code>Variable is not assignable (missing __block type specifier)</code>  </p>
 <p>若想在Block语法的表达式中将值赋值给在Block语法外声明的局部变量，需要在自动变量上附加<code>__block</code>修饰符。将上述代码进行改正后如下：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">__block <span class="keyword">int</span> val = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">void</span> (^block)()=^ &#123;</span><br><span class="line">  val = <span class="number">10000</span>;<span class="comment">//给局部变量赋上新值</span></span><br><span class="line">&#125;;</span><br><span class="line">block();</span><br><span class="line">printf(<span class="string">"val = %d\n"</span>,val );</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">__block int val = 100;
+void (^block)()=^ {
+  val = 10000;//给局部变量赋上新值
+};
+block();
+printf(&quot;val = %d\n&quot;,val );</code></pre>
 <p>该代码段可以正常运行。</p>
 <blockquote>
 <p>使用附有 <code>__block</code>修饰符的局部变量可以Block中赋值。该变量称为<code>__block</code>变量</p>
 </blockquote>
 <h2 id="截获的自动变量"><a href="#截获的自动变量" class="headerlink" title="截获的自动变量"></a>截获的自动变量</h2><p>在前面<strong>block修饰符一小节中，我们了解到，在没有加</strong>block修饰符，直接去修改block语法表达式中截获的自动变量的值时，会产生编译错误。那么截获OC对象会产生编译错误吗？</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSMutableArray</span> *array = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line"><span class="keyword">void</span> (^block)()=^  &#123;</span><br><span class="line">  <span class="keyword">id</span> obj = [[<span class="built_in">NSObject</span> alloc]init];</span><br><span class="line">  [array addObject:obj];</span><br><span class="line">&#125;</span><br><span class="line">block();</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">NSMutableArray *array = [NSMutableArray array];
+void (^block)()=^  {
+  id obj = [[NSObject alloc]init];
+  [array addObject:obj];
+}
+block();</code></pre>
 <p>代码编译运行没有问，若向变量赋上新的值就会产生编译错误了，代码如下：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSMutableArray</span> *array = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line"><span class="keyword">void</span> (^block)()=^  &#123;</span><br><span class="line">  array = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">block();</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">NSMutableArray *array = [NSMutableArray array];
+void (^block)()=^  {
+  array = [NSMutableArray array];
 
+}
+block();</code></pre>
 <p>上述代码同样会产生<code>//  Variable is not assignable (missing __block type specifier)</code>错误提示<br>解决办法就是在array前添加__block修饰符</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">__block <span class="built_in">NSMutableArray</span> *array = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line"><span class="keyword">void</span> (^block)()=^  &#123;</span><br><span class="line">  array = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">&#125;</span><br><span class="line">block();</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">__block NSMutableArray *array = [NSMutableArray array];
+void (^block)()=^  {
+  array = [NSMutableArray array];
+}
+block();</code></pre>
 <p>使用C语言数组时的指针的坑：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> text[]= <span class="string">"hello"</span>;</span><br><span class="line"><span class="keyword">void</span> (^block)() =^  &#123;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%c\n"</span>, text[<span class="number">2</span>]);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c">const char text[]= &quot;hello&quot;;
+void (^block)() =^  {
+printf(&quot;%c\n&quot;, text[2]);
+};</code></pre>
 <p><strong>使用Ｃ语言的字符串数组，而没有向截获的自动变量赋值 肯定没有什么问题？</strong><br>编译代码后得到：<code>Cannot refer to declaration with an array type inside block</code>错误提示<br>因为现在block中，截获的自动变量的方法并没有实现对Ｃ语言数组的截获。使用指针可以解决这个问题</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *text = <span class="string">"hello"</span>;</span><br><span class="line"><span class="keyword">void</span> (^block)() =^  &#123;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%c\n"</span>, text[<span class="number">2</span>]);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c">const char *text = &quot;hello&quot;;
+void (^block)() =^  {
+printf(&quot;%c\n&quot;, text[2]);
+};</code></pre>
 <h1 id="Blocks实现"><a href="#Blocks实现" class="headerlink" title="Blocks实现"></a>Blocks实现</h1><h2 id="Block的实质"><a href="#Block的实质" class="headerlink" title="Block的实质"></a>Block的实质</h2><blockquote>
 <p>Block是带有自动变量值的匿名函数，但block究竟是什么？</p>
 </blockquote>
 <p>Clang(LLVM编译器)具有转换为可读源码的功能。通过“-rewrite-objc”选项能将Block语法的源码转成C++源码（struct结构体）。<br>使用方法：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">clang -rewrite-objc 源码文件名</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c">clang -rewrite-objc 源码文件名</code></pre>
 <p>以最为简单的block代码为例：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="meta">#include<span class="meta-string">"stdio.h"</span></span></span><br><span class="line"><span class="keyword">int</span> main()&#123;</span><br><span class="line">    <span class="keyword">void</span>(^block)()=^&#123;</span><br><span class="line">        printf(<span class="string">"hello"</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">    block();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">#include&quot;stdio.h&quot;
+int main(){
+    void(^block)()=^{
+        printf(&quot;hello&quot;);
+    };
+    block();
+    return 0;
+}</code></pre>
 <p>将以上代码Clang成源码：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> __block_impl &#123;</span><br><span class="line">    <span class="keyword">void</span> *isa;</span><br><span class="line">    <span class="keyword">int</span> Flags;</span><br><span class="line">    <span class="keyword">int</span> Reserved;</span><br><span class="line">    <span class="keyword">void</span> *FuncPtr;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> __main_block_impl_0 &#123;</span><br><span class="line">  <span class="keyword">struct</span> __block_impl impl;</span><br><span class="line">  <span class="keyword">struct</span> __main_block_desc_0 * Desc;</span><br><span class="line"></span><br><span class="line">  __main_block_impl_0(<span class="keyword">void</span> *fp, <span class="keyword">struct</span> __main_block_desc_0 *desc, <span class="keyword">int</span> flags=<span class="number">0</span>) &#123;</span><br><span class="line">    impl.isa = &amp;_NSConcreteStackBlock;</span><br><span class="line">    impl.Flags = flags;</span><br><span class="line">    impl.FuncPtr = fp;</span><br><span class="line">    Desc = desc;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __main_block_func_0(<span class="keyword">struct</span> __main_block_impl_0 *__cself) &#123;</span><br><span class="line">    printf(<span class="string">"hello"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">struct</span> __main_block_desc_0 &#123;</span><br><span class="line">  size_t reserved;</span><br><span class="line">  size_t Block_size;</span><br><span class="line">&#125; __main_block_desc_0_DATA = &#123; <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> __main_block_impl_0)&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> main()&#123;</span><br><span class="line"><span class="keyword">void</span>(*block)()=((<span class="keyword">void</span> ( *)())&amp;__main_block_impl_0((<span class="keyword">void</span> *)__main_block_func_0, &amp;__main_block_desc_0_DATA));</span><br><span class="line">((<span class="keyword">void</span> ( *)(__block_impl * ))((__block_impl *)block)-&gt;FuncPtr)((__block_impl *)block);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">struct</span> IMAGE_INFO &#123; <span class="keyword">unsigned</span> version; <span class="keyword">unsigned</span> flag; &#125; _OBJC_IMAGE_INFO = &#123; <span class="number">0</span>, <span class="number">2</span> &#125;;</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">struct __block_impl {
+    void *isa;
+    int Flags;
+    int Reserved;
+    void *FuncPtr;
+};
+struct __main_block_impl_0 {
+  struct __block_impl impl;
+  struct __main_block_desc_0 * Desc;
 
+  __main_block_impl_0(void *fp, struct __main_block_desc_0 *desc, int flags=0) {
+    impl.isa = &amp;_NSConcreteStackBlock;
+    impl.Flags = flags;
+    impl.FuncPtr = fp;
+    Desc = desc;
+  }
+};
+static void __main_block_func_0(struct __main_block_impl_0 *__cself) {
+    printf(&quot;hello&quot;);
+}
+
+static struct __main_block_desc_0 {
+  size_t reserved;
+  size_t Block_size;
+} __main_block_desc_0_DATA = { 0, sizeof(struct __main_block_impl_0)};
+
+int main(){
+void(*block)()=((void ( *)())&amp;__main_block_impl_0((void *)__main_block_func_0, &amp;__main_block_desc_0_DATA));
+((void ( *)(__block_impl * ))((__block_impl *)block)-&gt;FuncPtr)((__block_impl *)block);
+return 0;
+}
+static struct IMAGE_INFO { unsigned version; unsigned flag; } _OBJC_IMAGE_INFO = { 0, 2 };</code></pre>
 <p>接下来我们来细读下这段代码：<br>最初的block语法：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">^&#123;</span><br><span class="line">  printf(<span class="string">"hello"</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">    ^{
+      printf(&quot;hello&quot;);
+    };</code></pre>
 <p>转换后：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __main_block_func_0(<span class="keyword">struct</span> __main_block_impl_0 *__cself) &#123;</span><br><span class="line">    printf(<span class="string">"hello"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">static void __main_block_func_0(struct __main_block_impl_0 *__cself) {
+    printf(&quot;hello&quot;);
+}</code></pre>
 <p>由上述代码所示，Block使用的匿名函数实际上被作为简单的C语言函数来处理。另外，根据Block语法所属的函数名（这里是main）和Block语法在该函数出现的位置顺序值来给经clang变换的函数命名。</p>
-<h3 id="了解clang源码中的结构体"><a href="#了解clang源码中的结构体" class="headerlink" title="了解clang源码中的结构体"></a>了解clang源码中的结构体</h3><p>  先看该Ｃ函数的参数的声明：<br>  <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">main_block_impl_0</span> *__<span class="title">cself</span></span></span><br></pre></td></tr></table></figure></p>
-<p>  参数<code>__cself</code>是<code>__main_block_impl_0</code>结构体指针，该结构体的声明如下：<br>  <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">main_block_impl_0</span> &#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> __<span class="title">block_impl</span> <span class="title">impl</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> __<span class="title">main_block_desc_0</span> * <span class="title">Desc</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>  为简单明了，此处将构造函数给去了。第一个成员变量是<code>impl</code>,是<code>__block_impl</code>的一个变量，其结构体的声明如下：<br>  <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">block_impl</span> &#123;</span></span><br><span class="line">    <span class="keyword">void</span> *isa;</span><br><span class="line">    <span class="keyword">int</span> Flags;</span><br><span class="line">    <span class="keyword">int</span> Reserved;</span><br><span class="line">    <span class="keyword">void</span> *FuncPtr;<span class="comment">//函数指针</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>  第二个成员变量是<code>Desc</code>指针，是<code>__main_block_desc_0</code>结构体的一个变量，其声明如下：<br>  <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> __<span class="title">main_block_desc_0</span> &#123;</span></span><br><span class="line">  <span class="keyword">size_t</span> reserved;<span class="comment">//保留区域</span></span><br><span class="line">  <span class="keyword">size_t</span> Block_size;<span class="comment">//Block的大小</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>  接下来我们来看下初始化含有这些结构体的<code>__main_block_impl_0</code>结构体构造函数:<br>  <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">__main_block_impl_0(<span class="keyword">void</span> *fp, struct __main_block_desc_0 *desc, <span class="keyword">int</span> flags=<span class="number">0</span>) &#123;</span><br><span class="line">  impl.isa = &amp;_NSConcreteStackBlock;</span><br><span class="line">  impl.Flags = flags;</span><br><span class="line">  impl.FuncPtr = fp;</span><br><span class="line">  Desc = desc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="了解clang源码中的结构体"><a href="#了解clang源码中的结构体" class="headerlink" title="了解clang源码中的结构体"></a>了解clang源码中的结构体</h3><p>  先看该Ｃ函数的参数的声明：</p>
+<pre><code class="c">  struct __main_block_impl_0 *__cself</code></pre>
+<p>  参数<code>__cself</code>是<code>__main_block_impl_0</code>结构体指针，该结构体的声明如下：</p>
+<pre><code class="c">  struct __main_block_impl_0 {
+    struct __block_impl impl;
+    struct __main_block_desc_0 * Desc;
+  };</code></pre>
+<p>  为简单明了，此处将构造函数给去了。第一个成员变量是<code>impl</code>,是<code>__block_impl</code>的一个变量，其结构体的声明如下：</p>
+<pre><code class="c">  struct __block_impl {
+      void *isa;
+      int Flags;
+      int Reserved;
+      void *FuncPtr;//函数指针
+  };
+</code></pre>
+<p>  第二个成员变量是<code>Desc</code>指针，是<code>__main_block_desc_0</code>结构体的一个变量，其声明如下：</p>
+<pre><code class="c">  static struct __main_block_desc_0 {
+    size_t reserved;//保留区域
+    size_t Block_size;//Block的大小
+  };</code></pre>
+<p>  接下来我们来看下初始化含有这些结构体的<code>__main_block_impl_0</code>结构体构造函数:</p>
+<pre><code class="c">  __main_block_impl_0(void *fp, struct __main_block_desc_0 *desc, int flags=0) {
+    impl.isa = &amp;_NSConcreteStackBlock;
+    impl.Flags = flags;
+    impl.FuncPtr = fp;
+    Desc = desc;
+  }</code></pre>
 <p>以上是初始化<code>__main_block_impl_0</code>结构体成员的源码，<code>_NSConcreteStackBlock</code>用于初始化<code>__block_impl</code>结构体的<code>isa</code>成员，在后面会对<code>_NSConcreteStackBlock</code>进行讲解。</p>
-<h3 id="调用结构体构造函数"><a href="#调用结构体构造函数" class="headerlink" title="调用结构体构造函数"></a>调用结构体构造函数</h3><p>  以下是<code>__main_block_impl_0</code>结构体构造函数的调用：<br>  <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span>(*block)()=((<span class="keyword">void</span> (*)())&amp;__main_block_impl_0((<span class="keyword">void</span> *)__main_block_func_0, &amp;__main_block_desc_0_DATA));</span><br></pre></td></tr></table></figure></p>
-<p>  什么鬼，看不懂，分解他：<br>  <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">main_block_impl_0</span> <span class="title">temp</span> =__<span class="title">main_block_impl_0</span>(__<span class="title">main_block_func_0</span>,&amp;__<span class="title">main_block_desc_0_DATA</span>);</span><span class="comment">//生成`__main_block_impl_0`结构体实例的变量</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">main_block_impl_0</span> *<span class="title">blk</span> = &amp;<span class="title">temp</span>;</span><span class="comment">//将生成的实例变量赋值给结构体指针</span></span><br></pre></td></tr></table></figure></p>
-<p>  上述代码对应的源码：<br>  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span>(^block)()=^&#123;</span><br><span class="line">       printf(<span class="string">"hello"</span>);</span><br><span class="line">   &#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="调用结构体构造函数"><a href="#调用结构体构造函数" class="headerlink" title="调用结构体构造函数"></a>调用结构体构造函数</h3><p>  以下是<code>__main_block_impl_0</code>结构体构造函数的调用：</p>
+<pre><code class="c">  void(*block)()=((void (*)())&amp;__main_block_impl_0((void *)__main_block_func_0, &amp;__main_block_desc_0_DATA));</code></pre>
+<p>  什么鬼，看不懂，分解他：</p>
+<pre><code class="c">  struct __main_block_impl_0 temp =__main_block_impl_0(__main_block_func_0,&amp;__main_block_desc_0_DATA);//生成`__main_block_impl_0`结构体实例的变量
+  struct __main_block_impl_0 *blk = &amp;temp;//将生成的实例变量赋值给结构体指针</code></pre>
+<p>  上述代码对应的源码：</p>
+<pre><code class="objc">  void(^block)()=^{
+         printf(&quot;hello&quot;);
+     };</code></pre>
 <blockquote>
 <p>将block语法生成的block赋给block类型的变量block，等同于将<code>__main_block_impl_0</code>结构体实例的指针赋给变量blk.该源码中的Block就是<code>__main_block_impl_0</code>结构体类型的自动变量blk.</p>
 </blockquote>
-<h3 id="深入-main-block-impl-0构造函数"><a href="#深入-main-block-impl-0构造函数" class="headerlink" title="深入__main_block_impl_0构造函数"></a>深入<code>__main_block_impl_0</code>构造函数</h3><p>  构造函数：<br>  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">__main_block_impl_0(__main_block_func_0,&amp;__main_block_desc_0_DATA);</span><br></pre></td></tr></table></figure></p>
+<h3 id="深入-main-block-impl-0构造函数"><a href="#深入-main-block-impl-0构造函数" class="headerlink" title="深入__main_block_impl_0构造函数"></a>深入<code>__main_block_impl_0</code>构造函数</h3><p>  构造函数：</p>
+<pre><code class="objc">  __main_block_impl_0(__main_block_func_0,&amp;__main_block_desc_0_DATA);
+</code></pre>
 <p>第一个参数是由Block语法转换成Ｃ语言函数指针。第二个参数是作为静态全局变量初始化的<code>__main_block_desc_0</code>结构体实例指针。<br>以下为<code>__main_block_desc_0</code>结构体实例化部分代码：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> __<span class="title">main_block_desc_0</span>   __<span class="title">main_block_desc_0_DATA</span> = &#123;</span></span><br><span class="line">  <span class="number">0</span>,</span><br><span class="line">  <span class="keyword">sizeof</span>(struct __main_block_impl_0)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c">static struct __main_block_desc_0   __main_block_desc_0_DATA = {
+  0,
+  sizeof(struct __main_block_impl_0)
+};</code></pre>
 <p>该源码中使用Block,即__main_block_impl_0结构体实例的大小进行初始化。</p>
 <h3 id="展开后的-main-block-impl-0"><a href="#展开后的-main-block-impl-0" class="headerlink" title="展开后的__main_block_impl_0"></a>展开后的<code>__main_block_impl_0</code></h3><p>我们来看下栈上的<code>__main_block_impl_0</code>结构体实例如何根据参数进行初始化。将结构体中的<code>__block_impl</code>展开，会是如下形式：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">main_block_impl_0</span>&#123;</span></span><br><span class="line">  <span class="keyword">void</span> *isa;</span><br><span class="line">  <span class="keyword">int</span> Flags;</span><br><span class="line">  <span class="keyword">int</span> Reserved;</span><br><span class="line">  <span class="keyword">void</span> *FuncPtr;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> __<span class="title">main_block_desc_0</span> * <span class="title">Desc</span>;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="C">struct __main_block_impl_0{
+  void *isa;
+  int Flags;
+  int Reserved;
+  void *FuncPtr;
+  struct __main_block_desc_0 * Desc;
+}</code></pre>
 <p>该构造函数会像下面一样进行初始化：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">isa= &amp; _NSConcreteStackBlock;</span><br><span class="line">Flags= <span class="number">0</span>;</span><br><span class="line">Reserved= <span class="number">0</span>;</span><br><span class="line">FuncPtr= __main_block_func_0;</span><br><span class="line">Desc= &amp; __main_block_desc_0_DATA;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="C">isa= &amp; _NSConcreteStackBlock;
+Flags= 0;
+Reserved= 0;
+FuncPtr= __main_block_func_0;
+Desc= &amp; __main_block_desc_0_DATA;
+</code></pre>
 <h3 id="block的调用"><a href="#block的调用" class="headerlink" title="block的调用"></a>block的调用</h3><p>说了这么久，还没有看到block的调用，接下来我们分析下block的调用</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">block();</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">   block();</code></pre>
 <p>转换后的源码：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">((<span class="keyword">void</span> ( * )(__block_impl *))((__block_impl *)block)-&gt;FuncPtr)((__block_impl *)block);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">((void ( * )(__block_impl *))((__block_impl *)block)-&gt;FuncPtr)((__block_impl *)block);</code></pre>
 <p>转换部分太多太杂，去掉他：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">（*block-&gt;impl.FuncPtr）(block);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">（*block-&gt;impl.FuncPtr）(block);</code></pre>
 <p>这就是简单的使用函数指针调用函数。正如我们所确认的,由Block语法转换的<code>__main_block_func_0</code>函数的指针被赋值给成员变量<code>FuncPtr</code>.另外，<code>__main_block_func_0</code>的参数<code>__cself</code>指向<code>Block</code>。在调用该函数的源代码中可以看出block正是作为以数进行了传递。</p>
-<h3 id="解密isa"><a href="#解密isa" class="headerlink" title="解密isa"></a>解密<code>isa</code></h3><p>在刚才我们看到这样的一句代码：<br> <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">isa= &amp;_NSConcreteStackBlock;</span><br></pre></td></tr></table></figure></p>
-<p> 将Block指针赋给Block的结构体成员变量<code>isa</code>.要理解<code>isa</code>是何方神圣，我们需要先了解下OC的类和对象的实质。Block就是OC对象。<br> 我们将一个简单person类，clang下它的源码：<br> <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="class"><span class="keyword">@interface</span> <span class="title">Person</span> : <span class="title">NSObject</span></span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> a ;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
-<p> clang后的代码，我将分散的代码集中到一块了：<br> <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#ifndef _REWRITER_typedef_Person</span></span><br><span class="line"><span class="meta">#define _REWRITER_typedef_Person</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_object Person;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;&#125; _objc_exc_Person;</span><br><span class="line"><span class="meta">#endif</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> objc_object &#123;</span><br><span class="line">    Class isa __attribute__((deprecated));</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_object *<span class="keyword">id</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这个是在runtime.h文件中找到的</span></span><br><span class="line"><span class="keyword">struct</span> objc_class &#123;</span><br><span class="line">    Class isa  OBJC_ISA_AVAILABILITY;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_class *Class;</span><br><span class="line"><span class="keyword">struct</span> <span class="built_in">NSObject_IMPL</span> &#123;</span><br><span class="line">    Class isa;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> Person_IMPL &#123;</span><br><span class="line">	<span class="keyword">struct</span> <span class="built_in">NSObject_IMPL</span> <span class="built_in">NSObject_IVARS</span>;</span><br><span class="line">	<span class="keyword">int</span> a;</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="解密isa"><a href="#解密isa" class="headerlink" title="解密isa"></a>解密<code>isa</code></h3><p>在刚才我们看到这样的一句代码：</p>
+<pre><code class="objc"> isa= &amp;_NSConcreteStackBlock;</code></pre>
+<p> 将Block指针赋给Block的结构体成员变量<code>isa</code>.要理解<code>isa</code>是何方神圣，我们需要先了解下OC的类和对象的实质。Block就是OC对象。<br> 我们将一个简单person类，clang下它的源码：</p>
+<pre><code class="objc"> @interface Person : NSObject
+{
+    int a ;
+    int age;
+}
+@end</code></pre>
+<p> clang后的代码，我将分散的代码集中到一块了：</p>
+<pre><code class="objc"> #ifndef _REWRITER_typedef_Person
+#define _REWRITER_typedef_Person
+typedef struct objc_object Person;
+typedef struct {} _objc_exc_Person;
+#endif
+
+struct objc_object {
+    Class isa __attribute__((deprecated));
+};
+typedef struct objc_object *id;
+
+//这个是在runtime.h文件中找到的
+struct objc_class {
+    Class isa  OBJC_ISA_AVAILABILITY;
+};
+
+typedef struct objc_class *Class;
+struct NSObject_IMPL {
+    Class isa;
+};
+
+struct Person_IMPL {
+    struct NSObject_IMPL NSObject_IVARS;
+    int a;
+    int age;
+};
+</code></pre>
 <p>“id”类型变量主要用于存放OC对象。我们可以像使用 <code>void *</code> 那样使用id.由上述clang中的代码我们发现id的声明如下：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_object *<span class="keyword">id</span>;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">  typedef struct objc_object *id;</code></pre>
 <p><code>id</code>是<code>objc_object</code>结构体的一个指针类型变量，<code>objc_object</code>其声明如下：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> objc_object &#123;</span><br><span class="line">    Class isa __attribute__((deprecated));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">  struct objc_object {
+      Class isa __attribute__((deprecated));
+  };</code></pre>
 <p>该结构体中只有一个<code>isa</code>成员变量，<code>Class</code>又是什么呢？</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_class *Class;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">typedef struct objc_class *Class;</code></pre>
 <p><code>Class</code>是<code>objc_class</code>的指针类型变量，<code>objc_class</code>又是什么东西，在runtime.h文件中，我找到了如下代码：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//这个是在runtime.h文件中找到的</span></span><br><span class="line"><span class="keyword">struct</span> objc_class &#123;</span><br><span class="line">    Class isa  OBJC_ISA_AVAILABILITY;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">//这个是在runtime.h文件中找到的
+struct objc_class {
+    Class isa  OBJC_ISA_AVAILABILITY;
+};</code></pre>
 <p>与<code>objc_object</code>结构体相对比，我们发现，它们的结构体成员都是一样的。<code>objc_object</code>和<code>objc_class</code>结构体都是各个对象和类的实现中使用的最基本的结构体。</p>
 <p>我们回过头来看下，刚才声明<code>Person</code>类：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Person</span> : <span class="title">NSObject</span></span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">int</span> a ;</span><br><span class="line">   <span class="keyword">int</span> age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">@interface Person : NSObject
+{
+   int a ;
+   int age;
+}
+@end</code></pre>
 <p>clang转换后的结构体为：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> Person_IMPL &#123;</span><br><span class="line">	<span class="keyword">struct</span> <span class="built_in">NSObject_IMPL</span> <span class="built_in">NSObject_IVARS</span>;</span><br><span class="line">	<span class="keyword">int</span> a;</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">struct Person_IMPL {
+    struct NSObject_IMPL NSObject_IVARS;
+    int a;
+    int age;
+};</code></pre>
 <p>将结构体中使用到的<code>NSObject_IMPL</code>结构体：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="built_in">NSObject_IMPL</span> &#123;</span><br><span class="line">    Class isa;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">struct NSObject_IMPL {
+    Class isa;
+};</code></pre>
 <p>展开后，得到：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> Person_IMPL &#123;</span><br><span class="line">  Class isa;</span><br><span class="line">	<span class="keyword">int</span> a;</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">struct Person_IMPL {
+  Class isa;
+    int a;
+    int age;
+};</code></pre>
 <p>类中的a ,age实例变量被直接转换成结构体的成员。<br>“OC中由类生成的对象”意味着，像该结构体“生成由该类生成的对象的结构体实例”。生成的各个对象（生成由该类生成的对象的结构体实例）通过成员变量isa保持该类的结构体实例指针。</p>
 <blockquote>
 <p>各类的结构体是基于<code>objc_class</code>结构体的<code>class_t</code>结构体。<code>class_t</code>结构体在objc4运行库中的声明如下：<a href="https://opensource.apple.com/source/objc4/objc4-437/runtime/objc-runtime-new.h" target="_blank" rel="noopener">runtime</a></p>
 </blockquote>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> class_t &#123;</span><br><span class="line">    <span class="keyword">struct</span> class_t *isa;</span><br><span class="line">    <span class="keyword">struct</span> class_t *superclass;</span><br><span class="line">    Cache cache;</span><br><span class="line">    IMP *vtable;</span><br><span class="line">    class_rw_t *data;</span><br><span class="line">&#125; class_t;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">typedef struct class_t {
+    struct class_t *isa;
+    struct class_t *superclass;
+    Cache cache;
+    IMP *vtable;
+    class_rw_t *data;
+} class_t;</code></pre>
 <p>在ＯＣ中，如NSMutableArray的class_t实例和NSObject的class_t实例，均生成并保持各个类的class_t结构体实例，该实例持有声明的成员变量，方法的名称，方法的实现（函数指针），属性及父类的指针，并被OC 运行时库使用。</p>
 <p>回到__main_block_impl_0结构体：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">main_block_impl_0</span>&#123;</span></span><br><span class="line">  <span class="keyword">void</span> *isa;</span><br><span class="line">  <span class="keyword">int</span> Flags;</span><br><span class="line">  <span class="keyword">int</span> Reserved;</span><br><span class="line">  <span class="keyword">void</span> *FuncPtr;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> __<span class="title">main_block_desc_0</span> * <span class="title">Desc</span>;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="C">struct __main_block_impl_0{
+  void *isa;
+  int Flags;
+  int Reserved;
+  void *FuncPtr;
+  struct __main_block_desc_0 * Desc;
+}</code></pre>
 <p>该__main_block_impl_0结构体相当于基于objc_object结构体的OC类对象的结构体。对成员变量isa的初始化如下：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">isa =&amp;_NSConcreteStackBlock;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">isa =&amp;_NSConcreteStackBlock;</code></pre>
 <p><code>_NSConcreteStackBlock</code>相当于class_t结构体实例。在将Block作为OC对象处理里，关于该类的信息放_NSConcreteStackBlock中。</p>
 <blockquote>
 <p>Block 实质就是OC对象。</p>
@@ -950,7 +1145,7 @@ int function(int">
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            NSMutableArray * array  = [NSMutableArray arrayWithArray:@[@"2",@"2",@"1",@"fad",@"23"]];for(NSString* str  in array)&#1
+                            NSMutableArray * array  = [NSMutableArray arrayWithArray:@[@&quot;2&quot;,@&quot;2&quot;,@&quot;1&quot;,@&quot;fad&quot;
                         
                     </div>
                     <div class="publish-info">
@@ -1141,7 +1336,7 @@ int function(int">
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

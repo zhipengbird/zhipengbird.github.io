@@ -453,9 +453,11 @@ Runloop什么是Runloop
 <li><p>CFRunLoopMode</p>
 <blockquote>
 <p>RunLoop在同一时段只能且必须在一种特定Mode下Run<br>更换Mode时, 需要暂停当前的Loop,然后重启新的Loop</p>
-   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">NSDefalutRunLoopMode      默认状态.空闲状态 </span><br><span class="line">UITrackingRunLoopMode     滑动ScrollView </span><br><span class="line">UIInitializationRunLoopMode    私有,App启动时 </span><br><span class="line">NSRunLoopCommonModes     默认包括上面第一和第二</span><br></pre></td></tr></table></figure>
 </blockquote>
-</li>
+<pre><code>      NSDefalutRunLoopMode      默认状态.空闲状态 
+      UITrackingRunLoopMode     滑动ScrollView 
+      UIInitializationRunLoopMode    私有,App启动时 
+      NSRunLoopCommonModes     默认包括上面第一和第二</code></pre></li>
 <li><p>UITrackingRunLoopMode 与 NSTimer</p>
 <blockquote>
 <p>默认情况下NSTimer被加入NSDefalutRunLoopMode </p>
@@ -483,50 +485,127 @@ Runloop什么是Runloop
 <p>CFRunLoopTimerRef是基于时间的触发器，它和 NSTimer 是toll-free bridged 的，可以混用。其包含一个时间长度和一个回调（函数指针）。当其加入到 RunLoop 时，RunLoop会注册对应的时间点，当时间点到时，RunLoop会被唤醒以执行那个回调。</p>
 <p>CFRunLoopObserverRef</p>
 <p>CFRunLoopObserverRef 是观察者，每个 Observer 都包含了一个回调（函数指针），当 RunLoop 的状态发生变化时，观察者就能通过回调接受到这个变化。可以观测的时间点有以下几个：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">typedef CF_OPTIONS(CFOptionFlags, CFRunLoopActivity) &#123;</span><br><span class="line">    kCFRunLoopEntry         = (1UL &lt;&lt; 0), // 即将进入Loop</span><br><span class="line">    kCFRunLoopBeforeTimers  = (1UL &lt;&lt; 1), // 即将处理 Timer</span><br><span class="line">    kCFRunLoopBeforeSources = (1UL &lt;&lt; 2), // 即将处理 Source</span><br><span class="line">    kCFRunLoopBeforeWaiting = (1UL &lt;&lt; 5), // 即将进入休眠</span><br><span class="line">    kCFRunLoopAfterWaiting  = (1UL &lt;&lt; 6), // 刚从休眠中唤醒</span><br><span class="line">    kCFRunLoopExit          = (1UL &lt;&lt; 7), // 即将退出Loop</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>主线程几乎所有的函数都是从以下几个函数调起，这些很长的函数我们能在程序运行时打断点在左侧的调用栈中看到：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    /// 1. 通知Observers，即将进入RunLoop</span><br><span class="line">    /// 此处有Observer会创建AutoreleasePool: _objc_autoreleasePoolPush();</span><br><span class="line">    __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopEntry);</span><br><span class="line">    do &#123;</span><br><span class="line">        /// 2. 通知 Observers: 即将触发 Timer 回调。</span><br><span class="line">        __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopBeforeTimers);</span><br><span class="line">        /// 3. 通知 Observers: 即将触发 Source (非基于port的,Source0) 回调。</span><br><span class="line">        __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopBeforeSources);</span><br><span class="line">        __CFRUNLOOP_IS_CALLING_OUT_TO_A_BLOCK__(block);</span><br><span class="line">        /// 4. 触发 Source0 (非基于port的) 回调。</span><br><span class="line">        __CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__(source0);</span><br><span class="line">        __CFRUNLOOP_IS_CALLING_OUT_TO_A_BLOCK__(block);</span><br><span class="line">        /// 6. 通知Observers，即将进入休眠</span><br><span class="line">        /// 此处有Observer释放并新建AutoreleasePool: _objc_autoreleasePoolPop(); _objc_autoreleasePoolPush();</span><br><span class="line">        __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopBeforeWaiting);</span><br><span class="line">        /// 7. sleep to wait msg.</span><br><span class="line">        mach_msg() -&gt; mach_msg_trap();</span><br><span class="line">        /// 8. 通知Observers，线程被唤醒</span><br><span class="line">        __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopAfterWaiting);</span><br><span class="line">        /// 9. 如果是被Timer唤醒的，回调Timer</span><br><span class="line">        __CFRUNLOOP_IS_CALLING_OUT_TO_A_TIMER_CALLBACK_FUNCTION__(timer);</span><br><span class="line">        /// 9. 如果是被dispatch唤醒的，执行所有调用 dispatch_async 等方法放入main queue 的 block</span><br><span class="line">        __CFRUNLOOP_IS_SERVICING_THE_MAIN_DISPATCH_QUEUE__(dispatched_block);</span><br><span class="line">        /// 9. 如果如果Runloop是被 Source1 (基于port的) 的事件唤醒了，处理这个事件</span><br><span class="line">        __CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE1_PERFORM_FUNCTION__(source1);</span><br><span class="line">    &#125; while (...);</span><br><span class="line">    /// 10. 通知Observers，即将退出RunLoop</span><br><span class="line">    /// 此处有Observer释放AutoreleasePool: _objc_autoreleasePoolPop();</span><br><span class="line">    __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopExit);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Runloop的实际使用<br>Runloop常用的场景有以下几种：NSTimer，PerformSelector，常驻线程。</p>
+<pre><code>typedef CF_OPTIONS(CFOptionFlags, CFRunLoopActivity) {
+    kCFRunLoopEntry         = (1UL &lt;&lt; 0), // 即将进入Loop
+    kCFRunLoopBeforeTimers  = (1UL &lt;&lt; 1), // 即将处理 Timer
+    kCFRunLoopBeforeSources = (1UL &lt;&lt; 2), // 即将处理 Source
+    kCFRunLoopBeforeWaiting = (1UL &lt;&lt; 5), // 即将进入休眠
+    kCFRunLoopAfterWaiting  = (1UL &lt;&lt; 6), // 刚从休眠中唤醒
+    kCFRunLoopExit          = (1UL &lt;&lt; 7), // 即将退出Loop
+};</code></pre><p>主线程几乎所有的函数都是从以下几个函数调起，这些很长的函数我们能在程序运行时打断点在左侧的调用栈中看到：</p>
+<pre><code>{
+    /// 1. 通知Observers，即将进入RunLoop
+    /// 此处有Observer会创建AutoreleasePool: _objc_autoreleasePoolPush();
+    __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopEntry);
+    do {
+        /// 2. 通知 Observers: 即将触发 Timer 回调。
+        __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopBeforeTimers);
+        /// 3. 通知 Observers: 即将触发 Source (非基于port的,Source0) 回调。
+        __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopBeforeSources);
+        __CFRUNLOOP_IS_CALLING_OUT_TO_A_BLOCK__(block);
+        /// 4. 触发 Source0 (非基于port的) 回调。
+        __CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__(source0);
+        __CFRUNLOOP_IS_CALLING_OUT_TO_A_BLOCK__(block);
+        /// 6. 通知Observers，即将进入休眠
+        /// 此处有Observer释放并新建AutoreleasePool: _objc_autoreleasePoolPop(); _objc_autoreleasePoolPush();
+        __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopBeforeWaiting);
+        /// 7. sleep to wait msg.
+        mach_msg() -&gt; mach_msg_trap();
+        /// 8. 通知Observers，线程被唤醒
+        __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopAfterWaiting);
+        /// 9. 如果是被Timer唤醒的，回调Timer
+        __CFRUNLOOP_IS_CALLING_OUT_TO_A_TIMER_CALLBACK_FUNCTION__(timer);
+        /// 9. 如果是被dispatch唤醒的，执行所有调用 dispatch_async 等方法放入main queue 的 block
+        __CFRUNLOOP_IS_SERVICING_THE_MAIN_DISPATCH_QUEUE__(dispatched_block);
+        /// 9. 如果如果Runloop是被 Source1 (基于port的) 的事件唤醒了，处理这个事件
+        __CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE1_PERFORM_FUNCTION__(source1);
+    } while (...);
+    /// 10. 通知Observers，即将退出RunLoop
+    /// 此处有Observer释放AutoreleasePool: _objc_autoreleasePoolPop();
+    __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopExit);
+}</code></pre><p>Runloop的实际使用<br>Runloop常用的场景有以下几种：NSTimer，PerformSelector，常驻线程。</p>
 <p>常驻线程<br>常驻线程的应用场景:经常在后台进行耗时操作,如:监控联网状态，扫描沙盒等 不希望线程处理完事件就销毁，保持常驻状态比如AFNetworking 2.0等。</p>
 <p>Runloop常驻线程等待block回调成功</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">__block NSString* result = nil;</span><br><span class="line">__block BOOL isExecuted = NO;</span><br><span class="line">[(WKWebView*)self.realWebView evaluateJavaScript:javaScriptString completionHandler:^(id obj, NSError* error) &#123;</span><br><span class="line">    result = obj;</span><br><span class="line">    isExecuted = YES;</span><br><span class="line">&#125;];</span><br><span class="line">while (isExecuted == NO) &#123;</span><br><span class="line">    [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];</span><br><span class="line">&#125;</span><br><span class="line">return result;</span><br><span class="line">__block NSString* result = nil;</span><br><span class="line">[(WKWebView*)self.realWebView evaluateJavaScript:javaScriptString completionHandler:^(id obj, NSError* error) &#123;</span><br><span class="line">    result = obj;</span><br><span class="line">    CFRunLoopStop(CFRunLoopGetMain());</span><br><span class="line">&#125;];</span><br><span class="line">CFRunLoopRun();</span><br><span class="line">return result;</span><br></pre></td></tr></table></figure>
-
-<p>保持子线程线程常驻例子</p>
+<pre><code>__block NSString* result = nil;
+__block BOOL isExecuted = NO;
+[(WKWebView*)self.realWebView evaluateJavaScript:javaScriptString completionHandler:^(id obj, NSError* error) {
+    result = obj;
+    isExecuted = YES;
+}];
+while (isExecuted == NO) {
+    [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+}
+return result;
+__block NSString* result = nil;
+[(WKWebView*)self.realWebView evaluateJavaScript:javaScriptString completionHandler:^(id obj, NSError* error) {
+    result = obj;
+    CFRunLoopStop(CFRunLoopGetMain());
+}];
+CFRunLoopRun();
+return result;</code></pre><p>保持子线程线程常驻例子</p>
 <p>1.设置成全局的，如果是线程对象是局部的就会死掉</p>
 <p>@property (nonatomic,strong) NSThread *thread;<br>2.初始化线程并启动</p>
 <p>self.thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) object:nil];<br>[self.thread start];<br>3.启动RunLoop，子线程的RunLoop默认是停止的</p>
 <p>在线程的入口处我们需要创建一个Autorelease Pool，当线程退出的时候释放这个Autorelease Pool。这样在线程中创建的autorelease对象就可以在线程结束的时候释放，避免过多的延迟释放造成程序占用过多的内存。如果是一个长寿命的线程的话，应该创建更多的Autorelease Pool来达到这个目的。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//只要往RunLoop中添加了  timer、source或者observer就会继续执行，一个Run Loop通常必须包含一个输入源或者定时器来监听事件，如果一个都没有，Run Loop启动后立即退出。</span><br><span class="line">- (void)run&#123;</span><br><span class="line">    @autoreleasepool &#123;</span><br><span class="line">        //添加一个input source</span><br><span class="line">        [[NSRunLoop currentRunLoop] addPort:[NSPort port] forMode:NSDefaultRunLoopMode];</span><br><span class="line">        [[NSRunLoop currentRunLoop] run];</span><br><span class="line">        //或者添加一个定时器</span><br><span class="line">        //NSTimer *timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(test) userInfo:nil repeats:YES];</span><br><span class="line">        //[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];</span><br><span class="line">        //[[NSRunLoop currentRunLoop] run];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>4.利用常驻线程处理事情</p>
+<pre><code>//只要往RunLoop中添加了  timer、source或者observer就会继续执行，一个Run Loop通常必须包含一个输入源或者定时器来监听事件，如果一个都没有，Run Loop启动后立即退出。
+- (void)run{
+    @autoreleasepool {
+        //添加一个input source
+        [[NSRunLoop currentRunLoop] addPort:[NSPort port] forMode:NSDefaultRunLoopMode];
+        [[NSRunLoop currentRunLoop] run];
+        //或者添加一个定时器
+        //NSTimer *timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(test) userInfo:nil repeats:YES];
+        //[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+        //[[NSRunLoop currentRunLoop] run];
+    }
+}</code></pre><p>4.利用常驻线程处理事情</p>
 <p>这样thread这个线程就会一直存在，当需要使用此线程处理一些事情的时候就这么调用</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[self performSelector:@selector(action) onThread:self.thread withObject:nil waitUntilDone:NO ];</span><br></pre></td></tr></table></figure>
-
-<p>NSTimer<br>NSTimer也是在面试中提及Runloop的时候会被问到的问题。<br>详情可以看我的另一篇文章：NSTimer需要注意的地方</p>
+<pre><code>[self performSelector:@selector(action) onThread:self.thread withObject:nil waitUntilDone:NO ];</code></pre><p>NSTimer<br>NSTimer也是在面试中提及Runloop的时候会被问到的问题。<br>详情可以看我的另一篇文章：NSTimer需要注意的地方</p>
 <p>PerformSelecter<br>当调用 NSObject 的 performSelecter:afterDelay: 后，实际上其内部会创建一个 Timer 并添加到当前线程的 RunLoop 中。所以如果当前线程没有 RunLoop，则这个方法会失效。</p>
 <p>Table View延迟加载图片<br>这个问题是有的TableView有大量图片（比如头像）加载，在滑动的时候，请求网络，下载完图片之后设置的时候会卡，往常的解决方案一般是添加delegate之类的，检测什么时候滑动结束什么时候去设置图片</p>
 <p>在知道RunLoop之后，可以采用下面的方案，在DefaultMode去做，这样滑动的时候就不会调用设置图片方法.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">UIImage *downLoadImage = ...;  </span><br><span class="line">[self.avatarImageView performSelector:@selector(setImage:) </span><br><span class="line">                        withObject:downloadImage  </span><br><span class="line">                        afterDelay:0  </span><br><span class="line">                        inModes:@[NSDefaultRunLoopMode]];</span><br></pre></td></tr></table></figure>
-
-<p>让Crash的APP回光返照<br>我这里有个Demo就是写Signal信号崩溃时，使用手动重启Runloop不使程序崩溃，并弹出Alert。DSSignalHandlerDemo。</p>
+<pre><code>UIImage *downLoadImage = ...;  
+[self.avatarImageView performSelector:@selector(setImage:) 
+                        withObject:downloadImage  
+                        afterDelay:0  
+                        inModes:@[NSDefaultRunLoopMode]];</code></pre><p>让Crash的APP回光返照<br>我这里有个Demo就是写Signal信号崩溃时，使用手动重启Runloop不使程序崩溃，并弹出Alert。DSSignalHandlerDemo。</p>
 <p>主要代码就是以下这段：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CFRunLoopRef runLoop = CFRunLoopGetCurrent();</span><br><span class="line">CFArrayRef allModes = CFRunLoopCopyAllModes(runLoop);</span><br><span class="line">while (!dismissed)</span><br><span class="line">&#123;</span><br><span class="line">    for (NSString *mode in (__bridge NSArray *)allModes)</span><br><span class="line">    &#123;</span><br><span class="line">        //为阻止线程退出，使用 CFRunLoopRunInMode(model, 0.001, false)等待系统消息，false表示RunLoop没有超时时间</span><br><span class="line">        CFRunLoopRunInMode((CFStringRef)mode, 0.001, false);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">CFRelease(allModes);</span><br></pre></td></tr></table></figure>
-
-<p>Async Test Case<br>原来在写Test Case 的时候不支持异步。然后这里有个方法就是使用runloop的CFRunLoopObserver来监听runloop快要sleep的时候，去验证这个异步。</p>
+<pre><code>CFRunLoopRef runLoop = CFRunLoopGetCurrent();
+CFArrayRef allModes = CFRunLoopCopyAllModes(runLoop);
+while (!dismissed)
+{
+    for (NSString *mode in (__bridge NSArray *)allModes)
+    {
+        //为阻止线程退出，使用 CFRunLoopRunInMode(model, 0.001, false)等待系统消息，false表示RunLoop没有超时时间
+        CFRunLoopRunInMode((CFStringRef)mode, 0.001, false);
+    }
+}
+CFRelease(allModes);</code></pre><p>Async Test Case<br>原来在写Test Case 的时候不支持异步。然后这里有个方法就是使用runloop的CFRunLoopObserver来监听runloop快要sleep的时候，去验证这个异步。</p>
 <p>如何查看Runloop的调试栈信息<br>你直接打开xcode，运行一下程序，然后打个断点暂停一下，我们就能看到从main函数后面马上调起了唤起了Runloop。这个Runloop是跟随着程序一直存在的，是主线程的runloop。我们看一下截图：</p>
 <p>Autorelease对象什么时候释放<br>Runloop是一个运行循环，但是它不可能一直运行着，所以它会有一个休眠期。Runloop维护着一个AutoreleasePool，当它进入休眠前它会把这个释放池里的对象进行释放。</p>
 <p>UIKit通过RunLoopObserver在RunLoop两次Sleep间对AutoreleasePool进行pop和push,将这次Loop中产生的Autorelease对象释放。</p>
 <p>所以说以下这样的例子会对性能是有影响的：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//这里大量的循环，Runloop又还没进入休眠状态，所以就会产生大量的Autorelease对象。</span><br><span class="line">for (int i = 0; i &lt; 100000000; i++)</span><br><span class="line">&#123;</span><br><span class="line">    NSString* string = @&quot;ab c&quot;;</span><br><span class="line">    NSArray* array = [string componentsSeparatedByString:string];</span><br><span class="line">&#125;</span><br><span class="line">//我们可以手动的给它加@autoreleasepool&#123;&#125;，在每次循环后都进行一次释放。</span><br><span class="line">for (int i = 0; i &lt; 100000000; i++)</span><br><span class="line">&#123;</span><br><span class="line">    @autoreleasepool</span><br><span class="line">    &#123;</span><br><span class="line">        NSString* string = @&quot;ab c&quot;;</span><br><span class="line">        NSArray* array = [string componentsSeparatedByString:string];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>那一般什么时候Runloop会进入休眠呢?</p>
+<pre><code>//这里大量的循环，Runloop又还没进入休眠状态，所以就会产生大量的Autorelease对象。
+for (int i = 0; i &lt; 100000000; i++)
+{
+    NSString* string = @&quot;ab c&quot;;
+    NSArray* array = [string componentsSeparatedByString:string];
+}
+//我们可以手动的给它加@autoreleasepool{}，在每次循环后都进行一次释放。
+for (int i = 0; i &lt; 100000000; i++)
+{
+    @autoreleasepool
+    {
+        NSString* string = @&quot;ab c&quot;;
+        NSArray* array = [string componentsSeparatedByString:string];
+    }
+}</code></pre><p>那一般什么时候Runloop会进入休眠呢?</p>
 <p>我们这里看一个简单的例子，就是主线程的Runloop在刚进入一个ViewController的时候什么时期进入休眠。</p>
 <p>先看下面一段代码：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- (void)viewDidLoad&#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    NSString *string = [NSString stringWithFormat:@&quot;齐滇大圣&quot;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这里[NSString stringWithFormat:@”齐滇大圣”];创建对象时这个对象的引用计数为 1 。当使用局部变量 string 指向这个对象时，这个对象的引用计数 +1 ，变成了 2 。而当 viewDidLoad 方法返回时，局部变量 string 被回收，指向了 nil 。因此，其所指向对象的引用计数 -1 ，变成了 1 。</p>
+<pre><code>- (void)viewDidLoad{
+    [super viewDidLoad];
+    NSString *string = [NSString stringWithFormat:@&quot;齐滇大圣&quot;];
+}</code></pre><p>这里[NSString stringWithFormat:@”齐滇大圣”];创建对象时这个对象的引用计数为 1 。当使用局部变量 string 指向这个对象时，这个对象的引用计数 +1 ，变成了 2 。而当 viewDidLoad 方法返回时，局部变量 string 被回收，指向了 nil 。因此，其所指向对象的引用计数 -1 ，变成了 1 。</p>
 <p>然后我们的这个对象是一个autorelease的实例，是被系统自动添加到了当前的 autoreleasepool 中的。所以会当Runloop一次迭代结束即将进入休眠的时候autoreleasepool drain对象引用计数 -1，对象释放。</p>
 <p>下面我们配合着堆栈信息看一下这个Runloop什么时候结束一次迭代。</p>
 <p>这里我们加入一个<strong>weak的全局变量reference来指向我们的对象。因为</strong>weak引用不持有我们的对象，不会影响所指向对象的生命周期，所以我们用它来输出以判断我们的对象什么时候释放。</p>
@@ -535,9 +614,10 @@ Runloop什么是Runloop
 <p>断点1和断点2：</p>
 <p>断点3</p>
 <p>我们能看到断点1和断点2 runloop还是在执行的，断点3表示runloop一个迭代已经结束了，即将进入睡眠。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//触发 Source0 (非基于port的) 回调。</span><br><span class="line">__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__(source0);</span><br><span class="line">//out_to_block表示从block跳出，block执行完毕，即将进入睡眠。</span><br><span class="line">__CFRUNLOOP_IS_CALLING_OUT_TO_A_BLOCK__(block);</span><br></pre></td></tr></table></figure>
-
-<p>参考文章<br><a href="http://blog.ibireme.com/2015/05/18/runloop/" target="_blank" rel="noopener">深入理解RunLoop</a><br><a href="http://v.youku.com/v_show/id_XODgxODkzODI0.html" target="_blank" rel="noopener">iOS线下分享《RunLoop》</a></p>
+<pre><code>//触发 Source0 (非基于port的) 回调。
+__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__(source0);
+//out_to_block表示从block跳出，block执行完毕，即将进入睡眠。
+__CFRUNLOOP_IS_CALLING_OUT_TO_A_BLOCK__(block);</code></pre><p>参考文章<br><a href="http://blog.ibireme.com/2015/05/18/runloop/" target="_blank" rel="noopener">深入理解RunLoop</a><br><a href="http://v.youku.com/v_show/id_XODgxODkzODI0.html" target="_blank" rel="noopener">iOS线下分享《RunLoop》</a></p>
 
             </div>
             <hr/>
@@ -972,7 +1052,7 @@ Message(短信)、Email
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

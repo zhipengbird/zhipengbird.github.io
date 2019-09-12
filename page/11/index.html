@@ -296,6 +296,137 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="../../2016/09/13/python-文件处理/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="python 文件处理">
+                            
+                            <span class="card-title">python 文件处理</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                文件的打开
+open()语法函数参数open(file, mode=&#39;r&#39;, buffering=None, encoding=None, errors=None, newline=None, closefd=True)参数
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-09-13
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-user fa-fw"></i>
+                                志鹏
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="../../tags/python/" target="_blank">
+                            <span class="chip bg-color">python</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="../../2016/09/11/PEP8代码风格/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="PEP8代码风格">
+                            
+                            <span class="card-title">PEP8代码风格</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                介绍这份文档给出的代码约定适用于主要的 Python 发行版所有标准库中的 Python 代码。请参阅相似的 PEP 信息，其用于描述实现 Python 的 C 代码规范[1]。
+这份文档和 PEP 257(文档字符串约定) 改编自 Gui
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-09-11
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="../../categories/python/" class="post-category" target="_blank">
+                                    python
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="../../tags/PEP8/" target="_blank">
+                            <span class="chip bg-color">PEP8</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="../../2016/09/08/给MacOS-X下的Python3安装requests模块/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="给MacOS X下的Python3安装requests模块">
+                            
+                            <span class="card-title">给MacOS X下的Python3安装requests模块</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                默认情况下直接用
+pip install requests
+会安装到MacOS 自带的Python 2下面，Python 3还是不能使用requests模块。解决方案
+下载request源代码：
+curl -OL https://githu
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-09-08
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-user fa-fw"></i>
+                                志鹏
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="../../2016/09/03/手把手教你使用charles抓取https消息/">
                         <div class="card-image">
                             
@@ -359,8 +490,9 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                             
                                 
 生成主机密钥 这里会要求输入密码，不输入，直接回车
- sudo mkdir /private/etc/apache2/sslcd /private/etc/apache2/sslsudo ssh-keygen -f server.key
-
+ sudo mkdir /private/etc/apache2/ssl
+ cd /private/etc/apache2/ssl
+ sudo ssh-keygen -f server.
                             
                         </div>
                         <div class="publish-info">
@@ -408,17 +540,12 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                         <div class="summary block-with-text">
                             
                                 常用操作：
-打开终端，运行启动Apache命令：
-sudo apachectl start
+打开终端，运行启动Apache命令：sudo apachectl start
 
-关闭命令：
-sudo apachectl stop
 
-重启命令
-sudo apachectl restart
-
-查看Apache版本命令
-http
+2. 关闭命令：sudo apachectl stop
+3. 重启命令sudo apachectl restart
+4. 查看Apache版本命令
                             
                         </div>
                         <div class="publish-info">
@@ -461,7 +588,7 @@ http
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                NSMutableArray * array  = [NSMutableArray arrayWithArray:@[@"2",@"2",@"1",@"fad",@"23"]];for(NSString* str  in array)&#1
+                                NSMutableArray * array  = [NSMutableArray arrayWithArray:@[@&quot;2&quot;,@&quot;2&quot;,@&quot;1&quot;,@&quot;fad&quot;
                             
                         </div>
                         <div class="publish-info">
@@ -595,145 +722,13 @@ int function(int
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                [[UIApplication sharedApplication] setIdleTimerDisabled:YES];//禁止自动锁屏 [[UIApplication sharedApplication] setIdleTimerDis
+                                 [[UIApplication sharedApplication] setIdleTimerDisabled:YES];//禁止自动锁屏
+  [[UIApplication sharedApplication] setIdleTimer
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2016-08-19
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="../../categories/iOS/" class="post-category" target="_blank">
-                                    iOS
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="../../tags/iOS/" target="_blank">
-                            <span class="chip bg-color">iOS</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="../../2016/08/16/GCD锁/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="GCD锁">
-                            
-                            <span class="card-title">GCD锁</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                
-何在GCD中快速的控制并发呢？答案就是dispatch_semaphore
-
-
-什么是dispatch_semaphoredispatch_semaphore是持有计数的信号,该计数是多线程编程中的计数类型信号,类似于过马路的信号灯,红灯
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-08-16
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="../../categories/iOS/" class="post-category" target="_blank">
-                                    iOS
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="../../tags/GCD/" target="_blank">
-                            <span class="chip bg-color">GCD</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="../../2016/08/12/NSTimer/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="NSTimer">
-                            
-                            <span class="card-title">NSTimer</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                一、创建+ (NSTimer *)timerWithTimeInterval:(NSTimeInterval)ti invocation:(NSInvocation *)invocation repeats:(BOOL)yesOrNo;+ 
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-08-12
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-user fa-fw"></i>
-                                志鹏
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="../../2016/08/03/单播，组播-多播-，广播以及任播/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="单播，组播(多播)，广播以及任播">
-                            
-                            <span class="card-title">单播，组播(多播)，广播以及任播</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                单播(unicast): 是指封包在计算机网络的传输中，目的地址为单一目标的一种传输方式。它是现今网络应用最为广泛，通常所使用的网络协议或服务大多采用单播传输，例如一切基于TCP的协议。组播(multicast): 也叫多播， 多点广播或群
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2016-08-03
                             </span>
                             <span class="publish-author">
                                 
@@ -777,7 +772,7 @@ int function(int
             
         </div>
         <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">11 / 14</div>
+            <div class="center-align b-text-gray">11 / 15</div>
         </div>
         <div class="col s6 m4 l4">
             
@@ -801,7 +796,7 @@ int function(int
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

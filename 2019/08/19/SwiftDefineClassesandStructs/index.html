@@ -401,7 +401,7 @@ Define properties">
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        729
+                        727
                     </div>
                     
 
@@ -441,8 +441,12 @@ Define properties">
 <li>Reference counting allows more than one reference to a class instance.<br>For more information, see Inheritance, Type Casting, Deinitialization, and Automatic Reference Counting.</li>
 </ul>
 <h2 id="Definition-Syntax"><a href="#Definition-Syntax" class="headerlink" title="Definition Syntax"></a>Definition Syntax</h2><p>Structures and classes have a similar definition syntax. You introduce structures with the struct keyword and classes with the class keyword. Both place their entire definition within a pair of braces:</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SomeStructure</span> </span>&#123;</span><br><span class="line">    <span class="comment">// structure definition goes here</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeClass</span> </span>&#123;</span><br><span class="line">    <span class="comment">// class definition goes here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="swift">struct SomeStructure {
+    // structure definition goes here
+}
+class SomeClass {
+    // class definition goes here
+}</code></pre>
 <blockquote>
 <p>Whenever you define a new structure or class, you define a new Swift type.</p>
 <ul>
@@ -451,11 +455,9 @@ Define properties">
 </ul>
 </blockquote>
 <h2 id="Accessing-Properties"><a href="#Accessing-Properties" class="headerlink" title="Accessing Properties"></a>Accessing Properties</h2><p>You can access the properties of an instance using dot syntax. In dot syntax, you write the property name immediately after the instance name, separated by a period (.), without any spaces:</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">"The width of someResolution is \(someResolution.width)"</span>)</span><br></pre></td></tr></table></figure>
-
+<pre><code class="swift">print(&quot;The width of someResolution is \(someResolution.width)&quot;)</code></pre>
 <h2 id="Memberwise-Initializers-for-Structure-Types"><a href="#Memberwise-Initializers-for-Structure-Types" class="headerlink" title="Memberwise Initializers for Structure Types"></a>Memberwise Initializers for Structure Types</h2><p>All structures have an automatically generated memberwise initializer, which you can use to initialize the member properties of new structure instances. Initial values for the properties of the new instance can be passed to the memberwise initializer by name:</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> vga = <span class="type">Resolution</span>(width: <span class="number">640</span>, height: <span class="number">480</span>)</span><br></pre></td></tr></table></figure>
-
+<pre><code class="swift">let vga = Resolution(width: 640, height: 480)</code></pre>
 <blockquote>
 <p>Unlike structures, class instances don’t receive a default memberwise initializer.</p>
 </blockquote>
@@ -899,7 +901,7 @@ Define properties">
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

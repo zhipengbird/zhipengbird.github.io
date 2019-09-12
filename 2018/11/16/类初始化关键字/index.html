@@ -430,22 +430,62 @@
 <p>对于这种能初始化全部必需变量的方法，一般可作为 <code>designed initializer</code>。所以，可以明确的告诉外部调用者，无论调用哪种初始化方法，最终，都会调用 <code>designed initializer</code>：</p>
 <p><code>- (instancetype)initWithTitle:(NSString *)title date:(NSDate *)date NS_DESIGNATED_INITIALIZER;</code>一个子类如果有自己的 designed initializer，则必须要实现父类的 designed initializer。比如一个继承自 NSObject 的 Person 类，就必须要重写 init 方法，并在 init 方法中，调用自己的 designed initializer，而不是调用 super 的初始化方法。如果未实现，可以看到编译警告：</p>
 <p><code>Method override for the designed initializer of the superclass ‘- init’ not found.</code><br>所以，对于 Person 来说，如果 initWithName: 被标记了 NS_DESIGNED_INITIALIZER，那么实现应该为：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">instancetype</span>)init &#123;</span><br><span class="line">    <span class="comment">// 在外部调用不需要 name 变量时，应该给出默认值</span></span><br><span class="line">    <span class="keyword">return</span> [<span class="keyword">self</span> initWithName:<span class="string">@"John doe"</span>];</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithName:(<span class="built_in">NSString</span> *)name &#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">- (instancetype)init {
+    // 在外部调用不需要 name 变量时，应该给出默认值
+    return [self initWithName:@&quot;John doe&quot;];
+}
+- (instancetype)initWithName:(NSString *)name {
+    self = [super init];
+    if (self) {
+        self.name = name;
+    }
+    return self;
+}</code></pre>
 <p>除此之外，子类的 designed initializer 方法，在调用 super 时，也应该调用 super 的 designed initializer。也就是说，如果 CustomView 是 UIView 的子类，那么应该写作：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 实现 UIView 的 designed initializer</span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithCoder:(<span class="built_in">NSCoder</span> *)aDecoder &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="keyword">self</span> initWithVideoID:@<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现 UIView 的 designed initializer</span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithFrame:(<span class="built_in">CGRect</span>)frame &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="keyword">self</span> initWithVideoID:@<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现自己的 designed initializer</span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithVideoID:(<span class="built_in">NSNumber</span> *)videoID &#123;</span><br><span class="line">    <span class="comment">// 这里在调用 super 的初始化方法时，就不能调用 init，因为 init 不是 UIView 的 designed initializer</span></span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:<span class="built_in">CGRectZero</span>];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.videoID = videoID;</span><br><span class="line">        [<span class="keyword">self</span> setupUI];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">// 实现 UIView 的 designed initializer
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    return [self initWithVideoID:@0];
+}
 
+// 实现 UIView 的 designed initializer
+- (instancetype)initWithFrame:(CGRect)frame {
+    return [self initWithVideoID:@0];
+}
+
+// 实现自己的 designed initializer
+- (instancetype)initWithVideoID:(NSNumber *)videoID {
+    // 这里在调用 super 的初始化方法时，就不能调用 init，因为 init 不是 UIView 的 designed initializer
+    self = [super initWithFrame:CGRectZero];
+    if (self) {
+        self.videoID = videoID;
+        [self setupUI];
+    }
+    return self;
+}</code></pre>
 <h1 id="NS-UNAVAILABLE"><a href="#NS-UNAVAILABLE" class="headerlink" title="NS_UNAVAILABLE"></a>NS_UNAVAILABLE</h1><p>在定义初始化方法时，除了能够用 <code>NS_DESIGNATED_INITIALIZER</code> 标记以外，还可以使用更为强势的 <code>NS_UNAVAILABLE</code>。和 <code>NS_DESIGNATED_INITIALIZER</code> 用于明确初始化方法方式不同，<code>NS_UNAVAILABLE</code> 的作用是，直接禁用其他初始化方法，简单粗暴。</p>
 <p>假设，对于 User 类，如果没有 userID 就代表着用户无效，那么我们也没必要给 init 方法一个默认的 userID = 0，或者 userID = nil。此时，需要告诉调用者，就只能通过 userID 来初始化，那么可以写作：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">+ (<span class="keyword">instancetype</span>)new <span class="built_in">NS_UNAVAILABLE</span>;</span><br><span class="line">- (<span class="keyword">instancetype</span>)init <span class="built_in">NS_UNAVAILABLE</span>; <span class="comment">///&lt; 直接标记 init 方法不可用</span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithUserID:(<span class="built_in">NSNumber</span> *)userID;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">+ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE; ///&lt; 直接标记 init 方法不可用
+- (instancetype)initWithUserID:(NSNumber *)userID;</code></pre>
 <p>方法一旦标记 <code>NS_UNAVAILABLE</code>，那么在 IDE 自动补全时，就不会索引到该方法，并且如果强制调用该方法，编译器会报错（但并不代表着方法不能被调用，runtime 依然可以做到）。</p>
 <p>除了可以直接使用 NS_UNAVAILABLE 标记不可用以外，还有一些其他的方式：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 作用与 NS_UNAVAILABLE 类似</span></span><br><span class="line">- (<span class="keyword">id</span>) init __unavailable;</span><br><span class="line">- (<span class="keyword">id</span>) init __attribute__((unavailable));</span><br><span class="line">- (<span class="keyword">id</span>) init UNAVAILABLE_ATTRIBUTE;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">// 作用与 NS_UNAVAILABLE 类似
+- (id) init __unavailable;
+- (id) init __attribute__((unavailable));
+- (id) init UNAVAILABLE_ATTRIBUTE;</code></pre>
 <p>// 在调用时给出提示<br><code>- (id) init __attribute__((unavailable(&quot;Must use initWithFoo: instead.&quot;)));</code>甚至是在调用时抛出异常等，比如 userID 不能小于 0：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">instancetype</span>)initWithUserID:(<span class="built_in">NSNumber</span> *)userID &#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (userID.integerValue &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">          	<span class="comment">// raise: 原因</span></span><br><span class="line">            <span class="comment">// format: 具体描述</span></span><br><span class="line">            [<span class="built_in">NSException</span> raise:<span class="string">@"error parameter"</span> format:<span class="string">@"user id can not = %@"</span>, userID];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">self</span>.userID = userID;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">- (instancetype)initWithUserID:(NSNumber *)userID {
+    self = [super init];
+    if (self) {
+        if (userID.integerValue &lt;= 0) {
+              // raise: 原因
+            // format: 具体描述
+            [NSException raise:@&quot;error parameter&quot; format:@&quot;user id can not = %@&quot;, userID];
+        }
+        self.userID = userID;
+    }
+    return self;
+}</code></pre>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p><code>NS_DESIGNATED_INITIALIZER</code>与 <code>NS_UNAVAILABLE</code> 都能清晰的告知调用者应该如何调用方法。</p>
 <p>如果是可以给出默认值初始化方法，那么使用<code>NS_DESIGNATED_INITIALIZER</code> 就可以。<br>如果是必须要用某参数来初始化的，可以使用 <code>NS_UNAVAILABLE</code>。<br>如果需要在内部验证参数是否合法，如果不合法就一定不能成功的，也可以在实现的时候，验证并抛出异常。<br>具体选择使用哪一种方式，可以根据具体的情况来看</p>
 
@@ -879,7 +919,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

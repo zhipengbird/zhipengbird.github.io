@@ -412,7 +412,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        596
+                        590
                     </div>
                     
 
@@ -441,24 +441,92 @@
 <a id="more"></a>
 <h2 id="什么是dispatch-semaphore"><a href="#什么是dispatch-semaphore" class="headerlink" title="什么是dispatch_semaphore"></a>什么是dispatch_semaphore</h2><p>dispatch_semaphore是持有计数的信号,该计数是多线程编程中的计数类型信号,类似于过马路的信号灯,红灯表示不能通过,而绿灯表示可以通过.而在dispatch_semaphore中使用计数来实现该功能,进行更细粒度的排他控制.在没有Serial Dispatch Queue和dispatch_barrier_async函数那么大的粒度且一部分处理需要进行排他控制的情况下,dispatch Semaphore便可发挥威力  </p>
 <h2 id="dispatch-semaphore语法说明"><a href="#dispatch-semaphore语法说明" class="headerlink" title="dispatch_semaphore语法说明"></a>dispatch_semaphore语法说明</h2><ol>
-<li>通过<code>dispatch_semaphore_create(long value);</code>函数创建<code>Dispatch_Semaphore</code>,参数表示计数的初始值<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//参数说明</span></span><br><span class="line"><span class="comment">//long value:表示计数的初始值</span></span><br><span class="line">dispatch_semaphore_t semaphore = dispatch_semaphore_create(<span class="keyword">long</span> value);</span><br></pre></td></tr></table></figure>
-
+<li>通过<code>dispatch_semaphore_create(long value);</code>函数创建<code>Dispatch_Semaphore</code>,参数表示计数的初始值<pre><code class="objc">//参数说明
+//long value:表示计数的初始值
+dispatch_semaphore_t semaphore = dispatch_semaphore_create(long value);</code></pre>
 </li>
 </ol>
 <ol start="2">
 <li><code>dispatch_semaphore_wait(dispatch_semaphore_t dsema, dispatch_time_t timeout);</code>函数等待<code>Dispatch Semaphore</code>的计数值大于或者等于1,当满足条件时计数器执行减法,并从wait函数中返回<br><strong><em>当dispatch_semaphore_wait函数返回0时,可以安全地执行排他控制的处理</em></strong></li>
 </ol>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//参数说明</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//dispatch_semaphore_t dsema:操作的Dispatch_Semaphore对象</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//dispatch_time_t timeout:由dispatch_time_t类型值指定等待时间</span></span><br><span class="line"></span><br><span class="line">dispatch_semaphore_wait(dispatch_semaphore_t dsema, dispatch_time_t timeout);</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">//参数说明
 
+//dispatch_semaphore_t dsema:操作的Dispatch_Semaphore对象
+
+//dispatch_time_t timeout:由dispatch_time_t类型值指定等待时间
+
+dispatch_semaphore_wait(dispatch_semaphore_t dsema, dispatch_time_t timeout);</code></pre>
 <ol start="3">
 <li><code>dispatch_semaphore_signal(dispatch_semaphore_t dsema);</code>函数将 <code>Dispatch_Semaphore</code>的计数器加1</li>
 </ol>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//参数说明</span></span><br><span class="line"><span class="comment">//dispatch_semaphore_t dsema:操作的Dispatch_Semaphore对象</span></span><br><span class="line">dispatch_semaphore_signal(dispatch_semaphore_t dsema);</span><br></pre></td></tr></table></figure>
-
-<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>  没有加锁的情况下，异步添加1000个数据到数组中<br>  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">void</span> unusesemaphoreSameple()&#123;</span><br><span class="line">     <span class="comment">//1.创建全局队列</span></span><br><span class="line">    <span class="built_in">dispatch_queue_t</span> queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>);</span><br><span class="line">     <span class="comment">//2.创建保存数据的可变数组</span></span><br><span class="line">    <span class="built_in">NSMutableArray</span> * array = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">    <span class="comment">//执行10000次操作</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span> ; i&lt;<span class="number">1000</span>; i++) &#123;</span><br><span class="line">         <span class="comment">//异步添加数据</span></span><br><span class="line">        <span class="built_in">dispatch_async</span>(queue, ^&#123;</span><br><span class="line">             <span class="comment">//处理数据</span></span><br><span class="line">            [array addObject:@(i)];</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,array);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>  执行结果是：代码出现问题，不能正常添加数据<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  GCDdispatch_semaphore(23505,0x700000081000) malloc: *** error for object 0x100700330: double free</span><br><span class="line">*** set a breakpoint in malloc_error_break to debug</span><br></pre></td></tr></table></figure></p>
-<p>  加锁情况下，异步添加1000个数据到数组中<br>  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">void</span> usesemaphoreSameple()&#123;</span><br><span class="line">    <span class="comment">//1.创建全局队列</span></span><br><span class="line">    <span class="built_in">dispatch_queue_t</span> queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">//2.创建dispatch_semaphore_t对象</span></span><br><span class="line">    dispatch_semaphore_t semaphore = dispatch_semaphore_create(<span class="number">1</span>);</span><br><span class="line">    <span class="comment">//3.创建保存数据的可变数组</span></span><br><span class="line">    <span class="built_in">NSMutableArray</span> * array = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">    <span class="comment">//执行10000次操作</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span> ; i&lt;<span class="number">1000</span>; i++) &#123;</span><br><span class="line">        <span class="comment">//异步添加数据</span></span><br><span class="line">        <span class="comment">//数据进入,等待处理,信号量减1</span></span><br><span class="line">        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);</span><br><span class="line">        <span class="built_in">dispatch_async</span>(queue, ^&#123;</span><br><span class="line">            <span class="comment">//处理数据</span></span><br><span class="line">            [array addObject:@(i)];</span><br><span class="line">            <span class="comment">//数据处理完毕,信号量加1,等待下一次处理</span></span><br><span class="line">            dispatch_semaphore_signal(semaphore);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,array);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>   执行结果：按顺序正常添加了1000个数据<br>   <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="number">0</span>,</span><br><span class="line"><span class="number">1</span>,</span><br><span class="line"><span class="number">2</span>,</span><br><span class="line"><span class="number">3</span>,</span><br><span class="line"><span class="number">4</span>,</span><br><span class="line"><span class="number">5</span>,</span><br><span class="line"><span class="number">6</span>,</span><br><span class="line"><span class="number">7</span>,</span><br><span class="line"><span class="number">8</span>,</span><br><span class="line"><span class="number">9</span>,</span><br><span class="line"><span class="number">10</span>,</span><br><span class="line"><span class="number">11</span>,</span><br><span class="line"><span class="number">12</span>,</span><br><span class="line"><span class="number">13</span>,</span><br><span class="line"><span class="number">14</span>,</span><br><span class="line"><span class="number">15</span>,</span><br><span class="line"><span class="number">16</span>,</span><br><span class="line"><span class="number">17</span>,</span><br><span class="line"><span class="number">18</span>,</span><br><span class="line"><span class="number">19</span>,</span><br><span class="line"><span class="number">20</span>,</span><br><span class="line"><span class="number">21</span>,</span><br><span class="line"><span class="number">22</span>,</span><br><span class="line">....</span><br></pre></td></tr></table></figure></p>
+<pre><code class="objc">//参数说明
+//dispatch_semaphore_t dsema:操作的Dispatch_Semaphore对象
+dispatch_semaphore_signal(dispatch_semaphore_t dsema);</code></pre>
+<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>  没有加锁的情况下，异步添加1000个数据到数组中</p>
+<pre><code class="objc">  void unusesemaphoreSameple(){
+     //1.创建全局队列
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+     //2.创建保存数据的可变数组
+    NSMutableArray * array = [NSMutableArray array];
+    //执行10000次操作
+    for (int i =0 ; i&lt;1000; i++) {
+         //异步添加数据
+        dispatch_async(queue, ^{
+             //处理数据
+            [array addObject:@(i)];
+        });
+    }
+    NSLog(@&quot;%@&quot;,array);
+}</code></pre>
+<p>  执行结果是：代码出现问题，不能正常添加数据</p>
+<pre><code>  GCDdispatch_semaphore(23505,0x700000081000) malloc: *** error for object 0x100700330: double free
+*** set a breakpoint in malloc_error_break to debug</code></pre><p>  加锁情况下，异步添加1000个数据到数组中</p>
+<pre><code class="objc">  void usesemaphoreSameple(){
+    //1.创建全局队列
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    //2.创建dispatch_semaphore_t对象
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);
+    //3.创建保存数据的可变数组
+    NSMutableArray * array = [NSMutableArray array];
+    //执行10000次操作
+    for (int i =0 ; i&lt;1000; i++) {
+        //异步添加数据
+        //数据进入,等待处理,信号量减1
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        dispatch_async(queue, ^{
+            //处理数据
+            [array addObject:@(i)];
+            //数据处理完毕,信号量加1,等待下一次处理
+            dispatch_semaphore_signal(semaphore);
+        });
+    }
+    NSLog(@&quot;%@&quot;,array);
+}</code></pre>
+<p>   执行结果：按顺序正常添加了1000个数据</p>
+<pre><code class="objc">   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   ....</code></pre>
 
             </div>
             <hr/>
@@ -700,7 +768,8 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            [[UIApplication sharedApplication] setIdleTimerDisabled:YES];//禁止自动锁屏 [[UIApplication sharedApplication] setIdleTimerDis
+                             [[UIApplication sharedApplication] setIdleTimerDisabled:YES];//禁止自动锁屏
+  [[UIApplication sharedApplication] setIdleTimer
                         
                     </div>
                     <div class="publish-info">
@@ -749,7 +818,8 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、创建+ (NSTimer *)timerWithTimeInterval:(NSTimeInterval)ti invocation:(NSInvocation *)invocation repeats:(BOOL)yesOrNo;+ 
+                            一、创建+ (NSTimer *)timerWithTimeInterval:(NSTimeInterval)ti invocation:(NSInvocation *)invocation repeats:(BOOL)yesOrNo;
++
                         
                     </div>
                     <div class="publish-info">
@@ -881,7 +951,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             

@@ -456,20 +456,49 @@
 <p>  在标准视图中只有<code>UITextField</code>和<code>UITextView</code>将<code>inputView</code>和<code>inputAccessoryView</code>重新定义为了<code>readwrite</code>类型，若想在自定义视图中使用，需要在自定义视图中重新定义<code>inputView</code>和<code>inputAccessoryView</code>属性。见 <a href="https://developer.apple.com/library/content/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/InputViews/InputViews.html#//apple_ref/doc/uid/TP40009542-CH12-SW2" target="_blank" rel="noopener">Input Views and Input Accessory Views</a>。</p>
 <h1 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h1><p>我们可以将键盘看成有两部分组成（当然，键盘还会有其他的部分组成），一部分是inputView，一部分是InputAccessoryView，并且，inputView在系统键盘的下面的部分，我们调用的系统默认键盘的时候，我们看到的部分就是这个InputView（输入视图），而这个InputAccessoryView就是键盘顶部的一个部分，当我Nil的时候则不显示，当我们给这个属性赋值的时候，就会显示这个我们添加的视图。</p>
 <h1 id="键盘中的枚举"><a href="#键盘中的枚举" class="headerlink" title="键盘中的枚举"></a>键盘中的枚举</h1><h2 id="键盘风格"><a href="#键盘风格" class="headerlink" title="键盘风格"></a>键盘风格</h2><p>UIKit框架支持8种风格键盘。</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;  </span><br><span class="line">    <span class="built_in">UIKeyboardTypeDefault</span>,                <span class="comment">// 默认键盘：支持所有字符  </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeASCIICapable</span>,           <span class="comment">// 支持ASCII的默认键盘  </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeNumbersAndPunctuation</span>,  <span class="comment">// 标准电话键盘，支持+ * # 等符号  </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeURL</span>,                    <span class="comment">// URL键盘，有.com按钮；只支持URL字符  </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeNumberPad</span>,              <span class="comment">//数字键盘  </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypePhonePad</span>,               <span class="comment">// 电话键盘  </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeNamePhonePad</span>,           <span class="comment">// 电话键盘，也支持输入人名字  </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeEmailAddress</span>,           <span class="comment">// 用于输入电子邮件地址的键盘  </span></span><br><span class="line">&#125; <span class="built_in">UIKeyboardType</span>;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="objc">typedef enum {  
+    UIKeyboardTypeDefault,                // 默认键盘：支持所有字符  
+    UIKeyboardTypeASCIICapable,           // 支持ASCII的默认键盘  
+    UIKeyboardTypeNumbersAndPunctuation,  // 标准电话键盘，支持+ * # 等符号  
+    UIKeyboardTypeURL,                    // URL键盘，有.com按钮；只支持URL字符  
+    UIKeyboardTypeNumberPad,              //数字键盘  
+    UIKeyboardTypePhonePad,               // 电话键盘  
+    UIKeyboardTypeNamePhonePad,           // 电话键盘，也支持输入人名字  
+    UIKeyboardTypeEmailAddress,           // 用于输入电子邮件地址的键盘  
+} UIKeyboardType;  
+</code></pre>
 <p>eg:<br><code>textView.keyboardtype = UIKeyboardTypeNumberPad;</code></p>
-<h2 id="键盘外观"><a href="#键盘外观" class="headerlink" title="键盘外观"></a>键盘外观</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;  </span><br><span class="line">    <span class="built_in">UIKeyboardAppearanceDefault</span>,    <span class="comment">// 默认外观：浅灰色  </span></span><br><span class="line">    <span class="built_in">UIKeyboardAppearanceAlert</span>,      <span class="comment">//深灰/石墨色  </span></span><br><span class="line">&#125; <span class="built_in">UIKeyboardAppearance</span>;</span><br></pre></td></tr></table></figure>
-
+<h2 id="键盘外观"><a href="#键盘外观" class="headerlink" title="键盘外观"></a>键盘外观</h2><pre><code class="objc">typedef enum {  
+    UIKeyboardAppearanceDefault,    // 默认外观：浅灰色  
+    UIKeyboardAppearanceAlert,      //深灰/石墨色  
+} UIKeyboardAppearance;</code></pre>
 <p>eg :<br><code>textView.keyboardAppearance=UIKeyboardAppearanceDefault;</code></p>
-<h2 id="回车键"><a href="#回车键" class="headerlink" title="回车键"></a>回车键</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;  </span><br><span class="line">    <span class="built_in">UIReturnKeyDefault</span>,  <span class="comment">//默认：灰色按钮，标有Return</span></span><br><span class="line">    <span class="built_in">UIReturnKeyGo</span>,  <span class="comment">//标有Go的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyGoogle</span>,  <span class="comment">//标有Google的蓝色按钮，用于搜索</span></span><br><span class="line">    <span class="built_in">UIReturnKeyJoin</span>,  <span class="comment">//标有Join的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyNext</span>,  <span class="comment">//标有Next的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyRoute</span>,  <span class="comment">//标有Route的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeySearch</span>,  <span class="comment">//标有Search的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeySend</span>,  <span class="comment">//标有Send的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyYahoo</span>,  <span class="comment">//标有Yahoo!的蓝色按钮，用于搜索</span></span><br><span class="line">    <span class="built_in">UIReturnKeyDone</span>,  <span class="comment">//标有Done的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyEmergencyCall</span>,  <span class="comment">//紧急呼叫按钮</span></span><br><span class="line">&#125; <span class="built_in">UIReturnKeyType</span>;</span><br></pre></td></tr></table></figure>
-
+<h2 id="回车键"><a href="#回车键" class="headerlink" title="回车键"></a>回车键</h2><pre><code class="objc">typedef enum {  
+    UIReturnKeyDefault,  //默认：灰色按钮，标有Return
+    UIReturnKeyGo,  //标有Go的蓝色按钮
+    UIReturnKeyGoogle,  //标有Google的蓝色按钮，用于搜索
+    UIReturnKeyJoin,  //标有Join的蓝色按钮
+    UIReturnKeyNext,  //标有Next的蓝色按钮
+    UIReturnKeyRoute,  //标有Route的蓝色按钮
+    UIReturnKeySearch,  //标有Search的蓝色按钮
+    UIReturnKeySend,  //标有Send的蓝色按钮
+    UIReturnKeyYahoo,  //标有Yahoo!的蓝色按钮，用于搜索
+    UIReturnKeyDone,  //标有Done的蓝色按钮
+    UIReturnKeyEmergencyCall,  //紧急呼叫按钮
+} UIReturnKeyType;</code></pre>
 <p>eg:<br><code>textView.returnKeyType=UIReturnKeyGo;</code></p>
-<h2 id="自动大写"><a href="#自动大写" class="headerlink" title="自动大写"></a>自动大写</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;  </span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeNone</span>, <span class="comment">//不自动大写  </span></span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeWords</span>, <span class="comment">//单词首字母大写  </span></span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeSentences</span>, <span class="comment">//句子首字母大写  </span></span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeAllCharacters</span>, <span class="comment">//所有字母大写  </span></span><br><span class="line">&#125; <span class="built_in">UITextAutocapitalizationType</span>;</span><br></pre></td></tr></table></figure>
-
+<h2 id="自动大写"><a href="#自动大写" class="headerlink" title="自动大写"></a>自动大写</h2><pre><code class="objc">typedef enum {  
+    UITextAutocapitalizationTypeNone, //不自动大写  
+    UITextAutocapitalizationTypeWords, //单词首字母大写  
+    UITextAutocapitalizationTypeSentences, //句子首字母大写  
+    UITextAutocapitalizationTypeAllCharacters, //所有字母大写  
+} UITextAutocapitalizationType;  </code></pre>
 <p>eg:<br><code>textField.autocapitalizationType = UITextAutocapitalizationTypeWords;</code></p>
-<h2 id="自动更正"><a href="#自动更正" class="headerlink" title="自动更正"></a>自动更正</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;  </span><br><span class="line">    <span class="built_in">UITextAutocorrectionTypeDefault</span>,<span class="comment">//默认  </span></span><br><span class="line">    <span class="built_in">UITextAutocorrectionTypeNo</span>,<span class="comment">//不自动更正  </span></span><br><span class="line">    <span class="built_in">UITextAutocorrectionTypeYes</span>,<span class="comment">//自动更正  </span></span><br><span class="line">&#125; <span class="built_in">UITextAutocorrectionType</span>;</span><br></pre></td></tr></table></figure>
-
+<h2 id="自动更正"><a href="#自动更正" class="headerlink" title="自动更正"></a>自动更正</h2><pre><code class="objc">typedef enum {  
+    UITextAutocorrectionTypeDefault,//默认  
+    UITextAutocorrectionTypeNo,//不自动更正  
+    UITextAutocorrectionTypeYes,//自动更正  
+} UITextAutocorrectionType;</code></pre>
 <p>eg:<br><code>textField.autocorrectionType = UITextAutocorrectionTypeYes;</code></p>
 <h2 id="安全文本输入"><a href="#安全文本输入" class="headerlink" title="安全文本输入"></a>安全文本输入</h2><p><code>textView.secureTextEntry=YES;</code><br>开启安全输入主要是用于密码或一些私人数据的输入，此时会禁用自动更正和自此缓存。</p>
 
@@ -893,7 +922,7 @@ ps: 字符显示程序的快捷键应该是 Control +
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">134.5k</span>
+                <span class="white-color">138.6k</span>
             
 
             
