@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
-<html lang="">
+<html lang="zh-CN">
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
     <meta name="keywords" content="Runloop, 志鹏的技术博客">
     <meta name="description" content="转载来源： https://www.zybuluo.com/qidiandasheng/note/346387
@@ -57,7 +57,7 @@ Runloop什么是Runloop
             
             <i class="fa fa-home"></i>
             
-            <span>Index</span>
+            <span>首页</span>
         </a>
     </li>
     
@@ -66,7 +66,7 @@ Runloop什么是Runloop
             
             <i class="fa fa-tags"></i>
             
-            <span>Tags</span>
+            <span>标签</span>
         </a>
     </li>
     
@@ -75,7 +75,7 @@ Runloop什么是Runloop
             
             <i class="fa fa-bookmark"></i>
             
-            <span>Categories</span>
+            <span>分类</span>
         </a>
     </li>
     
@@ -84,7 +84,7 @@ Runloop什么是Runloop
             
             <i class="fa fa-archive"></i>
             
-            <span>Archives</span>
+            <span>归档</span>
         </a>
     </li>
     
@@ -93,7 +93,7 @@ Runloop什么是Runloop
             
             <i class="fa fa-user-circle-o"></i>
             
-            <span>About</span>
+            <span>关于</span>
         </a>
     </li>
     
@@ -102,13 +102,13 @@ Runloop什么是Runloop
             
             <i class="fa fa-address-book"></i>
             
-            <span>Friends</span>
+            <span>友情链接</span>
         </a>
     </li>
     
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-            <i id="searchIcon" class="fa fa-search" title="Search"></i>
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
         </a>
     </li>
 </ul>
@@ -122,7 +122,7 @@ Runloop什么是Runloop
         <div class="logo-name">志鹏的技术博客</div>
         <div class="logo-desc">
             
-            Never really desperate, only the lost of the soul.
+            故不积跬步，无以至千里；不积小流，无以成江海。骐骥一跃，不能十步；驽马十驾，功在不舍。锲而舍之，朽木不折；锲而不舍，金石可镂。
             
         </div>
     </div>
@@ -136,7 +136,7 @@ Runloop什么是Runloop
                 
                 <i class="fa fa-fw fa-home"></i>
                 
-                Index
+                首页
             </a>
         </li>
         
@@ -145,7 +145,7 @@ Runloop什么是Runloop
                 
                 <i class="fa fa-fw fa-tags"></i>
                 
-                Tags
+                标签
             </a>
         </li>
         
@@ -154,7 +154,7 @@ Runloop什么是Runloop
                 
                 <i class="fa fa-fw fa-bookmark"></i>
                 
-                Categories
+                分类
             </a>
         </li>
         
@@ -163,7 +163,7 @@ Runloop什么是Runloop
                 
                 <i class="fa fa-fw fa-archive"></i>
                 
-                Archives
+                归档
             </a>
         </li>
         
@@ -172,7 +172,7 @@ Runloop什么是Runloop
                 
                 <i class="fa fa-fw fa-user-circle-o"></i>
                 
-                About
+                关于
             </a>
         </li>
         
@@ -181,7 +181,7 @@ Runloop什么是Runloop
                 
                 <i class="fa fa-fw fa-address-book"></i>
                 
-                Friends
+                友情链接
             </a>
         </li>
         
@@ -379,7 +379,7 @@ Runloop什么是Runloop
                 <div class="col s7">
                     
                           <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
+                            <span class="chip bg-color">无标签</span>
                           </div>
                     
                 </div>
@@ -390,29 +390,29 @@ Runloop什么是Runloop
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
-                    <i class="fa fa-calendar-minus-o fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
                     2018-07-12
                 </div>
 
                 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
                         2.9k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
-                        11 Min
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        11 分
                     </div>
                     
                 
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
                         <span id="busuanzi_value_page_pv"></span>
                     </div>
 				
@@ -453,15 +453,17 @@ Runloop什么是Runloop
 <li><p>CFRunLoopMode</p>
 <blockquote>
 <p>RunLoop在同一时段只能且必须在一种特定Mode下Run<br>更换Mode时, 需要暂停当前的Loop,然后重启新的Loop</p>
-</blockquote>
 <pre><code>      NSDefalutRunLoopMode      默认状态.空闲状态 
       UITrackingRunLoopMode     滑动ScrollView 
       UIInitializationRunLoopMode    私有,App启动时 
-      NSRunLoopCommonModes     默认包括上面第一和第二</code></pre></li>
+      NSRunLoopCommonModes     默认包括上面第一和第二
+</code></pre></blockquote>
+</li>
 <li><p>UITrackingRunLoopMode 与 NSTimer</p>
 <blockquote>
 <p>默认情况下NSTimer被加入NSDefalutRunLoopMode </p>
-<pre><code>如果不想NSTimer受到组件或者动画影响 添加到NSRunLoopCommonModes</code></pre></blockquote>
+<pre><code>如果不想NSTimer受到组件或者动画影响 添加到NSRunLoopCommonModes
+</code></pre></blockquote>
 </li>
 <li><p>RunLoopMode在滑动时切换</p>
 <blockquote>
@@ -492,7 +494,8 @@ Runloop什么是Runloop
     kCFRunLoopBeforeWaiting = (1UL &lt;&lt; 5), // 即将进入休眠
     kCFRunLoopAfterWaiting  = (1UL &lt;&lt; 6), // 刚从休眠中唤醒
     kCFRunLoopExit          = (1UL &lt;&lt; 7), // 即将退出Loop
-};</code></pre><p>主线程几乎所有的函数都是从以下几个函数调起，这些很长的函数我们能在程序运行时打断点在左侧的调用栈中看到：</p>
+};
+</code></pre><p>主线程几乎所有的函数都是从以下几个函数调起，这些很长的函数我们能在程序运行时打断点在左侧的调用栈中看到：</p>
 <pre><code>{
     /// 1. 通知Observers，即将进入RunLoop
     /// 此处有Observer会创建AutoreleasePool: _objc_autoreleasePoolPush();
@@ -523,7 +526,8 @@ Runloop什么是Runloop
     /// 10. 通知Observers，即将退出RunLoop
     /// 此处有Observer释放AutoreleasePool: _objc_autoreleasePoolPop();
     __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopExit);
-}</code></pre><p>Runloop的实际使用<br>Runloop常用的场景有以下几种：NSTimer，PerformSelector，常驻线程。</p>
+}
+</code></pre><p>Runloop的实际使用<br>Runloop常用的场景有以下几种：NSTimer，PerformSelector，常驻线程。</p>
 <p>常驻线程<br>常驻线程的应用场景:经常在后台进行耗时操作,如:监控联网状态，扫描沙盒等 不希望线程处理完事件就销毁，保持常驻状态比如AFNetworking 2.0等。</p>
 <p>Runloop常驻线程等待block回调成功</p>
 <pre><code>__block NSString* result = nil;
@@ -542,7 +546,8 @@ __block NSString* result = nil;
     CFRunLoopStop(CFRunLoopGetMain());
 }];
 CFRunLoopRun();
-return result;</code></pre><p>保持子线程线程常驻例子</p>
+return result;
+</code></pre><p>保持子线程线程常驻例子</p>
 <p>1.设置成全局的，如果是线程对象是局部的就会死掉</p>
 <p>@property (nonatomic,strong) NSThread *thread;<br>2.初始化线程并启动</p>
 <p>self.thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) object:nil];<br>[self.thread start];<br>3.启动RunLoop，子线程的RunLoop默认是停止的</p>
@@ -558,9 +563,11 @@ return result;</code></pre><p>保持子线程线程常驻例子</p>
         //[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
         //[[NSRunLoop currentRunLoop] run];
     }
-}</code></pre><p>4.利用常驻线程处理事情</p>
+}
+</code></pre><p>4.利用常驻线程处理事情</p>
 <p>这样thread这个线程就会一直存在，当需要使用此线程处理一些事情的时候就这么调用</p>
-<pre><code>[self performSelector:@selector(action) onThread:self.thread withObject:nil waitUntilDone:NO ];</code></pre><p>NSTimer<br>NSTimer也是在面试中提及Runloop的时候会被问到的问题。<br>详情可以看我的另一篇文章：NSTimer需要注意的地方</p>
+<pre><code>[self performSelector:@selector(action) onThread:self.thread withObject:nil waitUntilDone:NO ];
+</code></pre><p>NSTimer<br>NSTimer也是在面试中提及Runloop的时候会被问到的问题。<br>详情可以看我的另一篇文章：NSTimer需要注意的地方</p>
 <p>PerformSelecter<br>当调用 NSObject 的 performSelecter:afterDelay: 后，实际上其内部会创建一个 Timer 并添加到当前线程的 RunLoop 中。所以如果当前线程没有 RunLoop，则这个方法会失效。</p>
 <p>Table View延迟加载图片<br>这个问题是有的TableView有大量图片（比如头像）加载，在滑动的时候，请求网络，下载完图片之后设置的时候会卡，往常的解决方案一般是添加delegate之类的，检测什么时候滑动结束什么时候去设置图片</p>
 <p>在知道RunLoop之后，可以采用下面的方案，在DefaultMode去做，这样滑动的时候就不会调用设置图片方法.</p>
@@ -568,7 +575,8 @@ return result;</code></pre><p>保持子线程线程常驻例子</p>
 [self.avatarImageView performSelector:@selector(setImage:) 
                         withObject:downloadImage  
                         afterDelay:0  
-                        inModes:@[NSDefaultRunLoopMode]];</code></pre><p>让Crash的APP回光返照<br>我这里有个Demo就是写Signal信号崩溃时，使用手动重启Runloop不使程序崩溃，并弹出Alert。DSSignalHandlerDemo。</p>
+                        inModes:@[NSDefaultRunLoopMode]];
+</code></pre><p>让Crash的APP回光返照<br>我这里有个Demo就是写Signal信号崩溃时，使用手动重启Runloop不使程序崩溃，并弹出Alert。DSSignalHandlerDemo。</p>
 <p>主要代码就是以下这段：</p>
 <pre><code>CFRunLoopRef runLoop = CFRunLoopGetCurrent();
 CFArrayRef allModes = CFRunLoopCopyAllModes(runLoop);
@@ -580,7 +588,8 @@ while (!dismissed)
         CFRunLoopRunInMode((CFStringRef)mode, 0.001, false);
     }
 }
-CFRelease(allModes);</code></pre><p>Async Test Case<br>原来在写Test Case 的时候不支持异步。然后这里有个方法就是使用runloop的CFRunLoopObserver来监听runloop快要sleep的时候，去验证这个异步。</p>
+CFRelease(allModes);
+</code></pre><p>Async Test Case<br>原来在写Test Case 的时候不支持异步。然后这里有个方法就是使用runloop的CFRunLoopObserver来监听runloop快要sleep的时候，去验证这个异步。</p>
 <p>如何查看Runloop的调试栈信息<br>你直接打开xcode，运行一下程序，然后打个断点暂停一下，我们就能看到从main函数后面马上调起了唤起了Runloop。这个Runloop是跟随着程序一直存在的，是主线程的runloop。我们看一下截图：</p>
 <p>Autorelease对象什么时候释放<br>Runloop是一个运行循环，但是它不可能一直运行着，所以它会有一个休眠期。Runloop维护着一个AutoreleasePool，当它进入休眠前它会把这个释放池里的对象进行释放。</p>
 <p>UIKit通过RunLoopObserver在RunLoop两次Sleep间对AutoreleasePool进行pop和push,将这次Loop中产生的Autorelease对象释放。</p>
@@ -599,13 +608,15 @@ for (int i = 0; i &lt; 100000000; i++)
         NSString* string = @&quot;ab c&quot;;
         NSArray* array = [string componentsSeparatedByString:string];
     }
-}</code></pre><p>那一般什么时候Runloop会进入休眠呢?</p>
+}
+</code></pre><p>那一般什么时候Runloop会进入休眠呢?</p>
 <p>我们这里看一个简单的例子，就是主线程的Runloop在刚进入一个ViewController的时候什么时期进入休眠。</p>
 <p>先看下面一段代码：</p>
 <pre><code>- (void)viewDidLoad{
     [super viewDidLoad];
     NSString *string = [NSString stringWithFormat:@&quot;齐滇大圣&quot;];
-}</code></pre><p>这里[NSString stringWithFormat:@”齐滇大圣”];创建对象时这个对象的引用计数为 1 。当使用局部变量 string 指向这个对象时，这个对象的引用计数 +1 ，变成了 2 。而当 viewDidLoad 方法返回时，局部变量 string 被回收，指向了 nil 。因此，其所指向对象的引用计数 -1 ，变成了 1 。</p>
+}
+</code></pre><p>这里[NSString stringWithFormat:@”齐滇大圣”];创建对象时这个对象的引用计数为 1 。当使用局部变量 string 指向这个对象时，这个对象的引用计数 +1 ，变成了 2 。而当 viewDidLoad 方法返回时，局部变量 string 被回收，指向了 nil 。因此，其所指向对象的引用计数 -1 ，变成了 1 。</p>
 <p>然后我们的这个对象是一个autorelease的实例，是被系统自动添加到了当前的 autoreleasepool 中的。所以会当Runloop一次迭代结束即将进入休眠的时候autoreleasepool drain对象引用计数 -1，对象释放。</p>
 <p>下面我们配合着堆栈信息看一下这个Runloop什么时候结束一次迭代。</p>
 <p>这里我们加入一个<strong>weak的全局变量reference来指向我们的对象。因为</strong>weak引用不持有我们的对象，不会影响所指向对象的生命周期，所以我们用它来输出以判断我们的对象什么时候释放。</p>
@@ -617,7 +628,8 @@ for (int i = 0; i &lt; 100000000; i++)
 <pre><code>//触发 Source0 (非基于port的) 回调。
 __CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__(source0);
 //out_to_block表示从block跳出，block执行完毕，即将进入睡眠。
-__CFRUNLOOP_IS_CALLING_OUT_TO_A_BLOCK__(block);</code></pre><p>参考文章<br><a href="http://blog.ibireme.com/2015/05/18/runloop/" target="_blank" rel="noopener">深入理解RunLoop</a><br><a href="http://v.youku.com/v_show/id_XODgxODkzODI0.html" target="_blank" rel="noopener">iOS线下分享《RunLoop》</a></p>
+__CFRUNLOOP_IS_CALLING_OUT_TO_A_BLOCK__(block);
+</code></pre><p>参考文章<br><a href="http://blog.ibireme.com/2015/05/18/runloop/" target="_blank" rel="noopener">深入理解RunLoop</a><br><a href="http://v.youku.com/v_show/id_XODgxODkzODI0.html" target="_blank" rel="noopener">iOS线下分享《RunLoop》</a></p>
 
             </div>
             <hr/>
@@ -752,7 +764,7 @@ __CFRUNLOOP_IS_CALLING_OUT_TO_A_BLOCK__(block);</code></pre><p>参考文章<br><
 
 <div id="article-share">
     
-    <div class="social-share" data-disabled="qzone, qq, weibo, douban"></div>
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
     
 </div>
 
@@ -763,11 +775,11 @@ __CFRUNLOOP_IS_CALLING_OUT_TO_A_BLOCK__(block);</code></pre><p>参考文章<br><
     <div class="reprint" id="reprint-statement">
         <p class="reprint-tip">
             <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
-            <span>Reprint policy</span>
+            <span>转载规则</span>
         </p>
         
             <div class="center-align">
-                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
                     <img alt=""
                          style="border-width:0"
                          src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
@@ -777,20 +789,20 @@ __CFRUNLOOP_IS_CALLING_OUT_TO_A_BLOCK__(block);</code></pre><p>参考文章<br><
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
                     《Runloop》
-                </span> by
+                </span> 由
             <a xmlns:cc="http://creativecommons.org/ns#" href="" property="cc:attributionName"
                rel="cc:attributionURL">
                 志鹏
-            </a> is licensed under a
-            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
-                Creative Commons Attribution 4.0 International License
-            </a> 
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
         
     </div>
 
     <script async defer>
       document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
         M.toast({html: toastHTML})
       });
 
@@ -845,7 +857,7 @@ __CFRUNLOOP_IS_CALLING_OUT_TO_A_BLOCK__(block);</code></pre><p>参考文章<br><
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="../../../08/26/类图/">
                     <div class="card-image">
@@ -890,7 +902,7 @@ __CFRUNLOOP_IS_CALLING_OUT_TO_A_BLOCK__(block);</code></pre><p>参考文章<br><
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fa fa-chevron-right"></i>
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="../../../04/03/SMShareModel/">
@@ -948,7 +960,7 @@ Message(短信)、Email
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget">
-            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
             <div id="toc-content"></div>
         </div>
     </div>
@@ -1052,7 +1064,7 @@ Message(短信)、Email
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">138.6k</span>
+                <span class="white-color">149.2k</span>
             
 
             
@@ -1097,8 +1109,8 @@ Message(短信)、Email
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</span>
-            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
                    class="search-input">
         </div>
         <div id="searchResult"></div>

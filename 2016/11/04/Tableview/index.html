@@ -1,13 +1,12 @@
 <!DOCTYPE HTML>
-<html lang="">
+<html lang="zh-CN">
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
     <meta name="keywords" content="TableView表格学习笔记, 志鹏的技术博客">
     <meta name="description" content="UITableViewCell学习选中状态颜色设置
-系统自带的效果：typedef NS_ENUM(NSInteger, UITableViewCellSelectionStyle) {
-UITableViewCellSelectionSt">
+系统自带的效果：`objctypedef NS_ENUM(NSInteger, UITableViewCellSelectionStyle) {UITableViewCellSelecti">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -56,7 +55,7 @@ UITableViewCellSelectionSt">
             
             <i class="fa fa-home"></i>
             
-            <span>Index</span>
+            <span>首页</span>
         </a>
     </li>
     
@@ -65,7 +64,7 @@ UITableViewCellSelectionSt">
             
             <i class="fa fa-tags"></i>
             
-            <span>Tags</span>
+            <span>标签</span>
         </a>
     </li>
     
@@ -74,7 +73,7 @@ UITableViewCellSelectionSt">
             
             <i class="fa fa-bookmark"></i>
             
-            <span>Categories</span>
+            <span>分类</span>
         </a>
     </li>
     
@@ -83,7 +82,7 @@ UITableViewCellSelectionSt">
             
             <i class="fa fa-archive"></i>
             
-            <span>Archives</span>
+            <span>归档</span>
         </a>
     </li>
     
@@ -92,7 +91,7 @@ UITableViewCellSelectionSt">
             
             <i class="fa fa-user-circle-o"></i>
             
-            <span>About</span>
+            <span>关于</span>
         </a>
     </li>
     
@@ -101,13 +100,13 @@ UITableViewCellSelectionSt">
             
             <i class="fa fa-address-book"></i>
             
-            <span>Friends</span>
+            <span>友情链接</span>
         </a>
     </li>
     
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-            <i id="searchIcon" class="fa fa-search" title="Search"></i>
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
         </a>
     </li>
 </ul>
@@ -121,7 +120,7 @@ UITableViewCellSelectionSt">
         <div class="logo-name">志鹏的技术博客</div>
         <div class="logo-desc">
             
-            Never really desperate, only the lost of the soul.
+            故不积跬步，无以至千里；不积小流，无以成江海。骐骥一跃，不能十步；驽马十驾，功在不舍。锲而舍之，朽木不折；锲而不舍，金石可镂。
             
         </div>
     </div>
@@ -135,7 +134,7 @@ UITableViewCellSelectionSt">
                 
                 <i class="fa fa-fw fa-home"></i>
                 
-                Index
+                首页
             </a>
         </li>
         
@@ -144,7 +143,7 @@ UITableViewCellSelectionSt">
                 
                 <i class="fa fa-fw fa-tags"></i>
                 
-                Tags
+                标签
             </a>
         </li>
         
@@ -153,7 +152,7 @@ UITableViewCellSelectionSt">
                 
                 <i class="fa fa-fw fa-bookmark"></i>
                 
-                Categories
+                分类
             </a>
         </li>
         
@@ -162,7 +161,7 @@ UITableViewCellSelectionSt">
                 
                 <i class="fa fa-fw fa-archive"></i>
                 
-                Archives
+                归档
             </a>
         </li>
         
@@ -171,7 +170,7 @@ UITableViewCellSelectionSt">
                 
                 <i class="fa fa-fw fa-user-circle-o"></i>
                 
-                About
+                关于
             </a>
         </li>
         
@@ -180,7 +179,7 @@ UITableViewCellSelectionSt">
                 
                 <i class="fa fa-fw fa-address-book"></i>
                 
-                Friends
+                友情链接
             </a>
         </li>
         
@@ -393,29 +392,29 @@ UITableViewCellSelectionSt">
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
-                    <i class="fa fa-calendar-minus-o fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
                     2016-11-04
                 </div>
 
                 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
                         1.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
-                        4 Min
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        4 分
                     </div>
                     
                 
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
                         <span id="busuanzi_value_page_pv"></span>
                     </div>
 				
@@ -425,14 +424,7 @@ UITableViewCellSelectionSt">
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h3 id="UITableViewCell学习"><a href="#UITableViewCell学习" class="headerlink" title="UITableViewCell学习"></a>UITableViewCell学习</h3><h4 id="选中状态颜色设置"><a href="#选中状态颜色设置" class="headerlink" title="选中状态颜色设置"></a>选中状态颜色设置</h4><ol>
-<li>系统自带的效果：<pre><code class="objc">typedef NS_ENUM(NSInteger, UITableViewCellSelectionStyle) {
-UITableViewCellSelectionStyleNone,//没有效果
-UITableViewCellSelectionStyleBlue,//蓝色
-UITableViewCellSelectionStyleGray,//灰色
-UITableViewCellSelectionStyleDefault NS_ENUM_AVAILABLE_IOS(7_0)//灰色
-};
-</code></pre>
-</li>
+<li>系统自带的效果：<br><code>`</code>objc<br>typedef NS_ENUM(NSInteger, UITableViewCellSelectionStyle) {<br>UITableViewCellSelectionStyleNone,//没有效果<br>UITableViewCellSelectionStyleBlue,//蓝色<br>UITableViewCellSelectionStyleGray,//灰色<br>UITableViewCellSelectionStyleDefault NS_ENUM_AVAILABLE_IOS(7_0)//灰色<br>};</li>
 </ol>
 <pre><code>2. 改变选中时的背景色
 ```objc
@@ -440,7 +432,8 @@ self.selectionStyle= UITableViewCellSelectionStyleBlue;
 self.selectedBackgroundView=[[UIView alloc]initWithFrame:self.bounds];
 self.selectedBackgroundView.backgroundColor=[UIColor purpleColor];
 self.multipleSelectionBackgroundView =[[UIView alloc]initWithFrame:self.bounds];
-self.multipleSelectionBackgroundView.backgroundColor=[UIColor cyanColor];</code></pre><ol start="3">
+self.multipleSelectionBackgroundView.backgroundColor=[UIColor cyanColor];
+</code></pre><ol start="3">
 <li>选中状态背景设置的常用属性     </li>
 </ol>
 <ul>
@@ -457,9 +450,11 @@ self.multipleSelectionBackgroundView.backgroundColor=[UIColor cyanColor];</code>
      UITableViewCellSeparatorStyleNone,
      UITableViewCellSeparatorStyleSingleLine,
      UITableViewCellSeparatorStyleSingleLineEtched   // This separator style is only supported for grouped style table views currently
- } __TVOS_PROHIBITED;</code></pre>
+ } __TVOS_PROHIBITED;
+</code></pre>
 <pre><code class="objective-c"> //设置分隔线的缩进
- @property (nonatomic) UIEdgeInsets                    separatorInset NS_AVAILABLE_IOS(7_0) UI_APPEARANCE_SELECTOR __TVOS_PROHIBITED; // allows customization of the separator frame</code></pre>
+ @property (nonatomic) UIEdgeInsets                    separatorInset NS_AVAILABLE_IOS(7_0) UI_APPEARANCE_SELECTOR __TVOS_PROHIBITED; // allows customization of the separator frame
+</code></pre>
 </li>
 </ul>
 <h3 id="表格的相操作"><a href="#表格的相操作" class="headerlink" title="表格的相操作"></a>表格的相操作</h3><h5 id="1-表格的删除操作"><a href="#1-表格的删除操作" class="headerlink" title="1. 表格的删除操作"></a>1. 表格的删除操作</h5><p>实现表格的如下代理方法：</p>
@@ -469,7 +464,8 @@ self.multipleSelectionBackgroundView.backgroundColor=[UIColor cyanColor];</code>
 -(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
   //设置左滑后，显示的操作说明，这里可以换成其操作
     return @&quot;delte&quot;;
-}</code></pre>
+}
+</code></pre>
 <pre><code class="objc">-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{  
   //点击该操作后的处理，我这里所做的是删除操作，记住若要删除一个cell，同时也要对数据源进行更改
   [ _ datasource removeObjectAtIndex:indexPath.row ];
@@ -479,6 +475,7 @@ self.multipleSelectionBackgroundView.backgroundColor=[UIColor cyanColor];</code>
   //设置编辑的样式
     return UITableViewCellEditingStyleDelete;
 }
+
 </code></pre>
 <p>如果左滑后要出现多个操作按钮该怎么处理呢，iOS8以后苹果官司方新增加了个类<code>UITableViewRowAction</code> ,这个类该怎么用，用在哪里？</p>
 <h5 id="2-UITableViewRowAction-使用"><a href="#2-UITableViewRowAction-使用" class="headerlink" title="2 . UITableViewRowAction 使用"></a>2 . <code>UITableViewRowAction</code> 使用</h5><pre><code class="objective-c">NS_CLASS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED @interface UITableViewRowAction : NSObject &lt;NSCopying&gt;
@@ -489,7 +486,8 @@ self.multipleSelectionBackgroundView.backgroundColor=[UIColor cyanColor];</code>
 @property (nonatomic, copy, nullable) NSString *title;
 @property (nonatomic, copy, nullable) UIColor *backgroundColor; // default background color is dependent on style
 @property (nonatomic, copy, nullable) UIVisualEffect* backgroundEffect;
-@end</code></pre>
+@end
+</code></pre>
 <p>​    该类非常简单，事件的响应使用block回调用，事件的名称以及背景色都可以自定义，那么在表格中哪里使用呢？</p>
 <p>   我们只需要简单实现表格的<code>- (nullable NSArray&lt;UITableViewRowAction *&gt; *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(8_0)</code>这个代理方法。</p>
 <pre><code class="objective-c">// 设置显示多个按钮
@@ -521,16 +519,19 @@ self.multipleSelectionBackgroundView.backgroundColor=[UIColor cyanColor];</code>
     }];
 
     return @[deleteRowAction,topRowAction,moreRowAction];
-}</code></pre>
+}
+</code></pre>
 <h5 id="3-表格的单选与多选的设置"><a href="#3-表格的单选与多选的设置" class="headerlink" title="3. 表格的单选与多选的设置"></a>3. 表格的单选与多选的设置</h5><pre><code class="objective-c">_groupNumberTableview.allowsSelection=YES; // 是否允许选中
 _groupNumberTableview.editing=YES;//是否处于编辑状态
 _groupNumberTableview.allowsMultipleSelection=YES;//是否允许多选
-_groupNumberTableview.allowsMultipleSelectionDuringEditing=YES;//是否允许在编辑状态下多选</code></pre>
+_groupNumberTableview.allowsMultipleSelectionDuringEditing=YES;//是否允许在编辑状态下多选
+</code></pre>
 <h3 id="动态添加headerview"><a href="#动态添加headerview" class="headerlink" title="动态添加headerview"></a>动态添加headerview</h3><pre><code class="objc">UIView *headerView = _tableView.tableHeaderView;  
 headerView.height = 0;  
 [_tableView beginUpdates];  
 [_tableView setTableHeaderView:headerView];// 关键是这句话  
-[_tableView endUpdates];</code></pre>
+[_tableView endUpdates];
+</code></pre>
 <p>这两句话可以让其过渡有动画效果</p>
 
             </div>
@@ -666,7 +667,7 @@ headerView.height = 0;
 
 <div id="article-share">
     
-    <div class="social-share" data-disabled="qzone, qq, weibo, douban"></div>
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
     
 </div>
 
@@ -677,11 +678,11 @@ headerView.height = 0;
     <div class="reprint" id="reprint-statement">
         <p class="reprint-tip">
             <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
-            <span>Reprint policy</span>
+            <span>转载规则</span>
         </p>
         
             <div class="center-align">
-                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
                     <img alt=""
                          style="border-width:0"
                          src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
@@ -691,20 +692,20 @@ headerView.height = 0;
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
                     《TableView表格学习笔记》
-                </span> by
+                </span> 由
             <a xmlns:cc="http://creativecommons.org/ns#" href="" property="cc:attributionName"
                rel="cc:attributionURL">
                 志鹏
-            </a> is licensed under a
-            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
-                Creative Commons Attribution 4.0 International License
-            </a> 
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
         
     </div>
 
     <script async defer>
       document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
         M.toast({html: toastHTML})
       });
 
@@ -759,24 +760,26 @@ headerView.height = 0;
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="../../17/UIImagePickerController/">
+                <a href="../../17/顶点着色器/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="UIImagePickerController">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="顶点着色器">
                         
-                        <span class="card-title">UIImagePickerController</span>
+                        <span class="card-title">顶点着色器</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            创建对象
-//去相册选择图片
- UIImagePickerController * pickerController =[[UIImagePickerController alloc]init];
- pickerController.med
+                            顶点着色器顶点着色器实现了顶点操作的通秀可编程方法
+顶点着色器的输入：
+
+着色器程序 ： 描述顶点上执行操作的顶点着色器程序源代码或可执行文件
+顶点为着色器输入（属性）：用顶点数组提供的每个顶点的数据
+统一变量（uniform）：顶点着色器
                         
                     </div>
                     <div class="publish-info">
@@ -796,13 +799,21 @@ headerView.height = 0;
                     </div>
                 </div>
                 
+                <div class="card-action article-tags">
+                    
+                    <a href="../../../../tags/iOS/" target="_blank">
+                        <span class="chip bg-color">iOS</span>
+                    </a>
+                    
+                </div>
+                
             </div>
         </div>
         
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fa fa-chevron-right"></i>
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="../../../10/23/GPUImage-学习笔记/">
@@ -858,7 +869,7 @@ GPUImage 是一个基于 GPU 图像和视频处理的开源 iOS 框架。由于�
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget">
-            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
             <div id="toc-content"></div>
         </div>
     </div>
@@ -962,7 +973,7 @@ GPUImage 是一个基于 GPU 图像和视频处理的开源 iOS 框架。由于�
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">138.6k</span>
+                <span class="white-color">149.2k</span>
             
 
             
@@ -1007,8 +1018,8 @@ GPUImage 是一个基于 GPU 图像和视频处理的开源 iOS 框架。由于�
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</span>
-            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
                    class="search-input">
         </div>
         <div id="searchResult"></div>

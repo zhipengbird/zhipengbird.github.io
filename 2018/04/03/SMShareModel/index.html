@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
-<html lang="">
+<html lang="zh-CN">
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
     <meta name="keywords" content="SMShareModel, 志鹏的技术博客">
     <meta name="description" content="SMShareModel 简介该分享模块是一个相对独立的功能模块，主要负责内容分享. 目前可分享的平台如下：
@@ -57,7 +57,7 @@ Message(短信)、Email">
             
             <i class="fa fa-home"></i>
             
-            <span>Index</span>
+            <span>首页</span>
         </a>
     </li>
     
@@ -66,7 +66,7 @@ Message(短信)、Email">
             
             <i class="fa fa-tags"></i>
             
-            <span>Tags</span>
+            <span>标签</span>
         </a>
     </li>
     
@@ -75,7 +75,7 @@ Message(短信)、Email">
             
             <i class="fa fa-bookmark"></i>
             
-            <span>Categories</span>
+            <span>分类</span>
         </a>
     </li>
     
@@ -84,7 +84,7 @@ Message(短信)、Email">
             
             <i class="fa fa-archive"></i>
             
-            <span>Archives</span>
+            <span>归档</span>
         </a>
     </li>
     
@@ -93,7 +93,7 @@ Message(短信)、Email">
             
             <i class="fa fa-user-circle-o"></i>
             
-            <span>About</span>
+            <span>关于</span>
         </a>
     </li>
     
@@ -102,13 +102,13 @@ Message(短信)、Email">
             
             <i class="fa fa-address-book"></i>
             
-            <span>Friends</span>
+            <span>友情链接</span>
         </a>
     </li>
     
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-            <i id="searchIcon" class="fa fa-search" title="Search"></i>
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
         </a>
     </li>
 </ul>
@@ -122,7 +122,7 @@ Message(短信)、Email">
         <div class="logo-name">志鹏的技术博客</div>
         <div class="logo-desc">
             
-            Never really desperate, only the lost of the soul.
+            故不积跬步，无以至千里；不积小流，无以成江海。骐骥一跃，不能十步；驽马十驾，功在不舍。锲而舍之，朽木不折；锲而不舍，金石可镂。
             
         </div>
     </div>
@@ -136,7 +136,7 @@ Message(短信)、Email">
                 
                 <i class="fa fa-fw fa-home"></i>
                 
-                Index
+                首页
             </a>
         </li>
         
@@ -145,7 +145,7 @@ Message(短信)、Email">
                 
                 <i class="fa fa-fw fa-tags"></i>
                 
-                Tags
+                标签
             </a>
         </li>
         
@@ -154,7 +154,7 @@ Message(短信)、Email">
                 
                 <i class="fa fa-fw fa-bookmark"></i>
                 
-                Categories
+                分类
             </a>
         </li>
         
@@ -163,7 +163,7 @@ Message(短信)、Email">
                 
                 <i class="fa fa-fw fa-archive"></i>
                 
-                Archives
+                归档
             </a>
         </li>
         
@@ -172,7 +172,7 @@ Message(短信)、Email">
                 
                 <i class="fa fa-fw fa-user-circle-o"></i>
                 
-                About
+                关于
             </a>
         </li>
         
@@ -181,7 +181,7 @@ Message(短信)、Email">
                 
                 <i class="fa fa-fw fa-address-book"></i>
                 
-                Friends
+                友情链接
             </a>
         </li>
         
@@ -398,29 +398,29 @@ Message(短信)、Email">
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
-                    <i class="fa fa-calendar-minus-o fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
                     2018-04-03
                 </div>
 
                 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
                         2.5k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
-                        10 Min
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        10 分
                     </div>
                     
                 
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
                         <span id="busuanzi_value_page_pv"></span>
                     </div>
 				
@@ -519,7 +519,8 @@ Message(短信)、Email">
         ├── SMStrongChorusNaverView 
         ├── SMStrongScollerView 
         ├── SMStrongSoloExcellentShareView 
-        └── SMStrongSoloOrdinaryShareView</code></pre>
+        └── SMStrongSoloOrdinaryShareView
+</code></pre>
 <p>主要使用对象类：</p>
 <ol>
 <li>公共分享控件<ul>
@@ -555,7 +556,8 @@ Message(短信)、Email">
  */
  - (instancetype)initWithShareItem:(SMShareItemModel *)aItemModel
                      inviteAPIContent:(SMShareAPIContent *)apiContent
-                         returnBack:(ReturnBack)returnBack;  </code></pre>
+                         returnBack:(ReturnBack)returnBack;  
+</code></pre>
 </li>
 <li><p>SMShareViewController</p>
 <pre><code class="objc">  /**
@@ -575,7 +577,8 @@ Message(短信)、Email">
      */
      - (instancetype)initWithShareItems:(NSMutableArray &lt;NSDictionary *&gt;*)shareItems
                          shareContent:(SMShareAPIContent *)shareContent
-                             returnBack:(ReturnBack)returnBack;</code></pre>
+                             returnBack:(ReturnBack)returnBack;
+</code></pre>
 <h4 id="强分享"><a href="#强分享" class="headerlink" title="强分享"></a>强分享</h4></li>
 <li><p>SMStrongSoloViewController（独唱分享）</p>
 <pre><code class="objc"> @interface SMStrongSoloViewController : SMSNSBaseViewController
@@ -586,6 +589,7 @@ Message(短信)、Email">
                                      returnBlock:(ReturnBlock)returnBlock;
 
  @end
+
 </code></pre>
 </li>
 <li><p>SMStrongChorusViewController（合唱分享） </p>
@@ -597,7 +601,8 @@ Message(短信)、Email">
  - (instancetype)initWithShareStrongSoloItemModel:(SMShareStrongSoloItemModel *)itemModel
                          returnBlock:(ReturnBlock)returnBlock;
 
- @end</code></pre>
+ @end
+</code></pre>
 <h3 id="SMShareAPIManager"><a href="#SMShareAPIManager" class="headerlink" title="SMShareAPIManager"></a>SMShareAPIManager</h3><p> 该分享管理器提供了各平台单独的分享内容接口，在使用过程中调用相应的方法并传入正确的参数即可。</p>
 </li>
 </ol>
@@ -720,50 +725,33 @@ Message(短信)、Email">
 
     // 判断Twitter是否登陆
     + (void)isTwitterLogin:(SMShareTwitterState)state;
-    ```
+</code></pre>
+<h3 id="SMShareAPIContent-（分享内容模型）"><a href="#SMShareAPIContent-（分享内容模型）" class="headerlink" title="SMShareAPIContent （分享内容模型）"></a>SMShareAPIContent （分享内容模型）</h3><ol>
+<li>属性<br> <code>`</code>objc<br> @property (copy, nonatomic) NSString <em>shareRecordingId; //分享的唯一标识  不要重复<br> @property (assign, nonatomic) SMShareContentType shareContentSourceType; //之后会废弃这个字段<br> @property (copy,  nonatomic) NSString </em>shareTitle; //分享标题<br> @property (copy,  nonatomic) NSString <em>shareDescription; // 分享内容<br> @property (copy,  nonatomic) NSString </em>shareType; //分享类型 invite ，打点使用<br> @property (assign, nonatomic) SMShareContentType shareContentType; //分享内容类型<br> @property (copy,  nonatomic) NSString <em>shareLink; //分享链接<br> @property (copy,  nonatomic) NSString </em>shareImageURL;//分享图片<br> @property (copy,  nonatomic) NSString <em>shareVieoURL;//分享视频下载地址<br> @property (copy,  nonatomic) NSString </em>shareVideoPath;//分享视频本地地址<br> @property (copy,  nonatomic) NSString <em>shareHashtag; //分享Hashtag<br> @property (assign, nonatomic) BOOL isShareVideoType; // 是否是分享视频<br> @property (assign, nonatomic) NSInteger shareIspublic;//是否是私密状态<br> @property (copy, nonatomic) NSString </em>isContested;//是否是参赛作品 1，参赛 0，未参赛</li>
+</ol>
+<pre><code>/****************************************
+* 以下为IM分享携带信息
+* 如果可以取到信息请尽量传入避免之后请求
+*
+****************************************/
 
-### SMShareAPIContent （分享内容模型）
-1. 属性
-    ```objc
-    @property (copy, nonatomic) NSString *shareRecordingId; //分享的唯一标识  不要重复
-    @property (assign, nonatomic) SMShareContentType shareContentSourceType; //之后会废弃这个字段
-    @property (copy,  nonatomic) NSString *shareTitle; //分享标题
-    @property (copy,  nonatomic) NSString *shareDescription; // 分享内容
-    @property (copy,  nonatomic) NSString *shareType; //分享类型 invite ，打点使用
-    @property (assign, nonatomic) SMShareContentType shareContentType; //分享内容类型
-    @property (copy,  nonatomic) NSString *shareLink; //分享链接
-    @property (copy,  nonatomic) NSString *shareImageURL;//分享图片
-    @property (copy,  nonatomic) NSString *shareVieoURL;//分享视频下载地址
-    @property (copy,  nonatomic) NSString *shareVideoPath;//分享视频本地地址
-    @property (copy,  nonatomic) NSString *shareHashtag; //分享Hashtag
-    @property (assign, nonatomic) BOOL isShareVideoType; // 是否是分享视频
-    @property (assign, nonatomic) NSInteger shareIspublic;//是否是私密状态
-    @property (copy, nonatomic) NSString *isContested;//是否是参赛作品 1，参赛 0，未参赛
-
-
-    /****************************************
-    * 以下为IM分享携带信息
-    * 如果可以取到信息请尽量传入避免之后请求
-    *
-    ****************************************/
-
-    @property (strong,  nonatomic) SMShareFromContent *fromContent; //分享发送方信息
-    @property (copy, nonatomic) NSString *shareSingID;//分享作品歌手id
-    @property (copy, nonatomic) NSString *shareSingName;//分享作品歌手名字
-    @property (copy, nonatomic) NSString *shareSingCover;//分享作品歌手头像url
-    @property (assign, nonatomic) BOOL isVerified;//分享作品歌手是否是认证歌手
-    @property (nonatomic,assign) NSInteger  isRecordingPublic;//是否是我创建的作品
-    ```
-便捷方法：
-```objc
-- (instancetype)initWithShareContentTitle:(NSString *) aTitle
+@property (strong,  nonatomic) SMShareFromContent *fromContent; //分享发送方信息
+@property (copy, nonatomic) NSString *shareSingID;//分享作品歌手id
+@property (copy, nonatomic) NSString *shareSingName;//分享作品歌手名字
+@property (copy, nonatomic) NSString *shareSingCover;//分享作品歌手头像url
+@property (assign, nonatomic) BOOL isVerified;//分享作品歌手是否是认证歌手
+@property (nonatomic,assign) NSInteger  isRecordingPublic;//是否是我创建的作品
+```
+</code></pre><p>便捷方法：</p>
+<pre><code class="objc">- (instancetype)initWithShareContentTitle:(NSString *) aTitle
                               description:(NSString *) aDescription
                               recordingId:(NSString *) aRecordingId
                                      link:(NSString *) aLink
                                  imageURl:(NSString *) aImageUrl
                                  videoURL:(NSString *) aVideoUrl
                                   hashtag:(NSString *) ahashtag
-                              contentType:(SMShareContentType) aContentType;</code></pre>
+                              contentType:(SMShareContentType) aContentType;
+</code></pre>
 <h3 id="SMShareHelper"><a href="#SMShareHelper" class="headerlink" title="SMShareHelper"></a>SMShareHelper</h3><p>   根据title获取分享平台类型 、获取全部分享平台类型 、分享私信好友状态是否可用等功能接口</p>
 <pre><code>    /**
     根据返回传入item的title，获取分享平台类型
@@ -911,7 +899,8 @@ Message(短信)、Email">
 
     @return
     */
-    + (NSString *)getShareAppDownloadLink;</code></pre><p>目录结构存在的问题(<strong>已修复</strong>)：</p>
+    + (NSString *)getShareAppDownloadLink;
+</code></pre><p>目录结构存在的问题(<strong>已修复</strong>)：</p>
 <ol>
 <li>SMSharePublisthSuccess 代码存放目录不对</li>
 <li>SMStrongShare 存放目录不对  </li>
@@ -932,29 +921,22 @@ Message(短信)、Email">
  {
      [super viewWillAppear:animated];
      [self.navigationController setNavigationBarHidden:YES animated:NO];
- }   </code></pre> 这样在push页面过程中导航栏会出黑色<br> 建议把这个动画打开<pre><code> - (void)viewWillAppear:(BOOL)animated
+ }   
+</code></pre> 这样在push页面过程中导航栏会出黑色<br> 建议把这个动画打开<pre><code> - (void)viewWillAppear:(BOOL)animated
  {
      [super viewWillAppear:animated];
      [self.navigationController setNavigationBarHidden:YES animated:YES];
- }  </code></pre><h2 id="改进的地方"><a href="#改进的地方" class="headerlink" title="改进的地方"></a>改进的地方</h2></li>
+ }  
+</code></pre><h2 id="改进的地方"><a href="#改进的地方" class="headerlink" title="改进的地方"></a>改进的地方</h2></li>
 <li>项目中代码的逻辑目录需要有对应的物理文件夹</li>
 <li>将代码按不同的功能模块归纳到相应的目录下</li>
 <li>重复使用的代码可以考虑提取成一个方法，供使用</li>
 <li>一个代码文件里的代码可以按不同的方法类型 使用 <code>#pragma mark  -</code>进行归纳区分，方便阅读</li>
 <li>项目中的注释有点少，.h文件里的接口加上相应的注释，有利于自己和他们阅读与理解</li>
 </ol>
-<p>参考文档：<br><a href="https://phabricator.ushow.media/w/starmaker/ios/ios_sharesdk%E6%96%87%E6%A1%A3%E8%AF%B4%E6%98%8E/" target="_blank" rel="noopener">ShareSDK</a></p>
-<!-- # h5
-活动(web) -->
-<!-- <img src="/2018/04/03/SMShareModel/publishsuccess1.png" title="代码实际位置"> 
-<pre><code>{% asset_img 'publishsuccess2.png' '代码实际位置' %} 
-{% asset_img 'SMStrongShare1.png' '代码实际位置' %} 
-{% asset_img 'SMStrongShare2.png' '代码实际位置' %} 
-{% asset_img 'SMStrongShare3.png' '代码实际位置' %} 
-{% asset_img 'SMShare1.png' '代码实际位置' %} 
-{% asset_img 'SMShare2.png' '代码实际位置' %} 
-{% asset_img 'SMShare3.png' '代码实际位置' %} 
-{% asset_img 'SMShare4.png' '代码实际位置' %}  --&gt;</code></pre>-->
+<p>参考文档：<br><a href="https://phabricator.ushow.media/w/starmaker/ios/ios_sharesdk%E6%96%87%E6%A1%A3%E8%AF%B4%E6%98%8E/" target="_blank" rel="noopener">ShareSDK</a><br><!-- # h5
+活动(web) --><br><!-- <img src="/2018/04/03/SMShareModel/publishsuccess1.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/publishsuccess2.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMStrongShare1.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMStrongShare2.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMStrongShare3.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMShare1.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMShare2.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMShare3.png" title="代码实际位置"><br>    <img src="/2018/04/03/SMShareModel/SMShare4.png" title="代码实际位置">  –&gt;</p>
+--></p>
             </div>
             <hr/>
 
@@ -1088,7 +1070,7 @@ Message(短信)、Email">
 
 <div id="article-share">
     
-    <div class="social-share" data-disabled="qzone, qq, weibo, douban"></div>
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
     
 </div>
 
@@ -1099,11 +1081,11 @@ Message(短信)、Email">
     <div class="reprint" id="reprint-statement">
         <p class="reprint-tip">
             <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
-            <span>Reprint policy</span>
+            <span>转载规则</span>
         </p>
         
             <div class="center-align">
-                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
                     <img alt=""
                          style="border-width:0"
                          src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
@@ -1113,20 +1095,20 @@ Message(短信)、Email">
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
                     《SMShareModel》
-                </span> by
+                </span> 由
             <a xmlns:cc="http://creativecommons.org/ns#" href="" property="cc:attributionName"
                rel="cc:attributionURL">
                 志鹏
-            </a> is licensed under a
-            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
-                Creative Commons Attribution 4.0 International License
-            </a> 
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
         
     </div>
 
     <script async defer>
       document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
         M.toast({html: toastHTML})
       });
 
@@ -1181,7 +1163,7 @@ Message(短信)、Email">
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="../../../07/12/Runloop/">
                     <div class="card-image">
@@ -1220,7 +1202,7 @@ Runloop什么是Runloop
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fa fa-chevron-right"></i>
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="../../../03/31/hello-world/">
@@ -1263,7 +1245,7 @@ Runloop什么是Runloop
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget">
-            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
             <div id="toc-content"></div>
         </div>
     </div>
@@ -1367,7 +1349,7 @@ Runloop什么是Runloop
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">138.6k</span>
+                <span class="white-color">149.2k</span>
             
 
             
@@ -1412,8 +1394,8 @@ Runloop什么是Runloop
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</span>
-            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
                    class="search-input">
         </div>
         <div id="searchResult"></div>

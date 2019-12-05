@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
-<html lang="">
+<html lang="zh-CN">
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
     <meta name="keywords" content="Runtime消息转发基础, 志鹏的技术博客">
     <meta name="description" content="Runtime 的定义
@@ -55,7 +55,7 @@ The Objective-C language defers as many decisions as it can from compile time an
             
             <i class="fa fa-home"></i>
             
-            <span>Index</span>
+            <span>首页</span>
         </a>
     </li>
     
@@ -64,7 +64,7 @@ The Objective-C language defers as many decisions as it can from compile time an
             
             <i class="fa fa-tags"></i>
             
-            <span>Tags</span>
+            <span>标签</span>
         </a>
     </li>
     
@@ -73,7 +73,7 @@ The Objective-C language defers as many decisions as it can from compile time an
             
             <i class="fa fa-bookmark"></i>
             
-            <span>Categories</span>
+            <span>分类</span>
         </a>
     </li>
     
@@ -82,7 +82,7 @@ The Objective-C language defers as many decisions as it can from compile time an
             
             <i class="fa fa-archive"></i>
             
-            <span>Archives</span>
+            <span>归档</span>
         </a>
     </li>
     
@@ -91,7 +91,7 @@ The Objective-C language defers as many decisions as it can from compile time an
             
             <i class="fa fa-user-circle-o"></i>
             
-            <span>About</span>
+            <span>关于</span>
         </a>
     </li>
     
@@ -100,13 +100,13 @@ The Objective-C language defers as many decisions as it can from compile time an
             
             <i class="fa fa-address-book"></i>
             
-            <span>Friends</span>
+            <span>友情链接</span>
         </a>
     </li>
     
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-            <i id="searchIcon" class="fa fa-search" title="Search"></i>
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
         </a>
     </li>
 </ul>
@@ -120,7 +120,7 @@ The Objective-C language defers as many decisions as it can from compile time an
         <div class="logo-name">志鹏的技术博客</div>
         <div class="logo-desc">
             
-            Never really desperate, only the lost of the soul.
+            故不积跬步，无以至千里；不积小流，无以成江海。骐骥一跃，不能十步；驽马十驾，功在不舍。锲而舍之，朽木不折；锲而不舍，金石可镂。
             
         </div>
     </div>
@@ -134,7 +134,7 @@ The Objective-C language defers as many decisions as it can from compile time an
                 
                 <i class="fa fa-fw fa-home"></i>
                 
-                Index
+                首页
             </a>
         </li>
         
@@ -143,7 +143,7 @@ The Objective-C language defers as many decisions as it can from compile time an
                 
                 <i class="fa fa-fw fa-tags"></i>
                 
-                Tags
+                标签
             </a>
         </li>
         
@@ -152,7 +152,7 @@ The Objective-C language defers as many decisions as it can from compile time an
                 
                 <i class="fa fa-fw fa-bookmark"></i>
                 
-                Categories
+                分类
             </a>
         </li>
         
@@ -161,7 +161,7 @@ The Objective-C language defers as many decisions as it can from compile time an
                 
                 <i class="fa fa-fw fa-archive"></i>
                 
-                Archives
+                归档
             </a>
         </li>
         
@@ -170,7 +170,7 @@ The Objective-C language defers as many decisions as it can from compile time an
                 
                 <i class="fa fa-fw fa-user-circle-o"></i>
                 
-                About
+                关于
             </a>
         </li>
         
@@ -179,7 +179,7 @@ The Objective-C language defers as many decisions as it can from compile time an
                 
                 <i class="fa fa-fw fa-address-book"></i>
                 
-                Friends
+                友情链接
             </a>
         </li>
         
@@ -392,29 +392,29 @@ The Objective-C language defers as many decisions as it can from compile time an
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
-                    <i class="fa fa-calendar-minus-o fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
                     2019-09-09
                 </div>
 
                 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
                         1.6k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
-                        6 Min
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        6 分
                     </div>
                     
                 
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
                         <span id="busuanzi_value_page_pv"></span>
                     </div>
 				
@@ -445,12 +445,14 @@ The Objective-C language defers as many decisions as it can from compile time an
 typedef void (*IMP)(void /* id, SEL, ... */ );
 #else
 typedef id (*IMP)(id, SEL, ...);
-#endif</code></pre>
+#endif
+</code></pre>
 <p>向对象发送消息后，是由这个函数指针IMP执行的，即IMP函数指针指向了方法的实现。</p>
 <p>IMP函数指针最少包含了id和SEL类型的两个参数，后面其他的参数是对应方法需要的参数。其中id代表执行该方法的target（对象），SEL代表对应的方法，通过id和SEL参数就能确定唯一的方法实现地址。</p>
 <h3 id="如何获取方法的IMP"><a href="#如何获取方法的IMP" class="headerlink" title="如何获取方法的IMP"></a>如何获取方法的IMP</h3><p>NSObject提供了如下两方法：</p>
 <pre><code class="objc">- (IMP)methodForSelector:(SEL)aSelector;
-+ (IMP)instanceMethodForSelector:(SEL)aSelector;</code></pre>
++ (IMP)instanceMethodForSelector:(SEL)aSelector;
+</code></pre>
 <p>对应的实现源码：</p>
 <pre><code class="objc">+ (IMP)instanceMethodForSelector:(SEL)sel {
     if (!sel) [self doesNotRecognizeSelector:sel];
@@ -463,14 +465,16 @@ typedef id (*IMP)(id, SEL, ...);
 - (IMP)methodForSelector:(SEL)sel {
     if (!sel) [self doesNotRecognizeSelector:sel];
     return object_getMethodImplementation(self, sel);
-}</code></pre>
+}
+</code></pre>
 <p>上述实现中<code>methodForSelector</code>即有实例方法和类方法，而<code>instanceMethodForSelector</code>只有类方法<br>在使用<code>methodForSelector</code>方法时，向类发送消息，则<code>SEL</code>应该是类方法，若向实例对象发消息，则<code>SEL</code>应该为实例对象方法。<code>instanceMethodForSelector</code>仅仅允许类发送该消息，从而获取实例方法的IMP,该方法无法获取类方法的<code>IMP</code>,如果想获取类方法的<code>IMP</code>可以使用<code>methodForSelector</code>来获取。</p>
 <h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>在源码<code>runtime.h</code>中定义method,其本质是一个结构体</p>
 <pre><code class="objc">struct objc_method {
     SEL method_name     OBJC2_UNAVAILABLE;///函数名
     char *method_types  OBJC2_UNAVAILABLE;///方法类型
     IMP method_imp      OBJC2_UNAVAILABLE;///函数指针
-}</code></pre>
+}
+</code></pre>
 <ul>
 <li>方法名<code>method_name</code>类型为<code>SEL</code>;</li>
 <li>方法类型<code>method_types</code>是一个char指针，存储着方法的参数类型和返回值类型；</li>
@@ -478,12 +482,15 @@ typedef id (*IMP)(id, SEL, ...);
 </ul>
 <h3 id="获取method的方法"><a href="#获取method的方法" class="headerlink" title="获取method的方法"></a>获取method的方法</h3><p><code>runtime.h</code> 中有两个方法，可以根据 <code>SEL</code>直接获取实例方法和类方法的 <code>Method</code>，如下:</p>
 <pre><code class="objc">Method class_getInstanceMethod(Class cls, SEL name);///获取实例方法
-Method class_getClassMethod(Class cls, SEL name);///获取类方法</code></pre>
+Method class_getClassMethod(Class cls, SEL name);///获取类方法
+</code></pre>
 <h2 id="SEL"><a href="#SEL" class="headerlink" title="SEL"></a>SEL</h2><p>selector称之为方法选择器，SEL是selector的表示类型，也是方法编号，是类成员方法的指针。</p>
-<pre><code class="objc">typedef struct objc_selector *SEL;</code></pre>
+<pre><code class="objc">typedef struct objc_selector *SEL;
+</code></pre>
 <h3 id="获取SEL有方法"><a href="#获取SEL有方法" class="headerlink" title="获取SEL有方法"></a>获取SEL有方法</h3><pre><code class="objc">SEL sel = @selector(play:);
 SEL sel = sel_registerName(&quot;play:&quot;); 
-SEL sel = NSSelectorFromString(@&quot;play&quot;);</code></pre>
+SEL sel = NSSelectorFromString(@&quot;play&quot;);
+</code></pre>
 <p>SEL表示一个selector的指针，无论什么类里，只要方法名相同，SEL就相同，SEL实际是根据方法名hash化了的字符串，而对于字符串的比较仅仅需要比较他们的地址就可以了，所以速度上非常快，SEL的存在加快了查询方法的速度</p>
 <blockquote>
 <p>Q：为什么在同一个OC类中，不能存在同名的函数，即使用参数类型不同也不行？（OC为什么没有重载）<br>A：SEL表示一个selector的指针，无论在什么类型里，只要方法名相同，SEL就相同，相同的函数名，编译器无法编译通过。</p>
@@ -495,7 +502,8 @@ SEL sel = NSSelectorFromString(@&quot;play&quot;);</code></pre>
     if (!cls) return NO;
     rwlock_writer_t lock(runtimeLock);
     return ! addMethod(cls, name, imp, types ?: &quot;&quot;, NO);
-}</code></pre>
+}
+</code></pre>
 <blockquote>
 <p>Adds a new method to a class with a given name and implementation.<br>class_addMethod will add an override of a superclass’s implementation,<br>but will not replace an existing implementation in this class.<br>To change an existing implementation, use method_setImplementation.</p>
 </blockquote>
@@ -644,7 +652,7 @@ SEL sel = NSSelectorFromString(@&quot;play&quot;);</code></pre>
 
 <div id="article-share">
     
-    <div class="social-share" data-disabled="qzone, qq, weibo, douban"></div>
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
     
 </div>
 
@@ -655,11 +663,11 @@ SEL sel = NSSelectorFromString(@&quot;play&quot;);</code></pre>
     <div class="reprint" id="reprint-statement">
         <p class="reprint-tip">
             <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
-            <span>Reprint policy</span>
+            <span>转载规则</span>
         </p>
         
             <div class="center-align">
-                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
                     <img alt=""
                          style="border-width:0"
                          src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
@@ -669,20 +677,20 @@ SEL sel = NSSelectorFromString(@&quot;play&quot;);</code></pre>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
                     《Runtime消息转发基础》
-                </span> by
+                </span> 由
             <a xmlns:cc="http://creativecommons.org/ns#" href="" property="cc:attributionName"
                rel="cc:attributionURL">
                 志鹏
-            </a> is licensed under a
-            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
-                Creative Commons Attribution 4.0 International License
-            </a> 
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
         
     </div>
 
     <script async defer>
       document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
         M.toast({html: toastHTML})
       });
 
@@ -735,31 +743,29 @@ SEL sel = NSSelectorFromString(@&quot;play&quot;);</code></pre>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;Current
-            </div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="">
+                <a href="../../13/表达式求值/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Runtime消息转发基础">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="表达式求值">
                         
-                        <span class="card-title">Runtime消息转发基础</span>
+                        <span class="card-title">表达式求值</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Runtime 的定义
-The Objective-C language defers as many decisions as it can from compile time and link time to runtime. When
+                            表达式求值表达式基础任何一个表达式都由操作数（operand）、运算符(operator)和界限符（delimiter）组成。其中操作数可以是常数，也可以是被说明为变量或常量的标识符。运算符可以分为算述运算符、关系运算符、逻辑运算符三类。基
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-09
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-13
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-user fa-fw"></i>
@@ -768,12 +774,15 @@ The Objective-C language defers as many decisions as it can from compile time an
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="../../../../tags/runtime/" target="_blank">
-                        <span class="chip bg-color">runtime</span>
+                    <a href="../../../../tags/数据结构/" target="_blank">
+                        <span class="chip bg-color">数据结构</span>
+                    </a>
+                    
+                    <a href="../../../../tags/栈/" target="_blank">
+                        <span class="chip bg-color">栈</span>
                     </a>
                     
                 </div>
@@ -784,7 +793,7 @@ The Objective-C language defers as many decisions as it can from compile time an
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fa fa-chevron-right"></i>
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="../SwiftStringAndCharacters/">
@@ -827,7 +836,7 @@ The Objective-C language defers as many decisions as it can from compile time an
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget">
-            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
             <div id="toc-content"></div>
         </div>
     </div>
@@ -931,7 +940,7 @@ The Objective-C language defers as many decisions as it can from compile time an
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">138.6k</span>
+                <span class="white-color">149.2k</span>
             
 
             
@@ -976,8 +985,8 @@ The Objective-C language defers as many decisions as it can from compile time an
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</span>
-            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
                    class="search-input">
         </div>
         <div id="searchResult"></div>

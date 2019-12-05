@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
-<html lang="">
+<html lang="zh-CN">
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
     <meta name="keywords" content="iOS @property、 @synthesize和@dynamic, 志鹏的技术博客">
     <meta name="description" content="@property  @Property是声明属性的语法，它可以快速方便的为实例变量创建存取器，并允许我们通过点语法使用存取器
@@ -56,7 +56,7 @@
             
             <i class="fa fa-home"></i>
             
-            <span>Index</span>
+            <span>首页</span>
         </a>
     </li>
     
@@ -65,7 +65,7 @@
             
             <i class="fa fa-tags"></i>
             
-            <span>Tags</span>
+            <span>标签</span>
         </a>
     </li>
     
@@ -74,7 +74,7 @@
             
             <i class="fa fa-bookmark"></i>
             
-            <span>Categories</span>
+            <span>分类</span>
         </a>
     </li>
     
@@ -83,7 +83,7 @@
             
             <i class="fa fa-archive"></i>
             
-            <span>Archives</span>
+            <span>归档</span>
         </a>
     </li>
     
@@ -92,7 +92,7 @@
             
             <i class="fa fa-user-circle-o"></i>
             
-            <span>About</span>
+            <span>关于</span>
         </a>
     </li>
     
@@ -101,13 +101,13 @@
             
             <i class="fa fa-address-book"></i>
             
-            <span>Friends</span>
+            <span>友情链接</span>
         </a>
     </li>
     
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-            <i id="searchIcon" class="fa fa-search" title="Search"></i>
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
         </a>
     </li>
 </ul>
@@ -121,7 +121,7 @@
         <div class="logo-name">志鹏的技术博客</div>
         <div class="logo-desc">
             
-            Never really desperate, only the lost of the soul.
+            故不积跬步，无以至千里；不积小流，无以成江海。骐骥一跃，不能十步；驽马十驾，功在不舍。锲而舍之，朽木不折；锲而不舍，金石可镂。
             
         </div>
     </div>
@@ -135,7 +135,7 @@
                 
                 <i class="fa fa-fw fa-home"></i>
                 
-                Index
+                首页
             </a>
         </li>
         
@@ -144,7 +144,7 @@
                 
                 <i class="fa fa-fw fa-tags"></i>
                 
-                Tags
+                标签
             </a>
         </li>
         
@@ -153,7 +153,7 @@
                 
                 <i class="fa fa-fw fa-bookmark"></i>
                 
-                Categories
+                分类
             </a>
         </li>
         
@@ -162,7 +162,7 @@
                 
                 <i class="fa fa-fw fa-archive"></i>
                 
-                Archives
+                归档
             </a>
         </li>
         
@@ -171,7 +171,7 @@
                 
                 <i class="fa fa-fw fa-user-circle-o"></i>
                 
-                About
+                关于
             </a>
         </li>
         
@@ -180,7 +180,7 @@
                 
                 <i class="fa fa-fw fa-address-book"></i>
                 
-                Friends
+                友情链接
             </a>
         </li>
         
@@ -393,29 +393,29 @@
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
-                    <i class="fa fa-calendar-minus-o fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
                     2016-08-23
                 </div>
 
                 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
                         1.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
-                        3 Min
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        3 分
                     </div>
                     
                 
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
                         <span id="busuanzi_value_page_pv"></span>
                     </div>
 				
@@ -429,15 +429,15 @@
 <p>存取器（accessor）：指用于获取和设置实例变量的方法。用于获取实例变量值的存取器是getter，用于设置实例变量值的存取器是setter。<br>用<code>@Property</code>声明一个属性之后, 编译器会自动给你生成setter和getter方法的声明以及实现还有一个以_xxx 的成员变量(xxx是你属性定义的变量名字)  </p>
 </blockquote>
   <a id="more"></a>
-
 <h1 id="property对应两个选择"><a href="#property对应两个选择" class="headerlink" title="@property对应两个选择"></a><code>@property</code>对应两个选择</h1><h2 id="synthesize"><a href="#synthesize" class="headerlink" title="@synthesize"></a><code>@synthesize</code></h2><ul>
 <li><code>@synthesize</code> 能够为您的属性的<code>getter</code>和<code>setter</code>方法。有自定义会屏蔽自动生成的<code>getter</code>和<code>setter</code></li>
 <li>Xcode6以后省略这个了, 默认在 <code>@implementation</code> .m中添加了<code>@synthesize xxx = _xxx</code>;</li>
-<li>如果我们希望使用默认的实例变量命名方式，那么我们在.m文件中就不需要使用<code>@synthesize</code>声明，系统会帮我们自动完成。<pre><code>    如果我们希望自己命名实例变量命，那么我们就使用`@synthesize`显示声明我们希望的实例变量名。</code></pre></li>
+<li>如果我们希望使用默认的实例变量命名方式，那么我们在.m文件中就不需要使用<code>@synthesize</code>声明，系统会帮我们自动完成。<pre><code>    如果我们希望自己命名实例变量命，那么我们就使用`@synthesize`显示声明我们希望的实例变量名。
+</code></pre></li>
 </ul>
 <h2 id="dynamic"><a href="#dynamic" class="headerlink" title="@dynamic"></a><code>@dynamic</code></h2><ul>
 <li><code>@dynamic</code> 不会自动生成<code>getter/setter</code>方法，需要自己实现，不然会报错</li>
-<li>Xcode6以后省略这个了, 默认在 <code>@implementation.m</code>中添加了<code>@synthesize xxx</code>;</li>
+<li>Xcode6以后省略这个了, 默认在 <a href="mailto:`@implementation.m" target="_blank" rel="noopener">`@implementation.m</a><code>中添加了</code>@synthesize xxx`;</li>
 </ul>
 <h1 id="property的特性"><a href="#property的特性" class="headerlink" title="@property的特性"></a><code>@property的特性</code></h1><p>  @property还有一些关键字，它们都是有特殊作用的，它们分为三类，分别是：原子性，存取器控制，内存管理。</p>
 <h2 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h2><ul>
@@ -446,28 +446,28 @@
 </ul>
 <h2 id="存取器控制"><a href="#存取器控制" class="headerlink" title="存取器控制"></a>存取器控制</h2><ul>
 <li><code>readwrite</code>（默认）：<code>readwrite</code>是默认值，表示该属性同时拥有<code>setter</code>和<code>getter</code>。</li>
-<li><code>readonly</code>： readonly表示只有<code>getter</code>没有<code>setter</code>。<br>有时候为了语意更明确可能需要自定义访问器的名字：<pre><code class="objc">@property (nonatomic, setter = mySetter:,getter = myGetter ) NSString *name;</code></pre>
-最常见的是BOOL类型，比如标识View是否隐藏的属性hidden。可以这样声明：<pre><code class="objc">@property (nonatomic,getter = isHidden ) BOOL hidden;</code></pre>
+<li><code>readonly</code>： readonly表示只有<code>getter</code>没有<code>setter</code>。<br>有时候为了语意更明确可能需要自定义访问器的名字：<pre><code class="objc">@property (nonatomic, setter = mySetter:,getter = myGetter ) NSString *name;
+</code></pre>
+最常见的是BOOL类型，比如标识View是否隐藏的属性hidden。可以这样声明：<pre><code class="objc">@property (nonatomic,getter = isHidden ) BOOL hidden;
+</code></pre>
 </li>
 </ul>
 <h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><blockquote>
 <p><code>@property</code>有显示的内存管理策略。这使得我们只需要看一眼<code>@property</code>声明就明白它会怎样对待传入的值</p>
 </blockquote>
 <ul>
-<li><p><code>assign</code>（默认）：<code>assign</code>用于值类型，如<code>int</code>、<code>float</code>、<code>double</code>和<code>NSInteger</code>、<code>CGFloat</code>等表示单纯的复制。还包括不存在所有权关系的对象，比如常见的delegate。</p>
-</li>
-<li><p><code>retain</code>：在<code>setter</code>方法中，需要对传入的对象进行引用计数加1的操作。<br>简单来说，就是对传入的对象拥有所有权，只要对该对象拥有所有权，该对象就不会被释放。如下代码所示：</p>
-<pre><code class="objc">-(void)setName:(NSString * )_name{  
+<li><code>assign</code>（默认）：<code>assign</code>用于值类型，如<code>int</code>、<code>float</code>、<code>double</code>和<code>NSInteger</code>、<code>CGFloat</code>等表示单纯的复制。还包括不存在所有权关系的对象，比如常见的delegate。</li>
+<li><code>retain</code>：在<code>setter</code>方法中，需要对传入的对象进行引用计数加1的操作。<br>简单来说，就是对传入的对象拥有所有权，只要对该对象拥有所有权，该对象就不会被释放。如下代码所示：<pre><code class="objc">-(void)setName:(NSString * )_name{  
    //首先判断是否与旧对象一致，如果不一致进行赋值。  
    //因为如果是一个对象的话，进行if内的代码会造成一个极端的情况：当此name的retain为1时，使此次的set操作让实例name提前释放，而达不到赋值目的。  
    if ( name !=_name){  
         [name release];  
         name = [_name retain];  
    }  
-}</code></pre>
+}
+</code></pre>
 </li>
-<li><p><code>strong</code>：<code>strong</code>是在<code>iOS</code>引入<code>ARC</code>的时候引入的关键字，是<code>retain</code>的一个可选的替代。表示实例变量对传入的对象要有所有权关系，即强引用。<code>strong</code>跟<code>retain</code>的意思相同并产生相同的代码，但是语意上更好更能体现对象的关系。</p>
-</li>
+<li><code>strong</code>：<code>strong</code>是在<code>iOS</code>引入<code>ARC</code>的时候引入的关键字，是<code>retain</code>的一个可选的替代。表示实例变量对传入的对象要有所有权关系，即强引用。<code>strong</code>跟<code>retain</code>的意思相同并产生相同的代码，但是语意上更好更能体现对象的关系。</li>
 <li><p><code>weak</code>：在<code>setter</code>方法中，需要对传入的对象不进行引用计数加1的操作。<br>简单来说，就是对传入的对象没有所有权，当该对象引用计数为0时，即该对象被释放后，用<code>weak</code>声明的实例变量指向<code>nil</code>，即实例变量的值为0。</p>
 <blockquote>
 <p>注：weak关键字是iOS5引入的，iOS5之前是不能使用该关键字的。<code>delegate</code>和 <code>Outlet</code> 一般用weak来声明。</p>
@@ -610,7 +610,7 @@
 
 <div id="article-share">
     
-    <div class="social-share" data-disabled="qzone, qq, weibo, douban"></div>
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
     
 </div>
 
@@ -621,11 +621,11 @@
     <div class="reprint" id="reprint-statement">
         <p class="reprint-tip">
             <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
-            <span>Reprint policy</span>
+            <span>转载规则</span>
         </p>
         
             <div class="center-align">
-                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
                     <img alt=""
                          style="border-width:0"
                          src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
@@ -635,20 +635,20 @@
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
                     《iOS @property、 @synthesize和@dynamic》
-                </span> by
+                </span> 由
             <a xmlns:cc="http://creativecommons.org/ns#" href="" property="cc:attributionName"
                rel="cc:attributionURL">
                 志鹏
-            </a> is licensed under a
-            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
-                Creative Commons Attribution 4.0 International License
-            </a> 
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
         
     </div>
 
     <script async defer>
       document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
         M.toast({html: toastHTML})
       });
 
@@ -703,7 +703,7 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="../../28/Block学习/">
                     <div class="card-image">
@@ -723,8 +723,7 @@
 
 
 
-Ｃ语言中函数的声明与使用
-int function(int
+Ｃ语言中函数的声明与使用int function(int 
                         
                     </div>
                     <div class="publish-info">
@@ -746,7 +745,7 @@ int function(int
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fa fa-chevron-right"></i>
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="../../19/iOS手机锁屏控制/">
@@ -802,7 +801,7 @@ int function(int
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget">
-            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
             <div id="toc-content"></div>
         </div>
     </div>
@@ -906,7 +905,7 @@ int function(int
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">138.6k</span>
+                <span class="white-color">149.2k</span>
             
 
             
@@ -951,8 +950,8 @@ int function(int
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</span>
-            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
                    class="search-input">
         </div>
         <div id="searchResult"></div>

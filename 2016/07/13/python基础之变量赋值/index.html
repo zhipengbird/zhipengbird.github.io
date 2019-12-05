@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
-<html lang="">
+<html lang="zh-CN">
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
     <meta name="keywords" content="python基础之变量赋值, 志鹏的技术博客">
     <meta name="description" content="今天主要来学习下python的变量赋值方面的知识，及注意事项
@@ -55,7 +55,7 @@
             
             <i class="fa fa-home"></i>
             
-            <span>Index</span>
+            <span>首页</span>
         </a>
     </li>
     
@@ -64,7 +64,7 @@
             
             <i class="fa fa-tags"></i>
             
-            <span>Tags</span>
+            <span>标签</span>
         </a>
     </li>
     
@@ -73,7 +73,7 @@
             
             <i class="fa fa-bookmark"></i>
             
-            <span>Categories</span>
+            <span>分类</span>
         </a>
     </li>
     
@@ -82,7 +82,7 @@
             
             <i class="fa fa-archive"></i>
             
-            <span>Archives</span>
+            <span>归档</span>
         </a>
     </li>
     
@@ -91,7 +91,7 @@
             
             <i class="fa fa-user-circle-o"></i>
             
-            <span>About</span>
+            <span>关于</span>
         </a>
     </li>
     
@@ -100,13 +100,13 @@
             
             <i class="fa fa-address-book"></i>
             
-            <span>Friends</span>
+            <span>友情链接</span>
         </a>
     </li>
     
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-            <i id="searchIcon" class="fa fa-search" title="Search"></i>
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
         </a>
     </li>
 </ul>
@@ -120,7 +120,7 @@
         <div class="logo-name">志鹏的技术博客</div>
         <div class="logo-desc">
             
-            Never really desperate, only the lost of the soul.
+            故不积跬步，无以至千里；不积小流，无以成江海。骐骥一跃，不能十步；驽马十驾，功在不舍。锲而舍之，朽木不折；锲而不舍，金石可镂。
             
         </div>
     </div>
@@ -134,7 +134,7 @@
                 
                 <i class="fa fa-fw fa-home"></i>
                 
-                Index
+                首页
             </a>
         </li>
         
@@ -143,7 +143,7 @@
                 
                 <i class="fa fa-fw fa-tags"></i>
                 
-                Tags
+                标签
             </a>
         </li>
         
@@ -152,7 +152,7 @@
                 
                 <i class="fa fa-fw fa-bookmark"></i>
                 
-                Categories
+                分类
             </a>
         </li>
         
@@ -161,7 +161,7 @@
                 
                 <i class="fa fa-fw fa-archive"></i>
                 
-                Archives
+                归档
             </a>
         </li>
         
@@ -170,7 +170,7 @@
                 
                 <i class="fa fa-fw fa-user-circle-o"></i>
                 
-                About
+                关于
             </a>
         </li>
         
@@ -179,7 +179,7 @@
                 
                 <i class="fa fa-fw fa-address-book"></i>
                 
-                Friends
+                友情链接
             </a>
         </li>
         
@@ -392,29 +392,29 @@
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
-                    <i class="fa fa-calendar-minus-o fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
                     2016-07-13
                 </div>
 
                 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
                         851
                     </div>
                     
 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
-                        3 Min
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        3 分
                     </div>
                     
                 
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
                         <span id="busuanzi_value_page_pv"></span>
                     </div>
 				
@@ -430,79 +430,76 @@ astring = &#39;yuanph&#39;
 afloat= -3.141582653
 aotherString  = &#39;ping&#39;+&#39;hua&#39;
 alist =[3,1.4,&#39;ufasd&#39;,8.3-1.9]
-print(aint,astring,afloat,aotherString,alist)</code></pre>
+print(aint,astring,afloat,aotherString,alist)
+</code></pre>
 <p>以下的赋值语句是非法的</p>
 <pre><code class="python">&gt;&gt;&gt; x=1
 &gt;&gt;&gt; y= (x=x+1)
   File &quot;&lt;stdin&gt;&quot;, line 1
     y= (x=x+1)
          ^
-SyntaxError: invalid syntax</code></pre>
+SyntaxError: invalid syntax
+</code></pre>
 <p>如果你较为熟悉Ｃ的话，赋值语句其实就是当成一个表达式（可以返回值）,上述赋值在Ｃ中是合法的</p>
 <pre><code class="C">int x = 1;
 int y  = (x=x+1);
 printf(&quot;%d\t%d&quot;,x,y);
-//2    2</code></pre>
+//2    2
+</code></pre>
 <p>如将上述的语句改成链接赋值，那是合法的</p>
 <pre><code class="python">&gt;&gt;&gt; x=1
 &gt;&gt;&gt; y = x =x+1
 &gt;&gt;&gt; x,y
-(2, 2)</code></pre>
+(2, 2)
+</code></pre>
 <h4 id="增量赋值"><a href="#增量赋值" class="headerlink" title="增量赋值"></a>增量赋值</h4><p>从python2.0开始，等号可以和一个算述操作符组合在一起，将计算结果重新赋值给左边的变量，这被称为<font style="color:red;">增量赋值</font><br>增量赋值通过使用赋值运行算，将数学运算隐藏在赋值过程中，如果学过其他语言，对下面的增量运算符会比较熟悉：</p>
 <table>
 <thead>
 <tr>
 <th></th>
-<th align="center"></th>
-<th align="center"></th>
-<th align="center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>+=</code></td>
-<td align="center"><code>-=</code></td>
-<td align="center"><code>*=</code></td>
-<td align="center"><code>/=</code></td>
+<td style="text-align:center"><code>-=</code></td>
+<td style="text-align:center"><code>*=</code></td>
+<td style="text-align:center"><code>/=</code></td>
 </tr>
 <tr>
 <td><code>%=</code></td>
-<td align="center"><code>**=</code></td>
-<td align="center"><code>&lt;&lt;=</code></td>
-<td align="center"><code>&gt;&gt;=</code></td>
+<td style="text-align:center"><code>**=</code></td>
+<td style="text-align:center"><code>&lt;&lt;=</code></td>
+<td style="text-align:center"><code>&gt;&gt;=</code></td>
 </tr>
 <tr>
 <td><code>&amp;=</code></td>
-<td align="center"><code>^=</code></td>
-<td align="center">&#124;=</td>
-<td align="center"></td>
+<td style="text-align:center"><code>^=</code></td>
+<td style="text-align:center">&#124;=</td>
 </tr>
-<tr>
-<td><em>增量赋值相对于普通和赋值不仅是写法改变，最有意义的变化是第一个对象仅被处理一次。可变对象会被就地修改（无需拷贝引用），不可变对象则和Ａ＝Ａ＋Ｂ的结果一样（分配一个新的对象）</em></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td><strong><em>不支持<code>++</code>、<code>--</code>这样的前/后置的自增/减运算</em></strong></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-</tbody></table>
+</tbody>
+</table>
+<p><em>增量赋值相对于普通和赋值不仅是写法改变，最有意义的变化是第一个对象仅被处理一次。可变对象会被就地修改（无需拷贝引用），不可变对象则和Ａ＝Ａ＋Ｂ的结果一样（分配一个新的对象）</em><br><strong><em>不支持<code>++</code>、<code>--</code>这样的前/后置的自增/减运算</em></strong></p>
 <h4 id="多重赋值"><a href="#多重赋值" class="headerlink" title="多重赋值"></a>多重赋值</h4><pre><code class="python">&gt;&gt;&gt; x=y = z= b= 1
 &gt;&gt;&gt; x,y,z,b
-(1, 1, 1, 1)</code></pre>
+(1, 1, 1, 1)
+</code></pre>
 <p> 上述代码说明：一个值为1的整形对象被创建，该对象的同一个引用被赋值给x,y,z,b.d 在python中可以将多个对象赋给多个变量，请下看下的多元赋值</p>
 <h4 id="多元赋值"><a href="#多元赋值" class="headerlink" title="多元赋值"></a>多元赋值</h4><p>将多个变量同时赋值的方法＝＝＝&gt;多元赋值（非官方术语）<br>采用这种赋值时，等号两边的对象都是元组（一种基本数据类型）</p>
 <pre><code class="python">&gt;&gt;&gt; x,y,z = 1,2,&#39;yph&#39;
 &gt;&gt;&gt; x,y,z
-(1, 2, &#39;yph&#39;)</code></pre>
+(1, 2, &#39;yph&#39;)
+</code></pre>
 <p>上述代码中，将两个整型变量和一个字符串对象，分别赋值给x,y,z.通常情况下元组需要用括号括起来，增加可读性（这是可选操作），但推荐使用。<br>我们来看下使用多元赋值来完成两个变量值的交换，先看c的实现</p>
 <pre><code class="c">int x = 10;
 int y = 100;
 int temp = x;
 x = y;
-y = temp;</code></pre>
+y = temp;
+</code></pre>
 <p>一般情况下我们需要一个中间变量来完成我们的数据交换，接下来我们看下python是如何快速实现这两值的交换的</p>
 <pre><code class="python">&gt;&gt;&gt; x,y= 10,100
 &gt;&gt;&gt; x,y
@@ -510,6 +507,7 @@ y = temp;</code></pre>
 &gt;&gt;&gt; x,y= y,x
 &gt;&gt;&gt; x,y
 (100, 10)
+
 </code></pre>
 <p>非常的方便快捷，显然，python在赋值之前已经对x,y的新值做了计算。</p>
 
@@ -646,7 +644,7 @@ y = temp;</code></pre>
 
 <div id="article-share">
     
-    <div class="social-share" data-disabled="qzone, qq, weibo, douban"></div>
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
     
 </div>
 
@@ -657,11 +655,11 @@ y = temp;</code></pre>
     <div class="reprint" id="reprint-statement">
         <p class="reprint-tip">
             <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
-            <span>Reprint policy</span>
+            <span>转载规则</span>
         </p>
         
             <div class="center-align">
-                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
                     <img alt=""
                          style="border-width:0"
                          src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
@@ -671,20 +669,20 @@ y = temp;</code></pre>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
                     《python基础之变量赋值》
-                </span> by
+                </span> 由
             <a xmlns:cc="http://creativecommons.org/ns#" href="" property="cc:attributionName"
                rel="cc:attributionURL">
                 志鹏
-            </a> is licensed under a
-            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
-                Creative Commons Attribution 4.0 International License
-            </a> 
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
         
     </div>
 
     <script async defer>
       document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
         M.toast({html: toastHTML})
       });
 
@@ -739,7 +737,7 @@ y = temp;</code></pre>
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="../../14/python基础之标识符/">
                     <div class="card-image">
@@ -777,7 +775,7 @@ y = temp;</code></pre>
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fa fa-chevron-right"></i>
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="../../12/python-基础/">
@@ -793,10 +791,9 @@ y = temp;</code></pre>
                     <div class="summary block-with-text">
                         
                             在本文中主要了解python的基本语法，介绍基本的编程风格，了解变量、关键字以及变量占用的内存分配和回收。
-
 语法与句法python语句中的一些基本规则和特殊字符：
 井号（#）表示之后的字符为python注释
-换行（’\n’)是标准的行分隔
+换行（’\n’)是标准的行分隔符
                         
                     </div>
                     <div class="publish-info">
@@ -824,7 +821,7 @@ y = temp;</code></pre>
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget">
-            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
             <div id="toc-content"></div>
         </div>
     </div>
@@ -928,7 +925,7 @@ y = temp;</code></pre>
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">138.6k</span>
+                <span class="white-color">149.2k</span>
             
 
             
@@ -973,8 +970,8 @@ y = temp;</code></pre>
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</span>
-            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
                    class="search-input">
         </div>
         <div id="searchResult"></div>

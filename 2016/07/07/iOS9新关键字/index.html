@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
-<html lang="">
+<html lang="zh-CN">
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
     <meta name="keywords" content="iOS9新关键字, 志鹏的技术博客">
     <meta name="description" content="在iOS9 中苹果推出了很多新的关键字，目的其实很明确，主要是提高开发人员的效率，有益于程序员之间的沟通与交流，在开发中代码更加规范。
@@ -55,7 +55,7 @@
             
             <i class="fa fa-home"></i>
             
-            <span>Index</span>
+            <span>首页</span>
         </a>
     </li>
     
@@ -64,7 +64,7 @@
             
             <i class="fa fa-tags"></i>
             
-            <span>Tags</span>
+            <span>标签</span>
         </a>
     </li>
     
@@ -73,7 +73,7 @@
             
             <i class="fa fa-bookmark"></i>
             
-            <span>Categories</span>
+            <span>分类</span>
         </a>
     </li>
     
@@ -82,7 +82,7 @@
             
             <i class="fa fa-archive"></i>
             
-            <span>Archives</span>
+            <span>归档</span>
         </a>
     </li>
     
@@ -91,7 +91,7 @@
             
             <i class="fa fa-user-circle-o"></i>
             
-            <span>About</span>
+            <span>关于</span>
         </a>
     </li>
     
@@ -100,13 +100,13 @@
             
             <i class="fa fa-address-book"></i>
             
-            <span>Friends</span>
+            <span>友情链接</span>
         </a>
     </li>
     
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-            <i id="searchIcon" class="fa fa-search" title="Search"></i>
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
         </a>
     </li>
 </ul>
@@ -120,7 +120,7 @@
         <div class="logo-name">志鹏的技术博客</div>
         <div class="logo-desc">
             
-            Never really desperate, only the lost of the soul.
+            故不积跬步，无以至千里；不积小流，无以成江海。骐骥一跃，不能十步；驽马十驾，功在不舍。锲而舍之，朽木不折；锲而不舍，金石可镂。
             
         </div>
     </div>
@@ -134,7 +134,7 @@
                 
                 <i class="fa fa-fw fa-home"></i>
                 
-                Index
+                首页
             </a>
         </li>
         
@@ -143,7 +143,7 @@
                 
                 <i class="fa fa-fw fa-tags"></i>
                 
-                Tags
+                标签
             </a>
         </li>
         
@@ -152,7 +152,7 @@
                 
                 <i class="fa fa-fw fa-bookmark"></i>
                 
-                Categories
+                分类
             </a>
         </li>
         
@@ -161,7 +161,7 @@
                 
                 <i class="fa fa-fw fa-archive"></i>
                 
-                Archives
+                归档
             </a>
         </li>
         
@@ -170,7 +170,7 @@
                 
                 <i class="fa fa-fw fa-user-circle-o"></i>
                 
-                About
+                关于
             </a>
         </li>
         
@@ -179,7 +179,7 @@
                 
                 <i class="fa fa-fw fa-address-book"></i>
                 
-                Friends
+                友情链接
             </a>
         </li>
         
@@ -401,29 +401,29 @@
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
-                    <i class="fa fa-calendar-minus-o fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
                     2016-07-07
                 </div>
 
                 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
                         1.6k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
-                        6 Min
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        6 分
                     </div>
                     
                 
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
                         <span id="busuanzi_value_page_pv"></span>
                     </div>
 				
@@ -445,7 +445,8 @@
 //以下属性值可以为空
 @property(nonatomic,nullable)NSArray * array4;
 @property(nonatomic,strong)NSArray * __nullable array5;
-@property(nonatomic,strong)NSArray * _Nullable array6;</code></pre>
+@property(nonatomic,strong)NSArray * _Nullable array6;
+</code></pre>
 <p>在方法中可以与如下示例一样使用：</p>
 <pre><code class="objc">//以下方法中参数不能为空，如若为空，系统会有警告提示
 //nonnull ,_Nonnull,__nonnull 这三个关键字可以起到同样的效果，具体区别是什么呢？？？
@@ -456,10 +457,12 @@
 //__nullable,nullable ,_Nullable 这三个关键字可以起到同样的效果，具体区别是什么？？？
 -(nullable NSString * )testString3:(nullable NSString  * )string;
 -(NSString * _Nullable)testString4:(NSString* _Nullable)string;
--(NSString * __nullable)testString5:(NSString*__nullable)string;</code></pre>
+-(NSString * __nullable)testString5:(NSString*__nullable)string;
+</code></pre>
 <p>在以下两个宏之间定义的所有对象属性都默认为nonull</p>
 <pre><code class="objc">NS_ASSUME_NONNULL_BEGIN
 NS_ASSUME_NONNULL_END
+
 </code></pre>
 <pre><code class="objc">@interface LocationDataController : NSObject
 NS_ASSUME_NONNULL_BEGIN
@@ -471,17 +474,20 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSObject *)photoForLocation:(NSObject *)location;
 
 NS_ASSUME_NONNULL_END
-@end</code></pre>
+@end
+</code></pre>
 <h2 id="关键字-null-resettable"><a href="#关键字-null-resettable" class="headerlink" title="关键字: null_resettable"></a>关键字: null_resettable</h2><p>getter :不可以为nil<br>setter :可以为nil<br>如果使用 null_resettable 就必须重写 getter或者setter方法. 目的是为了处理值为空的情况<br>使用方法如下</p>
 <pre><code class="objc">//如果使用下null_resettable，没有实现setter方法或getter 方法会得到如下的警告
 // Synthesized setter &#39;setObjc:&#39; for null_resettable property &#39;objc&#39; does not handle nil
 @property(nonatomic,strong,null_resettable)NSObject * objc;
+
 </code></pre>
 <h2 id="关键字-Null-unspecified"><a href="#关键字-Null-unspecified" class="headerlink" title="关键字: _Null_unspecified"></a>关键字: _Null_unspecified</h2><p>这个关键字作用感觉不是那么大，因为默认情况下，都是不确定</p>
 <pre><code class="objc">  //在不确定对象中是否为空的情况下可以使用null_unspecified关键字
   @property(nonatomic,null_unspecified)NSObject * objc1;
   @property(nonatomic)NSObject* _Null_unspecified objec2;
-  @property(nonatomic)NSObject * __null_unspecified objec3;</code></pre>
+  @property(nonatomic)NSObject * __null_unspecified objec3;
+</code></pre>
 <h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>通过使用泛型, 我们可以非常容易地获取其中的元素，并访问其特有的属性和方法, 一般使用在集合中使用(例如:数组,字典), 当方法调用的时候才有效果, 我们来看看如何使用:</p>
 <pre><code class="objc">//如下定义属性与方法会得到下面的警告
 // Pointer is missing a nullability type specifier (_Nonnull, _Nullable, or _Null_unspecified)
@@ -492,7 +498,8 @@ NS_ASSUME_NONNULL_END
 
 //加上_Nonnull、_Nullable、_Null_unspecified这几个关键字中的一个，都不会出现以上警告
 -(NSArray&lt;NSString*&gt;* __nonnull)testArray3:(NSArray&lt;NSString*&gt;*__nonnull)array;
--(__kindof NSArray&lt;NSString*&gt;* __nonnull)testArray4:(NSArray&lt;NSString*&gt;*__nonnull)array;</code></pre>
+-(__kindof NSArray&lt;NSString*&gt;* __nonnull)testArray4:(NSArray&lt;NSString*&gt;*__nonnull)array;
+</code></pre>
 <h3 id="带泛型的容器"><a href="#带泛型的容器" class="headerlink" title="带泛型的容器"></a>带泛型的容器</h3><p>  有了泛型后可以指定容器类中对象的类型了</p>
 <pre><code class="objc">  NSArray&lt;NSString *&gt; * strings= @[@&quot;sun&quot;,@&quot;moon&quot;];
   //这什么这样定义的数组不会报提示呢，它们的类型不是不一样的吗？？
@@ -512,10 +519,12 @@ NS_ASSUME_NONNULL_END
 //    Incompatible pointer types sending &#39;NSNumber *&#39; to parameter of type &#39;NSString * _Nullable&#39;
   [mDic setValue:@10 forKey:@&quot;age&quot;];
   [mDic setObject:@10 forKey:@10];
-  [mDic setValue:@&quot;yuan&quot; forKey:@10];</code></pre>
+  [mDic setValue:@&quot;yuan&quot; forKey:@10];
+</code></pre>
 <p>系统中常用的一系列容器类型都增加了泛型支持，甚至连 NSEnumerator 都支持了，这是非常 Nice 的改进。和 Nullability 一样，我认为最大的意义还是丰富了接口描述信息，对比下面两种写法：</p>
 <pre><code class="objc">@property (readonly) NSArray *imageURLs;
-@property (readonly) NSArray&lt;NSURL *&gt; *imageURLs;</code></pre>
+@property (readonly) NSArray&lt;NSURL *&gt; *imageURLs;
+</code></pre>
 <p>不用多想就清楚下面的数组中存的是什么，避免了 NSString 和 NSURL 的混乱。</p>
 <h3 id="自定义泛型类"><a href="#自定义泛型类" class="headerlink" title="自定义泛型类"></a>自定义泛型类</h3><p>比起系统的泛型容器，更好 玩的是自定义一个泛型类</p>
 <pre><code class="objc">@interface Stack&lt;ObjectType&gt; : NSObject
@@ -523,21 +532,28 @@ NS_ASSUME_NONNULL_END
 - (ObjectType)popObject;
 @property (nonatomic, readonly) NSArray&lt;ObjectType&gt; *allObjects;
 @end
+
 </code></pre>
 <p>  这个 ObjectType 是传入类型的 placeholder，它只能在 @interface 上定义（类声明、类扩展、Category），如果你喜欢用 T 表示也 ok，这个类型在 @interface 和 @end 区间的作用域有效，可以把它作为入参、出参、甚至内部 NSArray 属性的泛型类型，应该说一切都是符合预期的。我们还可以给 ObjectType 增加类型限制，比如：</p>
 <pre><code class="objc">  // 只接受 NSNumber * 的泛型
   @interface Stack&lt;ObjectType: NSNumber *&gt; : NSObject
   // 只接受满足 NSCopying 协议的泛型
-  @interface Stack&lt;ObjectType: id&lt;NSCopying&gt;&gt; : NSObject</code></pre>
+  @interface Stack&lt;ObjectType: id&lt;NSCopying&gt;&gt; : NSObject
+</code></pre>
 <p>若什么都不加，表示接受任意类型 ( id )；当类型不满足时编译器将产生 error。<br><img src="imagesource/logo.jpg" alt="logo.jpg"></p>
-<h2 id="关键字：-kindof"><a href="#关键字：-kindof" class="headerlink" title="关键字： __kindof"></a>关键字： __kindof</h2><p>表示当前类, 或者它的子类(__kindof使用: 放在类型前面, 表示修饰此类型)<br>__kindof 这修饰符还是很实用的，解决了一个长期以来的小痛点，拿原来的 UITableView 的这个方法来说：</p>
-<pre><code class="objc">- (id)dequeueReusableCellWithIdentifier:(NSString *)identifier;</code></pre>
+<h2 id="关键字：-kindof"><a href="#关键字：-kindof" class="headerlink" title="关键字： __kindof"></a>关键字： __kindof</h2><p>表示当前类, 或者它的子类(<strong>kindof使用: 放在类型前面, 表示修饰此类型)
+</strong>kindof 这修饰符还是很实用的，解决了一个长期以来的小痛点，拿原来的 UITableView 的这个方法来说：</p>
+<pre><code class="objc">- (id)dequeueReusableCellWithIdentifier:(NSString *)identifier;
+</code></pre>
 <p>使用时前面基本会使用 UITableViewCell 子类型的指针来接收返回值，所以这个 API 为了让开发者不必每次都蛋疼的写显式强转，把返回值定义成了 id 类型，而这个 API 实际上的意思是返回一个 UITableViewCell 或 UITableViewCell 子类的实例，于是新的 __kindof 关键字解决了这个问题：</p>
-<pre><code class="objc">- (__kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;</code></pre>
+<pre><code class="objc">- (__kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;
+</code></pre>
 <p>既明确表明了返回值，又让使用者不必写强转。再举个带泛型的例子，UIView 的 subviews 属性被修改成了：</p>
-<pre><code class="objc">@property (nonatomic, readonly, copy) NSArray&lt;__kindof UIView *&gt; *subviews;</code></pre>
+<pre><code class="objc">@property (nonatomic, readonly, copy) NSArray&lt;__kindof UIView *&gt; *subviews;
+</code></pre>
 <p>这样，写下面的代码时就没有任何警告了：</p>
-<pre><code class="objc">UIButton *button = view.subviews.lastObject;</code></pre>
+<pre><code class="objc">UIButton *button = view.subviews.lastObject;
+</code></pre>
 
             </div>
             <hr/>
@@ -672,7 +688,7 @@ NS_ASSUME_NONNULL_END
 
 <div id="article-share">
     
-    <div class="social-share" data-disabled="qzone, qq, weibo, douban"></div>
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
     
 </div>
 
@@ -683,11 +699,11 @@ NS_ASSUME_NONNULL_END
     <div class="reprint" id="reprint-statement">
         <p class="reprint-tip">
             <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
-            <span>Reprint policy</span>
+            <span>转载规则</span>
         </p>
         
             <div class="center-align">
-                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
                     <img alt=""
                          style="border-width:0"
                          src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
@@ -697,20 +713,20 @@ NS_ASSUME_NONNULL_END
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
                     《iOS9新关键字》
-                </span> by
+                </span> 由
             <a xmlns:cc="http://creativecommons.org/ns#" href="" property="cc:attributionName"
                rel="cc:attributionURL">
                 志鹏
-            </a> is licensed under a
-            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
-                Creative Commons Attribution 4.0 International License
-            </a> 
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
         
     </div>
 
     <script async defer>
       document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
         M.toast({html: toastHTML})
       });
 
@@ -765,7 +781,7 @@ NS_ASSUME_NONNULL_END
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="../../11/清理mac的一些方去/">
                     <div class="card-image">
@@ -801,7 +817,7 @@ NS_ASSUME_NONNULL_END
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fa fa-chevron-right"></i>
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="../../../06/29/常用正则表达式/">
@@ -857,7 +873,7 @@ NS_ASSUME_NONNULL_END
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget">
-            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
             <div id="toc-content"></div>
         </div>
     </div>
@@ -961,7 +977,7 @@ NS_ASSUME_NONNULL_END
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">138.6k</span>
+                <span class="white-color">149.2k</span>
             
 
             
@@ -1006,8 +1022,8 @@ NS_ASSUME_NONNULL_END
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</span>
-            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
                    class="search-input">
         </div>
         <div id="searchResult"></div>

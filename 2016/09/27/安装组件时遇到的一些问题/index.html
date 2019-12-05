@@ -1,14 +1,14 @@
 <!DOCTYPE HTML>
-<html lang="">
+<html lang="zh-CN">
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
     <meta name="keywords" content="安装组件时遇到的一些问题, 志鹏的技术博客">
     <meta name="description" content="
 安装 mpv 终端播放器时遇到的问题brew install mpv
-在终端执行上述命令时遇到如下的提示：Error: You must `brew link lua` before mpv can be installed
-localh">
+
+在终端执行上述命令时遇到如下的提示：`shError: You must brew link lua before mpv can be installedlocal">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -57,7 +57,7 @@ localh">
             
             <i class="fa fa-home"></i>
             
-            <span>Index</span>
+            <span>首页</span>
         </a>
     </li>
     
@@ -66,7 +66,7 @@ localh">
             
             <i class="fa fa-tags"></i>
             
-            <span>Tags</span>
+            <span>标签</span>
         </a>
     </li>
     
@@ -75,7 +75,7 @@ localh">
             
             <i class="fa fa-bookmark"></i>
             
-            <span>Categories</span>
+            <span>分类</span>
         </a>
     </li>
     
@@ -84,7 +84,7 @@ localh">
             
             <i class="fa fa-archive"></i>
             
-            <span>Archives</span>
+            <span>归档</span>
         </a>
     </li>
     
@@ -93,7 +93,7 @@ localh">
             
             <i class="fa fa-user-circle-o"></i>
             
-            <span>About</span>
+            <span>关于</span>
         </a>
     </li>
     
@@ -102,13 +102,13 @@ localh">
             
             <i class="fa fa-address-book"></i>
             
-            <span>Friends</span>
+            <span>友情链接</span>
         </a>
     </li>
     
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-            <i id="searchIcon" class="fa fa-search" title="Search"></i>
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
         </a>
     </li>
 </ul>
@@ -122,7 +122,7 @@ localh">
         <div class="logo-name">志鹏的技术博客</div>
         <div class="logo-desc">
             
-            Never really desperate, only the lost of the soul.
+            故不积跬步，无以至千里；不积小流，无以成江海。骐骥一跃，不能十步；驽马十驾，功在不舍。锲而舍之，朽木不折；锲而不舍，金石可镂。
             
         </div>
     </div>
@@ -136,7 +136,7 @@ localh">
                 
                 <i class="fa fa-fw fa-home"></i>
                 
-                Index
+                首页
             </a>
         </li>
         
@@ -145,7 +145,7 @@ localh">
                 
                 <i class="fa fa-fw fa-tags"></i>
                 
-                Tags
+                标签
             </a>
         </li>
         
@@ -154,7 +154,7 @@ localh">
                 
                 <i class="fa fa-fw fa-bookmark"></i>
                 
-                Categories
+                分类
             </a>
         </li>
         
@@ -163,7 +163,7 @@ localh">
                 
                 <i class="fa fa-fw fa-archive"></i>
                 
-                Archives
+                归档
             </a>
         </li>
         
@@ -172,7 +172,7 @@ localh">
                 
                 <i class="fa fa-fw fa-user-circle-o"></i>
                 
-                About
+                关于
             </a>
         </li>
         
@@ -181,7 +181,7 @@ localh">
                 
                 <i class="fa fa-fw fa-address-book"></i>
                 
-                Friends
+                友情链接
             </a>
         </li>
         
@@ -403,29 +403,29 @@ localh">
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
-                    <i class="fa fa-calendar-minus-o fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
                     2016-09-27
                 </div>
 
                 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        167
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        161
                     </div>
                     
 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
-                        1 Min
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        1 分
                     </div>
                     
                 
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
                         <span id="busuanzi_value_page_pv"></span>
                     </div>
 				
@@ -435,16 +435,9 @@ localh">
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <ul>
-<li>安装 mpv 终端播放器时遇到的问题<pre><code class="sh">brew install mpv</code></pre>
-在终端执行上述命令时遇到如下的提示：<pre><code class="sh">Error: You must `brew link lua` before mpv can be installed
-localhost:~ yuanpinghua$ brew link lua
-Linking /usr/local/Cellar/lua/5.2.4_4...
-Error: Could not symlink bin/lua
-Target /usr/local/bin/lua
-already exists. You may want to remove it:
-rm &#39;/usr/local/bin/lua&#39;
+<li>安装 mpv 终端播放器时遇到的问题<pre><code class="sh">brew install mpv
 </code></pre>
-</li>
+在终端执行上述命令时遇到如下的提示：<br><code>`</code>sh<br>Error: You must <code>brew link lua</code> before mpv can be installed<br>localhost:~ yuanpinghua$ brew link lua<br>Linking /usr/local/Cellar/lua/5.2.4_4…<br>Error: Could not symlink bin/lua<br>Target /usr/local/bin/lua<br>already exists. You may want to remove it:<br>rm ‘/usr/local/bin/lua’</li>
 </ul>
 <p>To force the link and overwrite all conflicting files:<br>  brew link –overwrite lua</p>
 <p>To list all files that would be deleted:<br>  brew link –overwrite –dry-run lua</p>
@@ -452,10 +445,13 @@ rm &#39;/usr/local/bin/lua&#39;
 解决方案：
 ```sh
 sudo chown -R $(whoami) /usr/local/
-brew link lua</code></pre><p>执行上述命令会得到如下的提示：</p>
-<pre><code class="sh">Linking /usr/local/Cellar/lua/5.2.4_4... 55 symlinks created</code></pre>
+brew link lua
+</code></pre><p>执行上述命令会得到如下的提示：</p>
+<pre><code class="sh">Linking /usr/local/Cellar/lua/5.2.4_4... 55 symlinks created
+</code></pre>
 <p>再次执行:</p>
-<pre><code class="sh">brew install mpv </code></pre>
+<pre><code class="sh">brew install mpv 
+</code></pre>
 <p>这时就可以安装成功了</p>
 
             </div>
@@ -591,7 +587,7 @@ brew link lua</code></pre><p>执行上述命令会得到如下的提示：</p>
 
 <div id="article-share">
     
-    <div class="social-share" data-disabled="qzone, qq, weibo, douban"></div>
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
     
 </div>
 
@@ -602,11 +598,11 @@ brew link lua</code></pre><p>执行上述命令会得到如下的提示：</p>
     <div class="reprint" id="reprint-statement">
         <p class="reprint-tip">
             <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
-            <span>Reprint policy</span>
+            <span>转载规则</span>
         </p>
         
             <div class="center-align">
-                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
                     <img alt=""
                          style="border-width:0"
                          src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
@@ -616,20 +612,20 @@ brew link lua</code></pre><p>执行上述命令会得到如下的提示：</p>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
                     《安装组件时遇到的一些问题》
-                </span> by
+                </span> 由
             <a xmlns:cc="http://creativecommons.org/ns#" href="" property="cc:attributionName"
                rel="cc:attributionURL">
                 志鹏
-            </a> is licensed under a
-            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
-                Creative Commons Attribution 4.0 International License
-            </a> 
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
         
     </div>
 
     <script async defer>
       document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
         M.toast({html: toastHTML})
       });
 
@@ -684,7 +680,7 @@ brew link lua</code></pre><p>执行上述命令会得到如下的提示：</p>
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="../../30/bs4学习/">
                     <div class="card-image">
@@ -724,7 +720,7 @@ Beautiful Soup 是一个可以从HTML或XML文件中提取数据的Python库.它
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fa fa-chevron-right"></i>
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="../../26/Python-os-模块学习/">
@@ -742,13 +738,17 @@ Beautiful Soup 是一个可以从HTML或XML文件中提取数据的Python库.它
                             线程相关操作
 获取当前线程的IDos.getpid()
 
+
 获取父线程的IDos.getppid()
+
 
 当前线程的用户IDos.getuid()
 
 
+
 用户相关操作
 获取当前登录的用户名os.getlogin()
+
 
 
 系统环境相关
@@ -791,7 +791,7 @@ Beautiful Soup 是一个可以从HTML或XML文件中提取数据的Python库.它
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget">
-            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
             <div id="toc-content"></div>
         </div>
     </div>
@@ -895,7 +895,7 @@ Beautiful Soup 是一个可以从HTML或XML文件中提取数据的Python库.它
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">138.6k</span>
+                <span class="white-color">149.2k</span>
             
 
             
@@ -940,8 +940,8 @@ Beautiful Soup 是一个可以从HTML或XML文件中提取数据的Python库.它
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</span>
-            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
                    class="search-input">
         </div>
         <div id="searchResult"></div>

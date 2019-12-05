@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
-<html lang="">
+<html lang="zh-CN">
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
     <meta name="keywords" content="xcode solutions, 志鹏的技术博客">
     <meta name="description" content="
@@ -57,7 +57,7 @@ Xcode8注释快捷键失">
             
             <i class="fa fa-home"></i>
             
-            <span>Index</span>
+            <span>首页</span>
         </a>
     </li>
     
@@ -66,7 +66,7 @@ Xcode8注释快捷键失">
             
             <i class="fa fa-tags"></i>
             
-            <span>Tags</span>
+            <span>标签</span>
         </a>
     </li>
     
@@ -75,7 +75,7 @@ Xcode8注释快捷键失">
             
             <i class="fa fa-bookmark"></i>
             
-            <span>Categories</span>
+            <span>分类</span>
         </a>
     </li>
     
@@ -84,7 +84,7 @@ Xcode8注释快捷键失">
             
             <i class="fa fa-archive"></i>
             
-            <span>Archives</span>
+            <span>归档</span>
         </a>
     </li>
     
@@ -93,7 +93,7 @@ Xcode8注释快捷键失">
             
             <i class="fa fa-user-circle-o"></i>
             
-            <span>About</span>
+            <span>关于</span>
         </a>
     </li>
     
@@ -102,13 +102,13 @@ Xcode8注释快捷键失">
             
             <i class="fa fa-address-book"></i>
             
-            <span>Friends</span>
+            <span>友情链接</span>
         </a>
     </li>
     
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-            <i id="searchIcon" class="fa fa-search" title="Search"></i>
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
         </a>
     </li>
 </ul>
@@ -122,7 +122,7 @@ Xcode8注释快捷键失">
         <div class="logo-name">志鹏的技术博客</div>
         <div class="logo-desc">
             
-            Never really desperate, only the lost of the soul.
+            故不积跬步，无以至千里；不积小流，无以成江海。骐骥一跃，不能十步；驽马十驾，功在不舍。锲而舍之，朽木不折；锲而不舍，金石可镂。
             
         </div>
     </div>
@@ -136,7 +136,7 @@ Xcode8注释快捷键失">
                 
                 <i class="fa fa-fw fa-home"></i>
                 
-                Index
+                首页
             </a>
         </li>
         
@@ -145,7 +145,7 @@ Xcode8注释快捷键失">
                 
                 <i class="fa fa-fw fa-tags"></i>
                 
-                Tags
+                标签
             </a>
         </li>
         
@@ -154,7 +154,7 @@ Xcode8注释快捷键失">
                 
                 <i class="fa fa-fw fa-bookmark"></i>
                 
-                Categories
+                分类
             </a>
         </li>
         
@@ -163,7 +163,7 @@ Xcode8注释快捷键失">
                 
                 <i class="fa fa-fw fa-archive"></i>
                 
-                Archives
+                归档
             </a>
         </li>
         
@@ -172,7 +172,7 @@ Xcode8注释快捷键失">
                 
                 <i class="fa fa-fw fa-user-circle-o"></i>
                 
-                About
+                关于
             </a>
         </li>
         
@@ -181,7 +181,7 @@ Xcode8注释快捷键失">
                 
                 <i class="fa fa-fw fa-address-book"></i>
                 
-                Friends
+                友情链接
             </a>
         </li>
         
@@ -379,7 +379,7 @@ Xcode8注释快捷键失">
                 <div class="col s7">
                     
                           <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
+                            <span class="chip bg-color">无标签</span>
                           </div>
                     
                 </div>
@@ -399,29 +399,29 @@ Xcode8注释快捷键失">
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
-                    <i class="fa fa-calendar-minus-o fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
                     2016-09-18
                 </div>
 
                 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
                         549
                     </div>
                     
 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
-                        2 Min
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        2 分
                     </div>
                     
                 
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
                         <span id="busuanzi_value_page_pv"></span>
                     </div>
 				
@@ -433,87 +433,95 @@ Xcode8注释快捷键失">
                 <ol>
 <li><p>屏蔽系统日志<br><code>Xcode8</code>里边 <code>Edit Scheme</code>-&gt; <code>Run</code> -&gt; <code>Arguments</code>, 在<code>Environment Variables</code>里边添加<br><code>OS_ACTIVITY_MODE = Disable</code></p>
 </li>
-<li><p>Xcode8注释快捷键失效注释快捷键 <code>⌘ ``+`` /</code>失效，在终端输入下面的命令，重启系统即可</p>
-<pre><code class="sh">sudo /usr/libexec/xpccachectl</code></pre>
+<li><p>Xcode8注释快捷键失效注释快捷键 <code>⌘ `</code>+<code></code> / `失效，在终端输入下面的命令，重启系统即可</p>
+<pre><code class="sh">sudo /usr/libexec/xpccachectl
+</code></pre>
 </li>
 </ol>
-<p><code>__aaa</code><br>3. ios10相机等权限获取时的崩溃<br>  出现的提示信息有：</p>
-<pre><code>  This app has crashed because it attempted to access privacy-sensitive data without a usage description. The app&#39;s Info.plist must contain an NSCameraUsageDescription key with a string value explaining to the user how the app uses this data.</code></pre><p>  意思是没有获取相机的权限，需要添加在plist文件中添加这项权限</p>
-<pre><code class="json">  // 相机权限
-  &lt;key&gt;NSCameraUsageDescription&lt;/key&gt;
-  &lt;string&gt;CameraUsageDescription&lt;/string&gt;</code></pre>
-<p>  以下是所有权限的相关键值：</p>
-<pre><code class="js">  // 蓝牙权限
-  &lt;key&gt;NSBluetoothPeripheralUsageDescription&lt;/key&gt;
-    &lt;string&gt;BluetoothPeripheralUsageDescription&lt;/string&gt;
+<p><code>__aaa</code></p>
+<ol start="3">
+<li><p>ios10相机等权限获取时的崩溃<br>出现的提示信息有：</p>
+<pre><code>This app has crashed because it attempted to access privacy-sensitive data without a usage description. The app&#39;s Info.plist must contain an NSCameraUsageDescription key with a string value explaining to the user how the app uses this data.
+</code></pre><p>意思是没有获取相机的权限，需要添加在plist文件中添加这项权限</p>
+<pre><code class="json">// 相机权限
+&lt;key&gt;NSCameraUsageDescription&lt;/key&gt;
+&lt;string&gt;CameraUsageDescription&lt;/string&gt;
+</code></pre>
+<p>以下是所有权限的相关键值：</p>
+<pre><code class="js">// 蓝牙权限
+&lt;key&gt;NSBluetoothPeripheralUsageDescription&lt;/key&gt;
+ &lt;string&gt;BluetoothPeripheralUsageDescription&lt;/string&gt;
 
-  // 日历权限
-    &lt;key&gt;NSCalendarsUsageDescription&lt;/key&gt;
-    &lt;string&gt;CalendarsUsageDescription&lt;/string&gt;
-  // 相机权限
-    &lt;key&gt;NSCameraUsageDescription&lt;/key&gt;
-    &lt;string&gt;CameraUsageDescription&lt;/string&gt;
+// 日历权限
+ &lt;key&gt;NSCalendarsUsageDescription&lt;/key&gt;
+ &lt;string&gt;CalendarsUsageDescription&lt;/string&gt;
+// 相机权限
+ &lt;key&gt;NSCameraUsageDescription&lt;/key&gt;
+ &lt;string&gt;CameraUsageDescription&lt;/string&gt;
 
-  // 联系人
-    &lt;key&gt;NSContactsUsageDescription&lt;/key&gt;
-    &lt;string&gt;ContactsUsageDescription&lt;/string&gt;
+// 联系人
+ &lt;key&gt;NSContactsUsageDescription&lt;/key&gt;
+ &lt;string&gt;ContactsUsageDescription&lt;/string&gt;
 
-  // 健康分享权限
-    &lt;key&gt;NSHealthShareUsageDescription&lt;/key&gt;
-    &lt;string&gt;HealthShareUsageDescription&lt;/string&gt;
-  // 健康更新权限
-    &lt;key&gt;NSHealthUpdateUsageDescription&lt;/key&gt;
-    &lt;string&gt;HealthUpdateUsageDescription&lt;/string&gt;
+// 健康分享权限
+ &lt;key&gt;NSHealthShareUsageDescription&lt;/key&gt;
+ &lt;string&gt;HealthShareUsageDescription&lt;/string&gt;
+// 健康更新权限
+ &lt;key&gt;NSHealthUpdateUsageDescription&lt;/key&gt;
+ &lt;string&gt;HealthUpdateUsageDescription&lt;/string&gt;
 
-  // HomeKit使用权限
-    &lt;key&gt;NSHomeKitUsageDescription&lt;/key&gt;
-    &lt;string&gt;HomeKitUsageDescription&lt;/string&gt;
-  //  位置一直使用权限
-    &lt;key&gt;NSLocationAlwaysUsageDescription&lt;/key&gt;
-    &lt;string&gt;LocationAlwaysUsageDescription&lt;/string&gt;
+// HomeKit使用权限
+ &lt;key&gt;NSHomeKitUsageDescription&lt;/key&gt;
+ &lt;string&gt;HomeKitUsageDescription&lt;/string&gt;
+//  位置一直使用权限
+ &lt;key&gt;NSLocationAlwaysUsageDescription&lt;/key&gt;
+ &lt;string&gt;LocationAlwaysUsageDescription&lt;/string&gt;
 
-  // 使用位置权限
-    &lt;key&gt;NSLocationUsageDescription&lt;/key&gt;
-    &lt;string&gt;LocationUsageDescription&lt;/string&gt;
-  // 程序运行时使用位置权限
-    &lt;key&gt;NSLocationWhenInUseUsageDescription&lt;/key&gt;
-    &lt;string&gt;LocationWhenInUseUsageDescription&lt;/string&gt;
+// 使用位置权限
+ &lt;key&gt;NSLocationUsageDescription&lt;/key&gt;
+ &lt;string&gt;LocationUsageDescription&lt;/string&gt;
+// 程序运行时使用位置权限
+ &lt;key&gt;NSLocationWhenInUseUsageDescription&lt;/key&gt;
+ &lt;string&gt;LocationWhenInUseUsageDescription&lt;/string&gt;
 
-  // 获取appleMusic权限
-    &lt;key&gt;NSAppleMusicUsageDescription&lt;/key&gt;
-    &lt;string&gt;AppleMusicUsageDescription&lt;/string&gt;
+// 获取appleMusic权限
+ &lt;key&gt;NSAppleMusicUsageDescription&lt;/key&gt;
+ &lt;string&gt;AppleMusicUsageDescription&lt;/string&gt;
 
-  // 麦克锋使用权限
-    &lt;key&gt;NSMicrophoneUsageDescription&lt;/key&gt;
-    &lt;string&gt;MicrophoneUsageDescription&lt;/string&gt;
+// 麦克锋使用权限
+ &lt;key&gt;NSMicrophoneUsageDescription&lt;/key&gt;
+ &lt;string&gt;MicrophoneUsageDescription&lt;/string&gt;
 
-  // 陀螺仪使用权限
-    &lt;key&gt;NSMotionUsageDescription&lt;/key&gt;
-    &lt;string&gt;MotionUsageDescription&lt;/string&gt;
+// 陀螺仪使用权限
+ &lt;key&gt;NSMotionUsageDescription&lt;/key&gt;
+ &lt;string&gt;MotionUsageDescription&lt;/string&gt;
 
-  // 相册使用权限
-    &lt;key&gt;NSPhotoLibraryUsageDescription&lt;/key&gt;
-    &lt;string&gt;PhotoLibraryUsageDescription&lt;/string&gt;
+// 相册使用权限
+ &lt;key&gt;NSPhotoLibraryUsageDescription&lt;/key&gt;
+ &lt;string&gt;PhotoLibraryUsageDescription&lt;/string&gt;
 
-  // 提醒权限
-    &lt;key&gt;NSRemindersUsageDescription&lt;/key&gt;
-    &lt;string&gt;RemindersUsageDescription&lt;/string&gt;
+// 提醒权限
+ &lt;key&gt;NSRemindersUsageDescription&lt;/key&gt;
+ &lt;string&gt;RemindersUsageDescription&lt;/string&gt;
 
-  // Siri 使用权限
-    &lt;key&gt;NSSiriUsageDescription&lt;/key&gt;
-    &lt;string&gt;SiriUsageDescription&lt;/string&gt;
+// Siri 使用权限
+ &lt;key&gt;NSSiriUsageDescription&lt;/key&gt;
+ &lt;string&gt;SiriUsageDescription&lt;/string&gt;
 
-  // 语音识别权限
-    &lt;key&gt;NSSpeechRecognitionUsageDescription&lt;/key&gt;
-    &lt;string&gt;SpeechRecognitionUsageDescription&lt;/string&gt;
+// 语音识别权限
+ &lt;key&gt;NSSpeechRecognitionUsageDescription&lt;/key&gt;
+ &lt;string&gt;SpeechRecognitionUsageDescription&lt;/string&gt;
 
-  // 视频权限
-    &lt;key&gt;NSVideoSubscriberAccountUsageDescription&lt;/key&gt;
-    &lt;string&gt;VideoSubscriberAccountUsageDescription&lt;/string&gt;
+// 视频权限
+ &lt;key&gt;NSVideoSubscriberAccountUsageDescription&lt;/key&gt;
+ &lt;string&gt;VideoSubscriberAccountUsageDescription&lt;/string&gt;
 
-  // 音乐库权限
-    &lt;key&gt;kTCCServiceMediaLibrary&lt;/key&gt;
-    &lt;string&gt;CCServiceMediaLibrary&lt;/string&gt;</code></pre>
+// 音乐库权限
+ &lt;key&gt;kTCCServiceMediaLibrary&lt;/key&gt;
+ &lt;string&gt;CCServiceMediaLibrary&lt;/string&gt;
+</code></pre>
+</li>
+</ol>
 
             </div>
             <hr/>
@@ -648,7 +656,7 @@ Xcode8注释快捷键失">
 
 <div id="article-share">
     
-    <div class="social-share" data-disabled="qzone, qq, weibo, douban"></div>
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
     
 </div>
 
@@ -659,11 +667,11 @@ Xcode8注释快捷键失">
     <div class="reprint" id="reprint-statement">
         <p class="reprint-tip">
             <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
-            <span>Reprint policy</span>
+            <span>转载规则</span>
         </p>
         
             <div class="center-align">
-                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
                     <img alt=""
                          style="border-width:0"
                          src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
@@ -673,20 +681,20 @@ Xcode8注释快捷键失">
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
                     《xcode solutions》
-                </span> by
+                </span> 由
             <a xmlns:cc="http://creativecommons.org/ns#" href="" property="cc:attributionName"
                rel="cc:attributionURL">
                 志鹏
-            </a> is licensed under a
-            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
-                Creative Commons Attribution 4.0 International License
-            </a> 
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
         
     </div>
 
     <script async defer>
       document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
         M.toast({html: toastHTML})
       });
 
@@ -741,7 +749,7 @@ Xcode8注释快捷键失">
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="../../20/iOS-remotepush/">
                     <div class="card-image">
@@ -794,7 +802,7 @@ iOS 7在推送方面最大的变化就是允许，应用收到通知后在后台
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fa fa-chevron-right"></i>
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="../../13/python-文件处理/">
@@ -810,7 +818,8 @@ iOS 7在推送方面最大的变化就是允许，应用收到通知后在后台
                     <div class="summary block-with-text">
                         
                             文件的打开
-open()语法函数参数open(file, mode=&#39;r&#39;, buffering=None, encoding=None, errors=None, newline=None, closefd=True)参数
+open()语法函数参数open(file, mode=&#39;r&#39;, buffering=None, encoding=None, errors=None, newline=None, closefd=True)
+参
                         
                     </div>
                     <div class="publish-info">
@@ -846,7 +855,7 @@ open()语法函数参数open(file, mode=&#39;r&#39;, buffering=None, encoding=No
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget">
-            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
             <div id="toc-content"></div>
         </div>
     </div>
@@ -950,7 +959,7 @@ open()语法函数参数open(file, mode=&#39;r&#39;, buffering=None, encoding=No
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">138.6k</span>
+                <span class="white-color">149.2k</span>
             
 
             
@@ -995,8 +1004,8 @@ open()语法函数参数open(file, mode=&#39;r&#39;, buffering=None, encoding=No
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</span>
-            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
                    class="search-input">
         </div>
         <div id="searchResult"></div>

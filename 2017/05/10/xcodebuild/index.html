@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
-<html lang="">
+<html lang="zh-CN">
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
     <meta name="keywords" content="xcodebuild 和 altool 工具详解, 志鹏的技术博客">
     <meta name="description" content="xcodebuild 是什么？ xcodebuild 是一款用来打包 Xcode projects 或者 workspaces 的命令行工具
@@ -57,7 +57,7 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
             
             <i class="fa fa-home"></i>
             
-            <span>Index</span>
+            <span>首页</span>
         </a>
     </li>
     
@@ -66,7 +66,7 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
             
             <i class="fa fa-tags"></i>
             
-            <span>Tags</span>
+            <span>标签</span>
         </a>
     </li>
     
@@ -75,7 +75,7 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
             
             <i class="fa fa-bookmark"></i>
             
-            <span>Categories</span>
+            <span>分类</span>
         </a>
     </li>
     
@@ -84,7 +84,7 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
             
             <i class="fa fa-archive"></i>
             
-            <span>Archives</span>
+            <span>归档</span>
         </a>
     </li>
     
@@ -93,7 +93,7 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
             
             <i class="fa fa-user-circle-o"></i>
             
-            <span>About</span>
+            <span>关于</span>
         </a>
     </li>
     
@@ -102,13 +102,13 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
             
             <i class="fa fa-address-book"></i>
             
-            <span>Friends</span>
+            <span>友情链接</span>
         </a>
     </li>
     
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-            <i id="searchIcon" class="fa fa-search" title="Search"></i>
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
         </a>
     </li>
 </ul>
@@ -122,7 +122,7 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
         <div class="logo-name">志鹏的技术博客</div>
         <div class="logo-desc">
             
-            Never really desperate, only the lost of the soul.
+            故不积跬步，无以至千里；不积小流，无以成江海。骐骥一跃，不能十步；驽马十驾，功在不舍。锲而舍之，朽木不折；锲而不舍，金石可镂。
             
         </div>
     </div>
@@ -136,7 +136,7 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
                 
                 <i class="fa fa-fw fa-home"></i>
                 
-                Index
+                首页
             </a>
         </li>
         
@@ -145,7 +145,7 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
                 
                 <i class="fa fa-fw fa-tags"></i>
                 
-                Tags
+                标签
             </a>
         </li>
         
@@ -154,7 +154,7 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
                 
                 <i class="fa fa-fw fa-bookmark"></i>
                 
-                Categories
+                分类
             </a>
         </li>
         
@@ -163,7 +163,7 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
                 
                 <i class="fa fa-fw fa-archive"></i>
                 
-                Archives
+                归档
             </a>
         </li>
         
@@ -172,7 +172,7 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
                 
                 <i class="fa fa-fw fa-user-circle-o"></i>
                 
-                About
+                关于
             </a>
         </li>
         
@@ -181,7 +181,7 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
                 
                 <i class="fa fa-fw fa-address-book"></i>
                 
-                Friends
+                友情链接
             </a>
         </li>
         
@@ -407,29 +407,29 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
-                    <i class="fa fa-calendar-minus-o fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
                     2017-05-10
                 </div>
 
                 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
                         2.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
-                        9 Min
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        9 分
                     </div>
                     
                 
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
                         <span id="busuanzi_value_page_pv"></span>
                     </div>
 				
@@ -457,7 +457,8 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
     xcodebuild -showsdks
     xcodebuild -exportArchive -archivePath &lt;xcarchivepath&gt; -exportPath &lt;destinationpath&gt; -exportOptionsPlist &lt;plistpath&gt;
     xcodebuild -exportLocalizations -localizationPath &lt;path&gt; -project &lt;projectname&gt; [-exportLanguage &lt;targetlanguage&gt;...]
-    xcodebuild -importLocalizations -localizationPath &lt;path&gt; -project &lt;projectname&gt;</code></pre>
+    xcodebuild -importLocalizations -localizationPath &lt;path&gt; -project &lt;projectname&gt;
+</code></pre>
 </li>
 </ol>
 <p>参数详解：<br><code>-project projectname</code></p>
@@ -585,18 +586,22 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
 <ol start="3">
 <li>编译并生成.xcarchive包xcodebuild archive [-optionName]…</li>
 </ol>
-<pre><code>xcodebuild archive -archivePath /Users/UserName/Desktop/App/archive/XXX -workspace XXX.xcworkspace -scheme XXX -configuration Debug -sdk iphoneos9.3</code></pre><pre><code>命令                                  说明
+<pre><code>xcodebuild archive -archivePath /Users/UserName/Desktop/App/archive/XXX -workspace XXX.xcworkspace -scheme XXX -configuration Debug -sdk iphoneos9.3
+</code></pre><pre><code>命令                                  说明
 -archivePath PATH                    保存生成.xcarchive包路径
 -workspace NAME                        指定工作空间文件XXX.xcworkspace
 -scheme NAME                        指定构建工程名称
 -configuration [Debug/Release]      选择Debug或者Release构建
--sdk NAME                            指定编译时使用的SDK</code></pre><ol start="4">
+-sdk NAME                            指定编译时使用的SDK
+</code></pre><ol start="4">
 <li>.archive包导出ipa文件xcodebuild -exportArchive [-optionName]…</li>
 </ol>
-<pre><code>xcodebuild -exportArchive -archivePath /Users/UserName/Desktop/App/archive/XXX.xcarchive -exportPath /Users/UserName/Desktop/App/ipa/ -exportOptionsPlist /Users/UserName/Desktop/App/XXX.plist</code></pre><pre><code>命令                      说明
+<pre><code>xcodebuild -exportArchive -archivePath /Users/UserName/Desktop/App/archive/XXX.xcarchive -exportPath /Users/UserName/Desktop/App/ipa/ -exportOptionsPlist /Users/UserName/Desktop/App/XXX.plist
+</code></pre><pre><code>命令                      说明
 -archivePath            选择要导出的.xcarchive包路径
 -exportPath                导出ipa保存目录
--exportOptionsPlist        导出过程中需要的配置文件路径</code></pre><ol start="5">
+-exportOptionsPlist        导出过程中需要的配置文件路径
+</code></pre><ol start="5">
 <li>Export Options Plist 打包plist文件method 选项<br>method: (String) The method of distribution, which can be set as any of the following:</li>
 </ol>
 <ul>
@@ -620,7 +625,8 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
         &lt;key&gt;uploadSymbols&lt;/key&gt;
         &lt;true/&gt;
 &lt;/dict&gt;
-&lt;/plist&gt;</code></pre><ol start="6">
+&lt;/plist&gt;
+</code></pre><ol start="6">
 <li>获取工程的target列表 <code>xcodebuild -list -json</code> 得以一个json字符串<pre><code>{
 &quot;project&quot; : {
  &quot;targets&quot; : [
@@ -638,13 +644,15 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
  ],
  &quot;name&quot; : &quot;Mask&quot;
 }
-}%</code></pre></li>
+}%
+</code></pre></li>
 </ol>
 <h1 id="altool-上传-ipa"><a href="#altool-上传-ipa" class="headerlink" title="altool 上传 ipa"></a>altool 上传 ipa</h1><p>您可用 altool：Application Loader 的命令行工具来验证并上传您的应用程序二进制文件到 App Store。</p>
 <p>若要在上传或自动上传有效的构建版本到 App Store 之前验证您的构建版本，可将 altool 包含进您的持续集成系统中。altool 在 <code>Application\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/</code> 文件夹中。</p>
 <p>若要运行 altool，请在命令行执行以下一项操作：</p>
 <pre><code class="sh"> altool --validate-app -f file -u username [-p password] [--output-format xml]
- altool --upload-app -f file -u username [-p password] [--output-format xml]</code></pre>
+ altool --upload-app -f file -u username [-p password] [--output-format xml]
+</code></pre>
 <p>参数详解<br>其中                指定<br><code>--validate-app</code>      您要验证的应用程序。<br><code>--upload-app</code>        您要上传的应用程序。<br><code>-f file</code>             您正在验证或上传的应用程序的路径和文件名。<br><code>-u username</code>         您的用户名。<br><code>-p password</code>         您的用户密码。<br><code>--output-format [xml | normal]</code><br>您要 Application Loader 以结构化的 XML 格式还是非结构化的文本格式返回输出信息。Application Loader 默认以文本格式返回输出信息。<br><a href="http://help.apple.com/itc/apploader/#/apdATD1E53-D1E1A1303-D1E53A1126" target="_blank" rel="noopener">Application Loader</a></p>
 <p>另附上小编编写一个便捷的打包工具 <a href="https://github.com/zhipengbird/xcode_archive" target="_blank" rel="noopener">xcodearchive</a>,欢迎各位star^_^</p>
 
@@ -781,7 +789,7 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
 
 <div id="article-share">
     
-    <div class="social-share" data-disabled="qzone, qq, weibo, douban"></div>
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
     
 </div>
 
@@ -792,11 +800,11 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
     <div class="reprint" id="reprint-statement">
         <p class="reprint-tip">
             <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
-            <span>Reprint policy</span>
+            <span>转载规则</span>
         </p>
         
             <div class="center-align">
-                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
                     <img alt=""
                          style="border-width:0"
                          src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
@@ -806,20 +814,20 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
                     《xcodebuild 和 altool 工具详解》
-                </span> by
+                </span> 由
             <a xmlns:cc="http://creativecommons.org/ns#" href="" property="cc:attributionName"
                rel="cc:attributionURL">
                 志鹏
-            </a> is licensed under a
-            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
-                Creative Commons Attribution 4.0 International License
-            </a> 
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
         
     </div>
 
     <script async defer>
       document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
         M.toast({html: toastHTML})
       });
 
@@ -874,7 +882,7 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="../../16/TCP-1/">
                     <div class="card-image">
@@ -890,10 +898,9 @@ Tips: 在终端输入  man xcodebuild 可以查看具体用法，也可以去查
                         
                             
 TCP连接的端点是由一个IP地址和一个端口号来唯一标识的 
-
 TCP 是一个可靠的协议，也就是说，除非整个网络出现问题，数据将被完好地按原样正确的传送到另一外一端。这个可靠性是通过以下几个规则来实现的：
 
-为了防止数据在传输过程中被损坏，
+为了防止数据在传输过程中被损坏，每
                         
                     </div>
                     <div class="publish-info">
@@ -927,7 +934,7 @@ TCP 是一个可靠的协议，也就是说，除非整个网络出现问题，�
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fa fa-chevron-right"></i>
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="../../05/python-email/">
@@ -982,7 +989,7 @@ TCP 是一个可靠的协议，也就是说，除非整个网络出现问题，�
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget">
-            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
             <div id="toc-content"></div>
         </div>
     </div>
@@ -1086,7 +1093,7 @@ TCP 是一个可靠的协议，也就是说，除非整个网络出现问题，�
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">138.6k</span>
+                <span class="white-color">149.2k</span>
             
 
             
@@ -1131,8 +1138,8 @@ TCP 是一个可靠的协议，也就是说，除非整个网络出现问题，�
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</span>
-            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
                    class="search-input">
         </div>
         <div id="searchResult"></div>

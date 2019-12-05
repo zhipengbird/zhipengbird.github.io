@@ -1,15 +1,14 @@
 <!DOCTYPE HTML>
-<html lang="">
+<html lang="zh-CN">
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
     <meta name="keywords" content="Mac OS X中Apache开启ssl, 志鹏的技术博客">
     <meta name="description" content="
-生成主机密钥 这里会要求输入密码，不输入，直接回车
- sudo mkdir /private/etc/apache2/ssl
+生成主机密钥 这里会要求输入密码，不输入，直接回车 sudo mkdir /private/etc/apache2/ssl
  cd /private/etc/apache2/ssl
- sudo ssh-keygen -f server.">
+ sudo ssh-keygen -f server.k">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -58,7 +57,7 @@
             
             <i class="fa fa-home"></i>
             
-            <span>Index</span>
+            <span>首页</span>
         </a>
     </li>
     
@@ -67,7 +66,7 @@
             
             <i class="fa fa-tags"></i>
             
-            <span>Tags</span>
+            <span>标签</span>
         </a>
     </li>
     
@@ -76,7 +75,7 @@
             
             <i class="fa fa-bookmark"></i>
             
-            <span>Categories</span>
+            <span>分类</span>
         </a>
     </li>
     
@@ -85,7 +84,7 @@
             
             <i class="fa fa-archive"></i>
             
-            <span>Archives</span>
+            <span>归档</span>
         </a>
     </li>
     
@@ -94,7 +93,7 @@
             
             <i class="fa fa-user-circle-o"></i>
             
-            <span>About</span>
+            <span>关于</span>
         </a>
     </li>
     
@@ -103,13 +102,13 @@
             
             <i class="fa fa-address-book"></i>
             
-            <span>Friends</span>
+            <span>友情链接</span>
         </a>
     </li>
     
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-            <i id="searchIcon" class="fa fa-search" title="Search"></i>
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
         </a>
     </li>
 </ul>
@@ -123,7 +122,7 @@
         <div class="logo-name">志鹏的技术博客</div>
         <div class="logo-desc">
             
-            Never really desperate, only the lost of the soul.
+            故不积跬步，无以至千里；不积小流，无以成江海。骐骥一跃，不能十步；驽马十驾，功在不舍。锲而舍之，朽木不折；锲而不舍，金石可镂。
             
         </div>
     </div>
@@ -137,7 +136,7 @@
                 
                 <i class="fa fa-fw fa-home"></i>
                 
-                Index
+                首页
             </a>
         </li>
         
@@ -146,7 +145,7 @@
                 
                 <i class="fa fa-fw fa-tags"></i>
                 
-                Tags
+                标签
             </a>
         </li>
         
@@ -155,7 +154,7 @@
                 
                 <i class="fa fa-fw fa-bookmark"></i>
                 
-                Categories
+                分类
             </a>
         </li>
         
@@ -164,7 +163,7 @@
                 
                 <i class="fa fa-fw fa-archive"></i>
                 
-                Archives
+                归档
             </a>
         </li>
         
@@ -173,7 +172,7 @@
                 
                 <i class="fa fa-fw fa-user-circle-o"></i>
                 
-                About
+                关于
             </a>
         </li>
         
@@ -182,7 +181,7 @@
                 
                 <i class="fa fa-fw fa-address-book"></i>
                 
-                Friends
+                友情链接
             </a>
         </li>
         
@@ -399,29 +398,29 @@
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
-                    <i class="fa fa-calendar-minus-o fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
                     2016-09-03
                 </div>
 
                 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
                         596
                     </div>
                     
 
                     
                     <div class="info-break-policy">
-                        <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
-                        3 Min
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        3 分
                     </div>
                     
                 
 				
 				
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
                         <span id="busuanzi_value_page_pv"></span>
                     </div>
 				
@@ -431,11 +430,10 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <ol>
-<li><p>生成主机密钥<br> 这里会要求输入密码，不输入，直接回车</p>
-<pre><code> sudo mkdir /private/etc/apache2/ssl
+<li>生成主机密钥<br> 这里会要求输入密码，不输入，直接回车<pre><code> sudo mkdir /private/etc/apache2/ssl
  cd /private/etc/apache2/ssl
- sudo ssh-keygen -f server.key</code></pre><p> 执行过程：</p>
-<pre><code> localhost:~ yuanpinghua$ sudo mkdir  /private/etc/apache2/ssl
+ sudo ssh-keygen -f server.key
+</code></pre> 执行过程：<pre><code> localhost:~ yuanpinghua$ sudo mkdir  /private/etc/apache2/ssl
  Password:
  localhost:~ yuanpinghua$ cd /private/etc/apache2/ssl
  localhost:ssl yuanpinghua$ sudo ssh-keygen -f server.key
@@ -457,9 +455,11 @@
  |      =.+. o o   |
  |     + .o.. o    |
  |    . ..  .o     |
- +----[SHA256]-----+</code></pre> <a id="more"></a></li>
+ +----[SHA256]-----+
+</code></pre> <a id="more"></a></li>
 <li><p>生成证书请求文件</p>
-<pre><code>   sudo openssl req -new -key server.key -out request.csr</code></pre><p>   执行过程：</p>
+<pre><code>   sudo openssl req -new -key server.key -out request.csr
+</code></pre><p>   执行过程：</p>
 <pre><code>   localhost:ssl yuanpinghua$ sudo openssl req -new -key server.key -out request.csr
    You are about to be asked to enter information that will be incorporated
    into your certificate request.
@@ -479,19 +479,23 @@
    Please enter the following &#39;extra&#39; attributes
    to be sent with your certificate request
    A challenge password []:
-   An optional company name []:</code></pre></li>
+   An optional company name []:
+</code></pre></li>
 <li><p>生成ssl证书<br> 用上一步生成的文件生成ssl证书</p>
-<pre><code> sudo openssl x509 -req -days 365 -in request.csr -signkey server.key -out server.crt</code></pre><p> 到这里，自签名证书就生成好了，下面就开始配置Apache</p>
+<pre><code> sudo openssl x509 -req -days 365 -in request.csr -signkey server.key -out server.crt
+</code></pre><p> 到这里，自签名证书就生成好了，下面就开始配置Apache</p>
 <ul>
 <li><p><code>/private/etc/apache2/httpd.conf</code>，编辑这个文件去掉下面三行前面的 ‘#’</p>
 <pre><code> LoadModule ssl_module libexec/apache2/mod_ssl.so
  Include /private/etc/apache2/extra/httpd-ssl.conf
- Include/private/etc/apache2/extra/httpd-vhosts.conf</code></pre></li>
+ Include/private/etc/apache2/extra/httpd-vhosts.conf
+</code></pre></li>
 <li><p><code>/private/etc/apache2/extra/httpd-ssl.conf</code>，编辑这个文件去掉下面两行前面的 ‘#’</p>
 <pre><code> ```          
  SSLCertificateFile &quot;/private/etc/apache2/ssl/server.crt&quot;
  SSLCertificateKeyFile &quot;/private/etc/apache2/ssl/server.key&quot;
- ```</code></pre></li>
+ ```
+</code></pre></li>
 <li><p><code>/private/etc/apache2/extra/httpd-vhosts.conf</code>，编辑这个文件在<code>&#39;NameVirtualHost*:80&#39;</code> 后面添加</p>
 <pre><code> &lt;VirtualHost *:443&gt;
      SSLEngine on
@@ -500,14 +504,16 @@
      SSLCertificateKeyFile /private/etc/apache2/ssl/server.key
      ServerName localhost
      DocumentRoot &quot;/Library/WebServer/Documents&quot;
- &lt;/VirtualHost&gt;</code></pre></li>
+ &lt;/VirtualHost&gt;
+</code></pre></li>
 </ul>
 </li>
 <li><p>复制凭证和密钥到apache2目录下<br>将/private/ect/apache2/ssl中的server.crt,server.key 复制到/private/ect/apache2/下</p>
 </li>
 <li><p>到这里就配置完了，检查配置，没问题的话重启Apache就好了</p>
 <pre><code> sudo apachectl configtest 检查配置
- sudo apachectl -k restart 强制重启</code></pre></li>
+ sudo apachectl -k restart 强制重启
+</code></pre></li>
 <li><p>在浏览器中输入：可以正常访问<br><a href="https://localhost/" target="_blank" rel="noopener">https://localhost/</a> , <a href="https://192.168.0.1/" target="_blank" rel="noopener">https://192.168.0.1/</a> ,<a href="http://localhost/" target="_blank" rel="noopener">http://localhost/</a> , <a href="http://192.168.0.106/" target="_blank" rel="noopener">http://192.168.0.106/</a></p>
 </li>
 </ol>
@@ -645,7 +651,7 @@
 
 <div id="article-share">
     
-    <div class="social-share" data-disabled="qzone, qq, weibo, douban"></div>
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
     
 </div>
 
@@ -656,11 +662,11 @@
     <div class="reprint" id="reprint-statement">
         <p class="reprint-tip">
             <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
-            <span>Reprint policy</span>
+            <span>转载规则</span>
         </p>
         
             <div class="center-align">
-                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
                     <img alt=""
                          style="border-width:0"
                          src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
@@ -670,20 +676,20 @@
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
                     《Mac OS X中Apache开启ssl》
-                </span> by
+                </span> 由
             <a xmlns:cc="http://creativecommons.org/ns#" href="" property="cc:attributionName"
                rel="cc:attributionURL">
                 志鹏
-            </a> is licensed under a
-            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
-                Creative Commons Attribution 4.0 International License
-            </a> 
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
         
     </div>
 
     <script async defer>
       document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
         M.toast({html: toastHTML})
       });
 
@@ -738,7 +744,7 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="../手把手教你使用charles抓取https消息/">
                     <div class="card-image">
@@ -754,10 +760,9 @@
                         
                             
 安装charles
-
 安装sslproxy证书
 
-电脑端（Mac）：  charles–&gt;help–&gt;SSL Proxying –&gt; install charles Root certificate在密钥管理中将该证书设
+电脑端（Mac）：  charles–&gt;help–&gt;SSL Proxying –&gt; install charles Root certificate在密钥管理中将该证书设置
                         
                     </div>
                     <div class="publish-info">
@@ -787,7 +792,7 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fa fa-chevron-right"></i>
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="../../02/Mac上-Appache-的操作/">
@@ -803,12 +808,13 @@
                     <div class="summary block-with-text">
                         
                             常用操作：
-打开终端，运行启动Apache命令：sudo apachectl start
+打开终端，运行启动Apache命令：`sudo apachectl start
 
-
-2. 关闭命令：sudo apachectl stop
-3. 重启命令sudo apachectl restart
-4. 查看Apache版本命令
+2. 关闭命令：
+sudo apachectl stop
+3. 重启命令
+sudo apachectl restart
+4. 查看Apache版本
                         
                     </div>
                     <div class="publish-info">
@@ -844,7 +850,7 @@
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget">
-            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
             <div id="toc-content"></div>
         </div>
     </div>
@@ -948,7 +954,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">138.6k</span>
+                <span class="white-color">149.2k</span>
             
 
             
@@ -993,8 +999,8 @@
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</span>
-            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
                    class="search-input">
         </div>
         <div id="searchResult"></div>
